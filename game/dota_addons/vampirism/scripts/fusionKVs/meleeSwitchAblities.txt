@@ -1,0 +1,6 @@
+// Contains a list of all the abilities that will be swapped in melee heroes
+
+"MeleeList"
+{
+	"troll_warlord_berserkers_rage"			"troll_warlord_berserkers_rage_melee"
+}

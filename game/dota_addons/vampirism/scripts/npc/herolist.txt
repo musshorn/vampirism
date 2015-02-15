@@ -1,0 +1,6 @@
+"CustomHeroList"
+{
+	"npc_dota_hero_omniknight"  "1"
+	"npc_dota_hero_night_stalker" "1"
+	"npc_dota_hero_invoker"		"1"
+}

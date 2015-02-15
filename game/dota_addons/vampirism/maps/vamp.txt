@@ -1,0 +1,10 @@
+"dota_vamp"
+{
+	"Buildings"
+	{
+		"HumanWall"
+		{
+			"NPCName"				"vamp_base_wall"
+		}
+	}
+}
