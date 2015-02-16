@@ -216,37 +216,8 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-content/_toolsautosave/*
-content/core/*
-content/dota_core/*
-content/dota_addons/addon_template/*
-content/dota_addons/adventure_example/*
-content/dota_addons/dota_pvp/*
-content/dota_addons/DotaFusions/*
-content/dota_addons/holdout_example/*
-content/dota_addons/multiteam_example/*
-content/dota_addons/powertowers/*
-
-game/_toolsettings/*
-game/bin/*
-game/core/*
-game/dota/*
-game/dota_core/*
-game/dota_imported/*
-game/dota_koreana/*
-game/dota_koreana_imported/*
-game/dota_lv/*
-game/dota_lv_imported/*
-game/dota_schinese/*
-game/dota_schinese_imported/*
-816_install.vdf
-thirdpartylegalnotices.txt
-
-game/dota_addons/addon_template/*
-game/dota_addons/adventure_example/*
-game/dota_addons/dota_pvp/*
-game/dota_addons/DotaFusions/*
-game/dota_addons/holdout_example/*
-game/dota_addons/multiteam_example/*
-game/dota_addons/powertowers/*
-dota2cfg.cfg
+#Ignore everything except vamp
+/*
+/*/
+!game/dota_addons/vampirism
+!content/dota_addons/vampirism
