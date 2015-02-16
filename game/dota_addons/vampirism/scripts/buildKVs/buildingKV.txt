@@ -1,0 +1,15 @@
+"Buildings"
+{
+	//=================================================================================================================
+	// HERO: Omniknight - 57
+	//=================================================================================================================
+	"npc_dota_hero_omniknight"
+	{
+		"omniknight_purification"			"0"
+		"omniknight_repel"					"1"
+		"omniknight_degen_aura"				"2"
+		"omniknight_guardian_angel"			"3"
+		"enchantress_untouchable"			"4"
+		"enchantress_enchant"				"5"		
+	}
+}

@@ -10,7 +10,7 @@
 	"build_ui_called"
 	{
 		"player_ID"			"short"
-		"panel_ID"			"short"
+		"builder"			"string"
 	}
 	
 	//FlashUtil custom events

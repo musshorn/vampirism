@@ -121,46 +121,55 @@
 
 	"build_wall1"
 	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"basher"
-		"MaxLevel"	"1"
-		"AbilityCastRange"	"150"
+		"MaxLevel"			"1"
+		"AbilityCastRange"	"200"
 		"AbilityCastPoint"	"0.5"
-		"AOERadius"	"64"
 		"AbilityCooldown"	"0"
 		"AbilityManaCost"	"0"
 		"AbilityGoldCost"	"10"
+		"Building"			"1"
+		"BuildingSize"		"2"
+		"BuildTime"			"1"
+		"Scale"				"0.7"
+		"MaxScale"			"1"
+		"CasterCanControl"	"1"
+		"UnitName"			"npc_wall1"
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
-				"Target"	"POINT"
 				"ScriptFile"	"scripts/vscripts/abilities.lua"
 				"Function"	"build"
 			}
 
 		}
-
 	}
 
 	"build_house_t1"
 	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"basher"
-		"MaxLevel"	"1"
-		"AbilityCastRange"	"150"
-		"AbilityCastPoint"	"0.5"
-		"AOERadius"	"64"
-		"AbilityCooldown"	"0"
-		"AbilityManaCost"	"0"
-		"AbilityGoldCost"	"10"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"				"ability_datadriven"
+		"AbilityTextureName"	"house_t1"
+		"MaxLevel"				"1"
+		"AbilityCastRange"		"200"
+		"AbilityCastPoint"		"0.5"
+		"AbilityCooldown"		"0"
+		"AbilityManaCost"		"0"
+		"AbilityGoldCost"		"10"
+		"Building"				"1"
+		"BuildingSize"			"0.5"
+		"BuildTime"				"100"
+		"Scale"					"0.7"
+		"MaxScale"				"1"
+		"CasterCanControl"		"1"
+		"UnitName"				"house_t1"
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
-				"Target"	"POINT"
 				"ScriptFile"	"scripts/vscripts/abilities.lua"
 				"Function"	"build"
 			}
@@ -419,5 +428,212 @@
 		"BaseClass"	"ability_datadriven"
 		"MaxLevel"	"1"
 		"AbilityBhavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+	}
+	  	// move_to_point abilities are for BuildingHelper.
+	"move_to_point_70"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"ability_datadriven"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityCastRange"				"70"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"MaxLevel"						"1"
+
+		"AbilityManaCost"				"0"
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"		"POINT"
+				"ScriptFile"	"scripts/vscripts/abilities.lua"
+				"Function"		"create_building_entity"
+			}
+		}
+	}
+
+	"move_to_point_100"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"ability_datadriven"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityCastRange"				"100"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"MaxLevel"						"1"
+
+		"AbilityManaCost"				"0"
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"		"POINT"
+				"ScriptFile"	"scripts/vscripts/abilities.lua"
+				"Function"		"create_building_entity"
+			}
+		}
+	}
+
+	"move_to_point_150"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"ability_datadriven"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityCastRange"				"150"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"MaxLevel"						"1"
+
+		"AbilityManaCost"				"0"
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"		"POINT"
+				"ScriptFile"	"scripts/vscripts/abilities.lua"
+				"Function"		"create_building_entity"
+			}
+		}
+	}
+
+	"move_to_point_200"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"ability_datadriven"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityCastRange"				"200"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"MaxLevel"						"1"
+
+		"AbilityManaCost"				"0"
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"		"POINT"
+				"ScriptFile"	"scripts/vscripts/abilities.lua"
+				"Function"		"create_building_entity"
+			}
+		}
+	}
+
+	"move_to_point_250"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"ability_datadriven"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityCastRange"				"250"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"MaxLevel"						"1"
+
+		"AbilityManaCost"				"0"
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"		"POINT"
+				"ScriptFile"	"scripts/vscripts/abilities.lua"
+				"Function"		"create_building_entity"
+			}
+		}
+	}
+
+	"move_to_point_300"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"BaseClass"						"ability_datadriven"
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityCastRange"				"300"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"MaxLevel"						"1"
+
+		"AbilityManaCost"				"0"
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"Target"		"POINT"
+				"ScriptFile"	"scripts/vscripts/abilities.lua"
+				"Function"		"create_building_entity"
+			}
+		}
+	}
+
+	//-------------------
+	// Dummy stuff
+	//-------------------
+  
+	"samplerts_dummy_unit"
+	{
+		"AbilityBehavior" 		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+		"MaxLevel"                      "1"
+
+		"Modifiers"
+		{
+			"dummy_unit"
+			{
+				"Passive"                        "1"
+				"IsHidden"                        "1"    
+				"States"
+				{
+					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
+
+	"build_house1"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"build_rocket_launcher"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						".5"
+		"CasterCanControl"				"1"
+
+		"AbilityCooldown"				"2.0"
+		"AbilityGoldCost"				"10"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"house_t1"
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/abilities.lua"
+				"Function"				"build"
+			}
+		}
 	}
 }

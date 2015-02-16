@@ -223,6 +223,7 @@ function GameMode:OnNPCSpawned(keys)
   if npc:GetUnitName() == "house_t1" then
     TechTree:AddTech(keys)
   	npc:SetMana(0.0)
+    --House1:Init(npc)
   end  
 end
 
@@ -279,6 +280,23 @@ function GameMode:OnAbilityUsed(keys)
 
   local player = EntIndexToHScript(keys.PlayerID)
   local abilityname = keys.abilityname
+  local hero = player:GetAssignedHero()
+
+  -- Cancel the ghost if the player casts another active ability.
+  -- Start of BH Snippet:
+  if hero ~= nil then
+    local abil = hero:FindAbilityByName(abilityname)
+    if player.cursorStream ~= nil then
+      if not (string.len(abilityname) > 14 and string.sub(abilityname,1,14) == "move_to_point_") then
+        if not DontCancelBuildingGhostAbils[abilityname] then
+          player.cancelBuilding = true
+        else
+          print(abilityname .. " did not cancel building ghost.")
+        end
+      end
+    end
+  end
+  -- End of BH Snippet
 end
 
 -- A non-player entity (necro-book, chen creep, etc) used an ability
@@ -682,9 +700,10 @@ function GameMode:InitGameMode()
 
   self.bSeenWaitForPlayers = false
 
-  BuildingHelper:Init(8192)
   BuildingHelper:AutoSetHull(true)
   BuildingHelper:DisableFireEffects(true)
+
+  BuildingHelper:Init(8192)
 
   print('[vampirism] Done loading vampirism gamemode!\n\n')
 end

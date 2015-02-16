@@ -15,6 +15,17 @@
 		"File"		"FlashUtil"
 		"Depth"		"25"
 	}
+	"3"
+    {
+        "File"      "BuildingHelper"
+        "Depth"     "52"
+    }
+    "4"
+    {
+        "File"      "CustomError"
+        "Depth"     "53"
+    }
+
 }
 
 // =============================================
