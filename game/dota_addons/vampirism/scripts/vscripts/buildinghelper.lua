@@ -23,7 +23,7 @@ BH_A = math.pow(2,.5) --multi this by rad of building
 BH_cos45 = math.pow(.5,.5) -- cos(45)
 
 if not OutOfWorldVector then
-	OutOfWorldVector = Vector(0,0,0)
+	OutOfWorldVector = Vector(-8099.68798828125,-7962.6953125,256.0000610351563)
 end
 
 BuildingHelper = {}
@@ -36,8 +36,11 @@ BuildingHelperKVs =
 
 }
 
-function BuildingHelper:Init(nHalfMapLength) -- nHalfMapLength is 8192 if you're using the tile editor.
-	local nMapLength = nHalfMapLength*2
+function BuildingHelper:Init(...)
+	local nMapLength = 16384*2
+	if arg ~= nil then
+		nMapLength = arg[1]*2
+	end
 
 	Convars:RegisterCommand( "BuildingPosChosen", function()
 		--get the player that sent the command
@@ -85,13 +88,13 @@ function BuildingHelper:Init(nHalfMapLength) -- nHalfMapLength is 8192 if you're
 	-- Check the center of each square on the map to see if it's blocked by the GridNav.
 	for x=-halfLength+32, halfLength-32, 64 do
 		for y=halfLength-32, -halfLength+32,-64 do
-			if GridNav:IsTraversable(Vector(x,y,0)) == false or GridNav:IsBlocked(Vector(x,y,0)) then
+			if GridNav:IsBlocked(Vector(x,y,0)) or not GridNav:IsTraversable(Vector(x,y,0)) then
 				GRIDNAV_SQUARES[VectorString(Vector(x,y,0))] = true
 				gridnavCount=gridnavCount+1
 			end
 		end
 	end
-	--print("Total GridNav squares added: " .. gridnavCount)
+	print("Total GridNav squares added: " .. gridnavCount)
 
 	--print("BuildingAbilities: ")
 	--PrintTable(BuildingAbilities)
@@ -157,25 +160,45 @@ function BuildingHelper:AutoSetHull(bAutoSetHull)
 end
 
 function BuildingHelper:AddBuilding(keys)
+
+	-- Callbacks
+	function keys:OnConstructionStarted( callback )
+		keys.onConstructionStarted = callback
+	end
+
+	function keys:OnConstructionCompleted( callback )
+		keys.onConstructionCompleted = callback
+	end
+
+	function keys:EnableFireEffect( sFireEffect )
+		keys.fireEffect = sFireEffect
+	end
+
+	function keys:OnBelowHalfHealth( callback )
+		keys.onBelowHalfHealth = callback
+	end
+
+	function keys:OnAboveHalfHealth( callback )
+		keys.onAboveHalfHealth = callback
+	end
+
+	-- TODO: since the ability phase funcs are screwed up, can't get when building was canceled
+	-- due to right click
+	function keys:OnCanceled( callback )
+		keys.onCanceledCallback = callback
+	end
+
 	local hAbility = keys.ability
 	local abilName = hAbility:GetAbilityName()
 	local caster = keys.caster
-	local player = caster:GetPlayerOwner()
+	local builder = caster -- alias
+	-- get player handle that owns the builder.
+	local player = builder:GetPlayerOwner()
+	-- player's hero could be diff from the builder.
+	local playersHero = player:GetAssignedHero()
 	local pID = player:GetPlayerID()
-	local buildingTable = BuildingAbilities[abilName]
-	player.buildingPosChosen = false
-	player.cancelBuilding = false
-	caster.buildingTable = buildingTable
-	if player.ghost_particles == nil then
-		player.ghost_particles = {}
-	end
-	if caster.player == nil then
-		caster.player = player
-	end
 
-	if caster.orders == nil then
-		caster.orders = {}
-	end
+	local buildingTable = BuildingAbilities[abilName]
 
 	function buildingTable:GetVal( key, expectedType )
 		local val = buildingTable[key]
@@ -204,7 +227,25 @@ function BuildingHelper:AddBuilding(keys)
 		return sVal
 	end
 
+	player.buildingPosChosen = false
+	player.cancelBuilding = false
+	-- store ref to the buildingTable in the builder.
+	builder.buildingTable = buildingTable
+
+	if player.ghost_particles == nil then
+		player.ghost_particles = {}
+	end
+	-- store player handle ref in the builder
+	if builder.player == nil then
+		builder.player = player
+	end
+
+	if builder.orders == nil then
+		builder.orders = {}
+	end
+
 	buildingTable["abil"] = hAbility
+	buildingTable["playersHero"] = playersHero
 
 	local size = buildingTable:GetVal("BuildingSize", "number")
 	--local size = buildingTable["BuildingSize"]
@@ -228,11 +269,49 @@ function BuildingHelper:AddBuilding(keys)
 	if goldCost == nil then
 		goldCost = 0
 	end
+	-- store this for quick retrieval later.
 	buildingTable.goldCost = goldCost
+
 	-- dynamically handle the cooldown. if player cancels building, etc
 	hAbility:EndCooldown()
 	-- same thing with the gold cost.
-	caster:SetGold(caster:GetGold()+goldCost, false)
+	if playersHero ~= nil then
+		playersHero:SetGold(playersHero:GetGold()+goldCost, false)
+	end
+
+	local resources = {}
+	local notEnoughResources = {}
+	-- Check other resource costs.
+	local abilitySpecials = {}
+	if buildingTable["AbilitySpecial"] ~= nil then
+		abilitySpecials = buildingTable["AbilitySpecial"]
+	end
+
+	for k2,v2 in pairs(abilitySpecials) do
+		if abilitySpecials[k2] ~= nil then
+			local abilitySpecial = abilitySpecials[k2]
+			for k3,v3 in pairs(abilitySpecial) do
+				if string.starts(k3, "resource_") then
+					local cost = tonumber(abilitySpecial[k3])
+					local resourceName = string.sub(k3, 10):lower()
+					resources[resourceName] = cost
+					--print("Detected resource: " .. resourceName)
+					if player[resourceName] == nil then
+						player[resourceName] = 0
+					end
+					if player[resourceName] < cost then
+						notEnoughResources[resourceName] = cost-player[resourceName]
+					end
+				end
+			end
+		end
+	end
+
+	buildingTable.resources = resources
+
+	if TableLength(notEnoughResources) > 0 then
+		return {["error"] = "not_enough_resources", ["resourceTable"] = notEnoughResources}
+	end
 
 	--setup the dummy for model ghost
 	if player.modelGhostDummy ~= nil then
@@ -240,32 +319,6 @@ function BuildingHelper:AddBuilding(keys)
 	end
 
 	player.modelGhostDummy = CreateUnitByName(unitName, OutOfWorldVector, false, nil, nil, caster:GetTeam())
-
-	function keys:OnConstructionStarted( callback )
-		keys.onConstructionStarted = callback
-	end
-
-	function keys:OnConstructionCompleted( callback )
-		keys.onConstructionCompleted = callback
-	end
-
-	function keys:EnableFireEffect( sFireEffect )
-		keys.fireEffect = sFireEffect
-	end
-
-	function keys:OnBelowHalfHealth( callback )
-		keys.onBelowHalfHealth = callback
-	end
-
-	function keys:OnAboveHalfHealth( callback )
-		keys.onAboveHalfHealth = callback
-	end
-
-	-- TODO: since the ability phase funcs are screwed up, can't get when building was canceled
-	-- due to right click
-	function keys:OnCanceled( callback )
-		keys.onCanceledCallback = callback
-	end
 
 	function player:BeginGhost()
 		if not player.cursorStream then
@@ -299,7 +352,6 @@ function BuildingHelper:AddBuilding(keys)
 					player.lastCursorCenter = nil
 					ClearParticleTable(player.ghost_particles)
 					return
-					--TODO: If buildingPosChosen is false and hero casted another ability, remove the ghost. Listen to OnAbilityUsed
 				end
 
 				if validPos then
@@ -424,9 +476,16 @@ function BuildingHelper:AddBuilding(keys)
 			dontMove = true
 		end]]
 
+		-- If unit has other move_to_point abils, we should clean them up here
+		AbilityIterator(caster, function(abil)
+			local name = abil:GetAbilityName()
+			if name ~= abilName and string.starts(name, "move_to_point_") then
+				caster:RemoveAbility(name)
+				--print("removed " .. name)
+			end
+		end)
+
 		if not dontMove then
-			-- TODO: If unit has other move_to_point abils, we should clean them up here
-			-- iterate thru all abils and remove them, except abilName.
 			caster:AddAbility(abilName)
 			local abil = caster:FindAbilityByName(abilName)
 			abil.succeeded = false
@@ -462,7 +521,8 @@ end
 
 function BuildingHelper:InitializeBuildingEntity(keys)
 	local caster = keys.caster
-	local orders = caster.orders
+	local builder = caster -- alias
+	local orders = builder.orders
 	local pos = keys.target_points[1]
 	keys.ability.succeeded = true
 
@@ -481,26 +541,35 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 		return
 	end
 
+	-- delete order
+	orders[key] = nil
+
 	local squaresToClose = order["squares_to_close"]
 
 	-- let's still make sure we can build here. Someone else may have built a building here
 	-- during the time walking to the spot.
 	if BuildingHelper:IsAreaBlocked(squaresToClose) then
-		orders[key] = nil
 		return
 	end
 
-	local unit = CreateUnitByName(order.unitName, order.pos, false, nil, nil, order.team)
+	-- get our very useful buildingTable
+	local buildingTable = order["buildingTable"]
+	-- keys from the "build" func in abilities.lua
+	local keys2 = order["keys"]
+
+	local playersHero = buildingTable["playersHero"]
+
+	-- create building entity
+	local unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
 	local building = unit --alias
+	-- store reference to the buildingTable in the unit.
+	unit.buildingTable = buildingTable
+
 	-- Close the squares
 	BuildingHelper:CloseSquares(squaresToClose, "vector")
 	-- store the squares in the unit for later.
 	unit.squaresOccupied = shallowcopy(squaresToClose)
 	unit.building = true
-	local keys2 = order["keys"]
-
-	-- delete order
-	orders[key] = nil
 
 	-- Remove the sticky particles
 	--[[local player = caster:GetPlayerOwner()
@@ -508,20 +577,21 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 		ClearParticleTable(player.stickyGhost)
 	end]]
 
-	local buildingTable = order["buildingTable"]
-	-- store reference to the buildingTable in the unit.
-	unit.buildingTable = buildingTable
-
 	local buildTime = buildingTable:GetVal("BuildTime", "float")
 	if buildTime == nil then
 		buildTime = .1
 	end
 
+	-- the gametime when the building should be completed.
 	local fTimeBuildingCompleted=GameRules:GetGameTime()+buildTime
+	-- whether we should update the building's health over the build time.
 	local bUpdateHealth = buildingTable:GetVal("UpdateHealth", "bool")
 	local fMaxHealth = unit:GetMaxHealth()
+	-- health to add every tick until build time is completed.
 	local nHealthInterval = (fMaxHealth*BUILDINGHELPER_THINK)/buildTime
+	-- increase the health interval by 25%.
 	nHealthInterval = nHealthInterval + .25*nHealthInterval
+
 	if nHealthInterval < 1 then
 		--print("[BuildingHelper] nHealthInterval is below 1. Setting nHealthInterval to 1. The unit will gain full health before the build time ends.\n" ..
 		--	"Fix this by increasing the max health of your unit. Recommended unit max health is 1000.")
@@ -529,28 +599,27 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	end
 	unit.bUpdatingHealth = false --Keep tracking if we're currently updating health.
 
+	-- whether we should scale the building.
 	local bScale = buildingTable:GetVal("Scale", "bool")
+	-- the amount to scale to.
 	local fMaxScale = buildingTable:GetVal("MaxScale", "float")
 	if fMaxScale == nil then
 		fMaxScale = 1
 	end
-
+	-- scale to add every tick until build time is completed.
 	local fScaleInterval = (fMaxScale*BUILDINGHELPER_THINK)/buildTime
 	fScaleInterval = fScaleInterval + .2*fScaleInterval -- scaling is a bit slow evidently, so make it faster
+	-- start the building at 20% of max scale.
 	local fCurrentScale=.2*fMaxScale
 	local bScaling = false -- Keep tracking if we're currently model scaling.
 
 	local bCasterCanControl = buildingTable:GetVal("CasterCanControl", "bool")
 	if bCasterCanControl then
-		unit:SetControllableByPlayer(caster:GetPlayerID(), true)
+		unit:SetControllableByPlayer(playersHero:GetPlayerID(), true)
 	end
 
 	if bUpdateHealth then
 		unit:SetHealth(1)
-		--if unit.fMaxHealth < 200 then
-			-- increase by 50%
-			--unit.nHealthInterval = 1.5*unit.nHealthInterval
-		--end
 		unit.bUpdatingHealth = true
 		if bScale then
 			unit:SetModelScale(fCurrentScale)
@@ -637,15 +706,16 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 		end
 	end
 
-	--unit:InitializeBuilding()
-
 	-- Remove gold, start cooldown ,etc
 	local goldCost = buildingTable.goldCost
 	local cooldown = buildingTable:GetVal("AbilityCooldown", "number")
 	if cooldown == nil then
 		cooldown = 0
 	end
-	caster:SetGold(caster:GetGold()-goldCost, false)
+	-- remove gold from playersHero.
+	if playersHero ~= nil then
+		playersHero:SetGold(playersHero:GetGold()-goldCost, false)
+	end
 	buildingTable["abil"]:StartCooldown(cooldown)
 
 	if keys2.onConstructionStarted ~= nil then
@@ -953,4 +1023,32 @@ function shallowcopy(orig)
         copy = orig
     end
     return copy
+end
+
+function AbilityIterator(unit, callback)
+    for i=0, unit:GetAbilityCount()-1 do
+        local abil = unit:GetAbilityByIndex(i)
+        if abil ~= nil then
+            callback(abil)
+        end
+    end
+end
+
+function string.starts(String,Start)
+   return string.sub(String,1,string.len(Start))==Start
+end
+
+function string.ends(String,End)
+   return End=='' or string.sub(String,-string.len(End))==End
+end
+
+function TableLength( t )
+	if t == nil or t == {} then
+		return 0
+	end
+    local len = 0
+    for k,v in pairs(t) do
+        len = len + 1
+    end
+    return len
 end

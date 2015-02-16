@@ -67,18 +67,8 @@ function TechTree:AddTech(keys)
 	else
 		playerTrees[playerID][tech] = playerTrees[playerID][tech] + 1
 	end
-
-	--[[
-	if not string.match(playerTrees[playerID], tech) then
-		playerTrees[playerID] = playerTrees[playerID] .. tech .. ' '
-		end
-	else
-		playerTrees[playerID] = tech .. ' '
-		]]
 end
 
-
---REWRITE, CHANGE TO TRACKING ALL PLAYER BUILDINGS. / make timer to check 1 second later to be sure, scale back to .1
 --[[Check if a building was the last to be destroyed, if so remove it from the tree.]]
 
 function TechTree:RemoveTech(unitName, playerID)

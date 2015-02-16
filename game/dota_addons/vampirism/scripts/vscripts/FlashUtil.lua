@@ -30,7 +30,7 @@ function FlashUtil:Init()
 	Convars:RegisterCommand( "FlashUtil_return", function(name, p)
 		--get the player that sent the command
 		local cmdPlayer = Convars:GetCommandClient()
-		if cmdPlayer then
+		if cmdPlayer then 
 			self:HandleReturn( p )
 			return 0
 		end
@@ -47,6 +47,7 @@ end
 function FlashUtil:RequestData( dataName, playerID, callback )
 	local requestID = DoUniqueString(dataName)
 	self.callbacks[requestID] = callback
+
 	FireGameEvent('FlashUtil_request', { request_id = requestID, data_name = dataName, target_player = playerID })
 end
 
@@ -72,11 +73,12 @@ function FlashUtil:HandleReturn( return_data )
 		result = self:ParseVector(result)
 	end
 
+
 	--Call the corresponding callback
-	if self.callbacks[requestID] then
-		self.callbacks[requestID](playerID, result)
+	if not self.callbacks[requestID] then
+		--print('[FlashUtil] Error: callback not found. Data: '.. return_data)
 	else
-		print('[FlashUtil] Error: callback not found. Data: '..return_data)
+		self.callbacks[requestID](playerID, result)
 	end
 end
 
@@ -99,6 +101,10 @@ function FlashUtil:ParseVector( str )
 		return str
 	end
 end
+
+--[[function FlashUtil:( ... )
+	-- body
+end]]
 
 --Request a player's cursor position in world coordinates
 --Params:	pID - the player ID we want the cursor position for
@@ -128,7 +134,6 @@ end
 function FlashUtil:RequestDataStream( dataName, rps, pID, callback )
 	local requestID = DoUniqueString(dataName)
 	self.callbacks[requestID] = callback
-
 	FireGameEvent('FlashUtil_request_stream', { request_id = requestID, data_name = dataName, requests_per_second = rps, target_player = playerID })
 
 	return requestID

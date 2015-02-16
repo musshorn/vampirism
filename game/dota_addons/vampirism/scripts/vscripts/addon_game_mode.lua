@@ -15,6 +15,8 @@ require('items')
 require('units.worker')
 require('FlashUtil')
 require('TechTree')
+require('physics')
+require('util')
 
 function Precache( context )
 		--[[
@@ -31,7 +33,7 @@ function Precache( context )
 
 		-- Particles can be precached individually or by folder
 		-- It it likely that precaching a single particle system will precache all of its children, but this may not be guaranteed
-		--PrecacheResource("particle", "particles/econ/generic/generic_aoe_explosion_sphere_1/generic_aoe_explosion_sphere_1.vpcf", context)
+		--PrecacheResource("particle", "particles/econ/generic/generic_aoe_explosion_sere_1/generic_aoe_explosion_sphere_1.vpcf", context)
 		--PrecacheResource("particle_folder", "particles/test_particle", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", context)
 
@@ -43,6 +45,7 @@ function Precache( context )
 		PrecacheResource("model", "models/props_structures/good_barracks_melee001.vmdl", context)
 		PrecacheResource("model", "models/house1.vmdl", context)
 		PrecacheResource("model", "models/coin_reference.vmdl", context)
+		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 
 		-- Sounds can precached here like anything else
