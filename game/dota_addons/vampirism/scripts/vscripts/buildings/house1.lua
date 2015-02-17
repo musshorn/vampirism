@@ -1,8 +1,8 @@
+--initialize the class
 if House1 == nil then
 	House1 = {}
 	House1.__index = House1
 end
-
 
 function House1:Init(unit)
 
@@ -10,8 +10,6 @@ function House1:Init(unit)
 		if not unit:IsAlive() then
 			return nil
 		end
-
-		print('smart')
 
 		return .1
 	end)

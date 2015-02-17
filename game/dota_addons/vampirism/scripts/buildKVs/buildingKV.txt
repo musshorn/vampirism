@@ -1,15 +1,21 @@
 "Buildings"
 {
 	//=================================================================================================================
-	// HERO: Omniknight - 57
+	// BUILDER: Omniknight
 	//=================================================================================================================
 	"npc_dota_hero_omniknight"
 	{
-		"omniknight_purification"			"0"
-		"omniknight_repel"					"1"
-		"omniknight_degen_aura"				"2"
-		"omniknight_guardian_angel"			"3"
-		"enchantress_untouchable"			"4"
-		"enchantress_enchant"				"5"		
+		"build_house1"							"0"
+		"build_tent_1"							"1"
+		"build_slayer_tavern"					"2"
+		"build_human_surplus"					"3"
+		"build_tower_pearls"					"4"
+		"build_wall_t1"							"5"
+		"build_flag"							"6"
+		"build_research_center_t1"				"7"
+		"build_heal_wall_t1"					"8"
+		"build_gold_mine_t1"					"9"
+		"build_human_vault"						"10"
+		"build_cancel"							"11"
 	}
 }
