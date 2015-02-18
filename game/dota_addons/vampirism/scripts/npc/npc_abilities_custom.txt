@@ -182,6 +182,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"basher"
+		"AbilityModifierSupportValue"	"0.5"
 		"MaxLevel"	"1"
 		"AbilityManaCost"	"0"
 		"AbilityGoldCost"	"0"
@@ -189,32 +190,55 @@
 		{
 			"ApplyModifier"
 			{
-				"Target"	"CASTER"
-				"ModifierName"	"spawn_t1"
+				"ModifierName"	"training_t1_worker"
+				"Target" 		"CASTER"
 			}
-
-			"RunScript"
-			{
-				"TARGET"	"CASTER"
-				"ScriptFile"	"scripts/vscripts/buildings/house1.lua"
-				"Function"	"spawnWorkerT1"
-			}
-
 		}
 
 		"Modifiers"
 		{
-			"spawn_t1"
+			"training_t1_worker"
 			{
-				"IsDebuff"	"false"
 				"IsPurgable"	"false"
-				"IsStunDebuff"	"false"
+				"IsStunDebuff" "false"
 				"IsHidden"	"false"
-				"IsPassive"	"true"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+						"Function"		"TrainUnit"
+						"AddToQueue"	"t1_worker_training"
+					}
+				}
 			}
-
 		}
-
+	}
+	
+	"t1_worker_training"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"BaseClass"	"ability_datadriven"
+		"AbilityCastPoint"	"0"
+		"AbilityChannelTime" "1.0"
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/house1.lua"
+				"Function"	"spawnWorkerT1"
+			}
+		}
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Cancel"
+				"cancel"			"training_t1_worker"
+			}
+		}
 	}
 
 	"harvest_t1"
