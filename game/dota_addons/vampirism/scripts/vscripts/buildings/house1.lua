@@ -1,3 +1,4 @@
+--initialize the class
 if House1 == nil then
 	House1 = {}
 	House1.__index = House1
