@@ -132,14 +132,14 @@
 		{
 			"ApplyModifier"
 			{
-				"ModifierName"	"training_t1_worker"
+				"ModifierName"	"t1_worker_training"
 				"Target" 		"CASTER"
 			}
 		}
 
 		"Modifiers"
 		{
-			"training_t1_worker"
+			"t1_worker_training"
 			{
 				"IsPurgable"	"false"
 				"IsStunDebuff" "false"
@@ -160,25 +160,23 @@
 	
 	"t1_worker_training"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"	"ability_datadriven"
 		"AbilityCastPoint"	"0"
-		"AbilityChannelTime" "1.0"
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/house1.lua"
-				"Function"	"spawnWorkerT1"
-			}
-		}
+		"AbilityChannelTime" "5.0"
+	}
+
+	"cancel_training"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName"	"rubick_empty1"
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
 				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
 				"Function"		"Cancel"
-				"cancel"			"training_t1_worker"
 			}
 		}
 	}
