@@ -2,10 +2,8 @@ function call_menu(keys)
     
     local caster = keys.caster
     print("found "..caster:GetUnitName())
-    local ability = caster:FindAbilityByName("build_house_t1") 
-    print("abilityname is "..ability:GetAbilityName())
 
-    FireGameEvent("build_ui_called", {player_ID = caster:GetPlayerOwnerID(), panel_ID = 0}) --[[Returns:void
+    FireGameEvent("build_ui_called", {player_ID = caster:GetPlayerOwnerID(), builder = caster:GetUnitName()}) --[[Returns:void
     Fire a pre-defined event, which can be found either in custom_events.txt or in dota's resource/*.res
     ]]
 
