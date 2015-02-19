@@ -1,26 +1,48 @@
-function call_menu(keys)
-    
+playerCasters = {}
+
+if BuildUI == nil then
+    BuildUI = {}
+    BuildUI.__index = BuildUI
+end
+
+function BuildUI:Init()
+  Convars:RegisterCommand("buildui_chosen", function(name, p)
+   local cmdPlayer = Convars:GetCommandClient()
+   print(cmdPlayer:GetPlayerID()) 
+   if cmdPlayer then
+     print('this happened')
+      local playerID = cmdPlayer:GetPlayerID()
+      BuildUI:BuildChosen(p, playerID)
+      return 0
+    end
+  end, "building chosen", 0)  
+
+  Convars:RegisterCommand("check_select", function(name, p)
+    local cmdPlayer = Convars:GetCommandClient()
+    print('ITS CRAAAZY')
+    if cmdPlayer then
+        print(p)
+        index = tonumber(p)
+        print(index)
+        local ent = EntIndexToHScript(index) 
+        print(ent:GetUnitName())
+    end
+  end, "checking selected unit", 0)
+end
+
+function CallMenu(keys)
     local caster = keys.caster
-    print("found "..caster:GetUnitName())
+    local playerID = caster:GetPlayerOwnerID()
 
-    FireGameEvent("build_ui_called", {player_ID = caster:GetPlayerOwnerID(), builder = caster:GetUnitName()}) --[[Returns:void
-    Fire a pre-defined event, which can be found either in custom_events.txt or in dota's resource/*.res
-    ]]
+    FireGameEvent("build_ui_called", {player_ID = playerID, builder = caster:GetUnitName()})
 
---[[
-    FlashUtil:GetCursorWorldPos(caster:GetPlayerOwnerID(), function ( position )
-        print(position)
-        local test = FlashUtil:ParseVector(position)
-        print(test)
+    playerCasters[0] = caster
 
-     caster:CastAbilityOnPosition(Vector(0,0,0), ability, 0)
-     end)
-]]
-    --[[ HOW 2 CALL FLASH UTIL FOR REAL 
-    FlashUtil:GetCursorWorldPos(caster:GetPlayerID(), function(pID, cursor_position)
-    caster:CastAbilityOnPosition(cursor_position, ability, 0)
-        end)
-    --print(caster:GetPlayerOwnerID())
-    --caster:CastAbilityOnPosition(cursor, ability, 1) 
-    ]]
+end
+
+function BuildUI:BuildChosen(building, playerID)
+    local caster = playerCasters[0]
+    local ability = caster:FindAbilityByName(building)
+
+    caster:CastAbilityNoTarget(ability, 0)
 end

@@ -608,39 +608,7 @@ function GameMode:InitGameMode()
 
   -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
   Convars:RegisterCommand("command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", 0 )
-  Convars:RegisterCommand("buildui_house1", function ()
-    local player = Convars:GetCommandClient()
-    local hero = player:GetAssignedHero()
-    local ability = hero:FindAbilityByName("build_house_t1") 
 
-    FlashUtil:GetCursorWorldPos(hero:GetPlayerID(), function(pID, cursor_position)
-      if hero.isbuilding ~= true then
-        hero.isbuilding = true
-        if hero:IsPositionInRange(cursor_position, 150) then 
-          print(cursor_position)
-          hero:SetCursorPosition(cursor_position)
-          ability:OnSpellStart()
-          hero.isbuilding = false
-        else
-          Timers:CreateTimer(0.1, function()
-            if hero:IsPositionInRange(cursor_position, 150) then
-              hero:SetCursorPosition(cursor_position)
-              ability:OnSpellStart()
-              hero.isbuilding = false
-              return
-            else
-              hero:MoveToPosition(cursor_position) 
-              return 0.1
-            end
-          end)
-        end
-
-      --print(hero:GetPlayerOwnerID())
-      --hero:CastAbilityOnPosition(cursor, ability, 1)
-      end
-    end) 
-  end, "House 1 precast test", 0 )
-  
   -- Fill server with fake clients
   -- Fake clients don't use the default bot AI for buying items or moving down lanes and are sometimes necessary for debugging
   Convars:RegisterCommand('fake', function()
@@ -704,6 +672,7 @@ function GameMode:InitGameMode()
   BuildingHelper:DisableFireEffects(true)
 
   BuildingHelper:Init(8192)
+  BuildUI:Init()
 
   print('[vampirism] Done loading vampirism gamemode!\n\n')
 end

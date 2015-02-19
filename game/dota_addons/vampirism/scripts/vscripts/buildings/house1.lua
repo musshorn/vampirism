@@ -15,7 +15,7 @@ function House1:Init(unit)
 		if not unit:IsAlive() then
 			return nil
 		end
-
+		
 		--Check if there is units in the queue and the queue is free
 		--Note the maximum displayable buffs seems to be 7, any more are not shown.
 		if table.getn(house1.queue) > 0  and house1.doingWork == false then
