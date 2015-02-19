@@ -12,6 +12,19 @@
 		"Ability3"	"call_build_ui"
 		"Ability4"	"human_blink"
 		"Ability5"	"human_manaburn"
+		"Ability6"	"build_house1"
+		"Ability7"	"build_tent_1"
+		"Ability8"	"build_slayer_tavern"
+		"Ability9"	"build_human_surplus"
+		"Ability10"	"build_tower_pearls"
+		"Ability11"	"build_wall_t1"
+		"Ability12"	"build_flag"
+		"Ability13"	"build_research_center_t1"
+		"Ability14"	"build_heal_wall_t1"
+		"Ability15"	"build_gold_mine_t1"
+		"Ability16"	"build_human_vault"
+		"Ability17"	"build_cancel"
+
 		"MovementSpeed"	"400"
 		"Level"	"1"
 		"ConsideredHero"	"1"
@@ -22,6 +35,7 @@
 		"StatusHealth"	"600"
 		"AttributeBaseStrength"	"0"
 		"StatusManaRegen"	"0.5"
+		"AbilityLayout" 		"4"
 	}
 
 	"vamp_vampire"

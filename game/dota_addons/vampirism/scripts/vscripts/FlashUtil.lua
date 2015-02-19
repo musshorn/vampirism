@@ -30,7 +30,7 @@ function FlashUtil:Init()
 	Convars:RegisterCommand( "FlashUtil_return", function(name, p)
 		--get the player that sent the command
 		local cmdPlayer = Convars:GetCommandClient()
-		if cmdPlayer then 
+		if cmdPlayer then
 			self:HandleReturn( p )
 			return 0
 		end

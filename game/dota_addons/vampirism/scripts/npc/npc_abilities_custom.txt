@@ -272,7 +272,7 @@
 			{
 				"Target"	"CASTER"
 				"ScriptFile"	"scripts/vscripts/buildui.lua"
-				"Function"	"call_menu"
+				"Function"	"CallMenu"
 			}
 
 		}
@@ -549,7 +549,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"2"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -603,7 +603,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"tent1"
 		// End of BuildingHelper info
 
 		// Stats
@@ -633,7 +633,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"4"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -645,7 +645,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"slayer_tavern"
 		// End of BuildingHelper info
 
 		// Stats
@@ -675,7 +675,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"4"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -687,7 +687,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"human_surplus"
 		// End of BuildingHelper info
 
 		// Stats
@@ -717,7 +717,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"2"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -729,7 +729,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"tower_pearls"
 		// End of BuildingHelper info
 
 		// Stats
@@ -759,7 +759,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"2"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -771,7 +771,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"wall_t1"
 		// End of BuildingHelper info
 
 		// Stats
@@ -801,7 +801,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"2"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -813,7 +813,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"human_flag"
 		// End of BuildingHelper info
 
 		// Stats
@@ -843,7 +843,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"4"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -855,7 +855,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"research_center_t1"
 		// End of BuildingHelper info
 
 		// Stats
@@ -885,7 +885,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"2"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -897,7 +897,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"heal_wall_t1"
 		// End of BuildingHelper info
 
 		// Stats
@@ -927,7 +927,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"2"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -939,7 +939,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"gold_mine_t1"
 		// End of BuildingHelper info
 
 		// Stats
@@ -969,7 +969,7 @@
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
+		"BuildingSize"					"4"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
@@ -981,7 +981,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
+		"UnitName"						"human_vault"
 		// End of BuildingHelper info
 
 		// Stats

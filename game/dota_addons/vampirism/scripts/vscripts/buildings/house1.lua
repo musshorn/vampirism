@@ -10,7 +10,7 @@ function House1:Init(unit)
 		if not unit:IsAlive() then
 			return nil
 		end
-
+		
 		return .1
 	end)
 end
