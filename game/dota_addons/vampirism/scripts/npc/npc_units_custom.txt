@@ -289,8 +289,8 @@
 		//----------------------------------------------------------------
 
 		"Ability1"					"spawn_worker_t1"	//harvest test
-		"Ability2"					""					// Ability 2.
-		"Ability3"					""					// Ability 3.
+		"Ability2"					"cancel_training"					// Ability 2.
+		"Ability3"					"t1_worker_training"					// Ability 3.
 		"Ability4"					""					// Ability 4.
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.

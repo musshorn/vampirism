@@ -3,6 +3,8 @@ function build( keys )
   local pID = player:GetPlayerID()
   local returnTable = BuildingHelper:AddBuilding(keys)
 
+  local tempAbilities = {}
+
   -- handle errors if any
   if TableLength(returnTable) > 0 then
     --PrintTable(returnTable)
@@ -33,15 +35,33 @@ function build( keys )
     -- FindClearSpace for the builder
     FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
     -- start the building with 0 mana.
+
+    if unit:GetName() == "house_t1" then
+      print('this just happened')
+      for i in unit:GetAbilityCount() do
+        tempAbilities[i] = unit:GetAbilityByIndex(i)
+        print(tempAbilities[i]:GetAbilityName())
+        unit:RemoveAbility(tempAbilities[i]:GetAbilityName())
+        print('removed ability')
+      end
+    end
     unit:SetMana(0)
   end)
+
   keys:OnConstructionCompleted(function(unit)
     --print("Completed construction of " .. unit:GetUnitName())
-    -- Play construction complete sound.
+    -- Play construction complete sound.  
     -- Give building its abilities
     -- add the mana
     unit:SetMana(unit:GetMaxMana())
-    House1:Init(unit)
+    if unit:GetUnitName() == "house_t1" then
+      for i in tempAbilities[i] do
+        unit:AddAbility(tempAbilities[i]:GetAbilityName())
+        print(tempAbilities[i]:GetAbilityName())
+      end
+
+      House1:Init(unit)
+    end
   end)
 
   -- These callbacks will only fire when the state between below half health/above half health changes.
