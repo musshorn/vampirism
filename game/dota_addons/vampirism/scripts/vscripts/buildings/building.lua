@@ -3,5 +3,9 @@ function TrainUnit( keys )
   table.insert(caster.queue, keys)
 end
 function Cancel( keys )
-  -- Soon (tm)
+  local caster = keys.caster
+  Timers:RemoveTimer("WorkTimer")
+  caster.workHandler:SetChanneling(false)
+  caster.doingWork = false
+  caster:RemoveModifierByName(caster.workHandler:GetName())
 end
