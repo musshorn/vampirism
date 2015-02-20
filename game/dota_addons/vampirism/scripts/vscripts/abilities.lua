@@ -92,7 +92,10 @@ function human_blink(keys)
   --DeepPrintTable(keys)
   local caster = keys.caster
   local point = keys.target_points[1]
-  caster:SetAbsOrigin(point)
+
+  if not GridNav:IsBlocked(point) then
+    caster:SetAbsOrigin(point)
+  end
 end
 
 function slayer_attribute_bonus(keys)

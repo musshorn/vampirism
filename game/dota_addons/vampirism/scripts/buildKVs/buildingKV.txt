@@ -18,4 +18,63 @@
 		"build_human_vault"						"10"
 		"build_cancel"							"11"
 	}
+
+	//=================================================================================================================
+	// BUILDER: Simple Builder
+	//=================================================================================================================
+	"simple_tower_builder"
+	{
+		"build_house1"							"0"
+		"build_feed_t1"							"1"
+		"build_tower_mana_t1"					"2"
+		"build_human_surplus"					"3"
+		"build_research_center_t2"				"4"
+		"build_wall_t4"							"5"
+		"build_tower_wall_t1"					"6"
+		"build_tower_frost"						"7"
+		"build_heal_wall_t1"					"8"
+		"build_gold_mine_t1"					"9"
+		"build_wall_t3"							"10"
+		"build_cancel"							"11"
+	}
+
+	//=================================================================================================================
+	// BUILDER: Super Tower Builder
+	//=================================================================================================================
+	"super_tower_builder"
+	{
+		"build_tower_mana_t1"					"0"
+		"build_gold_mine_t2"					"1"
+		"build_tower_cripple_t1"				"2"
+		"build_human_surplus"					"3"
+		"build_wall_t8"							"4"
+		"build_tower_lightning_t1"				"5"
+		"build_tower_spire_t1"					"6"
+		"build_feed_t2"							"7"
+		"build_tower_wall_t1"					"8"
+		"build_command_center"					"9"
+		"build_base_operations"					"10"
+		"build_cancel"							"11"	
+	}
+
+	//=================================================================================================================
+	// BUILDER: Goblin Tower Builder
+	//=================================================================================================================
+	"goblin_tower_builder"
+	{
+		"build_house_t3"						"0"
+		"build_tower_blood_t1"					"1"
+		"build_gold_mind_t4"					"2"
+		"build_tower_cripple_t3"				"3"
+		"build_tower_pink_t1"					"4"
+		"build_wall_t9"							"5"
+		"build_tower_lightning_t2"				"6"
+		"build_tower_spire_t2"					"7"
+		"build_feed_t2"							"8"
+		"build_tower_wall_t2"					"9"
+		"build_heal_wall_t2"					"10"
+		"build_cancel"							"11"
+	}
+
+
 }
