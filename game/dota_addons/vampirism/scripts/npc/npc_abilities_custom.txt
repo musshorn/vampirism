@@ -605,7 +605,7 @@
 		}
 	}
 
-	"build_tent1"
+	"build_tent_1"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
@@ -625,7 +625,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"tent1"
+		"UnitName"						"tent_1"
 		// End of BuildingHelper info
 
 		// Stats
@@ -1063,6 +1063,51 @@
 			{
 				"ScriptFile"			"scripts/vscripts/abilities.lua"
 				"Function"				"build"
+			}
+		}
+	}
+
+	"build_silence"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"cancel"
+		//"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"AbilityUnitTargetType"     	"DOTA_UNIT_TARGET_ALL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		// BuildingHelper info
+
+		"AbilityCooldown"				"0"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"9000000"
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0"
+		"MaxLevel"						"1"
+		
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"perma_silence"
+				"Target" 		"TARGET"
+			}
+		}
+
+		"Modifiers"
+		{
+			"perma_silence"
+			{
+				"Passive"			"0"
+				"IsHidden"			"0"
+				"IsDebuff"			"1"
+				"IsPurgable"		"0"
+
+				"States"
+				{
+					"MODIFIER_STATE_SILENCED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}	
 			}
 		}
 	}

@@ -1,7 +1,13 @@
+abilTemp = {}
+OUT_OF_BOUNDS = Vector(-8099.68798828125,-7962.6953125,256.0000610351563)
+silencer = CreateUnitByName("util_silencer", OUT_OF_BOUNDS, false, nil, nil, 0)
+
 function build( keys )
   local player = keys.caster:GetPlayerOwner()
   local pID = player:GetPlayerID()
   local returnTable = BuildingHelper:AddBuilding(keys)
+
+  local tempAbilities = {}
 
   -- handle errors if any
   if TableLength(returnTable) > 0 then
@@ -32,16 +38,25 @@ function build( keys )
     -- Play construction sound
     -- FindClearSpace for the builder
     FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
-    -- start the building with 0 mana.
+    --Silence the unit while it is being built
+    unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})
     unit:SetMana(0)
   end)
+
   keys:OnConstructionCompleted(function(unit)
     --print("Completed construction of " .. unit:GetUnitName())
-    -- Play construction complete sound.
+    -- Play construction complete sound.  
     -- Give building its abilities
     -- add the mana
     unit:SetMana(unit:GetMaxMana())
-    House1:Init(unit)
+    if unit.buildingTable.UnitName == "house_t1" then
+      House1:Init(unit)
+    end
+
+    --Remove Building Silence.
+    if unit:HasModifier("modifier_silence") then
+      unit:RemoveModifierByName("modifier_silence")
+    end
   end)
 
   -- These callbacks will only fire when the state between below half health/above half health changes.
@@ -97,4 +112,8 @@ function uitest(keys)
   print(cursor_position)
   end)
 ]]
+end
+
+function why( keys )
+  print('does this happen')
 end
