@@ -2,6 +2,7 @@ function TrainUnit( keys )
   local caster = keys.caster
   table.insert(caster.queue, keys)
 end
+
 function Cancel( keys )
   local caster = keys.caster
   Timers:RemoveTimer("WorkTimer")

@@ -1,3 +1,7 @@
+abilTemp = {}
+OUT_OF_BOUNDS = Vector(-8099.68798828125,-7962.6953125,256.0000610351563)
+silencer = CreateUnitByName("util_silencer", OUT_OF_BOUNDS, false, nil, nil, 0)
+
 function build( keys )
   local player = keys.caster:GetPlayerOwner()
   local pID = player:GetPlayerID()
@@ -34,17 +38,8 @@ function build( keys )
     -- Play construction sound
     -- FindClearSpace for the builder
     FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
-    -- start the building with 0 mana.
-
-    if unit:GetName() == "house_t1" then
-      print('this just happened')
-      for i in unit:GetAbilityCount() do
-        tempAbilities[i] = unit:GetAbilityByIndex(i)
-        print(tempAbilities[i]:GetAbilityName())
-        unit:RemoveAbility(tempAbilities[i]:GetAbilityName())
-        print('removed ability')
-      end
-    end
+    --Silence the unit while it is being built
+    unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})
     unit:SetMana(0)
   end)
 
@@ -54,13 +49,13 @@ function build( keys )
     -- Give building its abilities
     -- add the mana
     unit:SetMana(unit:GetMaxMana())
-    if unit:GetUnitName() == "house_t1" then
-      for i in tempAbilities[i] do
-        unit:AddAbility(tempAbilities[i]:GetAbilityName())
-        print(tempAbilities[i]:GetAbilityName())
-      end
-
+    if unit.buildingTable.UnitName == "house_t1" then
       House1:Init(unit)
+    end
+
+    --Remove Building Silence.
+    if unit:HasModifier("modifier_silence") then
+      unit:RemoveModifierByName("modifier_silence")
     end
   end)
 
@@ -117,4 +112,8 @@ function uitest(keys)
   print(cursor_position)
   end)
 ]]
+end
+
+function why( keys )
+  print('does this happen')
 end
