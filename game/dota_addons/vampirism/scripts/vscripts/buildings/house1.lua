@@ -10,12 +10,14 @@ function House1:Init(unit)
 	house1.workTimer = nil -- Handle to the inner timer, used to cancel the current job
 	house1.doingWork = false -- Flag to indicate if the queue is currently in use
 	house1.workHandler = nil -- Handle of the ability currently channeling
+	house1.uniqueName = DoUniqueString("WorkTimer") -- Unique name for the work timer for this building
+
 
 	Timers:CreateTimer(function()
 		if not unit:IsAlive() then
 			return nil
 		end
-
+		
 		--Check if there is units in the queue and the queue is free
 		--Note the maximum displayable buffs seems to be 7, any more are not shown.
 		if table.getn(house1.queue) > 0  and house1.doingWork == false then
@@ -31,7 +33,7 @@ function House1:Init(unit)
 			house1.doingWork = true
 			
 			-- Create a timer on a delay to create the worker
-			house1.workTimer = Timers:CreateTimer("WorkTimer", {
+			house1.workTimer = Timers:CreateTimer(house1.uniqueName, {
 					endTime = spawnTime,
 					callback =  function()
 						local unit = Worker:Worker1(caster:GetAbsOrigin(), caster)

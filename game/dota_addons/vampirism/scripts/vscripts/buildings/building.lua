@@ -5,7 +5,7 @@ end
 
 function Cancel( keys )
   local caster = keys.caster
-  Timers:RemoveTimer("WorkTimer")
+  Timers:RemoveTimer(caster.uniqueName)
   caster.workHandler:SetChanneling(false)
   caster.doingWork = false
   caster:RemoveModifierByName(caster.workHandler:GetName())
