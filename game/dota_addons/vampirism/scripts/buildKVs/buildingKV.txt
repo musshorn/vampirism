@@ -75,6 +75,4 @@
 		"build_heal_wall_t2"					"10"
 		"build_cancel"							"11"
 	}
-
-
 }
