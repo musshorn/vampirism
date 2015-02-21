@@ -753,6 +753,13 @@ function GameMode:OnConnectFull(keys)
     self.vBroadcasters[keys.userid] = 1
     return
   end
+
+  --Hides unused HUD elements. Thanks to Noya for docuementing this!
+  mode = GameRules:GetGameModeEntity()
+  mode:SetHUDVisible(1, false)
+  mode:SetHUDVisible(2, false)
+  mode:SetHUDVisible(9, false)
+  mode:SetHUDVisible(12, false)
 end
 
 -- This is an example console command
