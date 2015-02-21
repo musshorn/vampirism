@@ -16,6 +16,5 @@ end
 
 function SetRallyPoint( keys )
   local caster = keys.caster
-  caster:Stop()
-  PrintTable(keys)
+  caster.rallyPoint = keys.target_points[1]
 end

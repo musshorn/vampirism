@@ -271,6 +271,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Harvesting, this is the base amount before research
+		"MaximumLumber"	"10"
 	}
 
 	//=================================================================================	
@@ -329,9 +332,8 @@
 
 		// Movement
 		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
-		"MovementSpeed"				"300"		// Speed
-		"MovementTurnRate"			"0.5"		// Turning rate.
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"			// Type of locomotion - ground, air
+		"MovementSpeed"				"0"		// Speed
 
 		// Status
 		//----------------------------------------------------------------

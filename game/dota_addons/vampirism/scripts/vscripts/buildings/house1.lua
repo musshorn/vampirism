@@ -43,6 +43,16 @@ function House1:Init(unit)
 						caster:RemoveModifierByName(house1.workHandler:GetName())
 						house1.workHandler:SetChanneling(false)
 						house1.doingWork = false
+
+						-- If a rally point is set for this building then move the worker to it.
+						-- Needs a delay as movement cant happen on the same frame as spawn
+						if house1.rallyPoint ~= nil then
+							Timers:CreateTimer(0.05, function()
+								unit:MoveToPosition(house1.rallyPoint)
+								return nil
+							end)
+						end
+						
 						return nil
 				end})
 			table.remove(house1.queue)
