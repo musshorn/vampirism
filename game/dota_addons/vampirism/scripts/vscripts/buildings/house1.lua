@@ -10,6 +10,7 @@ function House1:Init(unit)
 	house1.doingWork = false -- Flag to indicate if the queue is currently in use
 	house1.workHandler = nil -- Handle of the ability currently channeling
 	house1.uniqueName = DoUniqueString("WorkTimer") -- Unique name for the work timer for this building
+	house1.rallyPoint = nil -- Location to send units trained by this building
 
 
 	Timers:CreateTimer(function()

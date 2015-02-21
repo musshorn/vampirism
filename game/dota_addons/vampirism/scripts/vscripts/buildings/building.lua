@@ -13,3 +13,9 @@ function Cancel( keys )
     caster.workHandler = nil
   end
 end
+
+function SetRallyPoint( keys )
+  local caster = keys.caster
+  caster:Stop()
+  PrintTable(keys)
+end
