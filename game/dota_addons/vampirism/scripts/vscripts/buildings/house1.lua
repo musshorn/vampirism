@@ -7,10 +7,10 @@ end
 function House1:Init(unit)
 	local house1 = unit
 	house1.queue = {} -- Queue of work to do, can be workers or research
-	house1.workTimer = nil -- Handle to the inner timer, used to cancel the current job
 	house1.doingWork = false -- Flag to indicate if the queue is currently in use
 	house1.workHandler = nil -- Handle of the ability currently channeling
 	house1.uniqueName = DoUniqueString("WorkTimer") -- Unique name for the work timer for this building
+	house1.rallyPoint = nil -- Location to send units trained by this building
 
 
 	Timers:CreateTimer(function()
@@ -33,7 +33,7 @@ function House1:Init(unit)
 			house1.doingWork = true
 			
 			-- Create a timer on a delay to create the worker
-			house1.workTimer = Timers:CreateTimer(house1.uniqueName, {
+			Timers:CreateTimer(house1.uniqueName, {
 					endTime = spawnTime,
 					callback =  function()
 						local unit = Worker:Worker1(caster:GetAbsOrigin(), caster)
@@ -43,6 +43,16 @@ function House1:Init(unit)
 						caster:RemoveModifierByName(house1.workHandler:GetName())
 						house1.workHandler:SetChanneling(false)
 						house1.doingWork = false
+
+						-- If a rally point is set for this building then move the worker to it.
+						-- Needs a delay as movement cant happen on the same frame as spawn
+						if house1.rallyPoint ~= nil then
+							Timers:CreateTimer(0.05, function()
+								unit:MoveToPosition(house1.rallyPoint)
+								return nil
+							end)
+						end
+						
 						return nil
 				end})
 			table.remove(house1.queue)

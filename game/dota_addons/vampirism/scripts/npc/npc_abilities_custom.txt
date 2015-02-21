@@ -116,7 +116,27 @@
 			}
 
 		}
+	}
 
+	//Set rally point for workers created by this building
+	"set_rally_point"
+	{
+		"AbilityBehavior"						"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
+		"BaseClass"	"ability_datadriven"
+		"MaxLevel"						"1"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"0"
+		"AbilityCastRange"			"5000"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Target"			"POINT"
+				"Function"		"SetRallyPoint"
+			}
+		}
 	}
 
 	"spawn_worker_t1"
@@ -214,21 +234,17 @@
 			"ApplyModifier"
 			{
 				"Target"	"CASTER"
-				"ModifierName"	"harvest_mana"
+				"ModifierName"	"carrying_lumber"
 			}
 
 		}
 
 		"Modifiers"
 		{
-			"harvest_mana"
+			"carrying_lumber"
 			{
-				"Duration"	"0.9"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT_UNIQUE"	"0.9"
-				}
-
+				"IsPurgable"	"false"
+				"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
 			}
 
 		}
