@@ -35,11 +35,9 @@ function House1:Init(unit)
 			-- Create a timer on a delay to create the worker
 			Timers:CreateTimer(house1.uniqueName, {
 					endTime = spawnTime,
-					callback =  function()
+					callback = function()
 						local unit = Worker:Worker1(caster:GetAbsOrigin(), caster)
-						if unit.think then
-							unit:Think()
-						end
+
 						caster:RemoveModifierByName(house1.workHandler:GetName())
 						house1.workHandler:SetChanneling(false)
 						house1.doingWork = false
