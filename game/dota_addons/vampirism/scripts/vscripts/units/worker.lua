@@ -16,6 +16,7 @@ function Worker:Worker1(vPos, hOwner)
   worker.workTimer = DoUniqueString("WorkTimer")
   worker.pos = worker:GetAbsOrigin()
   worker.moving = false
+  worker.maxLumber = UNIT_KV.worker_t1.MaximumLumber
 
   Timers:CreateTimer(function()
   	if worker.pos ~= worker:GetAbsOrigin() then
@@ -32,8 +33,6 @@ function Worker:Worker1(vPos, hOwner)
   	return 0.1
   end)
 
-	-- Check if worker is stationary in a tree zone
-
 	function worker:Think()
 
 		worker.generationTimer = 
@@ -44,20 +43,23 @@ function Worker:Worker1(vPos, hOwner)
 			end
 
 			-- Check if the worker is in the trigger zone and not moving
-			if (worker.inTriggerZone and worker.moving == false) then
+			-- Additonally, store this location for the next trip
+			local carryTotal= worker:FindAbilityByName("carrying_lumber")
+			local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+
+			if (worker.inTriggerZone and worker.moving == false and currentLumber < worker.maxLumber) then
+				worker.treepos = worker:GetAbsOrigin()
 				local ability = worker:FindAbilityByName("harvest_channel")
+
+				-- If they are not working, start them working
 				if (ability:IsChanneling() == false) then
-					
 					ability:SetChanneling(true)
-					
 					local chopTime = ability:GetChannelTime()
 
 					-- Timer that increments the lumber stack count
 					Timers:CreateTimer(worker.workTimer,{
 							endTime = chopTime,
 							callback = function()
-								local carryTotal= worker:FindAbilityByName("carrying_lumber")
-								local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
 								worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
 								ability:SetChanneling(false)
 
@@ -66,16 +68,18 @@ function Worker:Worker1(vPos, hOwner)
 				end
 			end
 
+			-- not sure if this line is needed, double check
+			currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
 
-			--[[TODO: check if the player who owns the house is the same player who owns the worker.
-			if worker:GetMana() >= 1 then
+			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
+			if (currentLumber == worker.maxLumber) then
 				if Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 120) ~= nil then
 					print("found house")
 					local pfxPath = string.format("particles/msg_fx/msg_%s.vpcf", "heal")
 					local pidx = ParticleManager:CreateParticle(pfxPath, PATTACH_ABSORIGIN_FOLLOW, worker)
 
 					local digits = 0
-					local number = worker:GetMana()
+					local number = currentLumber
 					if number ~= nil then
 						digits = #tostring(number)
 					end
@@ -90,13 +94,12 @@ function Worker:Worker1(vPos, hOwner)
 					WOOD[pid] = WOOD[pid] + worker:GetMana()
 					print(pid)
 
-					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_amount = worker:GetMana()})
+					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_amount = currentLumber})
 
-					worker:SetMana(0)
+					worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
 					worker:MoveToPosition(worker.treepos)
 				end
-			end]]--
-
+			end
 			return .1
 		end)
 	end
