@@ -760,6 +760,7 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(2, false)
   mode:SetHUDVisible(9, false)
   mode:SetHUDVisible(12, false)
+  mode:SetCameraDistanceOverride(1500)
 end
 
 -- This is an example console command
