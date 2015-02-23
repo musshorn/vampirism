@@ -116,7 +116,7 @@ function Worker:Worker1(vPos, hOwner)
 					ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
 
 					local pid = worker:GetPlayerOwnerID() + 1
-					WOOD[pid] = WOOD[pid] + worker:GetMana()
+					WOOD[pid] = WOOD[pid] + currentLumber
 
 					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_amount = currentLumber})
 
