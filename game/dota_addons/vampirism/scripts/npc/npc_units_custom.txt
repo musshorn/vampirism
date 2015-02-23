@@ -219,8 +219,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 
-		"Ability1"					"harvest_t1"		//harvest test
-		"Ability2"					""			// Ability 2.
+		"Ability1"					"harvest_channel"		//harvest test
+		"Ability2"					"carrying_lumber"			// Ability 2.
 		"Ability3"					""			// Ability 3.
 		"Ability4"					""			// Ability 4.
 		"Ability5"					""			// Ability 5.
@@ -235,9 +235,9 @@
 
 		//Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-		"AttackDamageMin"			"0"
-		"AttackDamageMax"			"0"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"1"
+		"AttackDamageMax"			"1"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"0"
 		"AttackAnimationPoint"		"0"
@@ -295,7 +295,7 @@
 		"Ability2"					"cancel_training"					// Ability 2.
 		"Ability3"					"set_rally_point"					// Ability 3.
 		"Ability4"					"t1_worker_training"					// Ability 4.
-		"Ability5"					""					// Ability 5.
+		"Ability5"					"building_block"					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
 		"Ability8"					""					// Ability 8 - Extra.

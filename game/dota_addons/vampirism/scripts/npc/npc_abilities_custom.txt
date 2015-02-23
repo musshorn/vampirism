@@ -118,6 +118,26 @@
 		}
 	}
 
+	//Keeps the building stationary
+	"building_block"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"	"ability_datadriven"
+		"Modifiers"
+		{
+			"modifier_grounded_passive"
+			{
+				"Passive" "1"
+				"IsHidden" "1"
+				"States"
+				{
+					"MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+
+	}
+
 	//Set rally point for workers created by this building
 	"set_rally_point"
 	{
@@ -183,7 +203,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"	"ability_datadriven"
 		"AbilityCastPoint"	"0"
-		"AbilityChannelTime" "5.0"
+		"AbilityChannelTime" "1.0"
 	}
 
 	"cancel_training"
@@ -225,39 +245,23 @@
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"basher"
-		"AbilityChannelTime"	"0.9"
-		"AbilityCastAnimation"	"ACT_DOTA_ATTACK"
-		"AbilityManaCost"	"0"
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"Target"	"CASTER"
-				"ModifierName"	"carrying_lumber"
-			}
+		"AbilityCastPoint"	"0"
+		"AbilityChannelTime" "0.5"
+		"AbilityCastAnimation" "ACT_DOTA_ATTACK"
+	}
 
-		}
-
+	"carrying_lumber"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"	"ability_datadriven"
+		"AbilityCastPoint"	"0"
 		"Modifiers"
 		{
-			"carrying_lumber"
+			"modifier_carrying_lumber"
 			{
-				"IsPurgable"	"false"
-				"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Passive"	"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
 			}
-
-		}
-
-		"OnChannelFinish"
-		{
-			"RunScript"
-			{
-				"Target"	"CASTER"
-				"ScriptFile"	"scripts/vscripts/units/worker.lua"
-				"Function"	"TreeLoop"
-			}
-
 		}
 
 	}
