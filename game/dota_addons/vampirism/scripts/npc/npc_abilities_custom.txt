@@ -203,7 +203,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"	"ability_datadriven"
 		"AbilityCastPoint"	"0"
-		"AbilityChannelTime" "5.0"
+		"AbilityChannelTime" "1.0"
 	}
 
 	"cancel_training"
@@ -243,16 +243,16 @@
 
 	"harvest_channel"
 	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"BaseClass"	"ability_datadriven"
 		"AbilityCastPoint"	"0"
-		"AbilityChannelTime" "1.0"
+		"AbilityChannelTime" "0.5"
 		"AbilityCastAnimation" "ACT_DOTA_ATTACK"
 	}
 
 	"carrying_lumber"
 	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"	"ability_datadriven"
 		"AbilityCastPoint"	"0"
 		"Modifiers"

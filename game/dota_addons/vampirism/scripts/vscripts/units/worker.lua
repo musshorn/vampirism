@@ -17,6 +17,7 @@ function Worker:Worker1(vPos, hOwner)
   worker.pos = worker:GetAbsOrigin()
   worker.moving = false
   worker.maxLumber = UNIT_KV.worker_t1.MaximumLumber
+  worker.housePos = nil
 
   Timers:CreateTimer(function()
   	if worker.pos ~= worker:GetAbsOrigin() then
@@ -53,7 +54,7 @@ function Worker:Worker1(vPos, hOwner)
 
 				-- If they are not working, start them working
 				if (ability:IsChanneling() == false) then
-					ability:SetChanneling(true)
+					worker:CastAbilityNoTarget(ability, worker:GetPlayerOwnerID() )
 					local chopTime = ability:GetChannelTime()
 
 					-- Timer that increments the lumber stack count
@@ -62,19 +63,43 @@ function Worker:Worker1(vPos, hOwner)
 							callback = function()
 								worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
 								ability:SetChanneling(false)
+								worker.housePos = nil
 
 								return nil
 							end})
 				end
 			end
 
-			-- not sure if this line is needed, double check
-			currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
 
 			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
 			if (currentLumber == worker.maxLumber) then
-				if Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 120) ~= nil then
-					print("found house")
+				
+				-- Find all dota creatures, check if they can recieve lumber and that they are owned by the correct player
+				-- This function is relativly expensive so we only call it when needed.
+				if (worker.housePos == nil) then
+					local drop = Entities:FindByModel(nil, "models/house1.vmdl")
+					local minDist = 9999999
+					local bestDrop = nil
+					while drop ~= nil do
+						if drop:GetPlayerOwnerID() == worker:GetPlayerOwnerID() then
+							local workerV = worker:GetAbsOrigin()
+							local testDrop = drop:GetAbsOrigin()
+
+							-- Dirty distance function, avoid sqrt as it's expensive.
+							local dist = ((workerV.x - testDrop.x) ^ 2 + (workerV.y - testDrop.y) ^ 2 + (workerV.z - testDrop.z) ^ 2)
+							if (dist < minDist) then
+								bestDrop = drop
+								minDist = dist
+							end
+						end
+						drop = Entities:FindByModel(drop, "models/house1.vmdl")
+					end
+					worker.housePos = bestDrop:GetAbsOrigin()
+					worker:MoveToPosition(worker.housePos)
+				end
+
+				-- Drop lumber off at the house and alert Flash then move back to the tree
+				if Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 180) ~= nil then
 					local pfxPath = string.format("particles/msg_fx/msg_%s.vpcf", "heal")
 					local pidx = ParticleManager:CreateParticle(pfxPath, PATTACH_ABSORIGIN_FOLLOW, worker)
 
@@ -92,7 +117,6 @@ function Worker:Worker1(vPos, hOwner)
 
 					local pid = worker:GetPlayerOwnerID() + 1
 					WOOD[pid] = WOOD[pid] + worker:GetMana()
-					print(pid)
 
 					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_amount = currentLumber})
 
@@ -103,16 +127,10 @@ function Worker:Worker1(vPos, hOwner)
 			return .1
 		end)
 	end
-
-  function worker:Harvest()
-		local harvest = worker:FindAbilityByName("harvest_channel")
-		worker:CastAbilityNoTarget(harvest, worker:GetPlayerOwnerID())
-	  end
-  return worker
+	return worker
 end
 
 function AtTree(keys)
-	print("At the tree")
 	local unit = keys.activator
 	unit.treepos = unit:GetAbsOrigin()
 	unit.inTriggerZone = true
@@ -120,28 +138,6 @@ function AtTree(keys)
 end
 
 function LeftTree(keys)
-	print("Left the tree")
 	local unit = keys.activator
 	unit.inTriggerZone = false
-end
-
-function TreeLoop(keys)
-	print("In the meme loop?")
-	local unit = keys.caster
-	local harvest = unit:FindAbilityByName("harvest_channel")
-	local phase = unit:FindAbilityByName("harvest_phase")
-
-	if unit:GetMana() < 1 then
-		unit:CastAbilityNoTarget(harvest, unit:GetPlayerOwnerID())
-		--unit:CastAbilityNoTarget(phase, unit:GetPlayerOwnerID())
-	else
-		unit:InterruptChannel()
-
-		local drop = Entities:FindByModel(nil, "models/house1.vmdl")
-
-		unit:MoveToPosition(drop:GetAbsOrigin())
-		--test = Entities:FindByName(nil, "npc_dota_creature")
-		--print(test)
-		--DeepPrintTable(test)
-	end
 end
