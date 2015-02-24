@@ -49,8 +49,20 @@ function build( keys )
     -- Give building its abilities
     -- add the mana
     unit:SetMana(unit:GetMaxMana())
-    if unit.buildingTable.UnitName == "house_t1" then
-      House1:Init(unit)
+
+    
+    House1:Init(unit)
+
+    -- Check if the building will create units, if so, give it a unit creation timer
+    if UNIT_KV[unit.unitName].SpawnsUnits == "true" then
+      House1:UnitSpawner()
+    end
+
+    -- If the building provides food, how much? Also alert the UI for an update
+    if UNIT_KV[unit.unitName].ProvidesFood ~= nil then
+      local food = tonumber(UNIT_KV[unit.unitName].ProvidesFood)
+      TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
+      FireGameEvent('vamp_total_food_changed', { player_ID = pID, total_food = currentLumber})
     end
 
     --Remove Building Silence.

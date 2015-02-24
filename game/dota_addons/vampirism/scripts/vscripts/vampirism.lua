@@ -44,6 +44,9 @@ MAX_LEVEL = 50                          -- What level should we let heroes get t
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
 WOOD = {}
+TOTAL_FOOD = {}
+CURRENT_FOOD = {}
+
 UNIT_KV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
 -- Fill this table up with the required XP per level if you want to change it
