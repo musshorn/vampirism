@@ -26,36 +26,54 @@ function House1:Init(unit)
 			local keys = house1.queue[1]
 			local caster =  keys.caster
 			local abilityName = keys.AddToQueue
+			local unitToSpawn = keys.SpawnUnit
 						
-			house1.workHandler = caster:FindAbilityByName(abilityName)
+	
+			-- Check if the worker will fit in the food cap
+			if UNIT_KV[unitToSpawn].ConsumesFood ~= nil then
+				local requestingFood = UNIT_KV[unitToSpawn].ConsumesFood
+				if TOTAL_FOOD[caster:GetPlayerOwnerID()+ 1] >= CURRENT_FOOD[caster:GetPlayerOwnerID() + 1] + requestingFood then
+					house1.workHandler = caster:FindAbilityByName(abilityName)
+					house1.workHandler:SetChanneling(true)
+					local spawnTime = house1.workHandler:GetChannelTime()
 
-			house1.workHandler:SetChanneling(true)
-			local spawnTime = house1.workHandler:GetChannelTime()
+					house1.doingWork = true
 
-			house1.doingWork = true
-			
-			-- Create a timer on a delay to create the worker
-			Timers:CreateTimer(house1.uniqueName, {
-					endTime = spawnTime,
-					callback = function()
-						local unit = Worker:Worker1(caster:GetAbsOrigin(), caster)
 
-						caster:RemoveModifierByName(house1.workHandler:GetName())
-						house1.workHandler:SetChanneling(false)
-						house1.doingWork = false
+						-- Create a timer on a delay to create the worker
+						Timers:CreateTimer(house1.uniqueName, {
+								endTime = spawnTime,
+								callback = function()
+									local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
+									
+									CURRENT_FOOD[caster:GetPlayerOwnerID() + 1] = CURRENT_FOOD[caster:GetPlayerOwnerID() + 1] + requestingFood
+									FireGameEvent('vamp_food_changed', { player_ID = caster:GetPlayerOwnerID() + 1, food_total = CURRENT_FOOD[caster:GetPlayerOwnerID() + 1]})
 
-						-- If a rally point is set for this building then move the worker to it.
-						-- Needs a delay as movement cant happen on the same frame as spawn
-						if house1.rallyPoint ~= nil then
-							Timers:CreateTimer(0.05, function()
-								unit:MoveToPosition(house1.rallyPoint)
+									caster:RemoveModifierByName(house1.workHandler:GetName())
+									house1.workHandler:SetChanneling(false)
+									house1.doingWork = false
+
+									-- If a rally point is set for this building then move the worker to it.
+									-- Needs a delay as movement cant happen on the same frame as spawn
+									if house1.rallyPoint ~= nil then
+										Timers:CreateTimer(0.05, function()
+											unit:MoveToPosition(house1.rallyPoint)
+											return nil
+										end)
+									end
+								
 								return nil
-							end)
-						end
-						
-						return nil
-					end})
-			table.remove(house1.queue)
+							end})
+					-- Unit was created, pop the queue
+					table.remove(house1.queue)
+				else
+					FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Build more farms" } )
+					table.remove(house1.queue)
+					caster:RemoveModifierByName(house1.workHandler:GetName())
+					house1.workHandler:SetChanneling(false)
+					house1.doingWork = false
+				end
+			end
 		end
 		return .1
 	end)

@@ -61,8 +61,11 @@ function build( keys )
     -- If the building provides food, how much? Also alert the UI for an update
     if UNIT_KV[unit.unitName].ProvidesFood ~= nil then
       local food = tonumber(UNIT_KV[unit.unitName].ProvidesFood)
-      TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
-      FireGameEvent('vamp_total_food_changed', { player_ID = pID, total_food = currentLumber})
+      if (TOTAL_FOOD[pID] < 300) then
+        TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
+        print(TOTAL_FOOD[pID])
+        FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+      end
     end
 
     --Remove Building Silence.

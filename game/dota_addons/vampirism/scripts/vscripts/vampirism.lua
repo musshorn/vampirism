@@ -203,16 +203,9 @@ function GameMode:OnNPCSpawned(keys)
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
     WOOD[npc:GetPlayerOwnerID()] = 50
+    TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
+    CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
     print("made 40 wood for player "..npc:GetPlayerOwnerID())
-
-   local choseFusionHero = {   
-   PrimaryHero = string.lower(npc:GetName()),        
-   PlayerID = npc:GetPlayerOwnerID()
-   }
-   FireGameEvent( "ChosenFusionHeroes", choseFusionHero )
-
-  --print(choseFusionHero.PrimaryHero)
-  --print(choseFusionHero.PlayerID)
   end
 
   if npc:IsRealHero() and npc.bFirstSpawned == nil then
