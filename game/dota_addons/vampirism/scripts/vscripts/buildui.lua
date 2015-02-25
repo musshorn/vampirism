@@ -36,11 +36,16 @@ function CallMenu(keys)
 
     FireGameEvent("build_ui_called", {player_ID = playerID, builder = caster:GetUnitName()})
 
+    --ONLY FOR TESTING IN SINGLE, NOT WORKING IN MULTIPLAYER.
+    --SHOULD BE playerCasters[playerID] = caster
     playerCasters[0] = caster
 
 end
 
 function BuildUI:BuildChosen(building, playerID)
+
+    --ONLY FOR TESTING IN SINGLE, NOT WORKING IN MULTIPLAYER.
+    --SHOULD BE local caster = playerCasters[playerID]
     local caster = playerCasters[0]
     local ability = caster:FindAbilityByName(building)
 
