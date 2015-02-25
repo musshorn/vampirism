@@ -100,8 +100,8 @@ function Worker:Worker1(vPos, hOwner)
 
 				-- Drop lumber off at the house and alert Flash then move back to the tree
 				if Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 180) ~= nil then
-					local pfxPath = string.format("particles/msg_fx/msg_%s.vpcf", "heal")
-					local pidx = ParticleManager:CreateParticle(pfxPath, PATTACH_ABSORIGIN_FOLLOW, worker)
+					local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
+					local pidx = ParticleManager:CreateParticle("particles/msg_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, worker)
 
 					local digits = 0
 					local number = currentLumber
@@ -116,9 +116,10 @@ function Worker:Worker1(vPos, hOwner)
 					ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
 
 					local pid = worker:GetPlayerOwnerID() + 1
-					WOOD[pid] = WOOD[pid] + worker:GetMana()
+					WOOD[pid] = WOOD[pid] + currentLumber
 
-					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_amount = currentLumber})
+					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
+					print(WOOD[pid])
 
 					worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
 					worker:MoveToPosition(worker.treepos)

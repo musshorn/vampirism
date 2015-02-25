@@ -625,11 +625,11 @@
 		}
 	}
 
-	"build_tent_1"
+	"build_tent_t1"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"tent_1"
+		"AbilityTextureName"			"tent_t1"
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
@@ -645,7 +645,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"tent_1"
+		"UnitName"						"tent_t1"
 		// End of BuildingHelper info
 
 		// Stats
