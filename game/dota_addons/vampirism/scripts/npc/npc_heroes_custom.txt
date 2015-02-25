@@ -13,7 +13,7 @@
 		"Ability4"	"human_blink"
 		"Ability5"	"human_manaburn"
 		"Ability6"	"build_house1"
-		"Ability7"	"build_tent_1"
+		"Ability7"	"build_tent_t1"
 		"Ability8"	"build_slayer_tavern"
 		"Ability9"	"build_human_surplus"
 		"Ability10"	"build_tower_pearls"

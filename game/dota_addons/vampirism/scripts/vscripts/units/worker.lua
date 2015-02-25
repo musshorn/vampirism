@@ -4,10 +4,9 @@ if Worker == nil then
   Worker = {}
 end
 
-function Worker:Worker1(vPos, hOwner)
-  local worker = CreateUnitByName("worker_t1", vPos + VECTOR_BUMP, true, nil, nil, hOwner:GetTeam())
-  worker:SetControllableByPlayer(hOwner:GetPlayerOwnerID() + 1, true)
-  --worker:FindAbilityByName("harvest_t1"):SetLevel(1)
+function Worker:Worker1(vPos, hOwner, unitName)
+  local worker = CreateUnitByName(unitName, vPos + VECTOR_BUMP, true, nil, nil, hOwner:GetTeam())
+  worker:SetControllableByPlayer(hOwner:GetPlayerOwnerID() + 1, true)  
   worker:SetHullRadius(8)
 
   worker.inTriggerZone = true -- Flag set true if worker is near trees

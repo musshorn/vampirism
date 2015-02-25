@@ -44,6 +44,9 @@ MAX_LEVEL = 50                          -- What level should we let heroes get t
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
 WOOD = {}
+TOTAL_FOOD = {}
+CURRENT_FOOD = {}
+
 UNIT_KV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
 -- Fill this table up with the required XP per level if you want to change it
@@ -200,16 +203,9 @@ function GameMode:OnNPCSpawned(keys)
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
     WOOD[npc:GetPlayerOwnerID()] = 50
+    TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
+    CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
     print("made 40 wood for player "..npc:GetPlayerOwnerID())
-
-   local choseFusionHero = {   
-   PrimaryHero = string.lower(npc:GetName()),        
-   PlayerID = npc:GetPlayerOwnerID()
-   }
-   FireGameEvent( "ChosenFusionHeroes", choseFusionHero )
-
-  --print(choseFusionHero.PrimaryHero)
-  --print(choseFusionHero.PlayerID)
   end
 
   if npc:IsRealHero() and npc.bFirstSpawned == nil then
