@@ -192,6 +192,7 @@
 						"ScriptFile"	"scripts/vscripts/buildings/building.lua"
 						"Function"		"TrainUnit"
 						"AddToQueue"	"t1_worker_training"
+						"SpawnUnit"		"worker_t1"
 					}
 				}
 			}

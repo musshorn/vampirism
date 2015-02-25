@@ -6,7 +6,7 @@
 	"npc_dota_hero_omniknight"
 	{
 		"build_house1"							"0"
-		"build_tent_t1"							"1"
+		"build_tent_1"							"1"
 		"build_slayer_tavern"					"2"
 		"build_human_surplus"					"3"
 		"build_tower_pearls"					"4"
