@@ -7,6 +7,19 @@
 		"player_ID"			"short"
 		"wood_amount"		"short"
 	}
+
+	"vamp_food_changed"
+	{
+		"player_ID"			"short"
+		"food_amount"		"short"
+	}
+
+	"vamp_food_cap_changed"
+	{
+		"player_ID"			"short"
+		"food_cap_amount"		"short"
+	}
+
 	"build_ui_called"
 	{
 		"player_ID"			"short"
