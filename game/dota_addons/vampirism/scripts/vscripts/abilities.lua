@@ -4,7 +4,7 @@ silencer = CreateUnitByName("util_silencer", OUT_OF_BOUNDS, false, nil, nil, 0)
 
 function build( keys )
   local player = keys.caster:GetPlayerOwner()
-  local pID = player:GetPlayerID()
+  local pID = keys.caster:GetPlayerOwnerID()
   local returnTable = BuildingHelper:AddBuilding(keys)
 
   local tempAbilities = {}

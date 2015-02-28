@@ -407,14 +407,25 @@
 		}
 	}
 
-	//TECH TREE REQUIREMENT ABILITIES
-	"_tt_house_t1" //the building required
+	"upgrade_to_t2_tent"
 	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"BaseClass"	"ability_datadriven"
-		"MaxLevel"	"1"
-		"AbilityBhavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityChannelTime"	"5.0"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"t2_tent"
+				"LumberCost"	"10"
+			}
+		}
 	}
-	  	// move_to_point abilities are for BuildingHelper.
+
+	// move_to_point abilities are for BuildingHelper.
 	"move_to_point_70"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"

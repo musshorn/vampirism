@@ -18,3 +18,29 @@ function SetRallyPoint( keys )
   local caster = keys.caster
   caster.rallyPoint = keys.target_points[1]
 end
+
+function Upgrade( keys )
+  local caster = keys.caster
+  local lumberCost = keys.LumberCost
+  local goldCost = keys.GoldCost
+  local targetUnit = keys.TargetUnit
+  local pid = caster:GetPlayerOwnerID() + PID_OFFSET
+
+  if goldCost == nil then
+    goldCost = 0
+  end
+
+  if lumberCost == nil then
+    lumberCost = 0
+  end
+  
+  if PlayerResource:GetGold(pid) < goldCost then
+    caster:Stop()
+    FireGameEvent( 'custom_error_show', { player_ID = pid, _error = "You need more gold" } )
+  end
+
+  if WOOD[pid] < lumberCost then
+    caster:Stop()
+    FireGameEvent( 'custom_error_show', { player_ID = pid, _error = "You need more wood" } )
+  end
+end

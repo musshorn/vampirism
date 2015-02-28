@@ -6,7 +6,7 @@ end
 
 function Worker:Worker1(vPos, hOwner, unitName)
   local worker = CreateUnitByName(unitName, vPos + VECTOR_BUMP, true, nil, nil, hOwner:GetTeam())
-  worker:SetControllableByPlayer(hOwner:GetPlayerOwnerID() + 1, true)  
+  worker:SetControllableByPlayer(hOwner:GetPlayerOwnerID() + PID_OFFSET, true)  
   worker:SetHullRadius(8)
 
   worker.inTriggerZone = true -- Flag set true if worker is near trees
@@ -53,7 +53,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
 				-- If they are not working, start them working
 				if (ability:IsChanneling() == false) then
-					worker:CastAbilityNoTarget(ability, worker:GetPlayerOwnerID() )
+					worker:CastAbilityNoTarget(ability, worker:GetPlayerOwnerID() +PID_OFFSET)
 					local chopTime = ability:GetChannelTime()
 
 					-- Timer that increments the lumber stack count
@@ -80,12 +80,11 @@ function Worker:Worker1(vPos, hOwner, unitName)
 					local minDist = 9999999
 					local bestDrop = nil
 					while drop ~= nil do
-						if drop:GetPlayerOwnerID() == worker:GetPlayerOwnerID() then
+						if drop:GetPlayerOwnerID() + PID_OFFSET == worker:GetPlayerOwnerID() + PID_OFFSET then
 							local workerV = worker:GetAbsOrigin()
 							local testDrop = drop:GetAbsOrigin()
 
-							-- Dirty distance function, avoid sqrt as it's expensive.
-							local dist = ((workerV.x - testDrop.x) ^ 2 + (workerV.y - testDrop.y) ^ 2 + (workerV.z - testDrop.z) ^ 2)
+							local dist = CalcDistanceBetweenEntityOBB(worker, drop)
 							if (dist < minDist) then
 								bestDrop = drop
 								minDist = dist
@@ -114,7 +113,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 					ParticleManager:SetParticleControl(pidx, 2, Vector(1, digits, 0))
 					ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
 
-					local pid = worker:GetPlayerOwnerID() + 1
+					local pid = worker:GetPlayerOwnerID() + PID_OFFSET
 					WOOD[pid] = WOOD[pid] + currentLumber
 
 					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
