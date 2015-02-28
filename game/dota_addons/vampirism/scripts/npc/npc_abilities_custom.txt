@@ -1099,48 +1099,35 @@
 		}
 	}
 
-	"build_silence"
+	"vampire_particles"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"cancel"
-		//"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		"AbilityUnitTargetType"     	"DOTA_UNIT_TARGET_ALL"
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"rubick_empty1"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
-		// BuildingHelper info
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 
 		"AbilityCooldown"				"0"
 		"AbilityManaCost"				"0"
-		"AbilityCastRange"				"9000000"
 		
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0"
-		"MaxLevel"						"1"
-		
-		"OnSpellStart"
+
+
+		"precache"
 		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"perma_silence"
-				"Target" 		"TARGET"
-			}
+			"particle" "particles/vampire/courier_greevil_black_ambient_3.vpcf"
 		}
 
-		"Modifiers"
+		"OnSpellStart"
 		{
-			"perma_silence"
+			"FireEffect"
 			{
-				"Passive"			"0"
-				"IsHidden"			"0"
-				"IsDebuff"			"1"
-				"IsPurgable"		"0"
-
-				"States"
-				{
-					"MODIFIER_STATE_SILENCED"		"MODIFIER_STATE_VALUE_ENABLED"
-				}	
+				"EffectName"        "particles/vampire/courier_greevil_black_ambient_3.vpcf"
+				"EffectAttachType"  "follow_origin"
+				"Target"            "CASTER"
 			}
 		}
 	}
+
 }

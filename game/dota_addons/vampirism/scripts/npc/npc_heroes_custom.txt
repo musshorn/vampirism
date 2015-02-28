@@ -43,6 +43,7 @@
 		"override_hero"	"npc_dota_hero_night_stalker"
 		"BaseClass"	"npc_dota_creature"
 		"Ability1"	"vamp_farsight"
+		"Ability2"	"vampire_particles"
 		"Level"	"1"
 		"ConsideredHero"	"1"
 		"NewHero"	"0"

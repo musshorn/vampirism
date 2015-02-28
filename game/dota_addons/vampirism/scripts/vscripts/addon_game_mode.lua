@@ -56,6 +56,7 @@ function Precache( context )
 		PrecacheModel("models/props_structures/good_statue008.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
+		PrecacheResource("particle_folder", "particles/vampire", context)
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 
 		-- Sounds can precached here like anything else
