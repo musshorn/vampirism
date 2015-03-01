@@ -53,8 +53,9 @@ PID_OFFSET = 0 -- This is set to 1 when using workshop tools, otherwise leave it
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
-for i=1,MAX_LEVEL do
-  XP_PER_LEVEL_TABLE[i] = i * 100
+XP_PER_LEVEL_TABLE[1] = 0
+for i=2,MAX_LEVEL do
+  XP_PER_LEVEL_TABLE[i] = XP_PER_LEVEL_TABLE[i - 1] + i * 80
 end
 
 -- Generated from template
