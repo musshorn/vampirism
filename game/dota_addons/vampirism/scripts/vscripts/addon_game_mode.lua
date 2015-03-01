@@ -57,6 +57,10 @@ function Precache( context )
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)
+
+		-- Async unit precache, only loaded once it's needed.
+		PrecacheUnitByNameAsync("tent_t2", context)
+		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 
 		-- Sounds can precached here like anything else

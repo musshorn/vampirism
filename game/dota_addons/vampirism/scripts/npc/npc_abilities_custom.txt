@@ -412,6 +412,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"BaseClass"	"ability_datadriven"
 		"AbilityChannelTime"	"5.0"
+		"precache"
+		{
+			"model"  "models/props_structures/barrel_oct.vmdl"
+		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -420,7 +424,16 @@
 				"Function"		"Upgrade"
 				"TARGET"	"CASTER"
 				"TargetUnit"	"t2_tent"
+				"TargetModel"	"models/props_structures/barrel_oct.vmdl"
 				"LumberCost"	"10"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
 			}
 		}
 	}
