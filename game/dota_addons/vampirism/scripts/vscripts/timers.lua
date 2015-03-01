@@ -55,8 +55,6 @@
 
 ]]
 
-
-
 TIMERS_THINK = 0.01
 
 if Timers == nil then
@@ -74,7 +72,7 @@ end
 function Timers:start()
   Timers = self
   self.timers = {}
-  
+
   local ent = Entities:CreateByClassname("info_target") -- Entities:FindByClassname(nil, 'CWorld')
   ent:SetThink("Think", self, "timers", TIMERS_THINK)
 end
@@ -110,7 +108,7 @@ function Timers:Think()
     if now >= v.endTime then
       -- Remove from timers list
       Timers.timers[k] = nil
-      
+
       -- Run the callback
       local status, nextCall = pcall(v.callback, GameRules:GetGameModeEntity(), v)
 
@@ -188,7 +186,7 @@ function Timers:CreateTimer(name, args)
     args.endTime = now + args.endTime
   end
 
-  Timers.timers[name] = args 
+  Timers.timers[name] = args
 
   return name
 end

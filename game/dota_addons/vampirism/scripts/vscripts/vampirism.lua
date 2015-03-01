@@ -215,10 +215,10 @@ function GameMode:OnNPCSpawned(keys)
   local npc = EntIndexToHScript(keys.entindex)
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
-    WOOD[npc:GetPlayerOwnerID() + PID_OFFSET] = 50
-    TOTAL_FOOD[npc:GetPlayerOwnerID() + PID_OFFSET] = 15
-    CURRENT_FOOD[npc:GetPlayerOwnerID() + PID_OFFSET] = 0
-    print("made 40 wood for player "..npc:GetPlayerOwnerID() + PID_OFFSET)
+    WOOD[npc:GetPlayerOwnerID()] = 50
+    TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
+    CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
+    print("made 40 wood for player "..npc:GetPlayerOwnerID())
   end
 
   if npc:GetName() == "npc_dota_hero_night_stalker" then
