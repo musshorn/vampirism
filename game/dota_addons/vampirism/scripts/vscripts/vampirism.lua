@@ -49,8 +49,6 @@ CURRENT_FOOD = {}
 
 UNIT_KV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
-PID_OFFSET = 0 -- This is set to 1 when using workshop tools, otherwise leave it as 0 for multiplayer
-
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
 XP_PER_LEVEL_TABLE[1] = 0
@@ -105,11 +103,6 @@ end
 ]]
 function GameMode:OnAllPlayersLoaded()
   print("[vampirism] All Players have loaded into the game")
-  if table.getn(WOOD) > 1 then -- multiplayer, don't apply adjustment to player id
-    PID_OFFSET = 0
-  else
-    PID_OFFSET = 1
-  end
 
   local dummy = CreateUnitByName("npc_bh_dummy", OutOfWorldVector, false, nil, nil, 0)
   local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
@@ -215,10 +208,10 @@ function GameMode:OnNPCSpawned(keys)
   local npc = EntIndexToHScript(keys.entindex)
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
-    WOOD[npc:GetPlayerOwnerID() + PID_OFFSET] = 50
-    TOTAL_FOOD[npc:GetPlayerOwnerID() + PID_OFFSET] = 15
-    CURRENT_FOOD[npc:GetPlayerOwnerID() + PID_OFFSET] = 0
-    print("made 40 wood for player "..npc:GetPlayerOwnerID() + PID_OFFSET)
+    WOOD[npc:GetPlayerOwnerID()] = 50
+    TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
+    CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
+    print("made 40 wood for player "..npc:GetPlayerOwnerID())
   end
 
   if npc:GetName() == "npc_dota_hero_night_stalker" then

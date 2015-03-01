@@ -33,7 +33,7 @@ function House1:Init(unit)
 			if UNIT_KV[unitToSpawn].ConsumesFood ~= nil then
 				local requestingFood = UNIT_KV[unitToSpawn].ConsumesFood
 				print(caster:GetMainControllingPlayer())
-				if TOTAL_FOOD[caster:GetMainControllingPlayer()+ ] >= CURRENT_FOOD[caster:GetMainControllingPlayer() + ] + requestingFood then
+				if TOTAL_FOOD[caster:GetMainControllingPlayer()] >= CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood then
 					house1.workHandler = caster:FindAbilityByName(abilityName)
 					house1.workHandler:SetChanneling(true)
 					local spawnTime = house1.workHandler:GetChannelTime()
@@ -46,8 +46,8 @@ function House1:Init(unit)
 								callback = function()
 									local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
 									
-									CURRENT_FOOD[caster:GetMainControllingPlayer() + ] = CURRENT_FOOD[caster:GetMainControllingPlayer() + ] + requestingFood
-									FireGameEvent('vamp_food_changed', { player_ID = caster:GetMainControllingPlayer() + , food_total = CURRENT_FOOD[caster:GetMainControllingPlayer() + ]})
+									CURRENT_FOOD[caster:GetMainControllingPlayer() ] = CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood
+									FireGameEvent('vamp_food_changed', { player_ID = caster:GetMainControllingPlayer() , food_total = CURRENT_FOOD[caster:GetMainControllingPlayer() ]})
 
 									caster:RemoveModifierByName(house1.workHandler:GetName())
 									house1.workHandler:SetChanneling(false)
@@ -67,7 +67,7 @@ function House1:Init(unit)
 					-- Unit was created, pop the queue
 					table.remove(house1.queue)
 				else
-					FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Build more farms" } )
+					FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Build more farms" } )
 					table.remove(house1.queue)
 					caster:RemoveModifierByName(house1.workHandler:GetName())
 					house1.workHandler:SetChanneling(false)

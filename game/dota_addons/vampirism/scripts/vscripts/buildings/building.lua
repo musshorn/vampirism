@@ -24,7 +24,7 @@ function Upgrade( keys )
   local lumberCost = keys.LumberCost
   local goldCost = keys.GoldCost
   local targetUnit = keys.TargetUnit
-  local pid = caster:GetPlayerOwnerID() + PID_OFFSET
+  local pid = caster:GetMainControllingPlayer()
 
   if goldCost == nil then
     goldCost = 0
