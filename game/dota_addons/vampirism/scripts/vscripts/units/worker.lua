@@ -6,7 +6,7 @@ end
 
 function Worker:Worker1(vPos, hOwner, unitName)
   local worker = CreateUnitByName(unitName, vPos + VECTOR_BUMP, true, nil, nil, hOwner:GetTeam())
-  worker:SetControllableByPlayer(hOwner:GetPlayerOwnerID() + PID_OFFSET, true)  
+  worker:SetControllableByPlayer(hOwner:GetMainControllingPlayer() , true)  
   worker:SetHullRadius(8)
 
   worker.inTriggerZone = true -- Flag set true if worker is near trees
@@ -53,7 +53,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
 				-- If they are not working, start them working
 				if (ability:IsChanneling() == false) then
-					worker:CastAbilityNoTarget(ability, worker:GetPlayerOwnerID() +PID_OFFSET)
+					worker:CastAbilityNoTarget(ability, worker:GetMainControllingPlayer() +PID_OFFSET)
 					local chopTime = ability:GetChannelTime()
 
 					-- Timer that increments the lumber stack count
@@ -80,7 +80,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 					local minDist = 9999999
 					local bestDrop = nil
 					while drop ~= nil do
-						if drop:GetPlayerOwnerID() + PID_OFFSET == worker:GetPlayerOwnerID() + PID_OFFSET then
+						if drop:GetMainControllingPlayer()  == worker:GetMainControllingPlayer()  then
 							local workerV = worker:GetAbsOrigin()
 							local testDrop = drop:GetAbsOrigin()
 
@@ -113,7 +113,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 					ParticleManager:SetParticleControl(pidx, 2, Vector(1, digits, 0))
 					ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
 
-					local pid = worker:GetPlayerOwnerID() + PID_OFFSET
+					local pid = worker:GetMainControllingPlayer() 
 					WOOD[pid] = WOOD[pid] + currentLumber
 
 					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
