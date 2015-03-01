@@ -107,10 +107,15 @@ function human_blink(keys)
   --DeepPrintTable(keys)
   local caster = keys.caster
   local point = keys.target_points[1]
+  local casterpos = caster:GetAbsOrigin()
 
-  if not GridNav:IsBlocked(point) then
-    caster:SetAbsOrigin(point)
+  local diff = point - casterpos
+
+  if diff:Length2D() > 1000 then
+    point = casterpos + (point - casterpos):Normalized() * 1000
   end
+
+  FindClearSpaceForUnit(caster, point, false)
 end
 
 function slayer_attribute_bonus(keys)

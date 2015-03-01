@@ -347,7 +347,7 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"rubick_empty1"
 		"MaxLevel"	"1"
-		"AbilityCastRange"	"1000"
+		"AbilityCastRange"	"1000000"
 		"AbilityCastPoint"	"0.3"
 		"AbilityCastAnimation"	"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityManaCost"	"1"
@@ -1104,7 +1104,7 @@
 		"BaseClass"             		"ability_datadriven"
 		"AbilityTextureName"			"rubick_empty1"
 		"MaxLevel" 						"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 
@@ -1119,7 +1119,7 @@
 			"particle" "particles/vampire/courier_greevil_black_ambient_3.vpcf"
 		}
 
-		"OnSpellStart"
+		"OnUpgrade"
 		{
 			"FireEffect"
 			{
