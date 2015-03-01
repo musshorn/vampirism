@@ -30,7 +30,7 @@ function FlashUtil:Init()
 	Convars:RegisterCommand( "FlashUtil_return", function(name, p)
 		--get the player that sent the command
 		local cmdPlayer = Convars:GetCommandClient()
-		if cmdPlayer then 
+		if cmdPlayer then
 			self:HandleReturn( p )
 			return 0
 		end
@@ -134,7 +134,7 @@ end
 function FlashUtil:RequestDataStream( dataName, rps, pID, callback )
 	local requestID = DoUniqueString(dataName)
 	self.callbacks[requestID] = callback
-	FireGameEvent('FlashUtil_request_stream', { request_id = requestID, data_name = dataName, requests_per_second = rps, target_player = pID })
+	FireGameEvent('FlashUtil_request_stream', { request_id = requestID, data_name = dataName, requests_per_second = rps, target_player = playerID })
 
 	return requestID
 end

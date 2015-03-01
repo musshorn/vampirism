@@ -1,5 +1,4 @@
 -- GREAT UTILITY FUNCTIONS
--- The commented out functions are already integrated in buildinghelper.lua
 
 -- Returns a shallow copy of the passed table.
 --[[function shallowcopy(orig)
@@ -14,40 +13,7 @@
         copy = orig
     end
     return copy
-end
-
-function AbilityIterator(unit, callback)
-    for i=0, unit:GetAbilityCount()-1 do
-        local abil = unit:GetAbilityByIndex(i)
-        if abil ~= nil then
-            callback(abil)
-        end
-    end
-end
-
-function string.starts(String,Start)
-   return string.sub(String,1,string.len(Start))==Start
-end
-
-function string.ends(String,End)
-   return End=='' or string.sub(String,-string.len(End))==End
-end
-
-function VectorString(v)
-  return 'x: ' .. v.x .. ' y: ' .. v.y .. ' z: ' .. v.z
-end
-
-function TableLength( t )
-    if t == nil or t == {} then
-        return 0
-    end
-    local len = 0
-    for k,v in pairs(t) do
-        len = len + 1
-    end
-    return len
-end
-]]
+end]]
 
 -- Remove all abilities on a unit.
 function ClearAbilities( unit )
@@ -60,7 +26,7 @@ function ClearAbilities( unit )
 	-- we have to put in dummies and remove dummies so the ability icon changes.
 	-- it's stupid but volvo made us
 	for i=1,6 do
-		unit:AddAbility("samplerts_empty" .. tostring(i))
+		unit:AddAbility("pokemonworld_empty" .. tostring(i))
 	end
 	for i=0, unit:GetAbilityCount()-1 do
 		local abil = unit:GetAbilityByIndex(i)
@@ -76,7 +42,7 @@ function InitAbilities( hero )
 	for i=0, hero:GetAbilityCount()-1 do
 		local abil = hero:GetAbilityByIndex(i)
 		if abil ~= nil then
-			if hero:IsHero() and hero:GetAbilityPoints() > 0 then
+			if hero:GetAbilityPoints() > 0 then
 				hero:UpgradeAbility(abil)
 			else
 				abil:SetLevel(1)
@@ -224,6 +190,10 @@ end
 
 function DotProduct(v1,v2)
   return (v1.x*v2.x)+(v1.y*v2.y)
+end
+
+function VectorString(v)
+  return 'x: ' .. v.x .. ' y: ' .. v.y .. ' z: ' .. v.z
 end
 
 function PrintTable(t, indent, done)
