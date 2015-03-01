@@ -53,7 +53,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
 				-- If they are not working, start them working
 				if (ability:IsChanneling() == false) then
-					worker:CastAbilityNoTarget(ability, worker:GetMainControllingPlayer() +PID_OFFSET)
+					worker:CastAbilityNoTarget(ability, worker:GetMainControllingPlayer())
 					local chopTime = ability:GetChannelTime()
 
 					-- Timer that increments the lumber stack count
