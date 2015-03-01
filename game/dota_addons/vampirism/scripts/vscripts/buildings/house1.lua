@@ -32,7 +32,8 @@ function House1:Init(unit)
 			-- Check if the worker will fit in the food cap
 			if UNIT_KV[unitToSpawn].ConsumesFood ~= nil then
 				local requestingFood = UNIT_KV[unitToSpawn].ConsumesFood
-				if TOTAL_FOOD[caster:GetPlayerOwnerID()+ PID_OFFSET] >= CURRENT_FOOD[caster:GetPlayerOwnerID() + PID_OFFSET] + requestingFood then
+				print(caster:GetMainControllingPlayer())
+				if TOTAL_FOOD[caster:GetMainControllingPlayer()+ ] >= CURRENT_FOOD[caster:GetMainControllingPlayer() + ] + requestingFood then
 					house1.workHandler = caster:FindAbilityByName(abilityName)
 					house1.workHandler:SetChanneling(true)
 					local spawnTime = house1.workHandler:GetChannelTime()
@@ -45,8 +46,8 @@ function House1:Init(unit)
 								callback = function()
 									local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
 									
-									CURRENT_FOOD[caster:GetPlayerOwnerID() + PID_OFFSET] = CURRENT_FOOD[caster:GetPlayerOwnerID() + PID_OFFSET] + requestingFood
-									FireGameEvent('vamp_food_changed', { player_ID = caster:GetPlayerOwnerID() + PID_OFFSET, food_total = CURRENT_FOOD[caster:GetPlayerOwnerID() + PID_OFFSET]})
+									CURRENT_FOOD[caster:GetMainControllingPlayer() + ] = CURRENT_FOOD[caster:GetMainControllingPlayer() + ] + requestingFood
+									FireGameEvent('vamp_food_changed', { player_ID = caster:GetMainControllingPlayer() + , food_total = CURRENT_FOOD[caster:GetMainControllingPlayer() + ]})
 
 									caster:RemoveModifierByName(house1.workHandler:GetName())
 									house1.workHandler:SetChanneling(false)
