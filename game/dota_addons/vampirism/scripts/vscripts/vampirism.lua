@@ -220,6 +220,11 @@ function GameMode:OnNPCSpawned(keys)
     print("made 40 wood for player "..npc:GetPlayerOwnerID() + PID_OFFSET)
   end
 
+  if npc:GetName() == "npc_dota_hero_night_stalker" then
+    ability = npc:FindAbilityByName("vampire_particles")
+    --ability:SetLevel(1)
+    ability:OnUpgrade()
+  end
   if npc:IsRealHero() and npc.bFirstSpawned == nil then
     npc.bFirstSpawned = true
     GameMode:OnHeroInGame(npc)
