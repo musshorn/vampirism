@@ -193,7 +193,7 @@ function BuildingHelper:AddBuilding(keys)
 	local caster = keys.caster
 	local builder = caster -- alias
 	-- get player handle that owns the builder.
-	local player = builder:GetPlayerOwner()
+	local player = PlayerResource:GetPlayer(builder:GetMainControllingPlayer()) 
 	-- player's hero could be diff from the builder.
 	local playersHero = player:GetAssignedHero()
 	local pID = player:GetPlayerID()

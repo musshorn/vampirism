@@ -47,8 +47,8 @@ function House1:Init(unit)
 									local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
 									
 									CURRENT_FOOD[caster:GetMainControllingPlayer() ] = CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood
-									FireGameEvent('vamp_food_changed', { player_ID = caster:GetMainControllingPlayer() , food_total = CURRENT_FOOD[caster:GetMainControllingPlayer() ]})
-
+									FireGameEvent('vamp_food_changed', { player_ID = caster:GetMainControllingPlayer() , food_total = CURRENT_FOOD[caster:GetMainControllingPlayer()]})
+									
 									caster:RemoveModifierByName(house1.workHandler:GetName())
 									house1.workHandler:SetChanneling(false)
 									house1.doingWork = false
