@@ -44,6 +44,8 @@
 		"BaseClass"	"npc_dota_creature"
 		"Ability1"	"vamp_farsight"
 		"Ability2"	"vampire_particles"
+		"Ability3"	"vampire_poison"
+		"Ability4"	"vampire_critical_strike"
 		"Level"	"1"
 		"ConsideredHero"	"1"
 		"NewHero"	"0"
