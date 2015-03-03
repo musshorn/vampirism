@@ -723,23 +723,6 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	end
 end
 
-function BuildingHelper:UpgradeBuildingEntity(keys)
-	local caster = keys.caster
-	local targetUnit = keys.TargetUnit
-	local pos = caster:GetAbsOrigin()
-	local player = caster:GetMainControllingPlayer()
-	local buildingTable = BuildingAbilities[keys.ability:GetName()]
-
-
-	order = {["unitName"] = targetUnit, ["pos"] = pos, ["team"] = caster:GetTeam(),
-				["buildingTable"] = buildingTable, ["keys"] = keys}
-
-	-- create building entity
-	caster:Destroy()
-	local unit = CreateUnitByName(order.unitName, order.pos, false, nil, nil, order.team)
-	unit:SetControllableByPlayer(player, true)
-end
-
 function BuildingHelper:CloseSquares( vSquareCenters, type )
 	-- these are vectors not strings.
 	if #vSquareCenters > 0 then

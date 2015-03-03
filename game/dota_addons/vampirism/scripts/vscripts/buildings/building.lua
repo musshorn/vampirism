@@ -66,5 +66,14 @@ function Upgrade( keys )
 end
 
 function FinishUpgrade( keys )
-  BuildingHelper:UpgradeBuildingEntity(keys)
+  local caster = keys.caster
+  local targetUnit = keys.TargetUnit
+  local pos = caster:GetAbsOrigin()
+  local player = caster:GetMainControllingPlayer()
+  local team = caster:GetTeam()
+
+  caster:Destroy()
+  local unit = CreateUnitByName(targetUnit, pos, false, nil, nil, team)
+  unit:SetControllableByPlayer(player, true)
+
 end
