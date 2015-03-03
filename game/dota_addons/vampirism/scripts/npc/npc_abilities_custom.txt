@@ -1099,6 +1099,10 @@
 		}
 	}
 
+	//=================================================================================	
+	// Vampire: Particle Effects
+	//=================================================================================
+
 	"vampire_particles"
 	{
 		"BaseClass"             		"ability_datadriven"
@@ -1130,4 +1134,151 @@
 		}
 	}
 
+	//=================================================================================	
+	// Vampire: Vampire's Venom 
+	//=================================================================================
+	"vampire_poison"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"venomancer_poison_sting"
+		"MaxLevel" 						"1"
+
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"Modifiers"
+		{
+			"modifier_vampire_poison"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_vampire_poison_debuff"
+						"Target" 		"TARGET"
+					}
+				}
+			}
+
+			"modifier_vampire_poison_debuff"
+			{
+				"IsDebuff"			"1"
+
+				"Duration"			"2"
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" 	"-40"
+				}
+			}
+		}
+	}
+
+	//=================================================================================	
+	// Vampire: Critical Strike
+	//=================================================================================
+	"vampire_critical_strike"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"phantom_assassin_coup_de_grace"
+		"MaxLevel" 						"6"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"crit_bonus"				"200 275 350 425 500 575"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"crit_chance"				"2.5 3 3.5 4 4 4"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_vampire_critical_strike"
+			{
+				"Passive"			"1"
+				"IsHidden"			"1"
+
+				"OnAttackStart"
+				{
+					"RemoveModifier"
+					{
+						"ModifierName"	"modifier_vampire_critical_strike"
+						"Target" 		"CASTER"
+					}
+
+					"Random"
+					{
+						"Chance"			"%crit_chance"
+						"PseudoRandom" 		"DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"
+
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"ModifierName"	"modifier_vampire_critical_strike_hit"
+								"Target" 		"CASTER"
+							}
+
+							"RunScript"
+							{
+								"ScriptFile"	"scripts/vscripts/abilities.lua"
+								"Function"		"test"
+							}
+						}
+					}
+				}
+			}
+
+			"modifier_vampire_critical_strike_hit"
+			{
+				"IsHidden"		"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_bonus"
+				}
+
+				"OnAttackLanded"
+				{
+					"RemoveModifier"
+					{
+						"ModifierName"	"modifier_vampire_critical_strike_hit"
+						"Target" 		"TARGET"
+					}
+
+					"FireSound"
+					{
+						"EffectName"	"Hero_PhantomAssassin.CoupDeGrace"
+						"Target" 		"TARGET"
+					}
+				}
+			}
+		}
+	}
 }

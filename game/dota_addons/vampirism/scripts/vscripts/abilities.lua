@@ -125,18 +125,6 @@ function slayer_attribute_bonus(keys)
   caster:SetBaseIntellect(caster:GetBaseIntellect() + 3)
 end
 
-function uitest(keys)
-  local ability = keys.caster:FindAbilityByName("build_house_t1")
-  local caster = keys.caster
-  caster:CastAbilityOnPosition(Vector(1091.630737, -426.264648, 255.999939), ability, -1) 
-  --[[ 
-  FlashUtil:GetCursorWorldPos(caster:GetPlayerID(), function(pID, cursor_position)
-  caster:CastAbilityOnPosition(cursor_position, ability, 0)
-  print(cursor_position)
-  end)
-]]
-end
-
-function why( keys )
-  print('does this happen')
+function test( keys )
+  print('HIT A CRIT')
 end
