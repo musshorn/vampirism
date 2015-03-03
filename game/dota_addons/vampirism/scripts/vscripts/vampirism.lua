@@ -224,6 +224,10 @@ function GameMode:OnNPCSpawned(keys)
     GameMode:OnHeroInGame(npc)
   end
 
+  if string.match(npc:GetUnitName(), "vampire_vision_dummy") then
+    vision_dummy(npc)
+  end
+
   if npc:GetUnitName() == "npc_wall1" then
     TechTree:GetRequired(keys)
   end

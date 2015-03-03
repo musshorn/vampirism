@@ -17,6 +17,7 @@ require('FlashUtil')
 require('TechTree')
 require('physics')
 require('util')
+require('abilities.vampire')
 
 function Precache( context )
 		--[[

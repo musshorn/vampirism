@@ -166,42 +166,6 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
 
-	//=================================================================================	
-	// reveal dummy
-	//=================================================================================
-	"vision_dummy_passive"
-    {
-        // General
-        //-------------------------------------------------------------------------------------------------------------
-        "BaseClass"                     "npc_dota_creature"
-        "MaxLevel"                      "1"
-        "MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_FLY"
-
-        // Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1000"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1000"		// Range of vision at night time.
-        
-        // Modifiers
-        //-------------------------------------------------------------------------------------------------------------
-        "Modifiers"
-        {
-        
-            // Vision Dummy Passive
-            //---------------------------------------------------------------------------------------------------------
-            "vision_dummy_modifier"
-            {
-                "Passive"                       "1"
-                "IsHidden"                      "1" 
-                "States"
-                {
-                    "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
-                }
-            }
-            
-        }
-        
-    }
 
    	//=================================================================================	
 	// Worker T1 - Peasant
@@ -1033,7 +997,7 @@
 	}
 
 	//=================================================================================	
-	// Human Building T1 - House
+	// Human Building T1 - Human Vault
 	//=================================================================================
 	"human_vault"
 	{
@@ -1106,6 +1070,46 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 	}
+
+	//=================================================================================	
+	// Vampire: Reveal Dummy (Level 1)
+	//=================================================================================
+	"vampire_vision_dummy_1"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "npc_dota_creature"
+        "MaxLevel"                      "1"
+        "Model"						"models/development/invisiblebox.vmdl"	// Model.
+        "MovementCapabilities"			"DOTA_UNIT_CAP_MOVE_FLY"
+        "Ability1"						"vampire_vision_dummy_lock"
+
+        // Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"2500"		// Range of vision during day light.
+		"VisionNighttimeRange"		"2500"		// Range of vision at night time.
+    }
+
+    //=================================================================================	
+	// Vampire: Reveal Dummy (Level 2)
+	//=================================================================================
+	"vampire_vision_dummy_2"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "npc_dota_creature"
+        "Model"							"models/development/invisiblebox.vmdl"	// Model
+        "MaxLevel"                      "1"
+        "MovementCapabilities"			"DOTA_UNIT_CAP_MOVE_FLY"
+        "Ability1"						"vampire_vision_dummy_lock"
+
+
+        // Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"			"3000"		// Range of vision during day light.
+		"VisionNighttimeRange"			"3000"		// Range of vision at night time.
+    }
+
 
 
 	//=================================================================================	
