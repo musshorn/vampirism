@@ -66,5 +66,5 @@ function Upgrade( keys )
 end
 
 function FinishUpgrade( keys )
-  PrintTable(keys)
+  BuildingHelper:UpgradeBuildingEntity(keys)
 end
