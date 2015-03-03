@@ -412,6 +412,24 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"BaseClass"	"ability_datadriven"
 		"AbilityChannelTime"	"5.0"
+		
+		// BH things
+		"Building"						"1"
+		"BuildingSize"					"2"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						".5"
+		"CasterCanControl"				"1"
+
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"tent_t2"
+
+		"precache"
+		{
+			"model"  "models/props_structures/barrel_oct.vmdl"
+		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -419,8 +437,19 @@
 				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
 				"Function"		"Upgrade"
 				"TARGET"	"CASTER"
-				"TargetUnit"	"t2_tent"
+				"TargetUnit"	"tent_t2"
+				"TargetModel"	"models/props_structures/barrel_oct.vmdl"
 				"LumberCost"	"10"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tent_t2"
+				"TargetModel"	"models/props_structures/barrel_oct.vmdl"
 			}
 		}
 	}

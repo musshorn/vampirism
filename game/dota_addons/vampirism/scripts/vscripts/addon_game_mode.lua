@@ -59,6 +59,10 @@ function Precache( context )
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)
+
+		-- unit precache
+		PrecacheUnitByNameSync("tent_t2", context)
+		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 
 		-- Sounds can precached here like anything else
