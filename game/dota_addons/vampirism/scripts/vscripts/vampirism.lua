@@ -502,7 +502,7 @@ function GameMode:OnEntityKilled( keys )
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(5) 
-      elseif smallProb <= outcome then
+      elseif outcome <= smallProb then
         local coin = CreateItem("item_small_coin", nil, nil)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
