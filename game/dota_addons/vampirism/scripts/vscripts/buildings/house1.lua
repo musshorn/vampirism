@@ -32,7 +32,7 @@ function House1:Init(unit)
 			-- Check if the worker will fit in the food cap
 			if UNIT_KV[unitToSpawn].ConsumesFood ~= nil then
 				local requestingFood = UNIT_KV[unitToSpawn].ConsumesFood
-				print(caster:GetMainControllingPlayer())
+
 				if TOTAL_FOOD[caster:GetMainControllingPlayer()] >= CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood then
 					house1.workHandler = caster:FindAbilityByName(abilityName)
 					house1.workHandler:SetChanneling(true)

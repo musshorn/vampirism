@@ -8,7 +8,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
   local worker = CreateUnitByName(unitName, vPos + VECTOR_BUMP, true, nil, nil, hOwner:GetTeam())
   worker:SetControllableByPlayer(hOwner:GetMainControllingPlayer() , true)  
   worker:SetHullRadius(8)
-
+  worker.thinking = false
   worker.inTriggerZone = true -- Flag set true if worker is near trees
 
   worker.treepos = nil
@@ -35,6 +35,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
 	function worker:Think()
 
+    worker.thinking = true
 		worker.generationTimer = 
 		Timers:CreateTimer(function ()
 
@@ -62,7 +63,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 							callback = function()
 								worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
 								ability:SetChanneling(false)
-								worker.housePos = nil
+								
 
 								return nil
 							end})
@@ -117,7 +118,6 @@ function Worker:Worker1(vPos, hOwner, unitName)
 					WOOD[pid] = WOOD[pid] + currentLumber
 
 					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
-					print(WOOD[pid])
 
 					worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
 					worker:MoveToPosition(worker.treepos)
@@ -133,7 +133,9 @@ function AtTree(keys)
 	local unit = keys.activator
 	unit.treepos = unit:GetAbsOrigin()
 	unit.inTriggerZone = true
-	unit:Think()
+  if unit.thinking == false then
+	 unit:Think()
+  end
 end
 
 function LeftTree(keys)
