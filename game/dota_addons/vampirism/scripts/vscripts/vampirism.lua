@@ -230,7 +230,7 @@ function GameMode:OnNPCSpawned(keys)
   end
 
   if string.match(npc:GetUnitName(), "vampire_vision_dummy") then
-    vision_dummy(npc)
+    VisionDummy(npc)
   end
 
   if npc:GetUnitName() == "npc_wall1" then

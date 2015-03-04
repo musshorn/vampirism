@@ -90,7 +90,7 @@ function build( keys )
 
   -- Have a fire effect when the building goes below 50% health.
   -- It will turn off it building goes above 50% health again.
-  keys:EnableFireEffect("modifier_jakiro_liquid_fire_burn")
+  --keys:EnableFireEffect("modifier_jakiro_liquid_fire_burn")
 end
 
 function create_building_entity( keys )
