@@ -156,6 +156,7 @@
 			{
 				"ScriptFile"	"scripts/vscripts/items.lua"
 				"Function"	"CoinUsed"
+				"Type"	"small"
 			}
 
 			"FireSound"
@@ -165,7 +166,39 @@
 			}
 
 		}
+	}
+	"item_large_coin"
+	{
+		"ID"	"1108"
+		"BaseClass"	"item_datadriven"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_DONT_RESUME_ATTACK"
+		"Model"	"models/coin_reference.vmdl"
+		"ItemStackable"	"1"
+		"ItemKillable"	"1"
+		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"	"0"
+		"ItemInitialCharges"	"1"
+		"ItemCastOnPickup"	"1"
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{
+			}
 
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/items.lua"
+				"Function"	"CoinUsed"
+				"Type"	"large"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"General.Sell"
+				"Target"	"CASTER"
+			}
+
+		}
 	}
 
 	"item_health_modifier"

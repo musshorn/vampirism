@@ -3,6 +3,11 @@ function CoinUsed(keys)
 	local coin = keys.ability
 
 	if user:IsRealHero() then
-		user:SetGold(user:GetGold() + 1, false)
+    if keys.Type == "small" then
+		  user:SetGold(user:GetGold() + 1, false)
+    end
+    if keys.Type == "large" then
+      user:SetGold(user:GetGold() + 1, false)
+    end
 	end
 end
