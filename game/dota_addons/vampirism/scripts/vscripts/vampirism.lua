@@ -49,6 +49,9 @@ CURRENT_FOOD = {}
 
 UNIT_KV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
+VAMP_COUNT = 0
+HUMAN_COUNT = 0
+
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
 XP_PER_LEVEL_TABLE[1] = 0
@@ -212,12 +215,14 @@ function GameMode:OnNPCSpawned(keys)
     TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
     CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
     print("made 40 wood for player "..npc:GetPlayerOwnerID())
+    HUMAN_COUNT = HUMAN_COUNT + 1
   end
 
   if npc:GetName() == "npc_dota_hero_night_stalker" then
     ability = npc:FindAbilityByName("vampire_particles")
     --ability:SetLevel(1)
     ability:OnUpgrade()
+    VAMP_COUNT = VAMP_COUNT + 1
   end
   if npc:IsRealHero() and npc.bFirstSpawned == nil then
     npc.bFirstSpawned = true
@@ -486,11 +491,23 @@ function GameMode:OnEntityKilled( keys )
   end
 
   if killerEntity:GetUnitName() == "npc_dota_hero_night_stalker" then
-    if killedUnit ~= "npc_dota_hero_omniknight" then
-      local coin = CreateItem("item_small_coin", nil, nil)
-      local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
-      coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
-      coinP:SetModelScale(3) 
+    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" then
+
+      -- Probability function for a coin drop
+      local outcome = RandomInt(1, 200)
+      local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
+      local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
+      if outcome <= largeProb then        
+        local coin = CreateItem("item_large_coin", nil, nil)
+        local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
+        coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
+        coinP:SetModelScale(5) 
+      elseif smallProb <= outcome then
+        local coin = CreateItem("item_small_coin", nil, nil)
+        local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
+        coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
+        coinP:SetModelScale(3)
+      end 
     end   
   end
 
