@@ -58,21 +58,21 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
 					-- Timer that increments the lumber stack count
 					Timers:CreateTimer(worker.workTimer,{
-							endTime = chopTime,
-							callback = function()
-								worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
-								ability:SetChanneling(false)
-								worker.housePos = nil
+						endTime = chopTime,
+						callback = function()
+							worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
+							ability:SetChanneling(false)
+							worker.housePos = nil
 
-								return nil
-							end})
+							return nil
+					end})
 				end
 			end
 
 
 			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
 			if (currentLumber == worker.maxLumber) then
-				
+		
 				-- Find all dota creatures, check if they can recieve lumber and that they are owned by the correct player
 				-- This function is relativly expensive so we only call it when needed.
 				if (worker.housePos == nil) then
@@ -96,33 +96,45 @@ function Worker:Worker1(vPos, hOwner, unitName)
 					worker:MoveToPosition(worker.housePos)
 				end
 
-				-- Drop lumber off at the house and alert Flash then move back to the tree
-				if Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 180) ~= nil then
-					local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
-					local pidx = ParticleManager:CreateParticle("particles/msg_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, worker)
+				--[[ Drop lumber off at the house and alert Flash then move back to the tree
+				Proof of concept, timer checks to ensure that a worker is facing the house before
+				it drops off lumber. So endTime needs to be based off the units turn speed, not sure
+				what that number should actually be but .25 is working normally.
+				Currently using .25 under the assumption that its turn rate of .5 means 360 in
+				one second.]]
+				Timers:CreateTimer({
+					endTime = .25,
+					callback = function ()
+						if Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 180) ~= nil and worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal) > 0 then
+							print(worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal))
+							local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
+							local pidx = ParticleManager:CreateParticle("particles/msg_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, worker)
 
-					local digits = 0
-					local number = currentLumber
-					if number ~= nil then
-						digits = #tostring(number)
+							local digits = 0
+							local number = currentLumber
+							if number ~= nil then
+								digits = #tostring(number)
+							end
+
+							digits = digits + 1
+
+							ParticleManager:SetParticleControl(pidx, 1, Vector(0, tonumber(number), tonumber(nil)))
+							ParticleManager:SetParticleControl(pidx, 2, Vector(1, digits, 0))
+							ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
+
+							local pid = worker:GetMainControllingPlayer() 
+							WOOD[pid] = WOOD[pid] + currentLumber
+
+							FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
+							print(WOOD[pid])
+
+							worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
+							worker:MoveToPosition(worker.treepos)
+							return nil
+						end
 					end
-
-					digits = digits + 1
-
-					ParticleManager:SetParticleControl(pidx, 1, Vector(0, tonumber(number), tonumber(nil)))
-					ParticleManager:SetParticleControl(pidx, 2, Vector(1, digits, 0))
-					ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
-
-					local pid = worker:GetMainControllingPlayer() 
-					WOOD[pid] = WOOD[pid] + currentLumber
-
-					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
-					print(WOOD[pid])
-
-					worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
-					worker:MoveToPosition(worker.treepos)
+					})
 				end
-			end
 			return .1
 		end)
 	end
