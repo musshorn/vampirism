@@ -249,6 +249,14 @@
 		"AbilityCastPoint"	"0"
 		"AbilityChannelTime" "0.5"
 		"AbilityCastAnimation" "ACT_DOTA_ATTACK"
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/units/worker.lua"
+				"Function"		"ChoppedLumber"
+			}
+		}
 	}
 
 	"carrying_lumber"
@@ -316,25 +324,6 @@
 				"Target"	"CASTER"
 				"ScriptFile"	"scripts/vscripts/buildui.lua"
 				"Function"	"CallMenu"
-			}
-
-		}
-
-	}
-
-	"cursor_test"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_DONT_RESUME_ATTACK"
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"rubick_empty1"
-		"MaxLevel"	"1"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"Target"	"CASTER"
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"	"cursor"
 			}
 
 		}
