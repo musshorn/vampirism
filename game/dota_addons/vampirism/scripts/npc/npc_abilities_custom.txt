@@ -1399,7 +1399,6 @@
 		{
 			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dazzle.vsndevts"
 			"particle"			"particles/vampire/dazzle_shadow_wave.vpcf"
-			//"particle"			"particles/units/heroes/hero_dazzle/dazzle_shadow_wave_impact_damage.vpcf"
 		}
 
 		// Casting
@@ -1466,6 +1465,96 @@
 				"ScriptFile"	"abilities/vampire.lua"
 				"Function"		"HealthBeam"
 				"shadow_wave_particle"	"particles/vampire/dazzle_shadow_wave.vpcf"
+			}
+		}
+	}
+
+	//=================================================================================	
+	// Vampire: Chain of Death - Credits to Pizzalol and Noya (SpellLibrary)
+	//=================================================================================
+	"vampire_chain_of_death"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"			"lion_finger_of_death"
+		"MaxLevel"						"15"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			//"soundfile"					"soundevents/game_sounds_heroes/game_sounds_dazzle.vsndevts"
+			"particle"					"particles/vampire/zuus_arc_lightning.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.5"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"10"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"250 275 300 325 350 375 400 425 450 475 500 550 600 700 800"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bounce_radius"				"500"
+			}
+			"02"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"max_targets"				"4 5 6 7 8 9 10 10 10 10 10 10 10 10 10"
+			}
+			"03"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"tooltip_max_targets"		"4 5 6 7 8 9 10 10 10 10 10 10 10 10 10"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"125 150 175 200 225 250 275 300 325 350 375 400 425 450 475"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			//"FireSound"
+			//{
+			//	"EffectName"	"Hero_Dazzle.Shadow_Wave"
+			//	"Target" 		"CASTER"
+			//}
+
+			"FireEffect"
+			{
+				"EffectName"        "particles/vampire/zuus_arc_lightning.vpcf"
+				"EffectAttachType"  "start_at_customorigin"
+				
+				"ControlPointEntities"
+				{
+					"CASTER"	"attach_attack1"
+					"TARGET"	"follow_origin"
+				}
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"				"abilities/vampire.lua"
+				"Function"					"ChainOfDeath"
+				"chain_of_death_particle"	"particles/vampire/zuus_arc_lightning.vpcf"
 				//"damage_particle"		"particles/units/heroes/hero_dazzle/dazzle_shadow_wave_impact_damage.vpcf"
 			}
 		}

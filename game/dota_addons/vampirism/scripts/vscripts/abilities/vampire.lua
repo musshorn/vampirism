@@ -251,3 +251,93 @@ function HealthBeam( keys )
     end
   end
 end
+
+function ChainOfDeath(keys)
+  local caster = keys.caster
+  local caster_location = caster:GetAbsOrigin()
+  local target = keys.target
+  local target_location = target:GetAbsOrigin()
+  local ability = keys.ability
+  local ability_level = ability:GetLevel() - 1
+
+  -- Ability variables
+  local bounce_radius = ability:GetSpecialValueFor("bounce_radius")
+  local max_targets = ability:GetLevelSpecialValueFor("max_targets", ability_level)
+  local s_damage = ability:GetLevelSpecialValueFor("damage", ability_level)
+  local unit_damaged = false
+
+  print(bounce_radius)
+  print(max_targets)
+  print(s_damage)
+
+  print(target:GetTeam())
+  print(target_location)
+  print(ability:GetAbilityTargetTeam())
+
+
+  -- Particles
+  local chain_of_death_particle = keys.chain_of_death_particle
+
+  -- Setting up the hit table
+  local hit_table = {}
+
+  local count = 0
+  
+  --No priority unlike in heal beam, just find nearest
+  Timers:CreateTimer(function ()
+    if count < max_targets then
+      count = count + 1
+      --print('OUTER RUNNING')
+      -- Helper variable to keep track if we damaged a unit already
+      unit_damaged = false
+  
+      -- Find all the units in bounce radius
+      local units = FindUnitsInRadius(caster:GetTeam(), target_location, nil, bounce_radius, ability:GetAbilityTargetTeam(), DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+      PrintTable(units)
+      -- HURT HEROES --
+      -- First we check for hurt heroes
+      for _,unit in pairs(units) do
+        print(unit:GetUnitName())
+        if unit ~= caster then
+          local check_unit = 0  -- Helper variable to determine if a unit has been hit or not
+  
+          -- Checking the hit table to see if the unit is hit
+          for c = 0, #hit_table do
+            if hit_table[c] == unit then
+              check_unit = 1
+            end
+          end
+  
+          -- If its not hit then check if the unit has been hit
+          if check_unit == 0 then
+  
+            table.insert(hit_table, unit)
+            local unit_location = unit:GetAbsOrigin()
+  
+            -- Create the particle for the visual effect
+            local particle = ParticleManager:CreateParticle(chain_of_death_particle, PATTACH_CUSTOMORIGIN, caster)
+            ParticleManager:SetParticleControlEnt(particle, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target_location, true)
+            ParticleManager:SetParticleControlEnt(particle, 1, unit, PATTACH_POINT_FOLLOW, "attach_hitloc", unit_location, true)
+  
+            -- Set the unit as the new target
+            target = unit
+            target_location = unit_location
+  
+            local damageTable = {
+              victim = unit,
+              attacker = caster,
+              damage = s_damage,
+              damage_type = DAMAGE_TYPE_MAGICAL,
+            }
+            ApplyDamage(damageTable)
+  
+            -- Set the helper variable to true
+            unit_damaged = true
+            break
+          end
+        end
+      end
+    end
+  return .25
+  end)
+end

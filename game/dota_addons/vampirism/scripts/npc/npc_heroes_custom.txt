@@ -48,6 +48,7 @@
 		"Ability3"					"vampire_poison"
 		"Ability4"					"vampire_critical_strike"
 		"Ability5"					"vampire_health_beam"
+		"Ability6"					"vampire_chain_of_death"
 		"Level"						"1"
 		"ConsideredHero"			"1"
 		"NewHero"					"0"
