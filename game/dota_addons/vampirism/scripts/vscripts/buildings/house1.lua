@@ -32,7 +32,7 @@ function House1:Init(unit)
 			-- Check if the worker will fit in the food cap
 			if UNIT_KV[unitToSpawn].ConsumesFood ~= nil then
 				local requestingFood = UNIT_KV[unitToSpawn].ConsumesFood
-				print(caster:GetMainControllingPlayer())
+
 				if TOTAL_FOOD[caster:GetMainControllingPlayer()] >= CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood then
 					house1.workHandler = caster:FindAbilityByName(abilityName)
 					house1.workHandler:SetChanneling(true)
@@ -55,12 +55,20 @@ function House1:Init(unit)
 
 									-- If a rally point is set for this building then move the worker to it.
 									-- Needs a delay as movement cant happen on the same frame as spawn
+									-- If a rally point is not set then the worker will move to the nearest tree
 									if house1.rallyPoint ~= nil then
 										Timers:CreateTimer(0.05, function()
 											unit:MoveToPosition(house1.rallyPoint)
 											return nil
 										end)
+									else
+  										local tree = Entities:FindByClassnameNearest("ent_dota_tree",unit:GetAbsOrigin(),1000)
+  										Timers:CreateTimer(0.05, function()
+												unit:MoveToPosition(tree:GetAbsOrigin())
+												return nil
+											end)
 									end
+
 								
 								return nil
 							end})

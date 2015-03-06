@@ -55,6 +55,29 @@ function Worker:Worker1(vPos, hOwner, unitName)
 				-- If they are not working, start them working
 				if (ability:IsChanneling() == false) then
 					worker:CastAbilityNoTarget(ability, worker:GetMainControllingPlayer())
+					local chopTime = ability:GetChannelTime()
+
+					-- Timer that increments the lumber stack count
+					Timers:CreateTimer(worker.workTimer,{
+<<<<<<< HEAD
+							endTime = chopTime,
+							callback = function()
+								worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
+								ability:SetChanneling(false)
+								
+
+								return nil
+							end})
+=======
+						endTime = chopTime,
+						callback = function()
+							worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
+							ability:SetChanneling(false)
+							worker.housePos = nil
+
+							return nil
+					end})
+>>>>>>> upstream/master
 				end
 			end
 
@@ -114,8 +137,12 @@ function Worker:Worker1(vPos, hOwner, unitName)
 							local pid = worker:GetMainControllingPlayer() 
 							WOOD[pid] = WOOD[pid] + currentLumber
 
+<<<<<<< HEAD
+					FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
+=======
 							FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
 							print(WOOD[pid])
+>>>>>>> upstream/master
 
 							worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
 							worker:MoveToPosition(worker.treepos)
@@ -142,13 +169,4 @@ end
 function LeftTree(keys)
 	local unit = keys.activator
 	unit.inTriggerZone = false
-end
-
-function ChoppedLumber( keys )
-  local worker = keys.caster
-  local carryTotal= worker:FindAbilityByName("carrying_lumber")
-  local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
-
-  worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
-  worker.housePos = nil
 end
