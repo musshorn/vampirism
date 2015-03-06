@@ -42,10 +42,12 @@
 	{
 		"override_hero"				"npc_dota_hero_night_stalker"
 		"BaseClass"					"npc_dota_creature"
+		"AbilityLayout"				"6"
 		"Ability1"					"vampire_shadow_sight"
 		"Ability2"					"vampire_particles"
 		"Ability3"					"vampire_poison"
 		"Ability4"					"vampire_critical_strike"
+		"Ability5"					"vampire_health_beam"
 		"Level"						"1"
 		"ConsideredHero"			"1"
 		"NewHero"					"0"
