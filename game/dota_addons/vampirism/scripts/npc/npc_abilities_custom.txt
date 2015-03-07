@@ -443,7 +443,7 @@
 		}
 	}
 
-	// move_to_point abilities are for BuildingHelper.
+		// START OF BUILDING HELPER ABILITIES
 	"move_to_point_70"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
@@ -582,11 +582,7 @@
 		}
 	}
 
-	//-------------------
-	// Dummy stuff
-	//-------------------
-  
-	"samplerts_dummy_unit"
+	"bh_dummy"
 	{
 		"AbilityBehavior" 		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass" 					"ability_datadriven"
@@ -598,16 +594,35 @@
 			"dummy_unit"
 			{
 				"Passive"                        "1"
-				"IsHidden"                        "1"    
+				"IsHidden"                       "1"    
 				"States"
 				{
 					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NOT_ON_MINIMAP"		"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
+
+			"building_canceled"
+			{
+				"Passive"                        "0"
+				"IsHidden"                       "1"
+				"OnOrder"
+				// Triggers on Move/Casting/Hold/Stop
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities.lua"
+						"Function"		"building_canceled"
+					}
+				}
+
+			} 
 		}
 	}
+
+	// END OF BUILDING HELPER ABILITIES
 
 	//=================================================================================	
 	// HUMAN BUILDINGS

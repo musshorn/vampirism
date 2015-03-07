@@ -46,12 +46,6 @@
 	{
 		"stream_id"			"string"
 	}
-	"ChosenFusionHeroes"
-	{
-		"PrimaryHero"					"string"
-		"FusionHero"					"string"
-		"PlayerID"						"short"
-	}
 	"build_command_executed"
 	{
 		"player_id"			"short"
