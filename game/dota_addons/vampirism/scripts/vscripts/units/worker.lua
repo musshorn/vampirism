@@ -88,9 +88,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 				--[[ Drop lumber off at the house and alert Flash then move back to the tree
 				Proof of concept, timer checks to ensure that a worker is facing the house before
 				it drops off lumber. So endTime needs to be based off the units turn speed, not sure
-				what that number should actually be but .25 is working normally.
-				Currently using .25 under the assumption that its turn rate of .5 means 360 in
-				one second.]]
+				what that number should actually be but .25 is working normally.]]
 				Timers:CreateTimer({
 					endTime = .25,
 					callback = function ()
