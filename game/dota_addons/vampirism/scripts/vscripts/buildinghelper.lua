@@ -380,13 +380,13 @@ function BuildingHelper:AddBuilding(keys)
 						for x=boundingRect.leftBorderX+32,boundingRect.rightBorderX-32,64 do
 							for y=boundingRect.topBorderY-32,boundingRect.bottomBorderY+32,-64 do
 								if generateParticles then
-									if not modelParticle then
+									--[[if not modelParticle then
 										--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
 										modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
 										ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)						
 										ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
 										ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
-									end
+									end]]
 
 									-- Particles haven't been generated yet. Generate them.
 									local ghost_grid_particle = "particles/buildinghelper/square_sprite.vpcf"
@@ -394,8 +394,8 @@ function BuildingHelper:AddBuilding(keys)
 										ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
 									end
 									local id = ParticleManager:CreateParticleForPlayer(ghost_grid_particle, PATTACH_ABSORIGIN, caster, player)
-									ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
-									ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
+									--ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
+									--ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
 									table.insert(player.ghost_particles, id)
 
 								end
@@ -408,20 +408,20 @@ function BuildingHelper:AddBuilding(keys)
 								ParticleManager:SetParticleControl(particle, 0, Vector(x,y,groundZ))
 								--print("Moving " .. particle .. " to " .. VectorString(Vector(x,y,groundZ)))
 
-								if IsSquareBlocked(Vector(x,y,z), true) then
+								--[[if IsSquareBlocked(Vector(x,y,z), true) then
 									ParticleManager:SetParticleControl(particle, 2, Vector(255,0,0))
 									areaBlocked = true
 									--DebugDrawBox(Vector(x,y,z), Vector(-32,-32,0), Vector(32,32,1), 255, 0, 0, 40, delta)
 								else
 									ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0))
-								end
+								end]]
 							end
 						end
 
 						-- color + move model particle
 						if modelParticle ~= nil then
 							-- move model ghost particle
-							ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
+						--[[]	ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
 							if RECOLOR_GHOST_MODEL then
 								if areaBlocked then
 									ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))	
@@ -430,7 +430,7 @@ function BuildingHelper:AddBuilding(keys)
 								end
 							else
 								ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,255,255)) -- Draws the ghost with the original colors
-							end
+							end]]
 						end
 
 						if generateParticles then
@@ -489,6 +489,51 @@ function BuildingHelper:AddBuilding(keys)
 				table.insert(closed,Vector(x,y,0))
 			end
 		end
+
+		-- Iterate thru the square locations
+		local ptr = 1
+		for x=buildingRect.leftBorderX+32,buildingRect.rightBorderX-32,64 do
+			for y=buildingRect.topBorderY-32,buildingRect.bottomBorderY+32,-64 do
+				--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
+				modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
+				ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)						
+				ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
+				ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
+
+				-- Particles haven't been generated yet. Generate them.
+				local ghost_grid_particle = "particles/buildinghelper/square_sprite.vpcf"
+				if USE_PROJECTED_GRID then
+					ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
+				end
+				local id = ParticleManager:CreateParticleForPlayer(ghost_grid_particle, PATTACH_ABSORIGIN, caster, player)
+				ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
+				ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
+				table.insert(player.ghost_particles, id)
+
+
+				-- Move a particle to a correct location
+				local particle = player.ghost_particles[ptr]
+				ptr = ptr + 1
+
+				local groundZ = GetGroundPosition(Vector(x,y,z),caster).z
+				ParticleManager:SetParticleControl(particle, 0, Vector(x,y,groundZ))
+				ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0))
+			end
+		end
+
+		-- move model ghost particle
+		ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
+		if RECOLOR_GHOST_MODEL then
+			if areaBlocked then
+				ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))	
+			else
+				ParticleManager:SetParticleControl(modelParticle, 2, Vector(0,255,0))
+			end
+		else
+			ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,255,255)) -- Draws the ghost with the original colors
+		end
+
+		table.insert(player.ghost_particles, modelParticle)
 
 		-- Make the caster move towards the point
 		local abilName = "move_to_point_" .. tostring(castRange)
@@ -554,7 +599,9 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	local builder = caster -- alias
 	local orders = builder.orders
 	local pos = keys.target_points[1]
+	local player = builder:GetPlayerOwner()
 	keys.ability.succeeded = true
+	ClearParticleTable(player.ghost_particles)
 
 	-- search and get the correct order
 	local order = nil
@@ -662,23 +709,19 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 			bScaling=true
 		end
 	end
-	local fHPGiven = 1
+
 	-- health and scale timer
 	unit.updateHealthTimer = DoUniqueString('health')
 	Timers:CreateTimer(unit.updateHealthTimer, {
 	endTime = .03,
     callback = function()
 		if IsValidEntity(unit) then
-			local timesUp = GameRules:GetGameTime() >= fTimeBuildingCompleted
-			if not timesUp then
+			--local timesUp = 
+			if fTimeBuildingCompleted - GameRules:GetGameTime() > 0 then
 				if unit.bUpdatingHealth then
-					if unit:GetHealth() < fMaxHealth then
-						local fremainingTicks = (fTimeBuildingCompleted - GameRules:GetGameTime() + 1) / BUILDINGHELPER_THINK
-						nHealthInterval = fMaxHealth / fremainingTicks
-						unit:SetHealth(unit:GetHealth() + nHealthInterval)
-					else
-						unit.bUpdatingHealth = false
-					end
+					local fremainingTicks = (fTimeBuildingCompleted - GameRules:GetGameTime()) / BUILDINGHELPER_THINK
+					nHealthInterval = fMaxHealth / fremainingTicks
+					unit:SetHealth(unit:GetHealth() + nHealthInterval)
 				end
 				if bScaling then
 					if fCurrentScale < fMaxScale then
