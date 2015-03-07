@@ -623,8 +623,12 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	-- health to add every tick until build time is completed.
 	local nHealthInterval = (fMaxHealth*BUILDINGHELPER_THINK)/buildTime
 	-- increase the health interval by 25%.
-	nHealthInterval = nHealthInterval + .25*nHealthInterval
-
+	--nHealthInterval = nHealthInterval + .25*nHealthInterval
+	print("[MYLL]")
+	print(fMaxHealth)
+	print(BUILDINGHELPER_THINK)
+	print(buildTime)
+	print(nHealthInterval)
 	if nHealthInterval < 1 then
 		--print("[BuildingHelper] nHealthInterval is below 1. Setting nHealthInterval to 1. The unit will gain full health before the build time ends.\n" ..
 		--	"Fix this by increasing the max health of your unit. Recommended unit max health is 1000.")
@@ -649,7 +653,6 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	unit:SetControllableByPlayer(builder:GetMainControllingPlayer(), true)
 	unit:SetOwner(playersHero)
 
-
 	if bUpdateHealth then
 		unit:SetHealth(1)
 		unit.bUpdatingHealth = true
@@ -659,7 +662,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 			bScaling=true
 		end
 	end
-
+	local fHPGiven = 1
 	-- health and scale timer
 	unit.updateHealthTimer = DoUniqueString('health')
 	Timers:CreateTimer(unit.updateHealthTimer, {
@@ -670,7 +673,9 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 			if not timesUp then
 				if unit.bUpdatingHealth then
 					if unit:GetHealth() < fMaxHealth then
-						unit:SetHealth(unit:GetHealth()+nHealthInterval)
+						local fremainingTicks = (fTimeBuildingCompleted - GameRules:GetGameTime() + 1) / BUILDINGHELPER_THINK
+						nHealthInterval = fMaxHealth / fremainingTicks
+						unit:SetHealth(unit:GetHealth() + nHealthInterval)
 					else
 						unit.bUpdatingHealth = false
 					end

@@ -5,19 +5,19 @@
 	// Add a numbered block for each swf file to load when your addon starts
 
 
-	"1"
-	{
-		"File"		"CustomUI"
-		"Depth"		"51"
-	}
-	"2"
-	{
-		"File"		"FlashUtil"
-		"Depth"		"25"
-	}
-	"3"
+    "1"
+    {
+        "File"      "CustomUI"
+        "Depth"     "50"
+    }
+    "2"
     {
         "File"      "BuildingHelper"
+        "Depth"     "51"
+    }
+    "3"
+    {
+        "File"      "FlashUtil"
         "Depth"     "52"
     }
     "4"
