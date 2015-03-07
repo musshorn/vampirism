@@ -4,41 +4,26 @@ silencer = CreateUnitByName("util_silencer", OUT_OF_BOUNDS, false, nil, nil, 0)
 
 function build( keys )
   local player = keys.caster:GetPlayerOwner()
-  local pID = keys.caster:GetPlayerOwnerID()
+  local pID = keys.caster:GetMainControllingPlayer()
+
+  -- Check if player has enough resources here. If he doesn't they just return this function.
+  
   local returnTable = BuildingHelper:AddBuilding(keys)
 
-  local tempAbilities = {}
-
-  -- handle errors if any
-  if TableLength(returnTable) > 0 then
-    --PrintTable(returnTable)
-    if returnTable["error"] == "not_enough_resources" then
-      local resourceTable = returnTable["resourceTable"]
-      -- resourceTable is like this: {["lumber"] = 3, ["stone"] = 6}
-      -- so resourceName = cost-playersResourceAmount
-      -- the api searches for player[resourceName]. you need to keep this number updated
-      -- throughout your game
-      local firstResource = nil
-      for k,v in pairs(resourceTable) do
-        if not firstResource then
-          firstResource = k
-        end
-        print("P:" .. pID .. " needs " .. v .. " more " .. k .. ".")
-      end
-      local capitalLetter = firstResource:sub(1,1):upper()
-      firstResource = capitalLetter .. firstResource:sub(2)
-      FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Not enough " .. firstResource .. "." } )
-      return
-    end
-  end
+  keys:OnBuildingPosChosen(function(vPos)
+    --print("OnBuildingPosChosen")
+    -- in WC3 some build sound was played here.
+  end)
 
   keys:OnConstructionStarted(function(unit)
-    --print("Started construction of " .. unit:GetUnitName())
+    if Debug_BH then
+      print("Started construction of " .. unit:GetUnitName())
+    end
     -- Unit is the building be built.
     -- Play construction sound
     -- FindClearSpace for the builder
     FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
-    --Silence the unit while it is being built
+    -- start the building with 0 mana.
     unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})
     unit:SetMana(0)
   end)
@@ -50,7 +35,6 @@ function build( keys )
     -- add the mana
     unit:SetMana(unit:GetMaxMana())
 
-    
     House1:Init(unit)
 
     -- Check if the building will create units, if so, give it a unit creation timer
@@ -77,11 +61,15 @@ function build( keys )
   -- These callbacks will only fire when the state between below half health/above half health changes.
   -- i.e. it won't unnecessarily fire multiple times.
   keys:OnBelowHalfHealth(function(unit)
-    print(unit:GetUnitName() .. " is below half health.")
+    if Debug_BH then
+      print(unit:GetUnitName() .. " is below half health.")
+    end
   end)
 
   keys:OnAboveHalfHealth(function(unit)
-    print(unit:GetUnitName() .. " is above half health.")
+    if Debug_BH then
+      print(unit:GetUnitName() .. " is above half health.")
+    end
   end)
 
   --[[keys:OnCanceled(function()
@@ -90,7 +78,11 @@ function build( keys )
 
   -- Have a fire effect when the building goes below 50% health.
   -- It will turn off it building goes above 50% health again.
-  --keys:EnableFireEffect("modifier_jakiro_liquid_fire_burn")
+  keys:EnableFireEffect("modifier_jakiro_liquid_fire_burn")
+end
+
+function building_canceled( keys )
+  BuildingHelper:CancelBuilding(keys)
 end
 
 function create_building_entity( keys )
