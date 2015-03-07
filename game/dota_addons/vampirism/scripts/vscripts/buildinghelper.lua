@@ -662,23 +662,19 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 			bScaling=true
 		end
 	end
-	local fHPGiven = 1
+
 	-- health and scale timer
 	unit.updateHealthTimer = DoUniqueString('health')
 	Timers:CreateTimer(unit.updateHealthTimer, {
 	endTime = .03,
     callback = function()
 		if IsValidEntity(unit) then
-			local timesUp = GameRules:GetGameTime() >= fTimeBuildingCompleted
-			if not timesUp then
+			--local timesUp = 
+			if fTimeBuildingCompleted - GameRules:GetGameTime() > 0 then
 				if unit.bUpdatingHealth then
-					if unit:GetHealth() < fMaxHealth then
-						local fremainingTicks = (fTimeBuildingCompleted - GameRules:GetGameTime() + 1) / BUILDINGHELPER_THINK
-						nHealthInterval = fMaxHealth / fremainingTicks
-						unit:SetHealth(unit:GetHealth() + nHealthInterval)
-					else
-						unit.bUpdatingHealth = false
-					end
+					local fremainingTicks = (fTimeBuildingCompleted - GameRules:GetGameTime()) / BUILDINGHELPER_THINK
+					nHealthInterval = fMaxHealth / fremainingTicks
+					unit:SetHealth(unit:GetHealth() + nHealthInterval)
 				end
 				if bScaling then
 					if fCurrentScale < fMaxScale then
