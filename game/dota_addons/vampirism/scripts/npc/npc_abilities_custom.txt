@@ -1574,4 +1574,69 @@
 			}
 		}
 	}
+
+	//=================================================================================	
+	// Vampire: Veil of Darkness
+	//=================================================================================
+	"vampire_veil_of_darkness"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"night_stalker_hunter_in_the_night"
+		"MaxLevel" 						"3"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+		"AbilityCooldown"				"150 100 50"
+		"AbilityManaCost"				"0"
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"duration"					"60 80 100"
+			}
+			"02"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"speed"					"20 30 50"
+			}
+		}
+
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_veil_of_darkness"
+				"Target" 		"CASTER"
+				"Duration"		"%duration"
+			}
+
+		}
+
+		"Modifiers"
+		{
+			"modifier_veil_of_darkness"
+			{
+				"Passive"			"1"
+				"IsHidden"			"0"
+				"isBuff"			"1"
+				"IsDebuff"			"0"
+		
+		
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%speed" 
+				}
+
+				"States"
+				{
+					"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
 }
