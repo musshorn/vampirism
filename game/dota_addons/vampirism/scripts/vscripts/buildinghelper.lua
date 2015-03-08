@@ -490,6 +490,40 @@ function BuildingHelper:AddBuilding(keys)
 			end
 		end
 
+		-- Put dummy units down to make collions more square
+		local origin = Vector(centerX,centerY,vPoint.z)
+		local rad = 100
+		local A = BH_A*rad
+		local B = rad
+		local discCenter = (A-B)/2
+		local discRad = BH_cos45*discCenter
+		local dist = B + discCenter
+		local C = dist*BH_cos45
+		-- Top right disc
+		local tr_x = origin.x + BH_DUMMY:GetPaddedCollisionRadius() * 2
+		local tr_y = origin.y + BH_DUMMY:GetPaddedCollisionRadius() * 2
+		-- top left disc
+		local tl_x = origin.x - BH_DUMMY:GetPaddedCollisionRadius() * 2
+		local tl_y = tr_y
+		-- bot left disc
+		local bl_x = tl_x
+		local bl_y = origin.y - BH_DUMMY:GetPaddedCollisionRadius() * 2
+		-- bot right disc
+		local br_x = tr_x
+		local br_y = bl_y
+
+		local topRight = CreateUnitByName("npc_bh_dummy", Vector(tr_x,tr_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
+		--DebugDrawCircle(Vector(tr_x, tr_y, origin.z), Vector(255,0,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
+
+		local topLeft = CreateUnitByName("npc_bh_dummy", Vector(tl_x,tl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
+		--DebugDrawCircle(Vector(tl_x, tl_y, origin.z), Vector(0,255,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
+
+		local botRight = CreateUnitByName("npc_bh_dummy", Vector(br_x,br_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
+		--DebugDrawCircle(Vector(br_x, br_y, origin.z), Vector(0,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
+
+		local bottomLeft = CreateUnitByName("npc_bh_dummy", Vector(bl_x,bl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
+	  --DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
+
 		-- Iterate thru the square locations
 		local ptr = 1
 		for x=buildingRect.leftBorderX+32,buildingRect.rightBorderX-32,64 do
@@ -500,7 +534,7 @@ function BuildingHelper:AddBuilding(keys)
 				ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
 				ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
 
-				-- Particles haven't been generated yet. Generate them.
+				--[[ Particles haven't been generated yet. Generate them.
 				local ghost_grid_particle = "particles/buildinghelper/square_sprite.vpcf"
 				if USE_PROJECTED_GRID then
 					ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
@@ -517,7 +551,7 @@ function BuildingHelper:AddBuilding(keys)
 
 				local groundZ = GetGroundPosition(Vector(x,y,z),caster).z
 				ParticleManager:SetParticleControl(particle, 0, Vector(x,y,groundZ))
-				ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0))
+				ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0)) ]]--
 			end
 		end
 
