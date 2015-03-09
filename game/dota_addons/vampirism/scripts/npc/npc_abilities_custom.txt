@@ -257,6 +257,14 @@
 				"Function"		"ChoppedLumber"
 			}
 		}
+		"OnChannelInterrupted"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/units/worker.lua"
+				"Function"		"Interrupted"
+			}
+		}
 	}
 
 	"carrying_lumber"
