@@ -56,4 +56,12 @@
         "player_ID"     "short"
         "_error"        "string"
     }
+
+    //TechTree event
+    "tech_return"
+    {
+    	"player_ID"		"short"
+    	"building"		"string"
+    	"available"		"boolean"
+    }
 }

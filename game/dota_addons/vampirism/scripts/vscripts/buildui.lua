@@ -32,13 +32,13 @@ end
 
 function CallMenu(keys)
     local caster = keys.caster
-    local playerID = caster:GetPlayerOwnerID()
+    local playerID = caster:GetMainControllingPlayer()
 
     FireGameEvent("build_ui_called", {player_ID = playerID, builder = caster:GetUnitName()})
 
     --ONLY FOR TESTING IN SINGLE, NOT WORKING IN MULTIPLAYER.
     --SHOULD BE playerCasters[playerID] = caster
-    playerCasters[0] = caster
+    playerCasters[playerID] = caster
    -- playerCasters[playerID] = caster
 
 end
@@ -48,8 +48,13 @@ function BuildUI:BuildChosen(building, playerID)
     --ONLY FOR TESTING IN SINGLE, NOT WORKING IN MULTIPLAYER.
     --SHOULD BE local caster = playerCasters[playerID]
     --local caster = playerCasters[playerID]
-    local caster = playerCasters[0]
+    local caster = playerCasters[playerID]
     local ability = caster:FindAbilityByName(building)
+
+    --find a better way of doing this..(like getting it out of the kv.)
+    local tech = string.sub(building, 7)
+
+    TechTree:GetRequired(tech, playerID)
 
     caster:CastAbilityNoTarget(ability, 0)
 end

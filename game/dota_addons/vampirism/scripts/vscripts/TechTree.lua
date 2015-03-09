@@ -11,92 +11,72 @@ if playerTrees == nil then
 	playerTrees = {}
 end
 
-for i = 0, 9 do
-	playerTrees[i] = {}
-end
-
 function TechTree:Init()
 	--[[Convars:RegisterConvar('tech_query', string defaultValue, string helpText, int flags) --[[Returns:void
 	RegisterConvar(name, defaultValue, helpString, flags): register a new console variable.
 	]]
+	for i = 0, 9 do
+		playerTrees[i] = {}
+	end
 end
 
 --Check if a unit requires a missing tech, and return the missing tech(s) if any.
 function TechTree:GetRequired(unitName, playerID)
 	print('GETREQUIRED')
-	--local unit = EntIndexToHScript(keys.entindex)
-	--local playerID = unit:GetMainControllingPlayer()
-
-
-	if playerTrees[playerID] == nil then
-		print('PLAYER HAS NO TECH')
-		--player has no tech
-		FireGameEvent("tech_return", {player_ID = playerID, available = false})
-		return false
-	end
+	print(unitName)
+	print(playerID)
 
 	local techlist = {}
 
 	if UNIT_KV[unitName] ~= nil then
-		local reqs = tostring(UNIT_KV[unitName].NeedTech)
-		if reqs == nil then
-			print('unit has no reqs')
-		else
-			print(reqs..'- REQS')
+		if UNIT_KV[unitName].NeedTech ~= nil then
+			local reqs = tostring(UNIT_KV[unitName].NeedTech)
+			--print(reqs..'- REQS')
 			for tech in string.gmatch(reqs, "%S+") do
-				print(tech..'- TECH ADDED TO TECHLIST')
-				table.insert(techlist, tech)
+				--print(tech..'- TECH ADDED TO TECHLIST')
+				if tech ~= nil then
+					table.insert(techlist, tech)
+				end
 			end
+		else
+			--print('unit needs no techs shrek')
+			return true
 		end
 	end
 
-	if techlist ~= nil then
-		for i = 1, #techlist do
-			print(techlist[i])
-			print('ITEM IN TECHLIST')
-		end
+	if table.getn(techlist) == 0 then
+		--print('we think theres nothing in techlist')
+		return false
 	end
 
-	print('XPLICIT CHECK')
-	print(playerTrees[playerID].house_t1)
-
-	--PrintTable(playerTrees)
-	PrintTable(playerTrees[playerID])
-
-
 	if techlist ~= nil then
-		for i = 1, #techlist do
+		for i = 1, table.getn(techlist) do
 			local check = tostring(techlist[i])
-			if playerTrees[playerID].check == nil or playerTrees[playerID].check < 1 then
-				print(tostring(playerTrees[playerID].check)..' this tech was empty or less than 1')
-				FireGameEvent("vamp_tech_check_return", {player_ID = playerID, available = false})
-				print(check)
+			print(check)
+			if playerTrees[playerID][check] ~= nil then
+				if playerTrees[playerID][check] < 1 then
+					FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = false})
+					return false
+				end
+			else
 				return false
 			end
 		end
 	end
 
-	print('you have tech')
-
-	FireGameEvent("vamp_tech_check_return", {player_ID = playerID, available = true})
+	FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = true})
 	return true
 end
 
 --Adds a unit to the TechTree table, and increments the count of units in the table.
 function TechTree:AddTech(unitName, playerID)
 	local tech = unitName
-	print('adding '..tech)
-	if playerTrees[playerID].tech == nil then
-		playerTrees[playerID].tech = 1
-		print('making new tech index'..tech..tostring(playerID))
-		print(playerTrees[playerID].tech)
+
+	if playerTrees[playerID][tech] ~= nil then
+		playerTrees[playerID][tech] = playerTrees[playerID][tech] + 1
 	else
-		playerTrees[playerID].tech = playerTrees[playerID].tech + 1
-
-		print('adding tech to extisting index'..tech..tostring(playerID))
+		playerTrees[playerID][tech] = 1
 	end
-
-	print('added tech')
 end
 
 function TechTree:AddTechAbility(keys)
@@ -104,13 +84,11 @@ function TechTree:AddTechAbility(keys)
 	local tech = keys:GetAbilityName()
 	local playerID = ability:GetCaster():GetMainControllingPlayer()
 
-	if playerTrees[playerID].tech == nil then
-		playerTrees[playerID].tech = 1
-		print('making new tech index'..tech..tostring(playerID))
-		print(playerTrees[playerID].tech)
+	if playerTrees[playerID][tech] == nil then
+		playerTrees[playerID][tech] = 1
+		PrintTable(playerTrees)
 	else
-		playerTrees[playerID].tech = playerTrees[playerID].tech + 1
-		print('adding tech to extisting index'..tech..tostring(playerID))
+		playerTrees[playerID][tech] = playerTrees[playerID][tech] + 1
 	end
 end
 
@@ -118,17 +96,13 @@ end
 
 function TechTree:RemoveTech(unitName, playerID)
 	local tech = unitName
-	print('Removing tech')
 
-	if playerTrees[playerID].tech == nil then
-		print('nil tech bro')
+	if playerTrees[playerID][tech] == nil then
 		return
 	end
 
-	if playerTrees[playerID].tech > 0 then
-		playerTrees[playerID].tech = playerTrees[playerID].tech - 1
-		print('removed a kek')
-		print(playerTrees[playerID].tech)
+	if playerTrees[playerID][tech] > 0 then
+		playerTrees[playerID][tech] = playerTrees[playerID][tech] - 1
 	else
 		print('TECH ' .. tech .. ' is already 0!')
 	end

@@ -233,7 +233,7 @@ function GameMode:OnNPCSpawned(keys)
     VisionDummy(npc)
   end
   
-  TechTree:GetRequired(npc:GetUnitName(), npc:GetMainControllingPlayer())
+  --TechTree:GetRequired(npc:GetUnitName(), npc:GetMainControllingPlayer())
 end
 
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive
@@ -694,6 +694,7 @@ function GameMode:InitGameMode()
 
   BuildingHelper:Init(8192)
   BuildUI:Init()
+  TechTree:Init()
 
   print('[vampirism] Done loading vampirism gamemode!\n\n')
 end
