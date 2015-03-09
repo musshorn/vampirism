@@ -36,10 +36,10 @@
 
 	"FlashUtil_request_stream"
 	{
-		"request_id"		"string"
-		"data_name"			"string"
+		"request_id"				"string"
+		"data_name"					"string"
 		"requests_per_second"		"short"
-		"target_player"		"short"
+		"target_player"				"short"
 	}
 
 	"FlashUtil_stop_stream"

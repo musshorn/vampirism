@@ -232,16 +232,8 @@ function GameMode:OnNPCSpawned(keys)
   if string.match(npc:GetUnitName(), "vampire_vision_dummy") then
     VisionDummy(npc)
   end
-
-  if npc:GetUnitName() == "npc_wall1" then
-    TechTree:GetRequired(keys)
-  end
-
-  if npc:GetUnitName() == "house_t1" then
-    TechTree:AddTech(keys)
-  	npc:SetMana(0.0)
-    --House1:Init(npc)
-  end  
+  
+  TechTree:GetRequired(npc:GetUnitName(), npc:GetMainControllingPlayer())
 end
 
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive

@@ -52,6 +52,10 @@ function build( keys )
       end
     end
 
+    if UNIT_KV[unit:GetUnitName()].IsTech ~= nil then
+      TechTree:AddTech(unit:GetUnitName(), unit:GetMainControllingPlayer())
+    end
+
     --Remove Building Silence.
     if unit:HasModifier("modifier_silence") then
       unit:RemoveModifierByName("modifier_silence")

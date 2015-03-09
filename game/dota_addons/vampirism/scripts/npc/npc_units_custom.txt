@@ -317,6 +317,9 @@
 
 		// Vamp
 		"SpawnsUnits"	"true"
+		//Generic key to all techs, ability upgrades or buildings to track whether
+		//they should be tracked by the tech tree.
+		"IsTech"		"true"
 	}
 
 	//=================================================================================	
@@ -395,6 +398,11 @@
 
 		// Vamp
 		"ProvidesFood"	"25"
+		"IsTech"		"true"
+
+		//Key which contains each neccessary tech for this unit, sperated by spaces.
+		"NeedTech"		"house_t1"
+
 	}
 
 	"tent_t2"
@@ -470,6 +478,8 @@
 
 		// Vamp
 		"ProvidesFood"	"25"
+		//"GivesTech"		"true"
+
 	}
 
 	//=================================================================================	
@@ -545,6 +555,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"IsTech"		"true"
 	}
 
 	//=================================================================================	
@@ -620,6 +632,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"IsTech"		"true"
 	}
 
 	//=================================================================================	
@@ -695,6 +709,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		"IsTech"		"true"
 	}
 
 	//=================================================================================	
@@ -770,6 +786,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"IsTech"		"true"
 	}
 
 	//=================================================================================	
@@ -845,6 +863,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"IsTech"		"true"
+
 	}
 
 	//=================================================================================	
@@ -920,6 +941,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"IsTech"		"true"
 	}
 
 	//=================================================================================	
@@ -995,6 +1018,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"IsTech"		"true"
 	}
 
 	//=================================================================================	
@@ -1070,6 +1095,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"IsTech"		"true"
 	}
 
 	//=================================================================================	
@@ -1145,6 +1172,8 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"IsTech"		"true"
 	}
 
 	//=================================================================================	
@@ -1282,7 +1311,7 @@
 		"AttackDesire"				"1.5"		// How much bots want to attack them vs other non-hero things
 	}
 
-	"util_silencer"
+	"util_cyka_speed"
 	{
 		// General
 		//
@@ -1295,7 +1324,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		
-		"Ability1"					"build_silence"	// Ability 1.
+		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
 		"Ability4"					""			// Ability 4.
@@ -1306,7 +1335,7 @@
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"			// Physical protection.
+		"ArmorPhysical"					"0"			// Physical protection.
 		"MagicalResistance"				"0"			// Magical protection.
 
 		// Attack
@@ -1351,7 +1380,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"1"			// Base health.
+		"StatusHealth"				"100"			// Base health.
 		"StatusHealthRegen"			"0"			// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0"			// Mana regeneration rate.
