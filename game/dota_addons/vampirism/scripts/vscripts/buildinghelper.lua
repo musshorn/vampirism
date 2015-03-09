@@ -242,6 +242,11 @@ function BuildingHelper:AddBuilding(keys)
 	if player.ghost_particles == nil then
 		player.ghost_particles = {}
 	end
+
+	if player.temp_dummies == nil then
+		player.temp_dummies = {}
+	end
+
 	-- store player handle ref in the builder
 	if builder.player == nil then
 		builder.player = player
@@ -521,9 +526,12 @@ function BuildingHelper:AddBuilding(keys)
 		local botRight = CreateUnitByName("npc_bh_dummy", Vector(br_x,br_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
 		--DebugDrawCircle(Vector(br_x, br_y, origin.z), Vector(0,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
-		local bottomLeft = CreateUnitByName("npc_bh_dummy", Vector(bl_x,bl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
+		local botLeft = CreateUnitByName("npc_bh_dummy", Vector(bl_x,bl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
 	  --DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
+	  local dummies = { topRight, topLeft, botRight, botLeft}
+
+	  table.insert(player.temp_dummies, dummies)
 		-- Iterate thru the square locations
 		local ptr = 1
 		for x=buildingRect.leftBorderX+32,buildingRect.rightBorderX-32,64 do
@@ -858,6 +866,12 @@ function BuildingHelper:CancelBuilding( keys )
 	if caster:HasModifier("building_canceled") then
 		caster:RemoveModifierByName("building_canceled")
 	end
+	print("Removing those memes")
+	for i=#player.temp_dummies[1], 1,-1 do
+		player.temp_dummies[1][i]:RemoveSelf()
+	end
+	table.remove(player.temp_dummies, i)
+	PrintTable(player.temp_dummies)
 	--print("building_canceled")
 end
 
