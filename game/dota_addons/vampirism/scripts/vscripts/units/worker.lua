@@ -30,13 +30,15 @@ function Worker:Worker1(vPos, hOwner, unitName)
   	else
   		worker.moving = false
   	end
+
+    -- Also check if they can return lumber
+    ReturnLumber()
   	return 0.1
   end)
 
 	function worker:Think()
 
     worker.thinking = true
-		worker.generationTimer = 
 		Timers:CreateTimer(function ()
 
 			if not worker:IsAlive() then
@@ -84,48 +86,54 @@ function Worker:Worker1(vPos, hOwner, unitName)
 					worker.housePos = bestDrop:GetAbsOrigin()
 					worker:MoveToPosition(worker.housePos)
 				end
-
-				--[[ Drop lumber off at the house and alert Flash then move back to the tree
-				Proof of concept, timer checks to ensure that a worker is facing the house before
-				it drops off lumber. So endTime needs to be based off the units turn speed, not sure
-				what that number should actually be but .25 is working normally.]]
-				Timers:CreateTimer({
-					endTime = .25,
-					callback = function ()
-						if Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 180) ~= nil and worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal) > 0 then
-							print(worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal))
-							local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
-							local pidx = ParticleManager:CreateParticle("particles/msg_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, worker)
-
-							local digits = 0
-							local number = currentLumber
-							if number ~= nil then
-								digits = #tostring(number)
-							end
-
-							digits = digits + 1
-
-							ParticleManager:SetParticleControl(pidx, 1, Vector(0, tonumber(number), tonumber(nil)))
-							ParticleManager:SetParticleControl(pidx, 2, Vector(1, digits, 0))
-							ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
-
-							local pid = worker:GetMainControllingPlayer() 
-							WOOD[pid] = WOOD[pid] + currentLumber
-
-							FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
-							print(WOOD[pid])
-
-							worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
-							worker:MoveToPosition(worker.treepos)
-							return nil
-						end
-					end
-					})
-				end
+			end
 			return .1
 		end)
 	end
-	return worker
+
+  function ReturnLumber()
+    --[[ Drop lumber off at the house and alert Flash then move back to the tree
+    Proof of concept, timer checks to ensure that a worker is facing the house before
+    it drops off lumber. So endTime needs to be based off the units turn speed, not sure
+    what that number should actually be but .25 is working normally.]]
+    Timers:CreateTimer({
+      endTime = .25,
+      callback = function ()
+        local carryTotal= worker:FindAbilityByName("carrying_lumber")
+        local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+        local targetHouse = Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 180)
+        
+        if targetHouse ~= nil then
+          if targetHouse:GetMainControllingPlayer() == worker:GetMainControllingPlayer() and currentLumber > 0 then
+            local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
+            local pidx = ParticleManager:CreateParticle("particles/msg_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, worker)
+
+            local digits = 0
+            local number = currentLumber
+            if number ~= nil then
+              digits = #tostring(number)
+            end
+
+            digits = digits + 1
+
+            ParticleManager:SetParticleControl(pidx, 1, Vector(0, tonumber(number), tonumber(nil)))
+            ParticleManager:SetParticleControl(pidx, 2, Vector(1, digits, 0))
+            ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
+
+            local pid = worker:GetMainControllingPlayer() 
+            WOOD[pid] = WOOD[pid] + currentLumber
+
+            FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
+            print(WOOD[pid])
+
+            worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
+            worker:MoveToPosition(worker.treepos)
+            return nil
+          end
+        end
+    end})
+  end
+  return worker
 end
 
 function AtTree(keys)
