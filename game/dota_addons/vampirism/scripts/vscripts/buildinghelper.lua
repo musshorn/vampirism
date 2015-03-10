@@ -518,15 +518,19 @@ function BuildingHelper:AddBuilding(keys)
 		local br_y = bl_y
 
 		local topRight = CreateUnitByName("npc_bh_dummy", Vector(tr_x,tr_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
+		topRight:FindAbilityByName("bh_dummy"):OnUpgrade() 
 		--DebugDrawCircle(Vector(tr_x, tr_y, origin.z), Vector(255,0,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
 		local topLeft = CreateUnitByName("npc_bh_dummy", Vector(tl_x,tl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
+		topLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
 		--DebugDrawCircle(Vector(tl_x, tl_y, origin.z), Vector(0,255,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
 		local botRight = CreateUnitByName("npc_bh_dummy", Vector(br_x,br_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
+		botRight:FindAbilityByName("bh_dummy"):OnUpgrade()
 		--DebugDrawCircle(Vector(br_x, br_y, origin.z), Vector(0,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
 		local botLeft = CreateUnitByName("npc_bh_dummy", Vector(bl_x,bl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
+		botLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
 	  --DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
 	  local dummies = { topRight, topLeft, botRight, botLeft}
