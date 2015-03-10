@@ -11,57 +11,93 @@ if playerTrees == nil then
 	playerTrees = {}
 end
 
-for i = -1, 9 do
-	playerTrees[i] = {}
+function TechTree:Init()
+	for i = 0, 9 do
+		playerTrees[i] = {}
+	end
+
+  Convars:RegisterCommand("tech_query", function(name, p)
+   local cmdPlayer = Convars:GetCommandClient()
+   if cmdPlayer then
+      local playerID = cmdPlayer:GetPlayerID()
+      print(playerID)
+      TechTree:GetRequired(p, playerID)
+      return 0
+    end
+  end, "tech query made", 0)  
 end
 
 --Check if a unit requires a missing tech, and return the missing tech(s) if any.
-function TechTree:GetRequired (keys)
-	local unit = EntIndexToHScript(keys.entindex)
-	local playerID = unit:GetPlayerOwnerID()
-	if playerTrees[playerID] == nil then
-		print('YOU HAVE NO TECH')
-		return
-	end
+function TechTree:GetRequired(unitName, playerID)
+	print('GETREQUIRED')
+	print(unitName)
+	print(playerID)
 
+	PrintTable(PlayerTrees)
 	local techlist = {}
 
-	--populate a list with required techs.
-	for i = 0, unit:GetAbilityCount() - 1 do
-		if unit:GetAbilityByIndex(i) ~= nil then
-			--print(unit:GetAbilityByIndex(i):GetAbilityName())
-			if string.match(unit:GetAbilityByIndex(i):GetAbilityName(), '_tt_') then
-				print('assinging tech')
-				techlist[i] = string.sub(unit:GetAbilityByIndex(i):GetAbilityName(), 5)
+	if UNIT_KV[unitName] ~= nil then
+		if UNIT_KV[unitName].NeedTech ~= nil then
+			local reqs = tostring(UNIT_KV[unitName].NeedTech)
+			--print(reqs..'- REQS')
+			for tech in string.gmatch(reqs, "%S+") do
+				--print(tech..'- TECH ADDED TO TECHLIST')
+				if tech ~= nil then
+					table.insert(techlist, tech)
+				end
 			end
+		else
+			print('unit needs no techs shrek')
+			FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = true})
+			return true
 		end
 	end
 
-	local missing = nil
-
-	for k, v in pairs(techlist) do
-		if playerTrees[playerID][v] == nil or playerTrees[playerID][v] <= 0 then
-			if missing ~= nil then
-				missing = missing .. v .. ' '
+	if techlist ~= nil then
+		for i = 1, table.getn(techlist) do
+			local check = tostring(techlist[i])
+			print(check)
+			if playerTrees[playerID][check] ~= nil then
+				if playerTrees[playerID][check] < 1 then
+					print('hit here')
+					FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = false})
+					return false
+				end
 			else
-				missing = v .. ' '
+				FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = false})
+				print('exited here')
+				return false
 			end
 		end
 	end
-	
-	if missing ~= nil then
-		print('YOU ARE MISSING ' .. missing)
+
+	print('made it')
+	FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = true})
+	return true
+end
+
+--Adds a unit to the TechTree table, and increments the count of units in the table.
+function TechTree:AddTech(unitName, playerID)
+	local tech = unitName
+
+	print('adding tech '..tostring(playerID))
+
+	if playerTrees[playerID][tech] ~= nil then
+		playerTrees[playerID][tech] = playerTrees[playerID][tech] + 1
+		print('added')
+		PrintTable(PlayerTrees)
 	else
-		print('GO AHEAD MY SON')
+		playerTrees[playerID][tech] = 1
+		print('added')
+		PrintTable(PlayerTrees)
 	end
 end
 
---Adds a unit to the TechTree table if it is the first a player has built.
-function TechTree:AddTech(keys)
-	local unit = EntIndexToHScript(keys.entindex)
-	local tech = unit:GetUnitName()
-	local playerID = unit:GetPlayerOwnerID()
-	print(playerID)
+function TechTree:AddTechAbility(keys)
+	local ability = keys
+	local tech = keys:GetAbilityName()
+	local playerID = ability:GetCaster():GetMainControllingPlayer()
+
 	if playerTrees[playerID][tech] == nil then
 		playerTrees[playerID][tech] = 1
 	else
@@ -73,17 +109,13 @@ end
 
 function TechTree:RemoveTech(unitName, playerID)
 	local tech = unitName
-	print('i got called')
 
 	if playerTrees[playerID][tech] == nil then
-		print('nil tech bro')
 		return
 	end
 
 	if playerTrees[playerID][tech] > 0 then
 		playerTrees[playerID][tech] = playerTrees[playerID][tech] - 1
-		print('removed a kek')
-		print(playerTrees[playerID][tech])
 	else
 		print('TECH ' .. tech .. ' is already 0!')
 	end

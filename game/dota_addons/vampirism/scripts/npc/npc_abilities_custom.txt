@@ -257,6 +257,14 @@
 				"Function"		"ChoppedLumber"
 			}
 		}
+		"OnChannelInterrupted"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/units/worker.lua"
+				"Function"		"Interrupted"
+			}
+		}
 	}
 
 	"carrying_lumber"
@@ -584,10 +592,19 @@
 
 	"bh_dummy"
 	{
-		"AbilityBehavior" 		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityBehavior" 		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass" 					"ability_datadriven"
 		"AbilityTextureName"            "rubick_empty1"
 		"MaxLevel"                      "1"
+
+		"OnUpgrade"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"dummy_unit"
+				"Target" 		"CASTER"
+			}
+		}
 
 		"Modifiers"
 		{
@@ -1154,6 +1171,8 @@
 		"precache"
 		{
 			"particle" "particles/vampire/courier_greevil_black_ambient_3.vpcf"
+			"particle"  "particles/vampire/nevermore_trail.vpcf"
+			"particle"  "particles/vampire/nevermore_trail_ground_cracks.vpcf"
 		}
 
 		"OnUpgrade"
@@ -1161,6 +1180,18 @@
 			"FireEffect"
 			{
 				"EffectName"        "particles/vampire/courier_greevil_black_ambient_3.vpcf"
+				"EffectAttachType"  "follow_origin"
+				"Target"            "CASTER"
+			}
+			"FireEffect"
+			{
+				"EffectName"        "particles/vampire/nevermore_trail.vpcf"
+				"EffectAttachType"  "follow_origin"
+				"Target"            "CASTER"
+			}
+			"FireEffect"
+			{
+				"EffectName"        "particles/vampire/nevermore_trail_ground_cracks.vpcf"
 				"EffectAttachType"  "follow_origin"
 				"Target"            "CASTER"
 			}
@@ -1345,7 +1376,7 @@
 
 
 	//=================================================================================	
-	// Vampire: Vision Dummy hider
+	// Vampire: Vision Dummy
 	//=================================================================================
 	"vampire_vision_dummy_lock"
 	{
@@ -1583,7 +1614,7 @@
 		"BaseClass"             		"ability_datadriven"
 		"AbilityTextureName"			"night_stalker_hunter_in_the_night"
 		"MaxLevel" 						"3"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 
@@ -1615,13 +1646,20 @@
 				"Duration"		"%duration"
 			}
 
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/vampire.lua"
+				"Function"		"CykaSpeed"
+			}
 		}
+
+
 
 		"Modifiers"
 		{
 			"modifier_veil_of_darkness"
 			{
-				"Passive"			"1"
+				"Passive"			"0"
 				"IsHidden"			"0"
 				"isBuff"			"1"
 				"IsDebuff"			"0"
@@ -1636,6 +1674,47 @@
 				{
 					"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_ENABLED"
 				}
+			}
+		}
+	}
+
+	//=================================================================================	
+	// Vampire: BLOODCYKA
+	//=================================================================================
+	"vampire_cyka_speed"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"             		"bloodseeker_thirst"
+		"AbilityTextureName"			"bloodseeker_thirst"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"MaxLevel"						"3"
+
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"visibility_threshold_pct"	"100"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"invis_threshold_pct"		"100"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_movement_speed"		"10 10 10"
+			}			
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage"				"0"
 			}
 		}
 	}

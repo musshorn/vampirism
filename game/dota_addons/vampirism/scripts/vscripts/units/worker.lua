@@ -18,6 +18,8 @@ function Worker:Worker1(vPos, hOwner, unitName)
   worker.maxLumber = UNIT_KV.worker_t1.MaximumLumber
   worker.housePos = nil
 
+  worker.skipTicks = 0 -- If this is > 0 the worker will ignore this many ticks
+
   Timers:CreateTimer(function()
   	if worker.pos ~= worker:GetAbsOrigin() then
   		local ability = worker:FindAbilityByName("harvest_channel")
@@ -40,10 +42,13 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
     worker.thinking = true
 		Timers:CreateTimer(function ()
-
 			if not worker:IsAlive() then
 				return nil
 			end
+      if worker.skipTicks > 0 then
+        worker.skipTicks = worker.skipTicks - 1
+        return 0.1
+      end
 
 			-- Check if the worker is in the trigger zone and not moving
 			-- Additonally, store this location for the next trip
@@ -102,7 +107,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
         local carryTotal= worker:FindAbilityByName("carrying_lumber")
         local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
         local targetHouse = Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 180)
-        
+
         if targetHouse ~= nil then
           if targetHouse:GetMainControllingPlayer() == worker:GetMainControllingPlayer() and currentLumber > 0 then
             local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
@@ -157,4 +162,10 @@ function ChoppedLumber( keys )
 
   worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
   worker.housePos = nil
+end
+
+-- Stop the worker getting stuck if you want to get them away from the trees
+function Interrupted( keys )
+  local worker = keys.caster
+  worker.skipTicks = 3
 end
