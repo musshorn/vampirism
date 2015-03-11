@@ -410,23 +410,6 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityChannelTime"	"5.0"
 		
-		// BH things
-		"Building"						"1"
-		"BuildingSize"					"2"
-		"BuildTime"						"4.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"tent_t2"
-
-		"precache"
-		{
-			"model"  "models/props_structures/barrel_oct.vmdl"
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -435,7 +418,6 @@
 				"Function"		"Upgrade"
 				"TARGET"	"CASTER"
 				"TargetUnit"	"tent_t2"
-				"TargetModel"	"models/props_structures/barrel_oct.vmdl"
 				"LumberCost"	"10"
 			}
 		}
@@ -446,7 +428,289 @@
 				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
 				"Function"		"FinishUpgrade"
 				"TargetUnit"	"tent_t2"
-				"TargetModel"	"models/props_structures/barrel_oct.vmdl"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Upgrade unit to Topaz Wall
+	//=================================================================================	/
+	"upgrade_to_topaz_wall"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 5
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"npc_wall_topaz"
+				"LumberCost"	"1" // #DEBUG, true value is 250
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"npc_wall_topaz"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Upgrade unit to Amethyst Wall
+	//=================================================================================	/
+	"upgrade_to_amethyst_wall"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 10
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"npc_wall_amethyst"
+				"LumberCost"	"1" // #DEBUG, true value is 1000
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"npc_wall_amethyst"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Upgrade unit to Sapphire Wall
+	//=================================================================================	/
+	"upgrade_to_sapphire_wall"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 20
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"npc_wall_sapphire"
+				"LumberCost"	"1" // #DEBUG, true value is 5000
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"npc_wall_sapphire"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Upgrade unit to Emerald Wall
+	//=================================================================================	/
+	"upgrade_to_emerald_wall"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 30
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"npc_wall_emerald"
+				"LumberCost"	"1" // #DEBUG, true value is 10000
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"npc_wall_emerald"
+			}
+		}
+	}
+	//=================================================================================	/
+	// Upgrade unit to Chrysoprase Wall
+	//=================================================================================	/
+	"upgrade_to_chrysoprase_wall"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 40
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"npc_wall_chrysoprase"
+				"LumberCost"	"1" // #DEBUG, true value is 30000
+				"GoldCost"	"1"	// #DEBUG, true value is 10
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"npc_wall_chrysoprase"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Upgrade unit to Garnet Wall
+	//=================================================================================	/
+	"upgrade_to_garnet_wall"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 50
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"npc_wall_garnet"
+				"LumberCost"	"1" // #DEBUG, true value is 80000
+				"GoldCost"	"1"	// #DEBUG, true value is 35
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"npc_wall_garnet"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Upgrade unit to Ruby Wall
+	//=================================================================================	/
+	"upgrade_to_ruby_wall"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 60
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"npc_wall_ruby"
+				"LumberCost"	"1" // #DEBUG, true value is 150000
+				"GoldCost"	"1"	// #DEBUG, true value is 100
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"npc_wall_ruby"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Upgrade unit to Diamond Wall
+	//=================================================================================	/
+	"upgrade_to_diamond_wall"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 70
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"npc_wall_diamond"
+				"LumberCost"	"1" // #DEBUG, true value is 250000
+				"GoldCost"	"1"	// #DEBUG, true value is 200
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"npc_wall_diamond"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Upgrade unit to Onyx Wall
+	//=================================================================================	/
+	"upgrade_to_onyx_wall"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 100
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"npc_wall_onyx"
+				"LumberCost"	"1" // #DEBUG, true value is 450000
+				"GoldCost"	"1"	// #DEBUG, true value is 1200
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"npc_wall_onyx"
 			}
 		}
 	}
@@ -875,7 +1139,7 @@
 		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"wall_t1"
+		"UnitName"						"npc_wall_carnelian"
 		// End of BuildingHelper info
 
 		// Stats

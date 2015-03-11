@@ -57,6 +57,17 @@ function Precache( context )
 		PrecacheModel("models/props_cave/mine_cart.vmdl", context)
 		PrecacheModel("models/props_structures/good_statue008.vmdl", context)
 
+		-- Placeholder models for walls
+		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)
+		PrecacheModel("models/heroes/mirana/mount.vmdl",context)
+		PrecacheModel("models/heroes/phoenix/phoenix_egg.vmdl",context)
+		PrecacheModel("models/heroes/undying/undying_tower.vmdl",context)
+		PrecacheModel("models/items/chen/mount_navi_combined/mount_navi_combined.vmdl",context)
+		PrecacheModel("models/items/courier/carty/carty.vmdl",context)
+		PrecacheModel("models/items/lone_druid/viciouskraitpanda/viciouskrait_panda.vmdl",context)
+		PrecacheModel("models/props_bones/rib_cage001.vmdl",context)
+		PrecacheModel("models/props_gameplay/shopkeeper_dire/secretshopkeeper_dire.vmdl",context)
+
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)
 
