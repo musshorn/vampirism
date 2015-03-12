@@ -61,7 +61,8 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
 				-- If they are not working, start them working
 				if (ability:IsChanneling() == false) then
-					worker:CastAbilityNoTarget(ability, worker:GetMainControllingPlayer())
+          local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 200)
+          worker:CastAbilityOnTarget(tree, ability, worker:GetMainControllingPlayer())
 				end
 			end
 

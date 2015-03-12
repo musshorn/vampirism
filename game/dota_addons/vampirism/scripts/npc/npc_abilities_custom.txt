@@ -244,7 +244,8 @@
 
 	"harvest_channel"
 	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_TREE"
 		"BaseClass"	"ability_datadriven"
 		"AbilityCastPoint"	"0"
 		"AbilityChannelTime" "0.5"
