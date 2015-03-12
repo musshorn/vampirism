@@ -688,11 +688,14 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	local unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
 	local building = unit --alias
 	building.isBuilding = true
+	local regen = building:GetBaseHealthRegen()
+	building:SetBaseHealthRegen(0)
 	-- store reference to the buildingTable in the unit.
 	unit.buildingTable = buildingTable
 
 	-- Close the squares
 	BuildingHelper:CloseSquares(squaresToClose, "vector")
+
 	-- store the squares in the unit for later.
 	unit.squaresOccupied = shallowcopy(squaresToClose)
 	unit.building = true
@@ -702,6 +705,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	if player.stickyGhost ~= nil then
 		ClearParticleTable(player.stickyGhost)
 	end]]
+	table.remove(player.temp_dummies, i)
 
 	local buildTime = buildingTable:GetVal("BuildTime", "float")
 	if buildTime == nil then
@@ -717,11 +721,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	local nHealthInterval = (fMaxHealth*BUILDINGHELPER_THINK)/buildTime
 	-- increase the health interval by 25%.
 	--nHealthInterval = nHealthInterval + .25*nHealthInterval
-	print("[MYLL]")
-	print(fMaxHealth)
-	print(BUILDINGHELPER_THINK)
-	print(buildTime)
-	print(nHealthInterval)
+
 	if nHealthInterval < 1 then
 		--print("[BuildingHelper] nHealthInterval is below 1. Setting nHealthInterval to 1. The unit will gain full health before the build time ends.\n" ..
 		--	"Fix this by increasing the max health of your unit. Recommended unit max health is 1000.")
@@ -769,6 +769,10 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 					nHealthInterval = fMaxHealth / fremainingTicks
 					unit:SetHealth(unit:GetHealth() + nHealthInterval)
 				end
+				if unit:GetHealth() == unit:GetMaxHealth() then
+					print("Dank meme")
+					print(fTimeBuildingCompleted - GameRules:GetGameTime())
+				end
 				if bScaling then
 					if fCurrentScale < fMaxScale then
 						fCurrentScale = fCurrentScale+fScaleInterval
@@ -782,6 +786,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 				-- completion: timesUp is true
 				if keys2.onConstructionCompleted ~= nil then
 					keys2.onConstructionCompleted(unit)
+					building:SetBaseHealthRegen(regen)
 					unit.constructionCompleted = true
 				end
 				unit.bUpdatingHealth = false
@@ -869,13 +874,15 @@ function BuildingHelper:CancelBuilding( keys )
 	end
 	if caster:HasModifier("building_canceled") then
 		caster:RemoveModifierByName("building_canceled")
+		if (player.temp_dummies[1] ~= nil) then
+			for i=#player.temp_dummies[1], 1,-1 do
+				player.temp_dummies[1][i]:RemoveSelf()
+			end
+			table.remove(player.temp_dummies, 1)
+		end
 	end
-	print("Removing those memes")
-	for i=#player.temp_dummies[1], 1,-1 do
-		player.temp_dummies[1][i]:RemoveSelf()
-	end
-	table.remove(player.temp_dummies, i)
-	PrintTable(player.temp_dummies)
+
+	
 	--print("building_canceled")
 end
 
