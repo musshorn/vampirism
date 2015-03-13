@@ -33,6 +33,7 @@ function Upgrade( keys )
   local goldCost = keys.GoldCost
   local targetUnit = keys.TargetUnit
   local pid = caster:GetMainControllingPlayer()
+  local targetModel = UNIT_KV[targetUnit].Model
 
   -- This may be undefined for some upgrades
   if goldCost == nil then
@@ -62,7 +63,7 @@ function Upgrade( keys )
   end
   caster.refundGold = goldCost
   caster.refundLumber = lumberCost
-  caster:SetModel(keys.TargetModel)
+  caster:SetModel(targetModel)
 end
 
 function FinishUpgrade( keys )
