@@ -688,11 +688,14 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	local unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
 	local building = unit --alias
 	building.isBuilding = true
+	local regen = building:GetBaseHealthRegen()
+	building:SetBaseHealthRegen(0)
 	-- store reference to the buildingTable in the unit.
 	unit.buildingTable = buildingTable
 
 	-- Close the squares
 	BuildingHelper:CloseSquares(squaresToClose, "vector")
+
 	-- store the squares in the unit for later.
 	unit.squaresOccupied = shallowcopy(squaresToClose)
 	unit.building = true
@@ -702,6 +705,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	if player.stickyGhost ~= nil then
 		ClearParticleTable(player.stickyGhost)
 	end]]
+	table.remove(player.temp_dummies, i)
 
 	local buildTime = buildingTable:GetVal("BuildTime", "float")
 	if buildTime == nil then
@@ -710,18 +714,22 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 
 	-- the gametime when the building should be completed.
 	local fTimeBuildingCompleted=GameRules:GetGameTime()+buildTime
+
 	-- whether we should update the building's health over the build time.
 	local bUpdateHealth = buildingTable:GetVal("UpdateHealth", "bool")
 	local fMaxHealth = unit:GetMaxHealth()
+	local nAddedHealth = 0
 	-- health to add every tick until build time is completed.
-	local nHealthInterval = (fMaxHealth*BUILDINGHELPER_THINK)/buildTime
+	local nTickEstimate = buildTime * 0.1
+	local nBuildEstimate = buildTime - nTickEstimate
+	local nHealthInterval = fMaxHealth / (nBuildEstimate / BUILDINGHELPER_THINK)
+	local nSmallHealthInterval = nHealthInterval - math.floor(nHealthInterval) -- just the floating point component
+	nHealthInterval = math.floor(nHealthInterval)
+	local nHPAdjustment = 0
+
 	-- increase the health interval by 25%.
 	--nHealthInterval = nHealthInterval + .25*nHealthInterval
-	print("[MYLL]")
-	print(fMaxHealth)
-	print(BUILDINGHELPER_THINK)
-	print(buildTime)
-	print(nHealthInterval)
+
 	if nHealthInterval < 1 then
 		--print("[BuildingHelper] nHealthInterval is below 1. Setting nHealthInterval to 1. The unit will gain full health before the build time ends.\n" ..
 		--	"Fix this by increasing the max health of your unit. Recommended unit max health is 1000.")
@@ -765,9 +773,15 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 			--local timesUp = 
 			if fTimeBuildingCompleted - GameRules:GetGameTime() > 0 then
 				if unit.bUpdatingHealth then
-					local fremainingTicks = (fTimeBuildingCompleted - GameRules:GetGameTime()) / BUILDINGHELPER_THINK
-					nHealthInterval = fMaxHealth / fremainingTicks
-					unit:SetHealth(unit:GetHealth() + nHealthInterval)
+					nHPAdjustment = nHPAdjustment + nSmallHealthInterval
+					if nHPAdjustment > 1 then
+						unit:SetHealth(unit:GetHealth() + nHealthInterval + 1)
+						nHPAdjustment = nHPAdjustment - 1
+						nAddedHealth = nAddedHealth + nHealthInterval + 1
+					else
+						unit:SetHealth(unit:GetHealth() + nHealthInterval)
+						nAddedHealth = nAddedHealth + nHealthInterval
+					end
 				end
 				if bScaling then
 					if fCurrentScale < fMaxScale then
@@ -782,6 +796,8 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 				-- completion: timesUp is true
 				if keys2.onConstructionCompleted ~= nil then
 					keys2.onConstructionCompleted(unit)
+					unit:SetHealth(unit:GetHealth() + (fMaxHealth - nAddedHealth) )
+					building:SetBaseHealthRegen(regen)
 					unit.constructionCompleted = true
 				end
 				unit.bUpdatingHealth = false
@@ -869,13 +885,15 @@ function BuildingHelper:CancelBuilding( keys )
 	end
 	if caster:HasModifier("building_canceled") then
 		caster:RemoveModifierByName("building_canceled")
+		if (player.temp_dummies[1] ~= nil) then
+			for i=#player.temp_dummies[1], 1,-1 do
+				player.temp_dummies[1][i]:RemoveSelf()
+			end
+			table.remove(player.temp_dummies, 1)
+		end
 	end
-	print("Removing those memes")
-	for i=#player.temp_dummies[1], 1,-1 do
-		player.temp_dummies[1][i]:RemoveSelf()
-	end
-	table.remove(player.temp_dummies, i)
-	PrintTable(player.temp_dummies)
+
+	
 	--print("building_canceled")
 end
 
