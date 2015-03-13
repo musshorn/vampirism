@@ -714,11 +714,19 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 
 	-- the gametime when the building should be completed.
 	local fTimeBuildingCompleted=GameRules:GetGameTime()+buildTime
+
 	-- whether we should update the building's health over the build time.
 	local bUpdateHealth = buildingTable:GetVal("UpdateHealth", "bool")
 	local fMaxHealth = unit:GetMaxHealth()
+	local nAddedHealth = 0
 	-- health to add every tick until build time is completed.
-	local nHealthInterval = (fMaxHealth*BUILDINGHELPER_THINK)/buildTime
+	local nTickEstimate = buildTime * 0.1
+	local nBuildEstimate = buildTime - nTickEstimate
+	local nHealthInterval = fMaxHealth / (nBuildEstimate / BUILDINGHELPER_THINK)
+	local nSmallHealthInterval = nHealthInterval - math.floor(nHealthInterval) -- just the floating point component
+	nHealthInterval = math.floor(nHealthInterval)
+	local nHPAdjustment = 0
+
 	-- increase the health interval by 25%.
 	--nHealthInterval = nHealthInterval + .25*nHealthInterval
 
@@ -765,13 +773,15 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 			--local timesUp = 
 			if fTimeBuildingCompleted - GameRules:GetGameTime() > 0 then
 				if unit.bUpdatingHealth then
-					local fremainingTicks = (fTimeBuildingCompleted - GameRules:GetGameTime()) / BUILDINGHELPER_THINK
-					nHealthInterval = fMaxHealth / fremainingTicks
-					unit:SetHealth(unit:GetHealth() + nHealthInterval)
-				end
-				if unit:GetHealth() == unit:GetMaxHealth() then
-					print("Dank meme")
-					print(fTimeBuildingCompleted - GameRules:GetGameTime())
+					nHPAdjustment = nHPAdjustment + nSmallHealthInterval
+					if nHPAdjustment > 1 then
+						unit:SetHealth(unit:GetHealth() + nHealthInterval + 1)
+						nHPAdjustment = nHPAdjustment - 1
+						nAddedHealth = nAddedHealth + nHealthInterval + 1
+					else
+						unit:SetHealth(unit:GetHealth() + nHealthInterval)
+						nAddedHealth = nAddedHealth + nHealthInterval
+					end
 				end
 				if bScaling then
 					if fCurrentScale < fMaxScale then
@@ -786,6 +796,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 				-- completion: timesUp is true
 				if keys2.onConstructionCompleted ~= nil then
 					keys2.onConstructionCompleted(unit)
+					unit:SetHealth(unit:GetHealth() + (fMaxHealth - nAddedHealth) )
 					building:SetBaseHealthRegen(regen)
 					unit.constructionCompleted = true
 				end
