@@ -348,6 +348,7 @@ function CykaSpeed(keys)
   local ability_level = ability:GetLevel() - 1
   local duration = ability:GetLevelSpecialValueFor("duration", ability_level)
 
+  print(ability_level)
   caster:AddNewModifier(caster, ability, "modifier_invisible", {duration = duration})
   caster:AddNewModifier(caster, ability, "modifier_bloodseeker_thirst_speed", {duration = duration, visibility_threshold_pct = 100, invis_threshold_pct = 100, bonus_movement_speed = 1, bonus_damage = 0})
   caster:AddNewModifier(caster, ability, "modifier_item_orb_of_venom_slow", {duration = duration, slow = -42})

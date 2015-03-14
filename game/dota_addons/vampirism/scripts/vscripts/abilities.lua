@@ -1,11 +1,13 @@
-abilTemp = {}
-OUT_OF_BOUNDS = Vector(-8099.68798828125,-7962.6953125,256.0000610351563)
-silencer = CreateUnitByName("util_silencer", OUT_OF_BOUNDS, false, nil, nil, 0)
-
 function build( keys )
   local player = keys.caster:GetPlayerOwner()
   local pID = keys.caster:GetMainControllingPlayer()
 
+  local buildName = string.sub(keys.ability:GetAbilityName(), 7)
+  print(buildName)
+  if TechTree:GetRequired(buildName, pID) == false then
+    print('not enough techs')
+    return
+  end
   -- Check if player has enough resources here. If he doesn't they just return this function.
   
   local returnTable = BuildingHelper:AddBuilding(keys)
@@ -119,8 +121,4 @@ function slayer_attribute_bonus(keys)
   caster:SetBaseStrength(caster:GetBaseStrength() + 3)
   caster:SetBaseAgility(caster:GetBaseAgility() + 3)
   caster:SetBaseIntellect(caster:GetBaseIntellect() + 3)
-end
-
-function test( keys )
-  print('HIT A CRIT')
 end

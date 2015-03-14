@@ -20,7 +20,7 @@ function TechTree:Init()
    local cmdPlayer = Convars:GetCommandClient()
    if cmdPlayer then
       local playerID = cmdPlayer:GetPlayerID()
-      print(playerID)
+    --print(playerID)
       TechTree:GetRequired(p, playerID)
       return 0
     end
@@ -29,9 +29,9 @@ end
 
 --Check if a unit requires a missing tech, and return the missing tech(s) if any.
 function TechTree:GetRequired(unitName, playerID)
-	print('GETREQUIRED')
-	print(unitName)
-	print(playerID)
+	--print('GETREQUIRED')
+	--print(unitName)
+	--print(playerID)
 
 	--PrintTable(PlayerTrees)
 	local techlist = {}
@@ -47,7 +47,7 @@ function TechTree:GetRequired(unitName, playerID)
 				end
 			end
 		else
-			print('unit needs no techs shrek')
+			--print('unit needs no techs shrek')
 			FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 			return true
 		end
@@ -59,19 +59,19 @@ function TechTree:GetRequired(unitName, playerID)
 			--print(check)
 			if playerTrees[playerID][check] ~= nil then
 				if playerTrees[playerID][check] < 1 then
-					print('hit here')
+					--print('hit here')
 					FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = false})
 					return false
 				end
 			else
 				FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = false})
-				print('exited here')
+				--print('exited here')
 				return false
 			end
 		end
 	end
 
-	print('made it')
+	--print('made it')
 	FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 	return true
 end
@@ -80,16 +80,16 @@ end
 function TechTree:AddTech(unitName, playerID)
 	local tech = unitName
 
-	print('adding tech '..tostring(playerID))
+	--print('adding tech '..tostring(playerID))
 
 	if playerTrees[playerID][tech] ~= nil then
 		playerTrees[playerID][tech] = playerTrees[playerID][tech] + 1
-		print('added')
-		PrintTable(PlayerTrees)
+		--print('added')
+		--PrintTable(PlayerTrees)
 	else
 		playerTrees[playerID][tech] = 1
-		print('added')
-		PrintTable(PlayerTrees)
+		--print('added')
+		--PrintTable(PlayerTrees)
 	end
 end
 
@@ -116,7 +116,7 @@ function TechTree:RemoveTech(unitName, playerID)
 
 	if playerTrees[playerID][tech] > 0 then
 		playerTrees[playerID][tech] = playerTrees[playerID][tech] - 1
-	else
-		print('TECH ' .. tech .. ' is already 0!')
+	--else
+		--print('TECH ' .. tech .. ' is already 0!')
 	end
 end

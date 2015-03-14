@@ -211,11 +211,15 @@ function GameMode:OnNPCSpawned(keys)
   local npc = EntIndexToHScript(keys.entindex)
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
-    WOOD[npc:GetPlayerOwnerID()] = 50
-    TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
-    CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
-    print("made 40 wood for player "..npc:GetPlayerOwnerID())
-    HUMAN_COUNT = HUMAN_COUNT + 1
+    if npc:GetMainControllingPlayer() < 8 then    
+      WOOD[npc:GetPlayerOwnerID()] = 50
+      TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
+      CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
+      print("made 40 wood for player "..npc:GetPlayerOwnerID())
+      HUMAN_COUNT = HUMAN_COUNT + 1
+    else
+      --its a vampire player
+    end  
   end
 
   if npc:GetName() == "npc_dota_hero_night_stalker" then

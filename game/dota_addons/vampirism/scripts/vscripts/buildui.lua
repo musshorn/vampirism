@@ -8,9 +8,9 @@ end
 function BuildUI:Init()
   Convars:RegisterCommand("buildui_chosen", function(name, p)
    local cmdPlayer = Convars:GetCommandClient()
-   print(cmdPlayer:GetPlayerID()) 
+   --print(cmdPlayer:GetPlayerID()) 
    if cmdPlayer then
-     print('this happened')
+     --print('this happened')
       local playerID = cmdPlayer:GetPlayerID()
       BuildUI:BuildChosen(p, playerID)
       return 0
@@ -19,13 +19,13 @@ function BuildUI:Init()
 
   Convars:RegisterCommand("check_select", function(name, p)
     local cmdPlayer = Convars:GetCommandClient()
-    print('ITS CRAAAZY')
+    --print('ITS CRAAAZY')
     if cmdPlayer then
-        print(p)
+        --print(p)
         index = tonumber(p)
-        print(index)
+        --print(index)
         local ent = EntIndexToHScript(index) 
-        print(ent:GetUnitName())
+        --print(ent:GetUnitName())
     end
   end, "checking selected unit", 0)
 end
@@ -34,9 +34,9 @@ function CallMenu(keys)
     local caster = keys.caster
     local playerID = caster:GetMainControllingPlayer()
 
-    print(caster:GetAbilityCount())
+    --print(caster:GetAbilityCount())
     for i = 0, caster:GetAbilityCount() do
-      print(i)
+      --print(i)
       if caster:GetAbilityByIndex(i) ~= nil then
         local tech = caster:GetAbilityByIndex(i):GetAbilityName()
         if string.match(tech, "build_") then
@@ -66,7 +66,7 @@ function BuildUI:BuildChosen(building, playerID)
     --find a better way of doing this..(like getting it out of the kv.)
     local tech = string.sub(building, 7)
 
-    ---TechTree:GetRequired(tech, playerID)
+    print(TechTree:GetRequired(tech, playerID))
 
     caster:CastAbilityNoTarget(ability, 0)
 end
