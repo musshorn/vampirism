@@ -248,6 +248,7 @@
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_TREE"
 		"BaseClass"	"ability_datadriven"
 		"AbilityCastPoint"	"0"
+		"AbilityCastRange"				"150"
 		"AbilityChannelTime" "0.5"
 		"AbilityCastAnimation" "ACT_DOTA_ATTACK"
 		"OnChannelSucceeded"
@@ -281,7 +282,23 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
 			}
 		}
-
+	}
+	"drop_lumber"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC"
+		"AbilityCastPoint"	"0"
+		"AbilityCastRange"				"150"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/units/worker.lua"
+				"Function"		"DropLumber"
+			}
+		}
 	}
 
 	"bh_dummy_unit"

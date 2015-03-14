@@ -814,7 +814,7 @@
 
 		"Ability1"					"harvest_channel"		//harvest test
 		"Ability2"					"carrying_lumber"			// Ability 2.
-		"Ability3"					""			// Ability 3.
+		"Ability3"					"drop_lumber"			// Ability 3.
 		"Ability4"					""			// Ability 4.
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.

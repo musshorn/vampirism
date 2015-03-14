@@ -20,21 +20,15 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
   worker.skipTicks = 0 -- If this is > 0 the worker will ignore this many ticks
 
+
   Timers:CreateTimer(function()
   	if worker.pos ~= worker:GetAbsOrigin() then
-  		local ability = worker:FindAbilityByName("harvest_channel")
-  		if (ability:IsChanneling()) then
-  			ability:SetChanneling(false)
-  		end
-  		
   		worker.moving = true
   		worker.pos = worker:GetAbsOrigin()
   	else
   		worker.moving = false
   	end
 
-    -- Also check if they can return lumber
-    ReturnLumber()
   	return 0.1
   end)
 
@@ -54,7 +48,6 @@ function Worker:Worker1(vPos, hOwner, unitName)
 			-- Additonally, store this location for the next trip
 			local carryTotal= worker:FindAbilityByName("carrying_lumber")
 			local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
-
 			if (worker.inTriggerZone and worker.moving == false and currentLumber < worker.maxLumber) then
 				worker.treepos = worker:GetAbsOrigin()
 				local ability = worker:FindAbilityByName("harvest_channel")
@@ -70,82 +63,26 @@ function Worker:Worker1(vPos, hOwner, unitName)
 			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
 			if (currentLumber == worker.maxLumber) then
 		
-				-- Find all dota creatures, check if they can recieve lumber and that they are owned by the correct player
-				-- This function is relativly expensive so we only call it when needed.
+				-- Search for the nearest unit that can recieve lumber and is owned by the correct player
 				if (worker.housePos == nil) then
-					local drop = Entities:FindByModel(nil, "models/house1.vmdl")
-					local minDist = 9999999
 					local bestDrop = nil
-					while drop ~= nil do
-						if drop:GetMainControllingPlayer()  == worker:GetMainControllingPlayer()  then
-							local workerV = worker:GetAbsOrigin()
-							local testDrop = drop:GetAbsOrigin()
-
-							local dist = CalcDistanceBetweenEntityOBB(worker, drop)
-							if (dist < minDist) then
-								bestDrop = drop
-								minDist = dist
-							end
-						end
-						drop = Entities:FindByModel(drop, "models/house1.vmdl")
-					end
+          local bestDist = 99999
+          for k, v in pairs(LUMBER_DROPS) do
+            local dist = CalcDistanceBetweenEntityOBB(worker, v)
+            if dist < bestDist and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
+              bestDrop = v
+              bestDist = dist
+            end
+          end
 					worker.housePos = bestDrop:GetAbsOrigin()
-					worker:MoveToPosition(worker.housePos)
-				end
+          local drop_ability = worker:FindAbilityByName("drop_lumber")
+          worker:CastAbilityOnTarget(bestDrop, drop_ability,  worker:GetMainControllingPlayer())
+        end
 			end
 			return .1
 		end)
 	end
 
-  function ReturnLumber()
-    --[[ Drop lumber off at the house and alert Flash then move back to the tree
-    Proof of concept, timer checks to ensure that a worker is facing the house before
-    it drops off lumber. So endTime needs to be based off the units turn speed, not sure
-    what that number should actually be but .25 is working normally.]]
-    Timers:CreateTimer({
-      endTime = .25,
-      callback = function ()
-        local carryTotal= worker:FindAbilityByName("carrying_lumber")
-        local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
-        local targetHouse = Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 180)
-        local targetHouse = nil
-
-        for k, v in pairs(LUMBER_DROPS) do
-          if CalcDistanceBetweenEntityOBB(worker, v) < 180 and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
-            targetHouse = v
-          end
-        end
-
-        if targetHouse ~= nil then
-          if currentLumber > 0 then
-            local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
-            local pidx = ParticleManager:CreateParticle("particles/msg_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, worker)
-
-            local digits = 0
-            local number = currentLumber
-            if number ~= nil then
-              digits = #tostring(number)
-            end
-
-            digits = digits + 1
-
-            ParticleManager:SetParticleControl(pidx, 1, Vector(0, tonumber(number), tonumber(nil)))
-            ParticleManager:SetParticleControl(pidx, 2, Vector(1, digits, 0))
-            ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
-
-            local pid = worker:GetMainControllingPlayer() 
-            WOOD[pid] = WOOD[pid] + currentLumber
-
-            FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
-            print(WOOD[pid])
-
-            worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
-            worker:MoveToPosition(worker.treepos)
-            return nil
-          end
-        end
-    end})
-  end
   return worker
 end
 
@@ -176,4 +113,45 @@ end
 function Interrupted( keys )
   local worker = keys.caster
   worker.skipTicks = 3
+end
+
+function DropLumber( keys )
+  local worker = keys.caster
+  local carryTotal = worker:FindAbilityByName("carrying_lumber")
+  local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+  local targetHouse = nil
+
+  for k, v in pairs(LUMBER_DROPS) do
+    if CalcDistanceBetweenEntityOBB(worker, v) < 180 and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
+      targetHouse = v
+    end
+  end
+
+  if targetHouse ~= nil then
+    if currentLumber > 0 then
+      local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
+      local pidx = ParticleManager:CreateParticle("particles/msg_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, worker)
+
+      local digits = 0
+      local number = currentLumber
+      if number ~= nil then
+        digits = #tostring(number)
+      end
+
+      digits = digits + 1
+
+      ParticleManager:SetParticleControl(pidx, 1, Vector(0, tonumber(number), tonumber(nil)))
+      ParticleManager:SetParticleControl(pidx, 2, Vector(1, digits, 0))
+      ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
+
+      local pid = worker:GetMainControllingPlayer() 
+      WOOD[pid] = WOOD[pid] + currentLumber
+
+      FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
+      print(WOOD[pid])
+
+      worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
+      worker:MoveToPosition(worker.treepos)
+    end
+  end
 end
