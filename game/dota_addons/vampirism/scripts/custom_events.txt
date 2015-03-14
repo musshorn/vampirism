@@ -62,6 +62,6 @@
     {
     	"player_ID"		"short"
     	"building"		"string"
-    	"available"		"bool"
+    	"buildable"		"bool"
     }
 }

@@ -9,7 +9,7 @@
 		"BaseClass"					"npc_dota_creature"
 		"Ability1"					"build_silence"
 		"Ability2"					"build_house1"
-		"Ability3"					"call_build_ui"
+		"Ability3"					"call_buildui"
 		"Ability4"					"human_blink"
 		"Ability5"					"human_manaburn"
 		"Ability6"					"build_house1"

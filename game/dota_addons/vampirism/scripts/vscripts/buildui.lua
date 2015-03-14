@@ -34,6 +34,18 @@ function CallMenu(keys)
     local caster = keys.caster
     local playerID = caster:GetMainControllingPlayer()
 
+    print(caster:GetAbilityCount())
+    for i = 0, caster:GetAbilityCount() do
+      print(i)
+      if caster:GetAbilityByIndex(i) ~= nil then
+        local tech = caster:GetAbilityByIndex(i):GetAbilityName()
+        if string.match(tech, "build_") then
+         tech = string.sub(tech, 7)
+          TechTree:GetRequired(tech, playerID)
+        end
+      end
+    end 
+
     FireGameEvent("build_ui_called", {player_ID = playerID, builder = caster:GetUnitName()})
 
     --ONLY FOR TESTING IN SINGLE, NOT WORKING IN MULTIPLAYER.
@@ -54,7 +66,7 @@ function BuildUI:BuildChosen(building, playerID)
     --find a better way of doing this..(like getting it out of the kv.)
     local tech = string.sub(building, 7)
 
-    TechTree:GetRequired(tech, playerID)
+    ---TechTree:GetRequired(tech, playerID)
 
     caster:CastAbilityNoTarget(ability, 0)
 end
