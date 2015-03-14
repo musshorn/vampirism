@@ -58,6 +58,12 @@ function build( keys )
       TechTree:AddTech(unit:GetUnitName(), unit:GetMainControllingPlayer())
     end
 
+    if UNIT_KV[unit:GetUnitName()].RecievesLumber ~= nil then
+      if UNIT_KV[unit:GetUnitName()].RecievesLumber == "true" then
+        table.insert(LUMBER_DROPS, unit)
+      end
+    end
+
     --Remove Building Silence.
     if unit:HasModifier("modifier_silence") then
       unit:RemoveModifierByName("modifier_silence")

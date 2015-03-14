@@ -1,6 +1,19 @@
 function TrainUnit( keys )
-  local caster = keys.caster
-  table.insert(caster.queue, keys)
+  local building = keys.caster
+  local unitToSpawn = keys.SpawnUnit  
+
+  -- Parity with WC3 behaviour
+  if UNIT_KV[unitToSpawn].ConsumesFood ~= nil then
+    local requestingFood = UNIT_KV[unitToSpawn].ConsumesFood
+    if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood then
+        table.insert(building.queue, keys)
+    else
+      FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "Build more farms" } )
+      building:RemoveModifierByName(building.workHandler:GetName())
+      building.workHandler:SetChanneling(false)
+      building.doingWork = false
+    end
+  end
 end
 
 function Cancel( keys )
