@@ -503,15 +503,8 @@ function GameMode:OnEntityKilled( keys )
     end   
   end
 
-  --if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
-  --  TechTree:RemoveTech(unitName, playerID)
-  --end
-
-  if killedUnit.timers ~= nil then
-    while table.getn(killedUnit.timers) > 0 do
-      Timers:RemoveTimer(killedUnit.timers[1])
-      table.remove(killedUnit.timers)
-    end
+  if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
+    TechTree:RemoveTech(unitName, playerID)
   end
 
 end
