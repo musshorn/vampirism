@@ -946,7 +946,8 @@
 
 		// Vamp
 		"SpawnsUnits"	"true"
-		//Generic key to all techs, ability upgrades or buildings to track whether
+
+		//Generic key to all techs, ability upgrades or buildings to indicate whether
 		//they should be tracked by the tech tree.
 		"IsTech"		"true"
 	}
@@ -966,7 +967,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 
-		"Ability1"					"upgrade_to_t2_tent"	// Upgrade tent
+		"Ability1"					"upgrade_to_t2_tent"				// Upgrade tent
 		"Ability2"					"cancel_training"					// Ability 2.
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
@@ -1028,10 +1029,6 @@
 		// Vamp
 		"ProvidesFood"	"25"
 		"IsTech"		"true"
-
-		//Key which contains each neccessary tech for this unit, sperated by spaces.
-		"NeedTech"		"house_t1"
-
 	}
 
 	"tent_t2"
@@ -1186,6 +1183,8 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
 		"IsTech"		"true"
+		//Key which contains each neccessary tech for this unit, sperated by spaces.
+		"NeedTech"		"house_t1"
 	}
 
 	//=================================================================================	
@@ -1263,6 +1262,7 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
 		"IsTech"		"true"
+		"NeedTech"		"human_vault"
 	}
 
 	//=================================================================================	
@@ -1340,6 +1340,7 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		
 		"IsTech"		"true"
+		"NeedTech"		"house_t1"
 	}
 
 	//=================================================================================	
@@ -1417,6 +1418,7 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
 		"IsTech"		"true"
+		"NeedTech"		"house_t1"
 	}
 
 	//=================================================================================	
@@ -1492,9 +1494,6 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-
-		"IsTech"		"true"
-
 	}
 
 	//=================================================================================	
@@ -1572,6 +1571,7 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
 		"IsTech"		"true"
+		"NeedTech"		"house_t1"
 	}
 
 	//=================================================================================	
@@ -1649,6 +1649,7 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
 		"IsTech"		"true"
+		"NeedTech"		"house_t1"
 	}
 
 	//=================================================================================	
@@ -1726,6 +1727,7 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
 		"IsTech"		"true"
+		"NeedTech"		"human_vault house_t2"
 	}
 
 	//=================================================================================	
@@ -1803,6 +1805,85 @@
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
 		"IsTech"		"true"
+		"NeedTech"		"house_t1"
+	}
+
+	//=================================================================================	
+	// Human Building T1 - Lumber House
+	//=================================================================================
+	"house_t2"
+	{
+		// General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"					"npc_dota_creature"
+        "Model"						"models/props_structures/good_statue008.vmdl"
+		"ModelScale"				"1"
+		
+		"ConsideredHero"			"0"
+		// Abilities
+		//----------------------------------------------------------------
+
+		"Ability1"					""	//Human test
+		"Ability2"					""					// Ability 2.
+		"Ability3"					""					// Ability 3.
+		"Ability4"					""					// Ability 4.
+		"Ability5"					""					// Ability 5.
+		"Ability6"					""					// Ability 6 - Extra.
+		"Ability7"					""					// Ability 7 - Extra.
+		"Ability8"					""					// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"			// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+
+
+		//Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"0"
+		"AttackDamageMax"			"0"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"0"
+		"AttackAnimationPoint"		"0"
+		"AttackAcquisitionRange"	"0"
+		"AttackRange"				"0"
+		"ProjectileModel"			""
+		"ProjectileSpeed"			"0"
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributeBaseIntelligence"	"0"
+		"AttributeBaseIntelligenceGain"	"0"
+	
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"RingRadius"				"50"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"300"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"500"		// Base health.
+		"StatusHealthRegen"			"0"		// Health regeneration rate.
+		"StatusMana"				"120"			// Base mana.
+		"StatusManaRegen"			"-0.01"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		"IsTech"		"true"
+		"NeedTech"		"house_t1"
 	}
 
 	//=================================================================================	

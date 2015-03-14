@@ -33,7 +33,7 @@ function TechTree:GetRequired(unitName, playerID)
 	print(unitName)
 	print(playerID)
 
-	PrintTable(PlayerTrees)
+	--PrintTable(PlayerTrees)
 	local techlist = {}
 
 	if UNIT_KV[unitName] ~= nil then
@@ -48,7 +48,7 @@ function TechTree:GetRequired(unitName, playerID)
 			end
 		else
 			print('unit needs no techs shrek')
-			FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = true})
+			FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 			return true
 		end
 	end
@@ -56,15 +56,15 @@ function TechTree:GetRequired(unitName, playerID)
 	if techlist ~= nil then
 		for i = 1, table.getn(techlist) do
 			local check = tostring(techlist[i])
-			print(check)
+			--print(check)
 			if playerTrees[playerID][check] ~= nil then
 				if playerTrees[playerID][check] < 1 then
 					print('hit here')
-					FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = false})
+					FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = false})
 					return false
 				end
 			else
-				FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = false})
+				FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = false})
 				print('exited here')
 				return false
 			end
@@ -72,7 +72,7 @@ function TechTree:GetRequired(unitName, playerID)
 	end
 
 	print('made it')
-	FireGameEvent("tech_return", {player_ID = playerID, building = unitName, available = true})
+	FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 	return true
 end
 

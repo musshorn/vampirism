@@ -320,7 +320,7 @@
 
 	}
 
-	"call_build_ui"
+	"call_buildui"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_DONT_RESUME_ATTACK"
 		"BaseClass"	"ability_datadriven"
