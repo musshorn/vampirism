@@ -946,7 +946,8 @@
 
 		// Vamp
 		"SpawnsUnits"	"true"
-
+		"RecievesLumber"	"true"
+		
 		//Generic key to all techs, ability upgrades or buildings to indicate whether
 		//they should be tracked by the tech tree.
 		"IsTech"		"true"

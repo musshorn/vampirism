@@ -108,9 +108,16 @@ function Worker:Worker1(vPos, hOwner, unitName)
         local carryTotal= worker:FindAbilityByName("carrying_lumber")
         local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
         local targetHouse = Entities:FindByModelWithin(nil, "models/house1.vmdl", worker:GetAbsOrigin(), 180)
+        local targetHouse = nil
+
+        for k, v in pairs(LUMBER_DROPS) do
+          if CalcDistanceBetweenEntityOBB(worker, v) < 180 and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
+            targetHouse = v
+          end
+        end
 
         if targetHouse ~= nil then
-          if targetHouse:GetMainControllingPlayer() == worker:GetMainControllingPlayer() and currentLumber > 0 then
+          if currentLumber > 0 then
             local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
             local pidx = ParticleManager:CreateParticle("particles/msg_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, worker)
 

@@ -48,7 +48,7 @@ TOTAL_FOOD = {}
 CURRENT_FOOD = {}
 
 UNIT_KV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
-
+LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
 HUMAN_COUNT = 0
 
@@ -503,9 +503,17 @@ function GameMode:OnEntityKilled( keys )
     end   
   end
 
-  if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
-    TechTree:RemoveTech(unitName, playerID)
+  --if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
+  --  TechTree:RemoveTech(unitName, playerID)
+  --end
+
+  if killedUnit.timers ~= nil then
+    while table.getn(killedUnit.timers) > 0 do
+      Timers:RemoveTimer(killedUnit.timers[1])
+      table.remove(killedUnit.timers)
+    end
   end
+
 end
 
 function GameMode:ModifyStatBonuses(unit) 
