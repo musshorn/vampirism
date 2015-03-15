@@ -41,7 +41,10 @@ content/dota_addons/sns_fixed/
 content/dota_addons/test1/
 content/dota_addons/test2/
 content/dota_addons/thememegame/
-
+content/dota_addons/bh/
+game/dota_addons/bh/
+content/dota_addons/samplerts/
+game/dota_addons/samplerts/
 game/dota_addons/barebones/
 game/dota_addons/slide_ninja_slide/
 game/dota_addons/sns_fixed/

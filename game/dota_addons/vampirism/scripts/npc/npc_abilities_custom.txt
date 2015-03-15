@@ -248,6 +248,7 @@
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_TREE"
 		"BaseClass"	"ability_datadriven"
 		"AbilityCastPoint"	"0"
+		"AbilityCastRange"				"150"
 		"AbilityChannelTime" "0.5"
 		"AbilityCastAnimation" "ACT_DOTA_ATTACK"
 		"OnChannelSucceeded"
@@ -281,7 +282,23 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
 			}
 		}
-
+	}
+	"drop_lumber"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC"
+		"AbilityCastPoint"	"0"
+		"AbilityCastRange"				"150"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/units/worker.lua"
+				"Function"		"DropLumber"
+			}
+		}
 	}
 
 	"bh_dummy_unit"
@@ -927,7 +944,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"house_t1"
@@ -969,7 +987,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"20"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"tent_t1"
@@ -1011,7 +1030,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"400"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"slayer_tavern"
@@ -1053,7 +1073,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"3"
+		"AbilityLumberCost"				"1000"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"human_surplus"
@@ -1095,7 +1116,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"50"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"tower_pearls"
@@ -1137,7 +1159,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"50"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"npc_wall_carnelian"
@@ -1179,7 +1202,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"0"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"human_flag"
@@ -1221,7 +1245,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"150"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"research_center_t1"
@@ -1263,7 +1288,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"2000"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"heal_wall_t1"
@@ -1305,7 +1331,8 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"20000"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"gold_mine_t1"
@@ -1347,7 +1374,9 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
+		"AbilityGoldCost"				"1"
+		"AbilityLumberCost"				"150"
+
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"human_vault"
@@ -1389,7 +1418,6 @@
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"10"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
 		"UnitName"						"house_t1"
