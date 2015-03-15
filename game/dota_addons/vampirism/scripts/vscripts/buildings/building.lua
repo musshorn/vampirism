@@ -18,7 +18,7 @@ end
 
 function Cancel( keys )
   local caster = keys.caster
-  local pid = caster:GetMainControllingPlayer()
+  local pID = caster:GetMainControllingPlayer()
   if (caster.workHandler ~= nil) then
     Timers:RemoveTimer(caster.uniqueName)
     caster.workHandler:SetChanneling(false)
@@ -30,8 +30,9 @@ function Cancel( keys )
   if caster.oldModel ~= nil then
     caster:Stop()
     caster:SetModel(caster.oldModel)
-    PlayerResource:ModifyGold(pid, caster.refundGold, true, 9)
-    WOOD[pid] = WOOD[pid] + caster.refundLumber
+    PlayerResource:ModifyGold(pID, caster.refundGold, true, 9)
+    WOOD[pID] = WOOD[pID] + caster.refundLumber
+    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
   end
 end
 
@@ -45,7 +46,7 @@ function Upgrade( keys )
   local lumberCost = keys.LumberCost
   local goldCost = keys.GoldCost
   local targetUnit = keys.TargetUnit
-  local pid = caster:GetMainControllingPlayer()
+  local pID = caster:GetMainControllingPlayer()
   local targetModel = UNIT_KV[targetUnit].Model
 
   -- This may be undefined for some upgrades
@@ -57,18 +58,19 @@ function Upgrade( keys )
   end
   
   -- Check if the player can upgrade
-  if PlayerResource:GetGold(pid) < goldCost then
+  if PlayerResource:GetGold(pID) < goldCost then
     caster:Stop()
-    FireGameEvent( 'custom_error_show', { player_ID = pid, _error = "You need more gold" } )
+    FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
   end
-  if WOOD[pid] < lumberCost then
+  if WOOD[pID] < lumberCost then
     caster:Stop()
-    FireGameEvent( 'custom_error_show', { player_ID = pid, _error = "You need more wood" } )
+    FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more wood" } )
   end
 
   -- Deduct resources
-  PlayerResource:ModifyGold(pid, -1 * goldCost, true, 9) -- idk what the 4th param is
-  WOOD[pid] = WOOD[pid] - lumberCost
+  PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9) -- idk what the 4th param is
+  WOOD[pID] = WOOD[pID] - lumberCost
+  FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
 
   -- Change the model
   if caster.oldModel == nil then
