@@ -1,4 +1,5 @@
 function build( keys )
+  local caster = keys.caster
   local player = keys.caster:GetPlayerOwner()
   local pID = keys.caster:GetMainControllingPlayer()
 
@@ -9,7 +10,7 @@ function build( keys )
     return
   end
   -- Check if player has enough resources here. If he doesn't they just return this function.
-  
+
   local returnTable = BuildingHelper:AddBuilding(keys)
 
   keys:OnBuildingPosChosen(function(vPos)
@@ -98,7 +99,53 @@ function building_canceled( keys )
 end
 
 function create_building_entity( keys )
-  BuildingHelper:InitializeBuildingEntity(keys)
+  local caster = keys.caster
+  local pID = keys.caster:GetMainControllingPlayer()
+  local lumberCost = keys.attacker.buildingTable.AbilityLumberCost
+  local goldCost = keys.attacker.buildingTable.AbilityLumberCost
+
+  local lumberOK = false
+  local goldOK = false
+
+  -- Check that the player can afford the building
+  if lumberCost ~= nil then
+    if lumberCost > WOOD[pID] then
+      FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "You need more lumber" } )
+    else
+      lumberOK = true
+    end
+  else
+    lumberOK = true
+  end
+
+  if goldCost ~= nil then
+    if goldCost > caster:GetGold() then
+      FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "You need more gold" } )
+    else
+      goldOK = true
+    end
+  else
+    goldOK = true
+  end
+
+  -- If they cant afford it then stop building, otherwise resume
+  if lumberOK == false or goldOK == false then
+    return
+  else
+    if lumberCost == nil then
+      lumberCost = 0
+    end
+    if goldCost == nil then
+      goldCost = 0
+    end
+
+    -- Deduct resources and start constructing
+    WOOD[pID] = WOOD[pID] - lumberCost
+    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+    caster:SetGold(caster:GetGold() - goldCost, false)
+
+    BuildingHelper:InitializeBuildingEntity(keys)
+  end
 end
 
 function harvest_t1(keys)
