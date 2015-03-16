@@ -37,7 +37,7 @@ function ImproveLumber(keys)
   local pID = caster:GetMainControllingPlayer()
   local level = keys.Level
 
-  -- I think this research only applies to t1 workers so we don't need to search for any worker
+  -- This research only applies to t1 workers so we don't need to search for any worker
   if level == 1 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 10
   elseif level == 2 then
@@ -45,4 +45,12 @@ function ImproveLumber(keys)
   elseif level == 3 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 20
   end
+end
+
+function SharpenedHatchets(keys)
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+  
+  -- This research only applies to t1 workers so we don't need to search for any worker
+  UNIT_KV[pID]["worker_t1"].LumberPerChop = 2
 end

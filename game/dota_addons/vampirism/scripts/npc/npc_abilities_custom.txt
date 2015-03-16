@@ -428,7 +428,7 @@
 	"research_improved_lumber_harvesting"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"5"
+		"AbilityChannelTime"	"35"
 		"AbilityLumberCost"	"250"
 		"BaseClass"	"ability_datadriven"
 		"OnSpellStart"
@@ -458,7 +458,7 @@
 	"research_advanced_lumber_harvesting"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"5"
+		"AbilityChannelTime"	"35"
 		"AbilityLumberCost"	"500"
 		"BaseClass"	"ability_datadriven"
 		"OnSpellStart"
@@ -488,7 +488,7 @@
 	"research_insane_lumber_harvesting"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"5"
+		"AbilityChannelTime"	"35"
 		"AbilityLumberCost"	"750"
 		"BaseClass"	"ability_datadriven"
 		"OnSpellStart"
@@ -507,6 +507,34 @@
 				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
 				"Function"		"ImproveLumber"
 				"Level"				"3"
+				"TARGET"	"CASTER"
+			}
+		}
+	}
+	//=================================================================================	/
+	// Research: Sharpened Hatchets
+	//=================================================================================	/
+	"research_sharpened_hatchets"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"40"
+		"AbilityLumberCost"	"1000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"SharpenedHatchets"
 				"TARGET"	"CASTER"
 			}
 		}
