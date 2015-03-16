@@ -31,14 +31,13 @@ end
 function TechTree:GetRequired(unitName, playerID)
 	--print('GETREQUIRED')
 	--print(unitName)
-	--print(playerID)
+	print(playerID)
 
 	--PrintTable(PlayerTrees)
 	local techlist = {}
-
-	if UNIT_KV[unitName] ~= nil then
-		if UNIT_KV[unitName].NeedTech ~= nil then
-			local reqs = tostring(UNIT_KV[unitName].NeedTech)
+	if UNIT_KV[playerID][unitName] ~= nil then
+		if UNIT_KV[playerID][unitName].NeedTech ~= nil then
+			local reqs = tostring(UNIT_KV[playerID][unitName].NeedTech)
 			--print(reqs..'- REQS')
 			for tech in string.gmatch(reqs, "%S+") do
 				--print(tech..'- TECH ADDED TO TECHLIST')

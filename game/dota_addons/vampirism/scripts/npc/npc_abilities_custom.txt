@@ -422,6 +422,96 @@
 		}
 	}
 
+	//=================================================================================	/
+	// Research: Improved Lumber Havesting (1)
+	//=================================================================================	/
+	"research_improved_lumber_harvesting"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"5"
+		"AbilityLumberCost"	"250"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"ImproveLumber"
+				"Level"				"1"
+				"TARGET"	"CASTER"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Research: Improved Lumber Havesting (2)
+	//=================================================================================	/
+	"research_advanced_lumber_harvesting"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"5"
+		"AbilityLumberCost"	"500"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"ImproveLumber"
+				"Level"				"2"
+				"TARGET"	"CASTER"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Research: Improved Lumber Havesting (3)
+	//=================================================================================	/
+	"research_insane_lumber_harvesting"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"5"
+		"AbilityLumberCost"	"750"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"ImproveLumber"
+				"Level"				"3"
+				"TARGET"	"CASTER"
+			}
+		}
+	}
+
 	"upgrade_to_t2_tent"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
