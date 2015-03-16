@@ -31,7 +31,7 @@ end
 function TechTree:GetRequired(unitName, playerID)
 	--print('GETREQUIRED')
 	--print(unitName)
-	print(playerID)
+	--print(playerID)
 
 	--PrintTable(PlayerTrees)
 	local techlist = {}
