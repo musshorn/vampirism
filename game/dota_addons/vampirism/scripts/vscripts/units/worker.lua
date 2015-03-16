@@ -6,6 +6,7 @@ end
 
 function Worker:Worker1(vPos, hOwner, unitName)
   local worker = CreateUnitByName(unitName, vPos + VECTOR_BUMP, true, nil, nil, hOwner:GetTeam())
+  local pID = hOwner:GetMainControllingPlayer()
   worker:SetControllableByPlayer(hOwner:GetMainControllingPlayer() , true)  
   worker:SetHullRadius(8)
   worker.thinking = false
@@ -15,7 +16,6 @@ function Worker:Worker1(vPos, hOwner, unitName)
   worker.workTimer = DoUniqueString("WorkTimer")
   worker.pos = worker:GetAbsOrigin()
   worker.moving = false
-  worker.maxLumber = UNIT_KV.worker_t1.MaximumLumber
   worker.housePos = nil
 
   worker.skipTicks = 0 -- If this is > 0 the worker will ignore this many ticks
@@ -48,7 +48,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 			-- Additonally, store this location for the next trip
 			local carryTotal= worker:FindAbilityByName("carrying_lumber")
 			local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
-			if (worker.inTriggerZone and worker.moving == false and currentLumber < worker.maxLumber) then
+			if (worker.inTriggerZone and worker.moving == false and currentLumber < UNIT_KV[pID][unitName].MaximumLumber) then
 				worker.treepos = worker:GetAbsOrigin()
 				local ability = worker:FindAbilityByName("harvest_channel")
 
@@ -61,7 +61,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
 
 			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
-			if (currentLumber == worker.maxLumber) then
+			if (currentLumber == UNIT_KV[pID][unitName].MaximumLumber) then
 		
 				-- Search for the nearest unit that can recieve lumber and is owned by the correct player
 				if (worker.housePos == nil) then
@@ -86,6 +86,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
   return worker
 end
 
+-- Fired when the worker is near trees
 function AtTree(keys)
 	local unit = keys.activator
 	unit.treepos = unit:GetAbsOrigin()
@@ -95,17 +96,21 @@ function AtTree(keys)
   end
 end
 
+-- Fired when the worker leaves the trees
 function LeftTree(keys)
 	local unit = keys.activator
 	unit.inTriggerZone = false
 end
 
+-- Fired when the harvest_channel ability has finished channelling
 function ChoppedLumber( keys )
   local worker = keys.caster
   local carryTotal= worker:FindAbilityByName("carrying_lumber")
   local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+  local pID = worker:GetMainControllingPlayer()
+  local unitName = worker:GetUnitName()
 
-  worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + 1))
+  worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + UNIT_KV[pID][unitName].LumberPerChop))
   worker.housePos = nil
 end
 
