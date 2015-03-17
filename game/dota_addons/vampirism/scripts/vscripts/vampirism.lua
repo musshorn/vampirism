@@ -248,11 +248,16 @@ end
 -- operations here
 function GameMode:OnEntityHurt(keys)
   print("[vampirism] Entity Hurt")
-  --PrintTable(keys)
   local entCause = EntIndexToHScript(keys.entindex_attacker)
   local entVictim = EntIndexToHScript(keys.entindex_killed)
-  print(entVictim:GetUnitName())
-  print(entVictim:GetCursorPosition())
+
+  -- Buildings attacked by the worker are instantly killed
+  if entCause:GetMainControllingPlayer() == entVictim:GetMainControllingPlayer() then
+    local ability = entVictim:FindAbilityByName("is_a_building")
+    if entCause:GetUnitName() == "npc_dota_hero_omniknight" and ability ~= nil then
+      entVictim:ForceKill(true)
+    end
+  end
 end
 
 -- An item was picked up off the ground
