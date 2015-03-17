@@ -216,7 +216,7 @@ function GameMode:OnNPCSpawned(keys)
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
     if npc:GetMainControllingPlayer() < 8 then    
-      WOOD[npc:GetPlayerOwnerID()] = 500
+      WOOD[npc:GetPlayerOwnerID()] = 50
       TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
       CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
       print("made 40 wood for player "..npc:GetPlayerOwnerID())
@@ -512,8 +512,15 @@ function GameMode:OnEntityKilled( keys )
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(3)
-      end 
-    end   
+      end
+    end
+  end
+  
+  -- If the killed unit increased the players food cap then it needs to decrease when it dies
+  if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
+    local lostfood = UNIT_KV[playerID][unitName].ProvidesFood
+    TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
+    FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
   end
 
   if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
