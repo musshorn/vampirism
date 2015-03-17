@@ -118,7 +118,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -189,7 +189,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -259,7 +259,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -329,7 +329,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -399,7 +399,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -469,7 +469,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -539,7 +539,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -609,7 +609,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -679,7 +679,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -749,7 +749,7 @@
 		"Ability5"					""			// Ability 5.
 		"Ability6"					""			// Ability 6 - Extra.
 		"Ability7"					""			// Ability 7 - Extra.
-		"Ability8"					""			// Ability 8 - Extra.
+		"Ability8"					"is_a_building"			// Ability 8 - Extra.
 		"Ability10"					"_tt_house_t1"			// Ability 2.
 
 		// Armor
@@ -890,7 +890,7 @@
 		"Ability2"					"cancel_training"					// Ability 2.
 		"Ability3"					"set_rally_point"					// Ability 3.
 		"Ability4"					"t1_worker_training"					// Ability 4.
-		"Ability5"					"building_block"					// Ability 5.
+		"Ability5"					"is_a_building"					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
 		"Ability8"					""					// Ability 8 - Extra.
@@ -976,7 +976,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1051,7 +1051,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1131,7 +1131,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1210,7 +1210,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1288,7 +1288,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1366,7 +1366,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1519,7 +1519,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1597,7 +1597,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1675,7 +1675,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1753,7 +1753,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1831,7 +1831,7 @@
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					""					// Ability 8 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------

@@ -117,6 +117,26 @@
 
 		}
 	}
+	//=================================================================================	/
+	// Buff: Is a building is applied on building spawn to make the building deniable
+	//=================================================================================	/
+	"is_a_building"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"	"ability_datadriven"
+		"Modifiers"
+		{
+			"modifier_grounded_passive"
+			{
+				"Passive" "1"
+				"IsHidden" "1"
+				"States"
+				{
+					 "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+			}
+		}
+	}
 
 	//Keeps the building stationary
 	"building_block"
@@ -283,6 +303,7 @@
 			}
 		}
 	}
+
 	"drop_lumber"
 	{
 		"BaseClass"	"ability_datadriven"
@@ -539,6 +560,7 @@
 			}
 		}
 	}
+
 
 	"upgrade_to_t2_tent"
 	{
