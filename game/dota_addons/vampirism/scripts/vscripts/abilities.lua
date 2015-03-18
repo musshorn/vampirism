@@ -41,13 +41,13 @@ function build( keys )
     House1:Init(unit)
 
     -- Check if the building will create units, if so, give it a unit creation timer
-    if UNIT_KV[unit.unitName].SpawnsUnits == "true" then
+    if UNIT_KV[pID][unit.unitName].SpawnsUnits == "true" then
       House1:UnitSpawner()
     end
 
     -- If the building provides food, how much? Also alert the UI for an update
-    if UNIT_KV[unit.unitName].ProvidesFood ~= nil then
-      local food = tonumber(UNIT_KV[unit.unitName].ProvidesFood)
+    if UNIT_KV[pID][unit.unitName].ProvidesFood ~= nil then
+      local food = tonumber(UNIT_KV[pID][unit.unitName].ProvidesFood)
       if (TOTAL_FOOD[pID] < 300) then
         TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
         print(TOTAL_FOOD[pID])
@@ -55,12 +55,12 @@ function build( keys )
       end
     end
 
-    if UNIT_KV[unit:GetUnitName()].IsTech ~= nil then
+    if UNIT_KV[pID][unit:GetUnitName()].IsTech ~= nil then
       TechTree:AddTech(unit:GetUnitName(), unit:GetMainControllingPlayer())
     end
 
-    if UNIT_KV[unit:GetUnitName()].RecievesLumber ~= nil then
-      if UNIT_KV[unit:GetUnitName()].RecievesLumber == "true" then
+    if UNIT_KV[pID][unit:GetUnitName()].RecievesLumber ~= nil then
+      if UNIT_KV[pID][unit:GetUnitName()].RecievesLumber == "true" then
         table.insert(LUMBER_DROPS, unit)
       end
     end

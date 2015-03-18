@@ -47,7 +47,8 @@ WOOD = {}
 TOTAL_FOOD = {}
 CURRENT_FOOD = {}
 
-UNIT_KV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+UNIT_KV = {} -- Each player has their own UNIT_KV file that research modifies properties of
+ABILITY_KV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
 HUMAN_COUNT = 0
@@ -110,7 +111,14 @@ function GameMode:OnAllPlayersLoaded()
   local dummy = CreateUnitByName("npc_bh_dummy", OutOfWorldVector, false, nil, nil, 0)
   local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
 
+<<<<<<< HEAD
   ParticleManager:SetParticleControl(particle, 0, Vector(352, -416, 128.884))
+=======
+  ParticleManager:SetParticleControl(particle, 0, Vector(651.449, -250.312, 137))
+  for i=0,9 do
+    UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+  end
+>>>>>>> origin/master
 end
 
 --[[
@@ -212,7 +220,7 @@ function GameMode:OnNPCSpawned(keys)
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
     if npc:GetMainControllingPlayer() < 8 then    
-      WOOD[npc:GetPlayerOwnerID()] = 50
+      WOOD[npc:GetPlayerOwnerID()] = 500
       TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
       CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
       print("made 40 wood for player "..npc:GetPlayerOwnerID())
@@ -754,6 +762,7 @@ function GameMode:PlayerConnect(keys)
     -- This user is a Bot, so add it to the bots table
     self.vBots[keys.userid] = 1
   end
+
 end
 
 -- This function is called once when the player fully connects and becomes "Ready" during Loading

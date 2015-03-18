@@ -1,10 +1,11 @@
 function TrainUnit( keys )
   local building = keys.caster
-  local unitToSpawn = keys.SpawnUnit  
+  local unitToSpawn = keys.SpawnUnit
+  local pID = building:GetMainControllingPlayer()
 
   -- Parity with WC3 behaviour
-  if UNIT_KV[unitToSpawn].ConsumesFood ~= nil then
-    local requestingFood = UNIT_KV[unitToSpawn].ConsumesFood
+  if UNIT_KV[pID][unitToSpawn].ConsumesFood ~= nil then
+    local requestingFood = UNIT_KV[pID][unitToSpawn].ConsumesFood
     if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood then
         table.insert(building.queue, keys)
     else
@@ -47,7 +48,7 @@ function Upgrade( keys )
   local goldCost = keys.GoldCost
   local targetUnit = keys.TargetUnit
   local pID = caster:GetMainControllingPlayer()
-  local targetModel = UNIT_KV[targetUnit].Model
+  local targetModel = UNIT_KV[pID][targetUnit].Model
 
   -- This may be undefined for some upgrades
   if goldCost == nil then
