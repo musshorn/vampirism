@@ -110,7 +110,7 @@ function GameMode:OnAllPlayersLoaded()
   local dummy = CreateUnitByName("npc_bh_dummy", OutOfWorldVector, false, nil, nil, 0)
   local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
 
-  ParticleManager:SetParticleControl(particle, 0, Vector(651.449, -250.312, 137))
+  ParticleManager:SetParticleControl(particle, 0, Vector(352, -416, 128.884))
 end
 
 --[[
@@ -134,7 +134,7 @@ function GameMode:OnHeroInGame(hero)
   MultiTeam:SetPlayerTeam(playerID, team)]]
 
   -- This line for example will set the starting gold of every hero to 500 unreliable gold
-  hero:SetGold(500, false)
+  hero:SetGold(0, false)
 
   -- These lines will create an item and add it to the player, effectively ensuring they start with the item
   --local item = CreateItem("item_multiteam_action", hero, hero)
