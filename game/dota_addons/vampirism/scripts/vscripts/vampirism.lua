@@ -112,9 +112,6 @@ function GameMode:OnAllPlayersLoaded()
   local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
 
   ParticleManager:SetParticleControl(particle, 0, Vector(651.449, -250.312, 137))
-  for i=0,9 do
-    UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
-  end
 end
 
 --[[
@@ -219,6 +216,8 @@ function GameMode:OnNPCSpawned(keys)
       WOOD[npc:GetPlayerOwnerID()] = 50
       TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
       CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
+      UNIT_KV[npc:GetPlayerOwnerID()] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+      UNIT_KV[npc:GetPlayerOwnerID()].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
       print("made 40 wood for player "..npc:GetPlayerOwnerID())
       HUMAN_COUNT = HUMAN_COUNT + 1
     else

@@ -532,6 +532,7 @@
 			}
 		}
 	}
+
 	//=================================================================================	/
 	// Research: Sharpened Hatchets
 	//=================================================================================	/
@@ -561,6 +562,74 @@
 		}
 	}
 
+	//=================================================================================	/
+	// Research: Rifles
+	//=================================================================================	/
+	"research_rifles"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"30"
+		"AbilityLumberCost"	"1000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Rifles"
+				"TARGET"	"CASTER"
+			}
+		}
+		"Modifiers"
+		{
+			"rifle_attack_range"
+			{
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS" "300"
+				}
+				
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Research: Improved Worker Motivation
+	//=================================================================================	/
+	"research_improved_worker_motivation"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"2"
+		"AbilityLumberCost"	"2000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"ImprovedWorkerMotivation"
+				"TARGET"	"CASTER"
+			}
+		}
+	}
 
 	"upgrade_to_t2_tent"
 	{

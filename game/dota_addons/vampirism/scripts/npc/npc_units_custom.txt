@@ -853,7 +853,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"500"		// Base health.
+		"StatusHealth"				"100"		// Base health.
 		"StatusHealthRegen"			"0"		// Health regeneration rate.
 		"StatusMana"				"20"			// Base mana.
 		"StatusManaRegen"			"0"			// Mana regeneration rate.
@@ -1503,9 +1503,9 @@
 	"research_center_t1"
 	{
 		// General
-        //-------------------------------------------------------------------------------------------------------------
-        "BaseClass"					"npc_dota_creature"
-        "Model"						"models/props_structures/weapon_rack_00.vmdl"
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"					"npc_dota_creature"
+    "Model"						"models/props_structures/weapon_rack_00.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"
@@ -1516,7 +1516,7 @@
 		"Ability2"					"research_advanced_lumber_harvesting"					// Ability 2.
 		"Ability3"					"research_insane_lumber_harvesting"					// Ability 3.
 		"Ability4"					"research_rifles"					// Ability 4.
-		"Ability5"					""					// Ability 5.
+		"Ability5"					"research_improved_worker_motivation"					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
 		"Ability8"					"is_a_building"					// Ability 8 - Extra.

@@ -64,3 +64,28 @@ function Rifles(keys)
 
   ability:ApplyDataDrivenModifier(caster, hero, "rifle_attack_range", nil)
 end
+
+function ImprovedWorkerMotivation(keys)
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+  
+  -- Find all units with "MaximumLumber" not nil, these are all the harvesters
+  for key, value in pairs(UNIT_KV[pID]) do
+    if UNIT_KV[pID][key].MaximumLumber ~= nil then
+      models = Entities:FindAllByModel(UNIT_KV[pID][key].Model)
+
+      -- Increase the health of all the players harvesters
+      for i = 1,table.getn(models) do
+        local worker = models[i]
+        if worker:GetMainControllingPlayer() == pID then
+          worker:SetMaxHealth(worker:GetMaxHealth() + 300)
+          worker:SetHealth(worker:GetHealth() + 300)
+        end
+      end
+
+      -- Also increase the hp on any future units created
+      UNIT_KV[pID][key].StatusHealth = UNIT_KV[pID][key].StatusHealth + 300
+    end
+  end
+
+end
