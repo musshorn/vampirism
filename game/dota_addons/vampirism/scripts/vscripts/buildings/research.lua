@@ -54,3 +54,13 @@ function SharpenedHatchets(keys)
   -- This research only applies to t1 workers so we don't need to search for any worker
   UNIT_KV[pID]["worker_t1"].LumberPerChop = 2
 end
+
+function Rifles(keys)
+  local caster = keys.caster
+  local ability = keys.ability
+  local pID = caster:GetMainControllingPlayer()
+  local phandle = PlayerResource:GetPlayer(pID)
+  local hero = phandle:GetAssignedHero()
+
+  ability:ApplyDataDrivenModifier(caster, hero, "rifle_attack_range", nil)
+end

@@ -1515,7 +1515,7 @@
 		"Ability1"					"research_improved_lumber_harvesting"	//Human test
 		"Ability2"					"research_advanced_lumber_harvesting"					// Ability 2.
 		"Ability3"					"research_insane_lumber_harvesting"					// Ability 3.
-		"Ability4"					""					// Ability 4.
+		"Ability4"					"research_rifles"					// Ability 4.
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
