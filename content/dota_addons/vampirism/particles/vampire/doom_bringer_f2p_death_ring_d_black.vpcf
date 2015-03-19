@@ -118,7 +118,7 @@ C_OP_InterpolateRadius C_OP_InterpolateRadius_1
 	float m_flStartTime = 0.000000
 	float m_flEndTime = 1.000000
 	float m_flStartScale = 0.000000
-	float m_flEndScale = 1.500000
+	float m_flEndScale = 4.000000
 	bool m_bEaseInAndOut = false
 	float m_flBias = 0.980000
 	float m_flOpStartFadeInTime = 0.000000
@@ -503,7 +503,7 @@ C_INIT_CreateInEpitrochoid C_INIT_CreateInEpitrochoid_11
 C_INIT_PositionWarp C_INIT_PositionWarp_12
 {
 	float(3) m_vecWarpMin = ( 0.100000, 0.100000, 0.100000 )
-	float(3) m_vecWarpMax = ( 2.000000, 2.000000, 2.000000 )
+	float(3) m_vecWarpMax = ( 8.000000, 8.000000, 8.000000 )
 	int m_nScaleControlPointNumber = -1
 	int m_nControlPointNumber = 0
 	int m_nRadiusComponent = -1
