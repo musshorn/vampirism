@@ -111,14 +111,11 @@ function GameMode:OnAllPlayersLoaded()
   local dummy = CreateUnitByName("npc_bh_dummy", OutOfWorldVector, false, nil, nil, 0)
   local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
 
-<<<<<<< HEAD
   ParticleManager:SetParticleControl(particle, 0, Vector(352, -416, 128.884))
-=======
   ParticleManager:SetParticleControl(particle, 0, Vector(651.449, -250.312, 137))
   for i=0,9 do
     UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
   end
->>>>>>> origin/master
 end
 
 --[[
