@@ -631,6 +631,36 @@
 		}
 	}
 
+	//=================================================================================	/
+	// Research: Gem Quality
+	//=================================================================================	/
+	"research_gem_quality"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"2"
+		"AbilityLumberCost"	"2000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"GemQuality"
+				"TARGET"	"CASTER"
+				"Level"	"1"
+			}
+		}
+	}
+
 	"upgrade_to_t2_tent"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
