@@ -117,6 +117,26 @@
 
 		}
 	}
+	//=================================================================================	/
+	// Buff: Is a building is applied on building spawn to make the building deniable
+	//=================================================================================	/
+	"is_a_building"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"	"ability_datadriven"
+		"Modifiers"
+		{
+			"modifier_grounded_passive"
+			{
+				"Passive" "1"
+				"IsHidden" "1"
+				"States"
+				{
+					 "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+			}
+		}
+	}
 
 	//Keeps the building stationary
 	"building_block"
@@ -283,6 +303,7 @@
 			}
 		}
 	}
+
 	"drop_lumber"
 	{
 		"BaseClass"	"ability_datadriven"
@@ -428,7 +449,7 @@
 	"research_improved_lumber_harvesting"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"5"
+		"AbilityChannelTime"	"35"
 		"AbilityLumberCost"	"250"
 		"BaseClass"	"ability_datadriven"
 		"OnSpellStart"
@@ -458,7 +479,7 @@
 	"research_advanced_lumber_harvesting"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"5"
+		"AbilityChannelTime"	"35"
 		"AbilityLumberCost"	"500"
 		"BaseClass"	"ability_datadriven"
 		"OnSpellStart"
@@ -488,7 +509,7 @@
 	"research_insane_lumber_harvesting"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"5"
+		"AbilityChannelTime"	"35"
 		"AbilityLumberCost"	"750"
 		"BaseClass"	"ability_datadriven"
 		"OnSpellStart"
@@ -507,6 +528,104 @@
 				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
 				"Function"		"ImproveLumber"
 				"Level"				"3"
+				"TARGET"	"CASTER"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Research: Sharpened Hatchets
+	//=================================================================================	/
+	"research_sharpened_hatchets"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"40"
+		"AbilityLumberCost"	"1000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"SharpenedHatchets"
+				"TARGET"	"CASTER"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Research: Rifles
+	//=================================================================================	/
+	"research_rifles"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"30"
+		"AbilityLumberCost"	"1000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Rifles"
+				"TARGET"	"CASTER"
+			}
+		}
+		"Modifiers"
+		{
+			"rifle_attack_range"
+			{
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS" "300"
+				}
+				
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Research: Improved Worker Motivation
+	//=================================================================================	/
+	"research_improved_worker_motivation"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"2"
+		"AbilityLumberCost"	"2000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"ImprovedWorkerMotivation"
 				"TARGET"	"CASTER"
 			}
 		}

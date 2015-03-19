@@ -37,7 +37,7 @@ function ImproveLumber(keys)
   local pID = caster:GetMainControllingPlayer()
   local level = keys.Level
 
-  -- I think this research only applies to t1 workers so we don't need to search for any worker
+  -- This research only applies to t1 workers so we don't need to search for any worker
   if level == 1 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 10
   elseif level == 2 then
@@ -45,4 +45,47 @@ function ImproveLumber(keys)
   elseif level == 3 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 20
   end
+end
+
+function SharpenedHatchets(keys)
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+  
+  -- This research only applies to t1 workers so we don't need to search for any worker
+  UNIT_KV[pID]["worker_t1"].LumberPerChop = 2
+end
+
+function Rifles(keys)
+  local caster = keys.caster
+  local ability = keys.ability
+  local pID = caster:GetMainControllingPlayer()
+  local phandle = PlayerResource:GetPlayer(pID)
+  local hero = phandle:GetAssignedHero()
+
+  ability:ApplyDataDrivenModifier(caster, hero, "rifle_attack_range", nil)
+end
+
+function ImprovedWorkerMotivation(keys)
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+  
+  -- Find all units with "MaximumLumber" not nil, these are all the harvesters
+  for key, value in pairs(UNIT_KV[pID]) do
+    if UNIT_KV[pID][key].MaximumLumber ~= nil then
+      models = Entities:FindAllByModel(UNIT_KV[pID][key].Model)
+
+      -- Increase the health of all the players harvesters
+      for i = 1,table.getn(models) do
+        local worker = models[i]
+        if worker:GetMainControllingPlayer() == pID then
+          worker:SetMaxHealth(worker:GetMaxHealth() + 300)
+          worker:SetHealth(worker:GetHealth() + 300)
+        end
+      end
+
+      -- Also increase the hp on any future units created
+      UNIT_KV[pID][key].StatusHealth = UNIT_KV[pID][key].StatusHealth + 300
+    end
+  end
+
 end

@@ -7,8 +7,13 @@ end
 function Worker:Worker1(vPos, hOwner, unitName)
   local worker = CreateUnitByName(unitName, vPos + VECTOR_BUMP, true, nil, nil, hOwner:GetTeam())
   local pID = hOwner:GetMainControllingPlayer()
-  worker:SetControllableByPlayer(hOwner:GetMainControllingPlayer() , true)  
+  worker:SetControllableByPlayer(hOwner:GetMainControllingPlayer() , true)
+
+  -- If health techs have been researched, apply them
+  worker:SetMaxHealth(UNIT_KV[pID][unitName].StatusHealth)
+  worker:SetHealth(worker:GetMaxHealth())
   worker:SetHullRadius(8)
+  
   worker.thinking = false
   worker.inTriggerZone = true -- Flag set true if worker is near trees
 

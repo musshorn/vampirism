@@ -113,9 +113,6 @@ function GameMode:OnAllPlayersLoaded()
 
   ParticleManager:SetParticleControl(particle, 0, Vector(352, -416, 128.884))
   ParticleManager:SetParticleControl(particle, 0, Vector(651.449, -250.312, 137))
-  for i=0,9 do
-    UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
-  end
 end
 
 --[[
@@ -217,9 +214,11 @@ function GameMode:OnNPCSpawned(keys)
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
     if npc:GetMainControllingPlayer() < 8 then    
-      WOOD[npc:GetPlayerOwnerID()] = 500
+      WOOD[npc:GetPlayerOwnerID()] = 50
       TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
       CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
+      UNIT_KV[npc:GetPlayerOwnerID()] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+      UNIT_KV[npc:GetPlayerOwnerID()].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
       print("made 40 wood for player "..npc:GetPlayerOwnerID())
       HUMAN_COUNT = HUMAN_COUNT + 1
     else
@@ -249,11 +248,16 @@ end
 -- operations here
 function GameMode:OnEntityHurt(keys)
   print("[vampirism] Entity Hurt")
-  --PrintTable(keys)
   local entCause = EntIndexToHScript(keys.entindex_attacker)
   local entVictim = EntIndexToHScript(keys.entindex_killed)
-  print(entVictim:GetUnitName())
-  print(entVictim:GetCursorPosition())
+
+  -- Buildings attacked by the worker are instantly killed
+  if entCause:GetMainControllingPlayer() == entVictim:GetMainControllingPlayer() then
+    local ability = entVictim:FindAbilityByName("is_a_building")
+    if entCause:GetUnitName() == "npc_dota_hero_omniknight" and ability ~= nil then
+      entVictim:ForceKill(true)
+    end
+  end
 end
 
 -- An item was picked up off the ground
@@ -508,8 +512,15 @@ function GameMode:OnEntityKilled( keys )
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(3)
-      end 
-    end   
+      end
+    end
+  end
+  
+  -- If the killed unit increased the players food cap then it needs to decrease when it dies
+  if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
+    local lostfood = UNIT_KV[playerID][unitName].ProvidesFood
+    TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
+    FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
   end
 
   if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
