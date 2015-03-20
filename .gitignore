@@ -51,4 +51,4 @@ game/dota_addons/sns_fixed/
 game/dota_addons/test1/
 game/dota_addons/test2/
 game/dota_addons/thememegame/
-game/dota_addons/vampirism/tools_thumbnail_cache.bin
+*.bin
