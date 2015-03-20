@@ -102,7 +102,7 @@ function create_building_entity( keys )
   local caster = keys.caster
   local pID = keys.caster:GetMainControllingPlayer()
   local lumberCost = keys.attacker.buildingTable.AbilityLumberCost
-  local goldCost = keys.attacker.buildingTable.AbilityLumberCost
+  local goldCost = keys.attacker.buildingTable.AbilityGoldCost
 
   local lumberOK = false
   local goldOK = false
