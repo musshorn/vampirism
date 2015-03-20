@@ -16,7 +16,7 @@ CParticleSystemDefinition CParticleSystemDefinition_0
 	string m_hFallback = ""
 	int m_nFallbackMaxCount = -1
 	string m_hLowViolenceDef = ""
-	uint(4) m_ConstantColor = ( 143, 0, 0, 255 )
+	uint(4) m_ConstantColor = ( 100, 0, 0, 255 )
 	float(3) m_ConstantNormal = ( 0.000000, 0.000000, 1.000000 )
 	float m_flConstantRadius = 5.000000
 	float m_flConstantRotation = 0.000000
@@ -116,9 +116,9 @@ C_OP_Decay C_OP_Decay_0
 C_OP_InterpolateRadius C_OP_InterpolateRadius_1
 {
 	float m_flStartTime = 0.000000
-	float m_flEndTime = 1.000000
+	float m_flEndTime = 10.000000
 	float m_flStartScale = 0.000000
-	float m_flEndScale = 4.000000
+	float m_flEndScale = 5.000000
 	bool m_bEaseInAndOut = false
 	float m_flBias = 0.980000
 	float m_flOpStartFadeInTime = 0.000000

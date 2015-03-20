@@ -110,7 +110,7 @@ function GameMode:OnAllPlayersLoaded()
 
   local dummy = CreateUnitByName("npc_bh_dummy", OutOfWorldVector, false, nil, nil, 0)
   local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
-  ParticleManager:SetParticleControl(particle, 0, Vector(96, -416, 500))
+  ParticleManager:SetParticleControl(particle, 0, Vector(96, -416, 570))
 
   local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
   sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
