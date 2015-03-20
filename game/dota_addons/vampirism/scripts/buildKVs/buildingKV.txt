@@ -64,7 +64,7 @@
 	{
 		"build_house_t3"						"0"
 		"build_tower_blood_t1"					"1"
-		"build_gold_mind_t4"					"2"
+		"build_gold_mine_t4"					"2"
 		"build_tower_cripple_t3"				"3"
 		"build_tower_pink_t1"					"4"
 		"build_wall_t9"							"5"
