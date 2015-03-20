@@ -34,6 +34,7 @@ function Cancel( keys )
     PlayerResource:ModifyGold(pID, caster.refundGold, true, 9)
     WOOD[pID] = WOOD[pID] + caster.refundLumber
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+    caster:SetMaxHealth(caster.originalMaxHP)
   end
 end
 
@@ -57,7 +58,7 @@ function Upgrade( keys )
   if lumberCost == nil then
     lumberCost = 0
   end
-  
+
   -- Check if the player can upgrade
   if PlayerResource:GetGold(pID) < goldCost then
     caster:Stop()
@@ -80,6 +81,17 @@ function Upgrade( keys )
   caster.refundGold = goldCost
   caster.refundLumber = lumberCost
   caster:SetModel(targetModel)
+
+  -- If the unit has a HealthModifier (gem upgrades) then they gain the bonus of the targets HP straight away
+  -- "Muh Parity" - Space Germ, 2015
+  caster.originalMaxHP = caster:GetMaxHealth()
+  if UNIT_KV[pID][caster:GetUnitName()].HealthModifier ~= nil then
+    local maxHPOffset = UNIT_KV[pID][targetUnit].StatusHealth * UNIT_KV[pID][caster:GetUnitName()].HealthModifier - UNIT_KV[pID][targetUnit].StatusHealth
+    caster.originalMaxHP = caster:GetMaxHealth()
+
+    caster:SetMaxHealth(caster:GetMaxHealth() + maxHPOffset)
+    caster:SetHealth(caster:GetHealth() + maxHPOffset)
+  end
 end
 
 function FinishUpgrade( keys )

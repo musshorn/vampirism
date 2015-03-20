@@ -717,7 +717,15 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 
 	-- whether we should update the building's health over the build time.
 	local bUpdateHealth = buildingTable:GetVal("UpdateHealth", "bool")
+
+
 	local fMaxHealth = unit:GetMaxHealth()
+	PrintTable(UNIT_KV[builder:GetMainControllingPlayer()][order.unitName])
+	if UNIT_KV[builder:GetMainControllingPlayer()][order.unitName].HealthModifier ~= nil then
+		fMaxHealth = fMaxHealth * UNIT_KV[builder:GetMainControllingPlayer()][order.unitName].HealthModifier
+		unit:SetMaxHealth(fMaxHealth)
+	end
+
 	local nAddedHealth = 0
 	-- health to add every tick until build time is completed.
 	local nTickEstimate = buildTime * 0.1
@@ -763,6 +771,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 			bScaling=true
 		end
 	end
+	
 
 	-- health and scale timer
 	unit.updateHealthTimer = DoUniqueString('health')

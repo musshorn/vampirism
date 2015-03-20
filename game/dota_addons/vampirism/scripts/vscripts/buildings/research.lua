@@ -94,7 +94,7 @@ function GemQuality(keys)
   local pID = caster:GetMainControllingPlayer()
   local level = keys.Level
 
-  -- Find all units with "AffectedByGemUpgrades" not nil, these are all the harvesters
+  -- Find all units with "AffectedByGemUpgrades" not nil, these are all the walls
   for key, value in pairs(UNIT_KV[pID]) do
     if UNIT_KV[pID][key].AffectedByGemUpgrades ~= nil then
       models = Entities:FindAllByModel(UNIT_KV[pID][key].Model)
@@ -105,14 +105,24 @@ function GemQuality(keys)
         if wall:GetMainControllingPlayer() == pID then
           local increasedHP = 0
           if level == 1 then
-            increasedHP = worker:GetMaxHealth() * 1.2  - worker:GetHealth()
+            wall.baseMaxHP = wall:GetMaxHealth()
+            increasedHP = wall:GetMaxHealth() * 1.2  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.2
           end
+          if level == 2 then
+            increasedHP = wall.baseMaxHP * 1.4  - wall:GetHealth()
+            UNIT_KV[pID][key].HealthModifier = 1.4
+          end
+          if level == 3 then
+            increasedHP = wall.baseMaxHP * 1.6  - wall:GetHealth()
+            UNIT_KV[pID][key].HealthModifier = 1.6
+          end
 
-          wall:SetMaxHealth(increasedHP)
-          wall:SetHealth(worker:GetHealth() + increasedHP)
+          wall:SetMaxHealth(wall.baseMaxHP + increasedHP)
+          wall:SetHealth(wall:GetHealth() + increasedHP)
         end
       end
    
     end
   end
+end
