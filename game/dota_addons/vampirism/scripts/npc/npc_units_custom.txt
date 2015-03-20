@@ -153,7 +153,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"500"		// Base health.
+		"StatusHealth"				"400"		// Base health.
 		"StatusHealthRegen"			"1"		// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0"			// Mana regeneration rate.
@@ -164,6 +164,10 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
 
 	//=================================================================================	
@@ -235,6 +239,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
 	//=================================================================================	
 	// Building: Amethyst Wall
@@ -305,6 +312,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
 	//=================================================================================	
 	// Building: Sapphire Wall
@@ -375,6 +385,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
 	//=================================================================================	
 	// Building: Emerald Wall
@@ -445,6 +458,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
 	//=================================================================================	
 	// Building: Chrysoprase Wall
@@ -515,6 +531,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
 	//=================================================================================	
 	// Building: Garnet Wall
@@ -585,6 +604,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
 	//=================================================================================	
 	// Building: Ruby Wall
@@ -655,6 +677,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
 	//=================================================================================	
 	// Building: Diamond Wall
@@ -725,6 +750,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
 	//=================================================================================	
 	// Building: Onyx Wall
@@ -795,6 +823,9 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vamp
+		"AffectedByGemUpgrades"	"true"
 	}
   //=================================================================================	
 	// Worker T1 - Peasant
@@ -1512,11 +1543,11 @@
 		// Abilities
 		//----------------------------------------------------------------
 
-		"Ability1"					"research_improved_lumber_harvesting"	//Human test
-		"Ability2"					"research_advanced_lumber_harvesting"					// Ability 2.
-		"Ability3"					"research_insane_lumber_harvesting"					// Ability 3.
-		"Ability4"					"research_rifles"					// Ability 4.
-		"Ability5"					"research_improved_worker_motivation"					// Ability 5.
+		"Ability1"					"call_buildui"	//Human test
+		"Ability2"					"research_gem_quality"					// Ability 2.
+		"Ability3"					""					// Ability 3.
+		"Ability4"					""					// Ability 4.
+		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
 		"Ability8"					"is_a_building"					// Ability 8 - Extra.

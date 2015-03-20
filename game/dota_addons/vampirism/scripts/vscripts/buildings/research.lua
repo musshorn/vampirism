@@ -87,5 +87,42 @@ function ImprovedWorkerMotivation(keys)
       UNIT_KV[pID][key].StatusHealth = UNIT_KV[pID][key].StatusHealth + 300
     end
   end
+end
 
+function GemQuality(keys)
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+  local level = keys.Level
+
+  -- Find all units with "AffectedByGemUpgrades" not nil, these are all the walls
+  for key, value in pairs(UNIT_KV[pID]) do
+    if UNIT_KV[pID][key].AffectedByGemUpgrades ~= nil then
+      models = Entities:FindAllByModel(UNIT_KV[pID][key].Model)
+
+      -- Increase the health of all the players harvesters
+      for i = 1,table.getn(models) do
+        local wall = models[i]
+        if wall:GetMainControllingPlayer() == pID then
+          local increasedHP = 0
+          if level == 1 then
+            wall.baseMaxHP = wall:GetMaxHealth()
+            increasedHP = wall:GetMaxHealth() * 1.2  - wall:GetHealth()
+            UNIT_KV[pID][key].HealthModifier = 1.2
+          end
+          if level == 2 then
+            increasedHP = wall.baseMaxHP * 1.4  - wall:GetHealth()
+            UNIT_KV[pID][key].HealthModifier = 1.4
+          end
+          if level == 3 then
+            increasedHP = wall.baseMaxHP * 1.6  - wall:GetHealth()
+            UNIT_KV[pID][key].HealthModifier = 1.6
+          end
+
+          wall:SetMaxHealth(wall.baseMaxHP + increasedHP)
+          wall:SetHealth(wall:GetHealth() + increasedHP)
+        end
+      end
+   
+    end
+  end
 end

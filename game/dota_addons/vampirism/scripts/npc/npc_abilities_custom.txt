@@ -629,6 +629,97 @@
 		}
 	}
 
+	//=================================================================================	/
+	// Research: Improved Gem Quality
+	//=================================================================================	/
+	"research_improved_gem_quality"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"2"
+		"AbilityLumberCost"	"2000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"GemQuality"
+				"TARGET"	"CASTER"
+				"Level"	"1"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Research: Advanced Gem Quality
+	//=================================================================================	/
+	"research_advanced_gem_quality"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"2"
+		"AbilityLumberCost"	"2000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"GemQuality"
+				"TARGET"	"CASTER"
+				"Level"	"2"
+			}
+		}
+	}
+
+	//=================================================================================	/
+	// Research: Unbeatable Gem Quality
+	//=================================================================================	/
+	"research_unbeatable_gem_quality"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"2"
+		"AbilityLumberCost"	"2000"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"Research"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
+				"Function"		"GemQuality"
+				"TARGET"	"CASTER"
+				"Level"	"3"
+			}
+		}
+	}
+
+
 	"upgrade_to_t2_tent"
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
