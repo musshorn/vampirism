@@ -106,3 +106,65 @@ function FinishUpgrade( keys )
   unit:SetControllableByPlayer(player, true)
 
 end
+
+-- Repairing is hard.
+function RepairAutocast( keys )
+  local caster = keys.caster
+  local ability = keys.ability
+  local target = keys.target
+
+  if ability:GetAutoCastState() then
+    if not ability:IsChanneling() then
+      caster:CastAbilityOnTarget(target, ability, caster:GetMainControllingPlayer())
+    end
+  end
+end
+
+function Repair( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+  local target = keys.target
+  local targetName = target:GetUnitName()
+  local repairTimeRatio = keys.RepairTimeRatio
+
+  if target:FindAbilityByName("is_a_building") ~= nil then
+    if UNIT_KV[pID][targetName].RepairTime ~= nil then
+
+      local maxHP = target:GetMaxHealth()
+      local hpPerSec = maxHP / (UNIT_KV[pID][targetName].RepairTime * repairTimeRatio)
+      local repairTickRate = 0.03  -- No idea what it actually is, Just going to adjust HP/Sec to suit
+      local HPPerTick = repairTickRate * hpPerSec
+      local smallHPPerTick = HPPerTick - math.floor(HPPerTick)
+      HPPerTick = math.floor(HPPerTick)
+      local smallHPAdjustment = 0
+      print("Repair numbers: ", smallHPPerTick, HPPerTick, hpPerSec)
+
+      local timerName = DoUniqueString("Repair")
+      Timers:CreateTimer(timerName,{
+        endtime = 0.03,
+        callback = function ()
+          if target:GetHealth() < target:GetMaxHealth() then
+            target:SetHealth(target:GetHealth() + HPPerTick)
+            smallHPAdjustment = smallHPAdjustment + smallHPPerTick
+            if smallHPAdjustment > 1 then
+              target:SetHealth(target:GetHealth() + 1)
+              smallHPAdjustment = smallHPAdjustment - 1
+            end
+          else
+            caster:Stop()
+            return nil
+          end
+          return 0.03
+        end
+      })
+      target.RepairTimer = timerName
+    end
+  end
+end
+
+function RepairStop( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+  local target = keys.target
+  PrintTable(target) -- is this still a thing?
+end
