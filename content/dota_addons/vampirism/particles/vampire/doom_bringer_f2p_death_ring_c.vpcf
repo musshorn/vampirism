@@ -3,7 +3,7 @@ CParticleSystemDefinition CParticleSystemDefinition_0
 {
 	int m_nInitialParticles = 0
 	float(3) m_BoundingBoxMin = ( -40.000000, -150.000000, -10.000000 )
-	float(3) m_BoundingBoxMax = ( 150.000000, 20.000000, 180.000000 )
+	float(3) m_BoundingBoxMax = ( 500.000000, 500.000000, 500.000000 )
 	int m_nSnapshotControlPoint = 0
 	string m_pszSnapshotName = ""
 	string m_pszTargetLayerID = ""
@@ -445,7 +445,7 @@ C_INIT_RingWave C_INIT_RingWave_10
 	int m_nOverrideCP = -1
 	int m_nOverrideCP2 = -1
 	float m_flParticlesPerOrbit = 6.000000
-	float m_flInitialRadius = 30.000000
+	float m_flInitialRadius = 300.000000
 	float m_flThickness = 0.000000
 	float m_flInitialSpeedMin = 210.000000
 	float m_flInitialSpeedMax = 210.000000
@@ -477,7 +477,7 @@ C_INIT_RingWave C_INIT_RingWave_10
 
 C_INIT_RandomRadius C_INIT_RandomRadius_11
 {
-	float m_flRadiusMin = 20.000000
+	float m_flRadiusMin = 25.000000
 	float m_flRadiusMax = 50.000000
 	float m_flRadiusRandExponent = 1.000000
 	bool m_bRunForParentApplyKillList = true
