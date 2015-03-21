@@ -37,6 +37,7 @@ function Precache( context )
 		--PrecacheResource("particle", "particles/econ/generic/generic_aoe_explosion_sere_1/generic_aoe_explosion_sphere_1.vpcf", context)
 		--PrecacheResource("particle_folder", "particles/test_particle", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_arcane_orb.vpcf", context)
 		PrecacheResource("particle", "particles/msg_heal.vpcf", context)
 
 		-- Models can also be precached by folder or individually
