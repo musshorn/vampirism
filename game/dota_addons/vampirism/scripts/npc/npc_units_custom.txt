@@ -1305,7 +1305,7 @@
 		// General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"					"npc_dota_creature"
-    "Model"						"models/props_structures/tower_good4.vmdl"
+    "Model"							"models/props_structures/tower_good4.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"
@@ -1333,10 +1333,10 @@
 		"AttackDamageMin"			"16"
 		"AttackDamageMax"			"18"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-
+		"AttackRate"				"0.5"
 		"AttackAnimationPoint"		"0"
 		"AttackAcquisitionRange"	"900"
-		"AttackRange"				"600"
+		"AttackRange"				"850"
 		"ProjectileModel"			"particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_arcane_orb.vpcf"
 		"ProjectileSpeed"			"1900"
 
@@ -1347,7 +1347,7 @@
 	
 		// Bounds
 		//----------------------------------------------------------------
-		"BoundsHullName"			"DOTA_HULL_SIZE_TOWER"		// Hull type used for navigation/locomotion.
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
 		"HealthBarOffset"			"170"
 		"RingRadius"				"50"
 
@@ -1368,11 +1368,8 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
-
-		"VisionDaytimeRange"		"1500"		// Range of vision during day light.
-		"VisionNighttimeRange"		"1500"		// Range of vision at night time.
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		
 		"IsTech"		"true"
 		"NeedTech"		"house_t1"
