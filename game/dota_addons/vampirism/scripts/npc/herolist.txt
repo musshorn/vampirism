@@ -2,7 +2,4 @@
 {
 	"npc_dota_hero_omniknight"  "1"
 	"npc_dota_hero_night_stalker" "1"
-	"npc_dota_hero_invoker"		"1"
-	"npc_dota_hero_tinker"		"1"
-	"npc_dota_hero_bloodseeker"	"1"
 }

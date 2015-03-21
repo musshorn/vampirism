@@ -21,7 +21,7 @@ CParticleSystemDefinition CParticleSystemDefinition_0
 	float m_flConstantRadius = 5.000000
 	float m_flConstantRotation = 0.000000
 	float m_flConstantRotationSpeed = 0.000000
-	float m_flConstantLifespan = 55.000000
+	float m_flConstantLifespan = 65.000000
 	int m_nConstantSequenceNumber = 0
 	int m_nConstantSequenceNumber1 = 0
 	int m_nGroupID = 0

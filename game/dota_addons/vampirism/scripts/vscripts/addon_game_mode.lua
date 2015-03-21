@@ -57,6 +57,7 @@ function Precache( context )
 		PrecacheModel("models/heroes/juggernaut/jugg_healing_ward.vmdl", context)
 		PrecacheModel("models/props_cave/mine_cart.vmdl", context)
 		PrecacheModel("models/props_structures/good_statue008.vmdl", context)
+		PrecacheModel("models/heroes/nightstalker/nightstalker_wings.vmdl", context)
 
 		-- Placeholder models for walls
 		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)
@@ -74,6 +75,8 @@ function Precache( context )
 
 		-- unit precache
 		PrecacheUnitByNameSync("tent_t2", context)
+		PrecacheUnitByNameSync("npc_dota_hero_night_stalker", context)
+		PrecacheUnitByNameSync("npc_dota_hero_omniknight", context)
 		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 

@@ -4,8 +4,8 @@ ENABLE_HERO_RESPAWN = true              -- Should the heroes automatically respa
 UNIVERSAL_SHOP_MODE = false             -- Should the main shop contain Secret Shop items as well as regular items
 ALLOW_SAME_HERO_SELECTION = true        -- Should we let people select the same hero as each other
 
-HERO_SELECTION_TIME = 0             -- How long should we let people select their hero?
-PRE_GAME_TIME = 55.0                    -- How long after people select their heroes should the horn blow and the game start?
+HERO_SELECTION_TIME = 0.0             -- How long should we let people select their hero?
+PRE_GAME_TIME = 56.0                    -- How long after people select their heroes should the horn blow and the game start?
 POST_GAME_TIME = 60.0                   -- How long should we let people look at the scoreboard before closing the server automatically?
 TREE_REGROW_TIME = 60.0                 -- How long should it take individual trees to respawn after being cut down/destroyed?
 
@@ -210,21 +210,33 @@ end
 function GameMode:OnNPCSpawned(keys)
 
   print("[vampirism] NPC Spawned")
+  print('playerids')
+
 
   local npc = EntIndexToHScript(keys.entindex)
+  local playerID = npc:GetPlayerOwnerID()
+
+  print(npc:GetPlayerOwnerID())
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
-    if npc:GetMainControllingPlayer() < 8 then    
-      WOOD[npc:GetPlayerOwnerID()] = 50
-      TOTAL_FOOD[npc:GetPlayerOwnerID()] = 15
-      CURRENT_FOOD[npc:GetPlayerOwnerID()] = 0
-      UNIT_KV[npc:GetPlayerOwnerID()] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
-      UNIT_KV[npc:GetPlayerOwnerID()].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
-      print("made 40 wood for player "..npc:GetPlayerOwnerID())
+    if playerID < 8 then 
+      WOOD[playerID] = 50
+      TOTAL_FOOD[playerID] = 15
+      CURRENT_FOOD[playerID] = 0
+      UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+      UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
+      print("made 40 wood for player "..playerID)
       HUMAN_COUNT = HUMAN_COUNT + 1
+      PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
     else
-      --its a vampire player
-    end  
+      npc:RemoveSelf()
+      print('replacing hero')
+      Timers:CreateTimer(.3, function ()
+      		npc:SetAbsOrigin(OutOfWorldVector)
+      		return nil
+      	end)    
+      PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_BADGUYS)
+    end
   end
 
   if npc:GetName() == "npc_dota_hero_night_stalker" then
@@ -530,6 +542,7 @@ function GameMode:OnEntityKilled( keys )
 
 end
 
+
 function GameMode:ModifyStatBonuses(unit) 
   local spawnedUnitIndex = unit 
   print("modifying stat bonuses") 
@@ -781,12 +794,13 @@ function GameMode:OnConnectFull(keys)
   GameMode:CaptureGameMode()
   
   local entIndex = keys.index+1
+  print('entindex'..tostring(entIndex))
+
   -- The Player entity of the joining user
   local ply = EntIndexToHScript(entIndex)
-  
   -- The Player ID of the joining player
   local playerID = ply:GetPlayerID()
-  
+  print('playerID '..playerID)
   -- Update the user ID table with this user
   self.vUserIds[keys.userid] = ply
 
@@ -806,6 +820,42 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(9, false)
   mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
+  
+  heroRoller(playerID)
+end
+
+--an EPIC function. aka how to skip hero selection.
+function heroRoller(playerID)
+	print(PlayerResource:GetSelectedHeroName(playerID))
+	if playerID < 8 then
+		if PlayerResource:GetSelectedHeroName(playerID) ~= "npc_dota_hero_omniknight" then
+			PlayerResource:GetPlayer(playerID):MakeRandomHeroSelection()
+			Timers:CreateTimer(.3, function ()
+				print('ROLLING')
+				heroRoller(playerID)
+				return nil
+			end)
+			return
+		else
+			PlayerResource:SetHasRepicked(playerID) 
+			return
+		end
+	else
+		if PlayerResource:GetSelectedHeroName(playerID) ~= "npc_dota_hero_night_stalker" then
+			PlayerResource:GetPlayer(playerID):MakeRandomHeroSelection()
+			heroRoller(playerID)
+			Timers:CreateTimer(.3, function ()
+				print('ROLLING')
+				heroRoller(playerID)
+				return nil
+			end)
+			return
+		else
+			PlayerResource:SetHasRepicked(playerID) 
+			return
+		end
+	end
+
 end
 
 -- This is an example console command
