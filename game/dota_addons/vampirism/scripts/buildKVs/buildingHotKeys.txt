@@ -75,4 +75,23 @@
 		"build_heal_wall_t2"					"10"
 		"build_cancel"							"11"
 	}
+
+	//=================================================================================================================
+	// Research Center T1
+	//=================================================================================================================
+	"research_center_t1"
+	{
+		"research_improved_lumber_harvesting"						"0"
+		"research_advanced_lumber_harvesting"					"1"
+		"research_insane_lumber_harvesting"					"2"
+		"research_sharpened_hatchets"				"3"
+		"research_rifles"					"4"
+		"research_improved_worker_motivation"							"5"
+		"research_improved_gem_quality"				"6"
+		"research_advanced_gem_quality"					"7"
+		"research_unbeatable_gem_quality"							"8"
+		"build_cancel"					"9"
+		"build_cancel"					"10"
+		"build_cancel"							"11"
+	}
 }
