@@ -115,8 +115,10 @@ function ChoppedLumber( keys )
   local pID = worker:GetMainControllingPlayer()
   local unitName = worker:GetUnitName()
 
-  worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + UNIT_KV[pID][unitName].LumberPerChop))
-  worker.housePos = nil
+  if currentLumber + UNIT_KV[pID][unitName].LumberPerChop <= UNIT_KV[pID][unitName].MaximumLumber then
+    worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + UNIT_KV[pID][unitName].LumberPerChop))
+    worker.housePos = nil
+  end
 end
 
 -- Stop the worker getting stuck if you want to get them away from the trees
