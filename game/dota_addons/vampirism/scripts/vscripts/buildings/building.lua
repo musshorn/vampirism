@@ -169,5 +169,7 @@ function RepairStop( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
   local target = keys.target
-  PrintTable(target) -- is this still a thing?
+  
+  Timers:RemoveTimer(target.RepairTimer)
+  caster:Stop()
 end
