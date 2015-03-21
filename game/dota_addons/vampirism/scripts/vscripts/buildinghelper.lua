@@ -519,19 +519,24 @@ function BuildingHelper:AddBuilding(keys)
 
 		local topRight = CreateUnitByName("npc_bh_dummy", Vector(tr_x,tr_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
 		topRight:FindAbilityByName("bh_dummy"):OnUpgrade() 
-		--DebugDrawCircle(Vector(tr_x, tr_y, origin.z), Vector(255,0,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
+		DebugDrawCircle(Vector(tr_x, tr_y, origin.z), Vector(255,0,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
 		local topLeft = CreateUnitByName("npc_bh_dummy", Vector(tl_x,tl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
 		topLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
-		--DebugDrawCircle(Vector(tl_x, tl_y, origin.z), Vector(0,255,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
+		DebugDrawCircle(Vector(tl_x, tl_y, origin.z), Vector(0,255,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
 		local botRight = CreateUnitByName("npc_bh_dummy", Vector(br_x,br_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
 		botRight:FindAbilityByName("bh_dummy"):OnUpgrade()
-		--DebugDrawCircle(Vector(br_x, br_y, origin.z), Vector(0,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
+		DebugDrawCircle(Vector(br_x, br_y, origin.z), Vector(0,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
 		local botLeft = CreateUnitByName("npc_bh_dummy", Vector(bl_x,bl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
 		botLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
-	  --DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
+	  DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
+
+	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(0,255,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(255,0,0), false, 20) 
 
 	  local dummies = { topRight, topLeft, botRight, botLeft}
 
@@ -608,7 +613,7 @@ function BuildingHelper:AddBuilding(keys)
 		abil.succeeded = false
 		abil:SetLevel(1)
 		caster.orders[DoUniqueString("order")] = {["unitName"] = unitName, ["pos"] = vBuildingCenter, ["team"] = caster:GetTeam(),
-			["buildingTable"] = buildingTable, ["squares_to_close"] = closed, ["keys"] = keys}
+			["buildingTable"] = buildingTable, ["squares_to_close"] = closed, ["keys"] = keys, ["radius"] = buildingRect.leftBorderX / 2}
 		Timers:CreateTimer(.03, function()
 			caster:CastAbilityOnPosition(vBuildingCenter, abil, 0)
 			if keys.onBuildingPosChosen ~= nil then
@@ -686,6 +691,8 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	-- create building entity
 	print("UnitName: " .. order.unitName)
 	local unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
+	unit:SetHullRadius(order["radius"]) 
+	DebugDrawCircle(unit:GetAbsOrigin(), Vector(255,50,255), 5, unit:GetPaddedCollisionRadius(), false, 60)
 	local building = unit --alias
 	building.isBuilding = true
 	local regen = building:GetBaseHealthRegen()
