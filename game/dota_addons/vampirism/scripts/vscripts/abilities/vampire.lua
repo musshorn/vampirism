@@ -21,19 +21,33 @@ end
 --Called when the dummy is created, and destroys it on time.
 function VisionDummy(keys)
   local dummy = keys
-	local lock = dummy:FindAbilityByName("vampire_vision_dummy_lock")
+	
 
   --The level of the reveal dummy
   local level = tonumber(string.sub(dummy:GetUnitName(), -1))
 
   --Determine the amount of time the dummy should stay alive.
   if level == 1 then
+    local lock = dummy:FindAbilityByName("vampire_vision_dummy_lock")
+    lock:OnUpgrade()
     Timers:CreateTimer(10, function ()
         dummy:RemoveSelf()
+        return nil
     end)
   elseif level == 2 then
+    local lock = dummy:FindAbilityByName("vampire_vision_dummy_lock")
+    lock:OnUpgrade()
     Timers:CreateTimer(20, function ()
         dummy:RemoveSelf()
+        return nil
+    end)
+  elseif level == 3 then
+    print('lvevel 3')
+    local lock = dummy:FindAbilityByName("vampire_vision_dummy_lock2")
+    lock:OnUpgrade()
+    Timers:CreateTimer(55, function ()
+        dummy:RemoveSelf()
+        return nil
     end)
   end
 end

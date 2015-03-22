@@ -1304,7 +1304,7 @@
 	{
 		// General
     //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"						"npc_dota_building"
+    "BaseClass"						"npc_dota_creature"
     "Model"							"models/tower_good4_reference.vmdl"
 		"ModelScale"				"1"
 		
@@ -1544,7 +1544,7 @@
 		//----------------------------------------------------------------
 
 		"Ability1"					"call_buildui"	//Human test
-		"Ability2"					"debug_draw_building_boxes"					// Ability 2.
+		"Ability2"					""					// Ability 2.
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
 		"Ability5"					""					// Ability 5.
@@ -1957,6 +1957,25 @@
 		"VisionNighttimeRange"			"3000"		// Range of vision at night time.
     }
 
+    //=================================================================================	
+	// Vampire: Reveal Dummy (Level 3) - Portal vision
+	//=================================================================================
+	"vampire_vision_dummy_3"
+	{
+		// General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"						"npc_dota_creature"
+        "Model"							"models/development/invisiblebox.vmdl"	// Model
+        "MaxLevel"                      "1"
+        "MovementCapabilities"			"DOTA_UNIT_CAP_MOVE_FLY"
+        "Ability1"						"vampire_vision_dummy_lock2"
+
+
+        // Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"			"2000"		// Range of vision during day light.
+		"VisionNighttimeRange"			"2000"		// Range of vision at night time.
+	}
 
 
 	//=================================================================================	
@@ -2143,6 +2162,4 @@
 		//----------------------------------------------------------------
 		"AttackDesire"				"1.5"		// How much bots want to attack them vs other non-hero things
 	}
-
-
 }

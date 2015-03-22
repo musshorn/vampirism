@@ -39,6 +39,7 @@ function Precache( context )
 		PrecacheResource("particle", "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_arcane_orb.vpcf", context)
 		PrecacheResource("particle", "particles/msg_heal.vpcf", context)
+		PrecacheResource("particle", "particles/vampire/shadow_demon_disruption.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models

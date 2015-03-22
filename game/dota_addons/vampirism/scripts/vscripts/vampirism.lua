@@ -114,6 +114,12 @@ function GameMode:OnAllPlayersLoaded()
 
   local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
   sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
+
+  --timer needed to not break particles.
+  Timers:CreateTimer(2, function()
+    local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
+    return nil
+  end)
 end
 
 --[[
