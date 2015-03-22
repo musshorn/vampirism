@@ -1304,8 +1304,8 @@
 	{
 		// General
     //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"					"npc_dota_creature"
-    "Model"							"models/props_structures/tower_good4.vmdl"
+    "BaseClass"						"npc_dota_creature"
+    "Model"							"models/tower_good4_reference.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"

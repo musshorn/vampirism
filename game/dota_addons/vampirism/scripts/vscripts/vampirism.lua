@@ -158,6 +158,14 @@ end
 ]]
 function GameMode:OnGameInProgress()
   print("[vampirism] The game has officially begun")
+  local vamps = Entities:FindAllByName("npc_dota_hero_night_stalker")
+
+  for i = 1, table.getn(vamps) do
+  	print(vamps[i]:GetUnitName())
+  	vamps[i]:RemoveModifierByName("modifier_init_hider")
+  	vamps[i]:SetAbilityPoints(3)
+    FindClearSpaceForUnit(vamps[i], Vector(96, -416, 256), false)
+  end
 end
 
 
@@ -212,13 +220,17 @@ function GameMode:OnNPCSpawned(keys)
   print("[vampirism] NPC Spawned")
   print('playerids')
 
-
   local npc = EntIndexToHScript(keys.entindex)
+  print(npc:GetAbsOrigin())
   local playerID = npc:GetPlayerOwnerID()
 
   print(npc:GetPlayerOwnerID())
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
+  	npc:FindAbilityByName("call_buildui"):SetLevel(1)
+  	npc:FindAbilityByName("human_blink"):SetLevel(1)
+  	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
+  	npc:FindAbilityByName("human_repair"):SetLevel(1)
     if playerID < 8 then 
       WOOD[playerID] = 50
       TOTAL_FOOD[playerID] = 15
@@ -228,22 +240,25 @@ function GameMode:OnNPCSpawned(keys)
       print("made 40 wood for player "..playerID)
       HUMAN_COUNT = HUMAN_COUNT + 1
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
-    else
-      npc:RemoveSelf()
-      print('replacing hero')
-      Timers:CreateTimer(.3, function ()
-      		npc:SetAbsOrigin(OutOfWorldVector)
-      		return nil
-      	end)    
-      PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_BADGUYS)
     end
   end
 
+  local newState = GameRules:State_Get()
+  if newState == DOTA_GAMERULES_STATE_PRE_GAME then
+ 	print('pregame')
+  end
+
   if npc:GetName() == "npc_dota_hero_night_stalker" then
-    ability = npc:FindAbilityByName("vampire_particles")
-    --ability:SetLevel(1)
-    ability:OnUpgrade()
-    VAMP_COUNT = VAMP_COUNT + 1
+  	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
+  		--Next frame timer
+  		Timers:CreateTimer(0.03, function ()
+  			npc:FindAbilityByName("vampire_init_hider"):OnUpgrade()
+  			npc:SetAbsOrigin(OutOfWorldVector)
+    		npc:FindAbilityByName("vampire_particles"):OnUpgrade()
+    		VAMP_COUNT = VAMP_COUNT + 1
+    		return nil
+  		end)
+    end
   end
   if npc:IsRealHero() and npc.bFirstSpawned == nil then
     npc.bFirstSpawned = true
@@ -855,7 +870,6 @@ function heroRoller(playerID)
 			return
 		end
 	end
-
 end
 
 -- This is an example console command
