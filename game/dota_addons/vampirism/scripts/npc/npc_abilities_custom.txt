@@ -718,6 +718,24 @@
 			}
 		}
 	}
+	//=================================================================================	/
+	// Debugging: Draw building boxes
+	//=================================================================================	/
+	"debug_draw_building_boxes"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
+		"AbilityChannelTime"	"20"
+		"BaseClass"	"ability_datadriven"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/buildinghelper.lua"
+				"Function"		"DrawDebugLines"
+				"TARGET"	"CASTER"
+			}
+		}
+	}
 
 
 	//=================================================================================	/
@@ -1297,7 +1315,6 @@
 				{
 					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NOT_ON_MINIMAP"		"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}

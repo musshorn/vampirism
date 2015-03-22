@@ -533,6 +533,11 @@ function BuildingHelper:AddBuilding(keys)
 		botLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
 	  --DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
+	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(0,255,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(255,0,0), false, 20) 
+
 	  local dummies = { topRight, topLeft, botRight, botLeft}
 
 	  table.insert(player.temp_dummies, dummies)
@@ -608,7 +613,7 @@ function BuildingHelper:AddBuilding(keys)
 		abil.succeeded = false
 		abil:SetLevel(1)
 		caster.orders[DoUniqueString("order")] = {["unitName"] = unitName, ["pos"] = vBuildingCenter, ["team"] = caster:GetTeam(),
-			["buildingTable"] = buildingTable, ["squares_to_close"] = closed, ["keys"] = keys}
+			["buildingTable"] = buildingTable, ["squares_to_close"] = closed, ["keys"] = keys, ["buildingRect"] = buildingRect}
 		Timers:CreateTimer(.03, function()
 			caster:CastAbilityOnPosition(vBuildingCenter, abil, 0)
 			if keys.onBuildingPosChosen ~= nil then
@@ -682,10 +687,19 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 
 	local playersHero = buildingTable["playersHero"]
 	local player = buildingTable["player"]
+	buildingTable["buildingRect"] = order.buildingRect
 
 	-- create building entity
-	print("UnitName: " .. order.unitName)
 	local unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
+	local radius = (order.pos.x - order.buildingRect.leftBorderX) + 32
+	unit:SetHullRadius(radius)	
+	DebugDrawCircle(unit:GetAbsOrigin(), Vector(255,50,255), 5, unit:GetPaddedCollisionRadius(), false, 20)
+
+	-- builder can get stuck in the building so we'll move him
+	Timers:CreateTimer(0.03, function ( )
+		FindClearSpaceForUnit(builder, builder:GetAbsOrigin(), true)
+	end)
+
 	local building = unit --alias
 	building.isBuilding = true
 	local regen = building:GetBaseHealthRegen()
@@ -720,7 +734,6 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 
 
 	local fMaxHealth = unit:GetMaxHealth()
-	PrintTable(UNIT_KV[builder:GetMainControllingPlayer()][order.unitName])
 	if UNIT_KV[builder:GetMainControllingPlayer()][order.unitName].HealthModifier ~= nil then
 		fMaxHealth = fMaxHealth * UNIT_KV[builder:GetMainControllingPlayer()][order.unitName].HealthModifier
 		unit:SetMaxHealth(fMaxHealth)
@@ -1244,4 +1257,20 @@ function TableLength( t )
         len = len + 1
     end
     return len
+end
+
+function DrawDebugLines( keys )
+	local caster = keys.caster
+	local buildingRect = caster.buildingTable["buildingRect"]
+	local origin = caster:GetAbsOrigin()
+
+	-- Draw box around the building
+	DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(0,255,0), false, 20) 
+	DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
+	DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
+	DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(255,0,0), false, 20) 
+
+	-- Draw circle hit box
+	DebugDrawCircle(caster:GetAbsOrigin(), Vector(255,50,255), 5, caster:GetPaddedCollisionRadius(), false, 20)
+
 end
