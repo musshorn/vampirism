@@ -520,8 +520,20 @@ function GameMode:OnEntityKilled( keys )
     ParticleManager:SetParticleControlEnt(particle, 1, unit, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", killedUnit:GetAbsOrigin(), true)
     Timers:CreateTimer(.1, function()
       unit:RemoveSelf()
-      return
-      end) 
+      return nil
+    end) 
+
+    HUMAN_COUNT = HUMAN_COUNT - 1
+    if HUMAN_COUNT == 0 then
+      GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
+    end
+  end
+
+  if killedUnit:GetName() == "npc_dota_hero_night_stalker" then
+    VAMP_COUNT = VAMP_COUNT - 1
+    if VAMP_COUNT == 0 then
+      GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
+    end
   end
 
   if killerEntity:GetUnitName() == "npc_dota_hero_night_stalker" then
