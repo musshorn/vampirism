@@ -1304,7 +1304,7 @@
 	{
 		// General
     //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"						"npc_dota_creature"
+    "BaseClass"						"npc_dota_building"
     "Model"							"models/tower_good4_reference.vmdl"
 		"ModelScale"				"1"
 		
