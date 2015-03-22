@@ -1304,7 +1304,7 @@
 	{
 		// General
     //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"						"npc_dota_building"
+    "BaseClass"						"npc_dota_creature"
     "Model"							"models/tower_good4_reference.vmdl"
 		"ModelScale"				"1"
 		
@@ -1544,7 +1544,11 @@
 		//----------------------------------------------------------------
 
 		"Ability1"					"call_buildui"	//Human test
+<<<<<<< HEAD
+		"Ability2"					""					// Ability 2.
+=======
 		"Ability2"					"debug_draw_building_boxes"					// Ability 2.
+>>>>>>> upstream/master
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
 		"Ability5"					""					// Ability 5.

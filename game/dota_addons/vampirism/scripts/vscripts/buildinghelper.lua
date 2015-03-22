@@ -533,10 +533,10 @@ function BuildingHelper:AddBuilding(keys)
 		botLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
 	  --DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
-	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(0,255,0), false, 20) 
-	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
-	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
-	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.topBorderY , origin.z), Vector(0,255,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.bottomBorderY, origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.bottomBorderY , origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.topBorderY , origin.z), Vector(255,0,0), false, 20) 
 
 	  local dummies = { topRight, topLeft, botRight, botLeft}
 
@@ -691,9 +691,10 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 
 	-- create building entity
 	local unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
-	local radius = (order.pos.x - order.buildingRect.leftBorderX) + 32
+	local radius = (order.pos.x - order.buildingRect.leftBorderX)
 	unit:SetHullRadius(radius)	
 	DebugDrawCircle(unit:GetAbsOrigin(), Vector(255,50,255), 5, unit:GetPaddedCollisionRadius(), false, 20)
+	unit:RemoveModifierByName("modifier_invulnerable")
 
 	-- builder can get stuck in the building so we'll move him
 	Timers:CreateTimer(0.03, function ( )
