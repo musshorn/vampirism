@@ -116,7 +116,8 @@ function GameMode:OnAllPlayersLoaded()
   sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
 
   --timer needed to not break particles.
-  Timers:CreateTimer(2, function()
+  Timers:CreateTimer(5, function()
+    print('thjis')
     local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
     return nil
   end)
