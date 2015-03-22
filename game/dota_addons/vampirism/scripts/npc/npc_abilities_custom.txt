@@ -718,24 +718,6 @@
 			}
 		}
 	}
-	//=================================================================================	/
-	// Debugging: Draw building boxes
-	//=================================================================================	/
-	"debug_draw_building_boxes"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"20"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/buildinghelper.lua"
-				"Function"		"DrawDebugLines"
-				"TARGET"	"CASTER"
-			}
-		}
-	}
 
 
 	"upgrade_to_t2_tent"
