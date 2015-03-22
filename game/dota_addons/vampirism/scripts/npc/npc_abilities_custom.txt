@@ -360,7 +360,7 @@
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_DONT_RESUME_ATTACK"
 		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"rubick_empty1"
+		"AbilityTextureName"	"call_build"
 		"MaxLevel"	"1"
 
 		"OnSpellStart"
@@ -379,7 +379,7 @@
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
 		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"rubick_empty1"
+		"AbilityTextureName"	"antimage_blink"
 		"MaxLevel"	"1"
 		"AbilityCastRange"	"1000000"
 		"AbilityCastPoint"	"0.3"
@@ -747,8 +747,10 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
 		"AbilityCastAnimation"	"ACT_DOTA_ATTACK"
+		"AbilityTextureName"	"tinker_rearm"
 		"AbilityChannelTime"	"200"
 		"AbilityCastRange"	"150"
+		"MaxLevel"			"1"
 		"BaseClass"	"ability_datadriven"
 		"OnSpellStart"
 		{

@@ -5,8 +5,8 @@
 	//=================================================================================================================
 	"npc_dota_hero_omniknight"
 	{
-		"build_house1"									"h"
-		"build_tent_t1"									"t"
+		"build_house1"									"g" //h
+		"build_tent_t1"									"y" //t
 		"build_slayer_tavern"							"a"
 		"build_human_surplus"							"p"
 		"build_tower_pearls"							"s"

@@ -239,6 +239,7 @@ function GameMode:OnNPCSpawned(keys)
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
       print("made 40 wood for player "..playerID)
       HUMAN_COUNT = HUMAN_COUNT + 1
+      npc:SetAbilityPoints(0)
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
     end
   end
