@@ -19,6 +19,7 @@ function House1:Init(unit)
 		if not unit:IsAlive() then
 			return nil
 		end
+
 		
 		-- Check if there is units in the queue and the queue is free
 		-- Note the maximum displayable buffs seems to be 7, any more are not shown.
@@ -27,48 +28,54 @@ function House1:Init(unit)
 			local caster =  keys.caster
 			local abilityName = keys.AddToQueue
 			local unitToSpawn = keys.SpawnUnit
-						
+			house1.workHandler = caster:FindAbilityByName(abilityName)
 	
 			-- Check if the worker will fit in the food cap
 			if UNIT_KV[caster:GetMainControllingPlayer()][unitToSpawn].ConsumesFood ~= nil then
 				local requestingFood = UNIT_KV[caster:GetMainControllingPlayer()][unitToSpawn].ConsumesFood
 
 				if TOTAL_FOOD[caster:GetMainControllingPlayer()] >= CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood then
-					house1.workHandler = caster:FindAbilityByName(abilityName)
 					house1.workHandler:SetChanneling(true)
 					local spawnTime = house1.workHandler:GetChannelTime()
 
 					house1.doingWork = true
 
-						-- Create a timer on a delay to create the worker
-						Timers:CreateTimer(house1.uniqueName, {
+					-- Create a timer on a delay to create the worker
+					Timers:CreateTimer(house1.uniqueName, {
 								endTime = spawnTime,
 								callback = function()
-									local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
-									
-									CURRENT_FOOD[caster:GetMainControllingPlayer() ] = CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood
-									FireGameEvent('vamp_food_changed', { player_ID = caster:GetMainControllingPlayer() , food_total = CURRENT_FOOD[caster:GetMainControllingPlayer()]})
-									
-									caster:RemoveModifierByName(house1.workHandler:GetName())
-									house1.workHandler:SetChanneling(false)
-									house1.doingWork = false
+									if TOTAL_FOOD[caster:GetMainControllingPlayer()] >= CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood then
+										local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
+										
+										CURRENT_FOOD[caster:GetMainControllingPlayer() ] = CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood
+										FireGameEvent('vamp_food_changed', { player_ID = caster:GetMainControllingPlayer() , food_total = CURRENT_FOOD[caster:GetMainControllingPlayer()]})
+										
+										caster:RemoveModifierByName(house1.workHandler:GetName())
+										house1.workHandler:SetChanneling(false)
+										house1.doingWork = false
 
-									-- If a rally point is set for this building then move the worker to it.
-									-- Needs a delay as movement cant happen on the same frame as spawn
-									-- If a rally point is not set then the worker will move to the nearest tree
-									if house1.rallyPoint ~= nil then
-										Timers:CreateTimer(0.05, function()
-											unit:MoveToPosition(house1.rallyPoint)
-											return nil
-										end)
-									else
-  										local tree = Entities:FindByClassnameNearest("ent_dota_tree",unit:GetAbsOrigin(),1000)
-  										Timers:CreateTimer(0.05, function()
-												unit:MoveToPosition(tree:GetAbsOrigin())
+										-- If a rally point is set for this building then move the worker to it.
+										-- Needs a delay as movement cant happen on the same frame as spawn
+										-- If a rally point is not set then the worker will move to the nearest tree
+										if house1.rallyPoint ~= nil then
+											Timers:CreateTimer(0.05, function()
+												unit:MoveToPosition(house1.rallyPoint)
 												return nil
 											end)
+										else
+	  										local tree = Entities:FindByClassnameNearest("ent_dota_tree",unit:GetAbsOrigin(),1000)
+	  										Timers:CreateTimer(0.05, function()
+													unit:MoveToPosition(tree:GetAbsOrigin())
+													return nil
+												end)
+										end
+									else
+										FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Build more farms" } )
+										table.remove(house1.queue)
+										caster:RemoveModifierByName(house1.workHandler:GetName())
+										house1.workHandler:SetChanneling(false)
+										house1.doingWork = false
 									end
-
 								
 								return nil
 							end})

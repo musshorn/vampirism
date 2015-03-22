@@ -7,7 +7,12 @@ function TrainUnit( keys )
   if UNIT_KV[pID][unitToSpawn].ConsumesFood ~= nil then
     local requestingFood = UNIT_KV[pID][unitToSpawn].ConsumesFood
     if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood then
+      if table.getn(building.queue) <= 7 then
         table.insert(building.queue, keys)
+      else
+        FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "Too many units in queue" } )
+        building:RemoveModifierByName(keys.AddToQueue)
+      end
     else
       FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "Build more farms" } )
       building:RemoveModifierByName(building.workHandler:GetName())
