@@ -252,6 +252,7 @@ function HealthBeam( keys )
   end
 end
 
+--[[Ability that jumps to enemy units, dealing decreased damage after each jump]]
 function ChainOfDeath(keys)
   local caster = keys.caster
   local caster_location = caster:GetAbsOrigin()
@@ -345,11 +346,17 @@ end
 function CykaSpeed(keys)
   local caster = keys.caster
   local ability = keys.ability
-  local ability_level = ability:GetLevel() - 1
+  local ability_level = ability:GetLevel()
   local duration = ability:GetLevelSpecialValueFor("duration", ability_level)
 
   print(ability_level)
   caster:AddNewModifier(caster, ability, "modifier_invisible", {duration = duration})
   caster:AddNewModifier(caster, ability, "modifier_bloodseeker_thirst_speed", {duration = duration, visibility_threshold_pct = 100, invis_threshold_pct = 100, bonus_movement_speed = 1, bonus_damage = 0})
-  caster:AddNewModifier(caster, ability, "modifier_item_orb_of_venom_slow", {duration = duration, slow = -42})
+  if ability_level == 1 then
+    caster:AddNewModifier(caster, ability, "modifier_item_orb_of_venom_slow", {duration = duration, slow = -42})
+  elseif ability_level == 2 then 
+    caster:AddNewModifier(caster, ability, "modifier_item_orb_of_venom_slow", {duration = duration, slow = -41})
+  elseif ability_level == 3 then
+    caster:AddNewModifier(caster, ability, "modifier_item_orb_of_venom_slow", {duration = duration, slow = -39})
+  end
 end

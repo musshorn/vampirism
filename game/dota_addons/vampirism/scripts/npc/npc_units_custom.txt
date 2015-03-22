@@ -1304,8 +1304,8 @@
 	{
 		// General
     //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"					"npc_dota_creature"
-    "Model"							"models/props_structures/tower_good4.vmdl"
+    "BaseClass"						"npc_dota_creature"
+    "Model"							"models/tower_good4_reference.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"
@@ -1544,7 +1544,7 @@
 		//----------------------------------------------------------------
 
 		"Ability1"					"call_buildui"	//Human test
-		"Ability2"					""					// Ability 2.
+		"Ability2"					"debug_draw_building_boxes"					// Ability 2.
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
 		"Ability5"					""					// Ability 5.
@@ -1621,7 +1621,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 
-		"Ability1"					""	//Human test
+		"Ability1"					"debug_draw_building_boxes"	//Human test
 		"Ability2"					""					// Ability 2.
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
