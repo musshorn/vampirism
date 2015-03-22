@@ -108,19 +108,16 @@ end
 function GameMode:OnAllPlayersLoaded()
   print("[vampirism] All Players have loaded into the game")
 
-  local dummy = CreateUnitByName("npc_bh_dummy", OutOfWorldVector, false, nil, nil, 0)
-  local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
-  ParticleManager:SetParticleControl(particle, 0, Vector(96, -416, 570))
-
-  local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
-  sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
-
-  --timer needed to not break particles.
-  Timers:CreateTimer(5, function()
-    print('thjis')
+    local dummy = CreateUnitByName("npc_bh_dummy", Vector(0,0,0), true, nil, nil, 0)
+    local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
+    dummy:FindAbilityByName("vampire_vision_dummy_lock2"):OnUpgrade()
+    ParticleManager:SetParticleControl(particle, 0, Vector(96, -416, 570))
+  
+    local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
+    sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
+  
     local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
-    return nil
-  end)
+
 end
 
 --[[
@@ -263,6 +260,7 @@ function GameMode:OnNPCSpawned(keys)
   			npc:FindAbilityByName("vampire_init_hider"):OnUpgrade()
   			npc:SetAbsOrigin(OutOfWorldVector)
     		npc:FindAbilityByName("vampire_particles"):OnUpgrade()
+        npc:SetAbilityPoints(0)
     		VAMP_COUNT = VAMP_COUNT + 1
     		return nil
   		end)
