@@ -1263,14 +1263,14 @@ function DrawDebugLines( keys )
 	local caster = keys.caster
 	local buildingRect = caster.buildingTable["buildingRect"]
 	local origin = caster:GetAbsOrigin()
-	
+
 	-- Draw box around the building
 	DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(0,255,0), false, 20) 
-  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
-  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
-  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(255,0,0), false, 20) 
+	DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.topBorderY + 32, origin.z), Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
+	DebugDrawLine_vCol(Vector(buildingRect.rightBorderX + 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(255,0,0), false, 20) 
+	DebugDrawLine_vCol(Vector(buildingRect.leftBorderX - 32,buildingRect.bottomBorderY - 32, origin.z), Vector(buildingRect.leftBorderX - 32,buildingRect.topBorderY + 32, origin.z), Vector(255,0,0), false, 20) 
 
-  -- Draw circle hit box
- 	DebugDrawCircle(caster:GetAbsOrigin(), Vector(255,50,255), 5, caster:GetPaddedCollisionRadius(), false, 20)
+	-- Draw circle hit box
+	DebugDrawCircle(caster:GetAbsOrigin(), Vector(255,50,255), 5, caster:GetPaddedCollisionRadius(), false, 20)
 
 end
