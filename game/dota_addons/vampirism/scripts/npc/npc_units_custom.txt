@@ -976,6 +976,12 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"50"
+		"BountyGoldMin"				"1"
+		"BountyGoldMax"				"1"
+
 		// Vamp
 		"SpawnsUnits"	"true"
 		"RecievesLumber"	"true"
@@ -1059,6 +1065,12 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"75"
+		"BountyGoldMin"				"1"
+		"BountyGoldMax"				"1"
+
 		// Vamp
 		"ProvidesFood"	"25"
 	}
@@ -1066,9 +1078,9 @@
 	"tent_t2"
 	{
 		// General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"					"npc_dota_creature"
-    "Model"						"models/props_structures/barrel_oct.vmdl"
+    	//-------------------------------------------------------------------------------------------------------------
+    	"BaseClass"					"npc_dota_creature"
+    	"Model"						"models/props_structures/barrel_oct.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"
@@ -1133,6 +1145,12 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"150"
+		"BountyGoldMin"				"4"
+		"BountyGoldMax"				"4"
 
 		// Vamp
 		"ProvidesFood"	"25"
@@ -1213,6 +1231,12 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"50"
+		"BountyGoldMax"				"3"
+		"BountyGoldMin"				"3"
 
 		"IsTech"		"true"
 		//Key which contains each neccessary tech for this unit, sperated by spaces.
@@ -1303,9 +1327,9 @@
 	"tower_pearls"
 	{
 		// General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"						"npc_dota_creature"
-    "Model"							"models/tower_good4_reference.vmdl"
+   		//-------------------------------------------------------------------------------------------------------------
+   		"BaseClass"						"npc_dota_building"
+    	"Model"							"models/tower_good4_reference.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"
@@ -1371,6 +1395,12 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"125"
+		"BountyGoldMin"				"1"
+		"BountyGoldMax"				"1"
+
 		"IsTech"		"true"
 		"NeedTech"		"house_t1"
 	}
@@ -1448,6 +1478,12 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"50"
+		"BountyGoldMin"				"1"
+		"BountyGoldMax"				"1"
 
 		"IsTech"		"true"
 		"NeedTech"		"house_t1"
@@ -1533,7 +1569,7 @@
 	//=================================================================================
 	"research_center_t1"
 	{
-		// General
+	// General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"					"npc_dota_creature"
     "Model"						"models/props_structures/weapon_rack_00.vmdl"
@@ -1601,6 +1637,12 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"50"
+		"BountyGoldMin"				"3"
+		"BountyGoldMax"				"3"
 
 		"IsTech"		"true"
 		"NeedTech"		"house_t1"
@@ -1680,6 +1722,13 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"200"
+		"BountyGoldMin"				"5"
+		"BountyGoldMax"				"5"
+
 		"IsTech"		"true"
 		"NeedTech"		"house_t1"
 	}
@@ -1758,6 +1807,12 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"25"
+		"BountyGoldMin"				"2"
+		"BountyGoldMax"				"2"
+
 		"IsTech"		"true"
 		"NeedTech"		"human_vault house_t2"
 	}
@@ -1835,6 +1890,12 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"100"
+		"BountyGoldMin"				"5"
+		"BountyGoldMax"				"5"
 
 		"IsTech"		"true"
 		"NeedTech"		"house_t1"
