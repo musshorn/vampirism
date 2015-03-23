@@ -109,6 +109,9 @@ function FinishUpgrade( keys )
   caster:Destroy()
   local unit = CreateUnitByName(targetUnit, pos, false, nil, nil, team)
   unit:SetControllableByPlayer(player, true)
+  if keys.Scale ~= nil then
+    unit:SetModelScale(keys.Scale)
+  end
 
 end
 

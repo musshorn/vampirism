@@ -865,6 +865,7 @@
 				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
 				"Function"		"FinishUpgrade"
 				"TargetUnit"	"tent_t2"
+				"Scale"				"1.0"
 			}
 		}
 	}
