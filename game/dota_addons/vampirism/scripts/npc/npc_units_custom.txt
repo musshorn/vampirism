@@ -177,7 +177,7 @@
 	{
 		//General
 		//
-		"Model"	"models/heroes/keeper_of_the_light/horsefx.vmdl"
+		"Model"	"models/props_rock/riveredge_rock006a.vmdl"
 		"BaseClass"	"npc_dota_creature"
 		//"ModelScale"	"0.1"
 		
@@ -1005,7 +1005,7 @@
 		// General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"					"npc_dota_creature"
-        "Model"						"models/props_structures/barrel_fish.vmdl"
+        "Model"						"models/barrel_fish_reference.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"
@@ -1086,7 +1086,7 @@
 		// General
     	//-------------------------------------------------------------------------------------------------------------
     	"BaseClass"					"npc_dota_creature"
-    	"Model"						"models/props_structures/barrel_oct.vmdl"
+    	"Model"						"models/barrel_oct_reference.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"
@@ -1586,13 +1586,19 @@
 		//----------------------------------------------------------------
 
 		"Ability1"					"call_buildui"	//Human test
-		"Ability2"					""					// Ability 2.
-		"Ability3"					""					// Ability 3.
-		"Ability4"					""					// Ability 4.
-		"Ability5"					""					// Ability 5.
-		"Ability6"					""					// Ability 6 - Extra.
-		"Ability7"					""					// Ability 7 - Extra.
-		"Ability8"					"is_a_building"					// Ability 8 - Extra.
+		"Ability2"					"research_improved_lumber_harvesting"					// Ability 2.
+		"Ability3"					"research_advanced_lumber_harvesting"					// Ability 3.
+		"Ability4"					"research_insane_lumber_harvesting"					// Ability 4.
+		"Ability5"					"research_sharpened_hatchets"					// Ability 5.
+		"Ability6"					"research_rifles"					// Ability 6 - Extra.
+		"Ability7"					"research_improved_worker_motivation"
+		"Ability8"					"research_improved_gem_quality"
+		"Ability9"					"research_advanced_gem_quality"
+		"Ability10"					"research_unbeatable_gem_quality"
+		"Ability11"					"build_cancel"
+		"Ability13"					"build_cancel1"
+		"Ability14"					"build_cancel2"
+		"Ability15"					"is_a_building"					// Ability 8 - Extra.
 
 		// Armor
 		//----------------------------------------------------------------

@@ -1400,8 +1400,8 @@
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
+		"Scale"							"0.1"
+		"MaxScale"						"0.2"
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"
@@ -1820,6 +1820,88 @@
 	}
 
 	"build_cancel"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"cancel"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						".5"
+		"CasterCanControl"				"1"
+
+		"AbilityCooldown"				"2.0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"house_t1"
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+
+	"build_cancel1"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"cancel"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						".5"
+		"CasterCanControl"				"1"
+
+		"AbilityCooldown"				"2.0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"house_t1"
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+
+	"build_cancel2"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"						"ability_datadriven"

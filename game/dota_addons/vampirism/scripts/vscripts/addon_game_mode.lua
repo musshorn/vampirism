@@ -30,8 +30,6 @@ function Precache( context )
 
 		print("[vampirism] Performing pre-load precache")
 
-
-
 		-- Particles can be precached individually or by folder
 		-- It it likely that precaching a single particle system will precache all of its children, but this may not be guaranteed
 		--PrecacheResource("particle", "particles/econ/generic/generic_aoe_explosion_sere_1/generic_aoe_explosion_sphere_1.vpcf", context)
@@ -59,6 +57,9 @@ function Precache( context )
 		PrecacheModel("models/props_cave/mine_cart.vmdl", context)
 		PrecacheModel("models/props_structures/good_statue008.vmdl", context)
 		PrecacheModel("models/heroes/nightstalker/nightstalker_wings.vmdl", context)
+		PrecacheModel("models/barrel_fish_reference.vmdl", context)
+		PrecacheModel("models/barrel_oct_reference.vmdl", context)
+		PrecacheModel("models/props_rock/riveredge_rock006a.vmdl", context)
 
 		-- Placeholder models for walls
 		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)
