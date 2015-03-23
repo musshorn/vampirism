@@ -311,7 +311,7 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC"
 		"AbilityCastPoint"	"0"
-		"AbilityCastRange"				"150"
+		"AbilityCastRange"				"120"
 		"OnSpellStart"
 		{
 			"RunScript"
