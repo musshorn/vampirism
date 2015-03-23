@@ -326,7 +326,7 @@ function BuildingHelper:AddBuilding(keys)
 
 	function player:BeginGhost()
 		if not player.cursorStream then
-			local delta = .03
+			local delta = 0.5
 			local start = false
 			local generateParticles = true
 			local modelParticle = nil
@@ -385,13 +385,13 @@ function BuildingHelper:AddBuilding(keys)
 						for x=boundingRect.leftBorderX+32,boundingRect.rightBorderX-32,64 do
 							for y=boundingRect.topBorderY-32,boundingRect.bottomBorderY+32,-64 do
 								if generateParticles then
-									--[[if not modelParticle then
+									if not modelParticle then
 										--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
 										modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
 										ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)						
 										ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
 										ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
-									end]]
+									end
 
 									-- Particles haven't been generated yet. Generate them.
 									local ghost_grid_particle = "particles/buildinghelper/square_sprite.vpcf"
@@ -399,8 +399,8 @@ function BuildingHelper:AddBuilding(keys)
 										ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
 									end
 									local id = ParticleManager:CreateParticleForPlayer(ghost_grid_particle, PATTACH_ABSORIGIN, caster, player)
-									--ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
-									--ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
+									ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
+									ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
 									table.insert(player.ghost_particles, id)
 
 								end
@@ -413,20 +413,20 @@ function BuildingHelper:AddBuilding(keys)
 								ParticleManager:SetParticleControl(particle, 0, Vector(x,y,groundZ))
 								--print("Moving " .. particle .. " to " .. VectorString(Vector(x,y,groundZ)))
 
-								--[[if IsSquareBlocked(Vector(x,y,z), true) then
+								if IsSquareBlocked(Vector(x,y,z), true) then
 									ParticleManager:SetParticleControl(particle, 2, Vector(255,0,0))
 									areaBlocked = true
 									--DebugDrawBox(Vector(x,y,z), Vector(-32,-32,0), Vector(32,32,1), 255, 0, 0, 40, delta)
 								else
 									ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0))
-								end]]
+								end
 							end
 						end
 
 						-- color + move model particle
 						if modelParticle ~= nil then
 							-- move model ghost particle
-						--[[]	ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
+							ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
 							if RECOLOR_GHOST_MODEL then
 								if areaBlocked then
 									ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))	
@@ -435,7 +435,7 @@ function BuildingHelper:AddBuilding(keys)
 								end
 							else
 								ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,255,255)) -- Draws the ghost with the original colors
-							end]]
+							end
 						end
 
 						if generateParticles then
@@ -533,10 +533,10 @@ function BuildingHelper:AddBuilding(keys)
 		botLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
 	  --DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
-	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.topBorderY , origin.z), Vector(0,255,0), false, 20) 
-	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.bottomBorderY, origin.z), Vector(255,0,0), false, 20) 
-	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.bottomBorderY , origin.z), Vector(255,0,0), false, 20) 
-	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.topBorderY , origin.z), Vector(255,0,0), false, 20) 
+	  --DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.topBorderY , origin.z), Vector(0,255,0), false, 20) 
+	  --DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.bottomBorderY, origin.z), Vector(255,0,0), false, 20) 
+	  --DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.bottomBorderY , origin.z), Vector(255,0,0), false, 20) 
+	  --DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.topBorderY , origin.z), Vector(255,0,0), false, 20) 
 
 	  local dummies = { topRight, topLeft, botRight, botLeft}
 
@@ -551,7 +551,7 @@ function BuildingHelper:AddBuilding(keys)
 				ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
 				ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
 
-				--[[ Particles haven't been generated yet. Generate them.
+				-- Particles haven't been generated yet. Generate them.
 				local ghost_grid_particle = "particles/buildinghelper/square_sprite.vpcf"
 				if USE_PROJECTED_GRID then
 					ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
@@ -568,7 +568,7 @@ function BuildingHelper:AddBuilding(keys)
 
 				local groundZ = GetGroundPosition(Vector(x,y,z),caster).z
 				ParticleManager:SetParticleControl(particle, 0, Vector(x,y,groundZ))
-				ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0)) ]]--
+				ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0))
 			end
 		end
 
@@ -693,7 +693,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	local unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
 	local radius = (order.pos.x - order.buildingRect.leftBorderX)
 	unit:SetHullRadius(radius)	
-	DebugDrawCircle(unit:GetAbsOrigin(), Vector(255,50,255), 5, unit:GetPaddedCollisionRadius(), false, 20)
+	--DebugDrawCircle(unit:GetAbsOrigin(), Vector(255,50,255), 5, unit:GetPaddedCollisionRadius(), false, 20)
 	unit:RemoveModifierByName("modifier_invulnerable")
 
 	-- builder can get stuck in the building so we'll move him
