@@ -267,6 +267,10 @@ function GameMode:OnNPCSpawned(keys)
     GameMode:OnHeroInGame(npc)
   end
 
+  if npc:GetUnitName() == "tower_pearls" then
+    npc:FindAbilityByName("is_a_building"):OnUpgrade()
+  end
+
   if string.match(npc:GetUnitName(), "vampire_vision_dummy") then
     VisionDummy(npc)
   end

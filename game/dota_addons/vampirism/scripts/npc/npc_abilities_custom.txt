@@ -124,6 +124,16 @@
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"	"ability_datadriven"
+
+		"OnUpgrade"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_invisible_on_minimap"
+				"Target" 		"CASTER"
+			}
+		}
+		
 		"Modifiers"
 		{
 			"modifier_building_deniable"
@@ -133,7 +143,7 @@
 				"States"
 				{
 					 "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED"
-        }
+        		}
 			}
 			"modifier_invisible_on_minimap"
 			{
