@@ -556,10 +556,10 @@ function BuildingHelper:AddBuilding(keys)
 				if USE_PROJECTED_GRID then
 					ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
 				end
-				local id = ParticleManager:CreateParticleForPlayer(ghost_grid_particle, PATTACH_ABSORIGIN, caster, player)
-				ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
-				ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
-				table.insert(player.ghost_particles, id)
+				--local id = ParticleManager:CreateParticleForPlayer(ghost_grid_particle, PATTACH_ABSORIGIN, caster, player)
+				--ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
+				--ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
+				--table.insert(player.ghost_particles, id)
 
 
 				-- Move a particle to a correct location
