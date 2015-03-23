@@ -865,7 +865,7 @@
 				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
 				"Function"		"FinishUpgrade"
 				"TargetUnit"	"tent_t2"
-				"Scale"				"1.0"
+				"Scale"				".5"
 			}
 		}
 	}
@@ -897,6 +897,7 @@
 				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
 				"Function"		"FinishUpgrade"
 				"TargetUnit"	"npc_wall_topaz"
+				"Scale"				".5"
 			}
 		}
 	}
