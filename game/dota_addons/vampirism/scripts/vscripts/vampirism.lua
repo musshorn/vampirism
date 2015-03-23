@@ -222,13 +222,9 @@ end
 function GameMode:OnNPCSpawned(keys)
 
   print("[vampirism] NPC Spawned")
-  print('playerids')
 
   local npc = EntIndexToHScript(keys.entindex)
-  print(npc:GetAbsOrigin())
   local playerID = npc:GetPlayerOwnerID()
-
-  print(npc:GetPlayerOwnerID())
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
   	npc:FindAbilityByName("call_buildui"):SetLevel(1)
