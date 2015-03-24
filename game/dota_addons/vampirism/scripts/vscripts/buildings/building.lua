@@ -15,8 +15,7 @@ function TrainUnit( keys )
       end
     else
       FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "Build more farms" } )
-      building:RemoveModifierByName(building.workHandler:GetName())
-      building.workHandler:SetChanneling(false)
+      building:RemoveModifierByName(keys.AddToQueue)
       building.doingWork = false
     end
   end
