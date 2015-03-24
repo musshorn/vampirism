@@ -124,15 +124,6 @@
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"BaseClass"	"ability_datadriven"
-
-		"OnUpgrade"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_invisible_on_minimap"
-				"Target" 		"CASTER"
-			}
-		}
 		
 		"Modifiers"
 		{
@@ -144,15 +135,6 @@
 				{
 					 "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED"
         		}
-			}
-			"modifier_invisible_on_minimap"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
-				"States"
-				{
-					"MODIFIER_STATE_NOT_ON_MINIMAP_FOR_ENEMIES" "MODIFIER_STATE_VALUE_ENABLED"
-				}
 			}
 		}
 	}
@@ -884,7 +866,7 @@
 				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
 				"Function"		"FinishUpgrade"
 				"TargetUnit"	"tent_t2"
-				"Scale"				".5"
+				"Scale"				"1"
 			}
 		}
 	}
@@ -1593,8 +1575,8 @@
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
+		"Scale"							".5"
+		"MaxScale"						"1"
 		"CasterCanControl"				"1"
 
 		"AbilityCooldown"				"2.0"

@@ -22,7 +22,6 @@ end
 function VisionDummy(keys)
   local dummy = keys
 	
-
   --The level of the reveal dummy
   local level = tonumber(string.sub(dummy:GetUnitName(), -1))
 
@@ -357,6 +356,7 @@ function ChainOfDeath(keys)
   end)
 end
 
+--Allows the vampire to move faster than 522, by applying the bloodseeker thirst buff and then slowing it... needs more fine control.
 function CykaSpeed(keys)
   local caster = keys.caster
   local ability = keys.ability
@@ -365,7 +365,7 @@ function CykaSpeed(keys)
 
   print(ability_level)
   caster:AddNewModifier(caster, ability, "modifier_invisible", {duration = duration})
-  caster:AddNewModifier(caster, ability, "modifier_bloodseeker_thirst_speed", {duration = duration, visibility_threshold_pct = 100, invis_threshold_pct = 100, bonus_movement_speed = 1, bonus_damage = 0})
+  caster:AddNewModifier(caster, ability, "modifier_bloodseeker_thirst_speed", {duration = duration, visibility_threshold_pct = 100, invis_threshold_pct = 100, bonus_damage = 0})
   if ability_level == 1 then
     caster:AddNewModifier(caster, ability, "modifier_item_orb_of_venom_slow", {duration = duration, slow = -42})
   elseif ability_level == 2 then 

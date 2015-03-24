@@ -54,6 +54,7 @@
 		"Ability5"					"vampire_chain_of_death"
 		"Ability6"					"vampire_veil_of_darkness"
 		"Ability7"					"vampire_init_hider"
+		"Ability8"					"attacktest"
 		//"Ability8"				"vampire_cyka_speed"
 		"Level"						"1"
 		"ConsideredHero"			"1"

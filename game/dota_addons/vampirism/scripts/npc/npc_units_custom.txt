@@ -1172,7 +1172,7 @@
 		// General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"					"npc_dota_creature"
-        "Model"						"models/props_structures/secretshop_asian001.vmdl"
+        "Model"						"models/props_structures/good_barracks_ranged002.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"
@@ -1334,7 +1334,7 @@
 	{
 		// General
    		//-------------------------------------------------------------------------------------------------------------
-   		"BaseClass"						"npc_dota_building"
+   		"BaseClass"						"npc_dota_creature"
     	"Model"							"models/tower_good4_reference.vmdl"
 		"ModelScale"				"1"
 		
@@ -1367,7 +1367,7 @@
 		"AttackAnimationPoint"		"0"
 		"AttackAcquisitionRange"	"900"
 		"AttackRange"				"850"
-		"ProjectileModel"			"particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_arcane_orb.vpcf"
+		"ProjectileModel"			"particles/units/heroes/hero_wisp/wisp_base_attack.vpcf"
 		"ProjectileSpeed"			"1900"
 
 		// Attributes
