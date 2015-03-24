@@ -50,7 +50,6 @@ function build( keys )
       local food = tonumber(UNIT_KV[pID][unit.unitName].ProvidesFood)
       if (TOTAL_FOOD[pID] < 300) then
         TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
-        print(TOTAL_FOOD[pID])
         FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
       end
     end
