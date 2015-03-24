@@ -1357,14 +1357,14 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"2"
-		"BuildTime"						"4.0"
+		"BuildTime"						"1"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						".5"
 		"CasterCanControl"				"1"
 
-		"AbilityCooldown"				"2.0"
+		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
 		"AbilityLumberCost"				"10"
 		
@@ -1400,14 +1400,14 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"3"
-		"BuildTime"						"4.0"
+		"BuildTime"						"1"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"0.1"
 		"MaxScale"						"0.2"
 		"CasterCanControl"				"1"
 
-		"AbilityCooldown"				"2.0"
+		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
 		"AbilityLumberCost"				"20"
 		
@@ -1443,7 +1443,7 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"4"
-		"BuildTime"						"4.0"
+		"BuildTime"						"2"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
@@ -1486,7 +1486,7 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"4"
-		"BuildTime"						"4.0"
+		"BuildTime"						"15"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
@@ -1529,7 +1529,7 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"2"
-		"BuildTime"						"4.0"
+		"BuildTime"						"1"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
@@ -1572,7 +1572,7 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"2"
-		"BuildTime"						"4.0"
+		"BuildTime"						"5"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							".5"
@@ -1615,7 +1615,7 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"2"
-		"BuildTime"						"4.0"
+		"BuildTime"						"1"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
@@ -1658,7 +1658,7 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"4"
-		"BuildTime"						"4.0"
+		"BuildTime"						"1"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
@@ -1701,7 +1701,7 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"2"
-		"BuildTime"						"4.0"
+		"BuildTime"						"5"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
@@ -1744,7 +1744,7 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"2"
-		"BuildTime"						"4.0"
+		"BuildTime"						"1"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
@@ -1787,7 +1787,7 @@
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"4"
-		"BuildTime"						"4.0"
+		"BuildTime"						"2"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
@@ -1841,7 +1841,6 @@
 		"AbilityCooldown"				"2.0"
 		
 		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
 		// End of BuildingHelper info
 
 		// Stats

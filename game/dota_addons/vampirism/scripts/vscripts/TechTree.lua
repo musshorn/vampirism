@@ -96,8 +96,13 @@ function TechTree:AddTechAbility(keys)
 	local ability = keys
 	local tech = keys:GetAbilityName()
 	local playerID = ability:GetCaster():GetMainControllingPlayer()
+	print('ADDING RESEARCH')
+	print(tech)
+	print(playerID)
 
 	if playerTrees[playerID][tech] == nil then
+		print('made tech')
+		PrintTable(playerTrees[playerID])
 		playerTrees[playerID][tech] = 1
 	else
 		playerTrees[playerID][tech] = playerTrees[playerID][tech] + 1

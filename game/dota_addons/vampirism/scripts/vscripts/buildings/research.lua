@@ -27,7 +27,7 @@ function Research( keys )
 
   -- Player is ok to commence research, deduct resources
   WOOD[pID] = WOOD[pID] - lumberCost
-  FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
   PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
 
 end
