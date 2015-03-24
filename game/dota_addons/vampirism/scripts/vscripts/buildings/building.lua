@@ -96,6 +96,8 @@ function Upgrade( keys )
     caster:SetMaxHealth(caster:GetMaxHealth() + maxHPOffset)
     caster:SetHealth(caster:GetHealth() + maxHPOffset)
   end
+
+  UNIT_KV[pID][caster:GetUnitName()].HealthModifier
 end
 
 function FinishUpgrade( keys )
@@ -112,6 +114,14 @@ function FinishUpgrade( keys )
     unit:SetModelScale(keys.Scale)
   end
 
+  if UNIT_KV[player][targetUnit].ProvidesFood ~= nil then
+    if UNIT_KV[player][caster:GetUnitName()].ProvidesFood ~- nil then
+      TOTAL_FOOD[player] = TOTAL_FOOD[player] + UNIT_KV[player][targetUnit].ProvidesFood - UNIT_KV[player][caster:GetUnitName()].ProvidesFood
+    else
+      TOTAL_FOOD[player] = TOTAL_FOOD[player] + UNIT_KV[player][targetUnit].ProvidesFood
+    end
+    FireGameEvent("vamp_food_cap_changed", { player_ID = player, food_cap = TOTAL_FOOD[player]})
+  end
 end
 
 -- Repairing is hard.

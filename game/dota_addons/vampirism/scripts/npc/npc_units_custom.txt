@@ -1159,7 +1159,7 @@
 		"BountyGoldMax"				"4"
 
 		// Vamp
-		"ProvidesFood"	"25"
+		"ProvidesFood"	"65"
 		//"GivesTech"		"true"
 
 	}
