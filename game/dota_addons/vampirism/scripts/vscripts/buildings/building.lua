@@ -102,6 +102,7 @@ end
 function FinishUpgrade( keys )
   local caster = keys.caster
   local targetUnit = keys.TargetUnit
+  local casterName = caster:GetUnitName()
   local pos = caster:GetAbsOrigin()
   local player = caster:GetMainControllingPlayer()
   local team = caster:GetTeam()
@@ -114,8 +115,8 @@ function FinishUpgrade( keys )
   end
 
   if UNIT_KV[player][targetUnit].ProvidesFood ~= nil then
-    if UNIT_KV[player][caster:GetUnitName()].ProvidesFood ~- nil then
-      TOTAL_FOOD[player] = TOTAL_FOOD[player] + UNIT_KV[player][targetUnit].ProvidesFood - UNIT_KV[player][caster:GetUnitName()].ProvidesFood
+    if UNIT_KV[player][casterName].ProvidesFood ~= nil then
+      TOTAL_FOOD[player] = TOTAL_FOOD[player] + UNIT_KV[player][targetUnit].ProvidesFood - UNIT_KV[player][casterName].ProvidesFood
     else
       TOTAL_FOOD[player] = TOTAL_FOOD[player] + UNIT_KV[player][targetUnit].ProvidesFood
     end
