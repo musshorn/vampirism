@@ -97,7 +97,6 @@ function Upgrade( keys )
     caster:SetHealth(caster:GetHealth() + maxHPOffset)
   end
 
-  UNIT_KV[pID][caster:GetUnitName()].HealthModifier
 end
 
 function FinishUpgrade( keys )
