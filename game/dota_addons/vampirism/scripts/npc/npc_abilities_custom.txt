@@ -1155,6 +1155,39 @@
 		}
 	}
 
+	//=================================================================================	/
+	// Upgrade unit to Shiny Tower of Pearls
+	//=================================================================================	/
+	"upgrade_to_shiny_tower_of_pearls"
+	{
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"	"ability_datadriven"
+		"AbilityChannelTime"	"1" // #DEBUG, true value is 100
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"	"CASTER"
+				"TargetUnit"	"shiny_tower_pearls"
+				"LumberCost"	"150"
+				"GoldCost"	"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"shiny_tower_pearls"
+				"Scale"	"0.8"
+			}
+		}
+	}
+
 		// START OF BUILDING HELPER ABILITIES
 	"move_to_point_70"
 	{

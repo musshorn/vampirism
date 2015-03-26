@@ -1342,7 +1342,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 
-		"Ability1"					""	//Human test
+		"Ability1"					"upgrade_to_shiny_tower_of_pearls"	//Human test
 		"Ability2"					""					// Ability 2.
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
@@ -1389,7 +1389,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"500"		// Base health.
+		"StatusHealth"				"50"		// Base health.
 		"StatusHealthRegen"			"0"		// Health regeneration rate.
 		"StatusMana"				"120"			// Base mana.
 		"StatusManaRegen"			"-0.01"			// Mana regeneration rate.
@@ -1411,6 +1411,89 @@
 		"NeedTech"		"house_t1"
 	}
 
+	//=================================================================================	
+	// Human Shiny tower of Pearls
+	//=================================================================================
+	"shiny_tower_pearls"
+	{
+		// General
+   		//-------------------------------------------------------------------------------------------------------------
+   		"BaseClass"						"npc_dota_creature"
+    	"Model"							"models/tower_good2_reference.vmdl"
+		"ModelScale"				"1"
+		
+		"ConsideredHero"			"0"
+		// Abilities
+		//----------------------------------------------------------------
+
+		"Ability1"					""	//Human test
+		"Ability2"					""					// Ability 2.
+		"Ability3"					""					// Ability 3.
+		"Ability4"					""					// Ability 4.
+		"Ability5"					""					// Ability 5.
+		"Ability6"					""					// Ability 6 - Extra.
+		"Ability7"					""					// Ability 7 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"			// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+
+
+		//Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"16"
+		"AttackDamageMax"			"18"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"0.8"
+		"AttackAnimationPoint"		"0"
+		"AttackAcquisitionRange"	"1000"
+		"AttackRange"				"950"
+		"ProjectileModel"			"particles/units/heroes/hero_wisp/wisp_base_attack.vpcf"
+		"ProjectileSpeed"			"1900"
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributeBaseIntelligence"	"0"
+		"AttributeBaseIntelligenceGain"	"0"
+	
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"RingRadius"				"50"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"300"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"250"		// Base health.
+		"StatusHealthRegen"			"0"		// Health regeneration rate.
+		"StatusMana"				"120"			// Base mana.
+		"StatusManaRegen"			"-0.01"			// Mana regeneration rate.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"125"
+		"BountyGoldMin"				"1"
+		"BountyGoldMax"				"1"
+
+		"IsTech"		"true"
+		"NeedTech"		"house_t1"
+	}
 	//=================================================================================	
 	// Human Building T1 - Carnelian Wall
 	//=================================================================================
