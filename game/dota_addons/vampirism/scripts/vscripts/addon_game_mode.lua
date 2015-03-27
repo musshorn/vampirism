@@ -77,8 +77,10 @@ function Precache( context )
 
 		-- unit precache
 		PrecacheUnitByNameSync("tent_t2", context)
+		PrecacheUnitByNameSync("shiny_tower_pearls", context)
 		PrecacheUnitByNameSync("npc_dota_hero_night_stalker", context)
 		PrecacheUnitByNameSync("npc_dota_hero_omniknight", context)
+		PrecacheUnitByNameSync("npc_dota_hero_jakiro", context)
 		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 
