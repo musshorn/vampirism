@@ -7,11 +7,12 @@
 		BMD for helping figure out how to get mouse clicks in Flash.
 		Perry for writing FlashUtil, which contains functions for cursor tracking.
 ]]
-
+-- Need to change the way ClearParticleTable handles things for Shift+Queue
 BUILDINGHELPER_THINK = 0.03
 GRIDNAV_SQUARES = {}
 BUILDING_SQUARES = {}
 BH_UNITS = {}
+PLAYER_BUILDQ = {} -- Table stores each players build queues.
 FORCE_UNITS_AWAY = false
 UsePathingMap = false
 AUTO_SET_HULL = true
@@ -47,6 +48,8 @@ function BuildingHelper:Init(...)
 	Convars:RegisterCommand( "BuildingPosChosen", function()
 		--get the player that sent the command
 		local cmdPlayer = Convars:GetCommandClient()
+		PrintTable(cmdPlayer)
+		print(cmdPlayer)
 		if cmdPlayer then
 			cmdPlayer.buildingPosChosen = true
 		end
@@ -340,6 +343,10 @@ function BuildingHelper:AddBuilding(keys)
 				-- Check if the player chose the position.
 				if player.buildingPosChosen then
 					if validPos then
+						if PLAYER_BUILDQ[pID] == nil then
+							PLAYER_BUILDQ[pID] = {}
+						end
+						table.insert(PLAYER_BUILDQ[pID], cursorPos)
 						keys:AddToGrid(cursorPos)
 					end
 					player:CancelGhost()
@@ -348,6 +355,7 @@ function BuildingHelper:AddBuilding(keys)
 
 				-- This runs if player right clicked.
 				if player.cancelBuilding then
+					PLAYER_BUILDQ[pID] = {}
 					player:CancelGhost()
 					return
 				end
@@ -533,10 +541,10 @@ function BuildingHelper:AddBuilding(keys)
 		botLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
 	  --DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
 
-	  --DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.topBorderY , origin.z), Vector(0,255,0), false, 20) 
-	  --DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.bottomBorderY, origin.z), Vector(255,0,0), false, 20) 
-	  --DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.bottomBorderY , origin.z), Vector(255,0,0), false, 20) 
-	  --DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.topBorderY , origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.topBorderY , origin.z), Vector(0,255,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.bottomBorderY, origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.bottomBorderY , origin.z), Vector(255,0,0), false, 20) 
+	  DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.topBorderY , origin.z), Vector(255,0,0), false, 20) 
 
 	  local dummies = { topRight, topLeft, botRight, botLeft}
 
@@ -619,11 +627,14 @@ function BuildingHelper:AddBuilding(keys)
 			if keys.onBuildingPosChosen ~= nil then
 				keys.onBuildingPosChosen(vBuildingCenter)
 				keys.onBuildingPosChosen = nil
+				player.buildingPosChosen = nil
+				player:BeginGhost()
 			end
 		end)
 
 		-- Sticky ghosts will be stored in a queue. this will help with shift-click later on
 		table.insert(player.stickyGhosts, shallowcopy(player.ghost_particles))
+
 		-- prevent the particles from being deleted.
 		player.ghost_particles = {}
 
@@ -742,7 +753,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 
 	local nAddedHealth = 0
 	-- health to add every tick until build time is completed.
-	local nTickEstimate = buildTime * 0.1
+	local nTickEstimate = buildTime * (buildTime * TIMER_THINK)
 	local nBuildEstimate = buildTime - nTickEstimate
 	local nHealthInterval = fMaxHealth / (nBuildEstimate / BUILDINGHELPER_THINK)
 	local nSmallHealthInterval = nHealthInterval - math.floor(nHealthInterval) -- just the floating point component
