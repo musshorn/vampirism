@@ -240,6 +240,9 @@ function GameMode:OnNPCSpawned(keys)
       print("made 40 wood for player "..playerID)
       HUMAN_COUNT = HUMAN_COUNT + 1
       npc:SetAbilityPoints(0)
+      print('lua setting gold')
+      FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = 0})
+      FireGameEvent("vamp_scoreboard_addplayer", {player_ID = playerID, player_name = 'DONT SHIP THIS IN MP'})
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
     end
   end
@@ -851,6 +854,7 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(1, false)
   mode:SetHUDVisible(2, false)
   mode:SetHUDVisible(9, false)
+  mode:SetHUDVisible(11, false)
   mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
   

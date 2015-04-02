@@ -2,6 +2,12 @@
 "CustomEvents"
 {
 	
+	"vamp_gold_changed"
+	{
+		"player_ID"			"short"
+		"gold_total"		"short"
+	}
+
 	"vamp_wood_changed"
 	{
 		"player_ID"			"short"
@@ -17,7 +23,18 @@
 	"vamp_food_cap_changed"
 	{
 		"player_ID"			"short"
-		"food_cap"	"short"
+		"food_cap"			"short"
+	}
+
+	"vamp_scoreboard_addplayer"
+	{
+		"player_ID"			"short"
+		"player_name"		"string"
+	}
+
+	"vamp_scoreboard_removeplayer"
+	{
+		"player_ID"			"short"
 	}
 
 	"build_ui_called"
