@@ -29,6 +29,7 @@ function build( keys )
     -- start the building with 0 mana.
     unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})
     unit:SetMana(0)
+    BuildingHelper:AddBuilding(keys)
   end)
 
   keys:OnConstructionCompleted(function(unit)
