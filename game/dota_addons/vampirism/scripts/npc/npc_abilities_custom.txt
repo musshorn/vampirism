@@ -363,6 +363,7 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"call_build"
 		"MaxLevel"	"1"
+		"AbilityCooldown"				"5.0"
 
 		"OnSpellStart"
 		{
@@ -1383,21 +1384,21 @@
 
 	"build_house1"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"house_t1"
 		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildingSize"					"2"
-		"BuildTime"						"1"
+		"BuildTime"						"3"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						".5"
 		"CasterCanControl"				"1"
 
-		"AbilityCooldown"				"0"
+		"AbilityCooldown"				"0.05"
 		"AbilityGoldCost"				"0"
 		"AbilityLumberCost"				"10"
 		
@@ -1407,7 +1408,7 @@
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
+		"AbilityCastPoint"				"0.05"
 		"MaxLevel"						"1"
 
 		// Item Info
