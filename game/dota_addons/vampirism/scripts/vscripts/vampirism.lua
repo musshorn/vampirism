@@ -52,6 +52,7 @@ ABILITY_KV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
 HUMAN_COUNT = 0
+PLAYER_BUILDQ = {}
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
@@ -230,9 +231,9 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("call_buildui"):SetLevel(1)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
-  	npc:FindAbilityByName("human_repair"):SetLevel(1)
+  	npc:FindAbilityByName("build_house1"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 50
+      WOOD[playerID] = 5000
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")

@@ -4,7 +4,7 @@ function build( keys )
   local pID = keys.caster:GetMainControllingPlayer()
 
   local buildName = string.sub(keys.ability:GetAbilityName(), 7)
-  print(buildName)
+  print("CALLED THE BUILD")
   if TechTree:GetRequired(buildName, pID) == false then
     print('not enough techs')
     return
@@ -16,6 +16,7 @@ function build( keys )
   keys:OnBuildingPosChosen(function(vPos)
     --print("OnBuildingPosChosen")
     -- in WC3 some build sound was played here.
+    --BuildingHelper:AddBuilding(keys)
   end)
 
   keys:OnConstructionStarted(function(unit)
@@ -29,6 +30,7 @@ function build( keys )
     -- start the building with 0 mana.
     unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})
     unit:SetMana(0)
+    
   end)
 
   keys:OnConstructionCompleted(function(unit)
@@ -173,4 +175,20 @@ function slayer_attribute_bonus(keys)
   caster:SetBaseStrength(caster:GetBaseStrength() + 3)
   caster:SetBaseAgility(caster:GetBaseAgility() + 3)
   caster:SetBaseIntellect(caster:GetBaseIntellect() + 3)
+end
+
+-- Anything passed here is added to the build queue
+function shift_queue_add( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+
+  table.insert(PLAYER_BUILDQ[pID], keys)
+end
+
+-- If the worker is directly issued another command the queue is cleared of all issues
+function shift_queue_clear( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+
+  PLAYER_BUILDQ[pID] = {}
 end
