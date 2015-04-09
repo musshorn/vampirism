@@ -236,7 +236,15 @@ function BuildingHelper:AddBuilding(keys)
 
 	player.buildingPosChosen = false
 	player.cancelBuilding = false
-	player.stickyGhosts = {}
+
+	if player.stickyGhosts ~= nil then
+		if #player.stickyGhosts > 0 then
+			table.remove(player.stickyGhosts, 1)
+		end
+	else
+		player.stickyGhosts = {}
+	end
+
 	-- store ref to the buildingTable in the builder.
 	builder.buildingTable = buildingTable
 
@@ -357,12 +365,14 @@ function BuildingHelper:AddBuilding(keys)
 						generateParticles = true
 						modelParticle = nil
 					end
+					-- Do this if shift isn't pressed
 					--player:CancelGhost()
 					--return
 				end
 
 				-- This runs if player right clicked.
 				if player.cancelBuilding then
+					PrintTable(player.ghost_particles)
 					player:CancelGhost()
 					BUILD_QUEUE[pID] = {}
 					return
@@ -396,66 +406,7 @@ function BuildingHelper:AddBuilding(keys)
 						local areaBlocked = false
 						local squares = {}
 
-						-- Iterate thru the square locations
-						local ptr = 1
-						for x=boundingRect.leftBorderX+32,boundingRect.rightBorderX-32,64 do
-							for y=boundingRect.topBorderY-32,boundingRect.bottomBorderY+32,-64 do
-								if generateParticles then
-									if not modelParticle then
-										--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
-										modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
-										ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)						
-										ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
-										ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
-									end
-
-									-- Particles haven't been generated yet. Generate them.
-									local ghost_grid_particle = "particles/buildinghelper/square_sprite.vpcf"
-									if USE_PROJECTED_GRID then
-										ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
-									end
-									local id = ParticleManager:CreateParticleForPlayer(ghost_grid_particle, PATTACH_ABSORIGIN, caster, player)
-									ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
-									ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
-									table.insert(player.ghost_particles, id)
-
-								end
-
-								-- Move a particle to a correct location
-								local particle = player.ghost_particles[ptr]
-								ptr = ptr + 1
-
-								if particle ~= nil then
-									local groundZ = GetGroundPosition(Vector(x,y,z),caster).z
-									ParticleManager:SetParticleControl(particle, 0, Vector(x,y,groundZ))
-									--print("Moving " .. particle .. " to " .. VectorString(Vector(x,y,groundZ)))
-
-									if IsSquareBlocked(Vector(x,y,z), true) then
-										ParticleManager:SetParticleControl(particle, 2, Vector(255,0,0))
-										areaBlocked = true
-										--DebugDrawBox(Vector(x,y,z), Vector(-32,-32,0), Vector(32,32,1), 255, 0, 0, 40, delta)
-									else
-										ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0))
-									end
-								end
-							end
-						end
-
-						-- color + move model particle
-						if modelParticle ~= nil then
-							-- move model ghost particle
-							ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
-							if RECOLOR_GHOST_MODEL then
-								if areaBlocked then
-									ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))	
-								else
-									ParticleManager:SetParticleControl(modelParticle, 2, Vector(0,255,0))
-								end
-							else
-								ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,255,255)) -- Draws the ghost with the original colors
-							end
-						end
-
+						
 						if generateParticles then
 							-- modelParticle is in the last index.
 							table.insert(player.ghost_particles, modelParticle)
@@ -469,6 +420,7 @@ function BuildingHelper:AddBuilding(keys)
 	end
 
 	function player:CancelGhost( )
+		print("canned")
 		FlashUtil:StopDataStream( player.cursorStream )
 		player.cursorStream = nil
 		player.cancelBuilding = false
@@ -482,6 +434,34 @@ function BuildingHelper:AddBuilding(keys)
 			BUILD_QUEUE[pID] = {}
 		end
 		table.insert(BUILD_QUEUE[pID], vPoint)
+
+		mgd = CreateUnitByName(unitName, OutOfWorldVector, false, nil, nil, caster:GetTeam())
+
+		--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
+		modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
+		ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)						
+		ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
+		ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
+
+		-- color + move model particle
+		if modelParticle ~= nil then
+			-- move model ghost particle
+			ParticleManager:SetParticleControl(modelParticle, 0, player.lastCursorCenter)
+			if RECOLOR_GHOST_MODEL then
+				if areaBlocked then
+					ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))	
+				else
+					ParticleManager:SetParticleControl(modelParticle, 2, Vector(0,255,0))
+				end
+			else
+				ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,255,255)) -- Draws the ghost with the original colors
+			end
+		end
+
+		-- Sticky ghosts will be stored in a queue. this will help with shift-click later on
+		table.insert(player.stickyGhosts, modelParticle)
+		-- prevent the particles from being deleted.
+		player.ghost_particles = {}
 	end
 
 	function keys:AddToGrid()
@@ -559,11 +539,6 @@ function BuildingHelper:AddBuilding(keys)
 					keys.onBuildingPosChosen = nil
 				end
 			end)
-
-			-- Sticky ghosts will be stored in a queue. this will help with shift-click later on
-			table.insert(player.stickyGhosts, shallowcopy(player.ghost_particles))
-			-- prevent the particles from being deleted.
-			player.ghost_particles = {}
 
 			local abil = BH_DUMMY:FindAbilityByName("bh_dummy")
 			abil:ApplyDataDrivenModifier(BH_DUMMY, builder, "building_canceled", nil)
@@ -822,7 +797,8 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 
 	-- Remove the sticky ghost
 	if #player.stickyGhosts > 0 then
-		ClearParticleTable(player.stickyGhosts[1])
+		--ClearParticleTable(player.stickyGhosts)
+		ParticleManager:DestroyParticle(player.stickyGhosts[1], true)
 		--print("Clearing sticky ghost.")
 		table.remove(player.stickyGhosts, 1)
 	end
@@ -841,7 +817,7 @@ function BuildingHelper:CancelBuilding( keys )
 	local player = caster.player
 
 	if IsValidTable(player.stickyGhosts) and #player.stickyGhosts > 0 then
-		ClearParticleTable(player.stickyGhosts[1])
+		ClearParticleTable(player.stickyGhosts)
 		table.remove(player.stickyGhosts, 1)
 	end
 	if caster:HasModifier("building_canceled") then
