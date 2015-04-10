@@ -12,6 +12,7 @@ BUILDINGHELPER_THINK = 0.03
 GRIDNAV_SQUARES = {}
 BUILDING_SQUARES = {}
 BH_UNITS = {}
+BUILD_QUEUE = {} -- Each players build queue
 FORCE_UNITS_AWAY = false
 UsePathingMap = false
 AUTO_SET_HULL = true
@@ -235,7 +236,15 @@ function BuildingHelper:AddBuilding(keys)
 
 	player.buildingPosChosen = false
 	player.cancelBuilding = false
-	player.stickyGhosts = {}
+
+	if player.stickyGhosts ~= nil then
+		if #player.stickyGhosts > 0 then
+			table.remove(player.stickyGhosts, 1)
+		end
+	else
+		player.stickyGhosts = {}
+	end
+
 	-- store ref to the buildingTable in the builder.
 	builder.buildingTable = buildingTable
 
@@ -324,6 +333,17 @@ function BuildingHelper:AddBuilding(keys)
 	end)]]
 	player.lastCursorCenter = OutOfWorldVector
 
+	-- Process the build Queue
+	Timers:CreateTimer(0.1, function ()
+		if BUILD_QUEUE[pID] ~= nil then
+			if #BUILD_QUEUE[pID] > 0 and builder.ProcessingBuilding ~= true then
+				builder.ProcessingBuilding = true
+				keys:AddToGrid()
+			end
+		end
+		return 0.1
+	end)
+
 	function player:BeginGhost()
 		if not player.cursorStream then
 			local delta = 0.5
@@ -340,15 +360,21 @@ function BuildingHelper:AddBuilding(keys)
 				-- Check if the player chose the position.
 				if player.buildingPosChosen then
 					if validPos then
-						keys:AddToGrid(cursorPos)
+						keys:AddToQueue(cursorPos)
+						player.buildingPosChosen = false
+						generateParticles = true
+						modelParticle = nil
 					end
-					player:CancelGhost()
-					return
+					-- Do this if shift isn't pressed
+					--player:CancelGhost()
+					--return
 				end
 
 				-- This runs if player right clicked.
 				if player.cancelBuilding then
+					PrintTable(player.ghost_particles)
 					player:CancelGhost()
+					BUILD_QUEUE[pID] = {}
 					return
 				end
 
@@ -380,64 +406,7 @@ function BuildingHelper:AddBuilding(keys)
 						local areaBlocked = false
 						local squares = {}
 
-						-- Iterate thru the square locations
-						local ptr = 1
-						for x=boundingRect.leftBorderX+32,boundingRect.rightBorderX-32,64 do
-							for y=boundingRect.topBorderY-32,boundingRect.bottomBorderY+32,-64 do
-								if generateParticles then
-									if not modelParticle then
-										--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
-										modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
-										ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)						
-										ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
-										ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
-									end
-
-									-- Particles haven't been generated yet. Generate them.
-									local ghost_grid_particle = "particles/buildinghelper/square_sprite.vpcf"
-									if USE_PROJECTED_GRID then
-										ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
-									end
-									local id = ParticleManager:CreateParticleForPlayer(ghost_grid_particle, PATTACH_ABSORIGIN, caster, player)
-									ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
-									ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
-									table.insert(player.ghost_particles, id)
-
-								end
-
-								-- Move a particle to a correct location
-								local particle = player.ghost_particles[ptr]
-								ptr = ptr + 1
-
-								local groundZ = GetGroundPosition(Vector(x,y,z),caster).z
-								ParticleManager:SetParticleControl(particle, 0, Vector(x,y,groundZ))
-								--print("Moving " .. particle .. " to " .. VectorString(Vector(x,y,groundZ)))
-
-								if IsSquareBlocked(Vector(x,y,z), true) then
-									ParticleManager:SetParticleControl(particle, 2, Vector(255,0,0))
-									areaBlocked = true
-									--DebugDrawBox(Vector(x,y,z), Vector(-32,-32,0), Vector(32,32,1), 255, 0, 0, 40, delta)
-								else
-									ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0))
-								end
-							end
-						end
-
-						-- color + move model particle
-						if modelParticle ~= nil then
-							-- move model ghost particle
-							ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
-							if RECOLOR_GHOST_MODEL then
-								if areaBlocked then
-									ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))	
-								else
-									ParticleManager:SetParticleControl(modelParticle, 2, Vector(0,255,0))
-								end
-							else
-								ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,255,255)) -- Draws the ghost with the original colors
-							end
-						end
-
+						
 						if generateParticles then
 							-- modelParticle is in the last index.
 							table.insert(player.ghost_particles, modelParticle)
@@ -451,6 +420,7 @@ function BuildingHelper:AddBuilding(keys)
 	end
 
 	function player:CancelGhost( )
+		print("canned")
 		FlashUtil:StopDataStream( player.cursorStream )
 		player.cursorStream = nil
 		player.cancelBuilding = false
@@ -458,178 +428,121 @@ function BuildingHelper:AddBuilding(keys)
 		ClearParticleTable(player.ghost_particles)
 	end
 
-	-- Private function.
-	function keys:AddToGrid(vPoint)
-		-- Remember, our blocked squares are defined according to the square's center.
-		local centerX = SnapToGrid64(vPoint.x)
-		local centerY = SnapToGrid64(vPoint.y)
-		-- Buildings are centered differently when the size is odd.
-		if size%2 ~= 0 then
-			centerX=SnapToGrid32(vPoint.x)
-			centerY=SnapToGrid32(vPoint.y)
+		-- Private function.
+	function keys:AddToQueue(vPoint)
+		if BUILD_QUEUE[pID] == nil then
+			BUILD_QUEUE[pID] = {}
 		end
+		table.insert(BUILD_QUEUE[pID], vPoint)
 
-		local vBuildingCenter = Vector(centerX,centerY,vPoint.z)
-		local halfSide = (size/2)*64
-		local buildingRect = {leftBorderX = centerX-halfSide, 
-			rightBorderX = centerX+halfSide, 
-			topBorderY = centerY+halfSide, 
-			bottomBorderY = centerY-halfSide}
-			
-		if BuildingHelper:IsRectangularAreaBlocked(buildingRect) then
-			FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Unable to build there" } )
-			ClearParticleTable(player.ghost_particles)
+		mgd = CreateUnitByName(unitName, OutOfWorldVector, false, nil, nil, caster:GetTeam())
 
-			if keys.onCanceledCallback ~= nil then
-				keys.onCanceledCallback();
-			end
-			return nil
-		end
+		--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
+		modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
+		ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)						
+		ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
+		ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
 
-		-- The spot is not blocked, so add it to the closed squares.
-		local closed = {}
-		
-		for x=buildingRect.leftBorderX+32,buildingRect.rightBorderX-32,64 do
-			for y=buildingRect.topBorderY-32,buildingRect.bottomBorderY+32,-64 do
-				table.insert(closed,Vector(x,y,0))
-			end
-		end
-
-		-- Put dummy units down to make collions more square
-		local origin = Vector(centerX,centerY,vPoint.z)
-		local rad = 100
-		local A = BH_A*rad
-		local B = rad
-		local discCenter = (A-B)/2
-		local discRad = BH_cos45*discCenter
-		local dist = B + discCenter
-		local C = dist*BH_cos45
-		-- Top right disc
-		local tr_x = origin.x + BH_DUMMY:GetPaddedCollisionRadius() * 2
-		local tr_y = origin.y + BH_DUMMY:GetPaddedCollisionRadius() * 2
-		-- top left disc
-		local tl_x = origin.x - BH_DUMMY:GetPaddedCollisionRadius() * 2
-		local tl_y = tr_y
-		-- bot left disc
-		local bl_x = tl_x
-		local bl_y = origin.y - BH_DUMMY:GetPaddedCollisionRadius() * 2
-		-- bot right disc
-		local br_x = tr_x
-		local br_y = bl_y
-
-		local topRight = CreateUnitByName("npc_bh_dummy", Vector(tr_x,tr_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
-		topRight:FindAbilityByName("bh_dummy"):OnUpgrade() 
-		--DebugDrawCircle(Vector(tr_x, tr_y, origin.z), Vector(255,0,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
-
-		local topLeft = CreateUnitByName("npc_bh_dummy", Vector(tl_x,tl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
-		topLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
-		--DebugDrawCircle(Vector(tl_x, tl_y, origin.z), Vector(0,255,0), 5, topRight:GetPaddedCollisionRadius(), false, 60)
-
-		local botRight = CreateUnitByName("npc_bh_dummy", Vector(br_x,br_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
-		botRight:FindAbilityByName("bh_dummy"):OnUpgrade()
-		--DebugDrawCircle(Vector(br_x, br_y, origin.z), Vector(0,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
-
-		local botLeft = CreateUnitByName("npc_bh_dummy", Vector(bl_x,bl_y,origin.z), false, nil, nil, DOTA_TEAM_GOODGUYS)
-		botLeft:FindAbilityByName("bh_dummy"):OnUpgrade()
-	  --DebugDrawCircle(Vector(bl_x, bl_y, origin.z), Vector(255,0,255), 5, topRight:GetPaddedCollisionRadius(), false, 60)
-
-	  --DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.topBorderY , origin.z), Vector(0,255,0), false, 20) 
-	  --DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.topBorderY, origin.z), Vector(buildingRect.rightBorderX ,buildingRect.bottomBorderY, origin.z), Vector(255,0,0), false, 20) 
-	  --DebugDrawLine_vCol(Vector(buildingRect.rightBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.bottomBorderY , origin.z), Vector(255,0,0), false, 20) 
-	  --DebugDrawLine_vCol(Vector(buildingRect.leftBorderX, buildingRect.bottomBorderY, origin.z), Vector(buildingRect.leftBorderX ,buildingRect.topBorderY , origin.z), Vector(255,0,0), false, 20) 
-
-	  local dummies = { topRight, topLeft, botRight, botLeft}
-
-	  table.insert(player.temp_dummies, dummies)
-		-- Iterate thru the square locations
-		local ptr = 1
-		for x=buildingRect.leftBorderX+32,buildingRect.rightBorderX-32,64 do
-			for y=buildingRect.topBorderY-32,buildingRect.bottomBorderY+32,-64 do
-				--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
-				modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
-				ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)						
-				ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
-				ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
-
-				-- Particles haven't been generated yet. Generate them.
-				local ghost_grid_particle = "particles/buildinghelper/square_sprite.vpcf"
-				if USE_PROJECTED_GRID then
-					ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
+		-- color + move model particle
+		if modelParticle ~= nil then
+			-- move model ghost particle
+			ParticleManager:SetParticleControl(modelParticle, 0, player.lastCursorCenter)
+			if RECOLOR_GHOST_MODEL then
+				if areaBlocked then
+					ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))	
+				else
+					ParticleManager:SetParticleControl(modelParticle, 2, Vector(0,255,0))
 				end
-				--local id = ParticleManager:CreateParticleForPlayer(ghost_grid_particle, PATTACH_ABSORIGIN, caster, player)
-				--ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
-				--ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
-				--table.insert(player.ghost_particles, id)
-
-
-				-- Move a particle to a correct location
-				local particle = player.ghost_particles[ptr]
-				ptr = ptr + 1
-
-				local groundZ = GetGroundPosition(Vector(x,y,z),caster).z
-				ParticleManager:SetParticleControl(particle, 0, Vector(x,y,groundZ))
-				ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0))
-			end
-		end
-
-		-- move model ghost particle
-		ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
-		if RECOLOR_GHOST_MODEL then
-			if areaBlocked then
-				ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))	
 			else
-				ParticleManager:SetParticleControl(modelParticle, 2, Vector(0,255,0))
+				ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,255,255)) -- Draws the ghost with the original colors
 			end
-		else
-			ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,255,255)) -- Draws the ghost with the original colors
 		end
-
-		table.insert(player.ghost_particles, modelParticle)
-
-		-- Make the caster move towards the point
-		local abilName = "move_to_point_" .. tostring(castRange)
-		if AbilityKVs[abilName] == nil then
-			print('[BuildingHelper] Error: ' .. abilName .. ' was not found in npc_abilities_custom.txt. Using the ability move_to_point_100')
-			abilName = "move_to_point_100"
-		end
-		--[[if caster:GetAbilityCount() == 16 then
-			print('[BuildingHelper] Error: Unable to add ' .. abilName .. ' to the unit. The unit has the max ability count of 16.')
-			dontMove = true
-		end]]
-
-		-- If unit has other move_to_point abils, we should clean them up here
-		AbilityIterator(caster, function(abil)
-			local name = abil:GetAbilityName()
-			if name ~= abilName and string.starts(name, "move_to_point_") then
-				caster:RemoveAbility(name)
-				--print("removed " .. name)
-			end
-		end)
-
-		if not caster:HasAbility(abilName) then
-			caster:AddAbility(abilName)
-		end
-		local abil = caster:FindAbilityByName(abilName)
-		abil.succeeded = false
-		abil:SetLevel(1)
-		caster.orders[DoUniqueString("order")] = {["unitName"] = unitName, ["pos"] = vBuildingCenter, ["team"] = caster:GetTeam(),
-			["buildingTable"] = buildingTable, ["squares_to_close"] = closed, ["keys"] = keys, ["buildingRect"] = buildingRect}
-		Timers:CreateTimer(.03, function()
-			caster:CastAbilityOnPosition(vBuildingCenter, abil, 0)
-			if keys.onBuildingPosChosen ~= nil then
-				keys.onBuildingPosChosen(vBuildingCenter)
-				keys.onBuildingPosChosen = nil
-			end
-		end)
 
 		-- Sticky ghosts will be stored in a queue. this will help with shift-click later on
-		table.insert(player.stickyGhosts, shallowcopy(player.ghost_particles))
+		table.insert(player.stickyGhosts, modelParticle)
 		-- prevent the particles from being deleted.
 		player.ghost_particles = {}
+	end
 
-		local abil = BH_DUMMY:FindAbilityByName("bh_dummy")
-		abil:ApplyDataDrivenModifier(BH_DUMMY, builder, "building_canceled", nil)
+	function keys:AddToGrid()
+		if BUILD_QUEUE[pID] ~= nil then
+			local vPoint = BUILD_QUEUE[pID][1]
+			table.remove(BUILD_QUEUE[pID], 1)
+			
+			-- Remember, our blocked squares are defined according to the square's center.
+			local centerX = SnapToGrid64(vPoint.x)
+			local centerY = SnapToGrid64(vPoint.y)
+			-- Buildings are centered differently when the size is odd.
+			if size%2 ~= 0 then
+				centerX=SnapToGrid32(vPoint.x)
+				centerY=SnapToGrid32(vPoint.y)
+			end
 
+			local vBuildingCenter = Vector(centerX,centerY,vPoint.z)
+			local halfSide = (size/2)*64
+			local buildingRect = {leftBorderX = centerX-halfSide, 
+				rightBorderX = centerX+halfSide, 
+				topBorderY = centerY+halfSide, 
+				bottomBorderY = centerY-halfSide}
+				
+			if BuildingHelper:IsRectangularAreaBlocked(buildingRect) then
+				FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Unable to build there" } )
+				ClearParticleTable(player.ghost_particles)
+
+				if keys.onCanceledCallback ~= nil then
+					keys.onCanceledCallback();
+				end
+				return nil
+			end
+
+			-- The spot is not blocked, so add it to the closed squares.
+			local closed = {}
+			
+			for x=buildingRect.leftBorderX+32,buildingRect.rightBorderX-32,64 do
+				for y=buildingRect.topBorderY-32,buildingRect.bottomBorderY+32,-64 do
+					table.insert(closed,Vector(x,y,0))
+				end
+			end
+
+			-- Make the caster move towards the point
+			local abilName = "move_to_point_" .. tostring(castRange)
+			if AbilityKVs[abilName] == nil then
+				print('[BuildingHelper] Error: ' .. abilName .. ' was not found in npc_abilities_custom.txt. Using the ability move_to_point_100')
+				abilName = "move_to_point_100"
+			end
+			--[[if caster:GetAbilityCount() == 16 then
+				print('[BuildingHelper] Error: Unable to add ' .. abilName .. ' to the unit. The unit has the max ability count of 16.')
+				dontMove = true
+			end]]
+
+			-- If unit has other move_to_point abils, we should clean them up here
+			AbilityIterator(caster, function(abil)
+				local name = abil:GetAbilityName()
+				if name ~= abilName and string.starts(name, "move_to_point_") then
+					caster:RemoveAbility(name)
+					--print("removed " .. name)
+				end
+			end)
+
+			if not caster:HasAbility(abilName) then
+				caster:AddAbility(abilName)
+			end
+			local abil = caster:FindAbilityByName(abilName)
+			abil.succeeded = false
+			abil:SetLevel(1)
+			caster.orders[DoUniqueString("order")] = {["unitName"] = unitName, ["pos"] = vBuildingCenter, ["team"] = caster:GetTeam(),
+				["buildingTable"] = buildingTable, ["squares_to_close"] = closed, ["keys"] = keys, ["buildingRect"] = buildingRect}
+			Timers:CreateTimer(.03, function()
+				caster:CastAbilityOnPosition(vBuildingCenter, abil, 0)
+				if keys.onBuildingPosChosen ~= nil then
+					keys.onBuildingPosChosen(vBuildingCenter)
+					keys.onBuildingPosChosen = nil
+				end
+			end)
+
+			local abil = BH_DUMMY:FindAbilityByName("bh_dummy")
+			abil:ApplyDataDrivenModifier(BH_DUMMY, builder, "building_canceled", nil)
+		end
 	end
 
 	player:BeginGhost()
@@ -652,7 +565,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	local pos = keys.target_points[1]
 	local player = builder:GetPlayerOwner()
 	keys.ability.succeeded = true
-	ClearParticleTable(player.ghost_particles)
+	builder.ProcessingBuilding = false
 
 	-- search and get the correct order
 	local order = nil
@@ -884,7 +797,8 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 
 	-- Remove the sticky ghost
 	if #player.stickyGhosts > 0 then
-		ClearParticleTable(player.stickyGhosts[1])
+		--ClearParticleTable(player.stickyGhosts)
+		ParticleManager:DestroyParticle(player.stickyGhosts[1], true)
 		--print("Clearing sticky ghost.")
 		table.remove(player.stickyGhosts, 1)
 	end
@@ -903,7 +817,7 @@ function BuildingHelper:CancelBuilding( keys )
 	local player = caster.player
 
 	if IsValidTable(player.stickyGhosts) and #player.stickyGhosts > 0 then
-		ClearParticleTable(player.stickyGhosts[1])
+		ClearParticleTable(player.stickyGhosts)
 		table.remove(player.stickyGhosts, 1)
 	end
 	if caster:HasModifier("building_canceled") then

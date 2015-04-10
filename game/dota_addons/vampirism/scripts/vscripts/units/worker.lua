@@ -103,8 +103,8 @@ end
 
 -- Fired when the worker leaves the trees
 function LeftTree(keys)
- local unit = keys.activator
- unit.inTriggerZone = false
+	local unit = keys.activator
+	unit.inTriggerZone = false
 end
 
 -- Fired when the harvest_channel ability has finished channelling
