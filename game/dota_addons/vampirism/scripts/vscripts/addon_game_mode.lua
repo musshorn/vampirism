@@ -46,6 +46,7 @@ function Precache( context )
 		PrecacheModel("models/creeps/neutral_creeps/n_creep_kobold/kobold_b/n_creep_kobold_b.vmdl", context)
 		PrecacheModel("models/props_structures/good_barracks_melee001.vmdl", context)
 		PrecacheModel("models/house1.vmdl", context)
+		PrecacheModel("models/heroes/invoker/invoker.vmdl", context)
 		PrecacheModel("models/coin_reference.vmdl", context)
 		PrecacheModel("models/props_structures/barrel_fish.vmdl", context) 
 		PrecacheModel("models/props_structures/good_barracks_ranged002.vmdl", context) 
@@ -72,6 +73,7 @@ function Precache( context )
 		PrecacheModel("models/props_bones/rib_cage001.vmdl",context)
 		PrecacheModel("models/props_gameplay/shopkeeper_dire/secretshopkeeper_dire.vmdl",context)
 
+
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)
 
@@ -81,6 +83,7 @@ function Precache( context )
 		PrecacheUnitByNameSync("npc_dota_hero_night_stalker", context)
 		PrecacheUnitByNameSync("npc_dota_hero_omniknight", context)
 		PrecacheUnitByNameSync("npc_dota_hero_jakiro", context)
+		PrecacheUnitByNameSync("npc_dota_hero_invoker", context)
 		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 
