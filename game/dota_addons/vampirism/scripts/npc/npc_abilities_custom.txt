@@ -134,7 +134,7 @@
 				"States"
 				{
 					 "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED"
-        		}
+        }
 			}
 		}
 	}
@@ -423,6 +423,47 @@
 
 		}
 
+	}
+
+
+	//=================================================================================	/
+	// Summon: Spawns a Male Slayer
+	//=================================================================================	/
+	"summon_slayer_m"
+	{
+		"BaseClass"           "ability_datadriven"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityChannelTime"	"0.2"
+		"AbilityLumberCost"	"400"
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/abilities.lua"
+				"Function"		"SummonSlayer"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelInterrupted"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/abilities.lua"
+				"Function"		"Refund"
+				"TARGET"	"CASTER"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/abilities.lua"
+				"Function"		"SpawnSlayer"
+				"Gender"				"male"
+				"TARGET"	"CASTER"
+			}
+		}
 	}
 
 	"slayer_attribute_bonus"

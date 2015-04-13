@@ -8,7 +8,7 @@
 		"override_hero"				"npc_dota_hero_omniknight"
 		"BaseClass"					"npc_dota_creature"
 		"Ability1"					"build_silence"
-		"Ability2"					"build_house1"
+		"Ability2"					"summon_slayer_m"
 		"Ability3"					"call_buildui"
 		"Ability4"					"human_blink"
 		"Ability5"					"human_manaburn"
@@ -101,15 +101,40 @@
 		"VisionNighttimeRange"		"1600"
 	}
 
-	"npc_dota_hero_slayer_m"
+	"vamp_slayer"
 	{
 		"override_hero"				"npc_dota_hero_invoker"
-		"BaseClass"					"npc_dota_creature"
-		"Ability1"					"slayer_attribute_bonus"
-		"Level"						"1"
+		"Ability1"					"human_manaburn"
+		"Ability2"					"human_blink"
+		"Ability3"					""
+		"Ability4"					""
+		"Ability5"					""
+		"Ability6"					""
+		"Ability7"					""
+		"Ability8"					""
+		"Ability9"					""
+		"Ability10"					""
+		"Ability11"					""
+		"Ability12"					""
+		"Ability13"					""
+		"Ability14"					""
+		"Ability15"					""
+		"Ability16"					""
+		"Level"							"1"
 		"ConsideredHero"			"1"
-		"NewHero"					"0"
-		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"AbilityLayout"				"4"
+		"NewHero"						"0"
+
+		"Model"	"models/heroes/invoker/invoker.vmdl"
+		"precache"
+		{
+			"model"  "models/heroes/invoker/invoker_hair.vmdl"
+			"model"	 "models/heroes/invoker/invoker_shoulder.vmdl"
+			"model"	 "models/heroes/invoker/invoker_head.vmdl"
+			"model"	 "models/heroes/invoker/invoker_cape.vmdl"
+			"model"	 "models/heroes/invoker/invoker_bracer.vmdl"
+			"model"	 "models/heroes/invoker/invoker_dress.vmdl"
+		}
 
 		// Armor
 		//-------------------------------------------------------------------------------------------------------------
@@ -139,7 +164,8 @@
 
 		// Movement
 		//-------------------------------------------------------------------------------------------------------------
-		"MovementSpeed"				"522" // Speed.
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"			// Type of locomotion - ground, air
+		"MovementSpeed"				"400" // Speed.
 		"MovementTurnRate"			"0.5" // Turning rate.
 
 		// Status
@@ -148,7 +174,23 @@
 		"StatusMana"				"800"
 		"StatusHealthRegen"			"10"
 		"StatusManaRegen"			"5.5"
-		"VisionDaytimeRange"		"1600"
+		"VisionDaytimeRange"		"1400"
 		"VisionNighttimeRange"		"1600"
+
+		"ParticleFile"				"particles/units/heroes/hero_invoker.pcf"
+
+		"Creature"
+		{
+			"AttachWearables"
+			{
+				"Wearble1"	{ "ItemDef" 	"99" }
+				"Wearble2"	{ "ItemDef" 	"89" }
+				"Wearble3"	{ "ItemDef" 	"98" }
+				"Wearble4"	{ "ItemDef" 	"48" }
+				"Wearble5"	{ "ItemDef" 	"100" }
+				"Wearble6"	{ "ItemDef" 	"305" }
+			}
+		}
 	}
 }
+

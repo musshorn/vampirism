@@ -334,6 +334,7 @@ function BuildingHelper:AddBuilding(keys)
 	player.lastCursorCenter = OutOfWorldVector
 
 	-- Process the build Queue
+	builder.ProcessingBuilding = false
 	Timers:CreateTimer(0.1, function ()
 		if BUILD_QUEUE[pID] ~= nil then
 			if #BUILD_QUEUE[pID] > 0 and builder.ProcessingBuilding ~= true then
@@ -360,7 +361,7 @@ function BuildingHelper:AddBuilding(keys)
 				-- Check if the player chose the position.
 				if player.buildingPosChosen then
 					if validPos then
-						keys:AddToQueue(cursorPos)
+						keys:AddToQueue(cursorPos, unitName)
 						player.buildingPosChosen = false
 						generateParticles = true
 						modelParticle = nil
@@ -372,7 +373,7 @@ function BuildingHelper:AddBuilding(keys)
 
 				-- This runs if player right clicked.
 				if player.cancelBuilding then
-					PrintTable(player.ghost_particles)
+					player.ProcessingBuilding = false
 					player:CancelGhost()
 					BUILD_QUEUE[pID] = {}
 					return
@@ -420,7 +421,6 @@ function BuildingHelper:AddBuilding(keys)
 	end
 
 	function player:CancelGhost( )
-		print("canned")
 		FlashUtil:StopDataStream( player.cursorStream )
 		player.cursorStream = nil
 		player.cancelBuilding = false
@@ -429,11 +429,11 @@ function BuildingHelper:AddBuilding(keys)
 	end
 
 		-- Private function.
-	function keys:AddToQueue(vPoint)
+	function keys:AddToQueue(vPoint, unitName)
 		if BUILD_QUEUE[pID] == nil then
 			BUILD_QUEUE[pID] = {}
 		end
-		table.insert(BUILD_QUEUE[pID], vPoint)
+		table.insert(BUILD_QUEUE[pID], {["point"] = vPoint, ["name"] = unitName})
 
 		mgd = CreateUnitByName(unitName, OutOfWorldVector, false, nil, nil, caster:GetTeam())
 
@@ -466,7 +466,9 @@ function BuildingHelper:AddBuilding(keys)
 
 	function keys:AddToGrid()
 		if BUILD_QUEUE[pID] ~= nil then
-			local vPoint = BUILD_QUEUE[pID][1]
+			local target = BUILD_QUEUE[pID][1]
+			local vPoint = target.point
+			local unitName = target.name
 			table.remove(BUILD_QUEUE[pID], 1)
 			
 			-- Remember, our blocked squares are defined according to the square's center.
@@ -488,7 +490,9 @@ function BuildingHelper:AddBuilding(keys)
 			if BuildingHelper:IsRectangularAreaBlocked(buildingRect) then
 				FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Unable to build there" } )
 				ClearParticleTable(player.ghost_particles)
-
+				ParticleManager:DestroyParticle(player.stickyGhosts[1], true)
+				table.remove(player.stickyGhosts, 1)
+				player.ProcessingBuilding = false
 				if keys.onCanceledCallback ~= nil then
 					keys.onCanceledCallback();
 				end
