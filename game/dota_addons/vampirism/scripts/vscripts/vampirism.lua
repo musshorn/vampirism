@@ -305,7 +305,7 @@ end
 
 -- An item was picked up off the ground
 function GameMode:OnItemPickedUp(keys)
-  print ( '[vampirism] OnItemPurchased' )
+  print ( '[vampirism] OnItemPickedUp' )
   PrintTable(keys)
 
   local heroEntity = EntIndexToHScript(keys.HeroEntityIndex)
@@ -568,6 +568,10 @@ function GameMode:OnEntityKilled( keys )
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(3)
       end
+    end
+
+    if killedUnit:GetGoldBounty() > 0 then
+    	FireGameEvent("vamp_gold_feed", {player_ID = playerID, feed_total = killedUnit:GetGoldBounty()})
     end
   end
   

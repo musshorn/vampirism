@@ -1204,7 +1204,7 @@
 	{
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 100
+		"AbilityChannelTime"	"5" // #DEBUG, true value is 100
 		
 		"OnSpellStart"
 		{
@@ -1230,7 +1230,180 @@
 		}
 	}
 
-		// START OF BUILDING HELPER ABILITIES
+	//=================================================================================	/
+	// Upgrade to Opal Tower
+	//=================================================================================	/
+	"upgrade_to_tower_opal"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"5"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_opal"
+				"LumberCost"	"800"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_opal"
+				"Scale"			"1"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Upgrade to Lesser Mana Energy Tower
+	//=================================================================================/
+	"upgrade_to_tower_manaburn_t1"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"5"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_manaburn_t1"
+				"LumberCost"	"2000"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_manaburn_t1"
+				"Scale"			"0.7"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Lesser Mana Energy Tower - Feedback
+	//=================================================================================/
+	// Ability taken from SpellLibrary. - https://github.com/Pizzalol/SpellLibrary
+	// Author: Pizzalol
+	// Date: 16.12.2014.
+	"tower_manaburn_t1_feedback"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"		
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"antimage_mana_break"
+		"MaxLevel"						"1"
+	
+		// Precache	
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"	"particles/generic_gameplay/generic_manaburn.vpcf"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts"
+		}
+	
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_per_burn"		"1"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_per_hit"			"50"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_mana_break_orb_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+	
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/towers.lua"
+						"Function"		"ManaBreak"
+						"Target"		"TARGET"
+					}
+	
+					"FireSound"
+					{
+						"EffectName"	"Hero_Antimage.ManaBreak"
+						"Target"		"TARGET"
+					}
+	
+					"AttachEffect"
+					{
+						"EffectName"		"particles/generic_gameplay/generic_manaburn.vpcf"
+						"EffectAttachType"	"attach_hitloc"
+						"Target"			"TARGET"
+					}
+				}
+			}
+		}
+	}
+	//=================================================================================/
+	// Upgrade to Tower of Flame
+	//=================================================================================/
+	"upgrade_to_tower_flame_t1"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"25"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_flame_t1"
+				"LumberCost"	"4000"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_flame_t1"
+				"Scale"			"1"
+			}
+		}
+	}
+
+
+	// START OF BUILDING HELPER ABILITIES
 	"move_to_point_70"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"

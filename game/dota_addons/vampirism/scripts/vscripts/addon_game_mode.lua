@@ -36,8 +36,11 @@ function Precache( context )
 		--PrecacheResource("particle_folder", "particles/test_particle", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_wisp/wisp_base_attack.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_oracle/oracle_base_attack.vpcf", context)
+		PrecacheResource("particle", "particles/neutral_fx/satyr_trickster_projectile.vpcf", context)
 		PrecacheResource("particle", "particles/msg_heal.vpcf", context)
 		PrecacheResource("particle", "particles/vampire/shadow_demon_disruption.vpcf", context)
+		PrecacheResource("particle", "particles/base_attacks/ranged_tower_bad.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
@@ -61,6 +64,9 @@ function Precache( context )
 		PrecacheModel("models/barrel_fish_reference.vmdl", context)
 		PrecacheModel("models/barrel_oct_reference.vmdl", context)
 		PrecacheModel("models/props_rock/riveredge_rock006a.vmdl", context)
+		PrecacheModel("models/crystal_spike_sub1.vmdl", context)
+		PrecacheModel("models/statue_cuttlefish001.vmdl", context)
+		PrecacheModel("bad_column_torch_reference.vmdl", context)
 
 		-- Placeholder models for walls
 		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)

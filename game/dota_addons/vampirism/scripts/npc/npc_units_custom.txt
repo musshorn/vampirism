@@ -2,9 +2,38 @@
 "DOTAUnits"
 {
 	"Version"	"1"
+
+	//=================================================================================//
+	// Vampirism Naming Convention - Please read before making changes				   //
+	//																				   //
+	//   Custom units should follow the following convention.						   //
+	//   class_type_tier															   // 
+	//   - type is optional if there is only one in a class, as in slayer_tavern.	   //
+	//   - tier is optional if there is only one in a tier, as in tower_frost		   //
+	//																				   //
+	//   Examples of good naming:													   //
+	//																				   //
+	//   tower_pearls_t1															   //
+	//   - unit class is tower, type is pearls and tier is t1 						   //
+	//   																			   //
+	//   house_t1 																	   //
+	//   - unit class is house, type is not needed and tier is t1.					   //
+	//																				   //
+	//   Examples of bad naming:													   //
+	//																				   //
+	//  shiny_tower_pearls 															   //
+	//   - named according to its unit name, not really the best way to do this.       //
+	// 																				   //
+	//   research_center_t1 														   //
+	//   - uses underscores to indicate spaces, use caps instead, as in                //
+	//   ResearchCenter_t1 															   //
+	//  																			   //
+	//   To indicate a units real name / the name that is shown to the player, place   //
+	//   it in the ascii header above the unit. 									   //
+	//=================================================================================//
 	
 	//=================================================================================	
-	// Building: Vamp Fountain
+	// Fountain
 	//=================================================================================
 	"npc_vamp_fountain"
 	{
@@ -1343,8 +1372,8 @@
 		//----------------------------------------------------------------
 
 		"Ability1"					"upgrade_to_shiny_tower_of_pearls"	//Human test
-		"Ability2"					""					// Ability 2.
-		"Ability3"					""					// Ability 3.
+		"Ability2"					"upgrade_to_tower_opal"					// Ability 2.
+		"Ability3"					"upgrade_to_tower_manaburn_t1"					// Ability 3.
 		"Ability4"					""					// Ability 4.
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
@@ -1494,15 +1523,7 @@
 		"IsTech"		"true"
 		"NeedTech"		"house_t1"
 	}
-	//=================================================================================	
-	// Human Building T1 - Opal Tower
-	//=================================================================================
-	"tower_opal"
-	{
-		"BaseClass"             		"npc_dota_creature"
-		"AbilityTextureName"			"ability_name"
-		"MaxLevel" 						"7"
-	}
+
 	//=================================================================================	
 	// Human Building T1 - Carnelian Wall
 	//=================================================================================
@@ -2000,6 +2021,543 @@
 		"BountyXP"					"100"
 		"BountyGoldMin"				"5"
 		"BountyGoldMax"				"5"
+
+		"IsTech"		"true"
+		"NeedTech"		"house_t1"
+	}
+
+	//=================================================================================	
+	// Opal Tower
+	//=================================================================================
+	"tower_opal"
+	{
+		// General
+   		//-------------------------------------------------------------------------------------------------------------
+   		"BaseClass"					"npc_dota_creature"
+    	"Model"						"models/crystal_spike_sub1.vmdl"
+		"ModelScale"				"0.5"
+		
+		"ConsideredHero"			"0"
+		// Abilities
+		//----------------------------------------------------------------
+
+		"Ability1"					"upgrade_to_tower_flame_t1"	//Human test
+		"Ability2"					""					// Ability 2.
+		"Ability3"					""					// Ability 3.
+		"Ability4"					""					// Ability 4.
+		"Ability5"					""					// Ability 5.
+		"Ability6"					""					// Ability 6 - Extra.
+		"Ability7"					""					// Ability 7 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"4"			// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+
+
+		//Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"56"
+		"AttackDamageMax"			"58"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"0.1"
+		"AttackAnimationPoint"		"0"
+		"AttackAcquisitionRange"	"1000"
+		"AttackRange"				"600"
+		"ProjectileModel"			"particles/neutral_fx/satyr_trickster_projectile.vpcf"
+		"ProjectileSpeed"			"600"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributeBaseIntelligence"	"0"
+		"AttributeBaseIntelligenceGain"	"0"
+	
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"RingRadius"				"50"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"300"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"500"		// Base health.
+		"StatusHealthRegen"			"0"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"-0.01"			// Mana regeneration rate.
+
+	    // Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1500"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1500"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRONG"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"125"
+		"BountyGoldMin"				"2"
+		"BountyGoldMax"				"2"
+
+		"IsTech"		"true"
+		"NeedTech"		"house_t1"
+	}
+
+	//=================================================================================	
+	// Lesser Mana Energy Tower
+	//=================================================================================
+	"tower_manaburn_t1"
+	{
+		// General
+   		//-------------------------------------------------------------------------------------------------------------
+   		"BaseClass"					"npc_dota_creature"
+    	"Model"						"models/statue_cuttlefish001.vmdl"
+		"ModelScale"				"0.5"
+		
+		"ConsideredHero"			"0"
+		// Abilities
+		//----------------------------------------------------------------
+
+		"Ability1"					"tower_manaburn_t1_feedback"	//Human test
+		"Ability2"					""					// Ability 2.
+		"Ability3"					""					// Ability 3.
+		"Ability4"					""					// Ability 4.
+		"Ability5"					""					// Ability 5.
+		"Ability6"					""					// Ability 6 - Extra.
+		"Ability7"					""					// Ability 7 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"			// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+
+
+		//Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"3"
+		"AttackDamageMax"			"6"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"0.4"
+		"AttackAnimationPoint"		"0"
+		"AttackAcquisitionRange"	"800"
+		"AttackRange"				"800"
+		"ProjectileModel"			"particles/units/heroes/hero_oracle/oracle_base_attack.vpcf"
+		"ProjectileSpeed"			"1500"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributeBaseIntelligence"	"0"
+		"AttributeBaseIntelligenceGain"	"0"
+	
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"RingRadius"				"50"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"300"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1000"		// Base health.
+		"StatusHealthRegen"			"1"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"-0.01"			// Mana regeneration rate.
+
+	    // Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1500"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1200"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"125"
+		"BountyGoldMin"				"5"
+		"BountyGoldMax"				"5"
+
+		"IsTech"		"true"
+		"NeedTech"		"house_t1"
+	}
+
+	//=================================================================================	
+	// Tower of Flame
+	//=================================================================================
+	"tower_flame_t1"
+	{
+		// General
+   		//-------------------------------------------------------------------------------------------------------------
+   		"BaseClass"						"npc_dota_creature"
+    	"Model"							"models/bad_column_torch_reference.vmdl"
+		"ModelScale"					"1"
+		
+		"ConsideredHero"				"0"
+		// Abilities
+		//----------------------------------------------------------------
+
+		"Ability1"					""	//Human test
+		"Ability2"					""					// Ability 2.
+		"Ability3"					""					// Ability 3.
+		"Ability4"					""					// Ability 4.
+		"Ability5"					""					// Ability 5.
+		"Ability6"					""					// Ability 6 - Extra.
+		"Ability7"					""					// Ability 7 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"			// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+
+
+		//Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"300"
+		"AttackDamageMax"			"300"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"0.5"
+		"AttackAnimationPoint"		"0"
+		"AttackAcquisitionRange"	"1000"
+		"AttackRange"				"1000"
+		"ProjectileModel"			"particles/base_attacks/ranged_tower_bad.vpcf"
+		"ProjectileSpeed"			"900"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributeBaseIntelligence"	"0"
+		"AttributeBaseIntelligenceGain"	"0"
+	
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"RingRadius"				"50"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"300"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"500"		// Base health.
+		"StatusHealthRegen"			"5"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"-0.01"			// Mana regeneration rate.
+
+	    // Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1900"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"125"
+		"BountyGoldMin"				"25"
+		"BountyGoldMax"				"25"
+
+		"IsTech"		"true"
+		"NeedTech"		"house_t1"
+	}
+
+
+	//=================================================================================	
+	// Blood Tower
+	//=================================================================================
+	"tower_blood_t1"
+	{
+		// General
+   		//-------------------------------------------------------------------------------------------------------------
+   		"BaseClass"						"npc_dota_creature"
+    	"Model"							"models/tower_good2_reference.vmdl"
+		"ModelScale"				"1"
+		
+		"ConsideredHero"			"0"
+		// Abilities
+		//----------------------------------------------------------------
+
+		"Ability1"					""	//Human test
+		"Ability2"					""					// Ability 2.
+		"Ability3"					""					// Ability 3.
+		"Ability4"					""					// Ability 4.
+		"Ability5"					""					// Ability 5.
+		"Ability6"					""					// Ability 6 - Extra.
+		"Ability7"					""					// Ability 7 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"15"			// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+
+
+		//Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"1000"
+		"AttackDamageMax"			"1000"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1"
+		"AttackAnimationPoint"		"0"
+		"AttackAcquisitionRange"	"1200"
+		"AttackRange"				"1200"
+		"ProjectileModel"			"particles/units/heroes/hero_wisp/wisp_base_attack.vpcf"
+		"ProjectileSpeed"			"2000"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributeBaseIntelligence"	"0"
+		"AttributeBaseIntelligenceGain"	"0"
+	
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"RingRadius"				"50"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"300"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"2500"		// Base health.
+		"StatusHealthRegen"			"50"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"-0.01"			// Mana regeneration rate.
+
+	    // Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"125"
+		"BountyGoldMin"				"60"
+		"BountyGoldMax"				"60"
+
+		"IsTech"		"true"
+		"NeedTech"		"house_t1"
+	}
+
+	//=================================================================================	
+	// Calcite Outpost
+	//=================================================================================
+	"tower_calcite_t1"
+	{
+		// General
+   		//-------------------------------------------------------------------------------------------------------------
+   		"BaseClass"						"npc_dota_creature"
+    	"Model"							"models/tower_good2_reference.vmdl"
+		"ModelScale"				"1"
+		
+		"ConsideredHero"			"0"
+		// Abilities
+		//----------------------------------------------------------------
+
+		"Ability1"					""	//Human test
+		"Ability2"					""					// Ability 2.
+		"Ability3"					""					// Ability 3.
+		"Ability4"					""					// Ability 4.
+		"Ability5"					""					// Ability 5.
+		"Ability6"					""					// Ability 6 - Extra.
+		"Ability7"					""					// Ability 7 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"4"			// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+
+
+		//Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"1000"
+		"AttackDamageMax"			"1000"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"3"
+		"AttackAnimationPoint"		"0"
+		"AttackAcquisitionRange"	"700"
+		"AttackRange"				"700"
+		"ProjectileModel"			"particles/units/heroes/hero_wisp/wisp_base_attack.vpcf"
+		"ProjectileSpeed"			"600"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributeBaseIntelligence"	"0"
+		"AttributeBaseIntelligenceGain"	"0"
+	
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"RingRadius"				"50"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"300"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1000"		// Base health.
+		"StatusHealthRegen"			"1"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"-0.01"			// Mana regeneration rate.
+
+	    // Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1500"		// Range of vision during day light.
+		"VisionNighttimeRange"		"1500"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"125"
+		"BountyGoldMin"				"10"
+		"BountyGoldMax"				"10"
+
+		"IsTech"		"true"
+		"NeedTech"		"house_t1"
+	}
+
+	//=================================================================================	
+	// Frost Tower
+	//=================================================================================
+	"tower_frost"
+	{
+		// General
+   		//-------------------------------------------------------------------------------------------------------------
+   		"BaseClass"						"npc_dota_creature"
+    	"Model"							"models/tower_good2_reference.vmdl"
+		"ModelScale"				"1"
+		
+		"ConsideredHero"			"0"
+		// Abilities
+		//----------------------------------------------------------------
+
+		"Ability1"					""	//Human test
+		"Ability2"					""					// Ability 2.
+		"Ability3"					""					// Ability 3.
+		"Ability4"					""					// Ability 4.
+		"Ability5"					""					// Ability 5.
+		"Ability6"					""					// Ability 6 - Extra.
+		"Ability7"					""					// Ability 7 - Extra.
+		"Ability8"					"is_a_building"					// Ability 8 - Extra.
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"10"			// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+
+
+		//Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"150"
+		"AttackDamageMax"			"150"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"0.2"
+		"AttackAnimationPoint"		"0"
+		"AttackAcquisitionRange"	"1200"
+		"AttackRange"				"1200"
+		"ProjectileModel"			"particles/units/heroes/hero_wisp/wisp_base_attack.vpcf"
+		"ProjectileSpeed"			"1200"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+
+		// Attributes
+		//----------------------------------------------------------------
+		"AttributeBaseIntelligence"	"0"
+		"AttributeBaseIntelligenceGain"	"0"
+	
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"			// Hull type used for navigation/locomotion.
+		"HealthBarOffset"			"170"
+		"RingRadius"				"50"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"			// Type of locomotion - ground, air
+		"MovementSpeed"				"300"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"8000"		// Base health.
+		"StatusHealthRegen"			"20"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"-0.01"			// Mana regeneration rate.
+
+	    // Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"		// Range of vision during day light.
+		"VisionNighttimeRange"		"800"		// Range of vision at night time.
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"125"
+		"BountyGoldMin"				"100"
+		"BountyGoldMax"				"100"
 
 		"IsTech"		"true"
 		"NeedTech"		"house_t1"

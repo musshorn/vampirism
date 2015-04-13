@@ -37,6 +37,12 @@
 		"player_ID"			"short"
 	}
 
+	"vamp_gold_feed"
+	{
+		"player_ID"			"short"
+		"feed_total"		"short"
+	}
+
 	"build_ui_called"
 	{
 		"player_ID"			"short"
