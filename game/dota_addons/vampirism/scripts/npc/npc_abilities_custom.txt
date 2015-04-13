@@ -363,7 +363,7 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"call_build"
 		"MaxLevel"	"1"
-		"AbilityCooldown"				"5.0"
+		"AbilityCooldown"				"0"
 
 		"OnSpellStart"
 		{
