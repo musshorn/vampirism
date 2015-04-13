@@ -237,6 +237,7 @@ function SpawnSlayer( keys )
   local slayer = CreateUnitByName("npc_dota_hero_invoker", caster:GetAbsOrigin(), true, nil, nil, caster:GetTeam())
   slayer:SetControllableByPlayer(pID, true)
   slayer:SetOwner(EntIndexToHScript(pID))
+  GameMode:ModifyStatBonuses(slayer)
 end
 
 function Refund( keys )
