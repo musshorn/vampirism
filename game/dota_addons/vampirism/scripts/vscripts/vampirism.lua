@@ -119,6 +119,10 @@ function GameMode:OnAllPlayersLoaded()
   
     local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
 
+
+    for i = 0, 9 do
+    	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
+    end
 end
 
 --[[
@@ -243,7 +247,7 @@ function GameMode:OnNPCSpawned(keys)
       npc:SetAbilityPoints(0)
       print('lua setting gold')
       FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = 0})
-      FireGameEvent("vamp_scoreboard_addplayer", {player_ID = playerID, player_name = 'DONT SHIP THIS IN MP'})
+      --
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
     end
   end
@@ -850,7 +854,7 @@ function GameMode:OnConnectFull(keys)
     return
   end
 
-  --Hides unused HUD elements. Thanks to Noya for docuementing this!
+  --Hides unused HUD elements. Thanks to Noya for documenting this!
   mode = GameRules:GetGameModeEntity()
   mode:SetHUDVisible(1, false)
   mode:SetHUDVisible(2, false)
