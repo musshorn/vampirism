@@ -570,7 +570,10 @@ function GameMode:OnEntityKilled( keys )
       end
     end
 
+    print(killedUnit:GetGoldBounty())
     if killedUnit:GetGoldBounty() > 0 then
+    	print(playerID)
+    	print(feed_total)
     	FireGameEvent("vamp_gold_feed", {player_ID = playerID, feed_total = killedUnit:GetGoldBounty()})
     end
   end

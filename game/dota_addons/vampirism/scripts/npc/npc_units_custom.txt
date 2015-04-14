@@ -1035,7 +1035,7 @@
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"					"npc_dota_creature"
         "Model"						"models/barrel_fish_reference.vmdl"
-		"ModelScale"				"1"
+		"ModelScale"				"0.2"
 		
 		"ConsideredHero"			"0"
 		// Abilities
