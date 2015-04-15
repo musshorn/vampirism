@@ -255,12 +255,12 @@ function GameMode:OnNPCSpawned(keys)
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
-      print("made 40 wood for player "..playerID)
       HUMAN_COUNT = HUMAN_COUNT + 1
       npc:SetAbilityPoints(0)
-      print('lua setting gold')
       FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = 0})
-      --
+      FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
+      FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
+      FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
     end
   end

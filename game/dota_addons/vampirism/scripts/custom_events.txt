@@ -5,13 +5,13 @@
 	"vamp_gold_changed"
 	{
 		"player_ID"			"short"
-		"gold_total"		"short"
+		"gold_total"		"long"
 	}
 
 	"vamp_wood_changed"
 	{
 		"player_ID"			"short"
-		"wood_total"		"short"
+		"wood_total"		"long"
 	}
 
 	"vamp_food_changed"
