@@ -27,3 +27,10 @@ function ManaBreak( keys )
 
   ApplyDamage(damageTable)
 end
+
+function bloodArmor(keys)
+  local target = keys.target
+  local ability = keys.ability
+
+  target:SetModifierStackCount("modifier_blood_armor_1", ability, target:GetModifierStackCount("modifier_blood_armor_1", ability) + 1)
+end

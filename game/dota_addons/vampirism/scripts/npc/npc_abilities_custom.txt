@@ -1430,7 +1430,7 @@
 				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
 				"Function"		"FinishUpgrade"
 				"TargetUnit"	"tower_blood_t1"
-				"Scale"			"1"
+				"Scale"			"2.5"
 			}
 		}
 	}
@@ -1460,10 +1460,28 @@
 				{
 					"ApplyModifier"
 					{
-						"ModifierName"	"modifier_name"
+						"ModifierName"	"modifier_blood_armor_1"
 						"Target" 		"TARGET"
 						"Duration"		"5"
 					}
+
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/towers.lua"
+						"Function"		"bloodArmor"
+					}
+				}			
+			}
+
+			"modifier_blood_armor_1"
+			{
+				"Passive"	"1"
+				"IsHidden"	"0"
+				"IsDebuff"	"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-1"
 				}
 			}
 		}
