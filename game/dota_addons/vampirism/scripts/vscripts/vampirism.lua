@@ -56,6 +56,16 @@ PLAYER_BUILDQ = {}
 HAS_SLAYER = {}
 VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
 
+HUMAN_FEED = {}
+for i = 0, 7 do
+	HUMAN_FEED[i] = 0
+end
+
+VAMPIRE_FEED = {}
+for i = 8, 9 do
+	VAMPIRE_FEED[i] = 0
+end
+
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
 XP_PER_LEVEL_TABLE[1] = 0
@@ -245,12 +255,12 @@ function GameMode:OnNPCSpawned(keys)
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
-      print("made 40 wood for player "..playerID)
       HUMAN_COUNT = HUMAN_COUNT + 1
       npc:SetAbilityPoints(0)
-      print('lua setting gold')
       FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = 0})
-      --
+      FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
+      FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
+      FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
     end
   end
@@ -312,11 +322,11 @@ function GameMode:OnItemPickedUp(keys)
 
   local heroEntity = EntIndexToHScript(keys.HeroEntityIndex)
   local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
-  local player = PlayerResource:GetPlayer(keys.PlayerID)
+  local playerID = PlayerResource:GetPlayer(keys.PlayerID)
   local itemname = keys.itemname
 
   if itemname == "item_small_coin" then
-  	print(VAMPIRE_COINS[keys.ItemEntityIndex])
+  	--VAMPIRE_FEED[playerID] = VAMPIRE_FEED[playerID] + 1
   	FireGameEvent("vamp_gold_feed", {player_ID = VAMPIRE_COINS[keys.ItemEntityIndex], feed_total = 1})
   end
   if itemname == "item_large_coin" then
@@ -585,7 +595,9 @@ function GameMode:OnEntityKilled( keys )
     end
 
     if killedUnit:GetGoldBounty() > 0 then
-    	FireGameEvent("vamp_gold_feed", {player_ID = playerID, feed_total = killedUnit:GetGoldBounty()})
+    	print(HUMAN_FEED[playerID] + killedUnit:GetGoldBounty())
+    	HUMAN_FEED[playerID] = HUMAN_FEED[playerID] + killedUnit:GetGoldBounty()
+    	FireGameEvent("vamp_gold_feed", {player_ID = playerID, feed_total = HUMAN_FEED[playerID]})
     end
   end
   
