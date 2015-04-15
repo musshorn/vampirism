@@ -204,7 +204,6 @@ function BuildingHelper:AddBuilding(keys)
 	-- player's hero could be diff from the builder.
 	local playersHero = player:GetAssignedHero()
 	local pID = builder:GetMainControllingPlayer()
-
 	local buildingTable = BuildingAbilities[abilName]
 
 	function buildingTable:GetVal( key, expectedType )
@@ -335,15 +334,17 @@ function BuildingHelper:AddBuilding(keys)
 
 	-- Process the build Queue
 	builder.ProcessingBuilding = false
-	Timers:CreateTimer(0.1, function ()
-		if BUILD_QUEUE[pID] ~= nil then
-			if #BUILD_QUEUE[pID] > 0 and builder.ProcessingBuilding ~= true then
-				builder.ProcessingBuilding = true
-				keys:AddToGrid()
+	if builder.QueueTimer == nil then
+		builder.QueueTimer = Timers:CreateTimer(0.1, function ()
+			if BUILD_QUEUE[pID] ~= nil then
+				if #BUILD_QUEUE[pID] > 0 and builder.ProcessingBuilding ~= true then
+					builder.ProcessingBuilding = true
+					keys:AddToGrid()
+				end
 			end
-		end
-		return 0.1
-	end)
+			return 0.1
+		end)
+	end
 
 	function player:BeginGhost()
 		if not player.cursorStream then
@@ -361,7 +362,8 @@ function BuildingHelper:AddBuilding(keys)
 				-- Check if the player chose the position.
 				if player.buildingPosChosen then
 					if validPos then
-						keys:AddToQueue(cursorPos, unitName)
+
+						keys:AddToQueue(cursorPos, unitName, buildingTable)
 						player.buildingPosChosen = false
 						generateParticles = true
 						modelParticle = nil
@@ -429,12 +431,11 @@ function BuildingHelper:AddBuilding(keys)
 	end
 
 		-- Private function.
-	function keys:AddToQueue(vPoint, unitName)
+	function keys:AddToQueue(vPoint, unitName, buildingTable)
 		if BUILD_QUEUE[pID] == nil then
 			BUILD_QUEUE[pID] = {}
 		end
-		table.insert(BUILD_QUEUE[pID], {["point"] = vPoint, ["name"] = unitName})
-
+		table.insert(BUILD_QUEUE[pID], {["point"] = vPoint, ["name"] = unitName, ["buildingTable"] = buildingTable})
 		mgd = CreateUnitByName(unitName, OutOfWorldVector, false, nil, nil, caster:GetTeam())
 
 		--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
@@ -469,6 +470,7 @@ function BuildingHelper:AddBuilding(keys)
 			local target = BUILD_QUEUE[pID][1]
 			local vPoint = target.point
 			local unitName = target.name
+			local buildingTable = target.buildingTable
 			table.remove(BUILD_QUEUE[pID], 1)
 			
 			-- Remember, our blocked squares are defined according to the square's center.
