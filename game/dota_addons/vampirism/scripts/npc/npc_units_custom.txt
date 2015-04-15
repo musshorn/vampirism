@@ -2042,7 +2042,7 @@
 		//----------------------------------------------------------------
 
 		"Ability1"					"upgrade_to_tower_flame_t1"	//Human test
-		"Ability2"					""					// Ability 2.
+		"Ability2"					"upgrade_to_tower_blood_t1"					// Ability 2.
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
 		"Ability5"					""					// Ability 5.
@@ -2304,14 +2304,14 @@
 		// General
    		//-------------------------------------------------------------------------------------------------------------
    		"BaseClass"						"npc_dota_creature"
-    	"Model"							"models/tower_good2_reference.vmdl"
-		"ModelScale"				"1"
+    	"Model"							"models/bloodstone_reference.vmdl"
+		"ModelScale"					"3"
 		
-		"ConsideredHero"			"0"
+		"ConsideredHero"				"0"
 		// Abilities
 		//----------------------------------------------------------------
 
-		"Ability1"					""	//Human test
+		"Ability1"					"tower_blood_t1_holy_blood"	//Human test
 		"Ability2"					""					// Ability 2.
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
@@ -2337,7 +2337,7 @@
 		"AttackAnimationPoint"		"0"
 		"AttackAcquisitionRange"	"1200"
 		"AttackRange"				"1200"
-		"ProjectileModel"			"particles/units/heroes/hero_wisp/wisp_base_attack.vpcf"
+		"ProjectileModel"			"particles/items_fx/desolator_projectile.vpcf"
 		"ProjectileSpeed"			"2000"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
 
