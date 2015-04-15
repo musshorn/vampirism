@@ -1402,6 +1402,74 @@
 		}
 	}
 
+	//=================================================================================/
+	// Upgrade to Tower of Blood
+	//=================================================================================/
+	"upgrade_to_tower_blood_t1"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"25"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_blood_t1"
+				"LumberCost"	"15000"
+				"GoldCost"		"1"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_blood_t1"
+				"Scale"			"1"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Tower of Blood - Holy Blood
+	//=================================================================================/
+	"tower_blood_t1_holy_blood"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"dazzle_weave"
+		"MaxLevel" 						"1"
+
+		"Modifiers"
+		{
+			"modifier_holy_blood_debuff"
+			{
+				"Passive"			"1"
+				"IsHidden"			"0"
+				"IsDebuff"			"1"
+			
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_name"
+						"Target" 		"TARGET"
+						"Duration"		"5"
+					}
+				}
+			}
+		}
+	}
+
+
 
 	// START OF BUILDING HELPER ABILITIES
 	"move_to_point_70"

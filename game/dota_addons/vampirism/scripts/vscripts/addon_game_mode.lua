@@ -41,6 +41,7 @@ function Precache( context )
 		PrecacheResource("particle", "particles/msg_heal.vpcf", context)
 		PrecacheResource("particle", "particles/vampire/shadow_demon_disruption.vpcf", context)
 		PrecacheResource("particle", "particles/base_attacks/ranged_tower_bad.vpcf", context)
+		PrecacheResource("particle", "particles/items_fx/desolator_projectile.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
@@ -67,6 +68,7 @@ function Precache( context )
 		PrecacheModel("models/crystal_spike_sub1.vmdl", context)
 		PrecacheModel("models/statue_cuttlefish001.vmdl", context)
 		PrecacheModel("bad_column_torch_reference.vmdl", context)
+		PrecacheModel("models/bloodstone_reference.vmdl", context)
 
 		-- Placeholder models for walls
 		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)

@@ -54,6 +54,7 @@ VAMP_COUNT = 0
 HUMAN_COUNT = 0
 PLAYER_BUILDQ = {}
 HAS_SLAYER = {}
+VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
@@ -238,7 +239,8 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
   	npc:FindAbilityByName("build_house1"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 5000
+      WOOD[playerID] = 100000 --cheats
+      PlayerResource:SetGold(playerID, 1000, true) --cheats
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -312,6 +314,15 @@ function GameMode:OnItemPickedUp(keys)
   local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local itemname = keys.itemname
+
+  if itemname == "item_small_coin" then
+  	print(VAMPIRE_COINS[keys.ItemEntityIndex])
+  	FireGameEvent("vamp_gold_feed", {player_ID = VAMPIRE_COINS[keys.ItemEntityIndex], feed_total = 1})
+  end
+  if itemname == "item_large_coin" then
+  	print(VAMPIRE_COINS[keys.ItemEntityIndex])
+  	FireGameEvent("vamp_gold_feed", {player_ID = VAMPIRE_COINS[keys.ItemEntityIndex], feed_total = 2})
+  end
 end
 
 -- A player has reconnected to the game.  This function can be used to repaint Player-based particles or change
@@ -550,30 +561,30 @@ function GameMode:OnEntityKilled( keys )
     end
   end
 
-  if killerEntity:GetUnitName() == "npc_dota_hero_night_stalker" then
+  if killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
     if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" then
-
       -- Probability function for a coin drop
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
+      outcome = 1 --dont forget to change this
       if outcome <= largeProb then        
-        local coin = CreateItem("item_large_coin", nil, nil)
+        local coin = CreateItem("item_large_coin", killerEntity, killerEntity)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
+        VAMPIRE_COINS[coin:GetEntityIndex()] = killerEntity:GetMainControllingPlayer()
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(5) 
       elseif outcome <= smallProb then
-        local coin = CreateItem("item_small_coin", nil, nil)
+        local coin = CreateItem("item_small_coin", killerEntity, killerEntity)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
+        VAMPIRE_COINS[coin:GetEntityIndex()] = killerEntity:GetMainControllingPlayer()
+        coin.player = killerEntity:GetMainControllingPlayer()
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(3)
       end
     end
 
-    print(killedUnit:GetGoldBounty())
     if killedUnit:GetGoldBounty() > 0 then
-    	print(playerID)
-    	print(feed_total)
     	FireGameEvent("vamp_gold_feed", {player_ID = playerID, feed_total = killedUnit:GetGoldBounty()})
     end
   end
