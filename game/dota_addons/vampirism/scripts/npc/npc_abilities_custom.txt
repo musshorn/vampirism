@@ -1487,6 +1487,78 @@
 		}
 	}
 
+	//=================================================================================/
+	// Upgrade to Frost Tower
+	//=================================================================================/
+	"upgrade_to_tower_frost"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"30"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_frost"
+				"LumberCost"	"15000"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_frost"
+				"Scale"			"0.7"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Tower of Frost - Slow
+	//=================================================================================/
+	"tower_frost_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"lich_frost_nova"
+		"MaxLevel" 						"1"
+
+
+
+		"Modifiers"
+		{
+			"OnAttackLanded"
+			{
+				"ApplyModifier"
+				{
+					"ModifierName"	"modifier_tower_frost_slow"
+					"Target" 		"TARGET"
+					"Duration"		"%5"
+				}
+			}
+			"modifier_tower_frost_slow"
+			{
+				"IsHidden"	"0"
+				"IsDebuff"	"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%-25"
+				}
+			}
+		}
+	}
+
 
 
 	// START OF BUILDING HELPER ABILITIES

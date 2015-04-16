@@ -2043,7 +2043,7 @@
 
 		"Ability1"					"upgrade_to_tower_flame_t1"	//Human test
 		"Ability2"					"upgrade_to_tower_blood_t1"					// Ability 2.
-		"Ability3"					""					// Ability 3.
+		"Ability3"					"upgrade_to_tower_frost"					// Ability 3.
 		"Ability4"					""					// Ability 4.
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
@@ -2482,14 +2482,14 @@
 		// General
    		//-------------------------------------------------------------------------------------------------------------
    		"BaseClass"						"npc_dota_creature"
-    	"Model"							"models/tower_good2_reference.vmdl"
-		"ModelScale"				"1"
+    	"Model"							"models/crystal_ring01_reference.vmdl"
+		"ModelScale"				"0.7"
 		
 		"ConsideredHero"			"0"
 		// Abilities
 		//----------------------------------------------------------------
 
-		"Ability1"					""	//Human test
+		"Ability1"					"tower_frost_attack"	//Human test
 		"Ability2"					""					// Ability 2.
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
@@ -2515,7 +2515,7 @@
 		"AttackAnimationPoint"		"0"
 		"AttackAcquisitionRange"	"1200"
 		"AttackRange"				"1200"
-		"ProjectileModel"			"particles/units/heroes/hero_wisp/wisp_base_attack.vpcf"
+		"ProjectileModel"			"particles/items2_fx/skadi_projectile.vpcf"
 		"ProjectileSpeed"			"1200"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
 

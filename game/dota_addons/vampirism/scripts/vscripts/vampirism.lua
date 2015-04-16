@@ -326,12 +326,12 @@ function GameMode:OnItemPickedUp(keys)
   local itemname = keys.itemname
 
   if itemname == "item_small_coin" then
-  	--VAMPIRE_FEED[playerID] = VAMPIRE_FEED[playerID] + 1
-  	FireGameEvent("vamp_gold_feed", {player_ID = VAMPIRE_COINS[keys.ItemEntityIndex], feed_total = 1})
+  	VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]] = VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]] + 1
+  	FireGameEvent("vamp_gold_feed", {player_ID = VAMPIRE_COINS[keys.ItemEntityIndex], feed_total = VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]]})
   end
   if itemname == "item_large_coin" then
-  	print(VAMPIRE_COINS[keys.ItemEntityIndex])
-  	FireGameEvent("vamp_gold_feed", {player_ID = VAMPIRE_COINS[keys.ItemEntityIndex], feed_total = 2})
+  	VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]] = VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]] + 2
+  	FireGameEvent("vamp_gold_feed", {player_ID = VAMPIRE_COINS[keys.ItemEntityIndex], feed_total = VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]]})
   end
 end
 
