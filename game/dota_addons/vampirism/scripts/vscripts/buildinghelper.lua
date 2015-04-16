@@ -491,10 +491,9 @@ function BuildingHelper:AddBuilding(keys)
 				
 			if BuildingHelper:IsRectangularAreaBlocked(buildingRect) then
 				FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Unable to build there" } )
-				ClearParticleTable(player.ghost_particles)
-				ParticleManager:DestroyParticle(player.stickyGhosts[1], true)
-				table.remove(player.stickyGhosts, 1)
+				ClearParticleTable(player.stickyGhosts)
 				player.ProcessingBuilding = false
+				player.cancelBuilding = true
 				if keys.onCanceledCallback ~= nil then
 					keys.onCanceledCallback();
 				end
