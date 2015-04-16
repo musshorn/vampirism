@@ -3,868 +3,893 @@
 
 "DOTAAbilities"
 {
-	"vamp_fountain_heal"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	""
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"health_regen"
-				"Target"
-				{
-					"Center"	"CASTER"
-					"Radius"	"%health_radius"
-					"Teams"	"DOTA_UNIT_TARGET_TEAM_BOTH"
-					"Types"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
-				}
-
-			}
-
-		}
-
-		"Modifiers"
-		{
-			"fx_heal_aura"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
-				"OnCreated"
-				{
-					"AttachEffect"
-					{
-						"Target"	"TARGET"
-						"EffectName"	"particles/generic_gameplay/radiant_fountain_regen_mist.vpcf"
-						"EffectAttatchType"	"follow_origin"
-						"ControlPoints"
-						{
-							"00"	"0 0 0"
-							"01"	"%health_radius 0 0"
-							"02"	"0 0 -200"
-						}
-
-					}
-
-				}
-
-			}
-
-			"aura_health_regen"
-			{
-				"IsHidden"	"0"
-				"Passive"	"1"
-				"Aura"	"health_regen"
-				"Aura_Radius"	"%health_radius"
-				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_BOTH"
-				"Aura_Types"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
-				"Aura_ApplyToCaster"	"0"
-			}
-
-			"health_regen"
-			{
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE"	"%health_regen_amount"
-					"MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE"	"%mana_regen_amount"
-				}
-
-			}
-
-		}
-
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"health_radius"	"450"
-			}
-
-			"02"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"health_regen_amount"	"22.0"
-			}
-
-			"03"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"mana_regen_amount"	"8.0"
-			}
-
-		}
-
-	}
-
-	"vamp_farsight"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"reveal"
-		"MaxLevel"	"3"
-		"AbilityCooldown"	"30"
-		"OnSpellStart"
-		{
-			"SpawnUnit"
-			{
-				"UnitName"	"vision_dummy_passive"
-				"Target"	"POINT"
-				"Duration"	"30"
-				"UnitCount"	"1"
-			}
-
-		}
-	}
-	//=================================================================================	/
-	// Buff: Is a building is applied on building spawn to make the building deniable
-	//=================================================================================	/
-	"is_a_building"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"	"ability_datadriven"
-		
-		"Modifiers"
-		{
-			"modifier_building_deniable"
-			{
-				"Passive" "1"
-				"IsHidden" "1"
-				"States"
-				{
-					 "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED"
+  "vamp_fountain_heal"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  ""
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "health_regen"
+        "Target"
+        {
+          "Center"  "CASTER"
+          "Radius"  "%health_radius"
+          "Teams" "DOTA_UNIT_TARGET_TEAM_BOTH"
+          "Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
         }
-			}
-		}
-	}
 
-	//Keeps the building stationary
-	"building_block"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"	"ability_datadriven"
-		"Modifiers"
-		{
-			"modifier_grounded_passive"
-			{
-				"Passive" "1"
-				"IsHidden" "1"
-				"States"
-				{
-					"MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
+      }
 
-	}
+    }
 
-	//Set rally point for workers created by this building
-	"set_rally_point"
-	{
-		"AbilityBehavior"						"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
-		"BaseClass"	"ability_datadriven"
-		"MaxLevel"						"1"
-		"AbilityCastPoint"				"0.3"
-		"AbilityCooldown"				"0"
-		"AbilityCastRange"			"5000"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Target"			"POINT"
-				"Function"		"SetRallyPoint"
-			}
-		}
-	}
+    "Modifiers"
+    {
+      "fx_heal_aura"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+        "OnCreated"
+        {
+          "AttachEffect"
+          {
+            "Target"  "TARGET"
+            "EffectName"  "particles/generic_gameplay/radiant_fountain_regen_mist.vpcf"
+            "EffectAttatchType" "follow_origin"
+            "ControlPoints"
+            {
+              "00"  "0 0 0"
+              "01"  "%health_radius 0 0"
+              "02"  "0 0 -200"
+            }
 
-	"spawn_worker_t1"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"basher"
-		"AbilityModifierSupportValue"	"0.5"
-		"MaxLevel"	"1"
-		"AbilityManaCost"	"0"
-		"AbilityGoldCost"	"0"
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"t1_worker_training"
-				"Target" 		"CASTER"
-			}
-		}
+          }
 
-		"Modifiers"
-		{
-			"t1_worker_training"
-			{
-				"IsPurgable"	"false"
-				"IsStunDebuff" "false"
-				"IsHidden"	"false"
-				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-						"Function"		"TrainUnit"
-						"AddToQueue"	"t1_worker_training"
-						"SpawnUnit"		"worker_t1"
-					}
-				}
-			}
-		}
-	}
-	
-	"t1_worker_training"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"	"ability_datadriven"
-		"AbilityCastPoint"	"0"
-		"AbilityChannelTime" "1.0"
-	}
+        }
 
-	"cancel_training"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"rubick_empty1"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Cancel"
-			}
-		}
-	}
+      }
 
-	"harvest_t1"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_TREE"
-		"BaseClass"	"ability_datadriven"
-		"MaxLevel"	"1"
-		"AbilityManaCost"	"0"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"Target"	"UNIT"
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"	"harvest_t1"
-			}
+      "aura_health_regen"
+      {
+        "IsHidden"  "0"
+        "Passive" "1"
+        "Aura"  "health_regen"
+        "Aura_Radius" "%health_radius"
+        "Aura_Teams"  "DOTA_UNIT_TARGET_TEAM_BOTH"
+        "Aura_Types"  "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
+        "Aura_ApplyToCaster"  "0"
+      }
 
-		}
+      "health_regen"
+      {
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE" "%health_regen_amount"
+          "MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE" "%mana_regen_amount"
+        }
 
-	}
+      }
 
-	"harvest_channel"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_TREE"
-		"BaseClass"	"ability_datadriven"
-		"AbilityCastPoint"	"0"
-		"AbilityCastRange"				"150"
-		"AbilityChannelTime" "0.5"
-		"AbilityCastAnimation" "ACT_DOTA_ATTACK"
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/units/worker.lua"
-				"Function"		"ChoppedLumber"
-			}
-		}
-		"OnChannelInterrupted"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/units/worker.lua"
-				"Function"		"Interrupted"
-			}
-		}
-	}
+    }
 
-	"carrying_lumber"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"	"ability_datadriven"
-		"AbilityCastPoint"	"0"
-		"Modifiers"
-		{
-			"modifier_carrying_lumber"
-			{
-				"Passive"	"1"
-				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
-			}
-		}
-	}
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "health_radius" "450"
+      }
 
-	"drop_lumber"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC"
-		"AbilityCastPoint"	"0"
-		"AbilityCastRange"				"120"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/units/worker.lua"
-				"Function"		"DropLumber"
-			}
-		}
-	}
+      "02"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "health_regen_amount" "22.0"
+      }
 
-	"bh_dummy_unit"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"rubick_empty1"
-		"MaxLevel"	"1"
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"Target"	"CASTER"
-				"ModifierName"	"bh_dummy"
-			}
+      "03"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "mana_regen_amount" "8.0"
+      }
 
-		}
+    }
 
-		"Modifiers"
-		{
-			"bh_dummy"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
-				"States"
-				{
-					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
+  }
 
-	}
+  "vamp_farsight"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "reveal"
+    "MaxLevel"  "3"
+    "AbilityCooldown" "30"
+    "OnSpellStart"
+    {
+      "SpawnUnit"
+      {
+        "UnitName"  "vision_dummy_passive"
+        "Target"  "POINT"
+        "Duration"  "30"
+        "UnitCount" "1"
+      }
 
-	"call_buildui"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_DONT_RESUME_ATTACK"
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"call_build"
-		"MaxLevel"	"1"
-		"AbilityCooldown"				"5.0"
+    }
+  }
+  //================================================================================= /
+  // Buff: Is a building is applied on building spawn to make the building deniable
+  //================================================================================= /
+  "is_a_building"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    
+    "Modifiers"
+    {
+      "modifier_building_deniable"
+      {
+        "Passive" "1"
+        "IsHidden" "1"
+        "States"
+        {
+           "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
 
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"Target"	"CASTER"
-				"ScriptFile"	"scripts/vscripts/buildui.lua"
-				"Function"	"CallMenu"
-			}
-		}
+  //Keeps the building stationary
+  "building_block"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    "Modifiers"
+    {
+      "modifier_grounded_passive"
+      {
+        "Passive" "1"
+        "IsHidden" "1"
+        "States"
+        {
+          "MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
 
-	}
+  }
 
-	"human_blink"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"antimage_blink"
-		"MaxLevel"	"1"
-		"AbilityCastRange"	"1000000"
-		"AbilityCastPoint"	"0.3"
-		"AbilityCastAnimation"	"ACT_DOTA_CAST_ABILITY_1"
-		"AbilityManaCost"	"1"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Target"	"POINT"
-				"Function"	"human_blink"
-			}
+  //Set rally point for workers created by this building
+  "set_rally_point"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_TREE"
+    "BaseClass" "ability_datadriven"
+    "MaxLevel"            "1"
+    "AbilityCastPoint"        "0.3"
+    "AbilityCooldown"       "0"
+    "AbilityCastRange"      "5000"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Target"      "POINT"
+        "Function"    "SetRallyPoint"
+      }
+    }
+  }
 
-		}
+  "spawn_worker_t1"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "basher"
+    "AbilityModifierSupportValue" "0.5"
+    "MaxLevel"  "1"
+    "AbilityManaCost" "0"
+    "AbilityGoldCost" "0"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "t1_worker_training"
+        "Target"    "CASTER"
+      }
+    }
 
-	}
+    "Modifiers"
+    {
+      "t1_worker_training"
+      {
+        "IsPurgable"  "false"
+        "IsStunDebuff" "false"
+        "IsHidden"  "false"
+        "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+            "Function"    "TrainUnit"
+            "AddToQueue"  "t1_worker_training"
+            "SpawnUnit"   "worker_t1"
+          }
+        }
+      }
+    }
+  }
+  
+  "t1_worker_training"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    "AbilityCastPoint"  "0"
+    "AbilityChannelTime" "1.0"
+  }
 
-	"human_manaburn"
-	{
-		"BaseClass"	"satyr_soulstealer_mana_burn"
-		"MaxLevel"	"1"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"Modelscale"	".85"
-		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
-		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityCastRange"	"450"
-		"AbilityCastPoint"	"0.5"
-		"AbilityCooldown"	"30"
-		"AbilityManaCost"	"9"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"burn_amount"	"500"
-			}
+  "cancel_training"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "rubick_empty1"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
 
-		}
+  "harvest_t1"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetType" "DOTA_UNIT_TARGET_TREE"
+    "BaseClass" "ability_datadriven"
+    "MaxLevel"  "1"
+    "AbilityManaCost" "0"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "Target"  "UNIT"
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"  "harvest_t1"
+      }
 
-	}
+    }
 
+  }
 
-	//=================================================================================	/
-	// Summon: Spawns a Male Slayer
-	//=================================================================================	/
-	"summon_slayer_m"
-	{
-		"BaseClass"           "ability_datadriven"
-		"MaxLevel" 						"1"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityChannelTime"	"0.2"
-		"AbilityLumberCost"	"400"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"		"SummonSlayer"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelInterrupted"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"		"Refund"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"		"SpawnSlayer"
-				"Gender"				"male"
-				"TARGET"	"CASTER"
-			}
-		}
-	}
+  "harvest_channel"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetType" "DOTA_UNIT_TARGET_TREE"
+    "BaseClass" "ability_datadriven"
+    "AbilityCastPoint"  "0"
+    "AbilityCastRange"        "150"
+    "AbilityChannelTime" "0.5"
+    "AbilityCastAnimation" "ACT_DOTA_ATTACK"
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/units/worker.lua"
+        "Function"    "ChoppedLumber"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/units/worker.lua"
+        "Function"    "Interrupted"
+      }
+    }
+  }
 
-	"slayer_attribute_bonus"
-	{
-		"BaseClass"	"ability_datadriven"
-		"MaxLevel"	"20"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"LevelsBetweenUpgrades"	"1"
-		"OnUpgrade"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"	"slayer_attribute_bonus"
-				"Target"	"CASTER"
-			}
+  "carrying_lumber"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    "AbilityCastPoint"  "0"
+    "Modifiers"
+    {
+      "modifier_carrying_lumber"
+      {
+        "Passive" "1"
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+      }
+    }
+  }
 
-		}
-	}
+  "drop_lumber"
+  {
+    "BaseClass" "ability_datadriven"
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
+    "AbilityCastPoint"  "0"
+    "AbilityCastRange"        "120"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/units/worker.lua"
+        "Function"    "DropLumber"
+      }
+    }
+  }
 
-	//=================================================================================	/
-	// Research: Improved Lumber Havesting (1)
-	//=================================================================================	/
-	"research_improved_lumber_harvesting"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"35"
-		"AbilityLumberCost"	"250"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Research"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"ImproveLumber"
-				"Level"				"1"
-				"TARGET"	"CASTER"
-			}
-		}
-	}
+  "bh_dummy_unit"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "rubick_empty1"
+    "MaxLevel"  "1"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "Target"  "CASTER"
+        "ModifierName"  "bh_dummy"
+      }
 
-	//=================================================================================	/
-	// Research: Improved Lumber Havesting (2)
-	//=================================================================================	/
-	"research_advanced_lumber_harvesting"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"35"
-		"AbilityLumberCost"	"500"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Research"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"ImproveLumber"
-				"Level"				"2"
-				"TARGET"	"CASTER"
-			}
-		}
-	}
+    }
 
-	//=================================================================================	/
-	// Research: Improved Lumber Havesting (3)
-	//=================================================================================	/
-	"research_insane_lumber_harvesting"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"35"
-		"AbilityLumberCost"	"750"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Research"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"ImproveLumber"
-				"Level"				"3"
-				"TARGET"	"CASTER"
-			}
-		}
-	}
+    "Modifiers"
+    {
+      "bh_dummy"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+        "States"
+        {
+          "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
 
-	//=================================================================================	/
-	// Research: Sharpened Hatchets
-	//=================================================================================	/
-	"research_sharpened_hatchets"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"40"
-		"AbilityLumberCost"	"1000"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Research"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"SharpenedHatchets"
-				"TARGET"	"CASTER"
-			}
-		}
-	}
+  }
 
-	//=================================================================================	/
-	// Research: Rifles
-	//=================================================================================	/
-	"research_rifles"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"30"
-		"AbilityLumberCost"	"1000"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Research"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Rifles"
-				"TARGET"	"CASTER"
-			}
-		}
-		"Modifiers"
-		{
-			"rifle_attack_range"
-			{
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS" "300"
-				}
-				
-			}
-		}
-	}
+  "call_buildui"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_DONT_RESUME_ATTACK"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "call_build"
+    "MaxLevel"  "1"
+    "AbilityCooldown"       "0"
 
-	//=================================================================================	/
-	// Research: Improved Worker Motivation
-	//=================================================================================	/
-	"research_improved_worker_motivation"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"2"
-		"AbilityLumberCost"	"2000"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Research"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"ImprovedWorkerMotivation"
-				"TARGET"	"CASTER"
-			}
-		}
-	}
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "Target"  "CASTER"
+        "ScriptFile"  "scripts/vscripts/buildui.lua"
+        "Function"  "CallMenu"
+      }
+    }
 
-	//=================================================================================	/
-	// Research: Improved Gem Quality
-	//=================================================================================	/
-	"research_improved_gem_quality"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"2"
-		"AbilityLumberCost"	"2000"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Research"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"GemQuality"
-				"TARGET"	"CASTER"
-				"Level"	"1"
-			}
-		}
-	}
+  }
 
-	//=================================================================================	/
-	// Research: Advanced Gem Quality
-	//=================================================================================	/
-	"research_advanced_gem_quality"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"2"
-		"AbilityLumberCost"	"2000"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Research"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"GemQuality"
-				"TARGET"	"CASTER"
-				"Level"	"2"
-			}
-		}
-	}
+  "human_blink"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "antimage_blink"
+    "MaxLevel"  "1"
+    "AbilityCastRange"  "1000000"
+    "AbilityCastPoint"  "0.3"
+    "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_1"
+    "AbilityManaCost" "1"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Target"  "POINT"
+        "Function"  "human_blink"
+      }
 
-	//=================================================================================	/
-	// Research: Unbeatable Gem Quality
-	//=================================================================================	/
-	"research_unbeatable_gem_quality"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"2"
-		"AbilityLumberCost"	"2000"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"Research"
-				"TARGET"	"CASTER"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/research.lua"
-				"Function"		"GemQuality"
-				"TARGET"	"CASTER"
-				"Level"	"3"
-			}
-		}
-	}
-	//=================================================================================	/
-	// Debugging: Draw building boxes
-	//=================================================================================	/
-	"debug_draw_building_boxes"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"	
-		"AbilityChannelTime"	"20"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/buildinghelper.lua"
-				"Function"		"DrawDebugLines"
-				"TARGET"	"CASTER"
-			}
-		}
-	}
+    }
+
+  }
+
+  "human_manaburn"
+  {
+    "BaseClass" "satyr_soulstealer_mana_burn"
+    "MaxLevel"  "1"
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "Modelscale"  ".85"
+    "AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+    "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityCastRange"  "450"
+    "AbilityCastPoint"  "0.5"
+    "AbilityCooldown" "30"
+    "AbilityManaCost" "9"
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "burn_amount" "500"
+      }
+
+    }
+
+  }
 
 
-	//=================================================================================	/
-	// Human: Building Repair
-	//=================================================================================	/
-	"human_repair"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"	
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
-		"AbilityCastAnimation"	"ACT_DOTA_ATTACK"
-		"AbilityTextureName"	"tinker_rearm"
-		"AbilityChannelTime"	"200"
-		"AbilityCastRange"	"150"
-		"MaxLevel"			"1"
-		"BaseClass"	"ability_datadriven"
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Repair"
-				"RepairTimeRatio"	"1.5"
-			}
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_channeling"
-				"Target" 		"TARGET"
-			}
-		}
-		"OnChannelInterrupted"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"RepairStop"
-			}
-			"RemoveModifier"
+  //================================================================================= /
+  // Summon: Spawns a Male Slayer
+  //================================================================================= /
+  "summon_slayer_m"
+  {
+    "BaseClass"           "ability_datadriven"
+    "MaxLevel"            "1"
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityChannelTime"  "0.2"
+    "AbilityLumberCost" "400"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "SummonSlayer"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "Refund"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "SpawnSlayer"
+        "Gender"        "male"
+        "TARGET"  "CASTER"
+      }
+    }
+  }
+
+  "slayer_attribute_bonus"
+  {
+    "BaseClass" "ability_datadriven"
+    "MaxLevel"  "20"
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "LevelsBetweenUpgrades" "1"
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"  "slayer_attribute_bonus"
+        "Target"  "CASTER"
+      }
+
+    }
+  }
+
+  //================================================================================= /
+  // Slayer blink
+  //================================================================================= /
+  "slayer_blink"
+  {
+    "BaseClass"               "ability_datadriven"
+    "AbilityTextureName"      "ability_name"
+    "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT"
+    "MaxLevel"                "1"
+    "AbilityManaCost"         "500"
+    "AbilityCastRange"        "150000"
+    "AbilityCastPoint"        "0.3"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Target"  "POINT"
+        "Function"  "slayer_blink"
+      }
+    }
+
+  }
+
+  //================================================================================= /
+  // Research: Improved Lumber Havesting (1)
+  //================================================================================= /
+  "research_improved_lumber_harvesting"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "35"
+    "AbilityLumberCost" "250"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "ImproveLumber"
+        "Level"       "1"
+        "TARGET"  "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Improved Lumber Havesting (2)
+  //================================================================================= /
+  "research_advanced_lumber_harvesting"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "35"
+    "AbilityLumberCost" "500"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "ImproveLumber"
+        "Level"       "2"
+        "TARGET"  "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Improved Lumber Havesting (3)
+  //================================================================================= /
+  "research_insane_lumber_harvesting"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "35"
+    "AbilityLumberCost" "750"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "ImproveLumber"
+        "Level"       "3"
+        "TARGET"  "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Sharpened Hatchets
+  //================================================================================= /
+  "research_sharpened_hatchets"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "40"
+    "AbilityLumberCost" "1000"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "SharpenedHatchets"
+        "TARGET"  "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Rifles
+  //================================================================================= /
+  "research_rifles"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "AbilityLumberCost" "1000"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Rifles"
+        "TARGET"  "CASTER"
+      }
+    }
+    "Modifiers"
+    {
+      "rifle_attack_range"
+      {
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_ATTACK_RANGE_BONUS" "300"
+        }
+        
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Improved Worker Motivation
+  //================================================================================= /
+  "research_improved_worker_motivation"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "2"
+    "AbilityLumberCost" "2000"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "ImprovedWorkerMotivation"
+        "TARGET"  "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Improved Gem Quality
+  //================================================================================= /
+  "research_improved_gem_quality"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "2"
+    "AbilityLumberCost" "2000"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "GemQuality"
+        "TARGET"  "CASTER"
+        "Level" "1"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Advanced Gem Quality
+  //================================================================================= /
+  "research_advanced_gem_quality"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "2"
+    "AbilityLumberCost" "2000"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "GemQuality"
+        "TARGET"  "CASTER"
+        "Level" "2"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Unbeatable Gem Quality
+  //================================================================================= /
+  "research_unbeatable_gem_quality"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "2"
+    "AbilityLumberCost" "2000"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "GemQuality"
+        "TARGET"  "CASTER"
+        "Level" "3"
+      }
+    }
+  }
+  //================================================================================= /
+  // Debugging: Draw building boxes
+  //================================================================================= /
+  "debug_draw_building_boxes"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "20"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/buildinghelper.lua"
+        "Function"    "DrawDebugLines"
+        "TARGET"  "CASTER"
+      }
+    }
+  }
+
+
+  //================================================================================= /
+  // Human: Building Repair
+  //================================================================================= /
+  "human_repair"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"  
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
+    "AbilityCastAnimation"  "ACT_DOTA_ATTACK"
+    "AbilityTextureName"  "tinker_rearm"
+    "AbilityChannelTime"  "200"
+    "AbilityCastRange"  "150"
+    "MaxLevel"      "1"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Repair"
+        "RepairTimeRatio" "1.5"
+      }
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_channeling"
+        "Target"    "TARGET"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "RepairStop"
+      }
+      "RemoveModifier"
       {
           "ModifierName" "modifier_channeling"
           "Target" "TARGET"
       }
-		}
-		"OnChannelFinish"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"RepairStop"
-			}
-			"RemoveModifier"
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "RepairStop"
+      }
+      "RemoveModifier"
       {
           "ModifierName" "modifier_channeling"
           "Target" "TARGET"
       }
-		}
+    }
 
-		"Modifiers"
-		{
-			"modifier_autocast_aura"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-		
-				"Aura" 				"modifier_autocast_attacked"
-				"Aura_Radius" 		"900"
-				"Aura_Teams" 		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types" 		"DOTA_UNIT_TARGET_BASIC"
-			}
-			"modifier_autocast_attacked"
-			{
-				"IsHidden"	"1"
-				"OnAttacked"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-						"Function"		"RepairAutocast"
-						"RepairTimeRatio"	"1.5"
-					}
-				}
-			}
-			"modifier_channeling"
-    	{
+    "Modifiers"
+    {
+      "modifier_autocast_aura"
+      {
+        "Passive"     "1"
+        "IsHidden"      "1"
+    
+        "Aura"        "modifier_autocast_attacked"
+        "Aura_Radius"     "900"
+        "Aura_Teams"    "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "Aura_Types"    "DOTA_UNIT_TARGET_BASIC"
+      }
+      "modifier_autocast_attacked"
+      {
+        "IsHidden"  "1"
+        "OnAttacked"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+            "Function"    "RepairAutocast"
+            "RepairTimeRatio" "1.5"
+          }
+        }
+      }
+      "modifier_channeling"
+      {
         "ThinkInterval" "1.3"
-        "IsHidden"	"1"
+        "IsHidden"  "1"
         "OnIntervalThink"
         {
           "ApplyModifier"
@@ -875,1800 +900,2041 @@
         }
       }
       "channelling_animation"
-  	  {
+      {
         "IsHidden" "1"
         "Duration" "1"
         "OverrideAnimation" "ACT_DOTA_ATTACK"
-    	}
-		}
-	}
-
-
-	"upgrade_to_t2_tent"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"5.0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"tent_t2"
-				"LumberCost"	"10"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"tent_t2"
-				"Scale"				"1"
-			}
-		}
-	}
-
-	//=================================================================================	/
-	// Upgrade unit to Topaz Wall
-	//=================================================================================	/
-	"upgrade_to_topaz_wall"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 5
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"npc_wall_topaz"
-				"LumberCost"	"1" // #DEBUG, true value is 250
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"npc_wall_topaz"
-				"Scale"				".5"
-			}
-		}
-	}
-
-	//=================================================================================	/
-	// Upgrade unit to Amethyst Wall
-	//=================================================================================	/
-	"upgrade_to_amethyst_wall"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 10
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"npc_wall_amethyst"
-				"LumberCost"	"1" // #DEBUG, true value is 1000
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"npc_wall_amethyst"
-			}
-		}
-	}
-
-	//=================================================================================	/
-	// Upgrade unit to Sapphire Wall
-	//=================================================================================	/
-	"upgrade_to_sapphire_wall"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 20
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"npc_wall_sapphire"
-				"LumberCost"	"1" // #DEBUG, true value is 5000
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"npc_wall_sapphire"
-			}
-		}
-	}
-
-	//=================================================================================	/
-	// Upgrade unit to Emerald Wall
-	//=================================================================================	/
-	"upgrade_to_emerald_wall"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 30
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"npc_wall_emerald"
-				"LumberCost"	"1" // #DEBUG, true value is 10000
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"npc_wall_emerald"
-			}
-		}
-	}
-	//=================================================================================	/
-	// Upgrade unit to Chrysoprase Wall
-	//=================================================================================	/
-	"upgrade_to_chrysoprase_wall"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 40
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"npc_wall_chrysoprase"
-				"LumberCost"	"1" // #DEBUG, true value is 30000
-				"GoldCost"	"1"	// #DEBUG, true value is 10
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"npc_wall_chrysoprase"
-			}
-		}
-	}
-
-	//=================================================================================	/
-	// Upgrade unit to Garnet Wall
-	//=================================================================================	/
-	"upgrade_to_garnet_wall"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 50
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"npc_wall_garnet"
-				"LumberCost"	"1" // #DEBUG, true value is 80000
-				"GoldCost"	"1"	// #DEBUG, true value is 35
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"npc_wall_garnet"
-			}
-		}
-	}
-
-	//=================================================================================	/
-	// Upgrade unit to Ruby Wall
-	//=================================================================================	/
-	"upgrade_to_ruby_wall"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 60
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"npc_wall_ruby"
-				"LumberCost"	"1" // #DEBUG, true value is 150000
-				"GoldCost"	"1"	// #DEBUG, true value is 100
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"npc_wall_ruby"
-			}
-		}
-	}
-
-	//=================================================================================	/
-	// Upgrade unit to Diamond Wall
-	//=================================================================================	/
-	"upgrade_to_diamond_wall"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 70
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"npc_wall_diamond"
-				"LumberCost"	"1" // #DEBUG, true value is 250000
-				"GoldCost"	"1"	// #DEBUG, true value is 200
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"npc_wall_diamond"
-			}
-		}
-	}
-
-	//=================================================================================	/
-	// Upgrade unit to Onyx Wall
-	//=================================================================================	/
-	"upgrade_to_onyx_wall"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 100
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"npc_wall_onyx"
-				"LumberCost"	"1" // #DEBUG, true value is 450000
-				"GoldCost"	"1"	// #DEBUG, true value is 1200
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"npc_wall_onyx"
-			}
-		}
-	}
-
-	//=================================================================================	/
-	// Upgrade unit to Shiny Tower of Pearls
-	//=================================================================================	/
-	"upgrade_to_shiny_tower_of_pearls"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"BaseClass"	"ability_datadriven"
-		"AbilityChannelTime"	"1" // #DEBUG, true value is 100
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"Upgrade"
-				"TARGET"	"CASTER"
-				"TargetUnit"	"shiny_tower_pearls"
-				"LumberCost"	"150"
-				"GoldCost"	"0"
-			}
-		}
-		"OnChannelSucceeded"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
-				"Function"		"FinishUpgrade"
-				"TargetUnit"	"shiny_tower_pearls"
-				"Scale"	"0.8"
-			}
-		}
-	}
-
-		// START OF BUILDING HELPER ABILITIES
-	"move_to_point_70"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"BaseClass"						"ability_datadriven"
-		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"0"
-		"AbilityCastRange"				"70"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		"MaxLevel"						"1"
-
-		"AbilityManaCost"				"0"
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"Target"		"POINT"
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"		"create_building_entity"
-			}
-		}
-	}
-
-	"move_to_point_100"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"BaseClass"						"ability_datadriven"
-		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"0"
-		"AbilityCastRange"				"100"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		"MaxLevel"						"1"
-
-		"AbilityManaCost"				"0"
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"Target"		"POINT"
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"		"create_building_entity"
-			}
-		}
-	}
-
-	"move_to_point_150"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"BaseClass"						"ability_datadriven"
-		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"0"
-		"AbilityCastRange"				"150"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		"MaxLevel"						"1"
-
-		"AbilityManaCost"				"0"
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"Target"		"POINT"
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"		"create_building_entity"
-			}
-		}
-	}
-
-	"move_to_point_200"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"BaseClass"						"ability_datadriven"
-		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"0"
-		"AbilityCastRange"				"200"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		"MaxLevel"						"1"
-
-		"AbilityManaCost"				"0"
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"Target"		"POINT"
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"		"create_building_entity"
-			}
-		}
-	}
-
-	"move_to_point_250"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"BaseClass"						"ability_datadriven"
-		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"0"
-		"AbilityCastRange"				"250"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		"MaxLevel"						"1"
-
-		"AbilityManaCost"				"0"
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"Target"		"POINT"
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"		"create_building_entity"
-			}
-		}
-	}
-
-	"move_to_point_300"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"BaseClass"						"ability_datadriven"
-		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"0"
-		"AbilityCastRange"				"300"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		"MaxLevel"						"1"
-
-		"AbilityManaCost"				"0"
-
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"Target"		"POINT"
-				"ScriptFile"	"scripts/vscripts/abilities.lua"
-				"Function"		"create_building_entity"
-			}
-		}
-	}
-
-	"bh_dummy"
-	{
-		"AbilityBehavior" 		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"            "rubick_empty1"
-		"MaxLevel"                      "1"
-
-		"OnUpgrade"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"dummy_unit"
-				"Target" 		"CASTER"
-			}
-		}
-
-		"Modifiers"
-		{
-			"dummy_unit"
-			{
-				"Passive"                        "1"
-				"IsHidden"                       "1"    
-				"States"
-				{
-					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NOT_ON_MINIMAP"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-
-			"building_canceled"
-			{
-				"Passive"                        "0"
-				"IsHidden"                       "1"
-				"OnOrder"
-				// Triggers on Move/Casting/Hold/Stop
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"scripts/vscripts/abilities.lua"
-						"Function"		"building_canceled"
-					}
-				}
-
-			} 
-		}
-	}
-
-	// END OF BUILDING HELPER ABILITIES
-
-	//=================================================================================	
-	// HUMAN BUILDINGS
-	//=================================================================================
-
-	"build_house1"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"house_t1"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"2"
-		"BuildTime"						"3"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"0.05"
-		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"10"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.05"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_tent_t1"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"tent_t1"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"3"
-		"BuildTime"						"1"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"0.1"
-		"MaxScale"						"0.2"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"20"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"tent_t1"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_slayer_tavern"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"slayer_tavern"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"4"
-		"BuildTime"						"2"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"400"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"slayer_tavern"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_human_surplus"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"human_surplus"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"4"
-		"BuildTime"						"15"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"3"
-		"AbilityLumberCost"				"1000"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"human_surplus"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_tower_pearls"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"tower_pearls"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"2"
-		"BuildTime"						"1"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"50"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"tower_pearls"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_wall_t1"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"wall_1"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"2"
-		"BuildTime"						"5"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							".5"
-		"MaxScale"						"1"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"50"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"npc_wall_carnelian"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_flag"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"flag"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"2"
-		"BuildTime"						"1"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"0"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"human_flag"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_research_center_t1"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"research_center"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"4"
-		"BuildTime"						"1"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"150"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"research_center_t1"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_heal_wall_t1"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"heal_wall_1"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"2"
-		"BuildTime"						"5"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"2000"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"heal_wall_t1"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_gold_mine_t1"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"gold_mine_1"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"2"
-		"BuildTime"						"1"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"20000"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"gold_mine_t1"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_human_vault"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"human_vault"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"4"
-		"BuildTime"						"2"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		"AbilityGoldCost"				"1"
-		"AbilityLumberCost"				"150"
-
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"human_vault"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_cancel"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"cancel"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"3"
-		"BuildTime"						"4.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_cancel1"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"cancel"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"3"
-		"BuildTime"						"4.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	"build_cancel2"
-	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"cancel"
-		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"3"
-		"BuildTime"						"4.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						".5"
-		"CasterCanControl"				"1"
-
-		"AbilityCooldown"				"2.0"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"house_t1"
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"scripts/vscripts/abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-
-	//=================================================================================	
-	// Vampire: Particle Effects
-	//=================================================================================
-
-	"vampire_particles"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"rubick_empty1"
-		"MaxLevel" 						"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-
-		"AbilityCooldown"				"0"
-		"AbilityManaCost"				"0"
-		
-		"AbilityCastPoint"				"0"
-
-
-		"precache"
-		{
-			"particle" "particles/vampire/courier_greevil_black_ambient_3.vpcf"
-			"particle"  "particles/vampire/nevermore_trail.vpcf"
-			"particle"  "particles/vampire/nevermore_trail_ground_cracks.vpcf"
-		}
-
-		"OnUpgrade"
-		{
-			"FireEffect"
-			{
-				"EffectName"        "particles/vampire/courier_greevil_black_ambient_3.vpcf"
-				"EffectAttachType"  "follow_origin"
-				"Target"            "CASTER"
-			}
-			"FireEffect"
-			{
-				"EffectName"        "particles/vampire/nevermore_trail.vpcf"
-				"EffectAttachType"  "follow_origin"
-				"Target"            "CASTER"
-			}
-			"FireEffect"
-			{
-				"EffectName"        "particles/vampire/nevermore_trail_ground_cracks.vpcf"
-				"EffectAttachType"  "follow_origin"
-				"Target"            "CASTER"
-			}
-		}
-	}
-
-	//=================================================================================	
-	// Vampire: Vampire's Venom 
-	//=================================================================================
-	"vampire_poison"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"venomancer_poison_sting"
-		"MaxLevel" 						"1"
-
-		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-
-		"Modifiers"
-		{
-			"modifier_vampire_poison"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-
-				"OnAttackLanded"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_vampire_poison_debuff"
-						"Target" 		"TARGET"
-					}
-				}
-			}
-
-			"modifier_vampire_poison_debuff"
-			{
-				"IsDebuff"			"1"
-
-				"Duration"			"2"
-
-				"Properties"
-				{
-				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" 	"-40"
-				}
-			}
-		}
-	}
-
-	//=================================================================================	
-	// Vampire: Critical Strike
-	//=================================================================================
-	"vampire_critical_strike"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"phantom_assassin_coup_de_grace"
-		"MaxLevel" 						"6"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-
-
-		// Precache
-		//-------------------------------------------------------------------------------------------------------------
-		"precache"
-		{
-			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
-		}
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"crit_bonus"				"200 275 350 425 500 575"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"crit_chance"				"2.5 3 3.5 4 4 4"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_vampire_critical_strike"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-
-				"OnAttackStart"
-				{
-					"RemoveModifier"
-					{
-						"ModifierName"	"modifier_vampire_critical_strike"
-						"Target" 		"CASTER"
-					}
-
-					"Random"
-					{
-						"Chance"			"%crit_chance"
-						"PseudoRandom" 		"DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"
-
-						"OnSuccess"
-						{
-							"ApplyModifier"
-							{
-								"ModifierName"	"modifier_vampire_critical_strike_hit"
-								"Target" 		"CASTER"
-							}
-
-							"RunScript"
-							{
-								"ScriptFile"	"scripts/vscripts/abilities.lua"
-								"Function"		"test"
-							}
-						}
-					}
-				}
-			}
-
-			"modifier_vampire_critical_strike_hit"
-			{
-				"IsHidden"		"1"
-
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_bonus"
-				}
-
-				"OnAttackLanded"
-				{
-					"RemoveModifier"
-					{
-						"ModifierName"	"modifier_vampire_critical_strike_hit"
-						"Target" 		"TARGET"
-					}
-
-					"FireSound"
-					{
-						"EffectName"	"Hero_PhantomAssassin.CoupDeGrace"
-						"Target" 		"TARGET"
-					}
-				}
-			}
-		}
-	}
-
-	//=================================================================================	
-	// Vampire: Shadow Sight
-	//=================================================================================
-	"vampire_shadow_sight"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"keeper_of_the_light_blinding_light"
-		"MaxLevel" 						"2"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityCastRange"				"100000"
-		"AbilityCastPoint"				"0.3"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
-
-		"AbilityCooldown"				"30 20"
-		"AbilityManaCost"				"200 250"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"abilities/vampire.lua"
-				"Function"		"ShadowSight"
-				"Target"		"POINT"
-			}
-		}
-	}
-
-
-	//=================================================================================	
-	// Vampire: Vision Dummy
-	//=================================================================================
-	"vampire_vision_dummy_lock"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"rubick_empty1"
-		"MaxLevel" 						"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-
-		"precache"
-		{
-			"particle"  "particles/vampire/dust_of_appearance.vpcf"
-			//"soundfile" "add a sound file later mang"
-		}
-
-		"Modifiers"
-		{
-			"modifier_dummy_lock"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				
-				"States"
-				{
-					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NOT_ON_MINIMAP"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_ATTACK_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
-
-		"OnUpgrade"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_dummy_lock"
-				"Target" 		"CASTER"
-			}
-
-			"FireEffect"
-			{
-				"EffectName"        "particles/vampire/dust_of_appearance.vpcf"
-				"EffectAttachType"  "follow_origin"
-				"Target"            "CASTER"
-			}
-		}
-	}
-
-	//=================================================================================	
-	// Vampire: Vision Dummy - no particles
-	//=================================================================================
-	"vampire_vision_dummy_lock2"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"rubick_empty1"
-		"MaxLevel" 						"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-
-		"Modifiers"
-		{
-			"modifier_dummy_lock2"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				
-				"States"
-				{
-					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NOT_ON_MINIMAP"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_ATTACK_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
-
-		"OnUpgrade"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_dummy_lock2"
-				"Target" 		"CASTER"
-			}
-		}
-	}
-	//=================================================================================	
-	// Vampire: Health Beam - Credits to Pizzalol and Noya (SpellLibrary)
-	//=================================================================================
-	"vampire_health_beam"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_YES"
-		"AbilityTextureName"			"dazzle_shadow_wave"
-		"MaxLevel"						"10"
-
-		// Precache
-		//-------------------------------------------------------------------------------------------------------------
-		"precache"
-		{
-			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dazzle.vsndevts"
-			"particle"			"particles/vampire/dazzle_shadow_wave.vpcf"
-		}
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"500"
-		"AbilityCastPoint"				"0.5"
-		
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"10"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"175 200 225 500 750 2000 3500 5250 7000 7500"
-		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"bounce_radius"		"2000"
-			}
-			"02"
-			{	
-				"var_type"			"FIELD_INTEGER"
-				"max_targets"		"3 4 5 5 5 5 5 5 5 5"
-			}
-			"03"
-			{	
-				"var_type"			"FIELD_INTEGER"
-				"tooltip_max_targets_inc_dazzle"		"3 4 5 5 5 5 5 5 5 5"
-			}
-			"04"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"heal"				"1000 1500 2000 3000 4500 6000 7500 9000 11500 15000"
-			}
-		}
-
-		"OnSpellStart"
-		{
-			"FireSound"
-			{
-				"EffectName"	"Hero_Dazzle.Shadow_Wave"
-				"Target" 		"CASTER"
-			}
-
-			"FireEffect"
-			{
-				"EffectName"        "particles/vampire/dazzle_shadow_wave.vpcf"
-				"EffectAttachType"  "start_at_customorigin"
-				
-				"ControlPointEntities"
-				{
-					"CASTER"	"attach_attack1"
-					"TARGET"	"follow_origin"
-				}
-			}
-
-			"RunScript"
-			{
-				"ScriptFile"	"abilities/vampire.lua"
-				"Function"		"HealthBeam"
-				"shadow_wave_particle"	"particles/vampire/dazzle_shadow_wave.vpcf"
-			}
-		}
-	}
-
-	//=================================================================================	
-	// Vampire: Chain of Death - Credits to Pizzalol and Noya (SpellLibrary)
-	//=================================================================================
-	"vampire_chain_of_death"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityTextureName"			"lion_finger_of_death"
-		"MaxLevel"						"15"
-
-		// Precache
-		//-------------------------------------------------------------------------------------------------------------
-		"precache"
-		{
-			//"soundfile"					"soundevents/game_sounds_heroes/game_sounds_dazzle.vsndevts"
-			"particle"					"particles/vampire/zuus_arc_lightning.vpcf"
-		}
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"600"
-		"AbilityCastPoint"				"0.5"
-		
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"10"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"250 275 300 325 350 375 400 425 450 475 500 550 600 700 800"
-		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"bounce_radius"				"500"
-			}
-			"02"
-			{	
-				"var_type"					"FIELD_INTEGER"
-				"max_targets"				"4 5 6 7 8 9 10 10 10 10 10 10 10 10 10"
-			}
-			"03"
-			{	
-				"var_type"					"FIELD_INTEGER"
-				"tooltip_max_targets"		"4 5 6 7 8 9 10 10 10 10 10 10 10 10 10"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"damage"					"125 150 175 200 225 250 275 300 325 350 375 400 425 450 475"
-			}
-		}
-
-		"OnSpellStart"
-		{
-			//"FireSound"
-			//{
-			//	"EffectName"	"Hero_Dazzle.Shadow_Wave"
-			//	"Target" 		"CASTER"
-			//}
-
-			"FireEffect"
-			{
-				"EffectName"        "particles/vampire/zuus_arc_lightning.vpcf"
-				"EffectAttachType"  "start_at_customorigin"
-				
-				"ControlPointEntities"
-				{
-					"CASTER"	"attach_attack1"
-					"TARGET"	"follow_origin"
-				}
-			}
-
-			"RunScript"
-			{
-				"ScriptFile"				"abilities/vampire.lua"
-				"Function"					"ChainOfDeath"
-				"chain_of_death_particle"	"particles/vampire/zuus_arc_lightning.vpcf"
-				//"damage_particle"		"particles/units/heroes/hero_dazzle/dazzle_shadow_wave_impact_damage.vpcf"
-			}
-		}
-	}
-
-	//=================================================================================	
-	// Vampire: Veil of Darkness
-	//=================================================================================
-	"vampire_veil_of_darkness"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"night_stalker_hunter_in_the_night"
-		"MaxLevel" 						"3"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-
-		"AbilityCooldown"				"150 100 50"
-		"AbilityManaCost"				"0"
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"duration"					"60 80 100"
-			}
-			"02"
-			{	
-				"var_type"					"FIELD_INTEGER"
-				"speed"					"20 30 50"
-			}
-		}
-
-
-		"OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_veil_of_darkness"
-				"Target" 		"CASTER"
-				"Duration"		"%duration"
-			}
-
-			"RunScript"
-			{
-				"ScriptFile"	"abilities/vampire.lua"
-				"Function"		"CykaSpeed"
-			}
-		}
-
-
-
-		"Modifiers"
-		{
-			"modifier_veil_of_darkness"
-			{
-				"Passive"			"0"
-				"IsHidden"			"0"
-				"isBuff"			"1"
-				"IsDebuff"			"0"
-		
-		
-				"Properties"
-				{
-				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%speed" 
-				}
-
-				"States"
-				{
-					"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
-	}
-
-	//=================================================================================	
-	// Vampire: Summoning particle dummy
-	//=================================================================================
-	"vampire_particle_call"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"MaxLevel"						"1"
-
-		"precache"
-		{
-			"particle" "particles/vampire/doom_bringer_f2p_death.vpcf"
-		}
-
-		"OnUpgrade"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_sigil"
-				"Target" 		"CASTER"
-			}
-
-			"FireEffect"
-			{
-				"EffectName"        "particles/vampire/doom_bringer_f2p_death.vpcf"
-				"EffectAttachType"  "follow_origin"
-				"Target"            "CASTER"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_sigil"
-			{
-				"Passive"	"1"
-				"IsHidden"	"0"
-				"States"
-				{
-					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
-					//"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED" --invulnerable units cant have particles on them??
-					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
-	}
-
-	//=================================================================================	
-	// Vampire: Spawning hider
-	//=================================================================================
-	"vampire_init_hider"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"MaxLevel"						"1"
-
-		"OnUpgrade"
-		{
-			"ApplyModifier"
-			{
-				"ModifierName"	"modifier_init_hider"
-				"Target" 		"CASTER"
-				"Duration"		"55"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_init_hider"
-			{
-				"Passive"	"1"
-				"IsHidden"	"0"
-				"States"
-				{
-					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_SILENCED"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
-	}
+      }
+    }
+  }
+
+
+  "upgrade_to_t2_tent"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "5.0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "tent_t2"
+        "LumberCost"  "10"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tent_t2"
+        "Scale"       "1"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade unit to Topaz Wall
+  //================================================================================= /
+  "upgrade_to_topaz_wall"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1" // #DEBUG, true value is 5
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "npc_wall_topaz"
+        "LumberCost"  "1" // #DEBUG, true value is 250
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "npc_wall_topaz"
+        "Scale"       ".5"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade unit to Amethyst Wall
+  //================================================================================= /
+  "upgrade_to_amethyst_wall"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1" // #DEBUG, true value is 10
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "npc_wall_amethyst"
+        "LumberCost"  "1" // #DEBUG, true value is 1000
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "npc_wall_amethyst"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade unit to Sapphire Wall
+  //================================================================================= /
+  "upgrade_to_sapphire_wall"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1" // #DEBUG, true value is 20
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "npc_wall_sapphire"
+        "LumberCost"  "1" // #DEBUG, true value is 5000
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "npc_wall_sapphire"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade unit to Emerald Wall
+  //================================================================================= /
+  "upgrade_to_emerald_wall"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1" // #DEBUG, true value is 30
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "npc_wall_emerald"
+        "LumberCost"  "1" // #DEBUG, true value is 10000
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "npc_wall_emerald"
+      }
+    }
+  }
+  //================================================================================= /
+  // Upgrade unit to Chrysoprase Wall
+  //================================================================================= /
+  "upgrade_to_chrysoprase_wall"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1" // #DEBUG, true value is 40
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "npc_wall_chrysoprase"
+        "LumberCost"  "1" // #DEBUG, true value is 30000
+        "GoldCost"  "1" // #DEBUG, true value is 10
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "npc_wall_chrysoprase"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade unit to Garnet Wall
+  //================================================================================= /
+  "upgrade_to_garnet_wall"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1" // #DEBUG, true value is 50
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "npc_wall_garnet"
+        "LumberCost"  "1" // #DEBUG, true value is 80000
+        "GoldCost"  "1" // #DEBUG, true value is 35
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "npc_wall_garnet"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade unit to Ruby Wall
+  //================================================================================= /
+  "upgrade_to_ruby_wall"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1" // #DEBUG, true value is 60
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "npc_wall_ruby"
+        "LumberCost"  "1" // #DEBUG, true value is 150000
+        "GoldCost"  "1" // #DEBUG, true value is 100
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "npc_wall_ruby"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade unit to Diamond Wall
+  //================================================================================= /
+  "upgrade_to_diamond_wall"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1" // #DEBUG, true value is 70
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "npc_wall_diamond"
+        "LumberCost"  "1" // #DEBUG, true value is 250000
+        "GoldCost"  "1" // #DEBUG, true value is 200
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "npc_wall_diamond"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade unit to Onyx Wall
+  //================================================================================= /
+  "upgrade_to_onyx_wall"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1" // #DEBUG, true value is 100
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "npc_wall_onyx"
+        "LumberCost"  "1" // #DEBUG, true value is 450000
+        "GoldCost"  "1" // #DEBUG, true value is 1200
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "npc_wall_onyx"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade unit to Shiny Tower of Pearls
+  //================================================================================= /
+  "upgrade_to_shiny_tower_of_pearls"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "5" // #DEBUG, true value is 100
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "shiny_tower_pearls"
+        "LumberCost"  "150"
+        "GoldCost"  "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "shiny_tower_pearls"
+        "Scale" "0.8"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade to Opal Tower
+  //================================================================================= /
+  "upgrade_to_tower_opal"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "5"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"    "CASTER"
+        "TargetUnit"  "tower_opal"
+        "LumberCost"  "800"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_opal"
+        "Scale"     "1"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Lesser Mana Energy Tower
+  //=================================================================================/
+  "upgrade_to_tower_manaburn_t1"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "5"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"    "CASTER"
+        "TargetUnit"  "tower_manaburn_t1"
+        "LumberCost"  "2000"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_manaburn_t1"
+        "Scale"     "0.7"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Lesser Mana Energy Tower - Feedback
+  //=================================================================================/
+  // Ability taken from SpellLibrary. - https://github.com/Pizzalol/SpellLibrary
+  // Author: Pizzalol
+  // Date: 16.12.2014.
+  "tower_manaburn_t1_feedback"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"    
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+    "AbilityTextureName"      "antimage_mana_break"
+    "MaxLevel"            "1"
+  
+    // Precache 
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      "particle"  "particles/generic_gameplay/generic_manaburn.vpcf"
+      "soundfile" "soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts"
+    }
+  
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "damage_per_burn"   "1"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "mana_per_hit"      "50"
+      }
+    }
+  
+    "Modifiers"
+    {
+      "modifier_mana_break_orb_datadriven"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+  
+        "OnAttackLanded"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/abilities/towers.lua"
+            "Function"    "ManaBreak"
+            "Target"    "TARGET"
+          }
+  
+          "FireSound"
+          {
+            "EffectName"  "Hero_Antimage.ManaBreak"
+            "Target"    "TARGET"
+          }
+  
+          "AttachEffect"
+          {
+            "EffectName"    "particles/generic_gameplay/generic_manaburn.vpcf"
+            "EffectAttachType"  "attach_hitloc"
+            "Target"      "TARGET"
+          }
+        }
+      }
+    }
+  }
+  //=================================================================================/
+  // Upgrade to Tower of Flame
+  //=================================================================================/
+  "upgrade_to_tower_flame_t1"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "25"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"    "CASTER"
+        "TargetUnit"  "tower_flame_t1"
+        "LumberCost"  "4000"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_flame_t1"
+        "Scale"     "1"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Tower of Blood
+  //=================================================================================/
+  "upgrade_to_tower_blood_t1"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "25"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"    "CASTER"
+        "TargetUnit"  "tower_blood_t1"
+        "LumberCost"  "15000"
+        "GoldCost"    "1"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_blood_t1"
+        "Scale"     "1"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Tower of Blood - Holy Blood
+  //=================================================================================/
+  "tower_blood_t1_holy_blood"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "dazzle_weave"
+    "MaxLevel"            "1"
+
+    "Modifiers"
+    {
+      "modifier_holy_blood_debuff"
+      {
+        "Passive"     "1"
+        "IsHidden"      "0"
+        "IsDebuff"      "1"
+      
+        "OnAttackLanded"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_name"
+            "Target"    "TARGET"
+            "Duration"    "5"
+          }
+        }
+      }
+    }
+  }
+
+
+
+  // START OF BUILDING HELPER ABILITIES
+  "move_to_point_70"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+    "BaseClass"           "ability_datadriven"
+    "AbilityCastPoint"        "0"
+    "AbilityCooldown"       "0"
+    "AbilityCastRange"        "70"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    "MaxLevel"            "1"
+
+    "AbilityManaCost"       "0"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "Target"    "POINT"
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "create_building_entity"
+      }
+    }
+  }
+
+  "move_to_point_100"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+    "BaseClass"           "ability_datadriven"
+    "AbilityCastPoint"        "0"
+    "AbilityCooldown"       "0"
+    "AbilityCastRange"        "100"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    "MaxLevel"            "1"
+
+    "AbilityManaCost"       "0"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "Target"    "POINT"
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "create_building_entity"
+      }
+    }
+  }
+
+  "move_to_point_150"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+    "BaseClass"           "ability_datadriven"
+    "AbilityCastPoint"        "0"
+    "AbilityCooldown"       "0"
+    "AbilityCastRange"        "150"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    "MaxLevel"            "1"
+
+    "AbilityManaCost"       "0"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "Target"    "POINT"
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "create_building_entity"
+      }
+    }
+  }
+
+  "move_to_point_200"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+    "BaseClass"           "ability_datadriven"
+    "AbilityCastPoint"        "0"
+    "AbilityCooldown"       "0"
+    "AbilityCastRange"        "200"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    "MaxLevel"            "1"
+
+    "AbilityManaCost"       "0"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "Target"    "POINT"
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "create_building_entity"
+      }
+    }
+  }
+
+  "move_to_point_250"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+    "BaseClass"           "ability_datadriven"
+    "AbilityCastPoint"        "0"
+    "AbilityCooldown"       "0"
+    "AbilityCastRange"        "250"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    "MaxLevel"            "1"
+
+    "AbilityManaCost"       "0"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "Target"    "POINT"
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "create_building_entity"
+      }
+    }
+  }
+
+  "move_to_point_300"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+    "BaseClass"           "ability_datadriven"
+    "AbilityCastPoint"        "0"
+    "AbilityCooldown"       "0"
+    "AbilityCastRange"        "300"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    "MaxLevel"            "1"
+
+    "AbilityManaCost"       "0"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "Target"    "POINT"
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "create_building_entity"
+      }
+    }
+  }
+
+  "bh_dummy"
+  {
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"            "rubick_empty1"
+    "MaxLevel"                      "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "dummy_unit"
+        "Target"    "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "dummy_unit"
+      {
+        "Passive"                        "1"
+        "IsHidden"                       "1"    
+        "States"
+        {
+          "MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NOT_ON_MINIMAP"   "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+
+      "building_canceled"
+      {
+        "Passive"                        "0"
+        "IsHidden"                       "1"
+        "OnOrder"
+        // Triggers on Move/Casting/Hold/Stop
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/abilities.lua"
+            "Function"    "building_canceled"
+          }
+        }
+
+      } 
+    }
+  }
+
+  // END OF BUILDING HELPER ABILITIES
+
+  //================================================================================= 
+  // HUMAN BUILDINGS
+  //=================================================================================
+
+  "build_house1"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "2"
+    "BuildTime"           "3"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "0.05"
+    "AbilityGoldCost"       "0"
+    "AbilityLumberCost"       "10"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "house_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.05"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_tent_t1"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "tent_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "1"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "0.1"
+    "MaxScale"            "0.2"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "0"
+    "AbilityGoldCost"       "0"
+    "AbilityLumberCost"       "20"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "tent_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_slayer_tavern"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "slayer_tavern"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "4"
+    "BuildTime"           "2"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    "AbilityGoldCost"       "0"
+    "AbilityLumberCost"       "400"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "slayer_tavern"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_human_surplus"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "human_surplus"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "4"
+    "BuildTime"           "15"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    "AbilityGoldCost"       "3"
+    "AbilityLumberCost"       "1000"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "human_surplus"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_tower_pearls"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "tower_pearls"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "2"
+    "BuildTime"           "1"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    "AbilityGoldCost"       "0"
+    "AbilityLumberCost"       "50"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "tower_pearls"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_wall_t1"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "wall_1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "2"
+    "BuildTime"           "5"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             ".5"
+    "MaxScale"            "1"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    "AbilityGoldCost"       "0"
+    "AbilityLumberCost"       "50"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "npc_wall_carnelian"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_flag"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "flag"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "2"
+    "BuildTime"           "1"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    "AbilityGoldCost"       "0"
+    "AbilityLumberCost"       "0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "human_flag"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_research_center_t1"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "research_center"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "4"
+    "BuildTime"           "1"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    "AbilityGoldCost"       "0"
+    "AbilityLumberCost"       "150"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "research_center_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_heal_wall_t1"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "heal_wall_1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "2"
+    "BuildTime"           "5"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    "AbilityGoldCost"       "0"
+    "AbilityLumberCost"       "2000"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "heal_wall_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_gold_mine_t1"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "gold_mine_1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "2"
+    "BuildTime"           "1"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    "AbilityGoldCost"       "0"
+    "AbilityLumberCost"       "20000"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "gold_mine_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_human_vault"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "human_vault"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "4"
+    "BuildTime"           "2"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    "AbilityGoldCost"       "1"
+    "AbilityLumberCost"       "150"
+
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "human_vault"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_cancel"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "4.0"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_cancel1"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "4.0"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "house_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  "build_cancel2"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "4.0"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"            "house_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampire: Particle Effects
+  //=================================================================================
+
+  "vampire_particles"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "rubick_empty1"
+    "MaxLevel"            "1"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_BOTH"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+    "AbilityCooldown"       "0"
+    "AbilityManaCost"       "0"
+    
+    "AbilityCastPoint"        "0"
+
+
+    "precache"
+    {
+      "particle" "particles/vampire/courier_greevil_black_ambient_3.vpcf"
+      "particle"  "particles/vampire/nevermore_trail.vpcf"
+      "particle"  "particles/vampire/nevermore_trail_ground_cracks.vpcf"
+    }
+
+    "OnUpgrade"
+    {
+      "FireEffect"
+      {
+        "EffectName"        "particles/vampire/courier_greevil_black_ambient_3.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"            "CASTER"
+      }
+      "FireEffect"
+      {
+        "EffectName"        "particles/vampire/nevermore_trail.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"            "CASTER"
+      }
+      "FireEffect"
+      {
+        "EffectName"        "particles/vampire/nevermore_trail_ground_cracks.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampire: Vampire's Venom 
+  //=================================================================================
+  "vampire_poison"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "venomancer_poison_sting"
+    "MaxLevel"            "1"
+
+    "AbilityType"         "DOTA_ABILITY_TYPE_BASIC"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+
+    "Modifiers"
+    {
+      "modifier_vampire_poison"
+      {
+        "Passive"     "1"
+        "IsHidden"      "1"
+
+        "OnAttackLanded"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_vampire_poison_debuff"
+            "Target"    "TARGET"
+          }
+        }
+      }
+
+      "modifier_vampire_poison_debuff"
+      {
+        "IsDebuff"      "1"
+
+        "Duration"      "2"
+
+        "Properties"
+        {
+            "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "-40"
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampire: Critical Strike
+  //=================================================================================
+  "vampire_critical_strike"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "phantom_assassin_coup_de_grace"
+    "MaxLevel"            "6"
+
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_YES"
+
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      "soundfile"     "soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
+    }
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"          "FIELD_INTEGER"
+        "crit_bonus"        "200 275 350 425 500 575"
+      }
+      "02"
+      {
+        "var_type"          "FIELD_FLOAT"
+        "crit_chance"       "2.5 3 3.5 4 4 4"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_vampire_critical_strike"
+      {
+        "Passive"     "1"
+        "IsHidden"      "1"
+
+        "OnAttackStart"
+        {
+          "RemoveModifier"
+          {
+            "ModifierName"  "modifier_vampire_critical_strike"
+            "Target"    "CASTER"
+          }
+
+          "Random"
+          {
+            "Chance"      "%crit_chance"
+            "PseudoRandom"    "DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"
+
+            "OnSuccess"
+            {
+              "ApplyModifier"
+              {
+                "ModifierName"  "modifier_vampire_critical_strike_hit"
+                "Target"    "CASTER"
+              }
+
+              "RunScript"
+              {
+                "ScriptFile"  "scripts/vscripts/abilities.lua"
+                "Function"    "test"
+              }
+            }
+          }
+        }
+      }
+
+      "modifier_vampire_critical_strike_hit"
+      {
+        "IsHidden"    "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_bonus"
+        }
+
+        "OnAttackLanded"
+        {
+          "RemoveModifier"
+          {
+            "ModifierName"  "modifier_vampire_critical_strike_hit"
+            "Target"    "TARGET"
+          }
+
+          "FireSound"
+          {
+            "EffectName"  "Hero_PhantomAssassin.CoupDeGrace"
+            "Target"    "TARGET"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampire: Shadow Sight
+  //=================================================================================
+  "vampire_shadow_sight"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "keeper_of_the_light_blinding_light"
+    "MaxLevel"            "2"
+
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+    "AbilityCastRange"        "100000"
+    "AbilityCastPoint"        "0.3"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+
+    "AbilityCooldown"       "30 20"
+    "AbilityManaCost"       "200 250"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "abilities/vampire.lua"
+        "Function"    "ShadowSight"
+        "Target"    "POINT"
+      }
+    }
+  }
+
+
+  //================================================================================= 
+  // Vampire: Vision Dummy
+  //=================================================================================
+  "vampire_vision_dummy_lock"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "rubick_empty1"
+    "MaxLevel"            "1"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+    "precache"
+    {
+      "particle"  "particles/vampire/dust_of_appearance.vpcf"
+      //"soundfile" "add a sound file later mang"
+    }
+
+    "Modifiers"
+    {
+      "modifier_dummy_lock"
+      {
+        "Passive"     "1"
+        "IsHidden"      "1"
+        
+        "States"
+        {
+          "MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NOT_ON_MINIMAP"   "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_ATTACK_IMMUNE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_dummy_lock"
+        "Target"    "CASTER"
+      }
+
+      "FireEffect"
+      {
+        "EffectName"        "particles/vampire/dust_of_appearance.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampire: Vision Dummy - no particles
+  //=================================================================================
+  "vampire_vision_dummy_lock2"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "rubick_empty1"
+    "MaxLevel"            "1"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+    "Modifiers"
+    {
+      "modifier_dummy_lock2"
+      {
+        "Passive"     "1"
+        "IsHidden"      "1"
+        
+        "States"
+        {
+          "MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NOT_ON_MINIMAP"   "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_ATTACK_IMMUNE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_dummy_lock2"
+        "Target"    "CASTER"
+      }
+    }
+  }
+  //================================================================================= 
+  // Vampire: Health Beam - Credits to Pizzalol and Noya (SpellLibrary)
+  //=================================================================================
+  "vampire_health_beam"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ALLIES_YES"
+    "AbilityTextureName"      "dazzle_shadow_wave"
+    "MaxLevel"            "10"
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      "soundfile"     "soundevents/game_sounds_heroes/game_sounds_dazzle.vsndevts"
+      "particle"      "particles/vampire/dazzle_shadow_wave.vpcf"
+    }
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "500"
+    "AbilityCastPoint"        "0.5"
+    
+    // Time   
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "10"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "175 200 225 500 750 2000 3500 5250 7000 7500"
+    
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "bounce_radius"   "2000"
+      }
+      "02"
+      { 
+        "var_type"      "FIELD_INTEGER"
+        "max_targets"   "3 4 5 5 5 5 5 5 5 5"
+      }
+      "03"
+      { 
+        "var_type"      "FIELD_INTEGER"
+        "tooltip_max_targets_inc_dazzle"    "3 4 5 5 5 5 5 5 5 5"
+      }
+      "04"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "heal"        "1000 1500 2000 3000 4500 6000 7500 9000 11500 15000"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "FireSound"
+      {
+        "EffectName"  "Hero_Dazzle.Shadow_Wave"
+        "Target"    "CASTER"
+      }
+
+      "FireEffect"
+      {
+        "EffectName"        "particles/vampire/dazzle_shadow_wave.vpcf"
+        "EffectAttachType"  "start_at_customorigin"
+        
+        "ControlPointEntities"
+        {
+          "CASTER"  "attach_attack1"
+          "TARGET"  "follow_origin"
+        }
+      }
+
+      "RunScript"
+      {
+        "ScriptFile"  "abilities/vampire.lua"
+        "Function"    "HealthBeam"
+        "shadow_wave_particle"  "particles/vampire/dazzle_shadow_wave.vpcf"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampire: Chain of Death - Credits to Pizzalol and Noya (SpellLibrary)
+  //=================================================================================
+  "vampire_chain_of_death"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityTextureName"      "lion_finger_of_death"
+    "MaxLevel"            "15"
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      //"soundfile"         "soundevents/game_sounds_heroes/game_sounds_dazzle.vsndevts"
+      "particle"          "particles/vampire/zuus_arc_lightning.vpcf"
+    }
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "600"
+    "AbilityCastPoint"        "0.5"
+    
+    // Time   
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "10"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "250 275 300 325 350 375 400 425 450 475 500 550 600 700 800"
+    
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"          "FIELD_INTEGER"
+        "bounce_radius"       "500"
+      }
+      "02"
+      { 
+        "var_type"          "FIELD_INTEGER"
+        "max_targets"       "4 5 6 7 8 9 10 10 10 10 10 10 10 10 10"
+      }
+      "03"
+      { 
+        "var_type"          "FIELD_INTEGER"
+        "tooltip_max_targets"   "4 5 6 7 8 9 10 10 10 10 10 10 10 10 10"
+      }
+      "04"
+      {
+        "var_type"          "FIELD_INTEGER"
+        "damage"          "125 150 175 200 225 250 275 300 325 350 375 400 425 450 475"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      //"FireSound"
+      //{
+      //  "EffectName"  "Hero_Dazzle.Shadow_Wave"
+      //  "Target"    "CASTER"
+      //}
+
+      "FireEffect"
+      {
+        "EffectName"        "particles/vampire/zuus_arc_lightning.vpcf"
+        "EffectAttachType"  "start_at_customorigin"
+        
+        "ControlPointEntities"
+        {
+          "CASTER"  "attach_attack1"
+          "TARGET"  "follow_origin"
+        }
+      }
+
+      "RunScript"
+      {
+        "ScriptFile"        "abilities/vampire.lua"
+        "Function"          "ChainOfDeath"
+        "chain_of_death_particle" "particles/vampire/zuus_arc_lightning.vpcf"
+        //"damage_particle"   "particles/units/heroes/hero_dazzle/dazzle_shadow_wave_impact_damage.vpcf"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampire: Veil of Darkness
+  //=================================================================================
+  "vampire_veil_of_darkness"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "night_stalker_hunter_in_the_night"
+    "MaxLevel"            "3"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+    "AbilityCooldown"       "150 100 50"
+    "AbilityManaCost"       "0"
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"          "FIELD_INTEGER"
+        "duration"          "60 80 100"
+      }
+      "02"
+      { 
+        "var_type"          "FIELD_INTEGER"
+        "speed"         "20 30 50"
+      }
+    }
+
+
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_veil_of_darkness"
+        "Target"    "CASTER"
+        "Duration"    "%duration"
+      }
+
+      "RunScript"
+      {
+        "ScriptFile"  "abilities/vampire.lua"
+        "Function"    "CykaSpeed"
+      }
+    }
+
+
+
+    "Modifiers"
+    {
+      "modifier_veil_of_darkness"
+      {
+        "Passive"     "0"
+        "IsHidden"      "0"
+        "isBuff"      "1"
+        "IsDebuff"      "0"
+    
+    
+        "Properties"
+        {
+            "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%speed" 
+        }
+
+        "States"
+        {
+          "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampire: Summoning particle dummy
+  //=================================================================================
+  "vampire_particle_call"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                 "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "MaxLevel"            "1"
+
+    "precache"
+    {
+      "particle" "particles/vampire/doom_bringer_f2p_death.vpcf"
+    }
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_sigil"
+        "Target"    "CASTER"
+      }
+
+      "FireEffect"
+      {
+        "EffectName"        "particles/vampire/doom_bringer_f2p_death.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"            "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_sigil"
+      {
+        "Passive" "1"
+        "IsHidden"  "0"
+        "States"
+        {
+          "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
+          //"MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED" --invulnerable units cant have particles on them??
+          "MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampire: Spawning hider
+  //=================================================================================
+  "vampire_init_hider"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                 "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "MaxLevel"            "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_init_hider"
+        "Target"    "CASTER"
+        "Duration"    "55"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_init_hider"
+      {
+        "Passive" "1"
+        "IsHidden"  "0"
+        "States"
+        {
+          "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_SILENCED"   "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
 }

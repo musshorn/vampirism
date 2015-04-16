@@ -170,6 +170,13 @@ function human_blink(keys)
   FindClearSpaceForUnit(caster, point, false)
 end
 
+function slayer_blink( keys )
+  local caster = keys.caster
+  local point = keys.target_points[1]
+
+  FindClearSpaceForUnit(caster, point, false)
+end
+
 -- Anything passed here is added to the build queue
 function shift_queue_add( keys )
   local caster = keys.caster
@@ -224,7 +231,7 @@ function SummonSlayer( keys )
   FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
 
   PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
-  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = caster:GetGold()})  
+  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})  
 end
 
 -- Function that spawns the slayer on channel success
