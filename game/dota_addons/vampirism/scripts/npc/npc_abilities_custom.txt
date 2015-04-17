@@ -139,26 +139,6 @@
     }
   }
 
-  //Keeps the building stationary
-  "building_block"
-  {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-    "BaseClass" "ability_datadriven"
-    "Modifiers"
-    {
-      "modifier_grounded_passive"
-      {
-        "Passive" "1"
-        "IsHidden" "1"
-        "States"
-        {
-          "MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
-        }
-      }
-    }
-
-  }
-
   //Set rally point for workers created by this building
   "set_rally_point"
   {
@@ -434,7 +414,7 @@
     "BaseClass"           "ability_datadriven"
     "MaxLevel"            "1"
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "AbilityChannelTime"  "60"
+    "AbilityChannelTime"  "1"
     "AbilityLumberCost" "400"
     "OnSpellStart"
     {
@@ -496,7 +476,7 @@
     "AbilityManaCost"         "500"
     "AbilityCastRange"        "150000"
     "AbilityCastPoint"        "0.3"
-    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_6"
     "OnSpellStart"
     {
       "RunScript"
@@ -506,9 +486,59 @@
         "Function"  "slayer_blink"
       }
     }
-
   }
 
+  //================================================================================= /
+  // Slayer Summon Tracker
+  //================================================================================= /
+  "slayer_summon_tracker"
+  {
+    "BaseClass"               "ability_datadriven"
+    "AbilityTextureName"      "ability_name"
+    "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "MaxLevel"                "1"
+    "AbilityManaCost"         "500"
+    "AbilityCastPoint"        "0.3"
+    "AbilityCooldown"        "180"
+    "AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_6"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Target"  "POINT"
+        "Function"  "slayer_summon_tracker"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Slayer Tracker Summon Time
+  //================================================================================= /
+  "slayer_tracker_debuffs"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    
+    "Modifiers"
+    {
+      "modifier_duration"
+      {
+        "Passive" "1"
+        "Duration"  "120"
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/abilities.lua"
+            "Function"    "remove_tracker"
+          }
+        }
+      }
+    }
+
+
+  }
   //================================================================================= /
   // Research: Improved Lumber Havesting (1)
   //================================================================================= /

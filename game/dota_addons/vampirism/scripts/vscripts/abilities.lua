@@ -177,20 +177,19 @@ function slayer_blink( keys )
   FindClearSpaceForUnit(caster, point, false)
 end
 
--- Anything passed here is added to the build queue
-function shift_queue_add( keys )
+function slayer_summon_tracker( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
 
-  table.insert(PLAYER_BUILDQ[pID], keys)
+  local tracker = CreateUnitByName("slayer_tracker", caster:GetAbsOrigin(), true, nil, nil,caster:GetTeam() )
+  tracker:SetControllableByPlayer(pID, true)
+  tracker:FindAbilityByName("slayer_tracker_debuffs"):SetLevel(1)
 end
 
--- If the worker is directly issued another command the queue is cleared of all issues
-function shift_queue_clear( keys )
+function remove_tracker( keys )
   local caster = keys.caster
-  local pID = caster:GetMainControllingPlayer()
 
-  PLAYER_BUILDQ[pID] = {}
+  caster:RemoveSelf()
 end
 
 -- Check that the player can summon a slayer, otherwise stop.
@@ -244,6 +243,7 @@ function SpawnSlayer( keys )
   local slayer = CreateUnitByName("npc_dota_hero_invoker", caster:GetAbsOrigin(), true, nil, nil, caster:GetTeam())
   slayer:SetControllableByPlayer(pID, true)
   slayer:SetOwner(EntIndexToHScript(pID))
+  slayer:FindAbilityByName("slayer_blink"):SetLevel(1)
   GameMode:ModifyStatBonuses(slayer)
 end
 

@@ -52,7 +52,6 @@ ABILITY_KV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
 HUMAN_COUNT = 0
-PLAYER_BUILDQ = {}
 HAS_SLAYER = {}
 
 -- Fill this table up with the required XP per level if you want to change it

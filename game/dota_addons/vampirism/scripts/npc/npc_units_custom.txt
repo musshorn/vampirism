@@ -1110,6 +1110,9 @@
     "ProvidesFood"  "25"
   }
 
+  //================================================================================= 
+  // Human Building T1 - Tent 2
+  //=================================================================================
   "tent_t2"
   {
     // General
@@ -2639,6 +2642,98 @@
 
     "IsTech"    "true"
     "NeedTech"    "house_t1"
+  }
+
+  //================================================================================= 
+  // Slayer Unit - Tracker
+  //=================================================================================
+  "slayer_tracker"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"         "npc_dota_creature"
+    "Model"             "models/heroes/rubick/rubick.vmdl"
+    "ModelScale"        "0.5"
+
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"          "human_blink"  //Human test
+    "Ability2"          "slayer_tracker_debuffs"          // Ability 2.
+    "Ability3"          ""          // Ability 3.
+    "Ability4"          ""          // Ability 4.
+    "Ability5"          ""          // Ability 5.
+    "Ability6"          ""          // Ability 6 - Extra.
+    "Ability7"          ""          // Ability 7 - Extra.
+    "Ability8"          ""         // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "0"     // Physical protection.
+    "MagicalResistance"     "0"     // Magical protection.
+
+    "precache"
+    {
+        "model" "models/heroes/rubick/rubick_staff.vmdl"
+        "model" "models/heroes/rubick/cape.vmdl"
+        "model" "models/heroes/rubick/shoulder.vmdl"
+        "model" "models/heroes/rubick/rubick_head.vmdl"
+    }
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackDamageMin"     "50"
+    "AttackDamageMax"     "65"
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "0"
+    "AttackAnimationPoint"    "0"
+    "AttackAcquisitionRange"  "0"
+    "AttackRange"       "0"
+    "ProjectileModel"     ""
+    "ProjectileSpeed"     "0"
+
+    // Attributes
+    //----------------------------------------------------------------
+    "AttributeBaseIntelligence" "0"
+    "AttributeBaseIntelligenceGain" "0"
+  
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"     "170"
+    "RingRadius"        "50"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"       "522"   // Speed
+    "MovementTurnRate"      "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "750"   // Base health.
+    "StatusHealthRegen"     "0"   // Health regeneration rate.
+    "StatusMana"        "3"     // Base mana.
+    "StatusManaRegen"     "0.01"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    "Creature"
+    {
+        "AttachWearables"
+        {
+            "Wearble1"  { "ItemDef"     "203" }
+            "Wearble2"  { "ItemDef"     "204" }
+            "Wearble3"  { "ItemDef"     "205" }
+            "Wearble4"  { "ItemDef"     "419" }
+        }
+    }
   }
 
   //================================================================================= 
