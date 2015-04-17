@@ -1623,6 +1623,79 @@
 	}
 
 	//=================================================================================/
+	// Upgrade to Wall of Seeing
+	//=================================================================================/
+	"upgrade_to_wall_seeing"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"30"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"wall_seeing"
+				"LumberCost"	"5000"
+				"GoldCost"		"1"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"wall_seeing"
+				"Scale"			"1"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Wall of Seeing Truesight
+	//=================================================================================/
+	"wall_of_seeing_truesight"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"rubick_empty1"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+
+		"Modifiers"
+		{
+			"modifier_wall_seeing_truesight"
+			{
+				"Passive"			"1"
+				"IsHidden"			"0"
+				"IsDebuff"			"0"
+				
+				"OnCreated"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_truesight"
+						"Target" 		"CASTER"
+					}
+
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/towers.lua"
+						"Function"		"trueSight"
+					}
+				}
+			}
+		}
+
+	}
+
+	//=================================================================================/
 	// Tower of Frost - Slow
 	//=================================================================================/
 	"tower_frost_attack"

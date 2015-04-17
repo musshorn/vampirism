@@ -73,6 +73,7 @@ function Precache( context )
 		PrecacheModel("models/bloodstone_reference.vmdl", context)
 		PrecacheModel("models/crystal_ring01_reference.vmdl", context)
 		PrecacheModel("models/props_structures/bad_statue002.vmdl", context)
+		PrecacheModel("models/items/wards/celestial_observatory/celestial_observatory.vmdl", context)
 		
 		-- Placeholder models for walls
 		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)

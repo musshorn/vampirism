@@ -47,3 +47,8 @@ function calciteBuff( keys )
     caster:SetModifierStackCount("modifier_calcite_stack", ability, caster:GetModifierStackCount("modifier_calcite_stack", ability) + 1)
   end
 end
+
+function trueSight(keys)
+  print('called')
+    keys.caster:AddNewModifier(keys.caster, nil, 'modifier_truesight', {})
+end
