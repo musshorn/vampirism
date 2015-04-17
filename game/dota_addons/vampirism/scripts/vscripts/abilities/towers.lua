@@ -34,3 +34,16 @@ function bloodArmor(keys)
 
   target:SetModifierStackCount("modifier_blood_armor_1", ability, target:GetModifierStackCount("modifier_blood_armor_1", ability) + 1)
 end
+
+function calciteBuff( keys )
+  local caster = keys.caster
+  local target = keys.target
+  local ability = keys.ability
+  local attackGain = ability:GetLevelSpecialValueFor("tower_calcite_t1_speed_gain", (ability:GetLevel() -1))
+  local gainDuration = ability:GetLevelSpecialValueFor("duration", (ability:GetLevel()))
+  local maxStacks = ability:GetLevelSpecialValueFor("max_stacks", ability:GetLevel() -1)
+
+  if caster:GetModifierStackCount("modifier_calcite_stack", ability) < maxStacks then
+    caster:SetModifierStackCount("modifier_calcite_stack", ability, caster:GetModifierStackCount("modifier_calcite_stack", ability) + 1)
+  end
+end

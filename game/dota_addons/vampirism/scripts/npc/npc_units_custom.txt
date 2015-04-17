@@ -2041,10 +2041,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 
-		"Ability1"					"upgrade_to_tower_flame_t1"	//Human test
+		"Ability1"					"upgrade_to_tower_flame_t1"					//Human test
 		"Ability2"					"upgrade_to_tower_blood_t1"					// Ability 2.
-		"Ability3"					"upgrade_to_tower_frost"					// Ability 3.
-		"Ability4"					""					// Ability 4.
+		"Ability3"					"upgrade_to_tower_calcite_t1"				// Ability 3.
+		"Ability4"					"upgrade_to_tower_frost"					// Ability 4.
 		"Ability5"					""					// Ability 5.
 		"Ability6"					""					// Ability 6 - Extra.
 		"Ability7"					""					// Ability 7 - Extra.
@@ -2393,14 +2393,14 @@
 		// General
    		//-------------------------------------------------------------------------------------------------------------
    		"BaseClass"						"npc_dota_creature"
-    	"Model"							"models/tower_good2_reference.vmdl"
+    	"Model"							"models/props_structures/bad_statue002.vmdl"
 		"ModelScale"				"1"
 		
 		"ConsideredHero"			"0"
 		// Abilities
 		//----------------------------------------------------------------
 
-		"Ability1"					""	//Human test
+		"Ability1"					"tower_calcite_t1_attack"	//Human test
 		"Ability2"					""					// Ability 2.
 		"Ability3"					""					// Ability 3.
 		"Ability4"					""					// Ability 4.
@@ -2426,7 +2426,7 @@
 		"AttackAnimationPoint"		"0"
 		"AttackAcquisitionRange"	"700"
 		"AttackRange"				"700"
-		"ProjectileModel"			"particles/units/heroes/hero_wisp/wisp_base_attack.vpcf"
+		"ProjectileModel"			"particles/units/heroes/hero_shadow_demon/shadow_demon_base_attack.vpcf"
 		"ProjectileSpeed"			"600"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
 

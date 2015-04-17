@@ -1488,6 +1488,108 @@
 	}
 
 	//=================================================================================/
+	// Upgrade to Tower of Blood
+	//=================================================================================/
+	"upgrade_to_tower_calcite_t1"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"10"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_calcite_t1"
+				"LumberCost"	"3500"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_calcite_t1"
+				"Scale"			"1"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Calcite T1 Attack speed buff
+	//=================================================================================/
+	"tower_calcite_t1_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"ogre_magi_bloodlust"
+		"MaxLevel" 						"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"tower_calcite_t1_speed_gain"		"20"
+			}
+			"02"
+			{				
+				"var_type"							"FIELD_FLOAT"
+				"duration"							"5.0"
+			}
+			"03"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"max_stacks"						"10"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_calcite_attack_gain"
+			{
+				"Passive"		"1"
+				"IsHidden"		"0"
+
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/towers.lua"
+						"Function"		"calciteBuff"
+					}
+
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_calcite_stack"
+						"Target" 		"CASTER"
+						"Duration"		"%duration"
+					}
+				}
+			}
+
+			"modifier_calcite_stack"
+			{
+				"Passive"	"1"
+				"IsHidden"	"0"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%tower_calcite_t1_speed_gain"
+				}
+			}
+		}
+	}
+
+	//=================================================================================/
 	// Upgrade to Frost Tower
 	//=================================================================================/
 	"upgrade_to_tower_frost"
@@ -1533,17 +1635,40 @@
 		"AbilityTextureName"			"lich_frost_nova"
 		"MaxLevel" 						"1"
 
+		"precache"
+		{
+			"particle"  "particles/generic_gameplay/generic_slowed_cold.vpcf"
+		}
 
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"tower_frost_movespeed"				"-25"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"5.0"
+			}
+		}
 
 		"Modifiers"
 		{
-			"OnAttackLanded"
+			"modifier_frost_slow"
 			{
-				"ApplyModifier"
+				"Passive"		"1"
+				"IsHidden"		"1"
+
+				"OnAttackLanded"
 				{
-					"ModifierName"	"modifier_tower_frost_slow"
-					"Target" 		"TARGET"
-					"Duration"		"%5"
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_tower_frost_slow"
+						"Target" 		"TARGET"
+						"Duration"		"%duration"
+					}
 				}
 			}
 			"modifier_tower_frost_slow"
@@ -1551,9 +1676,11 @@
 				"IsHidden"	"0"
 				"IsDebuff"	"1"
 
+				"EffectName"					"particles/generic_gameplay/generic_slowed_cold.vpcf"
+
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%-25"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%tower_frost_movespeed"
 				}
 			}
 		}
