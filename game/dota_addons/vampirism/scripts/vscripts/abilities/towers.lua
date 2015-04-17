@@ -50,5 +50,13 @@ end
 
 function trueSight(keys)
   print('called')
-    keys.caster:AddNewModifier(keys.caster, nil, 'modifier_truesight', {})
+    keys.caster:AddNewModifier(keys.caster, nil, "modifier_truesight", {})
+
+    Timers:CreateTimer(1, function ()
+       if keys.caster:HasModifier("modifier_truesight") then
+         print('has trueSight')
+       end
+       return 1
+    end)
+
 end

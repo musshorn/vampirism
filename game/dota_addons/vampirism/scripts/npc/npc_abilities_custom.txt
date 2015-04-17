@@ -1663,7 +1663,7 @@
 		"BaseClass"             		"ability_datadriven"
 		"AbilityTextureName"			"rubick_empty1"
 		"MaxLevel" 						"1"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -1675,19 +1675,31 @@
 				"Passive"			"1"
 				"IsHidden"			"0"
 				"IsDebuff"			"0"
-				
+				"Aura"          	"modifier_wall_seeing_aura"
+				"Aura_Radius"   	"800"
+				"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Aura_Types"    	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_NONE"
+				"Aura_ApplyToCaster" "0"
+			}
+
+			"modifier_wall_seeing_aura"
+			{
 				"OnCreated"
 				{
 					"ApplyModifier"
 					{
 						"ModifierName"	"modifier_truesight"
-						"Target" 		"CASTER"
+						"Target" 		"TARGET"
 					}
+				}
 
-					"RunScript"
+				"OnDestroy"
+				{
+					"RemoveModifier"
 					{
-						"ScriptFile"	"scripts/vscripts/abilities/towers.lua"
-						"Function"		"trueSight"
+						"ModifierName"	"modifier_truesight"
+						"Target" 		"TARGET"
 					}
 				}
 			}
