@@ -124,6 +124,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "BaseClass" "ability_datadriven"
+
     
     "Modifiers"
     {
@@ -536,9 +537,100 @@
         }
       }
     }
+  }
+
+  //================================================================================= /
+  // Slayer Esnare
+  //================================================================================= /
+  "slayer_ensnare"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "ability_name"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
+
+    "AbilityManaCost"           "1000"
+    "AbilityCooldown"        "120"
+    "AbilityCastRange"        "500"
+    "AbilityCastPoint"        "0.3"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+
+    "precache"
+    {
+      "soundfile"         "soundevents/game_sounds_heroes/game_sounds_naga_siren.vsndevts"
+      "particle"          "particles/units/heroes/hero_siren/siren_net.vpcf"
+      "particle"          "particles/units/heroes/hero_siren/siren_net_projectile.vpcf"
+    }
+
+    "OnSpellStart"
+    {
+      "TrackingProjectile"
+      {
+        "Target"        "TARGET"
+        "EffectName"      "particles/units/heroes/hero_siren/siren_net_projectile.vpcf"
+        "Dodgeable"       "1"
+        "ProvidesVision"    "1"
+        "VisionRadius"      "0"
+        "MoveSpeed"       "1500"
+        "SourceAttachment"    "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+      }
+  
+      "FireSound"
+      {
+        "EffectName"      "Hero_NagaSiren.Ensnare.Cast"
+        "Target"        "CASTER"
+      }
+    }
+  
+    "OnProjectileHitUnit"
+    {
+      "DeleteOnHit" "1"
+  
+      "FireSound"
+      {
+        "EffectName"      "Hero_NagaSiren.Ensnare.Target"
+        "Target"        "TARGET"
+      }
+  
+      "ApplyModifier"
+      {
+        "Target"        "TARGET"
+        "ModifierName"      "modifier_ensnare_datadriven"
+      }
+    }
+  
+    "Modifiers"
+    {
+      "modifier_ensnare_datadriven"
+      {
+        "IsHidden"    "0"
+        "IsDebuff"    "1"
+        "IsPurgable"  "0"
+  
+        "Duration"    "3.0"
+  
+        "States"
+        {
+          "MODIFIER_STATE_ROOTED"   "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_INVISIBLE"  "MODIFIER_STATE_VALUE_DISABLED"
+        }
+  
+        "EffectName"      "particles/units/heroes/hero_siren/siren_net.vpcf"
+        "EffectAttachType"    "follow_origin"
+      }
+  
+      "modifier_ensnare_fake_datadriven"
+      {
+        "IsHidden"      "1"
+        "OverrideAnimation" "ACT_DOTA_CAST_ABILITY_1"
+      }
+    }
+
 
 
   }
+
   //================================================================================= /
   // Research: Improved Lumber Havesting (1)
   //================================================================================= /
