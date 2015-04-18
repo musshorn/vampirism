@@ -2660,7 +2660,7 @@
 
     "Ability1"          "human_blink"  //Human test
     "Ability2"          "slayer_tracker_debuffs"          // Ability 2.
-    "Ability3"          ""          // Ability 3.
+    "Ability3"          "slayer_tracker_truesight"          // Ability 3.
     "Ability4"          ""          // Ability 4.
     "Ability5"          ""          // Ability 5.
     "Ability6"          ""          // Ability 6 - Extra.

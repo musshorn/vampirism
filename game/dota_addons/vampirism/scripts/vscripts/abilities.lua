@@ -184,6 +184,7 @@ function slayer_summon_tracker( keys )
   local tracker = CreateUnitByName("slayer_tracker", caster:GetAbsOrigin(), true, nil, nil,caster:GetTeam() )
   tracker:SetControllableByPlayer(pID, true)
   tracker:FindAbilityByName("slayer_tracker_debuffs"):SetLevel(1)
+  tracker:FindAbilityByName("slayer_tracker_truesight"):SetLevel(1)
 end
 
 function remove_tracker( keys )
