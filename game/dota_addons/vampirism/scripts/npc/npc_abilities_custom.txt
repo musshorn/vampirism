@@ -482,9 +482,9 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
         "Target"  "POINT"
-        "Function"  "slayer_blink"
+        "Function"  "SlayerBlink"
       }
     }
   }
@@ -506,9 +506,9 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
         "Target"  "POINT"
-        "Function"  "slayer_summon_tracker"
+        "Function"  "SlayerSummonTracker"
       }
     }
   }
@@ -591,8 +591,8 @@
         {
           "RunScript"
           {
-            "ScriptFile"  "scripts/vscripts/abilities.lua"
-            "Function"    "remove_tracker"
+            "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
+            "Function"    "SlayerRemoveTracker"
           }
         }
       }
@@ -605,15 +605,17 @@
   "slayer_building_protection"
   {
     "BaseClass"                  "ability_datadriven"
+    "MaxLevel"                   "2"
     "AbilityBehavior"            "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
     "AbilityUnitTargetTeam"      "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitDamageType"      "DAMAGE_TYPE_MAGICAL"
 
+    
     "AbilityManaCost"            "1000"
     "AbilityCooldown"            "5"
     "AbilityChannelTime"         "4.0 20.0"
-    "MaxLevel"                   "2"
+    
     
     "precache"
     {
@@ -638,7 +640,7 @@
     {
       "RunScript"
       {
-        "ScriptFile"    "scripts/vscripts/abilities.lua"
+        "ScriptFile"    "scripts/vscripts/abilities/slayer.lua"
         "Function"      "SlayerBuildingProtection"
         "InvulRadius"          "%area"
       }
@@ -648,7 +650,7 @@
     {
       "RunScript"
       {
-        "ScriptFile"    "scripts/vscripts/abilities.lua"
+        "ScriptFile"    "scripts/vscripts/abilities/slayer.lua"
         "Function"      "SlayerBuildingProtectionEnd"
         "InvulRadius"          "%area"
       }
@@ -673,6 +675,102 @@
       }
     }
   }
+
+  //================================================================================= /
+  // Slayer Avatar
+  //================================================================================= /
+  "slayer_avatar"
+  {
+    "BaseClass"                  "ability_datadriven"
+    "MaxLevel"                   "1"
+    "AbilityBehavior"            "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitTargetTeam"      "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"      "DAMAGE_TYPE_MAGICAL"
+
+    
+    "AbilityManaCost"            "1000"
+    "AbilityCooldown"            "5"    
+    
+    "precache"
+    {
+      "particle"  "particles/items_fx/black_king_bar_avatar.vpcf"
+    }
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "bonus_hp"    "500" 
+      }
+      "02"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "duration"    "20"
+      }
+      "03"
+      {
+        "var_type"      "FIELD_FLOAT"     
+        "modelscale"    "25"
+      }
+      "04"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "bonus_damage"      "20"
+      }
+    }
+
+    "OnSpellStart"
+    {
+        "ApplyModifier"
+        {
+          "Target"          "CASTER"
+          "ModifierName"    "modifier_slayer_avatar"
+        }
+        "RunScript"
+        {
+          "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
+          "Function"    "SlayerAvatarStart"
+          "Modelscale"  "%modelscale"
+        }
+    }
+
+    "Modifiers"
+    {
+      "modifier_slayer_avatar"
+      {
+        "Passive"       "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "0"
+        "Duration"      "%duration"
+    
+        "EffectName"    "particles/items_fx/black_king_bar_avatar.vpcf"
+        "EffectAttachType"  "follow_origin"
+
+        "States"
+        {
+          "MODIFIER_STATE_MAGIC_IMMUNE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"    "%bonus_damage"
+          "MODIFIER_PROPERTY_HEALTH_BONUS"              "%bonus_hp"
+        }
+
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+          "ScriptFile"  "scripts/vscripts/abilities.lua"
+          "Function"    "SlayerAvatarEnd"
+          "Modelscale"  "%modelscale"
+          }
+        }
+      }
+    }
+  }
+
 
   //================================================================================= /
   // Slayer Esnare

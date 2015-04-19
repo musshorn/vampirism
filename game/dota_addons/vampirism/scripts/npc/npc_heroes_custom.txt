@@ -108,7 +108,7 @@
 		"Ability2"					"slayer_summon_tracker"
 		"Ability3"					"slayer_ensnare"
 		"Ability4"					"slayer_building_protection"
-		"Ability5"					""
+		"Ability5"					"slayer_avatar"
 		"Ability6"					""
 		"Ability7"					""
 		"Ability8"					""
