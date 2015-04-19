@@ -600,6 +600,81 @@
   }
 
   //================================================================================= /
+  // Slayer Building Protection
+  //================================================================================= /
+  "slayer_building_protection"
+  {
+    "BaseClass"                  "ability_datadriven"
+    "AbilityBehavior"            "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+    "AbilityUnitTargetTeam"      "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"      "DAMAGE_TYPE_MAGICAL"
+
+    "AbilityManaCost"            "1000"
+    "AbilityCooldown"            "5"
+    "AbilityChannelTime"         "4.0 20.0"
+    "MaxLevel"                   "2"
+    
+    "precache"
+    {
+      "particle"  "particles/items_fx/black_king_bar_avatar.vpcf"
+    }
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "area"      "400 1000" 
+      }
+      "02"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "duration"    "4.0 20.0"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"    "scripts/vscripts/abilities.lua"
+        "Function"      "SlayerBuildingProtection"
+        "InvulRadius"          "%area"
+      }
+    }
+
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"    "scripts/vscripts/abilities.lua"
+        "Function"      "SlayerBuildingProtectionEnd"
+        "InvulRadius"          "%area"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_building_invulnerable"
+      {
+        "Passive"      "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "0"
+        "Duration"      "%duration"
+    
+        "EffectName"    "particles/items_fx/black_king_bar_avatar.vpcf"
+        "EffectAttachType"  "follow_origin"
+
+        "States"
+        {
+          "MODIFIER_STATE_INVULNERABLE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
   // Slayer Esnare
   //================================================================================= /
   "slayer_ensnare"

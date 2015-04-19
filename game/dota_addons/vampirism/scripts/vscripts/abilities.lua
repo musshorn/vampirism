@@ -187,8 +187,40 @@ end
 
 function remove_tracker( keys )
   local caster = keys.caster
-
   caster:RemoveSelf()
+end
+
+function SlayerBuildingProtection( keys )
+  local caster = keys.caster
+  local radius = keys.InvulRadius
+  local pID = caster:GetMainControllingPlayer()
+  local ability = keys.ability
+
+  local nearby_units = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin() , nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false) 
+
+  for i, nearby in ipairs(nearby_units) do
+    if nearby:GetMainControllingPlayer() == pID then
+      if nearby:FindAbilityByName("is_a_building") ~= nil then
+        ability:ApplyDataDrivenModifier(caster, nearby, "modifier_building_invulnerable", nil)
+      end
+    end
+  end
+end
+
+function SlayerBuildingProtectionEnd( keys )
+  local caster = keys.caster
+  local radius = keys.InvulRadius
+  local pID = caster:GetMainControllingPlayer()
+
+  local nearby_units = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin() , nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false) 
+
+  for i, nearby in ipairs(nearby_units) do
+    if nearby:GetMainControllingPlayer() == pID then
+      if nearby:HasModifier("modifier_building_invulnerable") == true then
+        nearby:RemoveModifierByName("modifier_building_invulnerable")
+      end
+    end
+  end
 end
 
 -- Check that the player can summon a slayer, otherwise stop.
