@@ -199,7 +199,7 @@ function SlayerRespawnStart( keys )
 end
 
 function SlayerRespawnInterrupted( keys )
-  local caster = key.caster
+  local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
 
   if SLAYERS[pID].state == "reviving" then

@@ -114,7 +114,6 @@
         "Duration"  "30"
         "UnitCount" "1"
       }
-
     }
   }
   //================================================================================= /
@@ -355,7 +354,6 @@
         "Function"  "CallMenu"
       }
     }
-
   }
 
   "human_blink"
@@ -1614,72 +1612,547 @@
     }
   }
 
-  //================================================================================= /
-  // Upgrade unit to Shiny Tower of Pearls
-  //================================================================================= /
-  "upgrade_to_shiny_tower_of_pearls"
-  {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "5" // #DEBUG, true value is 100
-    
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "Upgrade"
-        "TARGET"  "CASTER"
-        "TargetUnit"  "shiny_tower_pearls"
-        "LumberCost"  "150"
-        "GoldCost"  "0"
-      }
-    }
-    "OnChannelSucceeded"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "FinishUpgrade"
-        "TargetUnit"  "shiny_tower_pearls"
-        "Scale" "0.8"
-      }
-    }
-  }
 
-  //================================================================================= /
-  // Upgrade to Opal Tower
-  //================================================================================= /
-  "upgrade_to_tower_opal"
-  {
-    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "BaseClass"       "ability_datadriven"
-    "AbilityChannelTime"  "5"
-    
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "Upgrade"
-        "TARGET"    "CASTER"
-        "TargetUnit"  "tower_opal"
-        "LumberCost"  "800"
-        "GoldCost"    "0"
-      }
-    }
-    "OnChannelSucceeded"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "FinishUpgrade"
-        "TargetUnit"  "tower_opal"
-        "Scale"     "1"
-      }
-    }
-  }
+	//=================================================================================	/
+	// Upgrade to Opal Tower
+	//=================================================================================	/
+	"upgrade_to_tower_opal"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"5"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_opal"
+				"LumberCost"	"800"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_opal"
+				"Scale"			"1"
+			}
+		}
+	}
 
+	//=================================================================================/
+	// Upgrade to Lesser Mana Energy Tower
+	//=================================================================================/
+	"upgrade_to_tower_manaburn_t1"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"5"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_manaburn_t1"
+				"LumberCost"	"2000"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_manaburn_t1"
+				"Scale"			"0.7"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Lesser Mana Energy Tower - Feedback
+	//=================================================================================/
+	// Ability taken from SpellLibrary. - https://github.com/Pizzalol/SpellLibrary
+	// Author: Pizzalol
+	// Date: 16.12.2014.
+	"tower_manaburn_t1_feedback"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"		
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"antimage_mana_break"
+		"MaxLevel"						"1"
+	
+		// Precache	
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"	"particles/generic_gameplay/generic_manaburn.vpcf"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts"
+		}
+	
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_per_burn"		"1"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_per_hit"			"50"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_mana_break_orb_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+	
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/towers.lua"
+						"Function"		"ManaBreak"
+						"Target"		"TARGET"
+					}
+	
+					"FireSound"
+					{
+						"EffectName"	"Hero_Antimage.ManaBreak"
+						"Target"		"TARGET"
+					}
+	
+					"AttachEffect"
+					{
+						"EffectName"		"particles/generic_gameplay/generic_manaburn.vpcf"
+						"EffectAttachType"	"attach_hitloc"
+						"Target"			"TARGET"
+					}
+				}
+			}
+		}
+	}
+	//=================================================================================/
+	// Upgrade to Tower of Flame
+	//=================================================================================/
+	"upgrade_to_tower_flame_t1"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"25"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_flame_t1"
+				"LumberCost"	"4000"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_flame_t1"
+				"Scale"			"1"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Upgrade to Tower of Blood
+	//=================================================================================/
+	"upgrade_to_tower_blood_t1"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"25"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_blood_t1"
+				"LumberCost"	"15000"
+				"GoldCost"		"1"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_blood_t1"
+				"Scale"			"2.5"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Tower of Blood - Holy Blood
+	//=================================================================================/
+	"tower_blood_t1_holy_blood"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"dazzle_weave"
+		"MaxLevel" 						"1"
+
+		"Modifiers"
+		{
+			"modifier_holy_blood_debuff"
+			{
+				"Passive"			"1"
+				"IsHidden"			"0"
+				"IsDebuff"			"1"
+			
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_blood_armor_1"
+						"Target" 		"TARGET"
+						"Duration"		"5"
+					}
+
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/towers.lua"
+						"Function"		"bloodArmor"
+					}
+				}			
+			}
+
+			"modifier_blood_armor_1"
+			{
+				"Passive"	"1"
+				"IsHidden"	"0"
+				"IsDebuff"	"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-1"
+				}
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Upgrade to Tower of Blood
+	//=================================================================================/
+	"upgrade_to_tower_calcite_t1"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"10"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_calcite_t1"
+				"LumberCost"	"3500"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_calcite_t1"
+				"Scale"			"1"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Calcite T1 Attack speed buff
+	//=================================================================================/
+	"tower_calcite_t1_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"ogre_magi_bloodlust"
+		"MaxLevel" 						"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"tower_calcite_t1_speed_gain"		"20"
+			}
+			"02"
+			{				
+				"var_type"							"FIELD_FLOAT"
+				"duration"							"5.0"
+			}
+			"03"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"max_stacks"						"10"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_calcite_attack_gain"
+			{
+				"Passive"		"1"
+				"IsHidden"		"0"
+
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts/vscripts/abilities/towers.lua"
+						"Function"		"calciteBuff"
+					}
+
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_calcite_stack"
+						"Target" 		"CASTER"
+						"Duration"		"%duration"
+					}
+				}
+			}
+
+			"modifier_calcite_stack"
+			{
+				"Passive"	"1"
+				"IsHidden"	"0"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%tower_calcite_t1_speed_gain"
+				}
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Upgrade to Frost Tower
+	//=================================================================================/
+	"upgrade_to_tower_frost"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"30"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"tower_frost"
+				"LumberCost"	"15000"
+				"GoldCost"		"0"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"tower_frost"
+				"Scale"			"0.7"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Upgrade to Wall of Seeing
+	//=================================================================================/
+	"upgrade_to_wall_seeing"
+	{
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"ability_datadriven"
+		"AbilityChannelTime"	"30"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"Upgrade"
+				"TARGET"		"CASTER"
+				"TargetUnit"	"wall_seeing"
+				"LumberCost"	"5000"
+				"GoldCost"		"1"
+			}
+		}
+		"OnChannelSucceeded"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/buildings/building.lua"
+				"Function"		"FinishUpgrade"
+				"TargetUnit"	"wall_seeing"
+				"Scale"			"1"
+			}
+		}
+	}
+
+	//=================================================================================/
+	// Wall of Seeing Truesight
+	//=================================================================================/
+	"wall_of_seeing_truesight"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"rubick_empty1"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+
+		"Modifiers"
+		{
+			"modifier_wall_seeing_truesight"
+			{
+				"Passive"			"1"
+				"IsHidden"			"0"
+				"IsDebuff"			"0"
+				"Aura"          	"modifier_wall_seeing_aura"
+				"Aura_Radius"   	"800"
+				"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Aura_Types"    	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_NONE"
+				"Aura_ApplyToCaster" "0"
+			}
+
+			"modifier_wall_seeing_aura"
+			{
+				"OnCreated"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_truesight"
+						"Target" 		"TARGET"
+					}
+				}
+
+				"OnDestroy"
+				{
+					"RemoveModifier"
+					{
+						"ModifierName"	"modifier_truesight"
+						"Target" 		"TARGET"
+					}
+				}
+			}
+		}
+
+	}
+
+	//=================================================================================/
+	// Tower of Frost - Slow
+	//=================================================================================/
+	"tower_frost_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"lich_frost_nova"
+		"MaxLevel" 						"1"
+
+		"precache"
+		{
+			"particle"  "particles/generic_gameplay/generic_slowed_cold.vpcf"
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"tower_frost_movespeed"				"-25"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"5.0"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_frost_slow"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_tower_frost_slow"
+						"Target" 		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
+			}
+			"modifier_tower_frost_slow"
+			{
+				"IsHidden"	"0"
+				"IsDebuff"	"1"
+
+				"EffectName"					"particles/generic_gameplay/generic_slowed_cold.vpcf"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%tower_frost_movespeed"
+				}
+			}
+		}
+	}
   //=================================================================================/
   // Upgrade to Lesser Mana Energy Tower
   //=================================================================================/

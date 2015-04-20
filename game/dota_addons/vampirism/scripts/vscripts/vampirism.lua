@@ -53,6 +53,17 @@ LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lu
 VAMP_COUNT = 0
 HUMAN_COUNT = 0
 SLAYERS = {}
+VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
+
+HUMAN_FEED = {}
+for i = 0, 7 do
+	HUMAN_FEED[i] = 0
+end
+
+VAMPIRE_FEED = {}
+for i = 8, 9 do
+	VAMPIRE_FEED[i] = 0
+end
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
@@ -120,6 +131,10 @@ function GameMode:OnAllPlayersLoaded()
     local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
     GameRules:SetHeroRespawnEnabled(false)
 
+
+    for i = 0, 9 do
+    	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
+    end
 end
 
 --[[
@@ -234,17 +249,18 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
   	npc:FindAbilityByName("build_house1"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 5000
+      WOOD[playerID] = 100000 --cheats
+      PlayerResource:SetGold(playerID, 1000, true) --cheats
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
-      print("made 40 wood for player "..playerID)
       HUMAN_COUNT = HUMAN_COUNT + 1
       npc:SetAbilityPoints(0)
-      print('lua setting gold')
       FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = 0})
-      FireGameEvent("vamp_scoreboard_addplayer", {player_ID = playerID, player_name = 'DONT SHIP THIS IN MP'})
+      FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
+      FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
+      FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
     end
   end
@@ -279,8 +295,6 @@ function GameMode:OnNPCSpawned(keys)
   if string.match(npc:GetUnitName(), "vampire_vision_dummy") then
     VisionDummy(npc)
   end
-  
-  --TechTree:GetRequired(npc:GetUnitName(), npc:GetMainControllingPlayer())
 end
 
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive
@@ -301,13 +315,22 @@ end
 
 -- An item was picked up off the ground
 function GameMode:OnItemPickedUp(keys)
-  print ( '[vampirism] OnItemPurchased' )
+  print ( '[vampirism] OnItemPickedUp' )
   PrintTable(keys)
 
   local heroEntity = EntIndexToHScript(keys.HeroEntityIndex)
   local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
-  local player = PlayerResource:GetPlayer(keys.PlayerID)
+  local playerID = PlayerResource:GetPlayer(keys.PlayerID)
   local itemname = keys.itemname
+
+  if itemname == "item_small_coin" then
+  	VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]] = VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]] + 1
+  	FireGameEvent("vamp_gold_feed", {player_ID = VAMPIRE_COINS[keys.ItemEntityIndex], feed_total = VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]]})
+  end
+  if itemname == "item_large_coin" then
+  	VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]] = VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]] + 2
+  	FireGameEvent("vamp_gold_feed", {player_ID = VAMPIRE_COINS[keys.ItemEntityIndex], feed_total = VAMPIRE_FEED[VAMPIRE_COINS[keys.ItemEntityIndex]]})
+  end
 end
 
 -- A player has reconnected to the game.  This function can be used to repaint Player-based particles or change
@@ -546,27 +569,37 @@ function GameMode:OnEntityKilled( keys )
     end
   end
 
-  if killerEntity:GetUnitName() == "npc_dota_hero_night_stalker" then
+  if killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
     if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_Invoker" then
-
       -- Probability function for a coin drop
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
+      outcome = 1 --dont forget to change this
       if outcome <= largeProb then        
-        local coin = CreateItem("item_large_coin", nil, nil)
+        local coin = CreateItem("item_large_coin", killerEntity, killerEntity)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
+        VAMPIRE_COINS[coin:GetEntityIndex()] = killerEntity:GetMainControllingPlayer()
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(5) 
       elseif outcome <= smallProb then
-        local coin = CreateItem("item_small_coin", nil, nil)
+        local coin = CreateItem("item_small_coin", killerEntity, killerEntity)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
+        VAMPIRE_COINS[coin:GetEntityIndex()] = killerEntity:GetMainControllingPlayer()
+        coin.player = killerEntity:GetMainControllingPlayer()
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(3)
       end
     end
+
+    if killedUnit:GetGoldBounty() > 0 then
+    	print(HUMAN_FEED[playerID] + killedUnit:GetGoldBounty())
+    	HUMAN_FEED[playerID] = HUMAN_FEED[playerID] + killedUnit:GetGoldBounty()
+    	FireGameEvent("vamp_gold_feed", {player_ID = playerID, feed_total = HUMAN_FEED[playerID]})
+    end
   end
   
+  -- Update all the slayer taverns the player owns to the new respawn time
   if killedUnit:GetUnitName() == "npc_dota_hero_Invoker" then
     SLAYERS[playerID].state = "dead"
     SLAYERS[playerID].level = killedUnit:GetLevel()
@@ -584,11 +617,13 @@ function GameMode:OnEntityKilled( keys )
 
 
   -- If the killed unit increased the players food cap then it needs to decrease when it dies
-  if UNIT_KV[playerID].unitName ~= nil then
-    if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
-      local lostfood = UNIT_KV[playerID][unitName].ProvidesFood
-      TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
-      FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+  if UNIT_KV[playerID] ~= nil then
+    if UNIT_KV[playerID].unitName ~= nil then
+      if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
+        local lostfood = UNIT_KV[playerID][unitName].ProvidesFood
+        TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
+        FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+      end
     end
   end
 
@@ -869,7 +904,7 @@ function GameMode:OnConnectFull(keys)
     return
   end
 
-  --Hides unused HUD elements. Thanks to Noya for docuementing this!
+  --Hides unused HUD elements. Thanks to Noya for documenting this!
   mode = GameRules:GetGameModeEntity()
   mode:SetHUDVisible(1, false)
   mode:SetHUDVisible(2, false)
