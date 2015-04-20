@@ -52,7 +52,7 @@ ABILITY_KV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
 HUMAN_COUNT = 0
-HAS_SLAYER = {}
+SLAYERS = {}
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
@@ -118,6 +118,7 @@ function GameMode:OnAllPlayersLoaded()
     sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
   
     local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
+    GameRules:SetHeroRespawnEnabled(false)
 
 end
 
@@ -490,7 +491,7 @@ function GameMode:OnEntityKilled( keys )
   -- The Killing entity
   local killerEntity = nil
   local unitName = killedUnit:GetUnitName()
-  local playerID = killedUnit:GetPlayerOwnerID()
+  local playerID = killedUnit:GetMainControllingPlayer()
   local modelName = killedUnit:GetModelName() 
 
   if keys.entindex_attacker ~= nil then
@@ -546,7 +547,7 @@ function GameMode:OnEntityKilled( keys )
   end
 
   if killerEntity:GetUnitName() == "npc_dota_hero_night_stalker" then
-    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" then
+    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_Invoker" then
 
       -- Probability function for a coin drop
       local outcome = RandomInt(1, 200)
@@ -566,11 +567,29 @@ function GameMode:OnEntityKilled( keys )
     end
   end
   
+  if killedUnit:GetUnitName() == "npc_dota_hero_Invoker" then
+    SLAYERS[playerID].state = "dead"
+    SLAYERS[playerID].level = killedUnit:GetLevel()
+    local house = nil
+    repeat
+      house = Entities:FindByModel(house, UNIT_KV[playerID]["slayer_tavern"].Model)
+      if house ~= nil then
+        if house:GetMainControllingPlayer() == playerID then
+          house:FindAbilityByName("slayer_respawn"):SetLevel(killedUnit:GetLevel())
+        end
+      end
+    until house == nil
+    FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Dead"})
+  end
+
+
   -- If the killed unit increased the players food cap then it needs to decrease when it dies
-  if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
-    local lostfood = UNIT_KV[playerID][unitName].ProvidesFood
-    TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
-    FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+  if UNIT_KV[playerID].unitName ~= nil then
+    if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
+      local lostfood = UNIT_KV[playerID][unitName].ProvidesFood
+      TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
+      FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+    end
   end
 
   if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then

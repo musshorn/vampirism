@@ -102,7 +102,7 @@ function SummonSlayer( keys )
   local lumberCost = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
   local goldCost = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
 
-  if HAS_SLAYER[pID] ~= nil then
+  if SLAYERS[pID] ~= nil then
     FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Only one slayer per player." } )
     caster:Stop()
     return
@@ -135,16 +135,83 @@ function SummonSlayer( keys )
   FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})  
 end
 
+function Refund( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+  local ability = keys.ability
+  
+  local refundWood = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
+  local refundGold = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
+
+  if refundWood == nil then
+    refundWood = 0
+  end
+  if refundGold == nil then
+    refundGold = 0
+  end
+
+  if HAS_SLAYER[pID] == nil then
+    WOOD[pID] = WOOD[pID] + refundWood
+    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+
+    PlayerResource:ModifyGold(pID, refundGold, true, 9)
+    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = caster:GetGold()}) 
+  end
+end
+
+
 -- Function that spawns the slayer on channel success
 function SpawnSlayer( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
 
-  HAS_SLAYER[pID] = true
+  SLAYERS[pID] = {["state"] = "alive"}
 
   local slayer = CreateUnitByName("npc_dota_hero_invoker", caster:GetAbsOrigin(), true, nil, nil, caster:GetTeam())
   slayer:SetControllableByPlayer(pID, true)
   slayer:SetOwner(EntIndexToHScript(pID))
   slayer:FindAbilityByName("slayer_blink"):SetLevel(1)
+
+  SLAYERS[pID].handle = slayer
+  FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Alive"})
+
   GameMode:ModifyStatBonuses(slayer)
+end
+
+-- Revive Slayer
+function SlayerRespawnStart( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+
+  if SLAYERS[pID].state == "alive" then
+    FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Slayer is currently alive" } )
+    caster:Stop()
+    return nil
+  end
+
+  if SLAYERS[pID].state == "reviving" then
+    FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Slayer is currently reviving" } )
+    caster:Stop()
+    return nil
+  end
+  SLAYERS[pID].state = "reviving"
+  FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Reviving"})
+end
+
+function SlayerRespawnInterrupted( keys )
+  local caster = key.caster
+  local pID = caster:GetMainControllingPlayer()
+
+  if SLAYERS[pID].state == "reviving" then
+   SLAYERS[pID].state = "dead" 
+   FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Dead"})
+  end
+end
+
+function SlayerRespawn( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+
+  SLAYERS[pID].handle:RespawnUnit()
+  GameMode:ModifyStatBonuses(SLAYERS[pID].handle)
 end

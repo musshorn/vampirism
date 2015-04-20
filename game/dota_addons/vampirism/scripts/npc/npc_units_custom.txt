@@ -1212,7 +1212,7 @@
     //----------------------------------------------------------------
 
     "Ability1"          "summon_slayer_m"         //Human test
-    "Ability2"          ""          // Ability 2.
+    "Ability2"          "slayer_respawn"          // Ability 2.
     "Ability3"          ""          // Ability 3.
     "Ability4"          ""          // Ability 4.
     "Ability5"          ""          // Ability 5.

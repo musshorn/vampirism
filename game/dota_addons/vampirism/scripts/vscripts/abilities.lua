@@ -66,6 +66,13 @@ function build( keys )
       end
     end
 
+    if SLAYERS[pID] ~= nil then
+      print("Player has a slayer", SLAYERS[pID].level, unit.unitName)
+      if SLAYERS[pID].level ~= nil and unit.unitName == "slayer_tavern" then
+        unit:FindAbilityByName("slayer_respawn"):SetLevel(SLAYERS[pID].level)
+      end
+    end
+
     --Remove Building Silence.
     if unit:HasModifier("modifier_silence") then
       unit:RemoveModifierByName("modifier_silence")
@@ -168,28 +175,4 @@ function human_blink(keys)
   end
 
   FindClearSpaceForUnit(caster, point, false)
-end
-
-function Refund( keys )
-  local caster = keys.caster
-  local pID = caster:GetMainControllingPlayer()
-  local ability = keys.ability
-  
-  local refundWood = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
-  local refundGold = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
-
-  if refundWood == nil then
-    refundWood = 0
-  end
-  if refundGold == nil then
-    refundGold = 0
-  end
-
-  if HAS_SLAYER[pID] == nil then
-    WOOD[pID] = WOOD[pID] + refundWood
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-
-    PlayerResource:ModifyGold(pID, refundGold, true, 9)
-    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = caster:GetGold()}) 
-  end
 end

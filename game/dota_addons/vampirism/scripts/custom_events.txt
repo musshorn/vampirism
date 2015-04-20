@@ -32,10 +32,16 @@
 		"player_name"		"string"
 	}
 
-	"vamp_scoreboard_removeplayer"
+	"vamp_slayer_state_update"
 	{
 		"player_ID"			"short"
+    "slayer_state"  "string"
 	}
+
+  "vamp_scoreboard_removeplayer"
+  {
+    "player_ID"     "short"
+  }
 
 	"build_ui_called"
 	{
