@@ -66,6 +66,13 @@ function build( keys )
       end
     end
 
+    if SLAYERS[pID] ~= nil then
+      print("Player has a slayer", SLAYERS[pID].level, unit.unitName)
+      if SLAYERS[pID].level ~= nil and unit.unitName == "slayer_tavern" then
+        unit:FindAbilityByName("slayer_respawn"):SetLevel(SLAYERS[pID].level)
+      end
+    end
+
     --Remove Building Silence.
     if unit:HasModifier("modifier_silence") then
       unit:RemoveModifierByName("modifier_silence")
@@ -168,98 +175,4 @@ function human_blink(keys)
   end
 
   FindClearSpaceForUnit(caster, point, false)
-end
-
--- Anything passed here is added to the build queue
-function shift_queue_add( keys )
-  local caster = keys.caster
-  local pID = caster:GetMainControllingPlayer()
-
-  table.insert(PLAYER_BUILDQ[pID], keys)
-end
-
--- If the worker is directly issued another command the queue is cleared of all issues
-function shift_queue_clear( keys )
-  local caster = keys.caster
-  local pID = caster:GetMainControllingPlayer()
-
-  PLAYER_BUILDQ[pID] = {}
-end
-
--- Check that the player can summon a slayer, otherwise stop.
-function SummonSlayer( keys )
-  local caster = keys.caster
-  local ability = keys.ability
-  local pID = caster:GetMainControllingPlayer()
-  local lumberCost = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
-  local goldCost = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
-
-  if HAS_SLAYER[pID] ~= nil then
-    FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Only one slayer per player." } )
-    caster:Stop()
-    return
-  end
-
-  if lumberCost == nil then
-    lumberCost = 0
-  end
-  if goldCost == nil then
-    goldCost = 0
-  end
-
-  -- Check that the player can afford the slayer, if not break out of the function
-  if WOOD[pID] < lumberCost then
-    caster:Stop()
-    FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more wood" } )
-    return
-  end
-  if PlayerResource:GetGold(pID) < goldCost then
-    caster:Stop()
-    FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
-    return
-  end
-
-  -- Checks passed, deduct the resources and start channeling
-  WOOD[pID] = WOOD[pID] - lumberCost
-  FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-
-  PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
-  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = caster:GetGold()})  
-end
-
--- Function that spawns the slayer on channel success
-function SpawnSlayer( keys )
-  local caster = keys.caster
-  local pID = caster:GetMainControllingPlayer()
-
-  HAS_SLAYER[pID] = true
-
-  local slayer = CreateUnitByName("npc_dota_hero_invoker", caster:GetAbsOrigin(), true, nil, nil, caster:GetTeam())
-  slayer:SetControllableByPlayer(pID, true)
-  slayer:SetOwner(EntIndexToHScript(pID))
-  GameMode:ModifyStatBonuses(slayer)
-end
-
-function Refund( keys )
-  local caster = keys.caster
-  local pID = caster:GetMainControllingPlayer()
-  local ability = keys.ability
-  
-  local refundWood = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
-  local refundGold = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
-
-  if refundWood == nil then
-    refundWood = 0
-  end
-  if refundGold == nil then
-    refundGold = 0
-  end
-
-  if HAS_SLAYER[pID] == nil then
-    WOOD[pID] = WOOD[pID] + refundWood
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-
-    PlayerResource:ModifyGold(pID, refundGold, true, 9)
-    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = caster:GetGold()}) 
-  end
 end
