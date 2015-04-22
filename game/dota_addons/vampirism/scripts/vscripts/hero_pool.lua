@@ -15,19 +15,14 @@ function Activate()
   )
 end
 
-
--- Change omni to invoker or whatever the slayer becomes
 function OnStartTouch( trigger )
-  if trigger.activator:GetName() == "npc_dota_hero_omniknight" then
-    Slayers_list[trigger.activator:GetPlayerOwnerID()] = trigger.activator
-    local hero  = trigger.activator
-    local ability = hero:FindAbilityByName("build_house_t1")
-    FireGameEvent('build_ui_called', {player_ID = pid, panel_ID = 0})
+  if trigger.activator:GetName() == "npc_dota_hero_Invoker" then
+    Slayers_list[trigger.activator:GetMainControllingPlayer()] = trigger.activator
   end
 end
 
 function OnEndTouch( trigger )
-  if trigger.activator:GetName() == "npc_dota_hero_omniknight" then
-    Slayers_list[trigger.activator:GetPlayerOwnerID()] = nil
+  if trigger.activator:GetName() == "npc_dota_hero_Invoker" then
+    Slayers_list[trigger.activator:GetMainControllingPlayer()] = nil
   end
 end
