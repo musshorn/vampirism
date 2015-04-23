@@ -327,7 +327,6 @@ function BuildingHelper:InitializeBuildingEntity( keys )
   if fMaxScale == nil then
     fMaxScale = 1
   end
-  print("[BH] fMaxScale", fMaxScale)
 
   -- Update model size, starting with an initial size
   local fInitialModelScale = 0.2
