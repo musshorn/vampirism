@@ -815,9 +815,6 @@ function GameMode:InitGameMode()
 
   self.bSeenWaitForPlayers = false
 
-  BuildingHelper:AutoSetHull(true)
-  BuildingHelper:DisableFireEffects(true)
-
   BuildingHelper:Init(8192)
   BuildUI:Init()
   TechTree:Init()
