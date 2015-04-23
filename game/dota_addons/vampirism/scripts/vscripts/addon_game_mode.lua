@@ -40,9 +40,13 @@ function Precache( context )
 		PrecacheResource("particle", "particles/neutral_fx/satyr_trickster_projectile.vpcf", context)
 		PrecacheResource("particle", "particles/msg_heal.vpcf", context)
 		PrecacheResource("particle", "particles/vampire/shadow_demon_disruption.vpcf", context)
+		PrecacheResource("particle", "particles/items_fx/necronomicon_true_sight.vpcf", context)
 		PrecacheResource("particle", "particles/base_attacks/ranged_tower_bad.vpcf", context)
 		PrecacheResource("particle", "particles/items_fx/desolator_projectile.vpcf", context)
-
+		PrecacheResource("particle", "particles/items2_fx/skadi_projectile.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_shadow_demon/shadow_demon_base_attack.vpcf", context)
+		PrecacheResource("particle", "particles/base_attacks/ranged_siege_good.vpcf", context)
+		
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
 		--PrecacheResource("model_folder", "particles/heroes/antimage", context)
@@ -69,8 +73,11 @@ function Precache( context )
 		PrecacheModel("models/statue_cuttlefish001.vmdl", context)
 		PrecacheModel("bad_column_torch_reference.vmdl", context)
 		PrecacheModel("models/bloodstone_reference.vmdl", context)
-
-		-- Placeholder models for walls
+		PrecacheModel("models/crystal_ring01_reference.vmdl", context)
+		PrecacheModel("models/props_structures/bad_statue002.vmdl", context)
+		PrecacheModel("models/items/wards/celestial_observatory/celestial_observatory.vmdl", context)
+		PrecacheModel("models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl", context)
+				-- Placeholder models for walls
 		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)
 		PrecacheModel("models/heroes/mirana/mount.vmdl",context)
 		PrecacheModel("models/heroes/phoenix/phoenix_egg.vmdl",context)
@@ -92,6 +99,7 @@ function Precache( context )
 		PrecacheUnitByNameSync("npc_dota_hero_omniknight", context)
 		PrecacheUnitByNameSync("npc_dota_hero_jakiro", context)
 		PrecacheUnitByNameSync("npc_dota_hero_invoker", context)
+		PrecacheUnitByNameSync("slayer_tracker", context)
 		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 

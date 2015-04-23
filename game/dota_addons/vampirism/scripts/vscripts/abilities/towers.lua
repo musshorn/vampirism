@@ -27,3 +27,36 @@ function ManaBreak( keys )
 
   ApplyDamage(damageTable)
 end
+
+function bloodArmor(keys)
+  local target = keys.target
+  local ability = keys.ability
+
+  target:SetModifierStackCount("modifier_blood_armor_1", ability, target:GetModifierStackCount("modifier_blood_armor_1", ability) + 1)
+end
+
+function calciteBuff( keys )
+  local caster = keys.caster
+  local target = keys.target
+  local ability = keys.ability
+  local attackGain = ability:GetLevelSpecialValueFor("tower_calcite_t1_speed_gain", (ability:GetLevel() -1))
+  local gainDuration = ability:GetLevelSpecialValueFor("duration", (ability:GetLevel()))
+  local maxStacks = ability:GetLevelSpecialValueFor("max_stacks", ability:GetLevel() -1)
+
+  if caster:GetModifierStackCount("modifier_calcite_stack", ability) < maxStacks then
+    caster:SetModifierStackCount("modifier_calcite_stack", ability, caster:GetModifierStackCount("modifier_calcite_stack", ability) + 1)
+  end
+end
+
+function trueSight(keys)
+  print('called')
+    keys.caster:AddNewModifier(keys.caster, nil, "modifier_truesight", {})
+
+    Timers:CreateTimer(1, function ()
+       if keys.caster:HasModifier("modifier_truesight") then
+         print('has trueSight')
+       end
+       return 1
+    end)
+
+end
