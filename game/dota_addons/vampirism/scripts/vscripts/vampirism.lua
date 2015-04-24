@@ -627,6 +627,11 @@ function GameMode:OnEntityKilled( keys )
     end
   end
 
+  -- If it's a building we need to remove the gridnav blocks
+  if killedUnit:FindAbilityByName("is_a_building") ~= nil then
+    killedUnit:RemoveBuilding(false)
+  end
+
   if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
     TechTree:RemoveTech(unitName, playerID)
   end
