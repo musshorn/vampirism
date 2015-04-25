@@ -35,6 +35,19 @@ function Cancel( keys )
   if caster.oldModel ~= nil then
     caster:Stop()
     caster:SetModel(caster.oldModel)
+    
+    for k,v in pairs(ABILITY_KV) do
+      if v.UnitName ~= nil then
+        if v.UnitName == caster:GetUnitName() then
+          if v.MaxScale ~= nil then
+            caster:SetModelScale(v.MaxScale)
+          else
+            print("[VAMP] There's problems in the KV's: model doesnt define a max scale")
+          end
+        end
+      end
+    end
+
     PlayerResource:ModifyGold(pID, caster.refundGold, true, 9)
     WOOD[pID] = WOOD[pID] + caster.refundLumber
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
@@ -85,6 +98,9 @@ function Upgrade( keys )
   caster.refundGold = goldCost
   caster.refundLumber = lumberCost
   caster:SetModel(targetModel)
+  
+  caster:SetModelScale(UNIT_KV[pID][targetUnit].ModelScale)
+
 
   -- If the unit has a HealthModifier (gem upgrades) then they gain the bonus of the targets HP straight away
   -- "Muh Parity" - Space Germ, 2015
