@@ -24,17 +24,17 @@
 	//=================================================================================================================
 	"simple_tower_builder"
 	{
-		"build_house1"							"a"
-		"build_feed_t1"							"a"
-		"build_tower_mana_t1"					"a"
-		"build_human_surplus"					"a"
-		"build_research_center_t2"				"a"
-		"build_wall_t4"							"a"
-		"build_tower_wall_t1"					"a"
-		"build_tower_frost"						"a"
-		"build_heal_wall_t1"					"a"
-		"build_gold_mine_t1"					"a"
-		"build_wall_t3"							"a"
+		"build_house1"							"h"
+		"build_feed_t1"							"b"
+		"build_tower_mana_t1"					"e"
+		"build_human_surplus"					"p"
+		"build_research_center_t2"				"u"
+		"build_wall_t4"							"o"
+		"build_tower_wall_t1"					"d"
+		"build_tower_frost"						"t"
+		"build_heal_wall_t1"					"f"
+		"build_gold_mine_t1"					"g"
+		"build_wall_t3"							"w"
 		"build_cancel"							"q"
 	}
 
@@ -81,17 +81,12 @@
 	//=================================================================================================================
 	"research_center_t1"
 	{
-		"research_improved_lumber_harvesting"						"a"
-		"research_advanced_lumber_harvesting"					"a"
-		"research_insane_lumber_harvesting"					"a"
-		"research_sharpened_hatchets"				"a"
-		"research_rifles"					"a"
-		"research_improved_worker_motivation"							"a"
-		"research_improved_gem_quality"				"a"
-		"research_advanced_gem_quality"					"a"
-		"research_unbeatable_gem_quality"							"a"
-		"build_cancel1"					"a"
-		"build_cancel2"					"a"
-		"build_cancel"							"q"
+		"research_improved_lumber_harvesting"				"a"
+		"research_sharpened_hatchets"						"a"
+		"research_rifles"									"a"
+		"research_improved_worker_motivation"				"a"
+		"research_improved_gem_quality"						"a"
+		"build_cancel"										"q"
+		"build_empty"										"q"
 	}
 }

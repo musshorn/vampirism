@@ -29,10 +29,10 @@ function Research( keys )
   WOOD[pID] = WOOD[pID] - lumberCost
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
   PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
-
 end
 
 function ImproveLumber(keys)
+  local ability = keys.ability
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
   local level = keys.Level
@@ -40,6 +40,7 @@ function ImproveLumber(keys)
   -- This research only applies to t1 workers so we don't need to search for any worker
   if level == 1 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 10
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_advanced_lumber_harvesting', builder = caster:GetUnitName(), tier = level})
   elseif level == 2 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 15
   elseif level == 3 then
@@ -122,7 +123,9 @@ function GemQuality(keys)
           wall:SetHealth(wall:GetHealth() + increasedHP)
         end
       end
-   
     end
   end
+end
+
+function HumanDamage(keys)
 end

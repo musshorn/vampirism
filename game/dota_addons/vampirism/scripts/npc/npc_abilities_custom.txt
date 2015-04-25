@@ -1176,6 +1176,129 @@
       }
     }
   }
+
+  //================================================================================= /
+  // Upgrade Human Damage (1)
+  //================================================================================= /
+  "research_human_damage_1"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "2"
+    "AbilityLumberCost" "1000"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "1"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade Human Damage (2)
+  //================================================================================= /
+  "research_human_damage_2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "2"
+    "AbilityLumberCost"   "6000"
+    "AbilityGoldCost"     "5"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "2"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade Human Damage (3)
+  //================================================================================= /
+  "research_human_damage_3"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "2"
+    "AbilityLumberCost"   "11000"
+    "AbilityGoldCost"     "10"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "3"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade Human Damage (4)
+  //================================================================================= /
+  "research_human_damage_4"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "2"
+    "AbilityLumberCost"   "11000"
+    "AbilityGoldCost"     "10"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "4"
+      }
+    }
+  }
   //================================================================================= /
   // Debugging: Draw building boxes
   //================================================================================= /
@@ -2359,6 +2482,37 @@
     }
   }
 
+  //=================================================================================/
+  // Wall Tower T1 - Splash Attack
+  //=================================================================================/
+  "tower_wall_t1_splash"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "rubick_empty1"
+    "MaxLevel"                  "1"
+
+    //From Davoness
+    "OnAttackLanded"
+    {
+      "Damage"
+      {
+          "Target"
+          {
+              "Center"    "TARGET"
+              "Radius"    "500"
+              "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+              "Types"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+          }
+          "Type"          "DAMAGE_TYPE_PHYSICAL"
+          "Damage"        "%attack_damage"
+      }
+    }
+  }
+
 
 
   // START OF BUILDING HELPER ABILITIES
@@ -3129,6 +3283,47 @@
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "house_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"      "scripts/vscripts/abilities.lua"
+        "Function"        "build"
+      }
+    }
+  }
+
+
+  "build_empty"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "4.0"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     // End of BuildingHelper info
 
     // Stats

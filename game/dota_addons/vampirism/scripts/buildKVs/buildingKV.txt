@@ -81,17 +81,30 @@
 	//=================================================================================================================
 	"research_center_t1"
 	{
-		"research_improved_lumber_harvesting"						"0"
-		"research_advanced_lumber_harvesting"					"1"
-		"research_insane_lumber_harvesting"					"2"
-		"research_sharpened_hatchets"				"3"
-		"research_rifles"					"4"
-		"research_improved_worker_motivation"							"5"
-		"research_improved_gem_quality"				"6"
-		"research_advanced_gem_quality"					"7"
-		"research_unbeatable_gem_quality"							"8"
-		"build_cancel1"					"9"
-		"build_cancel2"					"10"
+		"research_improved_lumber_harvesting"
+		{
+			"research_improved_lumber_harvesting"	"0"
+			"research_advanced_lumber_harvesting"	"1"
+			"research_insane_lumber_harvesting"		"2"
+			"OrderPosition"							"0"		
+		}
+		"research_sharpened_hatchets"			"1"
+		"research_rifles"						"2"
+		"research_improved_worker_motivation"	"3"
+		"build_empty"							"4"
+		"build_empty"							"5"
+		"build_empty"							"6"
+		"build_empty"							"7"
+		"build_empty"							"8"
+
+		"research_improved_gem_quality"			
+		{
+			"research_improved_gem_quality"			"0"
+			"research_advanced_gem_quality"			"1"
+			"research_unbeatable_gem_quality"		"2"
+			"OrderPosition"							"9"		
+		}
+		"build_empty"							"10"
 		"build_cancel"							"11"
 	}
 }

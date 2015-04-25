@@ -24,6 +24,7 @@
 		"Ability15"					"build_gold_mine_t1"
 		"Ability16"					"build_human_vault"
 		"Ability17"					"build_cancel"
+		"Ability18"					"build_empty"
 
 		"MovementSpeed"				"350"
 		"Level"						"1"

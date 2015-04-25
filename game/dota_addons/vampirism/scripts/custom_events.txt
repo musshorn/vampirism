@@ -49,6 +49,14 @@
 		"player_ID"			"short"
 		"builder"			"string"
 	}
+
+	"build_ui_upgrade"
+	{
+		"player_ID"			"short"
+		"ability_name"		"string"
+		"builder"			"string"
+		"tier"				"short"
+	}
 	
 	//FlashUtil custom events
 	"FlashUtil_request"
