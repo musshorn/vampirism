@@ -189,7 +189,7 @@ function BuildingHelper:AddBuilding(keys)
   player.activeBuildingTable = buildingTable
   player.activeCallbacks = callbacks
 
-  FireGameEvent('build_command_executed', { player_id = pID, building_size = size })
+  FireGameEvent('build_command_executed', { player_id = builder:GetMainControllingPlayer(), building_size = size })
 end
 
 
