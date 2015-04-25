@@ -618,14 +618,34 @@ function GameMode:OnEntityKilled( keys )
 
   -- If the killed unit increased the players food cap then it needs to decrease when it dies
   if UNIT_KV[playerID] ~= nil then
-    if UNIT_KV[playerID].unitName ~= nil then
+    if UNIT_KV[playerID][unitName] ~= nil then
       if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
         local lostfood = UNIT_KV[playerID][unitName].ProvidesFood
         TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
         FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       end
+
+      if UNIT_KV[playerID][unitName].SpawnsUnits == "true" then
+        if killedUnit.updateHealthTimer ~= nil then
+          Timers:RemoveTimer(killedUnit.updateHealthTimer)
+        end
+      end
+
+      if UNIT_KV[playerID][unitName].RecievesLumber == "true" then
+        for k, v in pairs(LUMBER_DROPS) do
+          if v == killedUnit then
+            LUMBER_DROPS[k] = nil
+          end
+        end
+      end
     end
   end
+
+  -- If it's a building we need to remove the gridnav blocks
+  if killedUnit:FindAbilityByName("is_a_building") ~= nil then
+    killedUnit:RemoveBuilding(false)
+  end
+
 
   if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
     TechTree:RemoveTech(unitName, playerID)
@@ -814,9 +834,6 @@ function GameMode:InitGameMode()
   self.nDireKills = 0
 
   self.bSeenWaitForPlayers = false
-
-  BuildingHelper:AutoSetHull(true)
-  BuildingHelper:DisableFireEffects(true)
 
   BuildingHelper:Init(8192)
   BuildUI:Init()
