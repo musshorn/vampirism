@@ -40,7 +40,7 @@ function ImproveLumber(keys)
   -- This research only applies to t1 workers so we don't need to search for any worker
   if level == 1 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 10
-    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_advanced_lumber_harvesting', builder = caster:GetUnitName(), tier = level})
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_lumber_harvesting', builder = caster:GetUnitName(), tier = level})
   elseif level == 2 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 15
   elseif level == 3 then
