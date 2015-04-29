@@ -1,7 +1,7 @@
-//custom event for adding/subtracting wood
+//Custom UI events
 "CustomEvents"
 {
-	
+	//Vampirism custom events
 	"vamp_gold_changed"
 	{
 		"player_ID"			"short"
@@ -34,8 +34,8 @@
 
 	"vamp_slayer_state_update"
 	{
-		"player_ID"			"short"
-                "slayer_state"  "string"
+		"player_ID"		"short"
+        "slayer_state"  "string"
 	}
 
 	"vamp_gold_feed"
@@ -44,6 +44,7 @@
 		"feed_total"		"short"
 	}
 
+	//BuildUI custom events
 	"build_ui_called"
 	{
 		"player_ID"			"short"
@@ -56,6 +57,22 @@
 		"ability_name"		"string"
 		"builder"			"string"
 		"tier"				"short"
+	}
+
+	"build_ui_hide"
+	{
+		"player_ID"			"short"
+		"ability_name"		"string"
+		"builder"			"string"
+		"tier"				"short"
+	}
+
+	"build_ui_show"
+	{
+		"player_ID"				"short"
+		"ability_name"			"string"
+		"builder"				"string"
+		"tier"					"short"
 	}
 	
 	//FlashUtil custom events

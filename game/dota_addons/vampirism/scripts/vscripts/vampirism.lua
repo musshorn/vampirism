@@ -929,18 +929,22 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(11, false)
   mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
+
+  shopEnt = Entities:FindByName(nil, "human_shop")
+  print('trying for ship')
+  shopEnt:SetAbsOrigin(Vector(0,0,160))
+  shop:InitShop(shopEnt)
+  print(shopEnt:GetAbsOrigin())
   
   heroRoller(playerID)
 end
 
 --an EPIC function. aka how to skip hero selection.
 function heroRoller(playerID)
-	print(PlayerResource:GetSelectedHeroName(playerID))
 	if playerID < 8 then
 		if PlayerResource:GetSelectedHeroName(playerID) ~= "npc_dota_hero_omniknight" then
 			PlayerResource:GetPlayer(playerID):MakeRandomHeroSelection()
 			Timers:CreateTimer(.3, function ()
-				print('ROLLING')
 				heroRoller(playerID)
 				return nil
 			end)
@@ -954,7 +958,6 @@ function heroRoller(playerID)
 			PlayerResource:GetPlayer(playerID):MakeRandomHeroSelection()
 			heroRoller(playerID)
 			Timers:CreateTimer(.3, function ()
-				print('ROLLING')
 				heroRoller(playerID)
 				return nil
 			end)
