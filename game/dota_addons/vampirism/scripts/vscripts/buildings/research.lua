@@ -28,7 +28,47 @@ function Research( keys )
   -- Player is ok to commence research, deduct resources
   WOOD[pID] = WOOD[pID] - lumberCost
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+    FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
   PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
+end
+
+function Cancelled(keys)
+  print('cancelled')
+  local caster = keys.caster
+  local ability = keys.ability
+  local lumberCost = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
+  local goldCost = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
+  local playerID = caster:GetMainControllingPlayer()
+
+  print(goldCost)
+  print(lumberCost)
+  if goldCost == nil then
+    goldCost = 0
+  end
+  if lumberCost == nil then
+    lumberCost = 0
+  end
+
+  -- Return the cost of the research
+  WOOD[playerID] = WOOD[playerID] + lumberCost
+  FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
+  PlayerResource:ModifyGold(playerID, goldCost, true, 9)
+
+  print(playerID)
+  print(ability:GetAbilityName())
+  print(caster:GetUnitName())
+  print(keys.level)
+  --Show the hidden icon in flash
+  FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
+end
+
+-- Used to catch if cancelled by casting another ability
+function Finished(keys)
+  print('Finished')
+  print(keys.interrupted)
+  if keys.interrupted == 1 then
+    Cancelled(keys)
+  end
 end
 
 function ImproveLumber(keys)
@@ -40,9 +80,11 @@ function ImproveLumber(keys)
   -- This research only applies to t1 workers so we don't need to search for any worker
   if level == 1 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 10
+    -- On completed, send the "parent" key of the ability to flash, along with the tier of the next tech.
     FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_lumber_harvesting', builder = caster:GetUnitName(), tier = level})
   elseif level == 2 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 15
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_lumber_harvesting', builder = caster:GetUnitName(), tier = level})
   elseif level == 3 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 20
   end
@@ -109,16 +151,17 @@ function GemQuality(keys)
             wall.baseMaxHP = wall:GetMaxHealth()
             increasedHP = wall:GetMaxHealth() * 1.2  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.2
+            FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_gem_quality', builder = caster:GetUnitName(), tier = level})
           end
           if level == 2 then
             increasedHP = wall.baseMaxHP * 1.4  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.4
+            FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_gem_quality', builder = caster:GetUnitName(), tier = level})
           end
           if level == 3 then
             increasedHP = wall.baseMaxHP * 1.6  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.6
           end
-
           wall:SetMaxHealth(wall.baseMaxHP + increasedHP)
           wall:SetHealth(wall:GetHealth() + increasedHP)
         end
