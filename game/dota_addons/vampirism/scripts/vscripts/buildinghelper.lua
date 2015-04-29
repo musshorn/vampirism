@@ -216,8 +216,8 @@ function BuildingHelper:InitializeBuildingEntity( keys )
 
   -- Check gridnav.
   if size % 2 == 1 then
-    for x = location.x - (size / 2) * 32 , location.x + (size / 2) * 32 , 64 do
-      for y = location.y - (size / 2) * 32 , location.y + (size / 2) * 32 , 64 do
+    for x = location.x - (size / 2) * 32 , location.x + (size / 2) * 32 , 32 do
+      for y = location.y - (size / 2) * 32 , location.y + (size / 2) * 32 , 32 do
         local testLocation = Vector(x, y, location.z)
         if GridNav:IsBlocked(testLocation) then
           ParticleManager:DestroyParticle(work.particles, true)
@@ -229,8 +229,8 @@ function BuildingHelper:InitializeBuildingEntity( keys )
       end
     end
   else
-    for x = location.x - (size / 2) * 32 + 32, location.x + (size / 2) * 32 - 32, 64 do
-      for y = location.y - (size / 2) * 32 + 32, location.y + (size / 2) * 32 - 32, 64 do
+    for x = location.x - (size / 2) * 32 + 16, location.x + (size / 2) * 32 - 16, 32 do
+      for y = location.y - (size / 2) * 32 + 16, location.y + (size / 2) * 32 - 16, 32 do
         local testLocation = Vector(x, y, location.z)
         if GridNav:IsBlocked(testLocation) then
           ParticleManager:DestroyParticle(work.particles, true)
