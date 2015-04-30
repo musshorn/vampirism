@@ -113,10 +113,4 @@
     	"building"		"string"
     	"buildable"		"bool"
     }
-    "tech_replace"
-    {
-    	"player_ID"		"short"
-    	"oldname"		"string"
-    	"newname"		"string"
-    }
 }
