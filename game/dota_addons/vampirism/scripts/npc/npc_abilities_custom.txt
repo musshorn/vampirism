@@ -1347,7 +1347,7 @@
   "research_human_damage_1"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
-    "AbilityChannelTime"  "2"
+    "AbilityChannelTime"  "15"
     "AbilityLumberCost" "1000"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
@@ -1357,6 +1357,24 @@
         "ScriptFile"  "scripts/vscripts/buildings/research.lua"
         "Function"    "Research"
         "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
       }
     }
     "OnChannelSucceeded"
@@ -1377,7 +1395,7 @@
   "research_human_damage_2"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
-    "AbilityChannelTime"  "2"
+    "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "6000"
     "AbilityGoldCost"     "5"
     "BaseClass"         "ability_datadriven"
@@ -1388,6 +1406,24 @@
         "ScriptFile"  "scripts/vscripts/buildings/research.lua"
         "Function"    "Research"
         "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
       }
     }
     "OnChannelSucceeded"
@@ -1408,7 +1444,7 @@
   "research_human_damage_3"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
-    "AbilityChannelTime"  "2"
+    "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "11000"
     "AbilityGoldCost"     "10"
     "BaseClass"         "ability_datadriven"
@@ -1419,6 +1455,24 @@
         "ScriptFile"  "scripts/vscripts/buildings/research.lua"
         "Function"    "Research"
         "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
       }
     }
     "OnChannelSucceeded"
@@ -1439,9 +1493,9 @@
   "research_human_damage_4"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
-    "AbilityChannelTime"  "2"
-    "AbilityLumberCost"   "11000"
-    "AbilityGoldCost"     "10"
+    "AbilityChannelTime"  "15"
+    "AbilityLumberCost"   "16000"
+    "AbilityGoldCost"     "15"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -1452,6 +1506,24 @@
         "TARGET"  "CASTER"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
     "OnChannelSucceeded"
     {
       "RunScript"
@@ -1460,6 +1532,296 @@
         "Function"    "HumanDamage"
         "TARGET"  "CASTER"
         "Level" "4"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade Human Damage (5)
+  //================================================================================= /
+  "research_human_damage_5"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityChannelTime"  "15"
+    "AbilityLumberCost"   "21000"
+    "AbilityGoldCost"     "20"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "5"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade Human Damage (6)
+  //================================================================================= /
+  "research_human_damage_6"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityChannelTime"  "15"
+    "AbilityLumberCost"   "26000"
+    "AbilityGoldCost"     "25"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "6"
+      }
+    }
+  }
+  //================================================================================= /
+  // Upgrade Human Damage (7)
+  //================================================================================= /
+  "research_human_damage_7"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityChannelTime"  "15"
+    "AbilityLumberCost"   "31000"
+    "AbilityGoldCost"     "30"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "7"
+      }
+    }
+  }
+  //================================================================================= /
+  // Upgrade Human Damage (8)
+  //================================================================================= /
+  "research_human_damage_8"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityChannelTime"  "15"
+    "AbilityLumberCost"   "36000"
+    "AbilityGoldCost"     "35"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "8"
+      }
+    }
+  }
+  //================================================================================= /
+  // Upgrade Human Damage (9)
+  //================================================================================= /
+  "research_human_damage_9"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityChannelTime"  "15"
+    "AbilityLumberCost"   "41000"
+    "AbilityGoldCost"     "40"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "9"
+      }
+    }
+  }
+  //================================================================================= /
+  // Upgrade Human Damage (10)
+  //================================================================================= /
+  "research_human_damage_10"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityChannelTime"  "15"
+    "AbilityLumberCost"   "46000"
+    "AbilityGoldCost"     "45"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "10"
       }
     }
   }

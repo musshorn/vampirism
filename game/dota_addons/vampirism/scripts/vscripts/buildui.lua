@@ -41,7 +41,7 @@ function CallMenu(keys)
         local tech = caster:GetAbilityByIndex(i):GetAbilityName()
         if string.match(tech, "build_") then
          tech = string.sub(tech, 7)
-          TechTree:GetRequired(tech, playerID)
+          TechTree:GetRequired(tech, playerID, true)
         end
       end
     end 
@@ -66,7 +66,7 @@ function BuildUI:BuildChosen(building, playerID)
     --find a better way of doing this..(like getting it out of the kv.)
     local tech = string.sub(building, 7)
 
-    print(TechTree:GetRequired(tech, playerID))
-
-    caster:CastAbilityNoTarget(ability, 0)
+    print(TechTree:GetRequired(tech, playerID, true))
+    print('player casted ability')
+    caster:CastAbilityNoTarget(ability, playerID)
 end

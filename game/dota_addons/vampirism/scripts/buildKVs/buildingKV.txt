@@ -107,4 +107,36 @@
 		"build_empty"							"10"
 		"build_cancel"							"11"
 	}
+
+	//=================================================================================================================
+	// Human's Vault
+	//=================================================================================================================
+	"human_vault"
+	{
+		"upgrade_human_damage_1"
+		{
+			"upgrade_human_damage_1"		"0"
+			"upgrade_human_damage_2"		"1"
+			"upgrade_human_damage_3"		"2"
+			"upgrade_human_damage_4"		"3"
+			"upgrade_human_damage_5"		"4"
+			"upgrade_human_damage_6"		"5"
+			"upgrade_human_damage_7"		"6"
+			"upgrade_human_damage_8"		"7"
+			"upgrade_human_damage_9"		"8"
+			"upgrade_human_damage_10"		"9"
+			"OrderPosition"							"0"		
+		}
+		"research_slayer_godlike"				"1"
+		"research_blink_extension"				"2"
+		"research_healing_vitality"				"3"
+		"train_super_tower_builder"				"4"
+		"train_worker_t4"						"5"
+		"train_worker_t5"						"6"
+		"upgrade_to_citadel_of_faith"			"7"
+		"build_empty"							"8"
+		"build_empty"							"9"
+		"build_empty"							"10"
+		"build_cancel"							"11"
+	}
 }

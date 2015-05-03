@@ -1703,7 +1703,7 @@
     "Ability1"          "call_buildui"  //Human test
     "Ability2"          "research_improved_lumber_harvesting"         // Ability 2.
     "Ability3"          "research_advanced_lumber_harvesting"         // Ability 3.
-    "Ability4"          "research_insane_lumber_harvesting"         // Ability 4.
+    "Ability4"          "research_insane_lumber_harvesting"           // Ability 4.
     "Ability5"          "research_sharpened_hatchets"         // Ability 5.
     "Ability6"          "research_rifles"         // Ability 6 - Extra.
     "Ability7"          "research_improved_worker_motivation"
@@ -1948,23 +1948,34 @@
   "human_vault"
   {
     // General
-        //-------------------------------------------------------------------------------------------------------------
-        "BaseClass"         "npc_dota_creature"
-        "Model"           "models/props_structures/good_statue008.vmdl"
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"         "npc_dota_creature"
+    "Model"             "models/props_structures/good_statue008.vmdl"
     "ModelScale"        "1"
     
     "ConsideredHero"      "0"
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          ""  //Human test
-    "Ability2"          ""          // Ability 2.
-    "Ability3"          ""          // Ability 3.
-    "Ability4"          ""          // Ability 4.
-    "Ability5"          ""          // Ability 5.
-    "Ability6"          ""          // Ability 6 - Extra.
-    "Ability7"          ""          // Ability 7 - Extra.
-    "Ability8"          "is_a_building"         // Ability 8 - Extra.
+    "Ability1"          "call_buildui"  //Human test
+    "Ability2"          "upgrade_human_damage_1"          // Ability 2.
+    "Ability3"          "upgrade_human_damage_2"          // Ability 3.
+    "Ability4"          "upgrade_human_damage_3"          // Ability 4.
+    "Ability5"          "upgrade_human_damage_4"          // Ability 5.
+    "Ability6"          "upgrade_human_damage_5"          // Ability 6 - Extra.
+    "Ability7"          "upgrade_human_damage_6"          // Ability 7 - Extra.
+    "Ability8"          "upgrade_human_damage_7"          // Ability 7 - Extra.
+    "Ability9"          "upgrade_human_damage_8"          // Ability 7 - Extra.
+    "Ability10"         "upgrade_human_damage_9"          // Ability 7 - Extra.
+    "Ability11"         "upgrade_human_damage_10"         
+    "Ability12"         "research_slayer_godlike"         
+    "Ability13"         "research_blink_extension"         
+    "Ability14"         "research_healing_vitality"         
+    "Ability15"         "train_super_tower_builder"         
+    "Ability16"         "train_worker_t4"
+    "Ability17"         "train_worker_t5"
+    "Ability18"         "upgrade_to_citadel_of_faith" 
+    "Ability19"         "is_a_building"         // Ability 8 - Extra.
 
     // Armor
     //----------------------------------------------------------------
@@ -2022,8 +2033,8 @@
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
-    "IsTech"    "true"
-    "NeedTech"    "house_t1"
+    "IsTech"        "true"
+    "NeedTech"      "house_t1 slayer_tavern"
   }
 
     //================================================================================= 

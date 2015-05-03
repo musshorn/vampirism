@@ -89,4 +89,20 @@
 		"build_cancel"										"q"
 		"build_empty"										"q"
 	}
+	//=================================================================================================================
+	// Research Center T1
+	//=================================================================================================================
+	"human_vault"
+	{
+		"upgrade_human_damage_1"							"d"
+		"research_slayer_godlike"							"y"
+		"research_blink_extension"							"x"
+		"research_healing_vitality"							"h"
+		"train_super_tower_builder"							"s"
+		"train_worker_t4"									"f"
+		"train_worker_t5"									"w"
+		"upgrade_to_citadel_of_faith"						"t"
+		"build_cancel"										"q"
+		"build_empty"										"q"
+	}
 }
