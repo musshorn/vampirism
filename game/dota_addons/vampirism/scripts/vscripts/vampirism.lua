@@ -644,6 +644,10 @@ function GameMode:OnEntityKilled( keys )
   -- If it's a building we need to remove the gridnav blocks
   if killedUnit:FindAbilityByName("is_a_building") ~= nil then
     killedUnit:RemoveBuilding(false)
+    if killedUnit.ShopEnt ~= nil then -- Also cleanup shops
+      killedUnit.ShopEnt:SetModel("")
+      killedUnit.ShopEnt = nil
+    end
   end
 
 

@@ -18,7 +18,6 @@ require('TechTree')
 require('physics')
 require('util')
 require('abilities.vampire')
-require('shop')
 
 function Precache( context )
 		--[[
