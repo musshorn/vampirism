@@ -929,13 +929,7 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(11, false)
   mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
-
-  shopEnt = Entities:FindByName(nil, "human_shop")
-  print('trying for ship')
-  shopEnt:SetAbsOrigin(Vector(0,0,160))
-  shop:InitShop(shopEnt)
-  print(shopEnt:GetAbsOrigin())
-  
+ 
   heroRoller(playerID)
 end
 

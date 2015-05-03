@@ -73,6 +73,14 @@ function build( keys )
       end
     end
 
+    if UNIT_KV[pID][unit:GetUnitName()].ShopType ~= nil then
+      if UNIT_KV[pID][unit:GetUnitName()].ShopType == "1" then
+        local shopEnt = Entities:FindByName(nil, "human_shop") -- entity name in hammer
+        local newshop = SpawnEntityFromTableSynchronous('trigger_shop', {origin = unit:GetAbsOrigin(), shoptype = 1, model=shopEnt:GetModelName()}) -- shoptype is 0 for a "home" shop, 1 for a side shop and 2 for a secret shop
+        unit.ShopEnt = newshop -- This needs to be removed if the shop is destroyed
+      end
+    end
+
     --Remove Building Silence.
     if unit:HasModifier("modifier_silence") then
       unit:RemoveModifierByName("modifier_silence")

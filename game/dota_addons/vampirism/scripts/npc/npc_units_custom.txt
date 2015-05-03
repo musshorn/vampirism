@@ -1355,6 +1355,7 @@
 
     "IsTech"    "true"
     "NeedTech"    "human_vault"
+    "ShopType"      "1" // 1 for human shops, vamp will use 0 and 2    
   }
 
   //================================================================================= 
