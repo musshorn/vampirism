@@ -33,15 +33,12 @@ function Research( keys )
 end
 
 function Cancelled(keys)
-  print('cancelled')
   local caster = keys.caster
   local ability = keys.ability
   local lumberCost = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
   local goldCost = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
   local playerID = caster:GetMainControllingPlayer()
 
-  print(goldCost)
-  print(lumberCost)
   if goldCost == nil then
     goldCost = 0
   end
@@ -54,18 +51,12 @@ function Cancelled(keys)
   FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
   PlayerResource:ModifyGold(playerID, goldCost, true, 9)
 
-  print(playerID)
-  print(ability:GetAbilityName())
-  print(caster:GetUnitName())
-  print(keys.level)
   --Show the hidden icon in flash
   FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
 end
 
 -- Used to catch if cancelled by casting another ability
 function Finished(keys)
-  print('Finished')
-  print(keys.interrupted)
   if keys.interrupted == 1 then
     Cancelled(keys)
   end

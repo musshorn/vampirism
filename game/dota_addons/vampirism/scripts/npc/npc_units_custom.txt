@@ -1710,9 +1710,7 @@
     "Ability9"          "research_advanced_gem_quality"
     "Ability10"         "research_unbeatable_gem_quality"
     "Ability11"         "build_cancel"
-    "Ability13"         "build_cancel1"
-    "Ability14"         "build_cancel2"
-    "Ability15"         "is_a_building"         // Ability 8 - Extra.
+    "Ability12"         "is_a_building"         // Ability 8 - Extra.
 
     // Armor
     //----------------------------------------------------------------
