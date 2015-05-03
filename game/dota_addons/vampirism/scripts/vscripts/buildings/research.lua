@@ -28,10 +28,13 @@ function Research( keys )
   -- Player is ok to commence research, deduct resources
   WOOD[pID] = WOOD[pID] - lumberCost
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+    --used to temporarily hide research as it is being made, to ensure it is only done from
+    --one research center at a time. 
     FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
   PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
 end
 
+-- Research was cancelled. Show the icon again, return cost to player.
 function Cancelled(keys)
   local caster = keys.caster
   local ability = keys.ability
@@ -63,6 +66,7 @@ function Finished(keys)
 end
 
 function ImproveLumber(keys)
+  print('improve lumber')
   local ability = keys.ability
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
@@ -133,7 +137,7 @@ function GemQuality(keys)
     if UNIT_KV[pID][key].AffectedByGemUpgrades ~= nil then
       models = Entities:FindAllByModel(UNIT_KV[pID][key].Model)
 
-      -- Increase the health of all the players harvesters
+      -- Increase the health of all walls
       for i = 1,table.getn(models) do
         local wall = models[i]
         if wall:GetMainControllingPlayer() == pID then
@@ -162,4 +166,71 @@ function GemQuality(keys)
 end
 
 function HumanDamage(keys)
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local level = keys.Level
+  local human = PlayerResource:GetPlayer(playerID):GetAssignedHero()
+
+  if level == 1 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    print(human:GetBaseAttackTime())
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+  if level == 2 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+  if level == 3 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+  if level == 4 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+  if level == 5 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+  if level == 6 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+  if level == 7 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+  if level == 8 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+  if level == 9 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+  if level == 10 then
+    human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+    human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+    human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  end
+
 end

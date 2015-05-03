@@ -5,7 +5,7 @@ function build( keys )
 
   local buildName = string.sub(keys.ability:GetAbilityName(), 7)
   print("CALLED THE BUILD")
-  if TechTree:GetRequired(buildName, pID) == false then
+  if TechTree:GetRequired(buildName, pID, true) == false then
     print('not enough techs')
     return
   end
