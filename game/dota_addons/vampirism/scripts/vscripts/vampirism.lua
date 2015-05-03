@@ -13,7 +13,7 @@ GOLD_PER_TICK = 0                     -- How much gold should players get per ti
 GOLD_TICK_TIME = 5                      -- How long should we wait in seconds between gold ticks?
 
 RECOMMENDED_BUILDS_DISABLED = true     -- Should we disable the recommened builds for heroes (Note: this is not working currently I believe)
-CAMERA_DISTANCE_OVERRIDE = 1134.0        -- How far out should we allow the camera to go?  1134 is the default in Dota
+CAMERA_DISTANCE_OVERRIDE = 1500.0        -- How far out should we allow the camera to go?  1134 is the default in Dota
 
 MINIMAP_ICON_SIZE = 1                   -- What icon size should we use for our heroes?
 MINIMAP_CREEP_ICON_SIZE = 1             -- What icon size should we use for creeps?
@@ -644,6 +644,10 @@ function GameMode:OnEntityKilled( keys )
   -- If it's a building we need to remove the gridnav blocks
   if killedUnit:FindAbilityByName("is_a_building") ~= nil then
     killedUnit:RemoveBuilding(false)
+    if killedUnit.ShopEnt ~= nil then -- Also cleanup shops
+      killedUnit.ShopEnt:SetModel("")
+      killedUnit.ShopEnt = nil
+    end
   end
 
 
@@ -929,13 +933,7 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(11, false)
   mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
-
-  shopEnt = Entities:FindByName(nil, "human_shop")
-  print('trying for ship')
-  shopEnt:SetAbsOrigin(Vector(0,0,160))
-  shop:InitShop(shopEnt)
-  print(shopEnt:GetAbsOrigin())
-  
+ 
   heroRoller(playerID)
 end
 
