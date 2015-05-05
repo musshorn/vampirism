@@ -3,11 +3,14 @@ function build( keys )
   local player = keys.caster:GetPlayerOwner()
   local pID = keys.caster:GetMainControllingPlayer()
 
-  local buildName = string.sub(keys.ability:GetAbilityName(), 7)
-  print("CALLED THE BUILD")
-  if TechTree:GetRequired(buildName, pID, true) == false then
-    print('not enough techs')
-    return
+  local buildName = ABILITY_KV[keys.ability:GetAbilityName()][UnitName]
+  --print("CALLED THE BUILD")
+  if buildName ~= nil then
+    print('not nil')
+    if TechTree:GetRequired(buildName, pID, true) == false then
+      print('not enough techs')
+      return
+    end
   end
   -- Check if player has enough resources here. If he doesn't they just return this function.
 

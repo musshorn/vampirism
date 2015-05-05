@@ -83,7 +83,6 @@ function HealthBeam( keys )
   -- Priority is Hurt Heroes > Hurt Units > Heroes > Units
   -- we start from 2 first because we healed 1 target already
   for i = 0, max_targets - 1 do
-    print('CHECKING FOR TARGETS')
     -- Helper variable to keep track if we healed a unit already
     unit_healed = false
 

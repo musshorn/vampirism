@@ -1,4 +1,5 @@
 function Research( keys )
+  print('research called XDDD')
   local caster = keys.caster
   local ability = keys.ability
   local lumberCost = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost

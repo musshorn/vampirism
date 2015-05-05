@@ -255,8 +255,8 @@ function BuildingHelper:InitializeBuildingEntity( keys )
       end
     end
   else
-    for x = location.x - (size / 2) * 32 + 32, location.x + (size / 2) * 32 - 32, 64 do
-      for y = location.y - (size / 2) * 32 + 32, location.y + (size / 2) * 32 - 32, 64 do
+    for x = location.x - (size / 2) * 32 + 16, location.x + (size / 2) * 32 - 16, 96 do
+      for y = location.y - (size / 2) * 32 + 16, location.y + (size / 2) * 32 - 16, 96 do
         local blockerLocation = Vector(x, y, location.z)
         local ent = SpawnEntityFromTableSynchronous("point_simple_obstruction", {origin = blockerLocation})
         table.insert(gridNavBlockers, ent)

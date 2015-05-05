@@ -177,7 +177,6 @@
         "Target"    "CASTER"
       }
     }
-
     "Modifiers"
     {
       "t1_worker_training"
@@ -201,6 +200,59 @@
   }
   
   "t1_worker_training"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    "AbilityCastPoint"  "0"
+    "AbilityChannelTime" "1.0"
+  }
+
+  //==============================================================
+  // T2 Worker Spawning
+  //==============================================================
+  "spawn_worker_t2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "basher"
+    "AbilityModifierSupportValue" "0.5"
+    "MaxLevel"  "1"
+    "AbilityManaCost" "0"
+    "AbilityGoldCost" "0"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "t2_worker_training"
+        "Target"    "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "t2_worker_training"
+      {
+        "IsPurgable"  "false"
+        "IsStunDebuff" "false"
+        "IsHidden"  "false"
+        "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+            "Function"    "TrainUnit"
+            "AddToQueue"  "t2_worker_training"
+            "SpawnUnit"   "worker_t2"
+          }
+        }
+      }
+    }
+  }
+  //======================================================
+  // T2 worker channel time
+  //======================================================
+  "t2_worker_training"
   {
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "BaseClass" "ability_datadriven"
@@ -904,7 +956,7 @@
   //================================================================================= /
   "research_improved_lumber_harvesting"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "35"
     "AbilityLumberCost" "250"
     "BaseClass" "ability_datadriven"
@@ -952,7 +1004,7 @@
   //================================================================================= /
   "research_advanced_lumber_harvesting"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "35"
     "AbilityLumberCost" "500"
     "BaseClass" "ability_datadriven"
@@ -1000,7 +1052,7 @@
   //================================================================================= /
   "research_insane_lumber_harvesting"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "35"
     "AbilityLumberCost" "750"
     "BaseClass" "ability_datadriven"
@@ -1048,7 +1100,7 @@
   //================================================================================= /
   "research_sharpened_hatchets"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "40"
     "AbilityLumberCost" "1000"
     "BaseClass" "ability_datadriven"
@@ -1095,7 +1147,7 @@
   //================================================================================= /
   "research_rifles"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "30"
     "AbilityLumberCost" "1000"
     "BaseClass" "ability_datadriven"
@@ -1154,7 +1206,7 @@
   //================================================================================= /
   "research_improved_worker_motivation"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "2"
     "AbilityLumberCost" "2000"
     "BaseClass" "ability_datadriven"
@@ -1202,7 +1254,7 @@
   //================================================================================= /
   "research_improved_gem_quality"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "2"
     "AbilityLumberCost" "2000"
     "BaseClass" "ability_datadriven"
@@ -1250,7 +1302,7 @@
   //================================================================================= /
   "research_advanced_gem_quality"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "2"
     "AbilityLumberCost" "2000"
     "BaseClass" "ability_datadriven"
@@ -1298,7 +1350,7 @@
   //================================================================================= /
   "research_unbeatable_gem_quality"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "2"
     "AbilityLumberCost" "2000"
     "BaseClass" "ability_datadriven"
@@ -1346,7 +1398,7 @@
   //================================================================================= /
   "research_human_damage_1"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost" "1000"
     "BaseClass"         "ability_datadriven"
@@ -1394,7 +1446,7 @@
   //================================================================================= /
   "research_human_damage_2"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "6000"
     "AbilityGoldCost"     "5"
@@ -1443,7 +1495,7 @@
   //================================================================================= /
   "research_human_damage_3"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "11000"
     "AbilityGoldCost"     "10"
@@ -1492,7 +1544,7 @@
   //================================================================================= /
   "research_human_damage_4"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "16000"
     "AbilityGoldCost"     "15"
@@ -1541,7 +1593,7 @@
   //================================================================================= /
   "research_human_damage_5"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "21000"
     "AbilityGoldCost"     "20"
@@ -1590,7 +1642,7 @@
   //================================================================================= /
   "research_human_damage_6"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "26000"
     "AbilityGoldCost"     "25"
@@ -1638,7 +1690,7 @@
   //================================================================================= /
   "research_human_damage_7"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "31000"
     "AbilityGoldCost"     "30"
@@ -1686,7 +1738,7 @@
   //================================================================================= /
   "research_human_damage_8"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "36000"
     "AbilityGoldCost"     "35"
@@ -1734,7 +1786,7 @@
   //================================================================================= /
   "research_human_damage_9"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "41000"
     "AbilityGoldCost"     "40"
@@ -1782,7 +1834,7 @@
   //================================================================================= /
   "research_human_damage_10"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
     "AbilityLumberCost"   "46000"
     "AbilityGoldCost"     "45"
@@ -1972,6 +2024,38 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "tent_t2"
+        "Scale"       "1"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade to T2 House
+  //================================================================================= /
+  "upgrade_to_t2_house"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "5.0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "house_t2"
+        "LumberCost"  "3000"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "house_t2"
         "Scale"       "1"
       }
     }
@@ -3788,6 +3872,169 @@
     }
   }
 
+  "build_blocked"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityType"         "DOTA_ABILITY_TYPE_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "4.0"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+  }
+
+  "build_blocked2"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityType"         "DOTA_ABILITY_TYPE_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "4.0"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+  }
+
+  "build_blocked3"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityType"         "DOTA_ABILITY_TYPE_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "4.0"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+  }
+
+  "build_blocked4"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityType"         "DOTA_ABILITY_TYPE_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "4.0"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+  }
+
+  "build_blocked5"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityType"         "DOTA_ABILITY_TYPE_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"            "1"
+    "BuildingSize"          "3"
+    "BuildTime"           "4.0"
+    "AbilityCastRange"        "200"
+    "UpdateHealth"          "1"
+    "Scale"             "1"
+    "MaxScale"            ".5"
+    "CasterCanControl"        "1"
+
+    "AbilityCooldown"       "2.0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+  }
+
+
+
+
   //================================================================================= 
   // Vampire: Particle Effects
   //=================================================================================
@@ -4001,6 +4248,15 @@
 
     "AbilityCooldown"       "30 20"
     "AbilityManaCost"       "200 250"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "radius"      "2500 3000"
+      }
+    }
     
     "OnSpellStart"
     {
@@ -4151,11 +4407,6 @@
         "max_targets"   "3 4 5 5 5 5 5 5 5 5"
       }
       "03"
-      { 
-        "var_type"      "FIELD_INTEGER"
-        "tooltip_max_targets_inc_dazzle"    "3 4 5 5 5 5 5 5 5 5"
-      }
-      "04"
       {
         "var_type"      "FIELD_INTEGER"
         "heal"        "1000 1500 2000 3000 4500 6000 7500 9000 11500 15000"
@@ -4241,11 +4492,6 @@
         "max_targets"       "4 5 6 7 8 9 10 10 10 10 10 10 10 10 10"
       }
       "03"
-      { 
-        "var_type"          "FIELD_INTEGER"
-        "tooltip_max_targets"   "4 5 6 7 8 9 10 10 10 10 10 10 10 10 10"
-      }
-      "04"
       {
         "var_type"          "FIELD_INTEGER"
         "damage"          "125 150 175 200 225 250 275 300 325 350 375 400 425 450 475"

@@ -31,6 +31,7 @@ function BuildUI:Init()
 end
 
 function CallMenu(keys)
+  --print('callmenu')
     local caster = keys.caster
     local playerID = caster:GetMainControllingPlayer()
 
@@ -38,10 +39,14 @@ function CallMenu(keys)
     for i = 0, caster:GetAbilityCount() do
       --print(i)
       if caster:GetAbilityByIndex(i) ~= nil then
-        local tech = caster:GetAbilityByIndex(i):GetAbilityName()
-        if string.match(tech, "build_") then
-         tech = string.sub(tech, 7)
-          TechTree:GetRequired(tech, playerID, true)
+        --print(i)
+        local ability = caster:GetAbilityByIndex(i):GetAbilityName()
+        local buildName = ABILITY_KV[ability]['UnitName']
+        --print('this is '..ability..' buildname')
+        --print(buildName)
+        if buildName ~= nil then
+          --print('callmenu get req')
+          TechTree:GetRequired(buildName, playerID, true)
         end
       end
     end 
@@ -52,10 +57,11 @@ function CallMenu(keys)
     --SHOULD BE playerCasters[playerID] = caster
     playerCasters[playerID] = caster
    -- playerCasters[playerID] = caster
-
 end
 
 function BuildUI:BuildChosen(building, playerID)
+
+    print('buildui chosen')
 
     --ONLY FOR TESTING IN SINGLE, NOT WORKING IN MULTIPLAYER.
     --SHOULD BE local caster = playerCasters[playerID]
@@ -63,10 +69,21 @@ function BuildUI:BuildChosen(building, playerID)
     local caster = playerCasters[playerID]
     local ability = caster:FindAbilityByName(building)
 
+    print(caster:GetUnitName())
+    print(ability:GetAbilityName())
+    caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
+    --ability:OnSpellStart()
+    print(ability:GetChannelTime())
+    --ability:SetChanneling(true)
+    --if caster:IsChanneling() then
+    -- caster:CastAbilityNoTarget(caster:FindAbilityByName('build_cancel'), caster:GetMainControllingPlayer())
+   -- else
+    --  ability:SetChanneling(true)
+    --end
     --find a better way of doing this..(like getting it out of the kv.)
-    local tech = string.sub(building, 7)
+    --local buildName = ABILITY_KV[ability]['UnitName']
 
-    print(TechTree:GetRequired(tech, playerID, true))
-    print('player casted ability')
-    caster:CastAbilityNoTarget(ability, playerID)
+    -- print(TechTree:GetRequired(tech, playerID, true))
+    -- print('player casted ability')
+    --caster:CastAbilityNoTarget(ability, playerID)
 end

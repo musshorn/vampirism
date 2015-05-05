@@ -146,7 +146,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -221,7 +221,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -294,7 +294,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -367,7 +367,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -440,7 +440,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -513,7 +513,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -586,7 +586,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -659,7 +659,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -732,7 +732,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -805,7 +805,7 @@
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          "is_a_building"     // Ability 8 - Extra.
-    "Ability10"         "_tt_house_t1"      // Ability 2.
+    "Ability10"         ""      // Ability 2.
 
     // Armor
     //----------------------------------------------------------------
@@ -954,16 +954,19 @@
     "Ability1"          "spawn_worker_t1" //harvest test
     "Ability2"          "cancel_training"         // Ability 2.
     "Ability3"          "set_rally_point"         // Ability 3.
-    "Ability4"          "t1_worker_training"          // Ability 4.
-    "Ability5"          "is_a_building"         // Ability 5.
+    "Ability4"          "upgrade_to_t2_house"          // Ability 4.
+    "Ability5"          ""         // Ability 5.
     "Ability6"          ""          // Ability 6 - Extra.
-    "Ability7"          ""          // Ability 7 - Extra.
-    "Ability8"          ""          // Ability 8 - Extra.
+    "Ability7"          "t1_worker_training"          // Ability 7 - Extra.
+    "Ability8"          "is_a_building"          // Ability 8 - Extra.
+
+    "AbilityLayout"			"4"
 
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"       "0"     // Physical protection.
     "MagicalResistance"     "0"     // Magical protection.
+
 
 
     //Attack
@@ -1279,6 +1282,7 @@
     //Key which contains each neccessary tech for this unit, sperated by spaces.
     "NeedTech"    "house_t1"
   }
+  
   //================================================================================= 
   // Human Building T1 - Human Surplus
   //=================================================================================
@@ -1695,23 +1699,30 @@
     "BaseClass"         "npc_dota_creature"
     "Model"           "models/props_structures/weapon_rack_00.vmdl"
     "ModelScale"        "1"
+    "AbilityLayout"      "1"
     
     "ConsideredHero"      "0"
     // Abilities
     //----------------------------------------------------------------
 
     "Ability1"          "call_buildui"  //Human test
-    "Ability2"          "research_improved_lumber_harvesting"         // Ability 2.
-    "Ability3"          "research_advanced_lumber_harvesting"         // Ability 3.
-    "Ability4"          "research_insane_lumber_harvesting"           // Ability 4.
-    "Ability5"          "research_sharpened_hatchets"         // Ability 5.
-    "Ability6"          "research_rifles"         // Ability 6 - Extra.
-    "Ability7"          "research_improved_worker_motivation"
-    "Ability8"          "research_improved_gem_quality"
-    "Ability9"          "research_advanced_gem_quality"
-    "Ability10"         "research_unbeatable_gem_quality"
-    "Ability11"         "build_cancel"
-    "Ability12"         "is_a_building"         // Ability 8 - Extra.
+    "Ability2"          "build_blocked"
+    "Ability3"          "build_blocked2"
+    "Ability4"          "build_cancel"
+    "Ability5"          "build_blocked3"
+    "Ability6"          "build_blocked4"
+    "Ability7"          "build_blocked5"
+    "Ability8"          "research_improved_lumber_harvesting"         // Ability 2.
+    "Ability9"          "research_advanced_lumber_harvesting"         // Ability 3.
+    "Ability10"          "research_insane_lumber_harvesting"           // Ability 4.
+    "Ability11"          "research_sharpened_hatchets"         // Ability 5.
+    "Ability12"         "research_rifles"         // Ability 6 - Extra.
+    "Ability13"         "research_improved_worker_motivation"
+    "Ability14"         "research_improved_gem_quality"
+    "Ability15"         "research_advanced_gem_quality"
+    "Ability16"         "research_unbeatable_gem_quality"
+    "Ability17"         "build_cancel"
+    "Ability18"         "is_a_building"         // Ability 8 - Extra.
 
     // Armor
     //----------------------------------------------------------------
@@ -2752,17 +2763,17 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"         "npc_dota_creature"
-        "Model"           "models/props_structures/good_statue008.vmdl"
+        "Model"           "models/props_structures/tent_dk_med.vmdl"
         "ModelScale"        "1"
         
         "ConsideredHero"      "0"
         // Abilities
         //----------------------------------------------------------------
     
-        "Ability1"          ""  //Human test
-        "Ability2"          ""          // Ability 2.
-        "Ability3"          ""          // Ability 3.
-        "Ability4"          ""          // Ability 4.
+        "Ability1"          "spawn_worker_t2"  //Human test
+        "Ability2"          "cancel_training"         // Ability 2.
+    	"Ability3"          "set_rally_point"         // Ability 3.
+    	"Ability4"          "t2_worker_training"          // Ability 4.
         "Ability5"          ""          // Ability 5.
         "Ability6"          ""          // Ability 6 - Extra.
         "Ability7"          ""          // Ability 7 - Extra.
@@ -2912,6 +2923,87 @@
             "Wearble4"  { "ItemDef"     "419" }
         }
     }
+  }
+
+  //================================================================================= 
+  // Worker T2 - Furbold
+  //=================================================================================
+  "worker_t2"
+  {
+    // General
+        //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "npc_dota_creature"
+    "Model" "models/heroes/ursa/ursa.vmdl"
+    "ModelScale"  "0.8" 
+    "ConsideredHero"  "0"
+
+
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"          "harvest_channel"   //harvest test
+    "Ability2"          "carrying_lumber"     // Ability 2.
+    "Ability3"          "drop_lumber"     // Ability 3.
+    "Ability4"          ""      // Ability 4.
+    "Ability5"          ""      // Ability 5.
+    "Ability6"          ""      // Ability 6 - Extra.
+    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "0"     // Physical protection.
+    "MagicalResistance"     "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"     "1"
+    "AttackDamageMax"     "1"
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "0"
+    "AttackAnimationPoint"    "0"
+    "AttackAcquisitionRange"  "0"
+    "AttackRange"       "0"
+    "ProjectileModel"     ""
+    "ProjectileSpeed"     "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"     "170"
+    "RingRadius"        "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"       "300"   // Speed
+    "MovementTurnRate"      "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "100"   // Base health.
+    "StatusHealthRegen"     "0"   // Health regeneration rate.
+    "StatusMana"        "20"      // Base mana.
+    "StatusManaRegen"     "0"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"          "25"
+    "BountyGoldMin"       "2"
+    "BountyGoldMax"       "2"
+
+    // Vamp
+    "MaximumLumber" "100" // Base max lumber
+    "LumberPerChop" "20"
+    "ConsumesFood"  "20"
   }
 
   //================================================================================= 
