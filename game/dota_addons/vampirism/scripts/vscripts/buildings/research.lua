@@ -159,7 +159,7 @@ function GemQuality(keys)
           wall:SetMaxHealth(wall.baseMaxHP + increasedHP)
           wall:SetHealth(wall:GetHealth() + increasedHP)
         end
-`      end
+      end
     end
   end
 end

@@ -1714,8 +1714,8 @@
     "Ability7"          "build_blocked5"
     "Ability8"          "research_improved_lumber_harvesting"         // Ability 2.
     "Ability9"          "research_advanced_lumber_harvesting"         // Ability 3.
-    "Ability10"          "research_insane_lumber_harvesting"           // Ability 4.
-    "Ability11"          "research_sharpened_hatchets"         // Ability 5.
+    "Ability10"         "research_insane_lumber_harvesting"           // Ability 4.
+    "Ability11"         "research_sharpened_hatchets"         // Ability 5.
     "Ability12"         "research_rifles"         // Ability 6 - Extra.
     "Ability13"         "research_improved_worker_motivation"
     "Ability14"         "research_improved_gem_quality"

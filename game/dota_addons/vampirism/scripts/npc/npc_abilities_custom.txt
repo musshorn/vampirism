@@ -3763,9 +3763,9 @@
     }
   }
 
-  // ====================================================
+  //====================================================
   // Heal Tower: Healing Beam
-  // ====================================================
+  //====================================================
   "heal_tower_heal_beam"
   {
     "BaseClass"         "ability_datadriven"
@@ -3774,7 +3774,7 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellImmunityType"       "SPELL_IMMUNITY_ALLIES_YES"
     "AbilityTextureName"      "dazzle_shadow_wave"
-    "MaxLevel"            "10"
+    "MaxLevel"            "1"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
@@ -3869,6 +3869,7 @@
         "var_type"  "FIELD_FLOAT"
         "mana_regen_amount" "0 22.0"
       }
+    }
 
 
     "OnSpellStart"

@@ -30,4 +30,5 @@ function SphereDoom( keys )
 		FindClearSpaceForUnit(caster, point, false)
 	else
 		FireGameEvent("custom_error_show", {player_ID = caster:GetMainControllingPlayer(), _error = "Vampire doesn't fit here!"}) 
+	end
 end
