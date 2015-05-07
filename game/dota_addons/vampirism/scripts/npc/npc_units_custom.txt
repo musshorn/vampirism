@@ -874,7 +874,7 @@
     "Ability1"          "harvest_channel"   //harvest test
     "Ability2"          "carrying_lumber"     // Ability 2.
     "Ability3"          "drop_lumber"     // Ability 3.
-    "Ability4"          ""      // Ability 4.
+    "Ability4"          "worker_det"      // Ability 4.
     "Ability5"          ""      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
@@ -1799,8 +1799,8 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "debug_draw_building_boxes" //Human test
-    "Ability2"          ""          // Ability 2.
+    "Ability1"          "heal_tower_heal_beam" //Human test
+    "Ability2"          "heal_tower_heal_aura"          // Ability 2.
     "Ability3"          ""          // Ability 3.
     "Ability4"          ""          // Ability 4.
     "Ability5"          ""          // Ability 5.
@@ -2831,6 +2831,8 @@
     
         "IsTech"    "true"
         "NeedTech"    "house_t1"
+        "RecievesLumber"    "true"
+        "SpawnsUnits"       "true" 
     }
 
   //================================================================================= 
@@ -2944,7 +2946,7 @@
     "Ability1"          "harvest_channel"   //harvest test
     "Ability2"          "carrying_lumber"     // Ability 2.
     "Ability3"          "drop_lumber"     // Ability 3.
-    "Ability4"          ""      // Ability 4.
+    "Ability4"          "worker_det"      // Ability 4.
     "Ability5"          ""      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.

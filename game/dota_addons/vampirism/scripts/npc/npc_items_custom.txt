@@ -3,6 +3,9 @@
 
 "DOTAAbilities"
 {
+	//================================================================================= 
+  	// Vampire Basics - Scroll of the Beast
+  	//=================================================================================
 	"item_scroll_beast"
 	{
 		"ID"	"1104"
@@ -77,6 +80,9 @@
 
 	}
 
+	//================================================================================= 
+  	// Market of Blood - Dracula's Helm
+  	//=================================================================================
 	"item_dracula_helmet"
 	{
 		"ID"	"1105"
@@ -104,6 +110,9 @@
 
 	}
 
+  	//================================================================================= 
+  	// Demonic Merchant - Demonic Remains
+  	//=================================================================================
 	"item_demonic_remains"
 	{
 		"ID"	"1106"
@@ -134,6 +143,9 @@
 
 	}
 
+	//================================================================================= 
+  	// Small Coin
+  	//=================================================================================
 	"item_small_coin"
 	{
 		"ID"	"1107"
@@ -167,6 +179,10 @@
 
 		}
 	}
+
+	//================================================================================= 
+  	// Large Coin
+  	//=================================================================================
 	"item_large_coin"
 	{
 		"ID"	"1108"
@@ -198,6 +214,72 @@
 				"Target"	"CASTER"
 			}
 
+		}
+	}
+
+  	//================================================================================= 
+  	// Market of Blood - Vampiric Boots
+  	//=================================================================================
+	"item_vampiric_boots"
+	{
+		"ID"	"1109"
+		"BaseClass"	"item_datadriven"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"Model"	"models/coin_reference.vmdl"
+		"ItemStackable"	"0"
+		"ItemKillable"	"1"
+		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"	"0"
+		"ItemInitialCharges"	"1"
+		"ItemCastOnPickup"	"1"
+		"AbilityCooldown"   "1"	
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"range"				"100"
+			}
+		}
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/items.lua"
+				"Function"		"ItemMoveSpeed"
+				"Speed"			"100"
+			}
+		}
+	}
+
+  	//================================================================================= 
+  	// Market of Blood - Sphere of Doom
+  	//=================================================================================
+	"item_sphere_of_doom"
+	{
+		"ID"	"1110"
+		"BaseClass"	"item_datadriven"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"Model"	"models/coin_reference.vmdl"
+		"ItemStackable"	"0"
+		"ItemKillable"	"1"
+		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"	"0"
+		"ItemInitialCharges"	"1"
+		"ItemCastOnPickup"	"1"
+		"AbilityCooldown"				"30"
+		"AbilityManaCost"				"1000"
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+		"OnSpellStart"
+		{	
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/items.lua"
+				"Function"		"SphereDoom"
+			}
 		}
 	}
 
@@ -323,5 +405,4 @@
 			}
 		}
 	}
-
 }

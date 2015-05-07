@@ -32,26 +32,18 @@ end
 
 --Check if a unit requires a missing tech, and return the missing tech(s) if any.
 function TechTree:GetRequired(unitName, playerID, isBuilding)
-	print('GETREQUIRED')
-	print(unitName)
-	print(playerID)
-	print(isBuilding)
-
 	if(isBuilding) then
 		PrintTable(PlayerTrees)
 		local techlist = {}
 		if UNIT_KV[playerID][unitName] ~= nil then
 			if UNIT_KV[playerID][unitName].NeedTech ~= nil then
 				local reqs = tostring(UNIT_KV[playerID][unitName].NeedTech)
-				print(reqs..'- REQS')
 				for tech in string.gmatch(reqs, "%S+") do
-					print(tech..'- TECH ADDED TO TECHLIST')
 					if tech ~= nil then
 						table.insert(techlist, tech)
 					end
 				end
 			else
-				print('unit needs no techs shrek')
 				FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 				return true
 			end
@@ -60,40 +52,31 @@ function TechTree:GetRequired(unitName, playerID, isBuilding)
 		if techlist ~= nil then
 			for i = 1, table.getn(techlist) do
 				local check = tostring(techlist[i])
-				print(check)
 				if playerTrees[playerID][check] ~= nil then
 					if playerTrees[playerID][check] < 1 then
-						print('hit here')
 						FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = false})
 						return false
 					end
 				else
 					FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = false})
-					print('exited here')
 					return false
 				end
 			end
 		end
 	
-		print('made it')
 		FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 	return true
 	else
-		print('not a building')
-		PrintTable(PlayerTrees)
 		local techlist = {}
 		if ABILITY_KV[unitName] ~= nil then
 			if ABILITY_KV[unitName].NeedTech ~= nil then
 				local reqs = tostring(ABILITY_KV[unitName].NeedTech)
-				print(reqs..'- REQS')
 				for tech in string.gmatch(reqs, "%S+") do
-					print(tech..'- TECH ADDED TO TECHLIST')
 					if tech ~= nil then
 						table.insert(techlist, tech)
 					end
 				end
 			else
-				print('unit needs no techs shrek')
 				FireGameEvent("tech_return", {player_ID = playerID, building = unitName, buildable = true})
 				return true
 			end
@@ -102,22 +85,18 @@ function TechTree:GetRequired(unitName, playerID, isBuilding)
 		if techlist ~= nil then
 			for i = 1, table.getn(techlist) do
 				local check = tostring(techlist[i])
-				print(check)
 				if playerTrees[playerID][check] ~= nil then
 					if playerTrees[playerID][check] < 1 then
-						print('hit here')
 						FireGameEvent("tech_return", {player_ID = playerID, building = unitName, buildable = false})
 						return false
 					end
 				else
 					FireGameEvent("tech_return", {player_ID = playerID, building = unitName, buildable = false})
-					print('exited here')
 					return false
 				end
 			end
 		end
 	
-		print('made it')
 		FireGameEvent("tech_return", {player_ID = playerID, building = unitName, buildable = true})
 	return true
 	end
@@ -144,12 +123,8 @@ function TechTree:AddTechAbility(keys)
 	local ability = keys
 	local tech = keys:GetAbilityName()
 	local playerID = ability:GetCaster():GetMainControllingPlayer()
-	print('ADDING RESEARCH')
-	print(tech)
-	print(playerID)
 
 	if playerTrees[playerID][tech] == nil then
-		print('made tech')
 		PrintTable(playerTrees[playerID])
 		playerTrees[playerID][tech] = 1
 	else

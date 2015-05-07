@@ -10,12 +10,13 @@ function House1:Init(unit)
 	house1.doingWork = false -- Flag to indicate if the queue is currently in use
 	house1.workHandler = nil -- Handle of the ability currently channeling
 	house1.uniqueName = DoUniqueString("WorkTimer") -- Unique name for the work timer for this building
+	house1.spawnName = DoUniqueString("SpawnTimer") -- Unique name for the work timer for this building
 	house1.rallyPoint = nil -- Location to send units trained by this building
-	house1.unitName = house1.buildingTable.UnitName -- Buildings name as referenced in the KV files
 
 	-- If the building can spawn units this is invoked
 	function House1:UnitSpawner()
-		Timers:CreateTimer(function()
+		Timers:CreateTimer(house1.spawnName, {
+			callback = function()
 		if not unit:IsAlive() then
 			return nil
 		end
@@ -91,7 +92,7 @@ function House1:Init(unit)
 			end
 		end
 		return .1
-	end)
+	end})
 
 	end
 end

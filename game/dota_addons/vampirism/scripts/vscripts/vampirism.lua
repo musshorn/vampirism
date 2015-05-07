@@ -54,6 +54,7 @@ VAMP_COUNT = 0
 HUMAN_COUNT = 0
 SLAYERS = {}
 VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
+VAMPIRES = {} -- table of all created vampires
 
 HUMAN_FEED = {}
 for i = 0, 7 do
@@ -187,6 +188,9 @@ function GameMode:OnGameInProgress()
   	vamps[i]:SetAbilityPoints(3)
     FindClearSpaceForUnit(vamps[i], Vector(96, -416, 256), false)
   end
+
+  GoldMineTimer()
+  SphereTimer()
 end
 
 
@@ -279,6 +283,7 @@ function GameMode:OnNPCSpawned(keys)
     		npc:FindAbilityByName("vampire_particles"):OnUpgrade()
         npc:SetAbilityPoints(0)
     		VAMP_COUNT = VAMP_COUNT + 1
+        table.insert(VAMPIRES, npc)
     		return nil
   		end)
     end
@@ -660,7 +665,6 @@ end
 
 function GameMode:ModifyStatBonuses(unit) 
   local spawnedUnitIndex = unit 
-  print("modifying stat bonuses") 
     Timers:CreateTimer(DoUniqueString("updateHealth_" .. spawnedUnitIndex:GetPlayerID()), { 
     endTime = 0.25, 
     callback = function() 
@@ -766,6 +770,7 @@ function GameMode:InitGameMode()
   ListenToGameEvent('dota_player_pick_hero', Dynamic_Wrap(GameMode, 'OnPlayerPickHero'), self)
   ListenToGameEvent('dota_team_kill_credit', Dynamic_Wrap(GameMode, 'OnTeamKillCredit'), self)
   ListenToGameEvent("player_reconnected", Dynamic_Wrap(GameMode, 'OnPlayerReconnect'), self)
+  ListenToGameEvent('player_say', Dynamic_Wrap(GameMode, 'OnPlayerSay'), self)
   --ListenToGameEvent('player_spawn', Dynamic_Wrap(GameMode, 'OnPlayerSpawn'), self)
   --ListenToGameEvent('dota_unit_event', Dynamic_Wrap(GameMode, 'OnDotaUnitEvent'), self)
   --ListenToGameEvent('nommed_tree', Dynamic_Wrap(GameMode, 'OnPlayerAteTree'), self)
@@ -965,6 +970,51 @@ function heroRoller(playerID)
 			return
 		end
 	end
+end
+
+function GoldMineTimer()
+  --Runs each minute for t1 gold mines
+  Timers:CreateTimer(function()
+    local t1gold = Entities:FindAllByModel('models/props_cave/mine_cart.vmdl')
+
+    for mine in t1gold do
+      if mine ~= nil then
+        local playerID = PlayerResource:GetPlayer(mine:GetMainControllingPlayer())
+        local curGold = PlayerResource:GetGold(playerID)
+        PlayerResource:SetGold(playerID, curGold + 1, true)
+        FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
+      end
+    end
+
+    return 60
+  end)
+end
+
+--Runs every 15 seconds, checks wether vamps have sphere of doom
+function SphereTimer()
+  local haveSphere = false
+  Timers:CreateTimer(function()
+    for vamp in VAMPIRES do
+      if vamp:HasItemInInventory('item_sphere_of_doom') then
+        haveSphere = true
+      else
+        haveSphere = false
+      end
+    end
+
+    for vamp in VAMPIRES do
+      if haveSphere then
+        vamp:SetBaseAgility(vamp:GetBaseAgility() +15)
+        vamp:SetBaseStrength(vamp:GetBaseStrength() +15)
+        vamp:SetBaseIntellect(vamp:GetBaseIntellect() +15)
+      end
+    end
+    return 15
+  end)
+end
+
+function GameMode:OnPlayerSay(keys)
+  -- later
 end
 
 -- This is an example console command

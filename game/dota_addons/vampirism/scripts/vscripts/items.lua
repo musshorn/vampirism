@@ -11,3 +11,23 @@ function CoinUsed(keys)
     end
 	end
 end
+
+function ItemMoveSpeed( keys )
+	--do this later hehe
+end
+
+function SphereDoom( keys )
+	local caster = keys.caster
+	local ability = keys.ability
+	local point = keys.target_points[1]
+
+	-- Move a "test unit", find the distance between them and see if it's ok then move the vamp
+	FindClearSpaceForUnit(caster, point, false)
+
+	local dist = CalcDistanceBetweenEntityOBB(caster, caster)
+
+	if dist < gooddist then
+		FindClearSpaceForUnit(caster, point, false)
+	else
+		FireGameEvent("custom_error_show", {player_ID = caster:GetMainControllingPlayer(), _error = "Vampire doesn't fit here!"}) 
+end

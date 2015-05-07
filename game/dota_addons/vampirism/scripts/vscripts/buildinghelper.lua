@@ -62,8 +62,6 @@ function BuildingHelper:Init(...)
       end
     end
   end
-
-
 end
 
 function BuildingHelper:AddBuilding(keys)

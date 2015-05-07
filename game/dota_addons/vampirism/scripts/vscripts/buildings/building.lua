@@ -120,24 +120,54 @@ function FinishUpgrade( keys )
   local targetUnit = keys.TargetUnit
   local casterName = caster:GetUnitName()
   local pos = caster:GetAbsOrigin()
-  local player = caster:GetMainControllingPlayer()
+  local pID = caster:GetMainControllingPlayer()
   local team = caster:GetTeam()
+  local buldingtable = caster.buildingTable
+
+  if UNIT_KV[pID][caster:GetUnitName()].RecievesLumber ~= nil then -- remove old unit from the lumber drops if applicable
+    if UNIT_KV[pID][caster:GetUnitName()].RecievesLumber == "true" then
+      for k,v in pairs(LUMBER_DROPS) do
+        if v == caster then
+          LUMBER_DROPS[k] = nil
+        end
+      end
+    end
+  end
+  
+  if UNIT_KV[pID][caster:GetUnitName()].SpawnsUnits == "true" then
+    Timers:RemoveTimer(caster.spawnName)
+  end 
 
   caster:Destroy()
   local unit = CreateUnitByName(targetUnit, pos, false, nil, nil, team)
-  unit:SetControllableByPlayer(player, true)
+  unit:SetControllableByPlayer(pID, true)
   if keys.Scale ~= nil then
     unit:SetModelScale(keys.Scale)
   end
 
-  if UNIT_KV[player][targetUnit].ProvidesFood ~= nil then
-    if UNIT_KV[player][casterName].ProvidesFood ~= nil then
-      TOTAL_FOOD[player] = TOTAL_FOOD[player] + UNIT_KV[player][targetUnit].ProvidesFood - UNIT_KV[player][casterName].ProvidesFood
+  unit.buildingTable = buildingTable
+  House1:Init(unit)
+
+
+  if UNIT_KV[pID][targetUnit].ProvidesFood ~= nil then
+    if UNIT_KV[pID][casterName].ProvidesFood ~= nil then
+      TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood - UNIT_KV[pID][casterName].ProvidesFood
     else
-      TOTAL_FOOD[player] = TOTAL_FOOD[player] + UNIT_KV[player][targetUnit].ProvidesFood
+      TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood
     end
-    FireGameEvent("vamp_food_cap_changed", { player_ID = player, food_cap = TOTAL_FOOD[player]})
+    FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
   end
+
+  if UNIT_KV[pID][unit:GetUnitName()].RecievesLumber ~= nil then -- add new unit to the lumber drops if applicable
+    if UNIT_KV[pID][unit:GetUnitName()].RecievesLumber == "true" then
+      table.insert(LUMBER_DROPS, unit)
+    end
+  end
+
+  if UNIT_KV[pID][unit:GetUnitName()].SpawnsUnits == "true" then
+    unit:UnitSpawner()
+  end 
+
 end
 
 -- Repairing is hard.
