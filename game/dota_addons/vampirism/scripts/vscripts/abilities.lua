@@ -47,7 +47,7 @@ function build( keys )
 
     -- Check if the building will create units, if so, give it a unit creation timer
     if UNIT_KV[pID][unit:GetUnitName()].SpawnsUnits == "true" then
-      House1:UnitSpawner()
+      unit:UnitSpawner()
     end
 
     -- If the building provides food, how much? Also alert the UI for an update

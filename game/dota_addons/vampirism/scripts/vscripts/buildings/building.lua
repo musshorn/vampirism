@@ -122,7 +122,6 @@ function FinishUpgrade( keys )
   local pos = caster:GetAbsOrigin()
   local pID = caster:GetMainControllingPlayer()
   local team = caster:GetTeam()
-  local buldingtable = caster.buildingTable
 
   if UNIT_KV[pID][caster:GetUnitName()].RecievesLumber ~= nil then -- remove old unit from the lumber drops if applicable
     if UNIT_KV[pID][caster:GetUnitName()].RecievesLumber == "true" then
@@ -145,9 +144,7 @@ function FinishUpgrade( keys )
     unit:SetModelScale(keys.Scale)
   end
 
-  unit.buildingTable = buildingTable
   House1:Init(unit)
-
 
   if UNIT_KV[pID][targetUnit].ProvidesFood ~= nil then
     if UNIT_KV[pID][casterName].ProvidesFood ~= nil then
