@@ -36,6 +36,16 @@ function CallMenu(keys)
     local playerID = caster:GetMainControllingPlayer()
 
     --print(caster:GetAbilityCount())
+
+    if caster:GetUnitName() == "npc_dota_hero_omniknight" then
+      for k, v in pairs(ABILITY_HOLDERS[caster:GetUnitName()]) do
+        if ABILITY_KV[v]['UnitName'] ~= nil then
+          local tech = ABILITY_KV[v]['UnitName']
+          TechTree:GetRequired(tech, playerID, true)
+        end
+      end
+    end
+
     for i = 0, caster:GetAbilityCount() do
       --print(i)
       if caster:GetAbilityByIndex(i) ~= nil then
@@ -61,19 +71,27 @@ end
 
 function BuildUI:BuildChosen(building, playerID)
 
-    print('buildui chosen')
-
     --ONLY FOR TESTING IN SINGLE, NOT WORKING IN MULTIPLAYER.
     --SHOULD BE local caster = playerCasters[playerID]
     --local caster = playerCasters[playerID]
     local caster = playerCasters[playerID]
-    local ability = caster:FindAbilityByName(building)
 
-    print(caster:GetUnitName())
-    print(ability:GetAbilityName())
-    caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
+    if caster:FindAbilityByName(building) ~= nil then
+      local ability = caster:FindAbilityByName(building)
+      caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
+    else
+      for k, v in pairs(ABILITY_HOLDERS[caster:GetUnitName()]) do
+        if building == v then
+          caster:AddAbility(v)
+          local ability = caster:FindAbilityByName(v)
+          caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
+          caster:RemoveAbility(v)
+        end
+      end
+    end
+
     --ability:OnSpellStart()
-    print(ability:GetChannelTime())
+    --print(ability:GetChannelTime())
     --ability:SetChanneling(true)
     --if caster:IsChanneling() then
     -- caster:CastAbilityNoTarget(caster:FindAbilityByName('build_cancel'), caster:GetMainControllingPlayer())

@@ -33,7 +33,6 @@ end
 --Check if a unit requires a missing tech, and return the missing tech(s) if any.
 function TechTree:GetRequired(unitName, playerID, isBuilding)
 	if(isBuilding) then
-		PrintTable(PlayerTrees)
 		local techlist = {}
 		if UNIT_KV[playerID][unitName] ~= nil then
 			if UNIT_KV[playerID][unitName].NeedTech ~= nil then

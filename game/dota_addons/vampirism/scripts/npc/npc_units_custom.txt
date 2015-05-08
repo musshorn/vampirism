@@ -3063,10 +3063,42 @@
 
             // Vision
         //----------------------------------------------------------------
+        "VisionDaytimeRange"      "3500"    // Range of vision during day light.
+        "VisionNighttimeRange"      "3500"    // Range of vision at night time.
+  }
+
+  //================================================================================= 
+  // Human build holder
+  //=================================================================================
+  "human_build_holder"
+  {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"           "npc_dota_creature"
+        "Model"                       "models/development/invisiblebox.vmdl"  // Model
+        "MaxLevel"                    "1"
+        "MovementCapabilities"        "DOTA_UNIT_CAP_MOVE_FLY"
+        "Ability1"                    "vampire_vision_dummy_lock2"
+        "Ability2"                    "build_house1"
+        "Ability3"                    "build_tent_t1"
+        "Ability4"                    "build_slayer_tavern"
+        "Ability5"                    "build_human_surplus"
+        "Ability6"                    "build_tower_pearls"
+        "Ability7"                    "build_wall_t1"
+        "Ability8"                    "build_flag"
+        "Ability9"                    "build_research_center_t1"
+        "Ability10"                   "build_heal_wall_t1"
+        "Ability11"                   "build_gold_mine_t1"
+        "Ability13"                   "build_human_vault"
+        "Ability14"                   "build_cancel"
+        "Ability15"                   "build_empty"
+
+
+        // Vision
+        //----------------------------------------------------------------
         "VisionDaytimeRange"      "2000"    // Range of vision during day light.
         "VisionNighttimeRange"      "2000"    // Range of vision at night time.
   }
-
 
   //================================================================================= 
   // BuildingHelper Dummy

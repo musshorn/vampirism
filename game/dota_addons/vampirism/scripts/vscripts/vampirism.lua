@@ -49,12 +49,14 @@ CURRENT_FOOD = {}
 
 UNIT_KV = {} -- Each player has their own UNIT_KV file that research modifies properties of
 ABILITY_KV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
+HERO_KV = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
 HUMAN_COUNT = 0
 SLAYERS = {}
 VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
 VAMPIRES = {} -- table of all created vampires
+ABILITY_HOLDERS = {} --table containing units which hold extra abilities when another unit does not have enough slots to store them all.
 
 HUMAN_FEED = {}
 for i = 0, 7 do
@@ -248,10 +250,10 @@ function GameMode:OnNPCSpawned(keys)
   local playerID = npc:GetPlayerOwnerID()
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
+    print('this still happens?')
   	npc:FindAbilityByName("call_buildui"):SetLevel(1)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
-  	npc:FindAbilityByName("build_house1"):SetLevel(1)
     if playerID < 8 then 
       WOOD[playerID] = 100000 --cheats
       PlayerResource:SetGold(playerID, 1000, true) --cheats
@@ -288,9 +290,27 @@ function GameMode:OnNPCSpawned(keys)
   		end)
     end
   end
+
   if npc:IsRealHero() and npc.bFirstSpawned == nil then
     npc.bFirstSpawned = true
     GameMode:OnHeroInGame(npc)
+
+    local name = ''
+
+    for k, v in pairs(HERO_KV) do
+      if HERO_KV[k]["override_hero"] == npc:GetUnitName() then
+        name = k
+      end
+    end
+
+    if HERO_KV[name]["AbilityHolder"] ~= nil then
+      if ABILITY_HOLDERS[npc:GetUnitName()] == nil then
+        ABILITY_HOLDERS[npc:GetUnitName()] = {}
+        for i = 1, HERO_KV[name]["AbilityHolder"] do
+          table.insert(ABILITY_HOLDERS[npc:GetUnitName()], HERO_KV[name]["ExtraAbility"..i])
+        end
+      end
+    end
   end
 
   if npc:GetUnitName() == "tower_pearls" then
