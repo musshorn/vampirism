@@ -14,7 +14,7 @@ function House1:Init(unit)
 	house1.rallyPoint = nil -- Location to send units trained by this building
 
 	-- If the building can spawn units this is invoked
-	function House1:UnitSpawner()
+	function unit:UnitSpawner()
 		Timers:CreateTimer(house1.spawnName, {
 			callback = function()
 		if not unit:IsAlive() then
