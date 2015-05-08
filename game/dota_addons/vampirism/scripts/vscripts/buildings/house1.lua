@@ -65,10 +65,12 @@ function House1:Init(unit)
 											end)
 										else
 	  										local tree = Entities:FindByClassnameNearest("ent_dota_tree",unit:GetAbsOrigin(),1000)
-	  										Timers:CreateTimer(0.05, function()
-													unit:MoveToPosition(tree:GetAbsOrigin())
-													return nil
-												end)
+	  										if tree ~= nil then
+		  										Timers:CreateTimer(0.05, function()
+														unit:MoveToPosition(tree:GetAbsOrigin())
+														return nil
+													end)
+		  									end
 										end
 									else
 										FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Build more farms" } )
