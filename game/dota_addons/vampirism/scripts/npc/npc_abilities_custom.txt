@@ -166,15 +166,18 @@
   "worker_det"
   {
     "BaseClass"                 "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityTextureName"      "rubick_empty1"
     "MaxLevel"             "1"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_AOE"
+    "AoERadius"           "250"
     "AbilityCastPoint"    "0.3"
     "OnSpellStart"
     {
       "RunScript"
       {
-        "script"    "scripts/vscripts/abilities.lua"
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Target"  "POINT"
         "Function"  "WorkerDet"
       }
     }

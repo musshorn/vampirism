@@ -189,5 +189,19 @@ end
 
 function WorkerDet( keys )
   local caster = keys.caster
-  caster:Kill(nil, caster)
+  local pID = caster:GetMainControllingPlayer()
+
+  -- Tidy up the Timers
+  if caster.moveTimer ~= nil then 
+    Timers:RemoveTimer(caster.moveTimer)
+  end
+
+  -- Refund any food if any
+  if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
+    local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
+    CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
+    FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+  end
+
+  caster:Destroy()
 end
