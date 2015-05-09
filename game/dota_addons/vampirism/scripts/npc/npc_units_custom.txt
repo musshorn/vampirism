@@ -2777,8 +2777,8 @@
         "Ability2"          "spawn_simple_tower_builder"         // Ability 2.
     	"Ability3"          "set_rally_point"         // Ability 3.
     	"Ability4"          "cancel_training"          // Ability 4.
-        "Ability5"          ""          // Ability 5.
-        "Ability6"          ""          // Ability 6 - Extra.
+        "Ability5"          ""                       // Ability 5.
+        "Ability6"          "simple_tower_builder_training"          // Ability 6 - Extra.
         "Ability7"          "t2_worker_training"          // Ability 7 - Extra.
         "Ability8"          "is_a_building"         // Ability 8 - Extra.
     
@@ -2898,7 +2898,7 @@
       "StatusHealth"                "100"   // Base health.
       "StatusHealthRegen"           "7"   // Health regeneration rate.
       "StatusMana"                  "5"     // Base mana.
-      "StatusManaRegen"             "-0.01"     // Mana regeneration rate.
+      "StatusManaRegen"             "0.1"     // Mana regeneration rate.
   
       // Team
       //----------------------------------------------------------------

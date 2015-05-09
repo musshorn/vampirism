@@ -298,6 +298,61 @@
     }
   }
 
+  //==============================================================
+  // Simple Tower Builder spawning
+  //==============================================================
+  "spawn_simple_tower_builder"
+  {
+    "AbilityBehavior"                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"                           "ability_datadriven"
+    "AbilityTextureName"                  "bounty_hunter_wind_walk"
+    "AbilityModifierSupportValue"         "0.5"
+    "MaxLevel"                            "1"
+    "AbilityManaCost"                     "0"
+    "AbilityGoldCost"                     "0"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"                    "simple_tower_builder_training"
+        "Target"                          "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "simple_tower_builder_training"
+      {
+        "IsPurgable"                      "false"
+        "IsStunDebuff"                    "false"
+        "IsHidden"                        "false"
+        "Attributes"                      "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                  "scripts/vscripts/buildings/building.lua"
+            "Function"                    "TrainUnit"
+            "AddToQueue"                  "simple_tower_builder_training"
+            "SpawnUnit"                   "simple_tower_builder"
+          }
+        }
+      }
+    }
+  }
+  
+  //======================================================
+  // Simple Tower builder channel timer
+  //======================================================
+  "simple_tower_builder_training"
+  {
+    "AbilityBehavior"                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"                           "ability_datadriven"
+    "AbilityCastPoint"                    "0"
+    "AbilityChannelTime"                  "1.0"
+    "AbilityTextureName"                  "bounty_hunter_wind_walk"
+  }
+
   "harvest_t1"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
