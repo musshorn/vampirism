@@ -2,22 +2,26 @@ function TrainUnit( keys )
   local building = keys.caster
   local unitToSpawn = keys.SpawnUnit
   local pID = building:GetMainControllingPlayer()
+  local requestingFood = nil
 
   -- Parity with WC3 behaviour
   if UNIT_KV[pID][unitToSpawn].ConsumesFood ~= nil then
-    local requestingFood = UNIT_KV[pID][unitToSpawn].ConsumesFood
-    if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood then
-      if table.getn(building.queue) <= 7 then
-        table.insert(building.queue, keys)
-      else
-        FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "Too many units in queue" } )
-        building:RemoveModifierByName(keys.AddToQueue)
-      end
+    requestingFood = UNIT_KV[pID][unitToSpawn].ConsumesFood
+  else
+      requestingFood = 0    
+  end 
+
+  if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood then
+    if table.getn(building.queue) <= 7 then
+      table.insert(building.queue, keys)
     else
-      FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "Build more farms" } )
+      FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "Too many units in queue" } )
       building:RemoveModifierByName(keys.AddToQueue)
-      building.doingWork = false
     end
+  else
+    FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "Build more farms" } )
+    building:RemoveModifierByName(keys.AddToQueue)
+    building.doingWork = false
   end
 end
 
