@@ -313,9 +313,7 @@
         "ScriptFile"  "scripts/vscripts/abilities.lua"
         "Function"  "harvest_t1"
       }
-
     }
-
   }
 
   "harvest_channel"
