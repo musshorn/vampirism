@@ -19,6 +19,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
   worker.treepos = nil
   worker.workTimer = DoUniqueString("WorkTimer")
+  worker.moveTimer = DoUniqueString("MoveTimer")
   worker.pos = worker:GetAbsOrigin()
   worker.moving = false
   worker.housePos = nil
@@ -26,7 +27,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
   worker.skipTicks = 0 -- If this is > 0 the worker will ignore this many ticks
 
 
-  Timers:CreateTimer(function()
+  Timers:CreateTimer(worker.moveTimer, {callback = function()
   	if worker.pos ~= worker:GetAbsOrigin() then
   		worker.moving = true
   		worker.pos = worker:GetAbsOrigin()
@@ -35,7 +36,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
   	end
 
   	return 0.1
-  end)
+  end})
 
 	function worker:Think()
 
