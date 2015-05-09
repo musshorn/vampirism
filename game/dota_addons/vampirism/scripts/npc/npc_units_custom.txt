@@ -126,7 +126,7 @@
   //================================================================================= 
   // Building: Carnelian Wall
   //=================================================================================
-  "npc_wall_carnelian"
+  "wall_t1"
   {
     //General
     //
@@ -138,7 +138,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "upgrade_to_topaz_wall" //ability 1 upgrades wall to level 2
+    "Ability1"          "upgrade_to_wall_t2" //ability 1 upgrades wall to level 2
     "Ability2"          ""      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
@@ -196,12 +196,15 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "15"
+
+    "IsTech"    "true"
+    "NeedTech"    "house_t1"
   }
 
   //================================================================================= 
   // Building: Topaz Wall
   //=================================================================================
-  "npc_wall_topaz"
+  "wall_t2"
   {
     //General
     //
@@ -213,7 +216,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "upgrade_to_amethyst_wall"  //ability 1 upgrades wall to level 2
+    "Ability1"          "upgrade_to_wall_t3"  //ability 1 upgrades wall to level 2
     "Ability2"          ""      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
@@ -274,7 +277,7 @@
   //================================================================================= 
   // Building: Amethyst Wall
   //=================================================================================
-  "npc_wall_amethyst"
+  "wall_t3"
   {
     //General
     //
@@ -286,7 +289,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "upgrade_to_sapphire_wall"  //ability 1 upgrades wall to level 2
+    "Ability1"          "upgrade_to_wall_t4"  //ability 1 upgrades wall to level 2
     "Ability2"          ""      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
@@ -347,7 +350,7 @@
   //================================================================================= 
   // Building: Sapphire Wall
   //=================================================================================
-  "npc_wall_sapphire"
+  "wall_t4"
   {
     //General
     //
@@ -359,7 +362,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "upgrade_to_emerald_wall" //ability 1 upgrades wall to level 2
+    "Ability1"          "upgrade_to_wall_t5" //ability 1 upgrades wall to level 2
     "Ability2"          ""      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
@@ -420,7 +423,7 @@
   //================================================================================= 
   // Building: Emerald Wall
   //=================================================================================
-  "npc_wall_emerald"
+  "wall_t5"
   {
     //General
     //
@@ -432,7 +435,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "upgrade_to_chrysoprase_wall" //ability 1 upgrades wall to level 2
+    "Ability1"          "upgrade_to_wall_t6" //ability 1 upgrades wall to level 2
     "Ability2"          ""      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
@@ -493,7 +496,7 @@
   //================================================================================= 
   // Building: Chrysoprase Wall
   //=================================================================================
-  "npc_wall_chrysoprase"
+  "wall_t6"
   {
     //General
     //
@@ -505,7 +508,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "upgrade_to_garnet_wall"  //ability 1 upgrades wall to level 2
+    "Ability1"          "upgrade_to_wall_t7"  //ability 1 upgrades wall to level 2
     "Ability2"          ""      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
@@ -566,7 +569,7 @@
   //================================================================================= 
   // Building: Garnet Wall
   //=================================================================================
-  "npc_wall_garnet"
+  "wall_t7"
   {
     //General
     //
@@ -578,7 +581,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "upgrade_to_ruby_wall"  //ability 1 upgrades wall to level 2
+    "Ability1"          "upgrade_to_wall_t8"  //ability 1 upgrades wall to level 2
     "Ability2"          ""      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
@@ -639,7 +642,7 @@
   //================================================================================= 
   // Building: Ruby Wall
   //=================================================================================
-  "npc_wall_ruby"
+  "wall_t8"
   {
     //General
     //
@@ -651,7 +654,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "upgrade_to_diamond_wall" //ability 1 upgrades wall to level 2
+    "Ability1"          "upgrade_to_wall_t9" //ability 1 upgrades wall to level 2
     "Ability2"          ""      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
@@ -712,7 +715,7 @@
   //================================================================================= 
   // Building: Diamond Wall
   //=================================================================================
-  "npc_wall_diamond"
+  "wall_t9"
   {
     //General
     //
@@ -724,7 +727,7 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          "upgrade_to_onyx_wall"  //ability 1 upgrades wall to level 2
+    "Ability1"          "upgrade_to_wall_t10"  //ability 1 upgrades wall to level 2
     "Ability2"          ""      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
@@ -785,7 +788,7 @@
   //================================================================================= 
   // Building: Onyx Wall
   //=================================================================================
-  "npc_wall_onyx"
+  "wall_t10"
   {
     //General
     //
@@ -1535,10 +1538,10 @@
     //=================================================================================
     "wall_t1"
     {
-        // General
-        //-------------------------------------------------------------------------------------------------------------
-        "BaseClass"         "npc_dota_creature"
-        "Model"           "models/props_stone/stoneblock009a.vmdl"
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"         "npc_dota_creature"
+    "Model"           "models/props_stone/stoneblock009a.vmdl"
     "ModelScale"        "1"
     
     "ConsideredHero"      "0"
@@ -1697,7 +1700,7 @@
   // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"         "npc_dota_creature"
-    "Model"           "models/props_structures/weapon_rack_00.vmdl"
+    "Model"           "models/weapon_rack_00_reference.vmdl"
     "ModelScale"        "1"
     "AbilityLayout"      "1"
     

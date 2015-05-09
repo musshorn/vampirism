@@ -62,7 +62,7 @@ function TechTree:GetRequired(unitName, playerID, isBuilding)
 				end
 			end
 		end
-	
+		
 		FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 	return true
 	else

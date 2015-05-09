@@ -2122,7 +2122,7 @@
   //================================================================================= /
   // Upgrade unit to Topaz Wall
   //================================================================================= /
-  "upgrade_to_topaz_wall"
+  "upgrade_to_wall_t2"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
@@ -2135,7 +2135,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
-        "TargetUnit"  "npc_wall_topaz"
+        "TargetUnit"  "wall_t2"
         "LumberCost"  "1" // #DEBUG, true value is 250
       }
     }
@@ -2145,7 +2145,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "npc_wall_topaz"
+        "TargetUnit"  "wall_t2"
         "Scale"       ".5"
       }
     }
@@ -2154,7 +2154,7 @@
   //================================================================================= /
   // Upgrade unit to Amethyst Wall
   //================================================================================= /
-  "upgrade_to_amethyst_wall"
+  "upgrade_to_wall_t3"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
@@ -2167,7 +2167,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
-        "TargetUnit"  "npc_wall_amethyst"
+        "TargetUnit"  "wall_t3"
         "LumberCost"  "1" // #DEBUG, true value is 1000
       }
     }
@@ -2177,7 +2177,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "npc_wall_amethyst"
+        "TargetUnit"  "wall_t3"
       }
     }
   }
@@ -2185,7 +2185,7 @@
   //================================================================================= /
   // Upgrade unit to Sapphire Wall
   //================================================================================= /
-  "upgrade_to_sapphire_wall"
+  "upgrade_to_wall_t4"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
@@ -2198,7 +2198,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
-        "TargetUnit"  "npc_wall_sapphire"
+        "TargetUnit"  "wall_t4"
         "LumberCost"  "1" // #DEBUG, true value is 5000
       }
     }
@@ -2208,7 +2208,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "npc_wall_sapphire"
+        "TargetUnit"  "wall_t4"
       }
     }
   }
@@ -2216,7 +2216,7 @@
   //================================================================================= /
   // Upgrade unit to Emerald Wall
   //================================================================================= /
-  "upgrade_to_emerald_wall"
+  "upgrade_to_wall_t5"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
@@ -2229,7 +2229,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
-        "TargetUnit"  "npc_wall_emerald"
+        "TargetUnit"  "wall_t5"
         "LumberCost"  "1" // #DEBUG, true value is 10000
       }
     }
@@ -2239,14 +2239,14 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "npc_wall_emerald"
+        "TargetUnit"  "wall_t5"
       }
     }
   }
   //================================================================================= /
   // Upgrade unit to Chrysoprase Wall
   //================================================================================= /
-  "upgrade_to_chrysoprase_wall"
+  "upgrade_to_wall_t6"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
@@ -2259,7 +2259,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
-        "TargetUnit"  "npc_wall_chrysoprase"
+        "TargetUnit"  "wall_t6"
         "LumberCost"  "1" // #DEBUG, true value is 30000
         "GoldCost"  "1" // #DEBUG, true value is 10
       }
@@ -2270,7 +2270,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "npc_wall_chrysoprase"
+        "TargetUnit"  "wall_t6"
       }
     }
   }
@@ -2278,7 +2278,7 @@
   //================================================================================= /
   // Upgrade unit to Garnet Wall
   //================================================================================= /
-  "upgrade_to_garnet_wall"
+  "upgrade_to_wall_t7"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
@@ -2291,7 +2291,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
-        "TargetUnit"  "npc_wall_garnet"
+        "TargetUnit"  "wall_t7"
         "LumberCost"  "1" // #DEBUG, true value is 80000
         "GoldCost"  "1" // #DEBUG, true value is 35
       }
@@ -2302,7 +2302,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "npc_wall_garnet"
+        "TargetUnit"  "wall_t7"
       }
     }
   }
@@ -2310,7 +2310,7 @@
   //================================================================================= /
   // Upgrade unit to Ruby Wall
   //================================================================================= /
-  "upgrade_to_ruby_wall"
+  "upgrade_to_wall_t8"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
@@ -2323,7 +2323,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
-        "TargetUnit"  "npc_wall_ruby"
+        "TargetUnit"  "wall_t8"
         "LumberCost"  "1" // #DEBUG, true value is 150000
         "GoldCost"  "1" // #DEBUG, true value is 100
       }
@@ -2334,7 +2334,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "npc_wall_ruby"
+        "TargetUnit"  "wall_t8"
       }
     }
   }
@@ -2342,7 +2342,7 @@
   //================================================================================= /
   // Upgrade unit to Diamond Wall
   //================================================================================= /
-  "upgrade_to_diamond_wall"
+  "upgrade_to_wall_t9"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
@@ -2355,7 +2355,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
-        "TargetUnit"  "npc_wall_diamond"
+        "TargetUnit"  "wall_t9"
         "LumberCost"  "1" // #DEBUG, true value is 250000
         "GoldCost"  "1" // #DEBUG, true value is 200
       }
@@ -2366,7 +2366,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "npc_wall_diamond"
+        "TargetUnit"  "wall_t9"
       }
     }
   }
@@ -2374,7 +2374,7 @@
   //================================================================================= /
   // Upgrade unit to Onyx Wall
   //================================================================================= /
-  "upgrade_to_onyx_wall"
+  "upgrade_to_wall_t10"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
@@ -2387,7 +2387,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
-        "TargetUnit"  "npc_wall_onyx"
+        "TargetUnit"  "wall_t10"
         "LumberCost"  "1" // #DEBUG, true value is 450000
         "GoldCost"  "1" // #DEBUG, true value is 1200
       }
@@ -2398,7 +2398,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "npc_wall_onyx"
+        "TargetUnit"  "wall_t10"
       }
     }
   }
@@ -3475,7 +3475,7 @@
     "AbilityCastRange"        "200"
     "UpdateHealth"          "1"
     "Scale"             "1"
-    "MaxScale"            ".5"
+    "MaxScale"            "0.8"
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
@@ -3518,7 +3518,7 @@
     "AbilityCastRange"        "200"
     "UpdateHealth"          "1"
     "Scale"             "1"
-    "MaxScale"            ".5"
+    "MaxScale"            "1"
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
@@ -3612,7 +3612,7 @@
     "AbilityLumberCost"       "50"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-    "UnitName"            "npc_wall_carnelian"
+    "UnitName"            "wall_t1"
     // End of BuildingHelper info
 
     // Stats
@@ -3689,8 +3689,8 @@
     "BuildTime"           "1"
     "AbilityCastRange"        "200"
     "UpdateHealth"          "1"
-    "Scale"             "1"
-    "MaxScale"            ".5"
+    "Scale"                 "1"
+    "MaxScale"              "1.2"
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
@@ -3733,7 +3733,7 @@
     "AbilityCastRange"        "200"
     "UpdateHealth"          "1"
     "Scale"             "1"
-    "MaxScale"            ".5"
+    "MaxScale"            "2"
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
@@ -3995,7 +3995,7 @@
     "AbilityCastRange"        "200"
     "UpdateHealth"          "1"
     "Scale"             "1"
-    "MaxScale"            ".5"
+    "MaxScale"            "1.3"
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
