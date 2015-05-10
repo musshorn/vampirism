@@ -10,7 +10,7 @@ POST_GAME_TIME = 60.0                   -- How long should we let people look at
 TREE_REGROW_TIME = 60.0                 -- How long should it take individual trees to respawn after being cut down/destroyed?
 
 GOLD_PER_TICK = 0                     -- How much gold should players get per tick?
-GOLD_TICK_TIME = 5                      -- How long should we wait in seconds between gold ticks?
+GOLD_TICK_TIME = 10000                      -- How long should we wait in seconds between gold ticks?
 
 RECOMMENDED_BUILDS_DISABLED = true     -- Should we disable the recommened builds for heroes (Note: this is not working currently I believe)
 CAMERA_DISTANCE_OVERRIDE = 1500.0        -- How far out should we allow the camera to go?  1134 is the default in Dota
@@ -159,9 +159,6 @@ function GameMode:OnHeroInGame(hero)
   print("setting " .. playerID .. " to team: " .. team)
   MultiTeam:SetPlayerTeam(playerID, team)]]
 
-  -- This line for example will set the starting gold of every hero to 500 unreliable gold
-  hero:SetGold(0, false)
-
   -- These lines will create an item and add it to the player, effectively ensuring they start with the item
   --local item = CreateItem("item_multiteam_action", hero, hero)
   --hero:AddItem(item)
@@ -249,20 +246,19 @@ function GameMode:OnNPCSpawned(keys)
   local playerID = npc:GetPlayerOwnerID()
 
   if npc:GetName() == "npc_dota_hero_omniknight" then
-    print('this still happens?')
   	npc:FindAbilityByName("call_buildui"):SetLevel(1)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 100000 --cheats
-      PlayerResource:SetGold(playerID, 1000, true) --cheats
+      WOOD[playerID] = 5000 --cheats
+      PlayerResource:SetGold(playerID, 0, false) --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, false)
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
       HUMAN_COUNT = HUMAN_COUNT + 1
       npc:SetAbilityPoints(0)
-      FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = 0})
+      FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
       FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
       FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
       FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
@@ -434,8 +430,6 @@ function GameMode:OnPlayerChangedName(keys)
   local newName = keys.newname
   local oldName = keys.oldName
 end
-
-
 
 -- A player leveled up an ability
 function GameMode:OnPlayerLearnedAbility( keys)
@@ -628,7 +622,6 @@ function GameMode:OnEntityKilled( keys )
     end
 
     if killedUnit:GetGoldBounty() > 0 then
-    	print(HUMAN_FEED[playerID] + killedUnit:GetGoldBounty())
     	HUMAN_FEED[playerID] = HUMAN_FEED[playerID] + killedUnit:GetGoldBounty()
     	FireGameEvent("vamp_gold_feed", {player_ID = playerID, feed_total = HUMAN_FEED[playerID]})
     end
@@ -964,11 +957,11 @@ function GameMode:OnConnectFull(keys)
 
   --Hides unused HUD elements. Thanks to Noya for documenting this!
   mode = GameRules:GetGameModeEntity()
-  mode:SetHUDVisible(1, false)
-  mode:SetHUDVisible(2, false)
-  mode:SetHUDVisible(9, false)
-  mode:SetHUDVisible(11, false)
-  mode:SetHUDVisible(12, false)
+  --mode:SetHUDVisible(1, false)
+  --mode:SetHUDVisible(2, false)
+  --mode:SetHUDVisible(9, false)
+  --mode:SetHUDVisible(11, false)
+  --mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
  
   heroRoller(playerID)
@@ -991,7 +984,6 @@ function heroRoller(playerID)
 	else
 		if PlayerResource:GetSelectedHeroName(playerID) ~= "npc_dota_hero_night_stalker" then
 			PlayerResource:GetPlayer(playerID):MakeRandomHeroSelection()
-			heroRoller(playerID)
 			Timers:CreateTimer(.3, function ()
 				heroRoller(playerID)
 				return nil

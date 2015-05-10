@@ -191,7 +191,6 @@
     "AbilityModifierSupportValue" "0.5"
     "MaxLevel"  "1"
     "AbilityManaCost" "0"
-    "AbilityGoldCost" "0"
     "OnSpellStart"
     {
       "ApplyModifier"
@@ -241,7 +240,7 @@
     "AbilityModifierSupportValue" "0.5"
     "MaxLevel"  "1"
     "AbilityManaCost" "0"
-    "AbilityGoldCost" "0"
+    "GoldCost" "0"
     "OnSpellStart"
     {
       "ApplyModifier"
@@ -362,7 +361,7 @@
     "AbilityModifierSupportValue"         "0.5"
     "MaxLevel"                            "1"
     "AbilityManaCost"                     "0"
-    "AbilityGoldCost"                     "0"
+    "GoldCost"                     "0"
     "OnSpellStart"
     {
       "ApplyModifier"
@@ -595,7 +594,7 @@
     "MaxLevel"            "1"
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityChannelTime"  "60"
-    "AbilityLumberCost" "400"
+    "LumberCost" "400"
     "OnSpellStart"
     {
       "RunScript"
@@ -1087,7 +1086,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "35"
-    "AbilityLumberCost"   "250"
+    "LumberCost"   "250"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -1135,7 +1134,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "35"
-    "AbilityLumberCost" "500"
+    "LumberCost" "500"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -1183,7 +1182,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "35"
-    "AbilityLumberCost" "750"
+    "LumberCost" "750"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -1231,7 +1230,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "40"
-    "AbilityLumberCost" "1000"
+    "LumberCost" "1000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -1278,7 +1277,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "30"
-    "AbilityLumberCost" "1000"
+    "LumberCost" "1000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -1337,7 +1336,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "2"
-    "AbilityLumberCost" "2000"
+    "LumberCost" "2000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -1385,7 +1384,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "2"
-    "AbilityLumberCost" "2000"
+    "LumberCost" "2000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -1433,7 +1432,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "2"
-    "AbilityLumberCost" "2000"
+    "LumberCost" "2000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -1481,7 +1480,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "2"
-    "AbilityLumberCost" "2000"
+    "LumberCost" "2000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -1530,7 +1529,7 @@
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "AbilityChannelTime"  "30"
-    "AbilityLumberCost" "1000"
+    "LumberCost" "1000"
     "OnSpellStart"
     {
       "RunScript"
@@ -1567,7 +1566,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost" "1000"
+    "LumberCost" "1000"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -1615,8 +1614,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost"   "6000"
-    "AbilityGoldCost"     "5"
+    "LumberCost"   "6000"
+    "GoldCost"     "5"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -1664,8 +1663,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost"   "11000"
-    "AbilityGoldCost"     "10"
+    "LumberCost"   "11000"
+    "GoldCost"     "10"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -1713,8 +1712,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost"   "16000"
-    "AbilityGoldCost"     "15"
+    "LumberCost"   "16000"
+    "GoldCost"     "15"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -1762,8 +1761,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost"   "21000"
-    "AbilityGoldCost"     "20"
+    "LumberCost"   "21000"
+    "GoldCost"     "20"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -1811,8 +1810,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost"   "26000"
-    "AbilityGoldCost"     "25"
+    "LumberCost"   "26000"
+    "GoldCost"     "25"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -1859,8 +1858,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost"   "31000"
-    "AbilityGoldCost"     "30"
+    "LumberCost"   "31000"
+    "GoldCost"     "30"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -1907,8 +1906,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost"   "36000"
-    "AbilityGoldCost"     "35"
+    "LumberCost"   "36000"
+    "GoldCost"     "35"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -1955,8 +1954,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost"   "41000"
-    "AbilityGoldCost"     "40"
+    "LumberCost"   "41000"
+    "GoldCost"     "40"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -2003,8 +2002,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
-    "AbilityLumberCost"   "46000"
-    "AbilityGoldCost"     "45"
+    "LumberCost"   "46000"
+    "GoldCost"     "45"
     "BaseClass"         "ability_datadriven"
     "OnSpellStart"
     {
@@ -2214,6 +2213,7 @@
         "TARGET"  "CASTER"
         "TargetUnit"  "house_t2"
         "LumberCost"  "3000"
+        "GoldCost"    "1"
       }
     }
     "OnChannelInterrupted"
@@ -3550,8 +3550,7 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "0.05"
-    "AbilityGoldCost"       "0"
-    "AbilityLumberCost"       "10"
+    "LumberCost"       "10"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "house_t1"
@@ -3593,8 +3592,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "0"
-    "AbilityGoldCost"       "0"
-    "AbilityLumberCost"       "20"
+    "GoldCost"       "0"
+    "LumberCost"       "20"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "tent_t1"
@@ -3636,8 +3635,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
-    "AbilityGoldCost"       "0"
-    "AbilityLumberCost"       "400"
+    "GoldCost"       "0"
+    "LumberCost"       "400"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "slayer_tavern"
@@ -3679,8 +3678,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
-    "AbilityGoldCost"       "3"
-    "AbilityLumberCost"       "1000"
+    "GoldCost"       "3"
+    "LumberCost"       "1000"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "human_surplus"
@@ -3722,8 +3721,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
-    "AbilityGoldCost"       "0"
-    "AbilityLumberCost"       "50"
+    "GoldCost"       "0"
+    "LumberCost"       "50"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "tower_pearls"
@@ -3765,8 +3764,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
-    "AbilityGoldCost"       "0"
-    "AbilityLumberCost"       "50"
+    "GoldCost"       "0"
+    "LumberCost"       "50"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "wall_t1"
@@ -3808,8 +3807,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
-    "AbilityGoldCost"       "0"
-    "AbilityLumberCost"       "0"
+    "GoldCost"       "0"
+    "LumberCost"       "0"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "human_flag"
@@ -3851,8 +3850,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
-    "AbilityGoldCost"       "0"
-    "AbilityLumberCost"       "150"
+    "GoldCost"       "0"
+    "LumberCost"       "150"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "research_center_t1"
@@ -3894,8 +3893,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
-    "AbilityGoldCost"       "0"
-    "AbilityLumberCost"       "2000"
+    "GoldCost"       "0"
+    "LumberCost"       "2000"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "heal_wall_t1"
@@ -4113,8 +4112,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
-    "AbilityGoldCost"       "0"
-    "AbilityLumberCost"       "20000"
+    "GoldCost"       "0"
+    "LumberCost"       "20000"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
     "UnitName"            "gold_mine_t1"
@@ -4156,8 +4155,8 @@
     "CasterCanControl"        "1"
 
     "AbilityCooldown"       "2.0"
-    "AbilityGoldCost"       "1"
-    "AbilityLumberCost"       "150"
+    "GoldCost"       "1"
+    "LumberCost"       "150"
 
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.

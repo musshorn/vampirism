@@ -99,8 +99,8 @@ function SummonSlayer( keys )
   local caster = keys.caster
   local ability = keys.ability
   local pID = caster:GetMainControllingPlayer()
-  local lumberCost = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
-  local goldCost = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
+  local lumberCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
+  local goldCost = ABILITY_KV[ability:GetAbilityName()].GoldCost
 
   if SLAYERS[pID] ~= nil then
     FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Only one slayer per player." } )
@@ -130,7 +130,6 @@ function SummonSlayer( keys )
   -- Checks passed, deduct the resources and start channeling
   WOOD[pID] = WOOD[pID] - lumberCost
   FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-
   PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
   FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})  
 end
@@ -140,8 +139,8 @@ function Refund( keys )
   local pID = caster:GetMainControllingPlayer()
   local ability = keys.ability
   
-  local refundWood = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
-  local refundGold = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
+  local refundWood = ABILITY_KV[ability:GetAbilityName()].LumberCost
+  local refundGold = ABILITY_KV[ability:GetAbilityName()].LumberCost
 
   if refundWood == nil then
     refundWood = 0
@@ -153,7 +152,6 @@ function Refund( keys )
   if HAS_SLAYER[pID] == nil then
     WOOD[pID] = WOOD[pID] + refundWood
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-
     PlayerResource:ModifyGold(pID, refundGold, true, 9)
     FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = caster:GetGold()}) 
   end

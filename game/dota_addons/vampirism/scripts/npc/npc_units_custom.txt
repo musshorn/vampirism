@@ -2839,7 +2839,7 @@
         "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
     
         "IsTech"    "true"
-        "NeedTech"    "house_t1"
+        "NeedTech"    "human_vault"
         "RecievesLumber"    "true"
         "SpawnsUnits"       "true" 
     }

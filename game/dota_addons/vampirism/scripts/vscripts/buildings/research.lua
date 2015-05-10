@@ -2,8 +2,8 @@ function Research( keys )
   print('in research')
   local caster = keys.caster
   local ability = keys.ability
-  local lumberCost = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
-  local goldCost = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
+  local lumberCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
+  local goldCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
   local pID = caster:GetMainControllingPlayer()
 
   -- Not all research requires lumber or gold
@@ -32,15 +32,17 @@ function Research( keys )
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
   FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
+  print('resarch gold')
   PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
+  print(PlayerResource:GetGold(pID))
 end
 
 -- Research was cancelled. Show the icon again, return cost to player.
 function Cancelled(keys)
   local caster = keys.caster
   local ability = keys.ability
-  local lumberCost = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
-  local goldCost = ABILITY_KV[ability:GetAbilityName()].AbilityGoldCost
+  local lumberCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
+  local goldCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
   local playerID = caster:GetMainControllingPlayer()
 
   if goldCost == nil then
@@ -53,7 +55,9 @@ function Cancelled(keys)
   -- Return the cost of the research
   WOOD[playerID] = WOOD[playerID] + lumberCost
   FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
+  print('rescancel')
   PlayerResource:ModifyGold(playerID, goldCost, true, 9)
+  print(PlayerResource:GetGold(playerID))
 
   --Show the hidden icon in flash
   FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})

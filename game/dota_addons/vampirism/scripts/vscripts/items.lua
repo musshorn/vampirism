@@ -4,10 +4,10 @@ function CoinUsed(keys)
 
 	if user:IsRealHero() then
     if keys.Type == "small" then
-		  user:SetGold(user:GetGold() + 1, false)
+		  user:SetGold(user:GetGold() + 1, true)
     end
     if keys.Type == "large" then
-      user:SetGold(user:GetGold() + 1, false)
+      user:SetGold(user:GetGold() + 1, true)
     end
 	end
 end

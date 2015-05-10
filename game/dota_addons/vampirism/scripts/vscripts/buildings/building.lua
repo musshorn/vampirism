@@ -52,10 +52,12 @@ function Cancel( keys )
         end
       end
     end
-
+    print('goldcancel')
     PlayerResource:ModifyGold(pID, caster.refundGold, true, 9)
+    print(PlayerResource:GetGold(pID))
     WOOD[pID] = WOOD[pID] + caster.refundLumber
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
     caster:SetMaxHealth(caster.originalMaxHP)
   end
 end
@@ -72,6 +74,7 @@ function Upgrade( keys )
   local targetUnit = keys.TargetUnit
   local pID = caster:GetMainControllingPlayer()
   local targetModel = UNIT_KV[pID][targetUnit].Model
+  local canUpgrade = true
 
   -- This may be undefined for some upgrades
   if goldCost == nil then
@@ -85,39 +88,50 @@ function Upgrade( keys )
   if PlayerResource:GetGold(pID) < goldCost then
     caster:Stop()
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
+    canUpgrade = false
   end
   if WOOD[pID] < lumberCost then
     caster:Stop()
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more wood" } )
+    canUpgrade = false
   end
 
-  -- Deduct resources
-  PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9) -- idk what the 4th param is
-  WOOD[pID] = WOOD[pID] - lumberCost
-  FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-
-  -- Change the model
-  if caster.oldModel == nil then
-    caster.oldModel = caster:GetModelName()
+  if TechTree:GetRequired(targetUnit, pID, true) == false then
+    caster:Stop()
+    FireGameEvent('custom_error_show', {player_ID = pID, _error = "You are missing tech for this!"})
+    canUpgrade = false
   end
-  caster.refundGold = goldCost
-  caster.refundLumber = lumberCost
-  caster:SetModel(targetModel)
+
+  if canUpgrade == true then
+    -- Deduct resources
+    print('goldupgrade')
+    PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9) -- idk what the 4th param is
+    print(PlayerResource:GetGold(pID))
+    WOOD[pID] = WOOD[pID] - lumberCost
+    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
   
-  caster:SetModelScale(UNIT_KV[pID][targetUnit].ModelScale)
-
-
-  -- If the unit has a HealthModifier (gem upgrades) then they gain the bonus of the targets HP straight away
-  -- "Muh Parity" - Space Germ, 2015
-  caster.originalMaxHP = caster:GetMaxHealth()
-  if UNIT_KV[pID][caster:GetUnitName()].HealthModifier ~= nil then
-    local maxHPOffset = UNIT_KV[pID][targetUnit].StatusHealth * UNIT_KV[pID][caster:GetUnitName()].HealthModifier - UNIT_KV[pID][targetUnit].StatusHealth
+    -- Change the model
+    if caster.oldModel == nil then
+      caster.oldModel = caster:GetModelName()
+    end
+    caster.refundGold = goldCost
+    caster.refundLumber = lumberCost
+    caster:SetModel(targetModel)
+    
+    caster:SetModelScale(UNIT_KV[pID][targetUnit].ModelScale)
+  
+  
+    -- If the unit has a HealthModifier (gem upgrades) then they gain the bonus of the targets HP straight away
+    -- "Muh Parity" - Space Germ, 2015
     caster.originalMaxHP = caster:GetMaxHealth()
-
-    caster:SetMaxHealth(caster:GetMaxHealth() + maxHPOffset)
-    caster:SetHealth(caster:GetHealth() + maxHPOffset)
+    if UNIT_KV[pID][caster:GetUnitName()].HealthModifier ~= nil then
+      local maxHPOffset = UNIT_KV[pID][targetUnit].StatusHealth * UNIT_KV[pID][caster:GetUnitName()].HealthModifier - UNIT_KV[pID][targetUnit].StatusHealth
+      caster.originalMaxHP = caster:GetMaxHealth()
+  
+      caster:SetMaxHealth(caster:GetMaxHealth() + maxHPOffset)
+      caster:SetHealth(caster:GetHealth() + maxHPOffset)
+    end
   end
-
 end
 
 function FinishUpgrade( keys )

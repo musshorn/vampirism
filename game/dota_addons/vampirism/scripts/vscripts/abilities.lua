@@ -119,8 +119,8 @@ function create_building_entity( keys )
   local caster = keys.caster
   local pID = keys.caster:GetMainControllingPlayer()
   local builderWork = keys.attacker.work
-  local lumberCost = builderWork.buildingTable.AbilityLumberCost
-  local goldCost = builderWork.buildingTable.AbilityGoldCost
+  local lumberCost = builderWork.buildingTable.LumberCost
+  local goldCost = builderWork.buildingTable.GoldCost
 
   local lumberOK = false
   local goldOK = false
@@ -137,7 +137,7 @@ function create_building_entity( keys )
   end
 
   if goldCost ~= nil then
-    if goldCost > caster:GetGold() then
+    if goldCost > PlayerResource:GetGold(pID) then
       FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "You need more gold" } )
     else
       goldOK = true
@@ -160,7 +160,8 @@ function create_building_entity( keys )
     -- Deduct resources and start constructing
     WOOD[pID] = WOOD[pID] - lumberCost
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    caster:SetGold(caster:GetGold() - goldCost, false)
+    PlayerResource:SetGold(pID, PlayerResource:GetGold(pID) - goldCost, true)
+    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
 
     BuildingHelper:InitializeBuildingEntity(keys)
   end
