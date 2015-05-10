@@ -25,7 +25,7 @@
 	"simple_tower_builder"
 	{
 		"build_house1"							"h"
-		"build_feed_t1"							"b"
+		"build_empty"							"b"
 		"build_tower_mana_t1"					"e"
 		"build_human_surplus"					"p"
 		"build_research_center_t2"				"u"
@@ -86,6 +86,7 @@
 		"research_rifles"									"a"
 		"research_improved_worker_motivation"				"a"
 		"research_improved_gem_quality"						"a"
+		"upgrade_to_research_center_t2"						"a"
 		"build_cancel"										"q"
 		"build_empty"										"q"
 	}
