@@ -283,6 +283,59 @@
     "AbilityChannelTime" "1.0"
   }
 
+  //==============================================================
+  // T3 Worker Spawning
+  //==============================================================
+  "spawn_worker_t3"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "basher"
+    "AbilityModifierSupportValue" "0.5"
+    "MaxLevel"  "1"
+    "AbilityManaCost" "0"
+    "AbilityGoldCost" "0"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "t3_worker_training"
+        "Target"    "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "t3_worker_training"
+      {
+        "IsPurgable"  "false"
+        "IsStunDebuff" "false"
+        "IsHidden"  "false"
+        "Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+            "Function"    "TrainUnit"
+            "AddToQueue"  "t3_worker_training"
+            "SpawnUnit"   "worker_t3"
+          }
+        }
+      }
+    }
+  }
+  //======================================================
+  // T2 worker channel time
+  //======================================================
+  "t3_worker_training"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    "AbilityCastPoint"  "0"
+    "AbilityChannelTime" "1.0"
+  }
+
   "cancel_training"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -2163,6 +2216,14 @@
         "LumberCost"  "3000"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
     "OnChannelSucceeded"
     {
       "RunScript"
@@ -2170,6 +2231,46 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "house_t2"
+        "Scale"       "0.5"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade to T3 House
+  //================================================================================= /
+  "upgrade_to_t3_house"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "5.0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"  "CASTER"
+        "TargetUnit"  "house_t3"
+        "LumberCost"  "3000"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "house_t3"
         "Scale"       "0.5"
       }
     }

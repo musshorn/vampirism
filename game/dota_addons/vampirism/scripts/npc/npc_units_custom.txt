@@ -2763,7 +2763,7 @@
     }
 
     //================================================================================= 
-    // Human Building T1 - Lumber House
+    // Human Building T2 - Lumber House
     //=================================================================================
     "house_t2"
     {
@@ -2772,6 +2772,8 @@
         "BaseClass"         "npc_dota_creature"
         "Model"             "models/tent_dk_med_reference.vmdl"
         "ModelScale"        "1"
+        "AbilityLayout"        "5"
+
         
         "ConsideredHero"      "0"
         // Abilities
@@ -2781,7 +2783,7 @@
         "Ability2"          "spawn_simple_tower_builder"         // Ability 2.
     	"Ability3"          "set_rally_point"         // Ability 3.
     	"Ability4"          "cancel_training"          // Ability 4.
-        "Ability5"          ""                       // Ability 5.
+        "Ability5"          "upgrade_to_t3_house"                       // Ability 5.
         "Ability6"          "simple_tower_builder_training"          // Ability 6 - Extra.
         "Ability7"          "t2_worker_training"          // Ability 7 - Extra.
         "Ability8"          "is_a_building"         // Ability 8 - Extra.
@@ -2841,12 +2843,93 @@
         "RecievesLumber"    "true"
         "SpawnsUnits"       "true" 
     }
+    //================================================================================= 
+    // Human Building T3 - Deforestation House
+    //=================================================================================
+    "house_t3"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"         "npc_dota_creature"
+        "Model"             "models/props_structures/tent_dk_large.vmdl"
+        "ModelScale"        "1"
+        "AbilityLayout"        "5"
+        
+        "ConsideredHero"      "0"
+        // Abilities
+        //----------------------------------------------------------------
+    
+        "Ability1"          "spawn_worker_t2"  //Human test
+        "Ability2"          "spawn_simple_tower_builder"         // Ability 2.
+        "Ability3"          "spawn_worker_t3"         // Ability 3.
+        "Ability4"          "set_rally_point"          // Ability 4.
+        "Ability5"          "cancel_training"                       // Ability 5.
+        "Ability6"          "simple_tower_builder_training"          // Ability 6 - Extra.
+        "Ability7"          "t2_worker_training"          // Ability 7 - Extra.
+        "Ability8"          "t3_worker_training"          // Ability 7 - Extra.
+        "Ability9"          "is_a_building"         // Ability 8 - Extra.
+    
+        // Armor
+        //----------------------------------------------------------------
+        "ArmorPhysical"       "0"     // Physical protection.
+        "MagicalResistance"     "0"     // Magical protection.
+    
+    
+        //Attack
+        //----------------------------------------------------------------
+        "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
+        "AttackDamageMin"       "0"
+        "AttackDamageMax"     "0"
+        "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+        "AttackRate"        "0"
+        "AttackAnimationPoint"    "0"
+        "AttackAcquisitionRange"  "0"
+        "AttackRange"       "0"
+        "ProjectileModel"     ""
+        "ProjectileSpeed"     "0"
+    
+        // Attributes
+        //----------------------------------------------------------------
+        "AttributeBaseIntelligence" "0"
+        "AttributeBaseIntelligenceGain" "0"
+    
+        // Bounds
+        //----------------------------------------------------------------
+        "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+        "HealthBarOffset"     "170"
+        "RingRadius"        "50"
+    
+        // Movement
+        //----------------------------------------------------------------
+        "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_NONE"     // Type of locomotion - ground, air
+        "MovementSpeed"       "300"   // Speed
+        "MovementTurnRate"      "0.5"   // Turning rate.
+    
+        // Status
+        //----------------------------------------------------------------
+        "StatusHealth"        "500"   // Base health.
+        "StatusHealthRegen"     "0"   // Health regeneration rate.
+        "StatusMana"        "120"     // Base mana.
+        "StatusManaRegen"     "-0.01"     // Mana regeneration rate.
+    
+        // Team
+        //----------------------------------------------------------------
+        "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+        "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+        "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+    
+        "IsTech"    "true"
+        "NeedTech"    "gold_mine_t1 human_vault"
+        "RecievesLumber"    "true"
+        "SpawnsUnits"       "true" 
+    }
 
-  //================================================================================= 
-  // Simple Tower Builder
-  //=================================================================================
-  "simple_tower_builder"
-  {
+    //================================================================================= 
+    // Simple Tower Builder
+    //=================================================================================
+    "simple_tower_builder"
+    {
       // General
       //-------------------------------------------------------------------------------------------------------------
       "BaseClass"                   "npc_dota_creature"
@@ -3156,7 +3239,7 @@
     //----------------------------------------------------------------
     "StatusHealth"        "100"   // Base health.
     "StatusHealthRegen"     "0"   // Health regeneration rate.
-    "StatusMana"        "20"      // Base mana.
+    "StatusMana"        "5"      // Base mana.
     "StatusManaRegen"     "0"     // Mana regeneration rate.
 
     // Team
@@ -3176,6 +3259,107 @@
     "MaximumLumber" "100" // Base max lumber
     "LumberPerChop" "20"
     "ConsumesFood"  "20"
+  }
+
+  //================================================================================= 
+  // Worker T3 - Fang Harvester
+  //=================================================================================
+  "worker_t3"
+  {
+    // General
+        //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "npc_dota_creature"
+    "Model" "models/heroes/sven/sven.vmdl"
+    "ModelScale"  "0.8" 
+    "ConsideredHero"  "0"
+
+    "precache"
+    {
+        "model"  "models/heroes/sven/sven_mask.vmdl"
+        "model"  "models/heroes/sven/sven_gauntlet.vmdl"
+        "model"  "models/heroes/sven/sven_shoulder.vmdl"
+        "model"  "models/items/sven/breath_of_tielong/breath_of_tielong.mdl"
+        "particle"  "particles/units/heroes/hero_sven.vpcf"
+    }
+
+
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"          "harvest_channel"   //harvest test
+    "Ability2"          "carrying_lumber"     // Ability 2.
+    "Ability3"          "drop_lumber"     // Ability 3.
+    "Ability4"          "worker_det"      // Ability 4.
+    "Ability5"          ""      // Ability 5.
+    "Ability6"          ""      // Ability 6 - Extra.
+    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "20"     // Physical protection.
+    "MagicalResistance"     "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"     "1"
+    "AttackDamageMax"     "1"
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "0"
+    "AttackAnimationPoint"    "0"
+    "AttackAcquisitionRange"  "0"
+    "AttackRange"       "0"
+    "ProjectileModel"     ""
+    "ProjectileSpeed"     "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"     "170"
+    "RingRadius"        "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"       "300"   // Speed
+    "MovementTurnRate"      "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "10000"   // Base health.
+    "StatusHealthRegen"     "0"   // Health regeneration rate.
+    "StatusMana"        "10"      // Base mana.
+    "StatusManaRegen"     "0"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"          "25"
+    "BountyGoldMin"       "2"
+    "BountyGoldMax"       "2"
+
+    // Vamp
+    "MaximumLumber" "1000" // Base max lumber
+    "LumberPerChop" "100"
+    "ConsumesFood"  "30"
+
+    "Creature"
+    {
+        "AttachWearables"
+        {
+            "Wearble1"  { "ItemDef"     "16" }
+            "Wearble2"  { "ItemDef"     "19" }
+            "Wearble3"  { "ItemDef"     "20" }
+            "Wearble4"  { "ItemDef"     "6080" }
+        }
+    }
   }
 
   //================================================================================= 

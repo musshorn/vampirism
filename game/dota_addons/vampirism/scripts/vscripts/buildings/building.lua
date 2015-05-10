@@ -28,7 +28,8 @@ end
 function Cancel( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
-  if (caster.workHandler ~= nil) then
+
+  if caster.workHandler ~= nil then
     Timers:RemoveTimer(caster.uniqueName)
     caster.workHandler:SetChanneling(false)
     caster.doingWork = false

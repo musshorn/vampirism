@@ -182,6 +182,11 @@ end
 function SlayerRespawnStart( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
+  
+  if SLAYERS[pID] == nil then
+    caster:Stop()
+    return nil
+  end
 
   if SLAYERS[pID].state == "alive" then
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Slayer is currently alive" } )
@@ -201,6 +206,10 @@ end
 function SlayerRespawnInterrupted( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
+
+  if SLAYERS[pID] == nil then
+    return nil
+  end
 
   if SLAYERS[pID].state == "reviving" then
    SLAYERS[pID].state = "dead" 
