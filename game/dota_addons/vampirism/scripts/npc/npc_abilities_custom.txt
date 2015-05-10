@@ -340,7 +340,7 @@
       }
     }
   }
-  
+
   //======================================================
   // Simple Tower builder channel timer
   //======================================================
@@ -1032,9 +1032,9 @@
   //================================================================================= /
   "research_improved_lumber_harvesting"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "35"
-    "AbilityLumberCost" "250"
+    "AbilityLumberCost"   "250"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -2170,7 +2170,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "house_t2"
-        "Scale"       "1"
+        "Scale"       "0.5"
       }
     }
   }
@@ -4080,6 +4080,41 @@
         "Function"        "build"
       }
     }
+  }
+
+  //================================================================================= /
+  // Upgrade to Ultra Research Center
+  //================================================================================= /
+  "upgrade_to_research_center_t2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "research_center_t2"
+        "LumberCost"  "3000"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "research_center_t2"
+        "Scale"       "1"
+      }
+    }
+
+    "IsTech"        "true"
+    "NeedTech"      "house_t2 gold_mine_t1"
   }
 
   "build_cancel"

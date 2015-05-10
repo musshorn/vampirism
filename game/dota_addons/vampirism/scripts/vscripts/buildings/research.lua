@@ -1,4 +1,5 @@
 function Research( keys )
+  print('in research')
   local caster = keys.caster
   local ability = keys.ability
   local lumberCost = ABILITY_KV[ability:GetAbilityName()].AbilityLumberCost
@@ -27,10 +28,10 @@ function Research( keys )
 
   -- Player is ok to commence research, deduct resources
   WOOD[pID] = WOOD[pID] - lumberCost
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+  FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
-    FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
+  FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
   PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
 end
 
@@ -82,6 +83,10 @@ function ImproveLumber(keys)
   elseif level == 3 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 20
   end
+
+  if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
+    caster:RemoveAbility(ability:GetAbilityName())
+  end
 end
 
 function SharpenedHatchets(keys)
@@ -90,6 +95,10 @@ function SharpenedHatchets(keys)
   
   -- This research only applies to t1 workers so we don't need to search for any worker
   UNIT_KV[pID]["worker_t1"].LumberPerChop = 2
+
+  if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
+    caster:RemoveAbility(ability:GetAbilityName())
+  end
 end
 
 function Rifles(keys)
@@ -100,6 +109,10 @@ function Rifles(keys)
   local hero = phandle:GetAssignedHero()
 
   ability:ApplyDataDrivenModifier(caster, hero, "rifle_attack_range", nil)
+
+  if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
+    caster:RemoveAbility(ability:GetAbilityName())
+  end
 end
 
 function ImprovedWorkerMotivation(keys)
@@ -123,6 +136,10 @@ function ImprovedWorkerMotivation(keys)
       -- Also increase the hp on any future units created
       UNIT_KV[pID][key].StatusHealth = UNIT_KV[pID][key].StatusHealth + 300
     end
+  end
+
+  if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
+    caster:RemoveAbility(ability:GetAbilityName())
   end
 end
 
@@ -162,6 +179,10 @@ function GemQuality(keys)
       end
     end
   end
+
+  if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
+    caster:RemoveAbility(ability:GetAbilityName())
+  end
 end
 
 function HumanDamage(keys)
@@ -174,6 +195,10 @@ function HumanDamage(keys)
   human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
   human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
   FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+
+  if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
+    caster:RemoveAbility(ability:GetAbilityName())
+  end
 end   
 
 function HealingTower(keys)

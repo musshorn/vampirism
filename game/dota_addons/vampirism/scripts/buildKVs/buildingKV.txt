@@ -25,7 +25,7 @@
 	"simple_tower_builder"
 	{
 		"build_house1"							"0"
-		"build_feed_t1"							"1"
+		"build_empty"							"1"
 		"build_tower_mana_t1"					"2"
 		"build_human_surplus"					"3"
 		"build_research_center_t2"				"4"
@@ -104,7 +104,7 @@
 			"research_unbeatable_gem_quality"		"2"
 			"OrderPosition"							"9"		
 		}
-		"build_empty"							"10"
+		"upgrade_to_research_center_t2"							"10"
 		"build_cancel"							"11"
 	}
 

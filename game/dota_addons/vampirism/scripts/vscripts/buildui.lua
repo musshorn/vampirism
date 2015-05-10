@@ -34,29 +34,43 @@ function CallMenu(keys)
   --print('callmenu')
     local caster = keys.caster
     local playerID = caster:GetMainControllingPlayer()
+    local unitName = caster:GetUnitName()
 
     --print(caster:GetAbilityCount())
 
     if caster:GetUnitName() == "npc_dota_hero_omniknight" then
-      for k, v in pairs(ABILITY_HOLDERS[caster:GetUnitName()]) do
-        if ABILITY_KV[v]['UnitName'] ~= nil then
+      for k, v in pairs(ABILITY_HOLDERS[unitName]) do
+        if ABILITY_KV[v]['UnitName'] ~= nil then -- if its not a research
           local tech = ABILITY_KV[v]['UnitName']
           TechTree:GetRequired(tech, playerID, true)
         end
       end
     end
 
-    for i = 0, caster:GetAbilityCount() do
-      --print(i)
-      if caster:GetAbilityByIndex(i) ~= nil then
+    if ABILITY_HOLDERS[unitName] ~= nil then
+      for k, v in pairs(ABILITY_HOLDERS[unitName]) do
+        if ABILITY_KV[v]['UnitName'] ~= nil then
+          local tech = ABILITY_KV[v]['UnitName']
+          TechTree:GetRequired(tech, playerID, true)
+        else
+          --assuming its research
+          local tech = v
+          TechTree:GetRequired(tech, playerID, true)
+        end
+      end
+    else -- caster is not using ability holders
+      for i = 0, caster:GetAbilityCount() do
         --print(i)
-        local ability = caster:GetAbilityByIndex(i):GetAbilityName()
-        local buildName = ABILITY_KV[ability]['UnitName']
-        --print('this is '..ability..' buildname')
-        --print(buildName)
-        if buildName ~= nil then
-          --print('callmenu get req')
-          TechTree:GetRequired(buildName, playerID, true)
+        if caster:GetAbilityByIndex(i) ~= nil then
+          --print(i)
+          local ability = caster:GetAbilityByIndex(i):GetAbilityName()
+          local buildName = ABILITY_KV[ability]['UnitName']
+          --print('this is '..ability..' buildname')
+          --print(buildName)
+          if buildName ~= nil then
+            --print('callmenu get req')
+            TechTree:GetRequired(buildName, playerID, false)
+          end
         end
       end
     end 
@@ -71,37 +85,22 @@ end
 
 function BuildUI:BuildChosen(building, playerID)
 
-    --ONLY FOR TESTING IN SINGLE, NOT WORKING IN MULTIPLAYER.
-    --SHOULD BE local caster = playerCasters[playerID]
-    --local caster = playerCasters[playerID]
     local caster = playerCasters[playerID]
 
     if caster:FindAbilityByName(building) ~= nil then
       local ability = caster:FindAbilityByName(building)
       caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
     else
-      for k, v in pairs(ABILITY_HOLDERS[caster:GetUnitName()]) do
+      for k, v in ipairs(ABILITY_HOLDERS[caster:GetUnitName()]) do
         if building == v then
           caster:AddAbility(v)
           local ability = caster:FindAbilityByName(v)
+          ability:SetLevel(1)
           caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
-          caster:RemoveAbility(v)
+          if ABILITY_KV[ability:GetAbilityName()]['UnitName'] ~= nil then
+            caster:RemoveAbility(v)
+          end
         end
       end
     end
-
-    --ability:OnSpellStart()
-    --print(ability:GetChannelTime())
-    --ability:SetChanneling(true)
-    --if caster:IsChanneling() then
-    -- caster:CastAbilityNoTarget(caster:FindAbilityByName('build_cancel'), caster:GetMainControllingPlayer())
-   -- else
-    --  ability:SetChanneling(true)
-    --end
-    --find a better way of doing this..(like getting it out of the kv.)
-    --local buildName = ABILITY_KV[ability]['UnitName']
-
-    -- print(TechTree:GetRequired(tech, playerID, true))
-    -- print('player casted ability')
-    --caster:CastAbilityNoTarget(ability, playerID)
 end

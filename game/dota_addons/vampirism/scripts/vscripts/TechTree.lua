@@ -104,8 +104,9 @@ end
 --Adds a unit to the TechTree table, and increments the count of units in the table.
 function TechTree:AddTech(unitName, playerID)
 	local tech = unitName
-
 	--print('adding tech '..tostring(playerID))
+	print('add tech')
+	print(tech)
 
 	if playerTrees[playerID][tech] ~= nil then
 		playerTrees[playerID][tech] = playerTrees[playerID][tech] + 1
@@ -116,6 +117,7 @@ function TechTree:AddTech(unitName, playerID)
 		--print('added')
 		--PrintTable(PlayerTrees)
 	end
+	PrintTable(playerTrees)
 end
 
 function TechTree:AddTechAbility(keys)

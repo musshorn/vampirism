@@ -78,6 +78,9 @@ function Precache( context )
 		PrecacheModel("models/items/wards/celestial_observatory/celestial_observatory.vmdl", context)
 		PrecacheModel("models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl", context)
 		PrecacheModel("models/heroes/bounty_hunter/bounty_hunter.vmdl", context)
+		PrecacheModel("models/props_structures/bad_base_shop001.vmdl", context)
+		PrecacheModel("models/tent_dk_med_reference.vmdl", context)
+		
 				-- Placeholder models for walls
 		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)
 		PrecacheModel("models/heroes/mirana/mount.vmdl",context)

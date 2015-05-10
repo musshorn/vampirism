@@ -167,8 +167,9 @@ function FinishUpgrade( keys )
 
   if UNIT_KV[pID][unit:GetUnitName()].SpawnsUnits == "true" then
     unit:UnitSpawner()
-  end 
+  end
 
+  TechTree:AddTech(targetUnit, pID)
 end
 
 -- Repairing is hard.

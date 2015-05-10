@@ -134,7 +134,6 @@ function GameMode:OnAllPlayersLoaded()
     local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
     GameRules:SetHeroRespawnEnabled(false)
 
-
     for i = 0, 9 do
     	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
     end
@@ -291,6 +290,8 @@ function GameMode:OnNPCSpawned(keys)
     end
   end
 
+local unitName = npc:GetUnitName()
+
   if npc:IsRealHero() and npc.bFirstSpawned == nil then
     npc.bFirstSpawned = true
     GameMode:OnHeroInGame(npc)
@@ -298,16 +299,25 @@ function GameMode:OnNPCSpawned(keys)
     local name = ''
 
     for k, v in pairs(HERO_KV) do
-      if HERO_KV[k]["override_hero"] == npc:GetUnitName() then
+      if HERO_KV[k]["override_hero"] == unitName then
         name = k
       end
     end
 
-    if HERO_KV[name]["AbilityHolder"] ~= nil then
-      if ABILITY_HOLDERS[npc:GetUnitName()] == nil then
-        ABILITY_HOLDERS[npc:GetUnitName()] = {}
+    if HERO_KV[name].AbilityHolder ~= nil then
+      if ABILITY_HOLDERS[unitName] == nil then
+        ABILITY_HOLDERS[unitName] = {}
         for i = 1, HERO_KV[name]["AbilityHolder"] do
-          table.insert(ABILITY_HOLDERS[npc:GetUnitName()], HERO_KV[name]["ExtraAbility"..i])
+          table.insert(ABILITY_HOLDERS[unitName], HERO_KV[name]["ExtraAbility"..i])
+        end
+      end
+    end
+  else
+    if UNIT_KV[-1][unitName]['AbilityHolder'] ~= nil then
+      if ABILITY_HOLDERS[unitName] == nil then
+        ABILITY_HOLDERS[unitName] = {}
+        for i = 1, UNIT_KV[-1][unitName]["AbilityHolder"] do
+          table.insert(ABILITY_HOLDERS[unitName], UNIT_KV[-1][unitName]["ExtraAbility"..i])
         end
       end
     end
@@ -867,6 +877,8 @@ function GameMode:InitGameMode()
   BuildingHelper:Init(8192)
   BuildUI:Init()
   TechTree:Init()
+
+  UNIT_KV[-1] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
   print('[vampirism] Done loading vampirism gamemode!\n\n')
 end
