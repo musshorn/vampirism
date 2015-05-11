@@ -179,7 +179,7 @@ function BuildingHelper:AddBuilding(keys)
   end
 
   -- Get the local player, this assumes the player is only placing one building at a time
-  local player = builder:GetPlayerOwner()
+  local player = PlayerResource:GetPlayer(builder:GetMainControllingPlayer())
   
   player.buildingPosChosen = false
   player.activeBuilder = builder
@@ -204,7 +204,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
   local callbacks = work.callbacks
   local unitName = work.name
   local location = work.location
-  local player = builder:GetPlayerOwner()
+  local player = PlayerResource:GetPlayer(builder:GetMainControllingPlayer())
   local playersHero = player:GetAssignedHero()
   local buildingTable = work.buildingTable
   local size = buildingTable:GetVal("BuildingSize", "number")
@@ -487,7 +487,7 @@ function InitializeBuilder( builder )
   function builder:AddToQueue( location )
     -- Adds a location to the builders work queue
 
-    local player = builder:GetPlayerOwner()
+    local player = PlayerResource:GetPlayer(builder:GetMainControllingPlayer())
     local building = player.activeBuilding
     local buildingTable = player.activeBuildingTable
     local fMaxScale = buildingTable:GetVal("MaxScale", "float")
