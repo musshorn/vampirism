@@ -80,6 +80,8 @@ function Precache( context )
 		PrecacheModel("models/heroes/bounty_hunter/bounty_hunter.vmdl", context)
 		PrecacheModel("models/props_structures/bad_base_shop001.vmdl", context)
 		PrecacheModel("models/tent_dk_med_reference.vmdl", context)
+		PrecacheModel("models/props_structures/statue_mystical001.vmdl", context)
+		PrecacheModel("models/bad_base_shop001_reference.vmdl", context)
 		
 				-- Placeholder models for walls
 		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)

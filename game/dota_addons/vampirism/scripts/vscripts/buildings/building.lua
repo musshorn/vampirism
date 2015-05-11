@@ -68,6 +68,7 @@ function SetRallyPoint( keys )
 end
 
 function Upgrade( keys )
+  print('in upgrade')
   local caster = keys.caster
   local lumberCost = keys.LumberCost
   local goldCost = keys.GoldCost

@@ -26,10 +26,10 @@
 	{
 		"build_house1"							"0"
 		"build_empty"							"1"
-		"build_tower_mana_t1"					"2"
+		"build_tower_manaburn_t2"				"2"
 		"build_human_surplus"					"3"
 		"build_research_center_t2"				"4"
-		"build_wall_t4"							"5"
+		"build_tower_opal"						"5"
 		"build_tower_wall_t1"					"6"
 		"build_tower_frost"						"7"
 		"build_heal_wall_t1"					"8"
@@ -43,7 +43,7 @@
 	//=================================================================================================================
 	"super_tower_builder"
 	{
-		"build_tower_mana_t1"					"0"
+		"build_tower_manaburn_t2"					"0"
 		"build_gold_mine_t2"					"1"
 		"build_tower_cripple_t1"				"2"
 		"build_human_surplus"					"3"

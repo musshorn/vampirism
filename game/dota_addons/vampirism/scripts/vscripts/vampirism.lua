@@ -250,8 +250,9 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 5000 --cheats
-      PlayerResource:SetGold(playerID, 0, false) --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, false)
+      WOOD[playerID] = 50000 --cheats
+      PlayerResource:SetGold(playerID, 0, false) --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, true)
+      PlayerResource:SetGold(playerID, 1000, true)
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -957,11 +958,11 @@ function GameMode:OnConnectFull(keys)
 
   --Hides unused HUD elements. Thanks to Noya for documenting this!
   mode = GameRules:GetGameModeEntity()
-  --mode:SetHUDVisible(1, false)
-  --mode:SetHUDVisible(2, false)
-  --mode:SetHUDVisible(9, false)
-  --mode:SetHUDVisible(11, false)
-  --mode:SetHUDVisible(12, false)
+  mode:SetHUDVisible(1, false)
+  mode:SetHUDVisible(2, false)
+  mode:SetHUDVisible(9, false)
+  mode:SetHUDVisible(11, false)
+  mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
  
   heroRoller(playerID)
