@@ -34,6 +34,7 @@ function BuildingHelper:Init(...)
     --get the player that sent the command
     local cmdPlayer = Convars:GetCommandClient()
     if cmdPlayer then
+      print('cancelbuilding')
       cmdPlayer.activeBuilder:ClearQueue()
       cmdPlayer.activeBuilding = nil
       cmdPlayer.activeBuilder:Stop()

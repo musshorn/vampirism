@@ -250,7 +250,7 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 50000 --cheats
+      WOOD[playerID] = 10000000 --cheats
       PlayerResource:SetGold(playerID, 0, false) --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, true)
       PlayerResource:SetGold(playerID, 1000, true)
       TOTAL_FOOD[playerID] = 15

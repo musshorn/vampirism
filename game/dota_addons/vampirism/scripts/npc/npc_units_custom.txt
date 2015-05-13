@@ -281,7 +281,7 @@
   {
     //General
     //
-    "Model" "models/heroes/mirana/mount.vmdl"
+    "Model" "models/props_rock/badside_rocks001.vmdl"
     "BaseClass" "npc_dota_creature"
     //"ModelScale"  "0.1"
     
@@ -354,7 +354,7 @@
   {
     //General
     //
-    "Model" "models/heroes/phoenix/phoenix_egg.vmdl"
+    "Model" "models/props_rock/riveredge_rock007a.vmdl"
     "BaseClass" "npc_dota_creature"
     //"ModelScale"  "0.1"
     
@@ -427,7 +427,7 @@
   {
     //General
     //
-    "Model" "models/heroes/undying/undying_tower.vmdl"
+    "Model" "models/props_rock/riveredge_rock004a.vmdl"
     "BaseClass" "npc_dota_creature"
     //"ModelScale"  "0.1"
     
@@ -500,7 +500,7 @@
   {
     //General
     //
-    "Model" "models/items/chen/mount_navi_combined/mount_navi_combined.vmdl"
+    "Model" "models/riveredge_rock010a_reference.vmdl"
     "BaseClass" "npc_dota_creature"
     //"ModelScale"  "0.1"
     
@@ -573,7 +573,7 @@
   {
     //General
     //
-    "Model" "models/items/courier/carty/carty.vmdl"
+    "Model" "models/riveredge_rock_wall001a_reference.vmdl"
     "BaseClass" "npc_dota_creature"
     //"ModelScale"  "0.1"
     
@@ -646,7 +646,7 @@
   {
     //General
     //
-    "Model" "models/items/lone_druid/viciouskraitpanda/viciouskrait_panda.vmdl"
+    "Model" "models/bad_stonewall003b_reference.vmdl"
     "BaseClass" "npc_dota_creature"
     //"ModelScale"  "0.1"
     
@@ -719,7 +719,7 @@
   {
     //General
     //
-    "Model" "models/props_bones/rib_cage001.vmdl"
+    "Model" "models/bad_stonewall003_reference.vmdl"
     "BaseClass" "npc_dota_creature"
     //"ModelScale"  "0.1"
     
@@ -792,7 +792,7 @@
   {
     //General
     //
-    "Model" "models/props_gameplay/shopkeeper_dire/secretshopkeeper_dire.vmdl"
+    "Model" "models/bad_stonewall003c_reference.vmdl"
     "BaseClass" "npc_dota_creature"
     //"ModelScale"  "0.1"
     
@@ -2718,7 +2718,7 @@
 
         //Attack
         //----------------------------------------------------------------
-        "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
+        "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
         "AttackDamageMin"           "150"
         "AttackDamageMax"           "150"
         "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"

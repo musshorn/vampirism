@@ -85,14 +85,14 @@ function Precache( context )
 		
 				-- Placeholder models for walls
 		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)
-		PrecacheModel("models/heroes/mirana/mount.vmdl",context)
-		PrecacheModel("models/heroes/phoenix/phoenix_egg.vmdl",context)
-		PrecacheModel("models/heroes/undying/undying_tower.vmdl",context)
-		PrecacheModel("models/items/chen/mount_navi_combined/mount_navi_combined.vmdl",context)
-		PrecacheModel("models/items/courier/carty/carty.vmdl",context)
-		PrecacheModel("models/items/lone_druid/viciouskraitpanda/viciouskrait_panda.vmdl",context)
-		PrecacheModel("models/props_bones/rib_cage001.vmdl",context)
-		PrecacheModel("models/props_gameplay/shopkeeper_dire/secretshopkeeper_dire.vmdl",context)
+		PrecacheModel("models/props_rock/badside_rocks001.vmdl",context)
+		PrecacheModel("models/props_rock/riveredge_rock007a.vmdl",context)
+		PrecacheModel("models/props_rock/riveredge_rock004a.vmdl",context)
+		PrecacheModel("models/riveredge_rock010a_reference.vmdl",context)
+		PrecacheModel("models/riveredge_rock_wall001a_reference.vmdl",context)
+		PrecacheModel("models/bad_stonewall003b_reference.vmdl",context)
+		PrecacheModel("models/bad_stonewall003_reference.vmdl",context)
+		PrecacheModel("models/bad_stonewall003c_reference.vmdl",context)
 
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
