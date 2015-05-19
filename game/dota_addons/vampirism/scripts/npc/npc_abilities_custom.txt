@@ -2271,7 +2271,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "house_t3"
-        "Scale"       "0.5"
+        "Scale"       "1"
       }
     }
   }

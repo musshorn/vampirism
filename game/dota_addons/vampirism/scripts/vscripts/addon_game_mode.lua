@@ -82,9 +82,6 @@ function Precache( context )
 		PrecacheModel("models/tent_dk_med_reference.vmdl", context)
 		PrecacheModel("models/props_structures/statue_mystical001.vmdl", context)
 		PrecacheModel("models/bad_base_shop001_reference.vmdl", context)
-		
-				-- Placeholder models for walls
-		PrecacheModel("models/heroes/keeper_of_the_light/horsefx.vmdl",context)
 		PrecacheModel("models/props_rock/badside_rocks001.vmdl",context)
 		PrecacheModel("models/props_rock/riveredge_rock007a.vmdl",context)
 		PrecacheModel("models/props_rock/riveredge_rock004a.vmdl",context)
@@ -93,7 +90,6 @@ function Precache( context )
 		PrecacheModel("models/bad_stonewall003b_reference.vmdl",context)
 		PrecacheModel("models/bad_stonewall003_reference.vmdl",context)
 		PrecacheModel("models/bad_stonewall003c_reference.vmdl",context)
-
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

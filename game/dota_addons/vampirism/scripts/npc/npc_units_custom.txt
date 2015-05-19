@@ -2942,7 +2942,7 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"         "npc_dota_creature"
-        "Model"             "models/props_structures/tent_dk_large.vmdl"
+        "Model"             "models/tent_dk_large_reference.vmdl"
         "ModelScale"        "1"
         "AbilityLayout"        "5"
         
