@@ -164,6 +164,38 @@
       }
     }
   }
+  //================================================================================= /
+  // Tombstone modifier to make it invulnerable until the player decides what to do (within 60s)
+  //================================================================================= /
+  "human_tomb_timer"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "Target"  "CASTER"
+        "ModifierName"  "modifier_human_tomb"
+      }
+
+    }
+
+    
+    "Modifiers"
+    {
+      "modifier_human_tomb"
+      {
+        "Passive" "1"
+        "Duration"  "60"
+        "IsHidden"  "1"
+        "States"
+        {
+          "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
 
   //Set rally point for workers created by this building
   "set_rally_point"

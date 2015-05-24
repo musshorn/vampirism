@@ -106,6 +106,7 @@ function Precache( context )
 		PrecacheUnitByNameSync("house_t2", context)
 		PrecacheUnitByNameSync("worker_t3", context)
 		PrecacheUnitByNameSync("house_t3", context)
+		PrecacheUnitByNameSync("human_tomb", context)
 
 		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
