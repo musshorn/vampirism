@@ -23,6 +23,13 @@ function BuildingHelper:Init(...)
   Convars:RegisterCommand( "BuildingPosChosen", function()
     --get the player that sent the command
     local cmdPlayer = Convars:GetCommandClient()
+    
+    if cmdPlayer.activeBuilder:HasAbility("has_build_queue") == false then
+      cmdPlayer.activeBuilder:AddAbility("has_build_queue")
+      local abil = cmdPlayer.activeBuilder:FindAbilityByName("has_build_queue")
+      abil:SetLevel(1)
+    end
+
     if cmdPlayer then
       FlashUtil:GetCursorWorldPos(cmdPlayer:GetPlayerID(), function ( pID, location )
         cmdPlayer.activeBuilder:AddToQueue(location)
@@ -34,7 +41,6 @@ function BuildingHelper:Init(...)
     --get the player that sent the command
     local cmdPlayer = Convars:GetCommandClient()
     if cmdPlayer then
-      print('cancelbuilding')
       cmdPlayer.activeBuilder:ClearQueue()
       cmdPlayer.activeBuilding = nil
       cmdPlayer.activeBuilder:Stop()
