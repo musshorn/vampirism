@@ -206,3 +206,19 @@ function WorkerDet( keys )
 
   caster:Destroy()
 end
+
+function BuildingQ( keys )
+
+  local ability = keys.ability
+  local caster = keys.caster  
+  local kvref = ABILITY_KV[keys.ability:GetAbilityName()]
+
+  if caster.ProcessingBuilding ~= nil then
+    -- caster is probably a builder, stop them
+    player = caster:GetPlayerOwner()
+    player.activeBuilder:ClearQueue()
+    player.activeBuilding = nil
+    player.activeBuilder:Stop()
+    player.activeBuilder.ProcessingBuilding = false
+  end
+end

@@ -138,6 +138,32 @@
       }
     }
   }
+  //================================================================================= /
+  // Builder modifier to signal that builder is processing a queue
+  //================================================================================= /
+  "has_build_queue"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass" "ability_datadriven"
+
+    
+    "Modifiers"
+    {
+      "modifier_has_build_queue"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+        "OnOrder"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/abilities.lua"
+            "Function"    "BuildingQ"
+          }
+        }
+      }
+    }
+  }
 
   //Set rally point for workers created by this building
   "set_rally_point"
@@ -2271,7 +2297,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "house_t3"
-        "Scale"       "0.5"
+        "Scale"       "1"
       }
     }
   }
@@ -2335,6 +2361,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "wall_t3"
+        "Scale"       "0.8"
       }
     }
   }
@@ -2366,6 +2393,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "wall_t4"
+        "Scale"       "0.5"
       }
     }
   }
@@ -2428,6 +2456,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "wall_t6"
+        "Scale"       "1"
       }
     }
   }
@@ -2460,6 +2489,7 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "wall_t7"
+        "Scale"       "0.9"
       }
     }
   }
@@ -4272,7 +4302,7 @@
     "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
     // BuildingHelper info
     "Building"                  "1"
-    "BuildingSize"              "2"
+    "BuildingSize"              "4"
     "BuildTime"                 "2"
     "AbilityCastRange"          "200"
     "UpdateHealth"              "1"
@@ -4368,7 +4398,7 @@
     "AbilityCastRange"          "200"
     "UpdateHealth"              "1"
     "Scale"                     "1"
-    "MaxScale"                  "1"
+    "MaxScale"                  "0.7"
     "CasterCanControl"          "1"
 
     "AbilityCooldown"           "0"
@@ -4458,7 +4488,7 @@
     "AbilityCastRange"          "200"
     "UpdateHealth"              "1"
     "Scale"                     "1"
-    "MaxScale"                  "1"
+    "MaxScale"                  "0.8"
     "CasterCanControl"          "1"
 
     "AbilityCooldown"           "0"
