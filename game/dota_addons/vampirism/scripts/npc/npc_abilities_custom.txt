@@ -169,7 +169,7 @@
   //================================================================================= /
   "human_tomb_timer"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -181,18 +181,32 @@
 
     }
 
-    
     "Modifiers"
     {
       "modifier_human_tomb"
       {
         "Passive" "1"
         "Duration"  "60"
-        "IsHidden"  "1"
         "States"
         {
           "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
         }
+      }
+    }
+  }
+  //================================================================================= /
+  // Turns the Tombstone into a gargoyle, if the gargoyle makes it back to the spawn they can become a vamp
+  //================================================================================= /
+  "become_vampire"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "SpawnGargoyle"
       }
     }
   }
