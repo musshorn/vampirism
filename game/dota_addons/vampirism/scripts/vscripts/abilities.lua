@@ -206,3 +206,29 @@ function WorkerDet( keys )
 
   caster:Destroy()
 end
+
+function BuildingQ( keys )
+
+  local ability = keys.ability
+  local caster = keys.caster  
+  local kvref = ABILITY_KV[keys.ability:GetAbilityName()]
+
+  if caster.ProcessingBuilding ~= nil then
+    -- caster is probably a builder, stop them
+    player = caster:GetPlayerOwner()
+    player.activeBuilder:ClearQueue()
+    player.activeBuilding = nil
+    player.activeBuilder:Stop()
+    player.activeBuilder.ProcessingBuilding = false
+  end
+end
+
+function SpawnGargoyle( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+
+  local unit = CreateUnitByName("human_gargoyle", caster:GetAbsOrigin(), false, nil, nil, caster:GetTeam())
+  unit:SetControllableByPlayer(pID, true)
+
+  caster:RemoveSelf()
+end

@@ -138,6 +138,78 @@
       }
     }
   }
+  //================================================================================= /
+  // Builder modifier to signal that builder is processing a queue
+  //================================================================================= /
+  "has_build_queue"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass" "ability_datadriven"
+
+    
+    "Modifiers"
+    {
+      "modifier_has_build_queue"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+        "OnOrder"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/abilities.lua"
+            "Function"    "BuildingQ"
+          }
+        }
+      }
+    }
+  }
+  //================================================================================= /
+  // Tombstone modifier to make it invulnerable until the player decides what to do (within 60s)
+  //================================================================================= /
+  "human_tomb_timer"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "Target"  "CASTER"
+        "ModifierName"  "modifier_human_tomb"
+      }
+
+    }
+
+    "Modifiers"
+    {
+      "modifier_human_tomb"
+      {
+        "Passive" "1"
+        "Duration"  "60"
+        "States"
+        {
+          "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
+  //================================================================================= /
+  // Turns the Tombstone into a gargoyle, if the gargoyle makes it back to the spawn they can become a vamp
+  //================================================================================= /
+  "become_vampire"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "SpawnGargoyle"
+      }
+    }
+  }
 
   //Set rally point for workers created by this building
   "set_rally_point"
