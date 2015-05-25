@@ -545,6 +545,7 @@ function GameMode:OnEntityKilled( keys )
   local killerEntity = nil
   local unitName = killedUnit:GetUnitName()
   local playerID = killedUnit:GetMainControllingPlayer()
+  local killedOwner = killedUnit:GetPlayerOwner()
   local modelName = killedUnit:GetModelName() 
 
   if keys.entindex_attacker ~= nil then
@@ -590,6 +591,10 @@ function GameMode:OnEntityKilled( keys )
     if HUMAN_COUNT == 0 then
       GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
     end
+
+    -- Create a tombstone, the player can then pick to become a human spectator or a vampire
+    local tomb = CreateUnitByName("human_tomb", killedUnit:GetAbsOrigin(), true, nil, nil, killedOwner:GetTeam())
+    tomb:SetControllableByPlayer(killedUnit:GetMainControllingPlayer(), true)
   end
 
   if killedUnit:GetName() == "npc_dota_hero_night_stalker" then

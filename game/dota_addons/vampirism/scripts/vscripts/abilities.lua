@@ -222,3 +222,13 @@ function BuildingQ( keys )
     player.activeBuilder.ProcessingBuilding = false
   end
 end
+
+function SpawnGargoyle( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+
+  local unit = CreateUnitByName("human_gargoyle", caster:GetAbsOrigin(), false, nil, nil, caster:GetTeam())
+  unit:SetControllableByPlayer(pID, true)
+
+  caster:RemoveSelf()
+end
