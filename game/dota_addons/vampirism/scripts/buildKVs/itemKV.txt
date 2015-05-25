@@ -1,0 +1,286 @@
+"ItemKV"
+{
+	//=================================================================================================================
+	// Human Surplus
+	//=================================================================================================================
+	"human_surplus"
+	{
+		"item_engineer_toolkit"
+		{
+			"stock"			"1"
+			"stocktime"		"180"
+			"index"			"0"
+		}
+		"item_master_slayer_vest"			
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"1"
+		}
+		"item_venom_orb"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"2"
+		}
+		"item_circlet_slayer"	
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"3"
+		}
+		"item_divinity_jewel"
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"4"
+		}
+		"item_pendant_mana"	
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"5"
+		}
+		"item_pendant_vitality"
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"6"
+		}				
+	}
+	//=================================================================================================================
+	// Vampire Shop
+	//=================================================================================================================
+	"vampire_shop"
+	{
+		"item_vampiric_boots"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"0"
+		}
+		"item_sphere_doom"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"1"
+		}
+		"item_vampiric_concoction"			
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"2"
+		}
+		"item_ring_hell_lords"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"3"
+		}
+		"item_dracula_helm"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"4"
+		}
+		"item_hire_shade"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"5"
+		}
+		"item_summon_infernal"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"6"
+		}
+		"item_summon_infernal_meteor"		
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"7"
+		}
+		"item_pulse_staff"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"8"
+		}
+		"item_immunity_shield"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"9"
+		}
+		"item_dracula_urn"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"10"
+		}
+		"item_rod_teleportation"			
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"11"
+		}
+		"item_demonic_remains"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"12"
+		}
+		"item_summon_assassin"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"13"
+		}
+		"item_summon_fel_beast"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"14"
+		}
+		"item_trade_wood"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"15"
+		}
+		"item_burst_gem"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"16"
+		}
+		"item_massive_grave"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"17"
+		}
+		"item_cloack_shadows"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"18"
+		}
+		"item_rain_inferno"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"19"
+		}
+		"item_wind_walk_potion"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"20"
+		}
+		"item_french_man"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"21"
+		}
+		"item_claws_dreadlord"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"22"
+		}
+		"item_meat_carrier"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"23"
+		}
+		"item_silent_whisper"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"24"
+		}
+		"item_refresh_potion"
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"25"
+		}				
+		
+		"item_wand_shadowsight"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"26"
+		}
+		"item_wand_cyclone"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"27"
+		}
+		"item_sentry_wards"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"28"
+		}
+		"item_scroll_beast"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"29"
+		}
+		"item_claws_attack"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"30"
+		}
+		"item_ring_regen"					
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"31"
+		}
+		"item_replenish_potion"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"32"
+		}
+		"item_ring_protection"				
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"33"
+		}
+		"item_recipie_dracula_cloak"		
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"34"
+		}
+		"item_recipie_ricochet_gem"			
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"35"
+		}
+		"item_gauntlets_underworld"			
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"36"
+		}
+		"item_gauntlets_hellfire"
+		{
+			"stock"			"1"
+			"stocktime"		"420"
+			"index"			"37"
+		}		
+	}	
+}

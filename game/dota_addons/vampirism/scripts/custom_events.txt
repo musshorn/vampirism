@@ -113,4 +113,13 @@
     	"building"		"string"
     	"buildable"		"bool"
     }
+
+    //Shop events
+    "shop_open"
+    {
+    	"player_ID"		"short"
+    	"shop_type"		"string"
+    	"shop_user"		"long"
+    	"shop_index"	"long"
+    }
 }

@@ -593,7 +593,7 @@
     "BaseClass"           "ability_datadriven"
     "MaxLevel"            "1"
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "AbilityChannelTime"  "60"
+    "AbilityChannelTime"  "1"
     "LumberCost" "400"
     "OnSpellStart"
     {

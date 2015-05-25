@@ -283,6 +283,46 @@
 		}
 	}
 
+	//================================================================================= 
+  	// Human Surplus - Engineers
+  	//=================================================================================
+  	"item_engineer_toolkit"
+  	{
+  		"ID"	"1111"
+  		"BaseClass"		"item_datadriven"
+  		"AbilityTextureName"	"item_maelstrom"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  		"ItemStackable"		"0"
+  		"ItemKillable"		"1"
+  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"		"1"
+  		"ItemRequiresCharges" "0"
+  		"SideShop"			"1"
+  		"AbilityCooldown"				"240"
+  		"LumberCost"		"5000"
+  		"OnSpellStart"
+  		{
+  			"SpawnUnit"
+  			{
+  				"UnitName"		"toolkit_engineer"
+  				"Target" 		"CASTER"
+  				"Duration"		"180"
+  				"UnitCount"		"4"
+  				"GrantsGold"	"1"
+  				"GrantsXP"		"1"
+  				"SpawnRadius"	"10"
+  			}
+  		}
+  		"OnCreated"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"scripts/vscripts/items.lua"
+  				"Function"		"CheckLumber"
+  			}
+  		}
+  	}
+
 	"item_health_modifier"
 	{
 		"ID"							"2102"

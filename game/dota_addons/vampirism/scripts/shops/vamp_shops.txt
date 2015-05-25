@@ -69,7 +69,7 @@
 
     "sideshop1"
     {
-        "item"      "ITEM_NAME"
+        "item"      "item_engineer_toolkit"
     }
 
  //Sideshop Page 2

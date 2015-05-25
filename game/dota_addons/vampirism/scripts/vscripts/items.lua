@@ -1,3 +1,8 @@
+function CheckLumber( keys )
+	print('checking lumber for item')
+	PrintTable(keys)
+end
+
 function CoinUsed(keys)
 	local user = keys.caster
 	local coin = keys.ability

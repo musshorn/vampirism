@@ -18,6 +18,7 @@ require('TechTree')
 require('physics')
 require('util')
 require('abilities.vampire')
+require('shopui')
 
 function Precache( context )
 		--[[
@@ -106,6 +107,7 @@ function Precache( context )
 		PrecacheUnitByNameSync("house_t2", context)
 		PrecacheUnitByNameSync("worker_t3", context)
 		PrecacheUnitByNameSync("house_t3", context)
+		PrecacheUnitByNameSync("toolkit_engineer", context)
 
 		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)

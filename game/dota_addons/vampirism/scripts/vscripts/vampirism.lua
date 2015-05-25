@@ -50,6 +50,8 @@ CURRENT_FOOD = {}
 UNIT_KV = {} -- Each player has their own UNIT_KV file that research modifies properties of
 ABILITY_KV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
 HERO_KV = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
+ITEM_KV = LoadKeyValues("scripts/npc/npc_items_custom.txt")
+INVENTORIES = {}
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
 HUMAN_COUNT = 0
@@ -191,9 +193,6 @@ function GameMode:OnGameInProgress()
   SphereTimer()
 end
 
-
-
-
 -- Cleanup a player when they leave
 function GameMode:OnDisconnect(keys)
   print('[vampirism] Player Disconnected ' .. tostring(keys.userid))
@@ -243,8 +242,9 @@ function GameMode:OnNPCSpawned(keys)
   print("[vampirism] NPC Spawned")
 
   local npc = EntIndexToHScript(keys.entindex)
+  print(npc:HasInventory())
   local playerID = npc:GetPlayerOwnerID()
-
+  print(npc:GetUnitName())
   if npc:GetName() == "npc_dota_hero_omniknight" then
   	npc:FindAbilityByName("call_buildui"):SetLevel(1)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
@@ -259,6 +259,7 @@ function GameMode:OnNPCSpawned(keys)
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
       HUMAN_COUNT = HUMAN_COUNT + 1
       npc:SetAbilityPoints(0)
+      npc:SetHasInventory(false)
       FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
       FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
       FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
@@ -268,9 +269,6 @@ function GameMode:OnNPCSpawned(keys)
   end
 
   local newState = GameRules:State_Get()
-  if newState == DOTA_GAMERULES_STATE_PRE_GAME then
- 	print('pregame')
-  end
 
   if npc:GetName() == "npc_dota_hero_night_stalker" then
   	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
@@ -287,7 +285,7 @@ function GameMode:OnNPCSpawned(keys)
     end
   end
 
-local unitName = npc:GetUnitName()
+local unitName = string.lower(npc:GetUnitName())
 
   if npc:IsRealHero() and npc.bFirstSpawned == nil then
     npc.bFirstSpawned = true
@@ -295,11 +293,15 @@ local unitName = npc:GetUnitName()
 
     local name = ''
 
+    print(unitName)
+    print('looking for name...')
     for k, v in pairs(HERO_KV) do
       if HERO_KV[k]["override_hero"] == unitName then
         name = k
       end
     end
+
+    print(name)
 
     if HERO_KV[name].AbilityHolder ~= nil then
       if ABILITY_HOLDERS[unitName] == nil then
@@ -326,6 +328,13 @@ local unitName = npc:GetUnitName()
 
   if string.match(npc:GetUnitName(), "vampire_vision_dummy") then
     VisionDummy(npc)
+  end
+
+  if npc:HasInventory() and npc:GetName() then
+    if INVENTORIES[playerID] == nil then
+      INVENTORIES[playerID] = {}
+    end
+    table.insert(INVENTORIES[playerID], npc)
   end
 end
 
@@ -386,7 +395,16 @@ function GameMode:OnItemPurchased( keys )
   
   -- The cost of the item purchased
   local itemcost = keys.itemcost
-  
+  local lumbercost = 0
+
+  if ITEM_KV[itemName]["LumberCost"] ~= nil then
+    lumbercost = ITEM_KV[itemName]["LumberCost"]
+  end
+
+  for k, v in pairs(INVENTORIES[playerID]) do
+    print(k)
+    print(v)
+  end
 end
 
 -- An ability was used by a player
@@ -871,6 +889,7 @@ function GameMode:InitGameMode()
   BuildingHelper:Init(8192)
   BuildUI:Init()
   TechTree:Init()
+  ShopUI:Init()
 
   UNIT_KV[-1] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
