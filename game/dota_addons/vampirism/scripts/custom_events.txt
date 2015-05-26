@@ -122,4 +122,10 @@
     	"shop_user"		"long"
     	"shop_index"	"long"
     }
+    "shop_item_bought"
+    {
+    	"player_ID"		"short"
+    	"shop_index"	"long"
+    	"item_name"		"string"
+    }
 }

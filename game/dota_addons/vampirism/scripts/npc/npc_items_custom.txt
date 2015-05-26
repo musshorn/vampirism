@@ -298,19 +298,15 @@
   		"ItemPermanent"		"1"
   		"ItemRequiresCharges" "0"
   		"SideShop"			"1"
-  		"AbilityCooldown"				"240"
-  		"LumberCost"		"5000"
+  		"AbilityCooldown"	"240"
+  		"GoldCost"			"5"
+  		"LumberCost"		"20000"
   		"OnSpellStart"
   		{
-  			"SpawnUnit"
+  			"RunScript"
   			{
-  				"UnitName"		"toolkit_engineer"
-  				"Target" 		"CASTER"
-  				"Duration"		"180"
-  				"UnitCount"		"4"
-  				"GrantsGold"	"1"
-  				"GrantsXP"		"1"
-  				"SpawnRadius"	"10"
+  				"ScriptFile"	"scripts/vscripts/items.lua"
+  				"Function"		"SpawnEngineers"
   			}
   		}
   		"OnCreated"

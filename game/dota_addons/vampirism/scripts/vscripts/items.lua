@@ -37,3 +37,14 @@ function SphereDoom( keys )
 		FireGameEvent("custom_error_show", {player_ID = caster:GetMainControllingPlayer(), _error = "Vampire doesn't fit here!"}) 
 	end
 end
+
+function SpawnEngineers( keys )
+	local caster = keys.caster
+	local playerID = caster:GetMainControllingPlayer()
+	local ability = keys.ability
+
+	for i = 1, 4 do
+		local engi = CreateUnitByName("toolkit_engineer", caster:GetAbsOrigin(), true, nil, nil, 0)
+		engi:SetControllableByPlayer(playerID, true)
+	end
+end

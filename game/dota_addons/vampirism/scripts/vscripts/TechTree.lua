@@ -32,7 +32,7 @@ end
 
 --Check if a unit requires a missing tech, and return the missing tech(s) if any.
 function TechTree:GetRequired(unitName, playerID, isBuilding)
-	PrintTable(PlayerTrees)
+	--PrintTable(PlayerTrees)
 	if(isBuilding) then
 		local techlist = {}
 		if UNIT_KV[playerID][unitName] ~= nil then
@@ -44,7 +44,7 @@ function TechTree:GetRequired(unitName, playerID, isBuilding)
 					end
 				end
 			else
-				print('no techs needed for '..tostring(unitName))
+				--print('no techs needed for '..tostring(unitName))
 				FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 				return true
 			end
@@ -60,14 +60,14 @@ function TechTree:GetRequired(unitName, playerID, isBuilding)
 						return false
 					end
 				else
-					print('missing tech for '..tostring(unitName).. ' (none in tree)')
+					--print('missing tech for '..tostring(unitName).. ' (none in tree)')
 					FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = false})
 					return false
 				end
 			end
 		end
 		
-		print(tostring(unitName)..' is buildable!')
+		--print(tostring(unitName)..' is buildable!')
 		FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 	return true
 	else
@@ -81,7 +81,7 @@ function TechTree:GetRequired(unitName, playerID, isBuilding)
 					end
 				end
 			else
-				print('no techs needed for '..tostring(unitName))
+				--print('no techs needed for '..tostring(unitName))
 				FireGameEvent("tech_return", {player_ID = playerID, building = unitName, buildable = true})
 				return true
 			end
@@ -92,18 +92,18 @@ function TechTree:GetRequired(unitName, playerID, isBuilding)
 				local check = tostring(techlist[i])
 				if playerTrees[playerID][check] ~= nil then
 					if playerTrees[playerID][check] < 1 then
-						print('missing tech for '..tostring(unitName))
+						--print('missing tech for '..tostring(unitName))
 						FireGameEvent("tech_return", {player_ID = playerID, building = unitName, buildable = false})
 						return false
 					end
 				else
-					print('missing tech for '..tostring(unitName).. ' (none in tree)')
+					--print('missing tech for '..tostring(unitName).. ' (none in tree)')
 					FireGameEvent("tech_return", {player_ID = playerID, building = unitName, buildable = false})
 					return false
 				end
 			end
 		end
-		print(tostring(unitName)..' is buildable!')
+		--print(tostring(unitName)..' is buildable!')
 		FireGameEvent("tech_return", {player_ID = playerID, building = unitName, buildable = true})
 	return true
 	end

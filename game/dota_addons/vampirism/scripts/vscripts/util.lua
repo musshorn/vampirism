@@ -15,6 +15,24 @@
     return copy
 end]]
 
+-- space_jam's find nearest unit.
+
+-- Finds the unit nearest from another unit, within a given range.
+function FindNearestUnit(sFindUnit, hFromUnit, fRange)
+	local nearestEnt = nil
+	local nearEnts = Entities:FindAllInSphere(hFromUnit:GetAbsOrigin(), fRange)
+	for k, v in pairs(nearEnts) do
+		if v:GetClassname() == 'npc_dota_creature' then
+			if v:GetUnitName() == sFindUnit then
+				nearestEnt = v
+			end
+		end
+	end
+
+	return nearestEnt --returns the found unit (nil if not found)
+
+end
+
 -- Remove all abilities on a unit.
 function ClearAbilities( unit )
 	for i=0, unit:GetAbilityCount()-1 do

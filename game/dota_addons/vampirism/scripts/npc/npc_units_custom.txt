@@ -1307,7 +1307,7 @@
     "Ability4"          ""          // Ability 4.
     "Ability5"          ""          // Ability 5.
     "Ability6"          ""          // Ability 6 - Extra.
-    "Ability7"          ""          // Ability 7 - Extra.
+    "Ability7"          "util_is_shop"          // Ability 7 - Extra.
     "Ability8"          "is_a_building"         // Ability 8 - Extra.
 
     // Armor
