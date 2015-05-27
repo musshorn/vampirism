@@ -9,7 +9,9 @@ function ShopUI:Init()
         local ent = EntIndexToHScript(tonumber(p))
         if ent:HasInventory() then
         	local shop = FindNearestUnit("human_surplus", ent, 1000)
-        	FireGameEvent('shop_open', {player_ID = ent:GetMainControllingPlayer(), shop_type = 'human_surplus', shop_user = tonumber(p), shop_index = shop:entindex()})
+        	if shop ~= nil then
+        		FireGameEvent('shop_open', {player_ID = ent:GetMainControllingPlayer(), shop_type = 'human_surplus', shop_user = tonumber(p), shop_index = shop:entindex()})
+        	end
         end
       end
   	end, "finds nearest shop", 0 )
