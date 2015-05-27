@@ -55,6 +55,7 @@ INVENTORIES = {}
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
 HUMAN_COUNT = 0
+HAS_SLAYER = {}
 SLAYERS = {}
 VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
 VAMPIRES = {} -- table of all created vampires

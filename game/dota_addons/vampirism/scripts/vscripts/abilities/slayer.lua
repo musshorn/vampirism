@@ -140,7 +140,7 @@ function Refund( keys )
   local ability = keys.ability
   
   local refundWood = ABILITY_KV[ability:GetAbilityName()].LumberCost
-  local refundGold = ABILITY_KV[ability:GetAbilityName()].LumberCost
+  local refundGold = ABILITY_KV[ability:GetAbilityName()].GoldCost
 
   if refundWood == nil then
     refundWood = 0
@@ -153,7 +153,7 @@ function Refund( keys )
     WOOD[pID] = WOOD[pID] + refundWood
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
     PlayerResource:ModifyGold(pID, refundGold, true, 9)
-    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = caster:GetGold()}) 
+    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)}) 
   end
 end
 
