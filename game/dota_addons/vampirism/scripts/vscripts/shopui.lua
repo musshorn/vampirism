@@ -6,10 +6,14 @@ function ShopUI:Init()
 	Convars:RegisterCommand("shop_pressed", function (name, p)
       local cmdPlayer = Convars:GetCommandClient()
       if cmdPlayer then
+        print('pressed')
         local ent = EntIndexToHScript(tonumber(p))
         if ent:HasInventory() then
-        	local shop = FindNearestUnit("human_surplus", ent, 1000)
+          print('has inventory')
+          print(ent:GetUnitName())
+        	local shop = FindNearestShop(ent:GetAbsOrigin(), 500)
         	if shop ~= nil then
+            print(shop:GetUnitName())
         		FireGameEvent('shop_open', {player_ID = ent:GetMainControllingPlayer(), shop_type = 'human_surplus', shop_user = tonumber(p), shop_index = shop:entindex()})
         	end
         end
