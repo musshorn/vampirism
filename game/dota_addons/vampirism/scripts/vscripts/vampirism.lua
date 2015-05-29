@@ -1084,6 +1084,10 @@ function GameMode:OnPlayerSay(keys)
   if string.find(msg, "-list") ~= nil then
     Trade:HandleChat(keys)
   end
+
+  if string.find(msg, "-buy") ~= nil then
+    Trade:HandleChat(keys)
+  end
 end
 
 -- This is an example console command
