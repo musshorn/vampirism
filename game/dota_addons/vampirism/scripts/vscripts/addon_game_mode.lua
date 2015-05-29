@@ -19,6 +19,7 @@ require('physics')
 require('util')
 require('abilities.vampire')
 require('shopui')
+require('trade')
 
 function Precache( context )
 		--[[
