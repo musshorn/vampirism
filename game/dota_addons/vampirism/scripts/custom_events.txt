@@ -128,4 +128,8 @@
     	"shop_index"	"long"
     	"item_name"		"string"
     }
+    "shop_close"
+    {
+    	"player_ID"		"short"
+    }
 }

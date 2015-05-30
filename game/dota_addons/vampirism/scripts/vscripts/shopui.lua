@@ -15,6 +15,15 @@ function ShopUI:Init()
         	if shop ~= nil then
             print(shop:GetUnitName())
         		FireGameEvent('shop_open', {player_ID = ent:GetMainControllingPlayer(), shop_type = 'human_surplus', shop_user = tonumber(p), shop_index = shop:entindex()})
+
+            Timers:CreateTimer(function ()
+              if CalcDistanceBetweenEntityOBB(shop, ent) > 500 then
+                FireGameEvent('shop_close', {player_ID = ent:GetMainControllingPlayer()})
+                return nil
+              else
+                return 0.03
+              end
+            end)
         	end
         end
       end
