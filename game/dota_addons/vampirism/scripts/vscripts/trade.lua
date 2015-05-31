@@ -85,12 +85,13 @@ function Trade:HandleChat( keys )
 			return "pink"
 		elseif id == 6 then
 			return "grey"
-		else id == 7 then
+		elseif id == 7 then
 			return "lb"
 		elseif id == 8 then
 			return "brown"
 		elseif id == 9 then
 			return "dg"
+		end
 	end
 
 	chat = ParseChat(keys)
