@@ -132,4 +132,8 @@
     {
     	"player_ID"		"short"
     }
+
+    //timer event for shops ui stuff etc.
+    "util_tick"
+    {}
 }
