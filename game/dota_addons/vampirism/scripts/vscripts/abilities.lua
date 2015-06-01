@@ -232,3 +232,15 @@ function SpawnGargoyle( keys )
 
   caster:RemoveSelf()
 end
+
+function BecomeVampire( keys )
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+
+  PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BAD_GUYS, true)
+  
+  local vamp = CreateUnitByName("npc_dota_hero_queenofpain", caster:GetAbsOrigin(), true, nil, nil, DOTA_TEAM_BAD_GUYS)
+  vamp:SetControllableByPlayer(pID, true)
+
+  caster:RemoveSelf()
+end

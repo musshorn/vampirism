@@ -868,6 +868,16 @@ function GameMode:InitGameMode()
     end
   end, 'Connects and assigns fake Players.', 0)
 
+  Convars:RegisterCommand('player_say', function(...)
+    local arg = {...}
+    table.remove(arg,1)
+    local cmdPlayer = Convars:GetCommandClient()
+    keys = {}
+    keys.ply = cmdPlayer
+    keys.text = table.concat(arg, " ")
+    self:OnPlayerSay(keys)
+  end, 'player say', 0)
+
   --[[This block is only used for testing events handling in the event that Valve adds more in the future
   Convars:RegisterCommand('events_test', function()
       GameMode:StartEventTest()
@@ -1064,7 +1074,20 @@ function SphereTimer()
 end
 
 function GameMode:OnPlayerSay(keys)
-  -- later
+  local player = keys.ply
+  local msg = keys.text
+
+  if string.find(msg, "-sell") ~= nil then
+    Trade:HandleChat(keys)
+  end
+
+  if string.find(msg, "-list") ~= nil then
+    Trade:HandleChat(keys)
+  end
+
+  if string.find(msg, "-buy") ~= nil then
+    Trade:HandleChat(keys)
+  end
 end
 
 -- This is an example console command

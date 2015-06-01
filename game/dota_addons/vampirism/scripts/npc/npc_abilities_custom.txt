@@ -207,6 +207,24 @@
       }
     }
   }
+  //================================================================================= /
+  // Turns the gargoyle into a vampire, must be cast on blight
+  //================================================================================= /
+  "vampire_form"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Function"    "BecomeVampire"
+      }
+    }
+  }
+
+
 
   //Set rally point for workers created by this building
   "set_rally_point"
