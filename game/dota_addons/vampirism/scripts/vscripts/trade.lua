@@ -5,6 +5,7 @@ General trade interface and managment
 ]]--
 
 Trade = {}
+Trade.NextID = 1
 Orders = {}
 
 function Trade:HandleChat( keys )
