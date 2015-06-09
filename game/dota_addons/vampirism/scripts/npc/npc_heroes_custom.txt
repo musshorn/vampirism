@@ -39,7 +39,7 @@
 		"ExtraAbility4"				"build_human_surplus"
 		"ExtraAbility5"				"build_tower_pearls"
 		"ExtraAbility6"				"build_wall_t1"
-		"ExtraAbility7"				"build_flag"
+		"ExtraAbility7"				"build_human_flag"
 		"ExtraAbility8"				"build_research_center_t1"
 		"ExtraAbility9"				"build_heal_wall_t1"
 		"ExtraAbility10"			"build_gold_mine_t1"
