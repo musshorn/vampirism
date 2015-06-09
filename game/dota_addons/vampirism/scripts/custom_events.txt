@@ -128,4 +128,12 @@
     	"shop_index"	"long"
     	"item_name"		"string"
     }
+    "shop_close"
+    {
+    	"player_ID"		"short"
+    }
+
+    //timer event for shops ui stuff etc.
+    "util_tick"
+    {}
 }

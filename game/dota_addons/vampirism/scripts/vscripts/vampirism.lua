@@ -190,6 +190,11 @@ function GameMode:OnGameInProgress()
     FindClearSpaceForUnit(vamps[i], Vector(96, -416, 256), false)
   end
 
+  --a timer to tell flash what the time is...
+  Timers:CreateTimer(function ()
+  	FireGameEvent('util_tick', nil) 
+  	return 1
+  end)
   GoldMineTimer()
   SphereTimer()
 end
