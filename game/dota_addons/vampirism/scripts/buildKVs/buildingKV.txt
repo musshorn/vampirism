@@ -11,7 +11,7 @@
 		"build_human_surplus"					"3"
 		"build_tower_pearls"					"4"
 		"build_wall_t1"							"5"
-		"build_human_flag"							"6"
+		"build_human_flag"						"6"
 		"build_research_center_t1"				"7"
 		"build_heal_wall_t1"					"8"
 		"build_gold_mine_t1"					"9"
