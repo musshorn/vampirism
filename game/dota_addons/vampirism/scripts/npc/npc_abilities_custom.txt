@@ -3881,7 +3881,7 @@
     }
   }
 
-  "build_flag"
+  "build_human_flag"
   {
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "BaseClass"           "ability_datadriven"
