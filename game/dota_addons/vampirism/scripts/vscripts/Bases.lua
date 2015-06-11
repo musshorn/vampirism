@@ -6,23 +6,26 @@ function EnterBase( keys )
   local pID = unit:GetMainControllingPlayer()
 
   local baseID = ent:Attribute_GetIntValue("BaseID", 0)
-  
+
   if unit:GetUnitName() == "human_flag" then
 
     -- Check claim to this base
     for k, v in pairs(BASE_OWNERSHIP) do
-      if v.baseID == baseID then
+      if v.BaseID == baseID then
         FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "This base has already been claimed!" } )
         return
       end
     end
 
     -- Remove any existing claims to a base (if any)
-    BASE_OWNERSHIP[pID] = nil    
+    BASE_OWNERSHIP[pID] = {}   
 
     -- Add claim to this base
     BASE_OWNERSHIP[pID].BaseID = baseID
     BASE_OWNERSHIP[pID].SharedBuilders = {}
+
+    local name = PlayerResource:GetPlayerName(pID)
+    GameRules:SendCustomMessage(name .. " has claimed base " .. baseID, 0, 0) 
   else
 
     -- Check the unit is a building
