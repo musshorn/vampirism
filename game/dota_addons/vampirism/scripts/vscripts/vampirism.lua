@@ -192,6 +192,7 @@ function GameMode:OnGameInProgress()
 
   --a timer to tell flash what the time is...
   Timers:CreateTimer(function ()
+  	print('tick')
   	FireGameEvent('util_tick', nil) 
   	return 1
   end)
