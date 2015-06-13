@@ -21,8 +21,7 @@ MODEL_ALPHA = 100 -- Defines the transparency of the ghost model.
 function BuildingHelper:Init(...)
 
   Convars:RegisterCommand( "BuildingPosChosen", function(name, params)
-    print("CLICK REGISTERED")
-    print(name, params)
+
     local x, y, z = params:match("([^,]+),([^,]+),([^,]+)")
     local location = Vector(x, y, z)
 
