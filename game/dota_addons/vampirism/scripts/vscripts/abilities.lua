@@ -244,3 +244,18 @@ function BecomeVampire( keys )
 
   caster:RemoveSelf()
 end
+
+function VerifyAttacker( keys )
+  local attacker = keys.attacker
+  local target = keys.caster
+  local attackerPID = attacker:GetMainControllingPlayer()
+  local targetPID = target:GetMainControllingPlayer()
+
+  -- if you're attacking a unit that's not yours but in your base then its ok, otherwise stop the attacker
+  if attackerPID ~= targetPID then
+    if target.inBase != BASE_OWNERSHIP[attackerPID].BaseID then
+      attacker:Stop()
+      FireGameEvent( 'custom_error_show', { player_ID = attackerPID , _error = "you may only destroy other players buildings in your own base!" } )
+    end
+  end
+end
