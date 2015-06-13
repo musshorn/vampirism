@@ -132,6 +132,14 @@
         {
            "MODIFIER_STATE_SPECIALLY_DENIABLE" "MODIFIER_STATE_VALUE_ENABLED"
         }
+        "OnAttacked"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/abilities.lua"
+            "Function"    "VerifyAttacker"
+          }
+        }
       }
     }
   }

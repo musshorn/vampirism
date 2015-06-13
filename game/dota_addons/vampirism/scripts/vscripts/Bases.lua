@@ -34,17 +34,25 @@ function EnterBase( keys )
 
       -- Check the unit is allowed to be built in this base
       local valid = true
+      local ownerPID = 0
 
       for k, v in pairs(BASE_OWNERSHIP) do
         if v.BaseID == baseID and v.SharedBuilders[pID] == nil then
           valid = false
         end
+        if v.BaseID == baseID then
+          ownerPID = k
+        end
       end
 
       -- Remove it if not
       if valid == false then
-        FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You cannot build here! Ask for permission." } )
+        local name = PlayerResource:GetPlayerName(ownerPID)
+
+        FireGameEvent( 'custom_error_show', { player_ID = pID, _error = name .. 'has claimed this base!' } )
         unit:RemoveBuilding(true)
+      else
+        unit.inBase = baseID
       end
     end
   end
