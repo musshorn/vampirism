@@ -20,7 +20,12 @@ MODEL_ALPHA = 100 -- Defines the transparency of the ghost model.
 
 function BuildingHelper:Init(...)
 
-  Convars:RegisterCommand( "BuildingPosChosen", function()
+  Convars:RegisterCommand( "BuildingPosChosen", function(name, params)
+    print("CLICK REGISTERED")
+    print(name, params)
+    local x, y, z = params:match("([^,]+),([^,]+),([^,]+)")
+    local location = Vector(x, y, z)
+
     --get the player that sent the command
     local cmdPlayer = Convars:GetCommandClient()
     
@@ -31,9 +36,7 @@ function BuildingHelper:Init(...)
     end
 
     if cmdPlayer then
-      FlashUtil:GetCursorWorldPos(cmdPlayer:GetPlayerID(), function ( pID, location )
-        cmdPlayer.activeBuilder:AddToQueue(location)
-      end )
+      cmdPlayer.activeBuilder:AddToQueue(location)
     end
   end, "", 0 )
 
