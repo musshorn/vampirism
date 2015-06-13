@@ -44,7 +44,7 @@ function EnterBase( keys )
       -- Remove it if not
       if valid == false then
         FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You cannot build here! Ask for permission." } )
-        unit:RemoveSelf()
+        unit:RemoveBuilding(true)
       end
     end
   end
