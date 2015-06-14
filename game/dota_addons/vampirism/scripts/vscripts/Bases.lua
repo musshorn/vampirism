@@ -1,4 +1,3 @@
-BASE_OWNERSHIP = {}     -- Access by owner pID, has int value baseID and a table of shared builders pIDs
 
 function EnterBase( keys )
   local unit = keys.activator
@@ -7,7 +6,7 @@ function EnterBase( keys )
 
   local baseID = ent:Attribute_GetIntValue("BaseID", 0)
 
-  if unit:GetUnitName() == "human_flag" then
+  if unit:GetUnitName() == "human_flag" and bMod == 0 then
 
     -- Check claim to this base
     for k, v in pairs(BASE_OWNERSHIP) do
@@ -25,7 +24,11 @@ function EnterBase( keys )
     BASE_OWNERSHIP[pID].SharedBuilders = {}
 
     local name = PlayerResource:GetPlayerName(pID)
-    GameRules:SendCustomMessage(name .. " has claimed base " .. baseID, 0, 0) 
+    GameRules:SendCustomMessage(name .. " has claimed base " .. baseID, 0, 0)
+    print(bMod)
+    bMod = (bMod + 1) % 2
+    PrintTable(BASE_OWNERSHIP)
+    print(bMod)
   else
 
     -- Check the unit is a building
@@ -61,7 +64,7 @@ function EnterBase( keys )
           FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
         end
 
-        FireGameEvent( 'custom_error_show', { player_ID = pID, _error = name .. 'has claimed this base!' } )
+        FireGameEvent( 'custom_error_show', { player_ID = pID, _error = name .. ' has claimed this base!' } )
         unit:RemoveBuilding(true)
       else
         unit.inBase = baseID
