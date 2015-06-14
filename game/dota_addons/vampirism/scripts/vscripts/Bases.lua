@@ -37,7 +37,7 @@ function EnterBase( keys )
       local ownerPID = 0
 
       for k, v in pairs(BASE_OWNERSHIP) do
-        if v.BaseID == baseID and v.SharedBuilders[pID] == nil then
+        if v.BaseID == baseID and v.SharedBuilders[pID] == nil and k ~= pID then
           valid = false
         end
         if v.BaseID == baseID then
@@ -45,9 +45,21 @@ function EnterBase( keys )
         end
       end
 
-      -- Remove it if not
+      -- Remove it if not, and refund the cost
       if valid == false then
         local name = PlayerResource:GetPlayerName(ownerPID)
+        local lumberCost = unit.buildingTable.LumberCost
+        local goldCost = unit.buildingTable.GoldCost
+
+        if lumberCost ~= nil then
+          WOOD[pID] = WOOD[pID] + lumberCost
+          FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+        end
+
+        if goldCost ~= nil then
+          PlayerResource:ModifyGold(pID, goldCost, true, 9)
+          FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
+        end
 
         FireGameEvent( 'custom_error_show', { player_ID = pID, _error = name .. 'has claimed this base!' } )
         unit:RemoveBuilding(true)
