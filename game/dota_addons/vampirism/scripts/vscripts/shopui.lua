@@ -3,7 +3,7 @@ if ShopUI == nil then
 end
 
 function ShopUI:Init()
-	Convars:RegisterCommand("shop_pressed", function (name, p)
+  Convars:RegisterCommand("shop_pressed", function (name, p)
       local cmdPlayer = Convars:GetCommandClient()
       if cmdPlayer then
         print('pressed')
@@ -13,9 +13,29 @@ function ShopUI:Init()
           print(ent:GetUnitName())
         	local shop = FindNearestShop(ent:GetAbsOrigin(), 500)
         	if shop ~= nil then
+            local playerID = ent:GetMainControllingPlayer()
+            local shopIndex = shop:entindex()
+            local shopName = shop:GetUnitName()
             print(shop:GetUnitName())
-        		FireGameEvent('shop_open', {player_ID = ent:GetMainControllingPlayer(), shop_type = 'human_surplus', shop_user = tonumber(p), shop_index = shop:entindex()})
-
+            if SHOPS[shopIndex] == nil then
+              SHOPS[shopIndex] = {}
+              for k, v in pairs(SHOP_KV[shopName]) do
+                local index = v['index']
+                SHOPS[shopIndex][index] = {}
+                SHOPS[shopIndex][index]['name'] = k
+                SHOPS[shopIndex][index]['stock'] = v['initstock']
+                SHOPS[shopIndex][index]['queue'] = {}
+                if SHOPS[shopIndex][index]['stock'] == 0 then
+                  table.insert(SHOPS[shopIndex][index]['queue'], v['stocktime'])
+                end
+              end             
+            end
+--[[
+            for k, v in pairs(SHOPS[shopIndex]) do
+              FireGameEvent('shop_preload', {player_ID = playerID, shop_index = shopIndex, item_name = })
+            end
+]]
+        		FireGameEvent('shop_open', {player_ID = playerID, shop_type = shopName, shop_user = tonumber(p), shop_index = shopindex})
             Timers:CreateTimer(function ()
               if CalcDistanceBetweenEntityOBB(shop, ent) > 500 then
                 FireGameEvent('shop_close', {player_ID = ent:GetMainControllingPlayer()})
@@ -84,7 +104,7 @@ function Purchase( itemname, buyer )
   				PlayerResource:SetGold(playerID, gold - goldCost, true)
   				FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
      			FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
-     			FireGameEvent("shop_item_bought", {player_ID = buyer:GetMainControllingPlayer(), shop_index = shop:entindex(), item_name = itemname} )
+     			FireGameEvent("shop_item_bought", {player_ID = buyer:GetMainControllingPlayer(), shop_index = shop:entindex(), item_name = itemname})
      		end
   		end
   	else

@@ -51,6 +51,7 @@ UNIT_KV = {} -- Each player has their own UNIT_KV file that research modifies pr
 ABILITY_KV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
 HERO_KV = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
 ITEM_KV = LoadKeyValues("scripts/npc/npc_items_custom.txt")
+SHOP_KV = LoadKeyValues('scripts/buildKVs/itemKV.txt')
 INVENTORIES = {}
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
@@ -60,6 +61,15 @@ SLAYERS = {}
 VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
 VAMPIRES = {} -- table of all created vampires
 ABILITY_HOLDERS = {} --table containing units which hold extra abilities when another unit does not have enough slots to store them all.
+SHOPS = {} --table of all shops. 
+
+
+--[[shopindex
+			slot
+				item
+				stock
+				stockqueue				
+]]
 
 HUMAN_FEED = {}
 for i = 0, 7 do
@@ -190,6 +200,7 @@ function GameMode:OnGameInProgress()
     FindClearSpaceForUnit(vamps[i], Vector(96, -416, 256), false)
   end
 
+  print('SF TIMERS ')
   --a timer to tell flash what the time is...
   Timers:CreateTimer(function ()
   	print('tick')
