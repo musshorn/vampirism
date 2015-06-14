@@ -311,15 +311,11 @@ local unitName = string.lower(npc:GetUnitName())
 
     local name = ''
 
-    print(unitName)
-    print('looking for name...')
     for k, v in pairs(HERO_KV) do
       if HERO_KV[k]["override_hero"] == unitName then
         name = k
       end
     end
-
-    print(name)
 
     if HERO_KV[name].AbilityHolder ~= nil then
       if ABILITY_HOLDERS[unitName] == nil then

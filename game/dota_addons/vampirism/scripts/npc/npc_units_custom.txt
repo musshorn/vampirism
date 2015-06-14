@@ -1715,8 +1715,8 @@
     "Ability4"          "build_cancel"
     "Ability5"          "build_blocked3"
     "Ability6"          "build_blocked4"
-    "Ability16"         "build_cancel"
-    "Ability17"         "is_a_building"
+    "Ability7"         "build_cancel"
+    "Ability8"         "is_a_building"
 
     "AbilityHolder"    "10"
 
@@ -1977,24 +1977,27 @@
     //----------------------------------------------------------------
 
     "Ability1"          "call_buildui"  //Human test
-    "Ability2"          "upgrade_human_damage_1"          // Ability 2.
-    "Ability3"          "upgrade_human_damage_2"          // Ability 3.
-    "Ability4"          "upgrade_human_damage_3"          // Ability 4.
-    "Ability5"          "upgrade_human_damage_4"          // Ability 5.
-    "Ability6"          "upgrade_human_damage_5"          // Ability 6 - Extra.
-    "Ability7"          "upgrade_human_damage_6"          // Ability 7 - Extra.
-    "Ability8"          "upgrade_human_damage_7"          // Ability 7 - Extra.
-    "Ability9"          "upgrade_human_damage_8"          // Ability 7 - Extra.
-    "Ability10"         "upgrade_human_damage_9"          // Ability 7 - Extra.
-    "Ability11"         "upgrade_human_damage_10"         
-    "Ability12"         "research_slayer_godlike"         
-    "Ability13"         "research_blink_extension"         
-    "Ability14"         "research_healing_vitality"         
-    "Ability15"         "train_super_tower_builder"         
-    "Ability16"         "train_worker_t4"
-    "Ability17"         "train_worker_t5"
-    "Ability18"         "upgrade_to_citadel_of_faith" 
-    "Ability19"         "is_a_building"         // Ability 8 - Extra.
+    "Ability2"          "is_a_building"         		// Ability 8 - Extra.
+
+    "AbilityHolder"          "17"
+
+    "ExtraAbility1"          "upgrade_human_damage_1"          
+    "ExtraAbility2"          "upgrade_human_damage_2"          
+    "ExtraAbility3"          "upgrade_human_damage_3"          
+    "ExtraAbility4"          "upgrade_human_damage_4"          
+    "ExtraAbility5"          "upgrade_human_damage_5"          
+    "ExtraAbility6"          "upgrade_human_damage_6"          
+    "ExtraAbility7"          "upgrade_human_damage_7"          
+    "ExtraAbility8"          "upgrade_human_damage_8"          
+    "ExtraAbility9"          "upgrade_human_damage_9"          
+    "ExtraAbility10"         "upgrade_human_damage_10"         
+    "ExtraAbility11"         "research_slayer_godlike"         
+    "ExtraAbility12"         "research_blink_extension"         
+    "ExtraAbility13"         "research_healing_vitality"         
+    "ExtraAbility14"         "train_super_tower_builder"         
+    "ExtraAbility15"         "train_worker_t4"
+    "ExtraAbility16"         "train_worker_t5"
+    "ExtraAbility17"         "upgrade_to_citadel_of_faith" 
 
     // Armor
     //----------------------------------------------------------------

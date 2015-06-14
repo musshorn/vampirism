@@ -1657,7 +1657,7 @@
   //================================================================================= /
   // Upgrade Human Damage (1)
   //================================================================================= /
-  "research_human_damage_1"
+  "upgrade_human_damage_1"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -1705,7 +1705,7 @@
   //================================================================================= /
   // Upgrade Human Damage (2)
   //================================================================================= /
-  "research_human_damage_2"
+  "upgrade_human_damage_2"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -1754,7 +1754,7 @@
   //================================================================================= /
   // Upgrade Human Damage (3)
   //================================================================================= /
-  "research_human_damage_3"
+  "upgrade_human_damage_3"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -1803,7 +1803,7 @@
   //================================================================================= /
   // Upgrade Human Damage (4)
   //================================================================================= /
-  "research_human_damage_4"
+  "upgrade_human_damage_4"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -1852,7 +1852,7 @@
   //================================================================================= /
   // Upgrade Human Damage (5)
   //================================================================================= /
-  "research_human_damage_5"
+  "upgrade_human_damage_5"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -1901,7 +1901,7 @@
   //================================================================================= /
   // Upgrade Human Damage (6)
   //================================================================================= /
-  "research_human_damage_6"
+  "upgrade_human_damage_6"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -1949,7 +1949,7 @@
   //================================================================================= /
   // Upgrade Human Damage (7)
   //================================================================================= /
-  "research_human_damage_7"
+  "upgrade_human_damage_7"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -1997,7 +1997,7 @@
   //================================================================================= /
   // Upgrade Human Damage (8)
   //================================================================================= /
-  "research_human_damage_8"
+  "upgrade_human_damage_8"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -2045,7 +2045,7 @@
   //================================================================================= /
   // Upgrade Human Damage (9)
   //================================================================================= /
-  "research_human_damage_9"
+  "upgrade_human_damage_9"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -2093,7 +2093,7 @@
   //================================================================================= /
   // Upgrade Human Damage (10)
   //================================================================================= /
-  "research_human_damage_10"
+  "upgrade_human_damage_10"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "15"
@@ -2138,6 +2138,343 @@
       }
     }
   }
+  //================================================================================= /
+  // Reseach Slayer Godlike Training
+  //================================================================================= /
+  "research_slayer_godlike"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "15"
+    "LumberCost"   "46000"
+    "GoldCost"     "45"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "10"
+      }
+    }
+  }
+  //================================================================================= /
+  // Reseach Slayer Blink Extension
+  //================================================================================= /
+  "research_blink_extension"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "15"
+    "LumberCost"   "46000"
+    "GoldCost"     "45"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "10"
+      }
+    }
+  }
+  //================================================================================= /
+  // Research Healing Vitality
+  //================================================================================= /
+  "research_healing_vitality"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "15"
+    "LumberCost"   "46000"
+    "GoldCost"     "45"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "10"
+      }
+    }
+  }
+  //================================================================================= /
+  // Train Super Tower Builder
+  //================================================================================= /
+  "train_super_tower_builder"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "15"
+    "LumberCost"   "46000"
+    "GoldCost"     "45"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "10"
+      }
+    }
+  }
+  //================================================================================= /
+  // Train Worker T4 (fix name)
+  //================================================================================= /
+  "train_worker_t4"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "15"
+    "LumberCost"   "46000"
+    "GoldCost"     "45"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "10"
+      }
+    }
+  }
+  //================================================================================= /
+  // Train Worker T5 (fix name)
+  //================================================================================= /
+  "train_worker_t5"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "15"
+    "LumberCost"   "46000"
+    "GoldCost"     "45"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "10"
+      }
+    }
+  }
+  //================================================================================= /
+  // Upgrade to Citadel of Faith
+  //================================================================================= /
+  "upgrade_to_citadel_of_faith"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "15"
+    "LumberCost"   "46000"
+    "GoldCost"     "45"
+    "BaseClass"         "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"  "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "HumanDamage"
+        "TARGET"  "CASTER"
+        "Level" "10"
+      }
+    }
+  }
+
   //================================================================================= /
   // Debugging: Draw building boxes
   //================================================================================= /
