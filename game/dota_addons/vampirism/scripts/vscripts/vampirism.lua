@@ -63,14 +63,6 @@ VAMPIRES = {} -- table of all created vampires
 ABILITY_HOLDERS = {} --table containing units which hold extra abilities when another unit does not have enough slots to store them all.
 SHOPS = {} --table of all shops. 
 
-
---[[shopindex
-			slot
-				item
-				stock
-				stockqueue				
-]]
-
 HUMAN_FEED = {}
 for i = 0, 7 do
 	HUMAN_FEED[i] = 0
@@ -150,6 +142,8 @@ function GameMode:OnAllPlayersLoaded()
     for i = 0, 9 do
     	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
     end
+
+
 end
 
 --[[
@@ -200,13 +194,7 @@ function GameMode:OnGameInProgress()
     FindClearSpaceForUnit(vamps[i], Vector(96, -416, 256), false)
   end
 
-  print('SF TIMERS ')
-  --a timer to tell flash what the time is...
-  Timers:CreateTimer(function ()
-  	print('tick')
-  	FireGameEvent('util_tick', nil) 
-  	return 1
-  end)
+  ShopUI:ProcessQueues()
   GoldMineTimer()
   SphereTimer()
 end

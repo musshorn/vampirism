@@ -127,13 +127,28 @@
     	"player_ID"		"short"
     	"shop_index"	"long"
     	"item_name"		"string"
+    	"item_index"	"short"
+    	"stock"			"short"
     }
     "shop_close"
     {
     	"player_ID"		"short"
     }
-
-    //timer event for shops ui stuff etc.
-    "util_tick"
-    {}
+    "shop_preload"
+    {
+    	"player_ID"		"short"
+    	"shop_type"		"string"
+    	"shop_index"	"long"
+    	"item_name"		"string"
+    	"item_stock"	"short"
+    	"item_time"		"short"
+    	"item_index"	"short"
+    }
+    "shop_restock"
+    {
+    	"shop_type"		"string"
+    	"shop_index"	"long"
+    	"item_index"	"short"
+    	"item_name"		"string"
+    }
 }
