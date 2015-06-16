@@ -12,7 +12,7 @@
 			//the max stock of an item, use -1 for unlimited
 			"stock"			"1"
 			//the time it takes for a charge to restore (in seconds)
-			"stocktime"		"20"
+			"stocktime"		"180"
 			//its position in the shop
 			"index"			"0"
 		}

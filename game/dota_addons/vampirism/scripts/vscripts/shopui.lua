@@ -115,7 +115,7 @@ function Purchase( itemname, buyer )
             table.insert(SHOPS[shopIndex][index]['queue'],  SHOPS[shopIndex][index]['stocktime'])
           else
             --out of stock, fire event anyway and send remaining time for next restock.
-            FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = SHOPS[index]['queue'][0]})
+            FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = SHOPS[shopIndex][index]['queue'][1]})
           end
      		end
   		end
