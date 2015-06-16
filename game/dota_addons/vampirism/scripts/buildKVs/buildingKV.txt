@@ -139,4 +139,36 @@
 		"build_empty"							"10"
 		"build_cancel"							"11"
 	}
+
+	//=================================================================================================================
+	// Research Center T1
+	//=================================================================================================================
+	"research_center_t2"
+	{
+		"research_gem_quality_1"
+		{
+			"research_gem_quality_1"	"0"
+			"research_gem_quality_2"	"1"
+			"research_gem_quality_3"	"2"
+			"research_gem_quality_4"	"3"
+			"research_gem_quality_5"	"4"
+		}
+		"research_basic_human_survival"		"1"
+		"research_holy_essence"				"2"
+		"upgrade_plating_1"
+		{
+			"upgrade_plating_1"		"0"
+			"upgrade_plating_2"		"1"
+			"upgrade_plating_3"		"2"
+			"upgrade_plating_4"		"3"
+		}
+		"upgrade_healing_vitality"		"4"
+		"research_human_teleport"		"5"
+		"research_tower_defenses"		"6"
+		"research_engineer_vitality"	"7"
+		"build_empty"					"8"
+		"build_empty"					"9"
+		"build_empty"					"10"
+		"build_cancel"					"11"
+	}
 }
