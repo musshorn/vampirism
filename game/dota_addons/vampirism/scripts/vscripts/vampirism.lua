@@ -53,7 +53,6 @@ HERO_KV = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
 ITEM_KV = LoadKeyValues("scripts/npc/npc_items_custom.txt")
 SHOP_KV = LoadKeyValues('scripts/buildKVs/itemKV.txt')
 BASE_OWNERSHIP = {}     -- Access by owner pID, has int value baseID and a table of shared builders pIDs
-bMod = 0                -- dirty check to stop the double base claim messages
 INVENTORIES = {}
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0

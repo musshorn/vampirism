@@ -1,12 +1,13 @@
-
 function EnterBase( keys )
+  print("BASE ALERT")
   local unit = keys.activator
   local ent = keys.caller
   local pID = unit:GetMainControllingPlayer()
 
   local baseID = ent:Attribute_GetIntValue("BaseID", 0)
 
-  if unit:GetUnitName() == "human_flag" and bMod == 0 then
+
+  if unit:GetUnitName() == "human_flag" then
 
     -- Check claim to this base
     for k, v in pairs(BASE_OWNERSHIP) do
@@ -25,10 +26,6 @@ function EnterBase( keys )
 
     local name = PlayerResource:GetPlayerName(pID)
     GameRules:SendCustomMessage(name .. " has claimed base " .. baseID, 0, 0)
-    print(bMod)
-    bMod = (bMod + 1) % 2
-    PrintTable(BASE_OWNERSHIP)
-    print(bMod)
   else
 
     -- Check the unit is a building
@@ -38,6 +35,7 @@ function EnterBase( keys )
       -- Check the unit is allowed to be built in this base
       local valid = true
       local ownerPID = 0
+      PrintTable(BASE_OWNERSHIP)
 
       for k, v in pairs(BASE_OWNERSHIP) do
         if v.BaseID == baseID and v.SharedBuilders[pID] == nil and k ~= pID then
@@ -47,6 +45,7 @@ function EnterBase( keys )
           ownerPID = k
         end
       end
+      print(valid)
 
       -- Remove it if not, and refund the cost
       if valid == false then

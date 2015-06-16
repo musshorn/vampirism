@@ -251,14 +251,8 @@ function VerifyAttacker( keys )
   local attackerPID = attacker:GetMainControllingPlayer()
   local targetPID = target:GetMainControllingPlayer()
 
-  print("kombat log")
   -- if you're attacking a unit that's not yours but in your base then its ok, otherwise stop the attacker
-  print(attackerPID, targetPID)
   if attackerPID ~= targetPID then
-    print(target.inBase)
-    print(targetPID)
-    print(BASE_OWNERSHIP)
-    PrintTable(BASE_OWNERSHIP)
     if target.inBase ~= BASE_OWNERSHIP[targetPID].BaseID then
       attacker:Stop()
       FireGameEvent( 'custom_error_show', { player_ID = attackerPID , _error = "You may only destroy other players buildings in your own base!" } )
