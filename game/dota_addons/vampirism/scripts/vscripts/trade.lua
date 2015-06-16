@@ -10,18 +10,6 @@ Orders = {}
 
 function Trade:HandleChat( keys )
 
-
-	function ParseChat( keys )
-		local player = keys.ply
-		local msg = keys.text
-		tokens = {}
-		for word in string.gmatch(msg, '([^ ]+)') do
-		    table.insert(tokens, word)
-		end
-
-		return tokens
-	end
-
 	-- Function returns colourised string for sending as a message
 	function FormatOutput( keys )
 		local resource = keys.resource
@@ -39,60 +27,6 @@ function Trade:HandleChat( keys )
 
 		local response = {resource = resource, amount = amount}
 		return response
-	end
-
-	function ColourToID( colour )
-		-- Radiant
-		if colour == "blue" then
-			return 0
-		elseif colour == "teal" then
-			return 1
-		elseif colour == "purple" then
-			return 2
-		elseif colour == "yellow" then
-			return 3
-		elseif colour == "orange" then
-			return 4
-
-		-- Dire
-		elseif colour == "pink" then
-			return 5
-		elseif colour == "grey" then
-			return 6
-		elseif colour == "light" or colour == "lb" then -- surely no one will notice ;)
-			return 7
-		elseif colour == "brown" then
-			return 8
-		elseif colour == "dark" or colour == "dg" then
-			return 9
-		end
-	end
-
-	function IDToColour( id )
-		-- Radiant
-		if id == 0 then
-			return "blue"
-		elseif id == 1 then
-			return "teal"
-		elseif id == 2 then
-			return "purple"
-		elseif id == 3 then
-			return "yellow"
-		elseif id == 4 then
-			return "orange"
-
-		-- Dire
-		elseif id == 5 then
-			return "pink"
-		elseif id == 6 then
-			return "grey"
-		elseif id == 7 then
-			return "lb"
-		elseif id == 8 then
-			return "brown"
-		elseif id == 9 then
-			return "dg"
-		end
 	end
 
 	chat = ParseChat(keys)

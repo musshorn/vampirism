@@ -1,5 +1,4 @@
 function EnterBase( keys )
-  print("BASE ALERT")
   local unit = keys.activator
   local ent = keys.caller
   local pID = unit:GetMainControllingPlayer()
@@ -10,22 +9,24 @@ function EnterBase( keys )
   if unit:GetUnitName() == "human_flag" then
 
     -- Check claim to this base
-    for k, v in pairs(BASE_OWNERSHIP) do
-      if v.BaseID == baseID then
-        FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "This base has already been claimed!" } )
-        return
+    for k, v in pairs(Bases.Owners) do
+      if type(v) ~= "function" then
+        if v.BaseID == baseID then
+          FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "This base has already been claimed!" } )
+          return
+        end
       end
     end
 
     -- Remove any existing claims to a base (if any)
-    BASE_OWNERSHIP[pID] = {}   
+    Bases.Owners[pID] = {}   
 
     -- Add claim to this base
-    BASE_OWNERSHIP[pID].BaseID = baseID
-    BASE_OWNERSHIP[pID].SharedBuilders = {}
+    Bases.Owners[pID].BaseID = baseID
+    Bases.Owners[pID].SharedBuilders = {}
 
     local name = PlayerResource:GetPlayerName(pID)
-    GameRules:SendCustomMessage(name .. " has claimed base " .. baseID, 0, 0)
+    GameRules:SendCustomMessage(ColorIt(name, IDToColour(pID)) .. " has claimed base " .. baseID, 0, 0)
   else
 
     -- Check the unit is a building
@@ -35,17 +36,17 @@ function EnterBase( keys )
       -- Check the unit is allowed to be built in this base
       local valid = true
       local ownerPID = 0
-      PrintTable(BASE_OWNERSHIP)
 
-      for k, v in pairs(BASE_OWNERSHIP) do
-        if v.BaseID == baseID and v.SharedBuilders[pID] == nil and k ~= pID then
-          valid = false
-        end
-        if v.BaseID == baseID then
-          ownerPID = k
+      for k, v in pairs(Bases.Owners) do
+        if type(v) ~= "function" then
+          if v.BaseID == baseID and v.SharedBuilders[pID] == nil and k ~= pID then
+            valid = false
+          end
+          if v.BaseID == baseID then
+            ownerPID = k
+          end
         end
       end
-      print(valid)
 
       -- Remove it if not, and refund the cost
       if valid == false then
