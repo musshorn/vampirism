@@ -3124,17 +3124,26 @@
       "Ability2"                    "build_cancel"                             // Ability 2.
       "Ability3"                    "build_blocked"                            // Ability 3.
       "Ability4"                    "build_blocked2"                           // Ability 4.
-      "Ability5"                    "build_blocked3"                           // Ability 5.
-      "Ability6"                    "build_blocked4"                           // Ability 6 - Extra.
-      "Ability7"                    "build_tower_mana_t1"                      // Ability 7 - Extra.
-      "Ability8"                    "build_human_surplus"                      // Ability 8 - Extra.
-      "Ability9"                    "build_research_center_t2"                 // Ability 8 - Extra.
-      "Ability10"                   "build_wall_t4"                            // Ability 8 - Extra.
-      "Ability11"                   "build_tower_wall_t1"                      // Ability 8 - Extra.
-      "Ability12"                   "build_tower_frost"                        // Ability 8 - Extra.
-      "Ability13"                   "build_heal_wall_t1"                       // Ability 8 - Extra.
-      "Ability14"                   "build_gold_mine_t1"                       // Ability 8 - Extra.
-      "Ability15"                   "build_wall_t3"                            // Ability 8 - Extra.
+
+      "AbilityHolder"               "16"
+
+      "ExtraAbility1"               "research_gem_quality_1"
+      "ExtraAbility2"               "research_gem_quality_2"
+      "ExtraAbility3"               "research_gem_quality_3"
+      "ExtraAbility4"               "reserach_gem_quality_4"
+      "ExtraAbility5"               "reserach_gem_quality_5"
+      "ExtraAbility6"               "research_basic_human_survival"
+      "ExtraAbility7"               "research_holy_essence"
+      "ExtraAbility8"               "upgrade_plating_1"
+      "ExtraAbility9"               "upgrade_plating_2"
+      "ExtraAbility10"              "upgrade_plating_3"
+      "ExtraAbility11"              "upgrade_plating_4"
+      "ExtraAbility12"              "upgrade_healing_vitality"
+      "ExtraAbility13"              "research_human_teleport"
+      "ExtraAbility14"              "research_tower_defenses"
+      "ExtraAbility15"              "research_engineer_vitality"
+      "ExtraAbility16"              "build_cancel"
+
   
       // Armor
       //----------------------------------------------------------------
@@ -3249,6 +3258,7 @@
       "CombatClassDefend"           "DOTA_COMBAT_CLASS_DEFEND_STRONG"
       "UnitRelationshipClass"       "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
   }
+
   //================================================================================= 
   // Gargoyle, if the human can get it back to the spawn they can revive as a vampire
   //=================================================================================

@@ -64,8 +64,19 @@ VAMPIRES = {} -- table of all created vampires
 ABILITY_HOLDERS = {} --table containing units which hold extra abilities when another unit does not have enough slots to store them all.
 SHOPS = {} --table of all shops. 
 
+<<<<<<< HEAD
 Bases = {}     -- Access by owner pID, has int value baseID and a table of shared builders pIDs
 Bases.Owners = {}
+
+--[[shopindex
+			slot
+				item
+				stock
+				stockqueue				
+]]
+
+=======
+>>>>>>> upstream/master
 HUMAN_FEED = {}
 for i = 0, 7 do
 	HUMAN_FEED[i] = 0

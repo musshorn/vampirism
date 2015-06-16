@@ -6,17 +6,13 @@ function ShopUI:Init()
   Convars:RegisterCommand("shop_pressed", function (name, p)
       local cmdPlayer = Convars:GetCommandClient()
       if cmdPlayer then
-        print('pressed')
         local ent = EntIndexToHScript(tonumber(p))
         if ent:HasInventory() then
-          print('has inventory')
-          print(ent:GetUnitName())
         	local shop = FindNearestShop(ent:GetAbsOrigin(), 500)
         	if shop ~= nil then
             local playerID = ent:GetMainControllingPlayer()
             local shopIndex = shop:entindex()
             local shopName = shop:GetUnitName()
-            print(shop:GetUnitName())
             if SHOPS[shopIndex] == nil then
               SHOPS[shopIndex] = {}
               for k, v in pairs(SHOP_KV[shopName]) do
@@ -25,17 +21,17 @@ function ShopUI:Init()
                 SHOPS[shopIndex][index]['name'] = k
                 SHOPS[shopIndex][index]['stock'] = v['initstock']
                 SHOPS[shopIndex][index]['queue'] = {}
+                SHOPS[shopIndex][index]['stocktime'] = v['stocktime']
                 if SHOPS[shopIndex][index]['stock'] == 0 then
                   table.insert(SHOPS[shopIndex][index]['queue'], v['stocktime'])
                 end
               end             
             end
---[[
             for k, v in pairs(SHOPS[shopIndex]) do
-              FireGameEvent('shop_preload', {player_ID = playerID, shop_index = shopIndex, item_name = })
+              --only sending the timer of the TOP item in the queue, not the queue itself.
+              FireGameEvent('shop_preload', {player_ID = playerID, shop_index = shopIndex, shop_type = shopName, item_name = v['name'], item_stock = v['stock'], item_time = v['queue'][0], item_index = k})
             end
-]]
-        		FireGameEvent('shop_open', {player_ID = playerID, shop_type = shopName, shop_user = tonumber(p), shop_index = shopindex})
+        		FireGameEvent('shop_open', {player_ID = playerID, shop_type = shopName, shop_user = tonumber(p), shop_index = shopIndex})
             Timers:CreateTimer(function ()
               if CalcDistanceBetweenEntityOBB(shop, ent) > 500 then
                 FireGameEvent('shop_close', {player_ID = ent:GetMainControllingPlayer()})
@@ -67,7 +63,6 @@ function FindNearestShop(vPos, fRange)
 	for k, v in pairs(shopEnts) do
 		if v:GetClassname() == "npc_dota_creature" then
 			if v:HasAbility("util_is_shop") then
-				print('found a shop, returning')
 				return v
 			end
 		end
@@ -93,22 +88,66 @@ function Purchase( itemname, buyer )
   			--check if user is still near shop, decrease that shops stock.
   			local shop = FindNearestShop(buyer:GetAbsOrigin(), 1000)
   			if shop ~= nil then
+          local shopIndex = shop:entindex()
+          local playerID = buyer:GetMainControllingPlayer()
+          --get the index of item
+          local index = nil
+          for k, v in pairs(SHOPS[shopIndex]) do
+            if v['name'] == itemname then
+              index = k
+            end
+          end
 
-  				local item = CreateItem(itemname, buyer, buyer)
-  				item:SetPurchaser(buyer)
-  				item:SetOwner(buyer)
-  				item:SetOwner(PlayerResource:GetPlayer(playerID))
-  				item:SetPurchaser(PlayerResource:GetPlayer(playerID))
-  				buyer:AddItem(item)
-  				WOOD[playerID] = WOOD[playerID] - lumberCost
-  				PlayerResource:SetGold(playerID, gold - goldCost, true)
-  				FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
-     			FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
-     			FireGameEvent("shop_item_bought", {player_ID = buyer:GetMainControllingPlayer(), shop_index = shop:entindex(), item_name = itemname})
+          --check stock
+          if SHOPS[shopIndex][index]['stock'] > 0 then
+  				  local item = CreateItem(itemname, buyer, buyer)
+  				  item:SetPurchaser(buyer)
+  				  item:SetOwner(buyer)
+  				  item:SetOwner(PlayerResource:GetPlayer(playerID))
+  				  item:SetPurchaser(PlayerResource:GetPlayer(playerID))
+  				  buyer:AddItem(item)
+  				  WOOD[playerID] = WOOD[playerID] - lumberCost
+  				  PlayerResource:SetGold(playerID, gold - goldCost, true)
+  				  FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
+     			  FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
+     			  FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = 0})
+            SHOPS[shopIndex][index]['stock'] = SHOPS[shopIndex][index]['stock'] - 1
+            table.insert(SHOPS[shopIndex][index]['queue'],  SHOPS[shopIndex][index]['stocktime'])
+          else
+            --out of stock, fire event anyway and send remaining time for next restock.
+            FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = SHOPS[shopIndex][index]['queue'][1]})
+          end
      		end
   		end
   	else
   		FireGameEvent( 'custom_error_show', { player_ID = buyer:GetMainControllingPlayer() , _error = "No room in inventory!" } )
   	end
   end
+end
+
+function ShopUI:ProcessQueues()
+  Timers:CreateTimer(function ()
+    --for each shop
+    for k, v in pairs(SHOPS) do
+        --for each item in shop
+        for index, item in pairs(v) do
+          --if a queue exists
+          if table.getn(item['queue']) > 0 then
+            for qIndex, qTime in pairs(item['queue']) do
+              if item['queue'][qIndex] > 0 then
+                --lower that timer
+                item['queue'][qIndex] = item['queue'][qIndex] - 1
+              else
+                local shopName = EntIndexToHScript(k):GetUnitName()
+                --pop that queue, restock item, fire flash restock event.
+                item['stock'] = item['stock'] + 1
+                FireGameEvent('shop_restock', {shop_type = shopName, shop_index = k, item_index = index, item_name = item['name']})
+                table.remove(item['queue'])
+              end
+            end
+          end
+        end
+      end
+    return 1
+  end)
 end

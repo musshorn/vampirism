@@ -91,7 +91,7 @@
 		"build_empty"										"q"
 	}
 	//=================================================================================================================
-	// Research Center T1
+	// Human Vault
 	//=================================================================================================================
 	"human_vault"
 	{
@@ -105,5 +105,20 @@
 		"upgrade_to_citadel_of_faith"						"t"
 		"build_cancel"										"q"
 		"build_empty"										"q"
+	}
+	//=================================================================================================================
+	// Human Vault
+	//=================================================================================================================
+	"research_center_t2"
+	{
+		"research_gem_quality_1"			"g"
+		"research_basic_human_survival"		"t"
+		"research_holy_essence"				"d"
+		"upgrade_plating_1"					"p"
+		"upgrade_healing_vitality"			"h"
+		"research_human_teleport"			"r"
+		"research_tower_defenses"			"o"
+		"research_engineer_vitality"		"e"
+		"build_cancel"						"q"
 	}
 }
