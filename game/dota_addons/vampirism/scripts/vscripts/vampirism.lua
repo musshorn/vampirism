@@ -52,7 +52,7 @@ ABILITY_KV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
 HERO_KV = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
 ITEM_KV = LoadKeyValues("scripts/npc/npc_items_custom.txt")
 SHOP_KV = LoadKeyValues('scripts/buildKVs/itemKV.txt')
-BASE_OWNERSHIP = {}     -- Access by owner pID, has int value baseID and a table of shared builders pIDs
+ 
 INVENTORIES = {}
 LUMBER_DROPS = {} -- table with handles to all the buildings that can recieve lumber
 VAMP_COUNT = 0
@@ -64,6 +64,8 @@ VAMPIRES = {} -- table of all created vampires
 ABILITY_HOLDERS = {} --table containing units which hold extra abilities when another unit does not have enough slots to store them all.
 SHOPS = {} --table of all shops. 
 
+Bases = {}     -- Access by owner pID, has int value baseID and a table of shared builders pIDs
+Bases.Owners = {}
 HUMAN_FEED = {}
 for i = 0, 7 do
 	HUMAN_FEED[i] = 0
@@ -1090,6 +1092,14 @@ function GameMode:OnPlayerSay(keys)
   if string.find(msg, "-buy") ~= nil then
     Trade:HandleChat(keys)
   end
+
+  if string.find(msg, "-allow") ~= nil then
+    Bases:HandleChat(keys)
+  end
+
+  if string.find(msg, "-disallow") ~= nil then
+    Bases:HandleChat(keys)
+  end
 end
 
 -- This is an example console command
@@ -1107,5 +1117,53 @@ function GameMode:ExampleConsoleCommand()
   print( '*********************************************' )
 end
 
+function Bases:HandleChat( keys )
+  local chat = ParseChat(keys)
+  local pID = keys.ply:GetPlayerID()
+
+  if chat[1] == "-allow" then
+    local ownerpID = pID
+    
+    local sharePID = ColourToID(chat[2])
+    
+    if sharePID ~= -1 then
+      if Bases.Owners[ownerpID] ~= nil then
+        Bases.Owners[ownerpID].SharedBuilders[sharePID] = true
+
+        local name = PlayerResource:GetPlayerName(ownerpID)
+        local sharedName = PlayerResource:GetPlayerName(sharePID)
+        
+        GameRules:SendCustomMessage(ColorIt(name, IDToColour(ownerpID)) .. " has shared their base with " .. ColorIt(sharedName, IDToColour(sharePID)) .. "!", 0, 0)
+      else
+        FireGameEvent( 'custom_error_show', { player_ID = ownerpID, _error = "That's not a valid color!" } )
+      end
+    else
+      FireGameEvent( 'custom_error_show', { player_ID = ownerpID, _error = "You have not claimed a base" } )
+    end
+  end 
+
+  if chat[1] == "-disallow" then
+    local ownerpID = pID
+    local blockPID = ColourToID(chat[2])
+
+    if blockPID ~= -1 then
+      if Bases.Owners[ownerpID] ~= nil then
+        for k, v in pairs(Bases.Owners[ownerpID].SharedBuilders) do
+          if k == blockPID then
+            Bases.Owners[ownerpID].SharedBuilders[k] = nil
+
+            local name = PlayerResource:GetPlayerName(ownerpID)
+            local blockName = PlayerResource:GetPlayerName(blockPID)
+
+            GameRules:SendCustomMessage(ColorIt(blockName, IDToColour(blockPID)) .. " can no longer build in " .. ColorIt(name, IDToColour(ownerpID)) .. "'s base!", 0, 0)
+          end
+        end
+      else
+        FireGameEvent( 'custom_error_show', { player_ID = ownerpID, _error = "That's not a valid color!" } )
+      end
+    else
+      FireGameEvent( 'custom_error_show', { player_ID = ownerpID, _error = "You have not claimed a base" } )
+  end
+end
 --require('eventtest')
 --GameMode:StartEventTest()

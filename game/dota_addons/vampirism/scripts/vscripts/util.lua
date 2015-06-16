@@ -147,7 +147,7 @@ function ColorIt( sStr, sColor )
 		color = "DDA0DD"
 	elseif sColor == "red" then
 		color = "FF6347"
-	elseif sColor == "cyan" then
+	elseif sColor == "lb" then
 		color = "00FFFF"
 	elseif sColor == "yellow" then
 		color = "FFFF00"
@@ -157,10 +157,84 @@ function ColorIt( sStr, sColor )
 		color = "FF00FF"
 	elseif sColor == "teal" then
 		color = "008080"
+	elseif sColor == "dg" then
+		color = "005624"
+	elseif sColor == "grey" then
+		color = "787878"
 	end
+
 	return "<font color='#" .. color .. "'>" .. sStr .. "</font>"
 end
 
+function ColourToID( colour )
+	-- Radiant
+	if colour == "blue" then
+		return 0
+	elseif colour == "teal" then
+		return 1
+	elseif colour == "purple" then
+		return 2
+	elseif colour == "yellow" then
+		return 3
+	elseif colour == "orange" then
+		return 4
+
+	-- Dire
+	elseif colour == "pink" then
+		return 5
+	elseif colour == "grey" then
+		return 6
+	elseif colour == "light" or colour == "lb" then -- surely no one will notice ;)
+		return 7
+	elseif colour == "brown" then
+		return 8
+	elseif colour == "dark" or colour == "dg" then
+		return 9
+	else
+		return -1 -- Error case
+	end
+end
+
+function IDToColour( id )
+	-- Radiant
+	if id == 0 then
+		return "blue"
+	elseif id == 1 then
+		return "teal"
+	elseif id == 2 then
+		return "purple"
+	elseif id == 3 then
+		return "yellow"
+	elseif id == 4 then
+		return "orange"
+
+	-- Dire
+	elseif id == 5 then
+		return "pink"
+	elseif id == 6 then
+		return "grey"
+	elseif id == 7 then
+		return "lb"
+	elseif id == 8 then
+		return "brown"
+	elseif id == 9 then
+		return "dg"
+	else
+		return -1 -- Error case
+	end
+end
+
+
+function ParseChat( keys )
+	local player = keys.ply
+	local msg = keys.text
+	tokens = {}
+	for word in string.gmatch(msg, '([^ ]+)') do
+	    table.insert(tokens, word)
+	end
+
+	return tokens
+end
 --[[
 	p: the raw point (Vector)
 	center: center of the square. (Vector)
