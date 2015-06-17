@@ -102,6 +102,22 @@ function build( keys )
     end
   end)
 
+  keys:OnConstructionFailed(function( unit )
+    local lumberCost = unit.buildingTable.LumberCost
+    local goldCost = unit.buildingTable.GoldCost
+
+    if lumberCost ~= nil then
+      WOOD[pID] = WOOD[pID] + lumberCost
+      FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+    end
+
+    if goldCost ~= nil then
+      PlayerResource:ModifyGold(pID, goldCost, true, 9)
+      FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
+    end
+
+  end)
+
   --[[keys:OnCanceled(function()
     print(keys.ability:GetAbilityName() .. " was canceled.")
   end)]]
