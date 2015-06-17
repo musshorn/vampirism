@@ -1163,6 +1163,7 @@ function Bases:HandleChat( keys )
       end
     else
       FireGameEvent( 'custom_error_show', { player_ID = ownerpID, _error = "You have not claimed a base" } )
+    end
   end
 end
 --require('eventtest')
