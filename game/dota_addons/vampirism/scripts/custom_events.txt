@@ -35,7 +35,7 @@
 	"vamp_slayer_state_update"
 	{
 		"player_ID"		"short"
-        "slayer_state"  "string"
+	    "slayer_state"  "string"
 	}
 
 	"vamp_gold_feed"
@@ -100,56 +100,57 @@
 		"player_id"			"short"
 		"building_size"		"short"
 	}
-    "custom_error_show"
-    {
-        "player_ID"     "short"	
-        "_error"        "string"
-    }
+	"custom_error_show"
+	{
+	    "player_ID"     "short"	
+	    "_error"        "string"
+	}
 
-    //TechTree event
-    "tech_return"
-    {
-    	"player_ID"		"short"
-    	"building"		"string"
-    	"buildable"		"bool"
-    }
+	//TechTree event
+	"tech_return"
+	{
+		"player_ID"		"short"
+		"building"		"string"
+		"buildable"		"bool"
+	}
 
-    //Shop events
-    "shop_open"
-    {
-    	"player_ID"		"short"
-    	"shop_type"		"string"
-    	"shop_user"		"long"
-    	"shop_index"	"long"
-    }
-    "shop_item_bought"
-    {
-    	"player_ID"		"short"
-    	"shop_index"	"long"
-    	"item_name"		"string"
-    	"item_index"	"short"
-    	"stock"			"short"
-    	"stock_time"	"long"
-    }
-    "shop_close"
-    {
-    	"player_ID"		"short"
-    }
-    "shop_preload"
-    {
-    	"player_ID"		"short"
-    	"shop_type"		"string"
-    	"shop_index"	"long"
-    	"item_name"		"string"
-    	"item_stock"	"short"
-    	"item_time"		"short"
-    	"item_index"	"short"
-    }
-    "shop_restock"
-    {
-    	"shop_type"		"string"
-    	"shop_index"	"long"
-    	"item_index"	"short"
-    	"item_name"		"string"
-    }
+	//Shop events
+	"shop_open"
+	{
+		"player_ID"		"short"
+		"shop_type"		"string"
+		"shop_user"		"long"
+		"shop_index"	"long"
+	}
+	"shop_item_bought"
+	{
+		"player_ID"		"short"
+		"shop_index"	"long"
+		"item_name"		"string"
+		"item_index"	"short"
+		"stock"			"short"
+		"stock_time"	"long"
+	}
+	"shop_close"
+	{
+		"player_ID"		"short"
+	}
+	"shop_preload"
+	{
+		"player_ID"		"short"
+		"shop_type"		"string"
+		"shop_index"	"long"
+		"item_name"		"string"
+		"item_stock"	"short"
+		"item_time"		"short"
+		"item_index"	"short"
+		"has_tech"		"bool"
+	}
+	"shop_restock"
+	{
+		"shop_type"		"string"
+		"shop_index"	"long"
+		"item_index"	"short"
+		"item_name"		"string"
+	}
 }

@@ -1977,7 +1977,14 @@
     //----------------------------------------------------------------
 
     "Ability1"          "call_buildui"  //Human test
-    "Ability2"          "is_a_building"         		// Ability 8 - Extra.
+    "Ability2"          "build_blocked"
+    "Ability3"          "build_blocked2"
+    "Ability4"          "build_cancel"
+    "Ability5"          "build_blocked3"
+    "Ability6"          "build_blocked4"
+    "Ability7"          "is_a_building"         		// Ability 8 - Extra.
+
+
 
     "AbilityHolder"          "17"
 

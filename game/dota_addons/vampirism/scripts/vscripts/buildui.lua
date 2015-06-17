@@ -42,7 +42,7 @@ function CallMenu(keys)
       for k, v in pairs(ABILITY_HOLDERS[unitName]) do
         if ABILITY_KV[v]['UnitName'] ~= nil then -- if its not a research
           local tech = ABILITY_KV[v]['UnitName']
-          TechTree:GetRequired(tech, playerID, true)
+          TechTree:GetRequired(tech, playerID, "building")
         end
       end
     end
@@ -51,11 +51,11 @@ function CallMenu(keys)
       for k, v in pairs(ABILITY_HOLDERS[unitName]) do
         if ABILITY_KV[v]['UnitName'] ~= nil then
           local tech = ABILITY_KV[v]['UnitName']
-          TechTree:GetRequired(tech, playerID, true)
+          TechTree:GetRequired(tech, playerID, "building")
         else
           --assuming its research
           local tech = v
-          TechTree:GetRequired(tech, playerID, true)
+          TechTree:GetRequired(tech, playerID, "building")
         end
       end
     else -- caster is not using ability holders
@@ -69,7 +69,7 @@ function CallMenu(keys)
           --print(buildName)
           if buildName ~= nil then
             --print('callmenu get req')
-            TechTree:GetRequired(buildName, playerID, false)
+            TechTree:GetRequired(buildName, playerID, "ability")
           end
         end
       end

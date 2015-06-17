@@ -7,7 +7,7 @@ function build( keys )
   --print("CALLED THE BUILD")
   if buildName ~= nil then
     print('not nil')
-    if TechTree:GetRequired(buildName, pID, true) == false then
+    if TechTree:GetRequired(buildName, pID, "building") == false then
       print('not enough techs')
       return
     end

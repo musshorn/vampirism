@@ -97,7 +97,7 @@ function Upgrade( keys )
     canUpgrade = false
   end
 
-  if TechTree:GetRequired(targetUnit, pID, true) == false then
+  if TechTree:GetRequired(targetUnit, pID, "building") == false then
     caster:Stop()
     FireGameEvent('custom_error_show', {player_ID = pID, _error = "You are missing tech for this!"})
     canUpgrade = false

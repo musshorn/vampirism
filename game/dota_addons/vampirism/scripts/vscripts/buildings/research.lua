@@ -1,9 +1,8 @@
 function Research( keys )
-  print('in research')
   local caster = keys.caster
   local ability = keys.ability
   local lumberCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
-  local goldCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
+  local goldCost = ABILITY_KV[ability:GetAbilityName()].GoldCost
   local pID = caster:GetMainControllingPlayer()
 
   -- Not all research requires lumber or gold
@@ -21,6 +20,7 @@ function Research( keys )
     return
   end
   if PlayerResource:GetGold(pID) < goldCost then
+    print(goldCost)
     caster:Stop()
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
     return
@@ -28,13 +28,13 @@ function Research( keys )
 
   -- Player is ok to commence research, deduct resources
   WOOD[pID] = WOOD[pID] - lumberCost
+  PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
   FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
   FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
   FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
   print('resarch gold')
-  PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
   print(PlayerResource:GetGold(pID))
 end
 
@@ -43,7 +43,7 @@ function Cancelled(keys)
   local caster = keys.caster
   local ability = keys.ability
   local lumberCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
-  local goldCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
+  local goldCost = ABILITY_KV[ability:GetAbilityName()].GoldCost
   local playerID = caster:GetMainControllingPlayer()
 
   if goldCost == nil then
@@ -56,7 +56,6 @@ function Cancelled(keys)
   -- Return the cost of the research
   WOOD[playerID] = WOOD[playerID] + lumberCost
   FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
-  print('rescancel')
   PlayerResource:ModifyGold(playerID, goldCost, true, 9)
   print(PlayerResource:GetGold(playerID))
   FireGameEvent('vamp_gold_changed', { player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
@@ -71,6 +70,8 @@ function Finished(keys)
     Cancelled(keys)
   end
 end
+
+--Research center upgrades
 
 function ImproveLumber(keys)
   local ability = keys.ability
@@ -189,23 +190,7 @@ function GemQuality(keys)
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
   end
-end
-
-function HumanDamage(keys)
-  local caster = keys.caster
-  local playerID = caster:GetMainControllingPlayer()
-  local level = keys.Level
-  local human = PlayerResource:GetPlayer(playerID):GetAssignedHero()
-
-  human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
-  human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
-  human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
-  FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
-
-  if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
-    caster:RemoveAbility(ability:GetAbilityName())
-  end
-end   
+end 
 
 function HealingTower(keys)
   local caster = keys.caster
@@ -215,4 +200,33 @@ function HealingTower(keys)
   ability:SetLevel(2)
 
   -- Note there needs to be a flag set for all future heal towers built to auto level this
+end
+
+-- Human Vault Researches
+
+function HumanDamage(keys)
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local level = keys.Level
+  local human = PlayerResource:GetPlayer(playerID):GetAssignedHero()
+  local ability = caster:FindAbilityByName('upgrade_human_damage_'..level)
+
+  human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
+  human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
+  human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+  FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+
+  if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
+    caster:RemoveAbility(ability:GetAbilityName())
+  end
+end 
+
+function SlayerGodlike(keys)
+end 
+
+-- formerly GemQuality
+function SpireQuality(keys)
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local level = keys.level
 end
