@@ -174,6 +174,12 @@ function SpawnSlayer( keys )
   SLAYERS[pID].handle = slayer
   FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Alive"})
 
+  SLAYERS[pID]['health'] = {}
+  SLAYERS[pID]['damage'] = {}
+  SLAYERS[pID]['strength'] = {}
+  SLAYERS[pID]['agility'] = {}
+  SLAYERS[pID]['intellect'] = {}
+
   GameMode:ModifyStatBonuses(slayer)
 end
 
@@ -224,11 +230,28 @@ function SlayerRespawn( keys )
   slayer:RespawnUnit()
   GameMode:ModifyStatBonuses(SLAYERS[pID].handle)
 
-  for k, v in pairs(SLAYERS['health']) do
+  --This does not appear to be saved by the game.
+  for k, v in pairs(SLAYERS[pID]['health']) do
     slayer:SetMaxHealth(slayer:GetMaxHealth() + v)
+    slayer:SetHealth(slayer:GetHealth() + v)
   end
-  for k, v in pairs(SLAYERS['damage']) do
-    slayer:SetBaseDamageMax(slayer:GetBaseDamageMax() + v)
-    slayer:SetBaseDamageMin(slayer:GetBaseDamageMin() + v)
+
+  --This is being saved by the game.
+  --for k, v in pairs(SLAYERS[pID]['damage']) do
+  --  slayer:SetBaseDamageMax(slayer:GetBaseDamageMax() + v)
+  --  slayer:SetBaseDamageMin(slayer:GetBaseDamageMin() + v)
+  --end
+
+  -- This may actually be saved by the game, without needing this table.
+  for k, v in pairs(SLAYERS[pID]['strength']) do
+    slayer:SetBaseStrength(slayer:GetBaseStrength() + v)
   end
+  for k, v in pairs(SLAYERS[pID]['agility']) do
+    slayer:SetBaseAgility(slayer:GetBaseAgility() + v)
+  end
+  for k, v in pairs(SLAYERS[pID]['intellect']) do
+    slayer:SetBaseIntellect(slayer:GetBaseIntellect() + v)
+  end
+
+  GameMode:ModifyStatBonuses(SLAYERS[pID].handle)
 end
