@@ -130,7 +130,7 @@ end
 ]]
 function GameMode:OnAllPlayersLoaded()
   print("[vampirism] All Players have loaded into the game")
-
+--[[]
     local dummy = CreateUnitByName("npc_bh_dummy", Vector(0,0,0), true, nil, nil, 0)
     local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
     dummy:FindAbilityByName("vampire_vision_dummy_lock2"):OnUpgrade()
@@ -145,7 +145,7 @@ function GameMode:OnAllPlayersLoaded()
     for i = 0, 9 do
     	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
     end
-
+]]
 
 end
 
@@ -215,6 +215,7 @@ function GameMode:OnDisconnect(keys)
 end
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
+  --[[
   print("[vampirism] GameRules State Changed")
   PrintTable(keys)
 
@@ -242,7 +243,7 @@ function GameMode:OnGameRulesStateChange(keys)
       })
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
     GameMode:OnGameInProgress()
-  end
+  end]]
 end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
@@ -417,8 +418,8 @@ function GameMode:OnAbilityUsed(keys)
   print('[vampirism] AbilityUsed')
   PrintTable(keys)
 
-  local player = EntIndexToHScript(keys.PlayerID)
-  local abilityname = keys.abilityname
+  local player = PlayerResource:GetPlayer(keys.PlayerID) 
+  local abilitysname = keys.abilityname
   local hero = player:GetAssignedHero()
 
   -- Cancel the ghost if the player casts another active ability.
@@ -792,6 +793,9 @@ function GameMode:InitGameMode()
   GameRules:SetHeroMinimapIconScale( MINIMAP_ICON_SIZE )
   GameRules:SetCreepMinimapIconScale( MINIMAP_CREEP_ICON_SIZE )
   GameRules:SetRuneMinimapIconScale( MINIMAP_RUNE_ICON_SIZE )
+  GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 8 )
+  GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 2 )
+
   print('[vampirism] GameRules set')
 
   InitLogFile( "log/vampirism.txt","")
@@ -911,6 +915,7 @@ function GameMode:InitGameMode()
   TechTree:Init()
   ShopUI:Init()
 
+
   UNIT_KV[-1] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
   print('[vampirism] Done loading vampirism gamemode!\n\n')
@@ -934,6 +939,8 @@ function GameMode:CaptureGameMode()
     mode:SetCustomHeroMaxLevel ( MAX_LEVEL )
     mode:SetCustomXPRequiredToReachNextLevel( XP_PER_LEVEL_TABLE )
 
+    --reborn things
+
     --mode:SetBotThinkingEnabled( USE_STANDARD_DOTA_BOT_THINKING )
     mode:SetTowerBackdoorProtectionEnabled( ENABLE_TOWER_BACKDOOR_PROTECTION )
 
@@ -948,6 +955,7 @@ function GameMode:CaptureGameMode()
     self:OnFirstPlayerLoaded()
   end 
 end
+
 
 -- Multiteam support is unfinished currently
 --[[function GameMode:SetupMultiTeams()
@@ -1004,11 +1012,13 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
  
-  heroRoller(playerID)
+  --heroRoller(playerID)
 end
 
---an EPIC function. aka how to skip hero selection.
+--an EPIC function. aka how to skip hero selection. rip
+--[[
 function heroRoller(playerID)
+  print('heroroller running')
 	if playerID < 8 then
 		if PlayerResource:GetSelectedHeroName(playerID) ~= "npc_dota_hero_omniknight" then
 			PlayerResource:GetPlayer(playerID):MakeRandomHeroSelection()
@@ -1030,11 +1040,11 @@ function heroRoller(playerID)
 			end)
 			return
 		else
-			PlayerResource:SetHasRepicked(playerID) 
+			PlayerResource:SetHasRepicked(playerID)
 			return
 		end
 	end
-end
+end]]
 
 function GoldMineTimer()
   --Runs each minute for t1 gold mines
@@ -1142,6 +1152,9 @@ function Bases:HandleChat( keys )
     end
   end 
 
+  --require('eventtest')
+--GameMode:StartEventTest()
+
   if chat[1] == "-disallow" then
     local ownerpID = pID
     local blockPID = ColourToID(chat[2])
@@ -1166,5 +1179,4 @@ function Bases:HandleChat( keys )
     end
   end
 end
---require('eventtest')
---GameMode:StartEventTest()
+end

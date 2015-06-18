@@ -164,6 +164,7 @@ function SpawnSlayer( keys )
   local pID = caster:GetMainControllingPlayer()
 
   SLAYERS[pID] = {["state"] = "alive"}
+  SLAYERS[pID] = {["upgrades"] = {}}
 
   local slayer = CreateUnitByName("npc_dota_hero_invoker", caster:GetAbsOrigin(), true, nil, nil, caster:GetTeam())
   slayer:SetControllableByPlayer(pID, true)
@@ -218,7 +219,16 @@ end
 function SlayerRespawn( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
+  local slayer = SLAYERS[pID].handle
 
-  SLAYERS[pID].handle:RespawnUnit()
+  slayer:RespawnUnit()
   GameMode:ModifyStatBonuses(SLAYERS[pID].handle)
+
+  for k, v in pairs(SLAYERS['health']) do
+    slayer:SetMaxHealth(slayer:GetMaxHealth() + v)
+  end
+  for k, v in pairs(SLAYERS['damage']) do
+    slayer:SetBaseDamageMax(slayer:GetBaseDamageMax() + v)
+    slayer:SetBaseDamageMin(slayer:GetBaseDamageMin() + v)
+  end
 end

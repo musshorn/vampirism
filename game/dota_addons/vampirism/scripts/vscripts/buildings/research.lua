@@ -222,6 +222,16 @@ function HumanDamage(keys)
 end 
 
 function SlayerGodlike(keys)
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local ability = keys.ability
+
+  local slayer = SLAYERS[playerID].handle
+  slayer:SetBaseDamageMax(slayer:GetBaseDamageMax() + 1000)
+  slayer:SetBaseDamageMin(slayer:GetBaseDamageMin() + 1000)
+  slayer:SetBaseMaxHealth(slayer:GetBaseMaxHealth() + 10000)
+
+  table.insert(SLAYERS[playerID]['upgrades'], ability)
 end 
 
 -- formerly GemQuality
