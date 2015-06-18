@@ -1179,4 +1179,3 @@ function Bases:HandleChat( keys )
     end
   end
 end
-end
