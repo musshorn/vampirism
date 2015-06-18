@@ -215,7 +215,7 @@ function GameMode:OnDisconnect(keys)
 end
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
-  --[[
+  
   print("[vampirism] GameRules State Changed")
   PrintTable(keys)
 
@@ -241,9 +241,18 @@ function GameMode:OnGameRulesStateChange(keys)
         return 1
       end
       })
+    for i = 0, 9 do
+      local playerTeam = PlayerResource:GetTeam(i)
+      print(playerTeam, ' player team')
+      if playerTeam == 2 then
+        CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
+      elseif playerTeam == 3 then
+        CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
+      end
+    end
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
     GameMode:OnGameInProgress()
-  end]]
+  end
 end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
@@ -297,7 +306,7 @@ function GameMode:OnNPCSpawned(keys)
 
 local unitName = string.lower(npc:GetUnitName())
 
-  if npc:IsRealHero() and npc.bFirstSpawned == nil then
+  if npc:IsRealHero() then
     npc.bFirstSpawned = true
     GameMode:OnHeroInGame(npc)
 
@@ -318,6 +327,8 @@ local unitName = string.lower(npc:GetUnitName())
       end
     end
   else
+    print(npc:IsRealHero(), 'isrealhero')
+    print(unitName, 'unitName')
     if UNIT_KV[-1][unitName]['AbilityHolder'] ~= nil then
       if ABILITY_HOLDERS[unitName] == nil then
         ABILITY_HOLDERS[unitName] = {}
