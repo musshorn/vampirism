@@ -500,6 +500,63 @@
     "AbilityTextureName"                  "bounty_hunter_wind_walk"
   }
 
+  //==============================================================
+  // Super Tower Builder spawning
+  //==============================================================
+  "spawn_super_tower_builder"
+  {
+    "AbilityBehavior"                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"                           "ability_datadriven"
+    "AbilityTextureName"                  "bounty_hunter_wind_walk"
+    "AbilityModifierSupportValue"         "0.5"
+    "MaxLevel"                            "1"
+    "AbilityManaCost"                     "0"
+    "GoldCost"                            "4"
+    "LumberCost"                          "5000"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"                    "super_tower_builder_training"
+        "Target"                          "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "super_tower_builder_training"
+      {
+        "IsPurgable"                      "false"
+        "IsStunDebuff"                    "false"
+        "IsHidden"                        "false"
+        "Attributes"                      "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                  "scripts/vscripts/buildings/building.lua"
+            "Function"                    "TrainUnit"
+            "AddToQueue"                  "super_tower_builder_training"
+            "SpawnUnit"                   "super_tower_builder"
+          }
+        }
+      }
+    }
+  }
+
+  //======================================================
+  // Super Tower builder channel timer
+  //======================================================
+  "super_tower_builder_training"
+  {
+    "AbilityBehavior"                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"                           "ability_datadriven"
+    "AbilityCastPoint"                    "0"
+    "AbilityChannelTime"                  "1.0"
+    "AbilityTextureName"                  "bounty_hunter_wind_walk"
+  }
+
+
   "harvest_t1"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -2426,51 +2483,44 @@
       }
     }
   }
+  
   //================================================================================= /
   // Upgrade to Citadel of Faith
   //================================================================================= /
   "upgrade_to_citadel_of_faith"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
-    "AbilityChannelTime"  "15"
-    "LumberCost"   "46000"
-    "GoldCost"     "45"
-    "BaseClass"         "ability_datadriven"
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "2"
+    
     "OnSpellStart"
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Research"
-        "TARGET"  "CASTER"
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "citadel_of_faith"
+        "LumberCost"  "125000"
+        "GoldCost"    "20"
       }
     }
     "OnChannelInterrupted"
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Cancelled"
-        "TARGET"      "CASTER"
-      }
-    }
-    "OnChannelFinish"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Finished"
-        "TARGET"      "CASTER"
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
       }
     }
     "OnChannelSucceeded"
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "HumanDamage"
-        "TARGET"  "CASTER"
-        "Level" "10"
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "citadel_of_faith"
+        "Scale"       "1"
       }
     }
   }

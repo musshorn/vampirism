@@ -30,17 +30,18 @@ function House1:Init(unit)
 			local abilityName = keys.AddToQueue
 			local unitToSpawn = keys.SpawnUnit
 			local requestingFood = nil
+			local playerID = caster:GetMainControllingPlayer()
 			house1.workHandler = caster:FindAbilityByName(abilityName)
 	
 			-- Check if the worker will fit in the food cap
-			if UNIT_KV[caster:GetMainControllingPlayer()][unitToSpawn].ConsumesFood ~= nil then
-				requestingFood = UNIT_KV[caster:GetMainControllingPlayer()][unitToSpawn].ConsumesFood
+			if UNIT_KV[playerID][unitToSpawn].ConsumesFood ~= nil then
+				requestingFood = UNIT_KV[playerID][unitToSpawn].ConsumesFood
 			else
 				requestingFood = 0
 			end
 
 
-			if TOTAL_FOOD[caster:GetMainControllingPlayer()] >= CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood then
+			if TOTAL_FOOD[playerID] >= CURRENT_FOOD[playerID ] + requestingFood then
 				house1.workHandler:SetChanneling(true)
 				local spawnTime = house1.workHandler:GetChannelTime()
 
@@ -50,11 +51,11 @@ function House1:Init(unit)
 				Timers:CreateTimer(house1.uniqueName, {
 							endTime = spawnTime,
 							callback = function()
-								if TOTAL_FOOD[caster:GetMainControllingPlayer()] >= CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood then
+								if TOTAL_FOOD[playerID] >= CURRENT_FOOD[playerID] + requestingFood then
 									local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
 									
-									CURRENT_FOOD[caster:GetMainControllingPlayer() ] = CURRENT_FOOD[caster:GetMainControllingPlayer() ] + requestingFood
-									FireGameEvent('vamp_food_changed', { player_ID = caster:GetMainControllingPlayer() , food_total = CURRENT_FOOD[caster:GetMainControllingPlayer()]})
+									CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + requestingFood
+									FireGameEvent('vamp_food_changed', { player_ID = playerID , food_total = CURRENT_FOOD[playerID]})
 									
 									caster:RemoveModifierByName(house1.workHandler:GetName())
 									house1.workHandler:SetChanneling(false)
@@ -78,7 +79,7 @@ function House1:Init(unit)
 	  									end
 									end
 								else
-									FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Build more farms" } )
+									FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Build more farms" } )
 									table.remove(house1.queue)
 									caster:RemoveModifierByName(house1.workHandler:GetName())
 									house1.workHandler:SetChanneling(false)
@@ -90,7 +91,7 @@ function House1:Init(unit)
 				-- Unit was created, pop the queue
 				table.remove(house1.queue)
 			else
-				FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Build more farms" } )
+				FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Build more farms" } )
 				table.remove(house1.queue)
 				caster:RemoveModifierByName(house1.workHandler:GetName())
 				house1.workHandler:SetChanneling(false)
