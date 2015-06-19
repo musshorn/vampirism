@@ -1061,16 +1061,15 @@ function GoldMineTimer()
   --Runs each minute for t1 gold mines
   Timers:CreateTimer(function()
     local t1gold = Entities:FindAllByModel('models/props_cave/mine_cart.vmdl')
-
-    for mine in t1gold do
+    PrintTable(t1gold)
+    for k, mine in pairs(t1gold) do
       if mine ~= nil then
-        local playerID = PlayerResource:GetPlayer(mine:GetMainControllingPlayer())
+        local playerID = mine:GetMainControllingPlayer()
         local curGold = PlayerResource:GetGold(playerID)
         PlayerResource:SetGold(playerID, curGold + 1, true)
         FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
       end
     end
-
     return 60
   end)
 end

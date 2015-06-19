@@ -319,6 +319,64 @@
   		}
   	}
 
+  	//================================================================================= 
+  	// Human Surplus - Engineers
+  	//=================================================================================
+  	"item_master_slayer_vest"
+  	{
+  		"ID"	"1112"
+  		"BaseClass"		"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"		"0"
+  		"ItemKillable"		"1"
+  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"		"1"
+  		"ItemRequiresCharges" "0"
+  		"SideShop"			"1"
+  		"AbilityCooldown"	"0"
+  		"GoldCost"			"10"
+  		"LumberCost"		"5000"
+
+  		"AbilitySpecial"
+  		{
+  			"01"
+  			{
+  				"var_type"			"FIELD_INTEGER"
+  				"health_bonus"			"3000"
+  			}
+  			"02"
+  			{
+  				"var_type"			"FIELD_INTEGER"
+  				"damage_bonus"		"300"
+  			}
+  		}
+  		"OnCreated"
+  		{
+  			"ApplyModifier"
+  			{
+  				"ModifierName"	"modifier_master_vest_stats"
+  				"Target" 		"TARGET"
+  			}
+
+  			"Modifiers"
+  			{
+  				"modifier_master_vest_stats"
+  				{
+  					"Passive"			"1"
+  					"IsHidden"			"1"
+  					"IsDebuff"			"0"
+  			  			
+  					"Properties"
+  					{
+  						"MODIFIER_PROPERTY_HEALTH_BONUS" "%health_bonus"
+  					    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%damage_bonus" 
+  					}
+  				}
+  			}
+  		}
+  	}
+
 	"item_health_modifier"
 	{
 		"ID"							"2102"

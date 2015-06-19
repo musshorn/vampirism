@@ -72,6 +72,7 @@ function FindNearestShop(vPos, fRange)
 end
 
 function Purchase( itemname, buyer )
+  print('purchase called', itemname, buyer)
   local playerID = buyer:GetMainControllingPlayer()
   local gold = PlayerResource:GetGold(playerID)
   local lumber = WOOD[playerID]

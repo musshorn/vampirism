@@ -107,9 +107,9 @@ function TechTree:GetRequired(unitName, playerID, sType)
 		return true
 	elseif sType == "item" then
 		local techlist = {}
-		if ITEM_KV[playerID][unitName] ~= nil then
-			if ITEM_KV[playerID][unitName].NeedTech ~= nil then
-				local reqs = tostring(ITEM_KV[playerID][unitName].NeedTech)
+		if ITEM_KV[unitName] ~= nil then
+			if ITEM_KV[unitName].NeedTech ~= nil then
+				local reqs = tostring(ITEM_KV[unitName].NeedTech)
 				for tech in string.gmatch(reqs, "%S+") do
 					if tech ~= nil then
 						table.insert(techlist, tech)
@@ -125,8 +125,8 @@ function TechTree:GetRequired(unitName, playerID, sType)
 		if techlist ~= nil then
 			for i = 1, table.getn(techlist) do
 				local check = tostring(techlist[i])
-				if playerTrees[playerID][check] ~= nil then
-					if playerTrees[playerID][check] < 1 then
+				if playerTrees[check] ~= nil then
+					if playerTrees[check] < 1 then
 						FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = false})
 						--print('missing tech for '..tostring(unitName))
 						return false
