@@ -320,7 +320,7 @@
   	}
 
   	//================================================================================= 
-  	// Human Surplus - Engineers
+  	// Human Surplus - Master Vampire Slayer Vest
   	//=================================================================================
   	"item_master_slayer_vest"
   	{
@@ -351,30 +351,96 @@
   				"damage_bonus"		"300"
   			}
   		}
-  		"OnCreated"
-  		{
-  			"ApplyModifier"
-  			{
-  				"ModifierName"	"modifier_master_vest_stats"
-  				"Target" 		"TARGET"
-  			}
 
-  			"Modifiers"
+  		"Modifiers"
+  		{
+  			"modifier_master_vest_stats"
   			{
-  				"modifier_master_vest_stats"
+  				"Passive"			"1"
+  				"IsHidden"			"1"
+  				"IsDebuff"			"0"
+  		  			
+  				"Properties"
   				{
-  					"Passive"			"1"
-  					"IsHidden"			"1"
-  					"IsDebuff"			"0"
-  			  			
-  					"Properties"
-  					{
-  						"MODIFIER_PROPERTY_HEALTH_BONUS" "%health_bonus"
-  					    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%damage_bonus" 
-  					}
+  					"MODIFIER_PROPERTY_HEALTH_BONUS" "%health_bonus"
+  				    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage_bonus" 
   				}
   			}
   		}
+  	}
+
+  	//================================================================================= 
+  	// Human Surplus - Venom Orb
+  	//=================================================================================
+  	"item_venom_orb"
+  	{
+  		"ID"	"1113"
+  		"BaseClass"		"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+  		"ItemStackable"		"0"
+  		"ItemKillable"		"1"
+  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"		"0"
+  		"ItemRequiresCharges" "0"
+  		"SideShop"			"1"
+  		"AbilityCooldown"	"0"
+  		"GoldCost"			"1"
+  		"LumberCost"		"10000"
+
+  		"RunScript"
+  		{
+  			"ScriptFile"	"scripts/vscripts/items.lua"
+  			"Function"		"VenomOrb"
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Human Surplus - Circlet of the Vampire Slayer
+  	//=================================================================================
+  	"item_circlet_slayer"
+  	{
+  		"ID"	"1114"
+  		"BaseClass"		"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"		"0"
+  		"ItemKillable"		"1"
+  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"		"0"
+  		"ItemRequiresCharges" "0"
+  		"SideShop"			"1"
+  		"AbilityCooldown"	"0"
+  		"GoldCost"			"5"
+  		"LumberCost"		"2000"
+
+  		"AbilitySpecial"
+  		{
+  			"01"
+  			{
+  				"var_type"			"FIELD_INTEGER"
+  				"stat_bonus"		"50"
+  			}
+  		}
+
+  		"Modifiers"
+  		{
+  			"modifier_circlet_stats"
+  			{
+  				"Passive"			"1"
+  				"IsHidden"			"1"
+  				"IsDebuff"			"0"
+  		  			
+  				"Properties"
+  				{
+  					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%stat_bonus"
+  				    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%stat_bonus"
+  				    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%stat_bonus"  
+  				}
+  			}
+  		}
+
+
   	}
 
 	"item_health_modifier"

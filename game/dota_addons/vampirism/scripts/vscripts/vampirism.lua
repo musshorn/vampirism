@@ -402,27 +402,10 @@ end
 -- An item was purchased by a player
 function GameMode:OnItemPurchased( keys )
   print ( '[vampirism] OnItemPurchased' )
-  PrintTable(keys)
 
   -- The playerID of the hero who is buying something
   local plyID = keys.PlayerID
   if not plyID then return end
-
-  -- The name of the item purchased
-  local itemName = keys.itemname 
-  
-  -- The cost of the item purchased
-  local itemcost = keys.itemcost
-  local lumbercost = 0
-
-  if ITEM_KV[itemName]["LumberCost"] ~= nil then
-    lumbercost = ITEM_KV[itemName]["LumberCost"]
-  end
-
-  for k, v in pairs(INVENTORIES[playerID]) do
-    print(k)
-    print(v)
-  end
 end
 
 -- An ability was used by a player
