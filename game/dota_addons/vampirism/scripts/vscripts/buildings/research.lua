@@ -280,7 +280,9 @@ function AddHealthUpgrade( keys )
   Timers:CreateTimer(.03, function ()
     caster:SetMaxHealth(caster:GetMaxHealth() + amount)
     --SNIPPET PLS, if finished, add hp if not dont.
-    caster:SetHealth(caster:GetHealth() + amount)
+    if caster.state == "complete" then
+      caster:SetHealth(caster:GetHealth() + amount)
+    end
     return nil
   end)
 end
