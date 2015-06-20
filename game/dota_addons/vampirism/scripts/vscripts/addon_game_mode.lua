@@ -101,6 +101,9 @@ function Precache( context )
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)
 
+		PrecacheResource("model_folder","models/items/omniknight", context)
+		PrecacheResource("model_folder","models/items/nightstalker", context)
+
 		-- unit precache
 		PrecacheUnitByNameSync("tent_t2", context)
 		PrecacheUnitByNameSync("shiny_tower_pearls", context)
