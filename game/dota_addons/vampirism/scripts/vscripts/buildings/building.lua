@@ -23,7 +23,6 @@ function TrainUnit( keys )
     end
   end
 
-
   if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood then
     if table.getn(building.queue) <= 7 then
       table.insert(building.queue, keys)

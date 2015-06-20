@@ -301,6 +301,19 @@ function BuildingHelper:InitializeBuildingEntity( keys )
     unit:SetMaxHealth(fMaxHealth)
   end
 
+  if UNIT_KV[pID][unitName]['TechModifiers'] ~= nil then
+    local modTable = UNIT_KV[pID][unitName]['TechModifiers']
+    for k, v in pairs(UNIT_KV[pID][unitName]['TechModifiers']) do
+      if TechTree:HasTech(pID, v) then
+        local modName =  ABILITY_KV[v]['GiveModifier']
+        building:AddAbility(modName)
+        local addedMod = building:FindAbilityByName(modName)
+        addedMod:SetLevel(1)
+        addedMod:OnUpgrade()
+      end
+    end
+  end
+
   --[[
         Code to update unit health and scale over the build time, maths is a bit spooky but here's whats happening
         Logic follows:

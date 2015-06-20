@@ -23,10 +23,6 @@
   //  shiny_tower_pearls
   //   - named according to its unit name, not really the best way to do this.       
   //
-  //   research_center_t1
-  //   - uses underscores to indicate spaces, use caps instead, as in
-  //   ResearchCenter_t1
-  //
   //   To indicate a units real name / the name that is shown to the player, place   
   //   it in the ascii header above the unit.
   //=================================================================================//
@@ -1873,8 +1869,20 @@
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
-    "IsTech"    "true"
+    "IsTech"      "true"
     "NeedTech"    "house_t1"
+
+
+    //currently testing. define a list of abilities that are the names of the techs player
+    //has researched. when a building spawns look through all these, and compare to the tech tree.
+    //if a tech has been researched and the tech is in this list, level it up. (all techmodifier abilities
+    //will be hidden passives.)
+    //note - we need to put the ability that gets channeled in here, not the tech modifier. this is because
+    //the ability is what is tracked by techtrees, not the modifier.
+    "TechModifiers"
+    {
+        "1"             "research_healing_vitality"
+    }
   }
 
   //================================================================================= 

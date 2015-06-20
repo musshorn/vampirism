@@ -244,7 +244,6 @@ function GameMode:OnGameRulesStateChange(keys)
       })
     for i = 0, 9 do
       local playerTeam = PlayerResource:GetTeam(i)
-      print(playerTeam, ' player team')
       if playerTeam == 2 then
         CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
       elseif playerTeam == 3 then
@@ -269,8 +268,9 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("call_buildui"):SetLevel(1)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
+    npc:FindAbilityByName('research_healing_vitality'):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 10000000 --cheats
+      WOOD[playerID] = 10000000 --cheats, real is 50.
       PlayerResource:SetGold(playerID, 0, false) --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, true)
       PlayerResource:SetGold(playerID, 1000, true)
       TOTAL_FOOD[playerID] = 15

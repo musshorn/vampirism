@@ -34,6 +34,8 @@ function Research( keys )
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
   FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
+  TechTree:AddTechAbility(pID, keys.ability:GetAbilityName())
+
   print('resarch gold')
   print(PlayerResource:GetGold(pID))
 end
@@ -241,4 +243,44 @@ function SpireQuality(keys)
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local level = keys.level
+end
+
+function TechUpgrade( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local ability = keys.ability
+  local abilityName = ability:GetAbilityName()
+  local techMod = ABILITY_KV[abilityName]['GiveModifier']
+
+  --get all alive entities
+
+  local ents = Entities:FindAllByClassname('npc_dota_creature')
+  for k, v in pairs(ents) do
+    -- is this unit effected by the research?
+    if v:IsAlive() then
+      local unitName = v:GetUnitName()      
+      if UNIT_KV[playerID][unitName]['TechModifiers'] ~= nil then
+        for i, mod in pairs(UNIT_KV[playerID][unitName]['TechModifiers']) do
+          if mod == abilityName and v:GetMainControllingPlayer() == playerID then
+            v:AddAbility(techMod)
+            v:FindAbilityByName(techMod):SetLevel(1)
+            v:FindAbilityByName(techMod):OnUpgrade()
+          end
+        end
+      end
+    end
+  end
+end
+
+function AddHealthUpgrade( keys )
+  local caster = keys.caster
+  local amount = keys.Amount
+
+  -- yeah this is how it should be
+  Timers:CreateTimer(.03, function ()
+    caster:SetMaxHealth(caster:GetMaxHealth() + amount)
+    --SNIPPET PLS, if finished, add hp if not dont.
+    caster:SetHealth(caster:GetHealth() + amount)
+    return nil
+  end)
 end

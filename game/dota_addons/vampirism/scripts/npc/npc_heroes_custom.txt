@@ -6,7 +6,7 @@
   {
     "override_hero"       "npc_dota_hero_omniknight"
     "Ability1"          "build_silence"
-    "Ability2"          "summon_slayer_m"
+    "Ability2"          "research_healing_vitality"
     "Ability3"          "call_buildui"
     "Ability4"          "human_blink"
     "Ability5"          "human_manaburn"

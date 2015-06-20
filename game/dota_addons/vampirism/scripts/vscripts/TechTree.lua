@@ -160,11 +160,8 @@ function TechTree:AddTech(unitName, playerID)
 	end
 end
 
-function TechTree:AddTechAbility(keys)
-	local ability = keys
-	local tech = keys:GetAbilityName()
-	local playerID = ability:GetCaster():GetMainControllingPlayer()
-
+function TechTree:AddTechAbility(playerID, tech)
+	print('adding', tech)
 	if playerTrees[playerID][tech] == nil then
 		playerTrees[playerID][tech] = 1
 	else
@@ -186,4 +183,14 @@ function TechTree:RemoveTech(unitName, playerID)
 	--else
 		--print('TECH ' .. tech .. ' is already 0!')
 	end
+end
+
+-- Quick check if a player has a given tech, used for checking tech modifiers.
+function TechTree:HasTech(playerID, tech)
+	for k, v in pairs(playerTrees) do
+		if v[tech] ~= nil then
+			return true
+		end
+	end
+	return false
 end

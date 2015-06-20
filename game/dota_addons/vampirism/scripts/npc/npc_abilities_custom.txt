@@ -1,3 +1,7 @@
+//Notes:
+//MODIFIER_PROPERTY_HEALTH_BONUS seems to be #problematic, doesnt want to be added as passive.
+//instead, run AddHealthUpgrade in research.lua.
+
 "DOTAAbilities"
 {
   "vamp_fountain_heal"
@@ -2291,6 +2295,7 @@
       }
     }
   }
+
   //================================================================================= /
   // Research Healing Vitality
   //================================================================================= /
@@ -2301,13 +2306,16 @@
     "LumberCost"   "46000"
     "GoldCost"     "45"
     "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_healing_vitality"
+
     "OnSpellStart"
     {
       "RunScript"
       {
         "ScriptFile"  "scripts/vscripts/buildings/research.lua"
         "Function"    "Research"
-        "TARGET"  "CASTER"
+        "TARGET"      "CASTER"
       }
     }
     "OnChannelInterrupted"
@@ -2332,13 +2340,54 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "HumanDamage"
-        "TARGET"  "CASTER"
-        "Level" "10"
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+        "Level"             "10"
       }
     }
   }
+
+  //================================================================================= /
+  // Healing Vitality passive (what gets applied to newly spawned buildings)
+  //================================================================================= /
+  "tech_healing_vitality"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_healing_vitality"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_healing_vitality"
+      {
+        "Passive"       "1"
+        "IsHidden"      "0"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+            "Function"          "AddHealthUpgrade" //adds a flat health bonus.
+            "TARGET"            "CASTER"
+            "Amount"            "1500"
+          }
+        }
+      }
+    }
+  }
+
   //================================================================================= /
   // Train Super Tower Builder
   //================================================================================= /
@@ -5612,7 +5661,6 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"       "0"
   }
-
 
 
 
