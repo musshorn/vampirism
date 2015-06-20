@@ -456,7 +456,7 @@
     "AbilityModifierSupportValue"         "0.5"
     "MaxLevel"                            "1"
     "AbilityManaCost"                     "0"
-    "GoldCost"                     "0"
+    "GoldCost"                            "0"
     "OnSpellStart"
     {
       "ApplyModifier"

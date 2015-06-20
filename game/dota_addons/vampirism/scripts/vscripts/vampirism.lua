@@ -279,7 +279,7 @@ function GameMode:OnNPCSpawned(keys)
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
       HUMAN_COUNT = HUMAN_COUNT + 1
       npc:SetAbilityPoints(0)
-      npc:SetHasInventory(false)
+      --npc:SetHasInventory(false) testing
       FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
       FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
       FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})

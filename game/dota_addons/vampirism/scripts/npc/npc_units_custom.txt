@@ -3111,6 +3111,8 @@
       "CombatClassAttack"           "DOTA_COMBAT_CLASS_ATTACK_BASIC"
       "CombatClassDefend"           "DOTA_COMBAT_CLASS_DEFEND_STRONG"
       "UnitRelationshipClass"       "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+      "IsUnique"                    "true"
   }
 
   //================================================================================= 

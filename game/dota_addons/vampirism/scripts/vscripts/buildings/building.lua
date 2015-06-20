@@ -9,7 +9,20 @@ function TrainUnit( keys )
     requestingFood = UNIT_KV[pID][unitToSpawn].ConsumesFood
   else
       requestingFood = 0    
-  end 
+  end
+
+  if UNIT_KV[pID][unitToSpawn].IsUnique ~= nil then
+    local modelName = UNIT_KV[pID][unitToSpawn]['Model']
+    local ents = Entities:FindAllByModel(modelName)
+    for k, v in pairs(ents) do
+      if v:GetUnitName() == unitToSpawn and v:GetMainControllingPlayer() == pID and v:IsAlive() then
+        FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "You cannot have more than one!" } )
+        building:RemoveModifierByName(keys.AddToQueue)
+      return
+      end
+    end
+  end
+
 
   if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood then
     if table.getn(building.queue) <= 7 then
