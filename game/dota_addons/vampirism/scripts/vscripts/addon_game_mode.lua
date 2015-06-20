@@ -95,6 +95,7 @@ function Precache( context )
 		PrecacheModel("models/bad_stonewall003c_reference.vmdl",context)
 		PrecacheModel("models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_high_priest.vmdl", context)
 		PrecacheModel("models/props_structures/good_statue010.vmdl", context)
+		PrecacheModel("models/props_mines/mine_cart002.vmdl", context)
 		
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)

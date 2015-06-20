@@ -61,8 +61,9 @@ HAS_SLAYER = {}
 SLAYERS = {}
 VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
 VAMPIRES = {} -- table of all created vampires
-ABILITY_HOLDERS = {} --table containing units which hold extra abilities when another unit does not have enough slots to store them all.
-SHOPS = {} --table of all shops. 
+ABILITY_HOLDERS = {} --[[table containing units which hold extra abilities when another unit does not have enough slots to store them all.
+                          Remember that in order to be used with buildUI, all abilities need to exist in abilities_custom]]
+SHOPS = {} --table of all shops, by entindex.
 
 Bases = {}     -- Access by owner pID, has int value baseID and a table of shared builders pIDs
 Bases.Owners = {}
@@ -327,12 +328,12 @@ local unitName = string.lower(npc:GetUnitName())
       end
     end
   else
-    print(npc:IsRealHero(), 'isrealhero')
-    print(unitName, 'unitName')
     if UNIT_KV[-1][unitName]['AbilityHolder'] ~= nil then
       if ABILITY_HOLDERS[unitName] == nil then
         ABILITY_HOLDERS[unitName] = {}
+        print('has holder adding', UNIT_KV[-1][unitName]["AbilityHolder"])
         for i = 1, UNIT_KV[-1][unitName]["AbilityHolder"] do
+          print(UNIT_KV[-1][unitName]["ExtraAbility"..i], 'went into holder')
           table.insert(ABILITY_HOLDERS[unitName], UNIT_KV[-1][unitName]["ExtraAbility"..i])
         end
       end
@@ -1058,19 +1059,62 @@ function heroRoller(playerID)
 end]]
 
 function GoldMineTimer()
-  --Runs each minute for t1 gold mines
+  --adds gold from gold mines
+  local goldTime = 0
   Timers:CreateTimer(function()
-    local t1gold = Entities:FindAllByModel('models/props_cave/mine_cart.vmdl')
-    PrintTable(t1gold)
-    for k, mine in pairs(t1gold) do
-      if mine ~= nil then
-        local playerID = mine:GetMainControllingPlayer()
-        local curGold = PlayerResource:GetGold(playerID)
-        PlayerResource:SetGold(playerID, curGold + 1, true)
-        FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
+    --check t4 gold
+    if goldTime % 4 == 0 then
+      local t4gold = Entities:FindAllByModel('t4gold') --change this later
+      for k, mine in pairs(t4gold) do
+        if mine ~= nil then
+          local playerID = mine:GetMainControllingPlayer()
+          local curGold = PlayerResource:GetGold(playerID)
+          PlayerResource:SetGold(playerID, curGold + 1, true) 
+          FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
+        end
+      end      
+    end
+    --check t3 gold
+    if goldTime % 6 == 0 then
+      local t3gold = Entities:FindAllByModel('t3gold') --change this later
+      for k, mine in pairs(t3gold) do
+        if mine ~= nil then
+          local playerID = mine:GetMainControllingPlayer() 
+          local curGold = PlayerResource:GetGold(playerID)
+          PlayerResource:SetGold(playerID, curGold + 1, true)
+          FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1}) 
+        end
       end
     end
-    return 60
+    --check t2 gold mines
+    if goldTime % 15 == 0 then
+      local t2gold = Entities:FindAllByModel('models/props_mines/mine_cart002.vmdl')
+      for k, mine in pairs(t2gold) do
+        if mine ~= nil then
+          local playerID = mine:GetMainControllingPlayer()
+          local curGold = PlayerResource:GetGold(playerID)
+          PlayerResource:SetGold(playerID, curGold + 1, true)
+          FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
+        end
+      end
+    end
+    --check t1 gold mines
+    if goldTime == 0 then
+      local t1gold = Entities:FindAllByModel('models/props_cave/mine_cart.vmdl')
+      for k, mine in pairs(t1gold) do
+        if mine ~= nil then
+          local playerID = mine:GetMainControllingPlayer()
+          local curGold = PlayerResource:GetGold(playerID)
+          PlayerResource:SetGold(playerID, curGold + 1, true)
+          FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
+        end
+      end
+    end
+    goldTime = goldTime + 1
+    if goldTime == 60 then
+      goldTime = 0
+    end
+    return 1
   end)
 end
 

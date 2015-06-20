@@ -231,7 +231,7 @@ function BuildingQ( keys )
 
   if caster.ProcessingBuilding ~= nil then
     -- caster is probably a builder, stop them
-    player = caster:GetPlayerOwner()
+    player = PlayerResource:GetPlayer(caster:GetMainControllingPlayer())
     player.activeBuilder:ClearQueue()
     player.activeBuilding = nil
     player.activeBuilder:Stop()

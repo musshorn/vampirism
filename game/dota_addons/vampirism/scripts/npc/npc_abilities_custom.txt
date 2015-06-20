@@ -2765,7 +2765,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "1" // #DEBUG, true value is 5
+    "AbilityChannelTime"  "5" 
     
     "OnSpellStart"
     {
@@ -2775,7 +2775,7 @@
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
         "TargetUnit"  "wall_t2"
-        "LumberCost"  "1" // #DEBUG, true value is 250
+        "LumberCost"  "250"
       }
     }
     "OnChannelSucceeded"
@@ -2797,7 +2797,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "1" // #DEBUG, true value is 10
+    "AbilityChannelTime"  "10" 
     
     "OnSpellStart"
     {
@@ -2807,7 +2807,7 @@
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
         "TargetUnit"  "wall_t3"
-        "LumberCost"  "1" // #DEBUG, true value is 1000
+        "LumberCost"  "1000"
       }
     }
     "OnChannelSucceeded"
@@ -2829,8 +2829,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "1" // #DEBUG, true value is 20
-    
+    "AbilityChannelTime"  "20"
     "OnSpellStart"
     {
       "RunScript"
@@ -2839,7 +2838,7 @@
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
         "TargetUnit"  "wall_t4"
-        "LumberCost"  "1" // #DEBUG, true value is 5000
+        "LumberCost"  "5000"
       }
     }
     "OnChannelSucceeded"
@@ -2861,7 +2860,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "1" // #DEBUG, true value is 30
+    "AbilityChannelTime"  "30"
     
     "OnSpellStart"
     {
@@ -2871,7 +2870,7 @@
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
         "TargetUnit"  "wall_t5"
-        "LumberCost"  "1" // #DEBUG, true value is 10000
+        "LumberCost"  "10000"
       }
     }
     "OnChannelSucceeded"
@@ -2891,7 +2890,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "1" // #DEBUG, true value is 40
+    "AbilityChannelTime"  "40" 
     
     "OnSpellStart"
     {
@@ -2901,8 +2900,8 @@
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
         "TargetUnit"  "wall_t6"
-        "LumberCost"  "1" // #DEBUG, true value is 30000
-        "GoldCost"  "1" // #DEBUG, true value is 10
+        "LumberCost"  "30000"
+        "GoldCost"  "10"
       }
     }
     "OnChannelSucceeded"
@@ -2924,8 +2923,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "1" // #DEBUG, true value is 50
-    
+    "AbilityChannelTime"  "50"
+
     "OnSpellStart"
     {
       "RunScript"
@@ -2934,8 +2933,8 @@
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
         "TargetUnit"  "wall_t7"
-        "LumberCost"  "1" // #DEBUG, true value is 80000
-        "GoldCost"  "1" // #DEBUG, true value is 35
+        "LumberCost"  "80000"
+        "GoldCost"  "35"
       }
     }
     "OnChannelSucceeded"
@@ -2957,7 +2956,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "1" // #DEBUG, true value is 60
+    "AbilityChannelTime"  "60"
     
     "OnSpellStart"
     {
@@ -2967,8 +2966,8 @@
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
         "TargetUnit"  "wall_t8"
-        "LumberCost"  "1" // #DEBUG, true value is 150000
-        "GoldCost"  "1" // #DEBUG, true value is 100
+        "LumberCost"  "150000"
+        "GoldCost"  "100"
       }
     }
     "OnChannelSucceeded"
@@ -2989,7 +2988,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "1" // #DEBUG, true value is 70
+    "AbilityChannelTime"  "70" // #DEBUG, true value is 
     
     "OnSpellStart"
     {
@@ -2999,8 +2998,8 @@
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
         "TargetUnit"  "wall_t9"
-        "LumberCost"  "1" // #DEBUG, true value is 250000
-        "GoldCost"  "1" // #DEBUG, true value is 200
+        "LumberCost"  "250000"
+        "GoldCost"  "200"
       }
     }
     "OnChannelSucceeded"
@@ -3021,7 +3020,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "1" // #DEBUG, true value is 100
+    "AbilityChannelTime"  "100" // #DEBUG, true value is 
     
     "OnSpellStart"
     {
@@ -3031,8 +3030,8 @@
         "Function"    "Upgrade"
         "TARGET"  "CASTER"
         "TargetUnit"  "wall_t10"
-        "LumberCost"  "1" // #DEBUG, true value is 450000
-        "GoldCost"  "1" // #DEBUG, true value is 1200
+        "LumberCost"  "450000"
+        "GoldCost"  "1200"
       }
     }
     "OnChannelSucceeded"
@@ -4793,6 +4792,85 @@
     }
   }
 
+  //================================================================================= /
+  // Upgrade to Super Gold Mine
+  //================================================================================= /
+  "upgrade_to_gold_mine_t2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "1"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "gold_mine_t2"
+        "LumberCost"  "50000"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "gold_mine_t2"
+        "Scale"       "1"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Build Super Gold Mine
+  //=================================================================================
+  "build_gold_mine_t2"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "1"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "1"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0.05"
+    "LumberCost"                "50000"
+    "GoldCost"                  "0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "gold_mine_t2"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
+
   //================================================================================= 
   // Build Opal Tower
   //=================================================================================
@@ -4972,6 +5050,327 @@
       }
     }
   }
+
+  //================================================================================= 
+  // Build Cripple Tower PLACEHOLDER
+  //=================================================================================
+  "build_tower_cripple_t1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "30"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "0.7"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "15000"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "tower_cripple_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Build Comet Tower PLACEHOLDER
+  //=================================================================================
+  "build_tower_cripple_t1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "30"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "0.7"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "15000"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "tower_cripple_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Build Ruby Wall
+  //=================================================================================
+  "build_wall_t8"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "60"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "0.7"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "150000"
+    "GoldCost"                  "100"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "wall_t8"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Build Lightning Oracle
+  //=================================================================================
+  "build_tower_lightning_t1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "60"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "0.7"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "750000"
+    "GoldCost"                  "250"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "tower_lightning_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Build Vampire Spire Tower
+  //=================================================================================
+  "build_tower_spire_t1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "30"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "0.7"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "75000"
+    "GoldCost"                  "30"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "tower_spire_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Build Command Center
+  //=================================================================================
+  "build_command_center"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "1"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "0.7"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "100000"
+    "GoldCost"                  "400"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "command_center"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Build Base of Operations
+  //=================================================================================
+  "build_base_operations"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "1"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "0.7"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "0"
+    "GoldCost"                  "1000"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "base_operations"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
 
 
   "build_cancel"
