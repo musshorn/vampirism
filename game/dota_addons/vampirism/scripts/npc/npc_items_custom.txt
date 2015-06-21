@@ -8,7 +8,7 @@
   	//=================================================================================
 	"item_scroll_beast"
 	{
-		"ID"	"1104"
+		"ID"	"2000"
 		"BaseClass"	"item_datadriven"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityTextureName"	"item_mask_of_madness"
@@ -85,7 +85,7 @@
   	//=================================================================================
 	"item_dracula_helmet"
 	{
-		"ID"	"1105"
+		"ID"	"2001"
 		"BaseClass"	"item_datadriven"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"	"item_wraith_band"
@@ -115,7 +115,7 @@
   	//=================================================================================
 	"item_demonic_remains"
 	{
-		"ID"	"1106"
+		"ID"	"2002"
 		"BaseClass"	"item_datadriven"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"	"item_vladmir"
@@ -148,7 +148,7 @@
   	//=================================================================================
 	"item_small_coin"
 	{
-		"ID"	"1107"
+		"ID"	"2003"
 		"BaseClass"	"item_datadriven"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_DONT_RESUME_ATTACK"
 		"Model"	"models/coin_reference.vmdl"
@@ -185,7 +185,7 @@
   	//=================================================================================
 	"item_large_coin"
 	{
-		"ID"	"1108"
+		"ID"	"2004"
 		"BaseClass"	"item_datadriven"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_DONT_RESUME_ATTACK"
 		"Model"	"models/coin_reference.vmdl"
@@ -222,7 +222,7 @@
   	//=================================================================================
 	"item_vampiric_boots"
 	{
-		"ID"	"1109"
+		"ID"	"2005"
 		"BaseClass"	"item_datadriven"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"Model"	"models/coin_reference.vmdl"
@@ -258,7 +258,7 @@
   	//=================================================================================
 	"item_sphere_of_doom"
 	{
-		"ID"	"1110"
+		"ID"	"2006"
 		"BaseClass"	"item_datadriven"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
 		"Model"	"models/coin_reference.vmdl"
@@ -288,7 +288,7 @@
   	//=================================================================================
   	"item_engineer_toolkit"
   	{
-  		"ID"	"1111"
+  		"ID"	"2007"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_maelstrom"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
@@ -324,7 +324,7 @@
   	//=================================================================================
   	"item_master_slayer_vest"
   	{
-  		"ID"	"1112"
+  		"ID"	"2008"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -374,7 +374,7 @@
   	//=================================================================================
   	"item_venom_orb"
   	{
-  		"ID"	"1113"
+  		"ID"	"2010"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
@@ -400,7 +400,7 @@
   	//=================================================================================
   	"item_circlet_slayer"
   	{
-  		"ID"	"1114"
+  		"ID"	"2011"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -446,7 +446,7 @@
   	//=================================================================================
   	"item_divinity_jewel"
   	{
-  		"ID"	"1115"
+  		"ID"	"2012"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
@@ -498,7 +498,7 @@
   	//=================================================================================
   	"item_pendant_mana"
   	{
-  		"ID"	"1116"
+  		"ID"	"2013"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -542,7 +542,7 @@
   	//=================================================================================
   	"item_pendant_vitality"
   	{
-  		"ID"	"1117"
+  		"ID"	"2014"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -586,7 +586,7 @@
   	//=================================================================================
   	"item_vampiric_concoction"
   	{
-  		"ID"	"1118"
+  		"ID"	"2015"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -632,7 +632,7 @@
   	//=================================================================================
   	"item_ring_hell_lords"
   	{
-  		"ID"	"1119"
+  		"ID"	"2016"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -673,6 +673,935 @@
   		}
   	}
 
+  	//================================================================================= 
+  	// Hire Shade
+  	//=================================================================================
+  	"item_hire_shade"
+  	{
+  		"ID"	"2017"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"5"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnEquip"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"scripts/vscripts/items.lua"
+  				"Function"		"HireUnit"
+  				"Mercenary"		"merc_shade"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Hire Lannik's Fire
+  	//=================================================================================
+  	"hire_lannik_fire"
+  	{
+  		"ID"					"2018"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"20"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnEquip"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"scripts/vscripts/items.lua"
+  				"Function"		"HireUnit"
+  				"Mercenary"		"merc_lannik_fire"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Hire Lannik's Meteor
+  	//=================================================================================
+  	"hire_lannik_meteor"
+  	{
+  		"ID"					"2019"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"70"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnEquip"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"scripts/vscripts/items.lua"
+  				"Function"		"HireUnit"
+  				"Mercenary"		"merc_lannik_meteor"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Hire Lannik's Meteor
+  	//=================================================================================
+  	"hire_lannik_meteor"
+  	{
+  		"ID"					"2019"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"70"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnEquip"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"scripts/vscripts/items.lua"
+  				"Function"		"HireUnit"
+  				"Mercenary"		"merc_lannik_meteor"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Pulse Staff
+  	//=================================================================================
+  	"item_pulse_staff"
+  	{
+  		"ID"					"2020"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"70"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"AbilitySpecial"
+  		{
+  			"01"
+  			{
+  				"var_type"			"FIELD_INTEGER"
+  				"damage"			"5000"
+  			}
+  			"02"
+  			{
+  				"var_type"			"FIELD_INTEGER"
+  				"jumps"				"1"
+  			}
+  		}
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"scripts/vscripts/items.lua"
+  				"Function"		"PulseStaff"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Immunity Shield
+  	//=================================================================================
+  	"item_immunity_shield"
+  	{
+  		"ID"					"2021"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"70"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"Modifiers"
+  		{
+  			"modifier_immunity_shield"
+  			{
+  				"Passive"			"0"
+  				"IsHidden"			"0"
+  				"IsDebuff"			"0"
+  				"Duration"			"1"
+  		  		
+  				"States"
+  				{
+  					"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
+  				}
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Dracula's Urn
+  	//=================================================================================
+  	"item_dracula_urn"
+  	{
+  		"ID"					"2022"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"200"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnEquip"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"DraculaUrn"
+  			}
+  		}
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"UrnReveal"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Rod of Teleportation
+  	//=================================================================================
+  	"item_rod_teleportation"
+  	{
+  		"ID"					"2023"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"100"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"RodTeleportation"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Hire Assassin
+  	//=================================================================================
+  	"hire_assassin"
+  	{
+  		"ID"					"2024"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"75"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"HireUnit"
+  				"Mercenary"		"merc_assassin"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Hire Fallen Hound
+  	//=================================================================================
+  	"hire_assassin"
+  	{
+  		"ID"					"2024"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"75"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"HireUnit"
+  				"Mercenary"		"merc_fallen_hound"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Trade Wood
+  	//=================================================================================
+  	"item_trade_wood"
+  	{
+  		"ID"					"2025"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"0"
+  		"LumberCost"			"8000"
+  		"FoodCost"				""
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"TradeWood"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Burst Gem
+  	//=================================================================================
+  	"item_burst_gem"
+  	{
+  		"ID"					"2026"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"290"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"AbilitySpecial"
+  		{
+  			"01"
+  			{
+  				"var_type"			"FIELD_INTEGER"
+  				"damage"			"1500"
+  			}
+  		}
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"BurstGem"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Massive Grave
+  	//=================================================================================
+  	"item_massive_grave"
+  	{
+  		"ID"					"2027"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"30"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"MassiveGrave"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Massive Grave
+  	//=================================================================================
+  	"item_massive_grave"
+  	{
+  		"ID"					"2028"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"30"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"MassiveGrave"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Cloak of Shadows
+  	//=================================================================================
+  	"item_cloak_shadows"
+  	{
+  		"ID"					"2029"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"325"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"States"
+  		{
+  			"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_ENABLED"
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Lannik's Rain of Fire
+  	//=================================================================================
+  	"item_lannik_rain"
+  	{
+  		"ID"					"2030"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"150"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+  	}
+
+  	//================================================================================= 
+  	// Wind Walk Potion
+  	//=================================================================================
+  	"item_wind_walk_potion"
+  	{
+  		"ID"					"2031"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"30"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+  	}
+
+  	//================================================================================= 
+  	// Hire French Man
+  	//=================================================================================
+  	"hire_french_man"
+  	{
+  		"ID"					"2032"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"5"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		"OnSpellStart"
+  		{
+  			"RunScript"
+  			{
+  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"Function"		"HireUnit"
+  				"Mercenary"		"french_man"
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Claws of the Dreadlord
+  	//=================================================================================
+  	"item_claws_dreadlord"
+  	{
+  		"ID"					"2033"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"125"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+		//mana regen hp regen. 		
+  	}
+
+  	//================================================================================= 
+  	// Hire Meat Carrier
+  	//=================================================================================
+  	"hire_meat_carrier"
+  	{
+  		"ID"					"2034"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"60"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+		"OnEquip"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"vscripts/scripts/items.lua"
+				"Function"		"HireUnit"
+				"Mercenary"		"MeatCarrier"
+			}
+		} 		
+  	}
+
+  	//================================================================================= 
+  	// Silent Whisper
+  	//=================================================================================
+  	"item_silent_whisper"
+  	{
+  		"ID"					"2035"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"50"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"vscripts/scripts/items.lua"
+				"Function"		"SilentWhisper"
+			}
+		}	
+  	}
+
+  	//================================================================================= 
+  	// Refresh Potion
+  	//=================================================================================
+  	"item_refresh_potion"
+  	{
+  		"ID"					"2037"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"275"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//add hp. mp
+  	}
+
+  	//================================================================================= 
+  	// Wand of Shadowsight
+  	//=================================================================================
+  	"item_wand_shadowsight"
+  	{
+  		"ID"					"2038"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"10"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//give vision
+  	}
+
+  	//================================================================================= 
+  	// Cyclone Wand
+  	//=================================================================================
+  	"item_wand_cyclone"
+  	{
+  		"ID"					"2039"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"2"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//cyclone human
+  	}
+
+  	//================================================================================= 
+  	// Sentry Wards
+  	//=================================================================================
+  	"item_sentry_wards"
+  	{
+  		"ID"					"2040"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"15"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//plant ward
+  	}
+
+  	//================================================================================= 
+  	// Claws of Attack
+  	//=================================================================================
+  	"item_claws_attack"
+  	{
+  		"ID"					"2041"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"2"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//give damages
+  	}
+
+  	//================================================================================= 
+  	// Ring of Regeneration
+  	//=================================================================================
+  	"item_ring_regen"
+  	{
+  		"ID"					"2042"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"6"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//give regen
+  	}
+
+  	//================================================================================= 
+  	// Replenish Potion
+  	//=================================================================================
+  	"item_replenish_potion"
+  	{
+  		"ID"					"2043"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"2"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//give regen
+  	}
+
+  	//================================================================================= 
+  	// Amulet of Protection
+  	//=================================================================================
+  	"item_amulet_protection"
+  	{
+  		"ID"					"2044"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"2"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//give armor
+  	}
+
+  	//================================================================================= 
+  	// Dracula's Cloak - recipie
+  	//=================================================================================
+  	"item_recipie_dracula_cloak"
+  	{
+  		"ID"					"2045"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"3275"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//give stats
+  	}
+
+  	//================================================================================= 
+  	// Ricochet Gem - recipie
+  	//=================================================================================
+  	"item_recipie_ricochet_gem"
+  	{
+  		"ID"					"2046"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"200"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//give ricochet
+  	}
+
+  	//================================================================================= 
+  	// Gauntlets of the Underworld
+  	//=================================================================================
+  	"item_gauntlets_underworld"
+  	{
+  		"ID"					"2047"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"2000"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//give stats
+  	}
+
+  	//================================================================================= 
+  	// Gauntlets of Hellfire
+  	//=================================================================================
+  	"item_gauntlets_hellfire"
+  	{
+  		"ID"					"2048"
+  		"BaseClass"				"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"			"0"
+  		"ItemKillable"			"1"
+  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"			"0"
+  		"ItemRequiresCharges"   "0"
+  		"SideShop"				"1"
+  		"AbilityCooldown"		"0"
+  		"GoldCost"				"1800"
+  		"LumberCost"			"0"
+  		"FoodCost"				""
+
+  		//give stats
+  	}
 
 	"item_health_modifier"
 	{
