@@ -1,0 +1,10 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/loading_screen.css" />
+  </styles>
+  <Panel class="AddonLoadingRoot">
+    <Panel id="CustomBg" >
+      <Image id="gamemode" class="loadingImage" src="file://{images}/custom_game/loading.png" />
+    </Panel>
+  </Panel>
+</root>

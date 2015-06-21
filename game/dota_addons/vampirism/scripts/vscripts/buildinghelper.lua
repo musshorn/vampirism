@@ -277,6 +277,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
   building:SetControllableByPlayer(pID, true)
   building.blockers = gridNavBlockers
   building.buildingTable = buildingTable
+  building.state = "building"
   
 
   -- Prevent regen messing with the building spawn hp gain
@@ -398,6 +399,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
         end
         building.constructionCompleted = true
         print("[BH] HP was off by:", fMaxHealth - fAddedHealth)
+        building.state = "complete"
         building.bUpdatingHealth = false
         -- clean up the timer if we don't need it.
         return nil
