@@ -20,6 +20,11 @@
         "item"  "item_cloak_shadows"
         "item"  "item_dracula_cloak"
         "item"  "item_master_slayer_vest"
+        "item"  "item_circlet_slayer"
+        "item"  "item_divinity_jewel"
+        "item"  "item_pendant_mana"
+        "item"  "item_pendant_vitality"
+        "item"  "item_vampiric_concoction"
     }
 
     "misc"

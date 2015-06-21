@@ -439,9 +439,240 @@
   				}
   			}
   		}
-
-
   	}
+
+  	//================================================================================= 
+  	// Human Surplus - Divinity Jewel
+  	//=================================================================================
+  	"item_divinity_jewel"
+  	{
+  		"ID"	"1115"
+  		"BaseClass"		"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  		"ItemStackable"		"0"
+  		"ItemKillable"		"1"
+  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"		"0"
+  		"ItemRequiresCharges" "0"
+  		"SideShop"			"1"
+  		"AbilityCooldown"	"0"
+  		"GoldCost"			"150"
+  		"LumberCost"		"10000"
+
+  		"AbilitySpecial"
+  		{
+  			"01"
+  			{
+  				"var_type"			"FIELD_INTEGER"
+  				"stat_bonus"		"250"
+  			}
+  		}
+
+  		"Modifiers"
+  		{
+  			"modifier_divinity_stats"
+  			{
+  				"Passive"			"1"
+  				"IsHidden"			"1"
+  				"IsDebuff"			"0"
+  		  			
+  				"Properties"
+  				{
+  					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%stat_bonus"
+  				    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%stat_bonus"
+  				    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%stat_bonus"  
+  				}
+  			}
+  		}
+
+  		"RunScript"
+  		{
+  			"ScriptFile"	"scripts/vscripts/items.lua"
+  			"Function"		"DivinityJewel"
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Human Surplus - Pendant of Mana
+  	//=================================================================================
+  	"item_pendant_mana"
+  	{
+  		"ID"	"1116"
+  		"BaseClass"		"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"		"0"
+  		"ItemKillable"		"1"
+  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"		"0"
+  		"ItemRequiresCharges" "0"
+  		"SideShop"			"1"
+  		"AbilityCooldown"	"0"
+  		"GoldCost"			"5"
+  		"LumberCost"		"2500"
+
+  		"AbilitySpecial"
+  		{
+  			"01"
+  			{
+  				"var_type"			"FIELD_INTEGER"
+  				"mana_bonus"		"10000"
+  			}
+  		}
+
+  		"Modifiers"
+  		{
+  			"modifier_mana_pendant_stats"
+  			{
+  				"Passive"			"1"
+  				"IsHidden"			"1"
+  				"IsDebuff"			"0"
+  		  			
+  				"Properties"
+  				{
+  					"MODIFIER_PROPERTY_MANA_BONUS"			"%mana_bonus"
+  				}
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Human Surplus - Pendant of Vitality
+  	//=================================================================================
+  	"item_pendant_vitality"
+  	{
+  		"ID"	"1117"
+  		"BaseClass"		"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"		"0"
+  		"ItemKillable"		"1"
+  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"		"0"
+  		"ItemRequiresCharges" "0"
+  		"SideShop"			"1"
+  		"AbilityCooldown"	"0"
+  		"GoldCost"			"5"
+  		"LumberCost"		"5000"
+
+  		"AbilitySpecial"
+  		{
+  			"01"
+  			{
+  				"var_type"			"FIELD_INTEGER"
+  				"health_bonus"		"10000"
+  			}
+  		}
+
+  		"Modifiers"
+  		{
+  			"modifier_vitality_pendant_stats"
+  			{
+  				"Passive"			"1"
+  				"IsHidden"			"1"
+  				"IsDebuff"			"0"
+  		  			
+  				"Properties"
+  				{
+  					"MODIFIER_PROPERTY_HEALTH_BONUS"			"%health_bonus"
+  				}
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Vampiric Concoction
+  	//=================================================================================
+  	"item_vampiric_concoction"
+  	{
+  		"ID"	"1118"
+  		"BaseClass"		"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  		"ItemStackable"		"0"
+  		"ItemKillable"		"1"
+  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"		"0"
+  		"ItemRequiresCharges" "0"
+  		"SideShop"			"1"
+  		"AbilityCooldown"	"150"
+  		"GoldCost"			"40"
+  		"LumberCost"		"0"
+
+  		"AbilitySpecial"
+  		{
+  			"01"
+  			{
+  				"var_type"			"FIELD_FLOAT"
+  				"duration"		"15.0"
+  			}
+  		}
+
+  		"Modifiers"
+  		{
+  			"modifier_vampiric_concoction"
+  			{
+  				"Passive"			"0"
+  				"IsHidden"			"0"
+  				"IsDebuff"			"0"
+  				"Duration"			"%duration"
+
+  				"States"
+  				{
+  					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+  				}
+  		  			
+  			}
+  		}
+  	}
+
+  	//================================================================================= 
+  	// Ring of the Hell Lords
+  	//=================================================================================
+  	"item_ring_hell_lords"
+  	{
+  		"ID"	"1119"
+  		"BaseClass"		"item_datadriven"
+  		"AbilityTextureName"	"item_glimmer_cape"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"ItemStackable"		"0"
+  		"ItemKillable"		"1"
+  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  		"ItemPermanent"		"0"
+  		"ItemRequiresCharges" "0"
+  		"SideShop"			"1"
+  		"AbilityCooldown"	"0"
+  		"GoldCost"			"300"
+  		"LumberCost"		"0"
+
+  		"AbilitySpecial"
+  		{
+  			"01"
+  			{
+  				"var_type"			"FIELD_FLOAT"
+  				"duration"		"15.0"
+  			}
+  		}
+
+  		"Modifiers"
+  		{
+  			"modifier_vampiric_concoction"
+  			{
+  				"Passive"			"0"
+  				"IsHidden"			"0"
+  				"IsDebuff"			"0"
+  				"Duration"			"%duration"
+
+  				"States"
+  				{
+  					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+  				}
+  		  			
+  			}
+  		}
+  	}
+
 
 	"item_health_modifier"
 	{
