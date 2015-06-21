@@ -99,21 +99,21 @@
 			"stocktime"		"180"
 			"index"			"4"
 		}
-		"item_hire_shade"					
+		"hire_shade"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
 			"stocktime"		"420"
 			"index"			"5"
 		}
-		"item_summon_infernal"				
+		"hire_lannik_fire"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
 			"stocktime"		"420"
 			"index"			"6"
 		}
-		"item_summon_infernal_meteor"		
+		"hire_lannik_meteor"		
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -155,7 +155,7 @@
 			"stocktime"		"60"
 			"index"			"12"
 		}
-		"item_summon_assassin"				
+		"hire_assassin"				
 		{
 			"initstock"		"1"
 			"stock"			"1"

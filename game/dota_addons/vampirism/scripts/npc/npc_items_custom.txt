@@ -676,7 +676,7 @@
   	//================================================================================= 
   	// Hire Shade
   	//=================================================================================
-  	"item_hire_shade"
+  	"hire_shade"
   	{
   		"ID"	"2017"
   		"BaseClass"				"item_datadriven"
@@ -731,37 +731,6 @@
   				"ScriptFile"	"scripts/vscripts/items.lua"
   				"Function"		"HireUnit"
   				"Mercenary"		"merc_lannik_fire"
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Hire Lannik's Meteor
-  	//=================================================================================
-  	"hire_lannik_meteor"
-  	{
-  		"ID"					"2019"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_glimmer_cape"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"70"
-  		"LumberCost"			"0"
-  		"FoodCost"				""
-
-  		"OnEquip"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"scripts/vscripts/items.lua"
-  				"Function"		"HireUnit"
-  				"Mercenary"		"merc_lannik_meteor"
   			}
   		}
   	}
@@ -985,9 +954,9 @@
   	//================================================================================= 
   	// Hire Fallen Hound
   	//=================================================================================
-  	"hire_assassin"
+  	"hire_fallen_hound"
   	{
-  		"ID"					"2024"
+  		"ID"					"2025"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -1018,7 +987,7 @@
   	//=================================================================================
   	"item_trade_wood"
   	{
-  		"ID"					"2025"
+  		"ID"					"2026"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -1048,7 +1017,7 @@
   	//=================================================================================
   	"item_burst_gem"
   	{
-  		"ID"					"2026"
+  		"ID"					"2027"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
@@ -1089,37 +1058,7 @@
   	//=================================================================================
   	"item_massive_grave"
   	{
-  		"ID"					"2027"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_glimmer_cape"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"30"
-  		"LumberCost"			"0"
-  		"FoodCost"				""
-
-  		"OnSpellStart"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
-  				"Function"		"MassiveGrave"
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Massive Grave
-  	//=================================================================================
-  	"item_massive_grave"
-  	{
-  		"ID"					"2028"
+  		"ID"					"2029"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
@@ -1149,7 +1088,7 @@
   	//=================================================================================
   	"item_cloak_shadows"
   	{
-  		"ID"					"2029"
+  		"ID"					"2030"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -1175,7 +1114,7 @@
   	//=================================================================================
   	"item_lannik_rain"
   	{
-  		"ID"					"2030"
+  		"ID"					"2031"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -1196,7 +1135,7 @@
   	//=================================================================================
   	"item_wind_walk_potion"
   	{
-  		"ID"					"2031"
+  		"ID"					"2032"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -1217,7 +1156,7 @@
   	//=================================================================================
   	"hire_french_man"
   	{
-  		"ID"					"2032"
+  		"ID"					"2033"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -1248,7 +1187,7 @@
   	//=================================================================================
   	"item_claws_dreadlord"
   	{
-  		"ID"					"2033"
+  		"ID"					"2034"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -1271,7 +1210,7 @@
   	//=================================================================================
   	"hire_meat_carrier"
   	{
-  		"ID"					"2034"
+  		"ID"					"2035"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -1302,7 +1241,7 @@
   	//=================================================================================
   	"item_silent_whisper"
   	{
-  		"ID"					"2035"
+  		"ID"					"2036"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
