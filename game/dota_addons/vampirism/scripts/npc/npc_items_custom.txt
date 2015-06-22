@@ -705,9 +705,9 @@
   	}
 
   	//================================================================================= 
-  	// Hire Lannik's Fire
+  	// Hire Avernal
   	//=================================================================================
-  	"hire_lannik_fire"
+  	"hire_avernal"
   	{
   		"ID"					"2018"
   		"BaseClass"				"item_datadriven"
@@ -730,15 +730,15 @@
   			{
   				"ScriptFile"	"scripts/vscripts/items.lua"
   				"Function"		"HireUnit"
-  				"Mercenary"		"merc_lannik_fire"
+  				"Mercenary"		"merc_avernal"
   			}
   		}
   	}
 
   	//================================================================================= 
-  	// Hire Lannik's Meteor
+  	// Hire Avernal Meteor
   	//=================================================================================
-  	"hire_lannik_meteor"
+  	"hire_avernal_meteor"
   	{
   		"ID"					"2019"
   		"BaseClass"				"item_datadriven"
@@ -761,7 +761,7 @@
   			{
   				"ScriptFile"	"scripts/vscripts/items.lua"
   				"Function"		"HireUnit"
-  				"Mercenary"		"merc_lannik_meteor"
+  				"Mercenary"		"merc_avernal_meteor"
   			}
   		}
   	}
@@ -1110,9 +1110,9 @@
   	}
 
   	//================================================================================= 
-  	// Lannik's Rain of Fire
+  	// Rain of Avernus
   	//=================================================================================
-  	"item_lannik_rain"
+  	"item_avernus_rain"
   	{
   		"ID"					"2031"
   		"BaseClass"				"item_datadriven"

@@ -43,7 +43,7 @@
 	//=================================================================================================================
 	"super_tower_builder"
 	{
-		"build_tower_manaburn_t2"					"0"
+		"build_tower_manaburn_t2"				"0"
 		"build_gold_mine_t2"					"1"
 		"build_tower_cripple_t1"				"2"
 		"build_human_surplus"					"3"
