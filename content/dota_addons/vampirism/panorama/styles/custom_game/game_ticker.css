@@ -1,0 +1,12 @@
+//Overwrite default HUD size
+.CustomUIState_HUD
+{
+  width: 100%;
+  height: 100%;
+}
+
+.TickerBox
+{
+  width: 35%;
+  position: 35% 80% 0px;
+}

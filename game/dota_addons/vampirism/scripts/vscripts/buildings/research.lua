@@ -68,9 +68,13 @@ end
 
 -- Used to catch if cancelled by casting another ability
 function Finished(keys)
+  local caster = keys.caster
+  local pID = caster:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
   if keys.interrupted == 1 then
     Cancelled(keys)
   end
+  CustomGameEventManager:Send_ServerToPlayer( player, "overtime_alert", broadcast_killcount )
 end
 
 --Research center upgrades
