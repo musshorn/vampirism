@@ -275,3 +275,11 @@ function VerifyAttacker( keys )
     end
   end
 end
+
+function worker_debug( keys )
+  local worker = keys.caster
+  print(worker.moving)
+  print(worker.skipTicks)
+  print(worker.inTriggerZone)
+  print(worker.thinking)
+end
