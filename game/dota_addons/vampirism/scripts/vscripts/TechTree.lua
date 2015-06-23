@@ -44,7 +44,6 @@ function TechTree:GetRequired(unitName, playerID, sType)
 					end
 				end
 			else
-				print('no techs needed for '..tostring(unitName))
 				FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 				return true
 			end
@@ -116,7 +115,6 @@ function TechTree:GetRequired(unitName, playerID, sType)
 					end
 				end
 			else
-				print('no techs needed for '..tostring(unitName))
 				FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, buildable = true})
 				return true
 			end
@@ -161,7 +159,6 @@ function TechTree:AddTech(unitName, playerID)
 end
 
 function TechTree:AddTechAbility(playerID, tech)
-	print('adding', tech)
 	if playerTrees[playerID][tech] == nil then
 		playerTrees[playerID][tech] = 1
 	else
