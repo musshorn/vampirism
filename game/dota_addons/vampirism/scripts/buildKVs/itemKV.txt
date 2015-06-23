@@ -106,14 +106,14 @@
 			"stocktime"		"420"
 			"index"			"5"
 		}
-		"hire_lannik_fire"				
+		"hire_avernal"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
 			"stocktime"		"420"
 			"index"			"6"
 		}
-		"hire_lannik_meteor"		
+		"hire_avernal_meteor"		
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -162,7 +162,7 @@
 			"stocktime"		"420"
 			"index"			"13"
 		}
-		"item_summon_fel_beast"				
+		"hire_fallen_hound"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -197,7 +197,7 @@
 			"stocktime"		"120"
 			"index"			"18"
 		}
-		"item_rain_inferno"					
+		"item_avernus_rain"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -211,7 +211,7 @@
 			"stocktime"		"120"
 			"index"			"20"
 		}
-		"item_french_man"					
+		"hire_french_man"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -225,7 +225,7 @@
 			"stocktime"		"300"
 			"index"			"22"
 		}
-		"item_meat_carrier"					
+		"hire_meat_carrier"					
 		{
 			"initstock"		"1"
 			"stock"			"1"

@@ -131,23 +131,21 @@ end
 ]]
 function GameMode:OnAllPlayersLoaded()
   print("[vampirism] All Players have loaded into the game")
---[[]
-    local dummy = CreateUnitByName("npc_bh_dummy", Vector(0,0,0), true, nil, nil, 0)
-    local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
-    dummy:FindAbilityByName("vampire_vision_dummy_lock2"):OnUpgrade()
-    ParticleManager:SetParticleControl(particle, 0, Vector(96, -416, 570))
-  
-    local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
-    sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
-  
-    local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
-    GameRules:SetHeroRespawnEnabled(false)
+  local dummy = CreateUnitByName("npc_bh_dummy", Vector(0,0,0), true, nil, nil, 0)
+  local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
+  dummy:FindAbilityByName("vampire_vision_dummy_lock2"):OnUpgrade()
+  ParticleManager:SetParticleControl(particle, 0, Vector(96, -416, 570))
 
-    for i = 0, 9 do
-    	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
-    end
-]]
+  local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
+  sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
 
+  local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
+  GameRules:SetHeroRespawnEnabled(false)
+  for i = 0, 9 do
+  	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
+  end
+
+  CreateUnitByName("vampire_shop", Vector(-1088, 512, 128), false, nil, nil, 0)
 end
 
 --[[
@@ -1006,6 +1004,7 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
 
+  --Lets player see bottom row of trees.
   SendToConsole("dota_camera_pitch_max 63")
  
   --heroRoller(playerID)

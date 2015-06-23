@@ -8,7 +8,7 @@ function ShopUI:Init()
       if cmdPlayer then
         local ent = EntIndexToHScript(tonumber(p))
         if ent:HasInventory() then
-        	local shop = FindNearestShop(ent:GetAbsOrigin(), 500)
+        	local shop = FindNearestShop(ent:GetAbsOrigin(), 800)
         	if shop ~= nil then
             local playerID = ent:GetMainControllingPlayer()
             local shopIndex = shop:entindex()
