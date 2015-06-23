@@ -6,9 +6,7 @@ function build( keys )
   local buildName = ABILITY_KV[keys.ability:GetAbilityName()][UnitName]
   --print("CALLED THE BUILD")
   if buildName ~= nil then
-    print('not nil')
     if TechTree:GetRequired(buildName, pID, "building") == false then
-      print('not enough techs')
       return
     end
   end
@@ -137,6 +135,7 @@ function create_building_entity( keys )
   local builderWork = keys.attacker.work
   local lumberCost = builderWork.buildingTable.LumberCost
   local goldCost = builderWork.buildingTable.GoldCost
+  print(builderWork.name)
 
   local lumberOK = false
   local goldOK = false

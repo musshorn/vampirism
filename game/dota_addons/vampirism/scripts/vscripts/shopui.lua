@@ -77,15 +77,30 @@ function Purchase( itemname, buyer )
   local playerID = buyer:GetMainControllingPlayer()
   local gold = PlayerResource:GetGold(playerID)
   local lumber = WOOD[playerID]
+  local food = CURRENT_FOOD[playerID]
+  local foodCap = TOTAL_FOOD[playerID]
   local goldCost = 0
   local lumberCost = 0
+  local foodCost = 0
   if ITEM_KV[itemname]['GoldCost'] ~= nil then
   	goldCost = ITEM_KV[itemname]['GoldCost']
   end
   if ITEM_KV[itemname]['LumberCost'] ~= nil then
   	lumberCost = ITEM_KV[itemname]['LumberCost']
   end
+  if ITEM_KV[itemname]['FoodCost'] ~= nil then
+    foodCost = ITEM_KV[itemname]['FoodCost']
+  end
 
+  if lumber < lumberCost then
+    FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough lumber!'})
+  end
+  if gold < goldCost then
+    FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough gold!'})
+  end
+  if food + foodCost > foodCap then
+    FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough food!'})
+  end
   if buyer:HasInventory() then
   	if buyer:HasAnyAvailableInventorySpace() then
   		if gold >= goldCost and lumber >= lumberCost then
@@ -124,7 +139,7 @@ function Purchase( itemname, buyer )
      		end
   		end
   	else
-  		FireGameEvent( 'custom_error_show', { player_ID = buyer:GetMainControllingPlayer() , _error = "No room in inventory!" } )
+  		FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "No room in inventory!" } )
   	end
   end
 end

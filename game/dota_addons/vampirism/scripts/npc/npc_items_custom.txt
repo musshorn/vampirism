@@ -83,7 +83,7 @@
 	//================================================================================= 
   	// Market of Blood - Dracula's Helm
   	//=================================================================================
-	"item_dracula_helmet"
+	"item_dracula_helm"
 	{
 		"ID"	"2001"
 		"BaseClass"	"item_datadriven"
@@ -94,7 +94,7 @@
 		"ItemDeclarations"	"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
 		"Modifiers"
 		{
-			"item_dracula_helm"
+			"modifier_item_dracula_helm"
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"
@@ -248,7 +248,7 @@
 			{
 				"ScriptFile"	"scripts/vscripts/items.lua"
 				"Function"		"ItemMoveSpeed"
-				"Speed"			"100"
+				"Speed"			  "100"
 			}
 		}
 	}
@@ -256,7 +256,7 @@
   	//================================================================================= 
   	// Market of Blood - Sphere of Doom
   	//=================================================================================
-	"item_sphere_of_doom"
+	"item_sphere_doom"
 	{
 		"ID"	"2006"
 		"BaseClass"	"item_datadriven"
@@ -385,13 +385,20 @@
   		"ItemRequiresCharges" "0"
   		"SideShop"			"1"
   		"AbilityCooldown"	"0"
-  		"GoldCost"			"1"
-  		"LumberCost"		"10000"
+      "Building"      "1"
+      "BuildingSize"  "2"
+      "BuildTime"     "1"
+      "Scale"         "1"
+      "MaxScale"      "2"
+      "CasterCanControl"    "1"
+      "UnitName"            "tower_venom_t1"
+  		"GoldCost"			       "1"
+  		"LumberCost"		        "10000"
 
   		"RunScript"
   		{
-  			"ScriptFile"	"scripts/vscripts/items.lua"
-  			"Function"		"VenomOrb"
+  			"ScriptFile"	"scripts/vscripts/abilities.lua"
+  			"Function"		"build"
   		}
   	}
 
