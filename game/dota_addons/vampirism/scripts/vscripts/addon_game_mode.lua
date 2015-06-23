@@ -104,6 +104,7 @@ function Precache( context )
 		PrecacheModel("models/tentaclesofnetherreach_reference.vmdl", context)
 		PrecacheModel("models/good_base_wall006_reference.vmdl", context)
 		PrecacheModel("models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged_mega.vmdl", context)
+		PrecacheModel("models/props_structures/good_ancient001.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

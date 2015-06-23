@@ -4418,7 +4418,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "models/props_mines/mine_cart002.vmdl"
+    "Model"                     "models/props_structures/good_ancient001.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 

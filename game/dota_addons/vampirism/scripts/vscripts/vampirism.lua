@@ -272,7 +272,7 @@ function GameMode:OnNPCSpawned(keys)
     if playerID < 8 then 
       WOOD[playerID] = 10000000 --cheats, real is 50.
       PlayerResource:SetGold(playerID, 0, false) --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, true)
-      PlayerResource:SetGold(playerID, 1000, true)
+      PlayerResource:SetGold(playerID, 100000, true)
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -969,7 +969,6 @@ function GameMode:PlayerConnect(keys)
     -- This user is a Bot, so add it to the bots table
     self.vBots[keys.userid] = 1
   end
-
 end
 
 -- This function is called once when the player fully connects and becomes "Ready" during Loading
@@ -1006,6 +1005,8 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(11, false)
   mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
+
+  SendToConsole("dota_camera_pitch_max 63")
  
   --heroRoller(playerID)
 end
