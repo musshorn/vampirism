@@ -4263,7 +4263,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "models/props_mines/mine_cart002.vmdl"
+    "Model"                     "models/statue_dragon003_reference.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
@@ -4282,7 +4282,7 @@
     "AttackAnimationPoint"      "0"
     "AttackAcquisitionRange"    "2000"
     "AttackRange"               "2000"
-    "ProjectileModel"           ""
+    "ProjectileModel"           "particles/units/heroes/hero_zuus/zuus_base_attack.vpcf"
     "ProjectileSpeed"           "2000"
 
     // Bounds
