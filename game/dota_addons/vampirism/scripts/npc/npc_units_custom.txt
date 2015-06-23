@@ -1985,8 +1985,8 @@
     //----------------------------------------------------------------
 
     "Ability1"          "call_buildui"  //Human test
-    "Ability2"          "spawn_super_tower_builder"
-    "Ability3"          "super_tower_builder_training"
+    "Ability2"          ""
+    "Ability3"          ""
     "Ability4"          "build_cancel"
     "Ability5"          "build_blocked3"
     "Ability6"          "build_blocked4"
@@ -4188,14 +4188,14 @@
   }
 
   //================================================================================= 
-  // Cripple Tower
+  // Comet Tower
   //=================================================================================
   "tower_cripple_t1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "models/props_mines/mine_cart002.vmdl"
+    "Model"                     "models/dragonknight_ward_reference.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
@@ -4207,15 +4207,15 @@
     //Attack
     //----------------------------------------------------------------
     "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
-    "AttackDamageMin"           "0"
-    "AttackDamageMax"           "0"
+    "AttackDamageMin"           "15000"
+    "AttackDamageMax"           "15000"
     "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
-    "AttackRate"                "0.1"
+    "AttackRate"                "1"
     "AttackAnimationPoint"      "0"
-    "AttackAcquisitionRange"    "0"
-    "AttackRange"               "0"
-    "ProjectileModel"           ""
-    "ProjectileSpeed"           "0"
+    "AttackAcquisitionRange"    "1500"
+    "AttackRange"               "1500"
+    "ProjectileModel"           "particles/units/heroes/hero_invoker/invoker_base_attack.vpcf"
+    "ProjectileSpeed"           "1250"
 
     // Bounds
     //----------------------------------------------------------------
@@ -4553,7 +4553,7 @@
     //----------------------------------------------------------------
 
     "Ability1"                  "spawn_super_tower_builder"   //harvest test
-    "Ability2"                  "human_blink"    // Ability 2.
+    "Ability2"                  ""    // Ability 2.
     "Ability3"                  "super_tower_builder_training"               // Ability 3.
     "Ability4"                  "build_blocked2"               // Ability 4.
     "Ability5"                  "build_blocked3"               // Ability 5.
