@@ -434,8 +434,8 @@ end
 
 -- A non-player entity (necro-book, chen creep, etc) used an ability
 function GameMode:OnNonPlayerUsedAbility(keys)
-  print('[vampirism] OnNonPlayerUsedAbility')
-  PrintTable(keys)
+  --print('[vampirism] OnNonPlayerUsedAbility')
+  --PrintTable(keys)
 
   local abilityname =  keys.abilityname
 end
@@ -460,8 +460,8 @@ end
 
 -- A channelled ability finished by either completing or being interrupted
 function GameMode:OnAbilityChannelFinished(keys)
-  print ('[vampirism] OnAbilityChannelFinished')
-  PrintTable(keys)
+  --print ('[vampirism] OnAbilityChannelFinished')
+  --PrintTable(keys)
 
   local abilityname = keys.abilityname
   local interrupted = keys.interrupted == 1

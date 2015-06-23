@@ -12,12 +12,8 @@ function Worker:Worker1(vPos, hOwner, unitName)
   -- If health techs have been researched, apply them
   worker:SetMaxHealth(UNIT_KV[pID][unitName].StatusHealth)
   worker:SetHealth(worker:GetMaxHealth())
-  worker:SetHullRadius(8)
+  worker:SetHullRadius(9)
   
-  worker.thinking = false
-  worker.inTriggerZone = true -- Flag set true if worker is near trees
-
-  worker.treepos = nil
   worker.workTimer = DoUniqueString("WorkTimer")
   worker.moveTimer = DoUniqueString("MoveTimer")
   worker.pos = worker:GetAbsOrigin()
@@ -26,6 +22,8 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
   worker.skipTicks = 0 -- If this is > 0 the worker will ignore this many ticks
 
+  local ability = worker:FindAbilityByName("find_lumber")
+  ability:ToggleAutoCast() 
 
   Timers:CreateTimer(worker.moveTimer, {callback = function()
   	if worker.pos ~= worker:GetAbsOrigin() then
@@ -45,28 +43,27 @@ function Worker:Worker1(vPos, hOwner, unitName)
 			if not worker:IsAlive() then
 				return nil
 			end
-      if worker.skipTicks > 0 then
-        worker.skipTicks = worker.skipTicks - 1
-        return 0.1
+
+      local ability = worker:FindAbilityByName("find_lumber")
+      if ability:GetAutoCastState() then
+        local harvest = worker:FindAbilityByName("harvest_channel")
+        local pID = worker:GetMainControllingPlayer()
+        local unitName = worker:GetUnitName()
+
+        local carryTotal= worker:FindAbilityByName("carrying_lumber")
+        local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+        if (worker.moving == false and currentLumber < UNIT_KV[pID][unitName].MaximumLumber) then
+          
+          -- If they are not working, start them working
+          if (harvest:IsChanneling() == false) then
+            local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
+            worker:CastAbilityOnTarget(tree, harvest, worker:GetMainControllingPlayer())
+          end
+        end
       end
 
-			-- Check if the worker is in the trigger zone and not moving
-			-- Additonally, store this location for the next trip
-			local carryTotal= worker:FindAbilityByName("carrying_lumber")
-			local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
-			if (worker.inTriggerZone and worker.moving == false and currentLumber < UNIT_KV[pID][unitName].MaximumLumber) then
-				worker.treepos = worker:GetAbsOrigin()
-				local ability = worker:FindAbilityByName("harvest_channel")
-
-				-- If they are not working, start them working
-				if (ability:IsChanneling() == false) then
-          local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 200)
-          worker:CastAbilityOnTarget(tree, ability, worker:GetMainControllingPlayer())
-				end
-			end
-
-
 			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
+      local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
 			if (currentLumber == UNIT_KV[pID][unitName].MaximumLumber) then
 		
 				-- Search for the nearest unit that can recieve lumber and is owned by the correct player
@@ -89,23 +86,28 @@ function Worker:Worker1(vPos, hOwner, unitName)
 		end)
 	end
 
+  worker:Think()
+
   return worker
 end
 
--- Fired when the worker is near trees
-function AtTree(keys)
-	local unit = keys.activator
-	unit.treepos = unit:GetAbsOrigin()
-	unit.inTriggerZone = true
-  if unit.thinking == false then
-	 unit:Think()
-  end
-end
+function FindLumber( keys )
+  local worker = keys.caster
+  local ability = worker:FindAbilityByName("harvest_channel")
+  local pID = worker:GetMainControllingPlayer()
+  local unitName = worker:GetUnitName()
 
--- Fired when the worker leaves the trees
-function LeftTree(keys)
-	local unit = keys.activator
-	unit.inTriggerZone = false
+  local carryTotal= worker:FindAbilityByName("carrying_lumber")
+  local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+  if (worker.moving == false and currentLumber < UNIT_KV[pID][unitName].MaximumLumber) then
+    local ability = worker:FindAbilityByName("harvest_channel")
+
+    -- If they are not working, start them working
+    if (ability:IsChanneling() == false) then
+      local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
+      worker:CastAbilityOnTarget(tree, ability, worker:GetMainControllingPlayer())
+    end
+  end
 end
 
 -- Fired when the harvest_channel ability has finished channelling
@@ -161,10 +163,12 @@ function DropLumber( keys )
       WOOD[pid] = WOOD[pid] + currentLumber
 
       FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
-      print(WOOD[pid])
 
       worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
-      worker:MoveToPosition(worker.treepos)
+      local ability = worker:FindAbilityByName("find_lumber")
+      if ability:GetAutoCastState() then
+        worker:CastAbilityNoTarget(ability, pid)
+      end
     end
   end
 end

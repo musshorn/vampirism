@@ -874,11 +874,11 @@
     "Ability2"          "carrying_lumber"     // Ability 2.
     "Ability3"          "drop_lumber"     // Ability 3.
     "Ability4"          "worker_det"      // Ability 4.
-    "Ability5"          ""      // Ability 5.
-    "Ability6"          ""      // Ability 6 - Extra.
+    "Ability5"          "worker_debug"      // Ability 5.
+    "Ability6"          "find_lumber"      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
-
+    "AbilityLayout"     "5"
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"       "0"     // Physical protection.

@@ -579,13 +579,30 @@
     }
   }
 
+  "find_lumber"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"             "ability_datadriven"
+    "AbilityCastRange"      "128"
+    "AbilityCooldown"        "0.5"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/units/worker.lua"
+        "Function"    "FindLumber"
+      }
+    }
+  }
+
   "harvest_channel"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetType" "DOTA_UNIT_TARGET_TREE"
     "BaseClass" "ability_datadriven"
     "AbilityCastPoint"  "0"
-    "AbilityCastRange"        "150"
+    "AbilityCastRange"        "128"
     "AbilityChannelTime" "0.5"
     "AbilityCastAnimation" "ACT_DOTA_ATTACK"
     "OnChannelSucceeded"
@@ -6488,5 +6505,29 @@
         "IsHidden"  "1"
       }
     }
+  }
+
+  //================================================================================= 
+  // Vampire: Spawning hider
+  //=================================================================================
+  "worker_debug"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "MaxLevel"  "1"
+    "AbilityCastPoint"  "0.3"
+    "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_1"
+    "AbilityManaCost" "1"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities.lua"
+        "Target"  "POINT"
+        "Function"  "worker_debug"
+      }
+
+    }
+
   }
 }
