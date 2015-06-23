@@ -12,7 +12,7 @@
 			//the max stock of an item, use -1 for unlimited
 			"stock"			"1"
 			//the time it takes for a charge to restore (in seconds)
-			"stocktime"		"180"
+			"stocktime"		"120"
 			//its position in the shop
 			"index"			"0"
 		}
@@ -20,42 +20,42 @@
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"1"
 		}
 		"item_venom_orb"					
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"25"
+			"stock"			"25"
+			"stocktime"		"120"
 			"index"			"2"
 		}
 		"item_circlet_slayer"	
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"3"
 		}
 		"item_divinity_jewel"
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"4"
 		}
 		"item_pendant_mana"	
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"5"
 		}
 		"item_pendant_vitality"
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"6"
 		}				
 	}
@@ -68,52 +68,52 @@
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"30"
 			"index"			"0"
 		}
 		"item_sphere_doom"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"600"
 			"index"			"1"
 		}
 		"item_vampiric_concoction"			
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"10"
 			"index"			"2"
 		}
 		"item_ring_hell_lords"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"160"
 			"index"			"3"
 		}
 		"item_dracula_helm"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"180"
 			"index"			"4"
 		}
-		"item_hire_shade"					
+		"hire_shade"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
 			"stocktime"		"420"
 			"index"			"5"
 		}
-		"item_summon_infernal"				
+		"hire_avernal"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
 			"stocktime"		"420"
 			"index"			"6"
 		}
-		"item_summon_infernal_meteor"		
+		"hire_avernal_meteor"		
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -124,45 +124,45 @@
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"8"
 		}
 		"item_immunity_shield"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"10"
 			"index"			"9"
 		}
 		"item_dracula_urn"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"30"
 			"index"			"10"
 		}
 		"item_rod_teleportation"			
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"10"
 			"index"			"11"
 		}
 		"item_demonic_remains"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"60"
 			"index"			"12"
 		}
-		"item_summon_assassin"				
+		"hire_assassin"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
 			"stocktime"		"420"
 			"index"			"13"
 		}
-		"item_summon_fel_beast"				
+		"hire_fallen_hound"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -180,24 +180,24 @@
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"16"
 		}
 		"item_massive_grave"				
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"4"
+			"stock"			"4"
+			"stocktime"		"60"
 			"index"			"17"
 		}
-		"item_cloack_shadows"				
+		"item_cloak_shadows"				
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"18"
 		}
-		"item_rain_inferno"					
+		"item_avernus_rain"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -206,12 +206,12 @@
 		}
 		"item_wind_walk_potion"				
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"5"
+			"stock"			"5"
+			"stocktime"		"120"
 			"index"			"20"
 		}
-		"item_french_man"					
+		"hire_french_man"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -222,10 +222,10 @@
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"300"
 			"index"			"22"
 		}
-		"item_meat_carrier"					
+		"hire_meat_carrier"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
@@ -236,99 +236,98 @@
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"24"
 		}
 		"item_refresh_potion"
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"300"
 			"index"			"25"
 		}				
-		
 		"item_wand_shadowsight"				
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"5"
+			"stock"			"5"
+			"stocktime"		"60"
 			"index"			"26"
 		}
 		"item_wand_cyclone"					
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"5"
+			"stock"			"5"
+			"stocktime"		"60"
 			"index"			"27"
 		}
 		"item_sentry_wards"					
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"5"
+			"stock"			"5"
+			"stocktime"		"60"
 			"index"			"28"
 		}
 		"item_scroll_beast"					
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"5"
+			"stock"			"5"
+			"stocktime"		"60"
 			"index"			"29"
 		}
 		"item_claws_attack"					
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"30"
 		}
 		"item_ring_regen"					
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"5"
+			"stock"			"5"
+			"stocktime"		"60"
 			"index"			"31"
 		}
 		"item_replenish_potion"				
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"5"
+			"stock"			"5"
+			"stocktime"		"60"
 			"index"			"32"
 		}
-		"item_ring_protection"				
+		"item_amulet_protection"				
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"3"
+			"stock"			"3"
+			"stocktime"		"120"
 			"index"			"33"
 		}
 		"item_recipie_dracula_cloak"		
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"60"
 			"index"			"34"
 		}
 		"item_recipie_ricochet_gem"			
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"35"
 		}
 		"item_gauntlets_underworld"			
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"120"
 			"index"			"36"
 		}
 		"item_gauntlets_hellfire"
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"180"
 			"index"			"37"
 		}		
 	}	

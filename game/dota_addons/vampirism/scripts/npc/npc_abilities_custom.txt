@@ -5356,7 +5356,7 @@
     "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
     // BuildingHelper info
     "Building"                  "1"
-    "BuildingSize"              "2"
+    "BuildingSize"              "4"
     "BuildTime"                 "1"
     "AbilityCastRange"          "200"
     "UpdateHealth"              "1"
@@ -5402,12 +5402,12 @@
     "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
     // BuildingHelper info
     "Building"                  "1"
-    "BuildingSize"              "2"
+    "BuildingSize"              "4"
     "BuildTime"                 "1"
     "AbilityCastRange"          "200"
     "UpdateHealth"              "1"
     "Scale"                     "1"
-    "MaxScale"                  "0.7"
+    "MaxScale"                  "0.5"
     "CasterCanControl"          "1"
 
     "AbilityCooldown"           "0"
@@ -5437,6 +5437,150 @@
     }
   }
 
+  //=================================================================================/
+  // Upgrade to Super Gold Mine
+  //=================================================================================/
+  "upgrade_to_gold_mine_t2"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "1"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"    "CASTER"
+        "TargetUnit"  "gold_mine_t2"
+        "LumberCost"  "50000"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "gold_mine_t2"
+        "Scale"       "1"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Build Elite Gold Mine
+  //=================================================================================
+  "build_gold_mine_t3"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "1"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  ".5"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0.05"
+    "LumberCost"                "50000"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "gold_mine_t3"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
+
+  //=================================================================================/
+  // Upgrade to Ultra Gold Mine
+  //=================================================================================/
+  "upgrade_to_gold_mine_t3"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "1"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"    "CASTER"
+        "TargetUnit"  "gold_mine_t3"
+        "LumberCost"  "60000"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "gold_mine_t3"
+        "Scale"       "1"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Elite Gold Mine
+  //=================================================================================/
+  "upgrade_to_gold_mine_t4"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "1"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"    "CASTER"
+        "TargetUnit"  "gold_mine_t4"
+        "LumberCost"  "80000"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "gold_mine_t4"
+        "Scale"       "1"
+      }
+    }
+  }
 
 
   "build_cancel"

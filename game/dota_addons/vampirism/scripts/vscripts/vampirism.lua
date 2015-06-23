@@ -131,23 +131,21 @@ end
 ]]
 function GameMode:OnAllPlayersLoaded()
   print("[vampirism] All Players have loaded into the game")
---[[]
-    local dummy = CreateUnitByName("npc_bh_dummy", Vector(0,0,0), true, nil, nil, 0)
-    local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
-    dummy:FindAbilityByName("vampire_vision_dummy_lock2"):OnUpgrade()
-    ParticleManager:SetParticleControl(particle, 0, Vector(96, -416, 570))
-  
-    local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
-    sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
-  
-    local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
-    GameRules:SetHeroRespawnEnabled(false)
+  local dummy = CreateUnitByName("npc_bh_dummy", Vector(0,0,0), true, nil, nil, 0)
+  local particle = ParticleManager:CreateParticle("particles/vampire/shadow_demon_disruption.vpcf",  PATTACH_ABSORIGIN, dummy)
+  dummy:FindAbilityByName("vampire_vision_dummy_lock2"):OnUpgrade()
+  ParticleManager:SetParticleControl(particle, 0, Vector(96, -416, 570))
 
-    for i = 0, 9 do
-    	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
-    end
-]]
+  local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
+  sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
 
+  local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
+  GameRules:SetHeroRespawnEnabled(false)
+  for i = 0, 9 do
+  	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
+  end
+
+  CreateUnitByName("vampire_shop", Vector(-1088, 512, 128), false, nil, nil, 0)
 end
 
 --[[
@@ -272,7 +270,7 @@ function GameMode:OnNPCSpawned(keys)
     if playerID < 8 then 
       WOOD[playerID] = 10000000 --cheats, real is 50.
       PlayerResource:SetGold(playerID, 0, false) --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, true)
-      PlayerResource:SetGold(playerID, 1000, true)
+      PlayerResource:SetGold(playerID, 100000, true)
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -402,27 +400,10 @@ end
 -- An item was purchased by a player
 function GameMode:OnItemPurchased( keys )
   print ( '[vampirism] OnItemPurchased' )
-  PrintTable(keys)
 
   -- The playerID of the hero who is buying something
   local plyID = keys.PlayerID
   if not plyID then return end
-
-  -- The name of the item purchased
-  local itemName = keys.itemname 
-  
-  -- The cost of the item purchased
-  local itemcost = keys.itemcost
-  local lumbercost = 0
-
-  if ITEM_KV[itemName]["LumberCost"] ~= nil then
-    lumbercost = ITEM_KV[itemName]["LumberCost"]
-  end
-
-  for k, v in pairs(INVENTORIES[playerID]) do
-    print(k)
-    print(v)
-  end
 end
 
 -- An ability was used by a player
@@ -986,7 +967,6 @@ function GameMode:PlayerConnect(keys)
     -- This user is a Bot, so add it to the bots table
     self.vBots[keys.userid] = 1
   end
-
 end
 
 -- This function is called once when the player fully connects and becomes "Ready" during Loading
@@ -1023,6 +1003,9 @@ function GameMode:OnConnectFull(keys)
   mode:SetHUDVisible(11, false)
   mode:SetHUDVisible(12, false)
   mode:SetCameraDistanceOverride(1500)
+
+  --Lets player see bottom row of trees.
+  SendToConsole("dota_camera_pitch_max 63")
  
   --heroRoller(playerID)
 end

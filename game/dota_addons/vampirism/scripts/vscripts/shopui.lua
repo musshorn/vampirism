@@ -8,7 +8,7 @@ function ShopUI:Init()
       if cmdPlayer then
         local ent = EntIndexToHScript(tonumber(p))
         if ent:HasInventory() then
-        	local shop = FindNearestShop(ent:GetAbsOrigin(), 500)
+        	local shop = FindNearestShop(ent:GetAbsOrigin(), 800)
         	if shop ~= nil then
             local playerID = ent:GetMainControllingPlayer()
             local shopIndex = shop:entindex()
@@ -31,6 +31,7 @@ function ShopUI:Init()
               --only sending the timer of the TOP item in the queue, not the queue itself.
               --player owning shop has needed tech
               local hasTech = TechTree:GetRequired(v['name'], shop:GetMainControllingPlayer(), "item")
+              print(hasTech)
               FireGameEvent('shop_preload', {player_ID = playerID, shop_index = shopIndex, shop_type = shopName, item_name = v['name'], item_stock = v['stock'], item_time = v['queue'][0], item_index = k, has_tech = hasTech})
             end
         		FireGameEvent('shop_open', {player_ID = playerID, shop_type = shopName, shop_user = tonumber(p), shop_index = shopIndex})
