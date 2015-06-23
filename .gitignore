@@ -53,4 +53,5 @@ game/dota_addons/vampirism/tools_asset_info.bin
 *.vtex_c
 *.vxml_c
 *.vcss_c
+*.vjs_c
 *.cfg

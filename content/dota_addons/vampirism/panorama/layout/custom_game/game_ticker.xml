@@ -1,0 +1,13 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/game_ticker.css" />
+  </styles>
+  <scripts>
+    <include src="file://{resources}/scripts/custom_game/game_ticker.js" />
+  </scripts>
+  <Panel>
+    <Panel class="TickerBox">
+      <Label text="" />
+    </Panel>
+  </Panel>
+</root>
