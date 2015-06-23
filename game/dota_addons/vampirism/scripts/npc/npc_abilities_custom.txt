@@ -5339,7 +5339,7 @@
     "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
     // BuildingHelper info
     "Building"                  "1"
-    "BuildingSize"              "2"
+    "BuildingSize"              "4"
     "BuildTime"                 "1"
     "AbilityCastRange"          "200"
     "UpdateHealth"              "1"

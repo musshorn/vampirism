@@ -3776,7 +3776,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"           "npc_dota_creature"
-    "Model" "models/creeps/lane_creeps/creep_good_ranged/creep_good_ranged.vmdl"
+    "Model"               "models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged_mega.vmdl"
     "ModelScale"  "1" 
     "ConsideredHero"  "0"
 
@@ -4401,7 +4401,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "models/props_mines/mine_cart002.vmdl"
+    "Model"                     "models/good_base_wall006_reference.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
