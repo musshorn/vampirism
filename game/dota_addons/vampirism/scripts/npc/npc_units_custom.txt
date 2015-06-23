@@ -966,8 +966,6 @@
     "ArmorPhysical"       "0"     // Physical protection.
     "MagicalResistance"     "0"     // Magical protection.
 
-
-
     //Attack
     //----------------------------------------------------------------
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
@@ -1025,6 +1023,9 @@
     //Generic key to all techs, ability upgrades or buildings to indicate whether
     //they should be tracked by the tech tree.
     "IsTech"    "true"
+
+    "RepairTime"  "10"
+
   }
 
     //================================================================================= 
@@ -1109,6 +1110,7 @@
 
     // Vamp
     "ProvidesFood"  "25"
+    "RepairTime"  "10"
   }
 
   //================================================================================= 
@@ -1194,6 +1196,7 @@
     // Vamp
     "ProvidesFood"  "65"
     //"GivesTech"   "true"
+    "RepairTime"  "10"
 
   }
 
@@ -1280,6 +1283,7 @@
     "IsTech"    "true"
     //Key which contains each neccessary tech for this unit, sperated by spaces.
     "NeedTech"    "house_t1"
+    "RepairTime"  "20"
   }
   
   //================================================================================= 
@@ -1359,6 +1363,7 @@
     "IsTech"    "true"
     "NeedTech"    "human_vault"
     "ShopType"      "1" // 1 for human shops, vamp will use 0 and 2    
+    "RepairTime"  "15"
   }
 
   //================================================================================= 
@@ -1443,10 +1448,11 @@
 
     "IsTech"    "true"
     "NeedTech"    "house_t1"
+    "RepairTime"  "10"
   }
 
   //================================================================================= 
-  // Human Shiny tower of Pearls
+  // Shiny Pearl Tower
   //=================================================================================
   "shiny_tower_pearls"
   {
@@ -1527,91 +1533,9 @@
 
         "IsTech"        "true"
         "NeedTech"      "house_t1"
+
+        "RepairTime"  "10"
     }
-
-    //================================================================================= 
-    // Human Building T1 - Carnelian Wall
-    //=================================================================================
-    "wall_t1"
-    {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"         "npc_dota_creature"
-    "Model"           "models/props_stone/stoneblock009a.vmdl"
-    "ModelScale"        "1"
-    
-    "ConsideredHero"      "0"
-    // Abilities
-    //----------------------------------------------------------------
-
-    "Ability1"          ""  //Human test
-    "Ability2"          ""          // Ability 2.
-    "Ability3"          ""          // Ability 3.
-    "Ability4"          ""          // Ability 4.
-    "Ability5"          ""          // Ability 5.
-    "Ability6"          ""          // Ability 6 - Extra.
-    "Ability7"          ""          // Ability 7 - Extra.
-    "Ability8"          "is_a_building"         // Ability 8 - Extra.
-
-    // Armor
-    //----------------------------------------------------------------
-    "ArmorPhysical"       "0"     // Physical protection.
-    "MagicalResistance"     "0"     // Magical protection.
-
-
-    //Attack
-    //----------------------------------------------------------------
-    "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "0"
-    "AttackDamageMax"     "0"
-    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
-    "AttackRate"        "0"
-    "AttackAnimationPoint"    "0"
-    "AttackAcquisitionRange"  "0"
-    "AttackRange"       "0"
-    "ProjectileModel"     ""
-    "ProjectileSpeed"     "0"
-
-    // Attributes
-    //----------------------------------------------------------------
-    "AttributeBaseIntelligence" "0"
-    "AttributeBaseIntelligenceGain" "0"
-  
-    // Bounds
-    //----------------------------------------------------------------
-    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
-    "HealthBarOffset"     "170"
-    "RingRadius"        "50"
-
-    // Movement
-    //----------------------------------------------------------------
-    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_NONE"     // Type of locomotion - ground, air
-    "MovementSpeed"       "300"   // Speed
-    "MovementTurnRate"      "0.5"   // Turning rate.
-
-    // Status
-    //----------------------------------------------------------------
-    "StatusHealth"        "500"   // Base health.
-    "StatusHealthRegen"     "0"   // Health regeneration rate.
-    "StatusMana"        "120"     // Base mana.
-    "StatusManaRegen"     "-0.01"     // Mana regeneration rate.
-
-    // Team
-    //----------------------------------------------------------------
-    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
-    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
-    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
-    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-
-    // Bounty
-    //----------------------------------------------------------------
-    "BountyXP"          "50"
-    "BountyGoldMin"       "1"
-    "BountyGoldMax"       "1"
-
-    "IsTech"    "true"
-    "NeedTech"    "house_t1"
-  }
 
   //================================================================================= 
   // Human Building T1 - Base Claim Flag
@@ -1686,10 +1610,11 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+    "RepairTime"  "32"
   }
 
   //================================================================================= 
-  // Human Building T1 - Research Centre T1
+  // Human Building T1 - Research Center T1
   //=================================================================================
   "research_center_t1"
   {
@@ -1786,6 +1711,7 @@
 
     "IsTech"    "true"
     "NeedTech"    "house_t1"
+    "RepairTime"  "15"
   }
 
   //================================================================================= 
@@ -1871,6 +1797,7 @@
 
     "IsTech"      "true"
     "NeedTech"    "house_t1"
+    "RepairTime"  "20"
 
 
     //currently testing. define a list of abilities that are the names of the techs player
@@ -1967,6 +1894,7 @@
 
     "IsTech"    "true"
     "NeedTech"    "human_vault house_t2"
+    "RepairTime"  "40"
   }
 
   //================================================================================= 
@@ -2073,10 +2001,11 @@
     "IsTech"        "true"
     "NeedTech"      "house_t1 slayer_tavern"
     "SpawnsUnits"       "true" 
+    "RepairTime"  "20"
   }
 
     //================================================================================= 
-    // Opal Tower
+    // Opal Spire
     //=================================================================================
     "tower_opal"
     {
@@ -2165,6 +2094,7 @@
 
         "IsTech"        "true"
         "NeedTech"      "house_t1"
+        "RepairTime"  "10"
     }
 
     //================================================================================= 
@@ -2254,6 +2184,7 @@
 
         "IsTech"        "true"
         "NeedTech"      "house_t1"
+        "RepairTime"  "20"
     }
 
     //================================================================================= 
@@ -2343,6 +2274,7 @@
 
         "IsTech"        "true"
         "NeedTech"      "research_center_t2"
+        "RepairTime"  "20"
     }
 
 
@@ -2433,6 +2365,7 @@
 
         "IsTech"        "true"
         "NeedTech"      "house_t1"
+        "RepairTime"  "20"
     }
 
 
@@ -2523,6 +2456,7 @@
 
         "IsTech"        "true"
         "NeedTech"      "house_t1"
+        "RepairTime"  "20"
     }
 
     //================================================================================= 
@@ -2612,6 +2546,7 @@
 
         "IsTech"        "true"
         "NeedTech"      "house_t1"
+        "RepairTime"  "10"
     }
 
     //================================================================================= 
@@ -2701,6 +2636,7 @@
 
         "IsTech"        "true"
         "NeedTech"      "house_t1"
+        "RepairTime"  "35"
     }
 
     
@@ -2786,6 +2722,7 @@
 
         "IsTech"        "true"
         "NeedTech"      "house_t2"
+        "RepairTime"  "30"
     }
 
     //================================================================================= 
@@ -2870,6 +2807,7 @@
 
         "IsTech"        "true"
         "NeedTech"      "house_t1"
+        "RepairTime"  "20"
     }
 
     //================================================================================= 
@@ -2952,6 +2890,7 @@
         "NeedTech"    "human_vault"
         "RecievesLumber"    "true"
         "SpawnsUnits"       "true" 
+        "RepairTime"  "20"
     }
     //================================================================================= 
     // Human Building T3 - Deforestation House
@@ -3033,6 +2972,7 @@
         "NeedTech"    "gold_mine_t1 human_vault"
         "RecievesLumber"    "true"
         "SpawnsUnits"       "true" 
+        "RepairTime"  "10"
     }
 
     //================================================================================= 
@@ -3210,6 +3150,7 @@
 
       "IsTech"        "true"
       "NeedTech"      "house_t2 gold_mine_t1"
+      "RepairTime"  "15"
   }
 
   //================================================================================= 
@@ -4012,6 +3953,8 @@
     "BountyXP"                  "25"
     "BountyGoldMin"             "50"
     "BountyGoldMax"             "50"
+
+    "RepairTime"  "40"
   }
 
   //================================================================================= 
@@ -4101,6 +4044,7 @@
 
     "IsTech"    "true"
     "NeedTech"    "human_vault house_t2"
+    "RepairTime"  "40"
   }
 
   //================================================================================= 
@@ -4185,6 +4129,7 @@
 
     "IsTech"    "true"
     "NeedTech"    "human_vault house_t2"
+    "RepairTime"  "40"
   }
 
   //================================================================================= 
@@ -4253,6 +4198,7 @@
     "BountyXP"                  "25"
     "BountyGoldMin"             "50"
     "BountyGoldMax"             "50"
+    "RepairTime"  "25"
   }
 
   //================================================================================= 
@@ -4321,6 +4267,7 @@
     "BountyXP"                  "25"
     "BountyGoldMin"             "1000"
     "BountyGoldMax"             "1000"
+    "RepairTime"  "25"
   }
 
   //================================================================================= 
@@ -4635,6 +4582,7 @@
 
     "SpawnsUnits" "true"
     "NeedTech"    "house_t3 research_center_t2"
+    "RepairTime"  "20"
   }
 
 
