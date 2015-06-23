@@ -40,7 +40,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
     worker.thinking = true
 		Timers:CreateTimer(function ()
-			if not worker:IsAlive() then
+			if not worker:IsNull() then
 				return nil
 			end
 
