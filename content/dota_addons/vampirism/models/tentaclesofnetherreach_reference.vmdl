@@ -1,0 +1,590 @@
+<!-- schema text {7e125a45-3d83-4043-b292-9e24f8ef27b4} generic {198980d8-3a93-4919-b4c6-dd1fb07a3a4b} -->
+CVModel CVModel_0
+{
+	CVmeshList m_meshList = CVmeshList
+	{
+		CVmesh[] m_meshList = 
+		[
+			CVmesh
+			{
+				string m_meshName = "tentaclesofnetherreach_reference"
+				string m_meshFile = "models/tentaclesofnetherreach_reference.smd"
+				string m_materialSearchPath = ""
+				bool m_bSkinParentedObjects = true
+				bool m_bLegacySkinParentedTransforms = false
+				bool m_bExpensiveTangents = false
+				bool m_bExpensiveVertices = false
+				bool m_bIgnoreCloth = false
+				bool m_bGetSkinningFromLod0 = false
+				CVmorphInfo* m_pMorphInfo = NULL
+			}
+		]
+	}
+	CVClothProxyMeshList m_clothProxyMeshList = CVClothProxyMeshList
+	{
+		CVClothProxyMesh[] m_clothProxyMeshList = 
+		[
+			
+		]
+		float m_flClothEnableThreshold = 0.050000
+		bool m_bCreateStaticBone = false
+		int m_nMaxBonesPerVertex = 4
+		bool m_bRemoveUnusedBonesEnabled = false
+		bool m_bDriveMeshesWithBacksolvedJointsOnly = true
+		float m_flMatchProxiesToMeshes = 1.000000
+		float m_flReservedFloat = 0.000000
+		int m_nReservedInt = 0
+		bool m_bReservedBool1 = false
+		bool m_bReservedBool2 = false
+		bool m_bReservedBool3 = false
+		bool m_bReservedBool4 = false
+	}
+	CVphysicsMeshList m_physicsMeshList = CVphysicsMeshList
+	{
+		CVphysicsMesh[] m_meshList = 
+		[
+			
+		]
+	}
+	CVmodelInfo* m_pModelInfo = NULL
+	CVBoneFlagListReference m_pBoneFlagList = CVBoneFlagListReference
+	{
+		CVBoneFlagList* m_pObject = NULL
+		string m_sFileName = ""
+	}
+	CVhitBoxSetListReference[] m_pHitBoxSetLists = 
+	[
+		CVhitBoxSetListReference
+		{
+			CVhitBoxSetList* m_pObject = &CVhitBoxSetList_0
+			string m_sFileName = ""
+		}
+	]
+	CVattachmentListReference[] m_pAttachmentLists = 
+	[
+		CVattachmentListReference
+		{
+			CVattachmentList* m_pObject = &CVattachmentList_0
+			string m_sFileName = ""
+		}
+	]
+	CVanimGroupReference[] m_pAnimGroups = 
+	[
+		
+	]
+	CVNodeMaterialGroupListReference m_pMaterialGroupList = CVNodeMaterialGroupListReference
+	{
+		NodeMaterialGroupList_t* m_pObject = NULL
+		string m_sFileName = ""
+	}
+	CVMeshGroupListReference m_pMeshGroupList = CVMeshGroupListReference
+	{
+		MeshGroupList_t* m_pObject = NULL
+		string m_sFileName = ""
+	}
+	CVLODGroupListReference m_pLodGroupList = CVLODGroupListReference
+	{
+		LODGroupList_t* m_pObject = NULL
+		string m_sFileName = ""
+	}
+	CVpropBreakableListReference m_pPropBreakableList = CVpropBreakableListReference
+	{
+		CVpropBreakableList* m_pObject = NULL
+		string m_sFileName = ""
+	}
+	CVpropDataListReference m_pPropDataList = CVpropDataListReference
+	{
+		CVpropDataList* m_pObject = NULL
+		string m_sFileName = ""
+	}
+	CVConstraintListReference[] m_pConstraintLists = 
+	[
+		
+	]
+	string m_collision = ""
+	string m_softbody = ""
+	string m_sMDLFilename = ""
+	string[] m_sOffsetHitboxSets = 
+	[
+		
+	]
+	float(3) m_vHitboxSetOffset = ( 0.000000, 0.000000, 0.000000 )
+	string[] m_scriptFiles = 
+	[
+		
+	]
+	CVMaterialRemapList* m_pMaterialRemapList = &CVMaterialRemapList_0
+	float m_flFbxScale = 1.000000
+	float m_flQCScale = 1.000000
+	float(3) m_vOrigin = ( 0.000000, 0.000000, 0.000000 )
+	CVPsf* m_pvPsf = NULL
+	string m_keyValueText = ""
+	bool m_bStaticProp = false
+	bool m_bEnableClothProcessing = true
+	float m_flClothEnableThreshold = 0.050000
+	int m_nMaxClothVertsPerMesh = 2048
+	bool m_bBuildClothBoneHierarchy = false
+	symbol m_nNavType = AUTH_NAV_MESH
+	bool m_bMakeUniqueVMeshes = false
+	bool m_bMakeImplicitBindPoseSequence = false
+	bool m_bAdjustSkeletonFromBoneFlags = false
+}
+
+CVhitBoxSetList CVhitBoxSetList_0
+{
+	CVhitBoxSet[] m_HitBoxSets = 
+	[
+		CVhitBoxSet
+		{
+			string m_name = "default"
+			CVhitBox[] m_HitBoxes = 
+			[
+				CVhitBox
+				{
+					string m_name = "root"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "root"
+					float(3) m_vMinBounds = ( -65.701691, -3.362705, -65.073410 )
+					float(3) m_vMaxBounds = ( 62.103897, 20.552559, 64.184158 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_1_01"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_1_01"
+					float(3) m_vMinBounds = ( -2.792968, -59.063789, -23.882597 )
+					float(3) m_vMaxBounds = ( -2.142210, -13.996719, 23.974173 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_2_01"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_2_01"
+					float(3) m_vMinBounds = ( -3.084381, -40.315800, 7.950703 )
+					float(3) m_vMaxBounds = ( -1.931683, 4.764038, 55.953259 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_3_01"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_3_01"
+					float(3) m_vMinBounds = ( -3.076024, -54.664268, -1.991081 )
+					float(3) m_vMaxBounds = ( -2.866270, -6.653286, 42.140701 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_1_01"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_1_01"
+					float(3) m_vMinBounds = ( 18.034670, -87.807129, -6.457600 )
+					float(3) m_vMaxBounds = ( 24.844625, -62.606384, 22.505272 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_2_01"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_2_01"
+					float(3) m_vMinBounds = ( 18.392511, -87.659302, -10.611448 )
+					float(3) m_vMaxBounds = ( 25.527929, -62.190430, 18.276236 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_3_01"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_3_01"
+					float(3) m_vMinBounds = ( 21.884537, -87.108337, -11.025600 )
+					float(3) m_vMaxBounds = ( 30.655334, -62.086643, 17.795631 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_1_02"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_1_02"
+					float(3) m_vMinBounds = ( 43.246468, -54.828911, -19.791443 )
+					float(3) m_vMaxBounds = ( 43.849091, -18.745230, 19.594719 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_2_02"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_2_02"
+					float(3) m_vMinBounds = ( 43.621681, -35.414448, 13.327042 )
+					float(3) m_vMaxBounds = ( 44.224335, 1.141350, 51.573730 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_3_02"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_3_02"
+					float(3) m_vMinBounds = ( 43.922165, -50.478153, 2.288807 )
+					float(3) m_vMaxBounds = ( 44.524788, -11.272099, 38.885078 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_1_02"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_1_02"
+					float(3) m_vMinBounds = ( 79.272079, -22.625359, -4.937311 )
+					float(3) m_vMaxBounds = ( 90.298447, 2.482925, 23.705786 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_2_02"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_2_02"
+					float(3) m_vMinBounds = ( 78.859436, -21.937206, -9.465027 )
+					float(3) m_vMaxBounds = ( 90.549332, 2.974836, 19.098392 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_3_02"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_3_02"
+					float(3) m_vMinBounds = ( 78.882767, -16.872023, -10.268238 )
+					float(3) m_vMaxBounds = ( 92.086319, 7.460144, 18.226971 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_1_03"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_1_03"
+					float(3) m_vMinBounds = ( 90.168228, -51.785713, -16.373657 )
+					float(3) m_vMaxBounds = ( 90.881729, -20.717674, 16.243736 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_2_03"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_2_03"
+					float(3) m_vMinBounds = ( 89.386093, -32.429688, 15.564896 )
+					float(3) m_vMaxBounds = ( 90.099594, -1.536049, 48.327286 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_3_03"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_3_03"
+					float(3) m_vMinBounds = ( 89.546997, -47.062943, 5.411452 )
+					float(3) m_vMaxBounds = ( 90.260544, -14.228554, 35.851181 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_1_03"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_1_03"
+					float(3) m_vMinBounds = ( 57.670063, 65.969391, -2.723021 )
+					float(3) m_vMaxBounds = ( 73.908035, 87.812866, 24.562578 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_2_03"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_2_03"
+					float(3) m_vMinBounds = ( 56.899220, 66.696854, -8.216883 )
+					float(3) m_vMaxBounds = ( 73.490463, 88.568710, 18.959402 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_3_03"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_3_03"
+					float(3) m_vMinBounds = ( 51.708229, 71.292725, -9.322714 )
+					float(3) m_vMaxBounds = ( 69.464272, 92.211258, 17.784052 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_1_04"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_1_04"
+					float(3) m_vMinBounds = ( 127.964844, -48.937950, -13.429952 )
+					float(3) m_vMaxBounds = ( 128.350891, -23.584381, 13.266688 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_2_04"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_2_04"
+					float(3) m_vMinBounds = ( 127.963821, -29.369984, 18.545792 )
+					float(3) m_vMaxBounds = ( 128.349930, -4.288638, 45.419495 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_3_04"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_3_04"
+					float(3) m_vMinBounds = ( 128.026367, -44.171394, 8.289265 )
+					float(3) m_vMaxBounds = ( 128.412445, -17.271542, 33.094833 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_1_04"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_1_04"
+					float(3) m_vMinBounds = ( -0.193770, 100.474335, -2.221363 )
+					float(3) m_vMaxBounds = ( 13.505357, 123.085434, 26.195047 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_2_04"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_2_04"
+					float(3) m_vMinBounds = ( -1.185007, 100.801743, -8.632257 )
+					float(3) m_vMaxBounds = ( 12.640841, 123.572922, 19.685347 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_3_04"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_3_04"
+					float(3) m_vMinBounds = ( 2.716846, 101.014503, -11.031548 )
+					float(3) m_vMaxBounds = ( 15.762481, 124.352165, 17.194027 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_1_05"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_1_05"
+					float(3) m_vMinBounds = ( 148.136597, -46.110916, -10.111790 )
+					float(3) m_vMaxBounds = ( 180.177307, -26.557594, 10.330700 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_2_05"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_2_05"
+					float(3) m_vMinBounds = ( 148.523468, -26.806034, 21.693985 )
+					float(3) m_vMaxBounds = ( 180.564148, -7.565964, 42.413963 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tentacle_3_05"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tentacle_3_05"
+					float(3) m_vMinBounds = ( -28.294842, 149.089752, 20.717522 )
+					float(3) m_vMaxBounds = ( -9.175312, 181.066925, 41.308716 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_1_05"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_1_05"
+					float(3) m_vMinBounds = ( 102.748932, -8.461290, -4.073105 )
+					float(3) m_vMaxBounds = ( 128.175079, -5.053652, 23.930204 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_2_05"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_2_05"
+					float(3) m_vMinBounds = ( 102.931091, -7.450509, -10.750595 )
+					float(3) m_vMaxBounds = ( 128.648224, -4.049608, 17.126907 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "sideTentacle_3_05"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "sideTentacle_3_05"
+					float(3) m_vMinBounds = ( 102.959717, -10.949102, -13.087620 )
+					float(3) m_vMaxBounds = ( 128.827499, -7.480309, 14.684963 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tooth_1_01"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tooth_1_01"
+					float(3) m_vMinBounds = ( -3.719659, 6.158276, -41.943764 )
+					float(3) m_vMaxBounds = ( 9.025619, 39.438988, -19.924675 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tooth_1_02"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tooth_1_02"
+					float(3) m_vMinBounds = ( 9.281811, 5.452507, -37.470734 )
+					float(3) m_vMaxBounds = ( 23.369274, 46.269203, -12.253349 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tooth_1_03"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tooth_1_03"
+					float(3) m_vMinBounds = ( 19.920383, 7.996578, -21.975384 )
+					float(3) m_vMaxBounds = ( 35.618687, 39.121536, -8.887943 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tooth_1_04"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tooth_1_04"
+					float(3) m_vMinBounds = ( -34.791092, 6.051689, 7.055075 )
+					float(3) m_vMaxBounds = ( -14.806281, 39.262688, 22.132601 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tooth_1_05"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tooth_1_05"
+					float(3) m_vMinBounds = ( -33.889950, 5.161335, -24.009132 )
+					float(3) m_vMaxBounds = ( -14.295860, 38.380402, -10.347413 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tooth_1_06"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tooth_1_06"
+					float(3) m_vMinBounds = ( -41.983467, 5.005665, -8.986811 )
+					float(3) m_vMaxBounds = ( -15.375678, 45.363323, 7.241095 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tooth_1_07"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tooth_1_07"
+					float(3) m_vMinBounds = ( -5.515201, 5.686981, 19.043129 )
+					float(3) m_vMaxBounds = ( 6.804416, 37.880615, 39.146988 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tooth_1_08"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tooth_1_08"
+					float(3) m_vMinBounds = ( 7.289352, 9.009354, 14.373169 )
+					float(3) m_vMaxBounds = ( 23.288136, 45.595779, 35.908684 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "tooth_1_09"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "tooth_1_09"
+					float(3) m_vMinBounds = ( 11.989288, 6.543636, 8.845554 )
+					float(3) m_vMaxBounds = ( 32.770775, 37.662018, 21.906977 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				},
+				CVhitBox
+				{
+					string m_name = "mouth_open"
+					string m_sSurfaceProperty = ""
+					int m_nGroupId = 0
+					string m_sBoneName = "mouth_open"
+					float(3) m_vMinBounds = ( 7.601494, -33.722858, -36.106789 )
+					float(3) m_vMaxBounds = ( 9.866451, 35.634167, 35.039223 )
+					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
+				}
+			]
+		}
+	]
+}
+
+CVattachmentList CVattachmentList_0
+{
+	string m_name = ""
+	CVattachment[] m_attachments = 
+	[
+		CVattachment
+		{
+			string m_name = "attach_attack1"
+			CVattachmentInfluence[] m_influences = 
+			[
+				CVattachmentInfluence
+				{
+					string m_influenceName = "root"
+					float(3) m_vTranslationOffset = ( 0.000016, 223.059830, -0.000000 )
+					float(3) m_vRotationOffset = ( -0.000000, -0.000003, 0.000001 )
+					float m_flWeight = 1.000000
+					bool m_bRoot = false
+				}
+			]
+		}
+	]
+}
+
+CVMaterialRemapList CVMaterialRemapList_0
+{
+	CVMaterialRemap[] m_vMaterialRemapList = 
+	[
+		CVMaterialRemap
+		{
+			string m_sSearchMaterial = "materials/models/items/pugna/ward/tentaclesofnetherreach/tentaclesofn_color.vmat"
+			string m_sReplaceMaterial = "materials/models/items/pugna/ward/tentaclesofnetherreach/tentaclesofnetherreach.vmat"
+		}
+	]
+}

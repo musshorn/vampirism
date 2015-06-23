@@ -4331,7 +4331,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "models/props_mines/mine_cart002.vmdl"
+    "Model"                     "models/tentaclesofnetherreach_reference.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
@@ -4350,7 +4350,7 @@
     "AttackAnimationPoint"      "0"
     "AttackAcquisitionRange"    "1000"
     "AttackRange"               "1000"
-    "ProjectileModel"           ""
+    "ProjectileModel"           "particles/units/heroes/hero_pugna/pugna_base_attack.vpcf"
     "ProjectileSpeed"           "5000"
 
     // Bounds
