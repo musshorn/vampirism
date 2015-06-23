@@ -49,6 +49,7 @@ game/thirdpartylegalnotices.txt
 thirdpartylegalnotices.txt
 game/dota_addons/vampirism/tools_thumbnail_cache.bin
 game/dota_addons/vampirism/tools_asset_info.bin
+game/dota_addons/vpks/
 *.vmap_autosave
 *.vtex_c
 *.vxml_c
