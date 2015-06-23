@@ -12,12 +12,8 @@ function Worker:Worker1(vPos, hOwner, unitName)
   -- If health techs have been researched, apply them
   worker:SetMaxHealth(UNIT_KV[pID][unitName].StatusHealth)
   worker:SetHealth(worker:GetMaxHealth())
-  worker:SetHullRadius(8)
+  worker:SetHullRadius(9)
   
-  worker.thinking = false
-  worker.inTriggerZone = true -- Flag set true if worker is near trees
-
-  worker.treepos = nil
   worker.workTimer = DoUniqueString("WorkTimer")
   worker.moveTimer = DoUniqueString("MoveTimer")
   worker.pos = worker:GetAbsOrigin()

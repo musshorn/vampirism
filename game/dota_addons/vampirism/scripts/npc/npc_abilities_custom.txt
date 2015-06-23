@@ -583,7 +583,7 @@
   {
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"             "ability_datadriven"
-    "AbilityCastRange"      "150"
+    "AbilityCastRange"      "128"
     "AbilityCooldown"        "0.5"
 
     "OnSpellStart"
@@ -602,7 +602,7 @@
     "AbilityUnitTargetType" "DOTA_UNIT_TARGET_TREE"
     "BaseClass" "ability_datadriven"
     "AbilityCastPoint"  "0"
-    "AbilityCastRange"        "150"
+    "AbilityCastRange"        "128"
     "AbilityChannelTime" "0.5"
     "AbilityCastAnimation" "ACT_DOTA_ATTACK"
     "OnChannelSucceeded"
