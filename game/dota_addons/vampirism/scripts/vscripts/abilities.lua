@@ -2,6 +2,7 @@ function build( keys )
   local caster = keys.caster
   local player = keys.caster:GetPlayerOwner()
   local pID = keys.caster:GetMainControllingPlayer()
+  local sourceItem = keys.ItemBuilding
 
   local buildName = ABILITY_KV[keys.ability:GetAbilityName()][UnitName]
   --print("CALLED THE BUILD")
@@ -30,8 +31,19 @@ function build( keys )
     FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
     -- start the building with 0 mana.
     unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})
+    unit:AddNewModifier(silencer, nil, "modifier_disarmed", {duration=10000})
     unit:SetMana(0)
-    
+
+    if sourceItem ~= nil then
+      for i = 0, caster:GetNumItemsInInventory() do
+        local item = caster:GetItemInSlot(i)
+        if item ~= nil then
+          if item:GetName() == sourceItem then
+            caster:RemoveItem(item)
+          end
+        end
+      end
+    end
   end)
 
   keys:OnConstructionCompleted(function(unit)
@@ -80,9 +92,12 @@ function build( keys )
       unit.ShopEnt = newshop -- This needs to be removed if the shop is destroyed
     end
 
-    --Remove Building Silence.
+    --Remove Building Silence, Disarm
     if unit:HasModifier("modifier_silence") then
       unit:RemoveModifierByName("modifier_silence")
+    end
+    if unit:HasModifier("modifier_disarmed") then
+      unit:RemoveModifierByName("modifier_disarmed")
     end
   end)
 

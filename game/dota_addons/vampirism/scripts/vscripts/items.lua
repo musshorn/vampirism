@@ -48,3 +48,14 @@ function SpawnEngineers( keys )
 		engi:SetControllableByPlayer(playerID, true)
 	end
 end
+
+function VenomOrb( keys )
+	local caster = keys.caster
+	local ability = keys.ability
+	local abilityToAdd = keys.AbilityToAdd
+	print(abilityToAdd)
+
+	caster:AddAbility(abilityToAdd)
+	local added = caster:FindAbilityByName(abilityToAdd)
+	caster:CastAbilityNoTarget(added, caster:GetMainControllingPlayer())
+end

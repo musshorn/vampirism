@@ -52,6 +52,7 @@ function Precache( context )
 		PrecacheResource("particle", "particles/units/heroes/hero_invoker/invoker_base_attack.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_zuus/zuus_base_attack.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_pugna/pugna_base_attack.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_venomancer/venomancer_plague_ward_projectile.vpcf", context)
 		
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
@@ -105,6 +106,7 @@ function Precache( context )
 		PrecacheModel("models/good_base_wall006_reference.vmdl", context)
 		PrecacheModel("models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged_mega.vmdl", context)
 		PrecacheModel("models/props_structures/good_ancient001.vmdl", context)
+		PrecacheModel("models/heroes/venomancer/venomancer_ward.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

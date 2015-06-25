@@ -3251,6 +3251,7 @@
       }
     }
   }
+
   //=================================================================================/
   // Upgrade to Tower of Flame
   //=================================================================================/
@@ -5341,6 +5342,109 @@
       {
         "ScriptFile"            "scripts/vscripts/abilities.lua"
         "Function"              "build"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Build Venom Spire
+  //=================================================================================
+  "build_tower_venom_t1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "30"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "1.5"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "0"
+    "GoldCost"                  "0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "tower_venom_t1"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+        "ItemBuilding"          "item_venom_orb"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Venomous Leak
+  //=================================================================================
+  "venom_spire_passive"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "venomancer_poison_sting"
+    "MaxLevel"                  "1"
+
+    "AbilityType"             "DOTA_ABILITY_TYPE_BASIC"
+    "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitDamageType"   "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+
+    "precache"
+    {
+      "particle"              "particles/units/heroes/hero_venomancer/venomancer_gale_poison_debuff.vpcf"
+    }
+
+    "Modifiers"
+    {
+      "modifier_spire_poison"
+      {
+        "Passive"       "1"
+        "IsHidden"      "0"
+
+        "OnAttackLanded"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_spire_poison_debuff"
+            "Target"    "TARGET"
+          }
+        }
+      }
+
+      "modifier_spire_poison_debuff"
+      {
+        "IsDebuff"      "1"
+        "Duration"      "2"
+
+        "AttachEffect"
+        {
+          "EffectName"          "particles/units/heroes/hero_venomancer/venomancer_gale_poison_debuff.vpcf"
+          "EffectAttachType"    "attach_hitloc"
+          "Target"              "TARGET"
+        }
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "-20"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "-20"
+        }
       }
     }
   }

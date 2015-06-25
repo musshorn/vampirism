@@ -372,7 +372,7 @@
   		"ID"	"2010"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_orb_of_venom"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
   		"ItemStackable"		"0"
   		"ItemKillable"		"1"
   		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
@@ -390,11 +390,16 @@
   		"GoldCost"			       "1"
   		"LumberCost"		        "10000"
 
-  		"RunScript"
-  		{
-  			"ScriptFile"	"scripts/vscripts/abilities.lua"
-  			"Function"		"build"
-  		}
+      "OnSpellStart"
+      {
+        "RunScript"
+        {
+          "ScriptFile"  "scripts/vscripts/items.lua"
+          "Function"    "VenomOrb"
+          "AbilityToAdd"  "build_tower_venom_t1"
+        }
+      }
+
   	}
 
   	//================================================================================= 

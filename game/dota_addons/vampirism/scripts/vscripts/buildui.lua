@@ -80,7 +80,7 @@ function CallMenu(keys)
     --ONLY FOR TESTING IN SINGLE, NOT WORKING IN MULTIPLAYER.
     --SHOULD BE playerCasters[playerID] = caster
     playerCasters[playerID] = caster
-   -- playerCasters[playerID] = caster
+    --playerCasters[playerID] = caster
 end
 
 function BuildUI:BuildChosen(building, playerID)
