@@ -265,19 +265,32 @@
   "worker_det"
   {
     "BaseClass"                 "ability_datadriven"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-    "AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-    "AbilityTextureName"      "rubick_empty1"
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityTextureName"        "rubick_empty1"
     "MaxLevel"             "1"
     "AoERadius"           "250"
     "AbilityCastPoint"    "0.3"
+
+    "precache"
+    {
+      "particle"  "particles/generic_gameplay/generic_hit_blood_flash.vpcf"
+    }
+
     "OnSpellStart"
     {
+      "FireEffect"
+      {
+        "EffectName"          "particles/generic_gameplay/generic_hit_blood_flash.vpcf"
+        "EffectAttachType"    "follow_origin"
+        "Target"              "CASTER"
+        "EffectRadius"        "250"
+      }
       "RunScript"
       {
         "ScriptFile"  "scripts/vscripts/abilities.lua"
-        "Target"  "POINT"
-        "Function"  "WorkerDet"
+        "Target"      "POINT"
+        "Function"    "WorkerDet"
       }
     }
   }

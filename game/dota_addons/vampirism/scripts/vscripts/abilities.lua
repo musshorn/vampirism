@@ -234,7 +234,10 @@ function WorkerDet( keys )
     FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
   end
 
-  caster:Destroy()
+  Timers:CreateTimer(0.03, function ()
+    caster:Destroy()
+    return nil
+  end)
 end
 
 function BuildingQ( keys )
