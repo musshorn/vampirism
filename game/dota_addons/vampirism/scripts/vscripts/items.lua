@@ -53,7 +53,6 @@ function VenomOrb( keys )
 	local caster = keys.caster
 	local ability = keys.ability
 	local abilityToAdd = keys.AbilityToAdd
-	print(abilityToAdd)
 
 	caster:AddAbility(abilityToAdd)
 	local added = caster:FindAbilityByName(abilityToAdd)

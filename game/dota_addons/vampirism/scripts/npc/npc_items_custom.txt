@@ -4,8 +4,8 @@
 "DOTAAbilities"
 {
 	//================================================================================= 
-  	// Vampire Basics - Scroll of the Beast
-  	//=================================================================================
+  // Vampire Basics - Scroll of the Beast
+  //=================================================================================
 	"item_scroll_beast"
 	{
 		"ID"	"2000"
@@ -26,7 +26,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"Value"	"7"
+				"duration"	"7"
 			}
 
 			"02"
@@ -65,7 +65,7 @@
 				"TextureName"	"item_kata_InvulnerablBottle"
 				"IsHidden"	"0"
 				"Passive"	"0"
-				"Duration"	"%Value"
+				"Duration"	"%duration"
 				"EffectName"	"particles/units/heroes/hero_omniknight/omniknight_guardian_angel_ally.vpcf"
 				"EffectAttachType"	"follow_origin"
 				"Properties"
@@ -80,8 +80,8 @@
 	}
 
 	//================================================================================= 
-  	// Market of Blood - Dracula's Helm
-  	//=================================================================================
+  // Market of Blood - Dracula's Helm
+  //=================================================================================
 	"item_dracula_helm"
 	{
 		"ID"	"2001"
@@ -106,9 +106,9 @@
 		}
 	}
 
-  	//================================================================================= 
-  	// Demonic Merchant - Demonic Remains
-  	//=================================================================================
+  //================================================================================= 
+  // Demonic Merchant - Demonic Remains
+  //=================================================================================
 	"item_demonic_remains"
 	{
 		"ID"	"2002"
@@ -139,8 +139,8 @@
 	}
 
 	//================================================================================= 
-  	// Small Coin
-  	//=================================================================================
+  // Small Coin
+  //=================================================================================
 	"item_small_coin"
 	{
 		"ID"	"2003"
@@ -176,8 +176,8 @@
 	}
 
 	//================================================================================= 
-  	// Large Coin
-  	//=================================================================================
+  // Large Coin
+  //=================================================================================
 	"item_large_coin"
 	{
 		"ID"	"2004"
@@ -248,9 +248,9 @@
 		}
 	}
 
-  	//================================================================================= 
-  	// Market of Blood - Sphere of Doom
-  	//=================================================================================
+  //================================================================================= 
+  // Market of Blood - Sphere of Doom
+  //=================================================================================
 	"item_sphere_doom"
 	{
 		"ID"	"2006"
@@ -279,8 +279,8 @@
 	}
 
 	//================================================================================= 
-  	// Human Surplus - Engineers
-  	//=================================================================================
+  // Human Surplus - Engineers
+  //=================================================================================
   	"item_engineer_toolkit"
   	{
   		"ID"	"2007"
@@ -302,14 +302,6 @@
   			{
   				"ScriptFile"	"scripts/vscripts/items.lua"
   				"Function"		"SpawnEngineers"
-  			}
-  		}
-  		"OnCreated"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"scripts/vscripts/items.lua"
-  				"Function"		"CheckLumber"
   			}
   		}
   	}
@@ -399,7 +391,6 @@
           "AbilityToAdd"  "build_tower_venom_t1"
         }
       }
-
   	}
 
   	//================================================================================= 
@@ -493,12 +484,6 @@
   				    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%stat_bonus"  
   				}
   			}
-  		}
-
-  		"RunScript"
-  		{
-  			"ScriptFile"	"scripts/vscripts/items.lua"
-  			"Function"		"DivinityJewel"
   		}
   	}
 
@@ -613,6 +598,11 @@
   		"GoldCost"			"40"
   		"LumberCost"		"0"
 
+      "precache"
+      {
+        "particle"  "particles/items3_fx/lotus_orb_shield.vpcf"
+      }
+
   		"AbilitySpecial"
   		{
   			"01"
@@ -622,20 +612,31 @@
   			}
   		}
 
+      "OnSpellStart"
+      {
+        "ApplyModifier"
+        {
+          "ModifierName"  "modifier_vampiric_concoction"
+          "Target"        "CASTER"
+        }
+      }
+
   		"Modifiers"
   		{
   			"modifier_vampiric_concoction"
   			{
-  				"Passive"			"0"
+  				"Passive"			  "0"
   				"IsHidden"			"0"
   				"IsDebuff"			"0"
   				"Duration"			"%duration"
 
+          "EffectName"        "particles/items3_fx/lotus_orb_shield.vpcf"
+          "EffectAttachType"  "follow_origin"
+
   				"States"
   				{
   					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-  				}
-  		  			
+  				}		
   			}
   		}
   	}
@@ -681,7 +682,6 @@
   				{
   					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
   				}
-  		  			
   			}
   		}
   	}
