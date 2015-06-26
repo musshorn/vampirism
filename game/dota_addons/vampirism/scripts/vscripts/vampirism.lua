@@ -145,7 +145,8 @@ function GameMode:OnAllPlayersLoaded()
   	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
   end
 
-  CreateUnitByName("vampire_shop", Vector(-1088, 512, 128), false, nil, nil, 0)
+  local vshop = CreateUnitByName("vampire_shop", Vector(-1088, 512, 128), false, nil, nil, DOTA_TEAM_BADGUYS)
+  vshop:FindAbilityByName('bh_dummy_unit'):OnSpellStart()
 end
 
 --[[
@@ -622,7 +623,7 @@ function GameMode:OnEntityKilled( keys )
   end
 
   if killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
-    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_Invoker" then
+    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_Invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil then
       -- Probability function for a coin drop
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)

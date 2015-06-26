@@ -647,8 +647,8 @@
   	"item_ring_hell_lords"
   	{
   		"ID"	"2016"
-  		"BaseClass"		"item_datadriven"
-  		"AbilityTextureName"	"ring_aquila"
+  		"BaseClass"		         "item_datadriven"
+  		"AbilityTextureName"	"item_ring_aquila"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"		"0"
   		"ItemKillable"		"1"
@@ -665,23 +665,60 @@
   			"01"
   			{
   				"var_type"			"FIELD_FLOAT"
-  				"duration"		"15.0"
+  				"range"		      "300"
   			}
+        "02"
+        {
+          "var_type"      "FIELD_INTEGER"
+          "damage"        "50"
+        }
+        "03"
+        {
+          "var_type"      "FIELD_INTEGER"
+          "max_ghosts"      "5"
+        }
+        "04"
+        {
+          "var_type"      "FIELD_INTEGER"
+          "ghost_speed"     "400"
+        }
+        "05"
+        {
+          "var_type"      "FIELD_FLOAT" 
+          "ring_cd"       "2.0"
+        }
+        "06"
+        {
+          "var_type"      "FIELD_FLOAT"
+          "ghost_interval"  "0.2"
+        }
   		}
+
+      "OnEquip"
+      {
+        "ApplyModifier"
+        {
+          "ModifierName"  "modifier_ring_hell_lords"
+          "Target"     "CASTER"
+        }
+      }
 
   		"Modifiers"
   		{
-  			"modifier_vampiric_concoction"
+  			"modifier_ring_hell_lords"
   			{
-  				"Passive"			"0"
+  				"Passive"			  "0"
   				"IsHidden"			"0"
   				"IsDebuff"			"0"
-  				"Duration"			"%duration"
 
-  				"States"
-  				{
-  					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-  				}
+          "OnCreated"
+          {
+            "RunScript"
+            {
+              "ScriptFile"  "scripts/vscripts/items.lua"
+              "Function"    "GhostRing"
+            }
+          }
   			}
   		}
   	}
