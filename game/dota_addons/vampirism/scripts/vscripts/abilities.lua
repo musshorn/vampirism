@@ -291,6 +291,7 @@ function VerifyAttacker( keys )
         attacker:Stop()
         FireGameEvent( 'custom_error_show', { player_ID = attackerPID , _error = "You may only destroy other players buildings in your own base!" } )
       end
+    end
   end
 end
 
