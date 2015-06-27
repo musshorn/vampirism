@@ -279,15 +279,6 @@ function ChainOfDeath(keys)
   local s_damage = ability:GetLevelSpecialValueFor("damage", ability_level)
   local unit_damaged = false
 
-  print(bounce_radius)
-  print(max_targets)
-  print(s_damage)
-
-  print(target:GetTeam())
-  print(target_location)
-  print(ability:GetAbilityTargetTeam())
-
-
   -- Particles
   local chain_of_death_particle = keys.chain_of_death_particle
 
@@ -306,7 +297,13 @@ function ChainOfDeath(keys)
   
       -- Find all the units in bounce radius
       local units = FindUnitsInRadius(caster:GetTeam(), target_location, nil, bounce_radius, ability:GetAbilityTargetTeam(), DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
-      PrintTable(units)
+
+      for k, v in pairs(units) do
+        if v:FindAbilityByName("is_a_building") ~= nil then
+          units[k] = nil
+        end
+      end
+
       -- HURT HEROES --
       -- First we check for hurt heroes
       for _,unit in pairs(units) do
