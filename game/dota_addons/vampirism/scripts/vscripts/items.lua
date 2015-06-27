@@ -87,7 +87,7 @@ function GhostRing( keys )
 		local nearBuildings = Entities:FindAllByClassnameWithin('npc_dota_creature', caster:GetAbsOrigin(), ghostRange)
 		for k, v in pairs(nearBuildings) do
 			--finds nearest enemy building.
-			if v:GetTeamNumber() ~= casterTeam and v:GetUnitName() ~= 'ring_ghost' then
+			if v:GetTeamNumber() ~= casterTeam and v:GetUnitName() ~= 'ring_ghost' and v:IsInvulnerable() ~= true and v:NotOnMinimap() ~= true then
 				targetBuilding = v
 				if ghostStock > 0 and interval == false then
 					newGhost(targetBuilding)
@@ -158,14 +158,15 @@ function GhostRing( keys )
 			end
 
 			if collision then
-				if ghost.current_target ~= nil then
+				if ghost.current_target ~= nil and ghost.current_target:IsInvulnerable() ~= true then
 
-					local damage_table = {}
+					local damage_table = {
+						victim = ghost.current_target,
+						attacker = caster,
+						damage_type = DAMAGE_TYPE_MAGICAL,
+						damage = 50
+					}
 	
-					damage_table.victim = ghost.current_target
-					damage_table.attacker = caster					
-					damage_table.damage_type = abilityDamageType
-					damage_table.damage = ghostDamage
 					ApplyDamage(damage_table)
 					local particle = ParticleManager:CreateParticle(particleDamageBuilding, PATTACH_ABSORIGIN, ghost.current_target)
 					ParticleManager:SetParticleControl(particle, 0, ghost.current_target:GetAbsOrigin())
