@@ -26,6 +26,10 @@ function Worker:Worker1(vPos, hOwner, unitName)
   ability:ToggleAutoCast() 
 
   Timers:CreateTimer(worker.moveTimer, {callback = function()
+    if worker:IsNull() then
+      return nil
+    end
+
   	if worker.pos ~= worker:GetAbsOrigin() then
   		worker.moving = true
   		worker.pos = worker:GetAbsOrigin()
@@ -40,7 +44,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
     worker.thinking = true
 		Timers:CreateTimer(function ()
-			if not worker:IsNull() then
+			if worker:IsNull() then
 				return nil
 			end
 

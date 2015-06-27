@@ -671,10 +671,18 @@ function GameMode:OnEntityKilled( keys )
   -- If the killed unit increased the players food cap then it needs to decrease when it dies
   if UNIT_KV[playerID] ~= nil then
     if UNIT_KV[playerID][unitName] ~= nil then
+      local lostfood = 0
+      
       if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
-        local lostfood = UNIT_KV[playerID][unitName].ProvidesFood
+        lostfood = UNIT_KV[playerID][unitName].ProvidesFood
         TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
         FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+      end
+
+      if UNIT_KV[playerID][unitName].ConsumesFood ~= nil then
+        lostfood = UNIT_KV[playerID][unitName].ConsumesFood
+        CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] - lostfood
+        FireGameEvent("vamp_food_changed", { player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
       end
 
       if UNIT_KV[playerID][unitName].SpawnsUnits == "true" then
