@@ -65,11 +65,10 @@ function Cancel( keys )
       end
     end
     print('goldcancel')
-    PlayerResource:ModifyGold(pID, caster.refundGold, true, 9)
-    print(PlayerResource:GetGold(pID))
+    GOLD[pID] = GOLD[pID] + caster.refundGold
     WOOD[pID] = WOOD[pID] + caster.refundLumber
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
+    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = GOLD[pID]})
     caster:SetMaxHealth(caster.originalMaxHP)
   end
 end
@@ -97,7 +96,7 @@ function Upgrade( keys )
   end
 
   -- Check if the player can upgrade
-  if PlayerResource:GetGold(pID) < goldCost then
+  if GOLD[pID] < goldCost then
     caster:Stop()
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
     canUpgrade = false
@@ -116,11 +115,11 @@ function Upgrade( keys )
 
   if canUpgrade == true then
     -- Deduct resources
-    print('goldupgrade')
-    PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9) -- idk what the 4th param is
-    print(PlayerResource:GetGold(pID))
+    GOLD[pID] = GOLD[pID] - goldCost
     WOOD[pID] = WOOD[pID] - lumberCost
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
+
   
     -- Change the model
     if caster.oldModel == nil then

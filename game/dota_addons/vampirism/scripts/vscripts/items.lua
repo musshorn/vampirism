@@ -4,16 +4,21 @@ function CheckLumber( keys )
 end
 
 function CoinUsed(keys)
-	local user = keys.caster
+	local caster = keys.caster
 	local coin = keys.ability
+	local playerID = caster:GetMainControllingPlayer()
+	local playerGold = GOLD[playerID]
+	print(playerGold)
 
-	if user:IsRealHero() then
-    if keys.Type == "small" then
-		  user:SetGold(user:GetGold() + 1, true)
+	if caster:IsRealHero() then
+    	if keys.Type == "small" then
+    		GOLD[playerID] = GOLD[playerID] + 1
+    		FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
     end
-    if keys.Type == "large" then
-      user:SetGold(user:GetGold() + 1, true)
-    end
+    	if keys.Type == "large" then
+    		GOLD[playerID] = GOLD[playerID] + 2
+      		FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+    	end
 	end
 end
 

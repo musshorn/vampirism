@@ -19,7 +19,7 @@ function Research( keys )
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more wood" } )
     return
   end
-  if PlayerResource:GetGold(pID) < goldCost then
+  if GOLD[pID] < goldCost then
     print(goldCost)
     caster:Stop()
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
@@ -28,16 +28,13 @@ function Research( keys )
 
   -- Player is ok to commence research, deduct resources
   WOOD[pID] = WOOD[pID] - lumberCost
-  PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
+  GOLD[pID] = GOLD[pID] - goldCost
   FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
+  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
   FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
   TechTree:AddTechAbility(pID, keys.ability:GetAbilityName())
-
-  print('resarch gold')
-  print(PlayerResource:GetGold(pID))
 end
 
 -- Research was cancelled. Show the icon again, return cost to player.
@@ -57,10 +54,9 @@ function Cancelled(keys)
 
   -- Return the cost of the research
   WOOD[playerID] = WOOD[playerID] + lumberCost
+  GOLD[playerID] = GOLD[playerID] + goldCost
   FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
-  PlayerResource:ModifyGold(playerID, goldCost, true, 9)
-  print(PlayerResource:GetGold(playerID))
-  FireGameEvent('vamp_gold_changed', { player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
+  FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
 
   --Show the hidden icon in flash
   FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
