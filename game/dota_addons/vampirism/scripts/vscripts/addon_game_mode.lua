@@ -110,6 +110,7 @@ function Precache( context )
 		PrecacheModel("models/props_structures/good_ancient001.vmdl", context)
 		PrecacheModel("models/heroes/venomancer/venomancer_ward.vmdl", context)
 		PrecacheModel("models/items/death_prophet/hecate_ghosts/hecate_ghosts.vmdl", context)
+		PrecacheModel("models/heroes/nevermore/nevermore.vmdl", context) 
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

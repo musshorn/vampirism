@@ -73,7 +73,6 @@ function FindNearestShop(vPos, fRange)
 end
 
 function Purchase( itemname, buyer )
-  print('purchase called', itemname, buyer)
   local playerID = buyer:GetMainControllingPlayer()
   local gold = PlayerResource:GetGold(playerID)
   local lumber = WOOD[playerID]
@@ -126,9 +125,11 @@ function Purchase( itemname, buyer )
   				  item:SetPurchaser(PlayerResource:GetPlayer(playerID))
   				  buyer:AddItem(item)
   				  WOOD[playerID] = WOOD[playerID] - lumberCost
+            CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + foodCost
   				  PlayerResource:SetGold(playerID, gold - goldCost, true)
   				  FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
      			  FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
+            FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
      			  FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = 0})
             SHOPS[shopIndex][index]['stock'] = SHOPS[shopIndex][index]['stock'] - 1
             table.insert(SHOPS[shopIndex][index]['queue'],  SHOPS[shopIndex][index]['stocktime'])

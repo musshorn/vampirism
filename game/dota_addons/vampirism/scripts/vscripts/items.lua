@@ -178,3 +178,20 @@ function GhostRing( keys )
 		end)
 	end
 end
+
+-- Handles all unit hiring behavior
+function HireUnit( keys )
+	local caster = keys.caster
+	local ability = keys.ability
+	local foodCost = ITEM_KV[ability:GetAbilityName()]['FoodCost']
+	local mercName = keys.Mercenary
+	local playerID = caster:GetMainControllingPlayer()
+
+	local merc = CreateUnitByName(mercName, caster:GetAbsOrigin(), true, caster, PlayerResource:GetPlayer(playerID), caster:GetTeam())
+	merc:SetControllableByPlayer(playerID, true)
+
+	-- initialize specific mercenary abilities
+	if mercName == 'merc_shade' then
+		merc:AddNewModifier(caster, nil, "modifier_invisible", {})
+	end
+end
