@@ -247,7 +247,17 @@ function GameMode:OnGameRulesStateChange(keys)
       if playerTeam == 2 then
         CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
       elseif playerTeam == 3 then
-        CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
+        local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
+        --Next frame timer
+        Timers:CreateTimer(0.03, function ()
+          vampire:FindAbilityByName("vampire_init_hider"):OnUpgrade()
+          vampire:SetAbsOrigin(OutOfWorldVector)
+          vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
+          vampire:SetAbilityPoints(0)
+          VAMP_COUNT = VAMP_COUNT + 1
+          table.insert(VAMPIRES, vampire)
+          return nil
+        end)
       end
     end
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
@@ -285,23 +295,6 @@ function GameMode:OnNPCSpawned(keys)
       FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
       FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
-    end
-  end
-
-  local newState = GameRules:State_Get()
-
-  if npc:GetName() == "npc_dota_hero_night_stalker" then
-  	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
-  		--Next frame timer
-  		Timers:CreateTimer(0.03, function ()
-  			npc:FindAbilityByName("vampire_init_hider"):OnUpgrade()
-  			npc:SetAbsOrigin(OutOfWorldVector)
-    		npc:FindAbilityByName("vampire_particles"):OnUpgrade()
-        npc:SetAbilityPoints(0)
-    		VAMP_COUNT = VAMP_COUNT + 1
-        table.insert(VAMPIRES, npc)
-    		return nil
-  		end)
     end
   end
 
@@ -1117,23 +1110,23 @@ function GoldMineTimer()
   end)
 end
 
---Runs every 15 seconds, checks wether vamps have sphere of doom
+--Runs every 15 seconds, checks whether vamps have sphere of doom
 function SphereTimer()
   local haveSphere = false
   Timers:CreateTimer(function()
-    for vamp in VAMPIRES do
-      if vamp:HasItemInInventory('item_sphere_of_doom') then
+    for k, v in pairs(VAMPIRES) do
+      if v:HasItemInInventory('item_sphere_of_doom') then
         haveSphere = true
       else
         haveSphere = false
       end
     end
 
-    for vamp in VAMPIRES do
+    for k, v in pairs(VAMPIRES) do
       if haveSphere then
-        vamp:SetBaseAgility(vamp:GetBaseAgility() +15)
-        vamp:SetBaseStrength(vamp:GetBaseStrength() +15)
-        vamp:SetBaseIntellect(vamp:GetBaseIntellect() +15)
+        v:SetBaseAgility(v:GetBaseAgility() +15)
+        v:SetBaseStrength(v:GetBaseStrength() +15)
+        v:SetBaseIntellect(v:GetBaseIntellect() +15)
       end
     end
     return 15
