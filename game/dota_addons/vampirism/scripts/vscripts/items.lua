@@ -30,17 +30,16 @@ function SphereDoom( keys )
 	local caster = keys.caster
 	local ability = keys.ability
 	local point = keys.target_points[1]
+	local gooddist = keys.MaxBlink
 
-	-- Move a "test unit", find the distance between them and see if it's ok then move the vamp
-	FindClearSpaceForUnit(caster, point, false)
+	local dist_vec =  point - caster:GetAbsOrigin()
 
-	local dist = CalcDistanceBetweenEntityOBB(caster, caster)
-
-	if dist < gooddist then
-		FindClearSpaceForUnit(caster, point, false)
-	else
-		FireGameEvent("custom_error_show", {player_ID = caster:GetMainControllingPlayer(), _error = "Vampire doesn't fit here!"}) 
+	if dist_vec:Length2D() > keys.MaxBlink then
+		point = caster:GetAbsOrigin() + (point - caster:GetAbsOrigin()):Normalized() * keys.MaxBlink
 	end
+
+	caster:SetAbsOrigin(point)
+	FindClearSpaceForUnit(caster, point, false)
 end
 
 function SpawnEngineers( keys )

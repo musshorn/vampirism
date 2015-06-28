@@ -307,7 +307,6 @@ function ChainOfDeath(keys)
       -- HURT HEROES --
       -- First we check for hurt heroes
       for _,unit in pairs(units) do
-        print(unit:GetUnitName())
         if unit ~= caster then
           local check_unit = 0  -- Helper variable to determine if a unit has been hit or not
   
@@ -359,7 +358,6 @@ function CykaSpeed(keys)
   local ability_level = ability:GetLevel()
   local duration = ability:GetLevelSpecialValueFor("duration", ability_level)
 
-  print(ability_level)
   caster:AddNewModifier(caster, ability, "modifier_invisible", {duration = duration})
   caster:AddNewModifier(caster, ability, "modifier_bloodseeker_thirst_speed", {duration = duration, visibility_threshold_pct = 100, invis_threshold_pct = 100, bonus_damage = 0})
   if ability_level == 1 then
