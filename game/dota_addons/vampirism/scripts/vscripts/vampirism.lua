@@ -700,6 +700,7 @@ function GameMode:OnEntityKilled( keys )
   -- Vampire killed a unit
   if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS and killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
     local vampPID = killerEntity:GetMainControllingPlayer()
+    GOLD[vampPID] = GOLD[vampPID] + killedUnit:GetGoldBounty()
     FireGameEvent('vamp_gold_changed', {player_ID = vampPID, gold_total = GOLD[vampPID]})
   end
 
