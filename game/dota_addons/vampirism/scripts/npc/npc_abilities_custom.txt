@@ -9,6 +9,29 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "BaseClass" "ability_datadriven"
     "AbilityTextureName"  ""
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "health_radius" "1200"
+      }
+
+      "02"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "health_regen_amount" "22.0"
+      }
+
+      "03"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "mana_regen_amount" "8.0"
+      }
+    }
+
+
     "OnSpellStart"
     {
       "ApplyModifier"
@@ -21,13 +44,31 @@
           "Teams" "DOTA_UNIT_TARGET_TEAM_BOTH"
           "Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
         }
-
+      }
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_hider"
+        "Target"
+        {
+          "Center"  "CASTER"
+        }
       }
 
     }
 
     "Modifiers"
     {
+      "modifier_hider"
+      {
+        "IsHidden"  "1"
+        "Passive"   "1"
+        "States"
+        {
+          "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
       "fx_heal_aura"
       {
         "Passive" "1"
@@ -72,31 +113,7 @@
         }
 
       }
-
     }
-
-    "AbilitySpecial"
-    {
-      "01"
-      {
-        "var_type"  "FIELD_INTEGER"
-        "health_radius" "450"
-      }
-
-      "02"
-      {
-        "var_type"  "FIELD_FLOAT"
-        "health_regen_amount" "22.0"
-      }
-
-      "03"
-      {
-        "var_type"  "FIELD_FLOAT"
-        "mana_regen_amount" "8.0"
-      }
-
-    }
-
   }
 
   "vamp_farsight"

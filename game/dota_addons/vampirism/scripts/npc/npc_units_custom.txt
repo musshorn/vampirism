@@ -34,13 +34,7 @@
   {
     //General
     //
-    "BaseClass" "ent_dota_fountain"
-    "Model" ""
-    "SoundSet" "Creep_Good_Melee"
-    "GameSoundsFile" "soundevents/game_sounds_creeps.vsndevts"
-    "MinimapIon" "minimap_ancient"
-    "HealthBarOffset" "400"
-
+    "BaseClass" "npc_dota_creature"
     //Abilities
     //----------------------------------------------------------------
 
