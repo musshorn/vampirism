@@ -652,6 +652,7 @@
   		"BaseClass"		         "item_datadriven"
   		"AbilityTextureName"	"item_ring_aquila"
   		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+      "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
   		"ItemStackable"		"0"
   		"ItemKillable"		"1"
   		"ItemShareability"	"ITEM_FULLY_SHAREABLE"

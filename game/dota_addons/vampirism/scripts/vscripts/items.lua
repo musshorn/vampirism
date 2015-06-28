@@ -73,7 +73,7 @@ function GhostRing( keys )
 	local ghostInterval = ability:GetLevelSpecialValueFor('ghost_interval', 1)
 	local abilityDamageType = ability:GetAbilityDamageType()
 	local ghostStock = maxGhosts
-	local targetBuilding = nil
+	local targetUnit = nil
 	local interval = false
 	local casterTeam = caster:GetTeamNumber()
 	local particleDamageBuilding = "particles/units/heroes/hero_death_prophet/death_prophet_exorcism_attack_building_glows.vpcf"
@@ -81,13 +81,13 @@ function GhostRing( keys )
 	print('specials', ghostRange,  ghostDamage, maxGhosts, ghostSpeed, ringCD, ghostInterval, abilityDamageType)
 
 	Timers:CreateTimer(function ()
-		local nearBuildings = Entities:FindAllByClassnameWithin('npc_dota_creature', caster:GetAbsOrigin(), ghostRange)
-		for k, v in pairs(nearBuildings) do
-			--finds nearest enemy building.
+      	local units = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, ghostRange, ability:GetAbilityTargetTeam(), DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+		for k, v in pairs(units) do
+			--finds nearest enemy unit.
 			if v:GetTeamNumber() ~= casterTeam and v:GetUnitName() ~= 'ring_ghost' and v:IsInvulnerable() ~= true and v:NotOnMinimap() ~= true then
-				targetBuilding = v
+				targetUnit = v
 				if ghostStock > 0 and interval == false then
-					newGhost(targetBuilding)
+					newGhost(targetUnit)
 					ghostStock = ghostStock - 1
 					interval = true
 					Timers:CreateTimer(ghostInterval, function ()
@@ -119,7 +119,6 @@ function GhostRing( keys )
 
 		local point = target:GetAbsOrigin()
 		ghost:OnPhysicsFrame(function ( ghost )
-
 
 			-- Move the unit orientation to adjust the particle
 			ghost:SetForwardVector( ( ghost:GetPhysicsVelocity() ):Normalized() )
