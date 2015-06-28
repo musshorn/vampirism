@@ -100,6 +100,7 @@ end
 
 function SharpenedHatchets(keys)
   local caster = keys.caster
+  local ability = keys.ability
   local pID = caster:GetMainControllingPlayer()
   
   -- This research only applies to t1 workers so we don't need to search for any worker
