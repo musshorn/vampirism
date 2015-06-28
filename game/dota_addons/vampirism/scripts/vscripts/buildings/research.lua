@@ -70,7 +70,7 @@ function Finished(keys)
   if keys.interrupted == 1 then
     Cancelled(keys)
   end
-  CustomGameEventManager:Send_ServerToPlayer( player, "overtime_alert", broadcast_killcount )
+  Notifications:Bottom(pID, "Research Complete", 5, nil, {color="yellow", ["font-size"]="24px"})
 end
 
 --Research center upgrades
