@@ -176,6 +176,15 @@ function GhostRing( keys )
 	        		Timers:CreateTimer(2, function ()
 	        			ghostStock = ghostStock + 1
 	        		end)
+	        	else
+	        		ghost:SetPhysicsVelocity(Vector(0,0,0))
+	        		ghost:OnPhysicsFrame(nil)
+	        		ghost:ForceKill(false)
+	        		ghost:Destroy()
+
+	        		Timers:CreateTimer(2, function ()
+	        			ghostStock = ghostStock + 1
+	        		end)
 	        	end
 			end
 		end)
