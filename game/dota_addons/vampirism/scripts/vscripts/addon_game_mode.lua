@@ -20,6 +20,7 @@ require('util')
 require('abilities.vampire')
 require('shopui')
 require('trade')
+require('notifications')
 require('Bases')
 
 function Precache( context )

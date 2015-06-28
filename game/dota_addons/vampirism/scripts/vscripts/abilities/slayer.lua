@@ -180,6 +180,11 @@ function SpawnSlayer( keys )
   SLAYERS[pID]['agility'] = {}
   SLAYERS[pID]['intellect'] = {}
 
+    
+  local name = PlayerResource:GetPlayerName(pID)
+  local time = GameRules:GetDOTATime(false, false)
+  Notifications:BottomToTeam(caster:GetTeam(), name .. " has completed a slayer in " .. tostring( round(time, 2)) .. "s", 5, nil, {color="yellow", ["font-size"]="24px"})
+
   GameMode:ModifyStatBonuses(slayer)
 end
 
