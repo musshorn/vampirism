@@ -7,8 +7,6 @@ function CoinUsed(keys)
 	local caster = keys.caster
 	local coin = keys.ability
 	local playerID = caster:GetMainControllingPlayer()
-	local playerGold = GOLD[playerID]
-	print(playerGold)
 
 	if caster:IsRealHero() then
     	if keys.Type == "small" then

@@ -244,10 +244,20 @@ function GameMode:OnGameRulesStateChange(keys)
       })
     for i = 0, 9 do
       local playerTeam = PlayerResource:GetTeam(i)
-      if playerTeam == 2 then
+      if playerTeam == 3 then
         CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
-      elseif playerTeam == 3 then
+      elseif playerTeam == 2 then
         local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
+        GOLD[i] = 0
+        WOOD[i] = 0
+        TOTAL_FOOD[i] = 10
+        CURRENT_FOOD[i] = 0
+        FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
+        FireGameEvent("vamp_wood_changed", {player_ID = i, wood_total = WOOD[i]})
+        FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
+        FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
+
+
         --Next frame timer
         Timers:CreateTimer(0.03, function ()
           vampire:FindAbilityByName("vampire_init_hider"):OnUpgrade()
