@@ -265,7 +265,7 @@
 		"ItemInitialCharges"	"1"
 		"AbilityCooldown"				"30"
 		"AbilityManaCost"				"1000"
-		"AbilityCastRange"				"100"
+		"AbilityCastRange"				"0"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 		"OnSpellStart"
@@ -274,6 +274,8 @@
 			{
 				"ScriptFile"	"scripts/vscripts/items.lua"
 				"Function"		"SphereDoom"
+        "Target" "POINT"
+        "MaxBlink"    "200"
 			}
 		}
 	}
