@@ -70,7 +70,7 @@ function Finished(keys)
   if keys.interrupted == 1 then
     Cancelled(keys)
   end
-  CustomGameEventManager:Send_ServerToPlayer( player, "overtime_alert", broadcast_killcount )
+  Notifications:Bottom(pID, "Research Complete", 5, nil, {color="yellow", ["font-size"]="24px"})
 end
 
 --Research center upgrades
@@ -100,6 +100,7 @@ end
 
 function SharpenedHatchets(keys)
   local caster = keys.caster
+  local ability = keys.ability
   local pID = caster:GetMainControllingPlayer()
   
   -- This research only applies to t1 workers so we don't need to search for any worker
@@ -126,6 +127,7 @@ end
 
 function ImprovedWorkerMotivation(keys)
   local caster = keys.caster
+  local ability = keys.ability
   local pID = caster:GetMainControllingPlayer()
   
   -- Find all units with "MaximumLumber" not nil, these are all the harvesters
@@ -156,6 +158,7 @@ function GemQuality(keys)
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
   local level = keys.Level
+  local ability = keys.ability
 
   -- Find all units with "AffectedByGemUpgrades" not nil, these are all the walls
   for key, value in pairs(UNIT_KV[pID]) do
