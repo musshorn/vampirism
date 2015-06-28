@@ -5,7 +5,7 @@
 	</script>
 		
 	<Panel>
-    <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/game_ticker.xml" />
+    <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hud_base.xml" /> 
 	</Panel>
 </root>
 
