@@ -148,6 +148,8 @@ function GameMode:OnAllPlayersLoaded()
 
   local vshop = CreateUnitByName("vampire_shop", Vector(-1088, 512, 128), false, nil, nil, DOTA_TEAM_BADGUYS)
   vshop:FindAbilityByName('bh_dummy_unit'):OnSpellStart()
+
+  CreateUnitByName("npc_vamp_fountain", Vector(779, 430, 128), false, nil, nil, DOTA_TEAM_BADGUYS)
 end
 
 --[[
