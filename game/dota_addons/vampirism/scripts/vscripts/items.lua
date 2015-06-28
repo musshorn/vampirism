@@ -4,16 +4,19 @@ function CheckLumber( keys )
 end
 
 function CoinUsed(keys)
-	local user = keys.caster
+	local caster = keys.caster
 	local coin = keys.ability
+	local playerID = caster:GetMainControllingPlayer()
 
-	if user:IsRealHero() then
-    if keys.Type == "small" then
-		  user:SetGold(user:GetGold() + 1, true)
+	if caster:IsRealHero() then
+    	if keys.Type == "small" then
+    		GOLD[playerID] = GOLD[playerID] + 1
+    		FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
     end
-    if keys.Type == "large" then
-      user:SetGold(user:GetGold() + 1, true)
-    end
+    	if keys.Type == "large" then
+    		GOLD[playerID] = GOLD[playerID] + 2
+      		FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+    	end
 	end
 end
 
@@ -81,7 +84,7 @@ function GhostRing( keys )
 		local nearBuildings = Entities:FindAllByClassnameWithin('npc_dota_creature', caster:GetAbsOrigin(), ghostRange)
 		for k, v in pairs(nearBuildings) do
 			--finds nearest enemy building.
-			if v:GetTeamNumber() ~= casterTeam and v:GetUnitName() ~= 'ring_ghost' then
+			if v:GetTeamNumber() ~= casterTeam and v:GetUnitName() ~= 'ring_ghost' and v:IsInvulnerable() ~= true and v:NotOnMinimap() ~= true then
 				targetBuilding = v
 				if ghostStock > 0 and interval == false then
 					newGhost(targetBuilding)
@@ -152,19 +155,29 @@ function GhostRing( keys )
 			end
 
 			if collision then
-				if ghost.current_target ~= nil then
+				if ghost.current_target ~= nil and ghost.current_target:IsInvulnerable() ~= true then
 
-					local damage_table = {}
+					local damage_table = {
+						victim = ghost.current_target,
+						attacker = caster,
+						damage_type = DAMAGE_TYPE_MAGICAL,
+						damage = 50
+					}
 	
-					damage_table.victim = ghost.current_target
-					damage_table.attacker = caster					
-					damage_table.damage_type = abilityDamageType
-					damage_table.damage = ghostDamage
 					ApplyDamage(damage_table)
 					local particle = ParticleManager:CreateParticle(particleDamageBuilding, PATTACH_ABSORIGIN, ghost.current_target)
 					ParticleManager:SetParticleControl(particle, 0, ghost.current_target:GetAbsOrigin())
 					ParticleManager:SetParticleControlEnt(particle, 1, ghost.current_target, PATTACH_POINT_FOLLOW, "attach_hitloc", ghost.current_target:GetAbsOrigin(), true)
 					ghost:SetPhysicsVelocity(Vector(0,0,0))
+	        		ghost:OnPhysicsFrame(nil)
+	        		ghost:ForceKill(false)
+	        		ghost:Destroy()
+
+	        		Timers:CreateTimer(2, function ()
+	        			ghostStock = ghostStock + 1
+	        		end)
+	        	else
+	        		ghost:SetPhysicsVelocity(Vector(0,0,0))
 	        		ghost:OnPhysicsFrame(nil)
 	        		ghost:ForceKill(false)
 	        		ghost:Destroy()

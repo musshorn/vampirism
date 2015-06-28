@@ -299,7 +299,7 @@ function ChainOfDeath(keys)
       local units = FindUnitsInRadius(caster:GetTeam(), target_location, nil, bounce_radius, ability:GetAbilityTargetTeam(), DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
 
       for k, v in pairs(units) do
-        if v:FindAbilityByName("is_a_building") ~= nil then
+        if v:FindAbilityByName("is_a_building") ~= nil or v:NotOnMinimap() == true then
           units[k] = nil
         end
       end

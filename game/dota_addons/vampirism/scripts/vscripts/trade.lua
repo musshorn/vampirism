@@ -52,12 +52,12 @@ function Trade:HandleChat( keys )
 		  	FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
 			end
 
-			if sellResource == "gold" and PlayerResource:GetGold(pID) < sellAmount then
+			if sellResource == "gold" and GOLD[pID] < sellAmount then
 				FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
 				return
 			elseif sellResource == "gold" then
-				PlayerResource:ModifyGold(pID, -1 * sellAmount, true, 9)
-				FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
+				GOLD[pID] = GOLD[pID] - sellAmount
+				FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
 			end
 
 			-- Generate order table and add it to the master table
@@ -120,21 +120,21 @@ function Trade:HandleChat( keys )
 		  				FireGameEvent('vamp_wood_changed', { player_ID = buyerPID, wood_total = WOOD[buyerPID]})
 		  				FireGameEvent('vamp_wood_changed', { player_ID = sellerPID, wood_total = WOOD[sellerPID]})
 
-		  				PlayerResource:ModifyGold(buyerPID, offers.sellAmount, true, 9)
-		  				FireGameEvent('vamp_gold_changed', { player_ID = buyerPID, gold_total = PlayerResource:GetGold(buyerPID)})
+		  				GOLD[buyerPID] = GOLD[buyerPID] + offers.sellAmount
+		  				FireGameEvent('vamp_gold_changed', { player_ID = buyerPID, gold_total = GOLD[buyerPID]})
 		  			end
 		  		end
 
 		  		-- Resolve trades asking for gold
 					if askingResource == "gold" then
-						if PlayerResource:GetGold(buyerPID) < askingAmount then
+						if GOLD[buyerPID] < askingAmount then
 							FireGameEvent( 'custom_error_show', { player_ID = buyerPID, _error = "You need more gold" } )
 							return
 						else
-							PlayerResource:ModifyGold(buyerPID, -1 * askingAmount, true, 9)
-							PlayerResource:ModifyGold(sellerPID, askingAmount, true, 9)
-		  				FireGameEvent('vamp_gold_changed', { player_ID = buyerPID, gold_total = PlayerResource:GetGold(buyerPID)})
-		  				FireGameEvent('vamp_gold_changed', { player_ID = sellerPID, gold_total = PlayerResource:GetGold(sellerPID)})
+							GOLD[buyerPID] = GOLD[buyerPID] - askingAmount
+							GOLD[sellerPID] = GOLD[sellerPID] + askingAmount
+		  				FireGameEvent('vamp_gold_changed', { player_ID = buyerPID, gold_total = GOLD[buyerPID]})
+		  				FireGameEvent('vamp_gold_changed', { player_ID = sellerPID, gold_total = GOLD[sellerPID]})
 
 		  				WOOD[buyerPID] = WOOD[buyerPID] + offers.sellAmount
 		  				FireGameEvent('vamp_wood_changed', { player_ID = buyerPID, wood_total = WOOD[buyerPID]})
@@ -170,14 +170,14 @@ function Trade:HandleChat( keys )
 		  	FireGameEvent('vamp_wood_changed', { player_ID = recieverID, wood_total = WOOD[recieverID]})
 			end
 
-			if sendResource == "gold" and PlayerResource:GetGold(senderID) < sendAmount then
+			if sendResource == "gold" and GOLD[senderID] < sendAmount then
 				FireGameEvent( 'custom_error_show', { player_ID = senderID, _error = "You need more gold" } )
 				return
 			elseif sendResource == "gold" then
-				PlayerResource:ModifyGold(senderID, -1 * sendAmount, true, 9)
-				PlayerResource:ModifyGold(recieverID, sendAmount, true, 9)
-				FireGameEvent('vamp_gold_changed', { player_ID = senderID, gold_total = PlayerResource:GetGold(senderID)})
-				FireGameEvent('vamp_gold_changed', { player_ID = recieverID, gold_total = PlayerResource:GetGold(recieverID)})
+				GOLD[senderID] = GOLD[senderID] - sendAmount
+				GOLD[recieverID] = GOLD[recieverID] + sendAmount
+				FireGameEvent('vamp_gold_changed', { player_ID = senderID, gold_total = GOLD[senderID]})
+				FireGameEvent('vamp_gold_changed', { player_ID = recieverID, gold_total = GOLD[recieverID]})
 			end
 		end
 	end

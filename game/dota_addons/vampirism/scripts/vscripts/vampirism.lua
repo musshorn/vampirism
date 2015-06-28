@@ -43,6 +43,7 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 200                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
+GOLD = {}
 WOOD = {}
 TOTAL_FOOD = {}
 CURRENT_FOOD = {}
@@ -73,7 +74,7 @@ for i = 0, 7 do
 end
 
 VAMPIRE_FEED = {}
-for i = 8, 9 do
+for i = 0, 9 do
 	VAMPIRE_FEED[i] = 0
 end
 
@@ -248,7 +249,26 @@ function GameMode:OnGameRulesStateChange(keys)
       if playerTeam == 2 then
         CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
       elseif playerTeam == 3 then
-        CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
+        local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
+        GOLD[i] = 1000000 --cheats on
+        WOOD[i] = 1000000 --cheats on
+        TOTAL_FOOD[i] = 10
+        CURRENT_FOOD[i] = 0
+        FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
+        FireGameEvent("vamp_wood_changed", {player_ID = i, wood_total = WOOD[i]})
+        FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
+        FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
+
+        --Next frame timer
+        Timers:CreateTimer(0.03, function ()
+          vampire:FindAbilityByName("vampire_init_hider"):OnUpgrade()
+          vampire:SetAbsOrigin(OutOfWorldVector)
+          vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
+          vampire:SetAbilityPoints(0)
+          VAMP_COUNT = VAMP_COUNT + 1
+          table.insert(VAMPIRES, vampire)
+          return nil
+        end)
       end
     end
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
@@ -272,8 +292,8 @@ function GameMode:OnNPCSpawned(keys)
     npc:FindAbilityByName('research_healing_vitality'):SetLevel(1)
     if playerID < 8 then 
       WOOD[playerID] = 10000000 --cheats, real is 50.
-      PlayerResource:SetGold(playerID, 0, false) --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, true)
-      PlayerResource:SetGold(playerID, 100000, true)
+      GOLD[playerID] = 0 --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, true)
+      GOLD[playerID] = 10000000
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -281,28 +301,11 @@ function GameMode:OnNPCSpawned(keys)
       HUMAN_COUNT = HUMAN_COUNT + 1
       npc:SetAbilityPoints(0)
       --npc:SetHasInventory(false) testing
-      FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
+      FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = GOLD[playerID]})
       FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
       FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
       FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
-    end
-  end
-
-  local newState = GameRules:State_Get()
-
-  if npc:GetName() == "npc_dota_hero_night_stalker" then
-  	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
-  		--Next frame timer
-  		Timers:CreateTimer(0.03, function ()
-  			npc:FindAbilityByName("vampire_init_hider"):OnUpgrade()
-  			npc:SetAbsOrigin(OutOfWorldVector)
-    		npc:FindAbilityByName("vampire_particles"):OnUpgrade()
-        npc:SetAbilityPoints(0)
-    		VAMP_COUNT = VAMP_COUNT + 1
-        table.insert(VAMPIRES, npc)
-    		return nil
-  		end)
     end
   end
 
@@ -631,16 +634,18 @@ function GameMode:OnEntityKilled( keys )
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
       outcome = 1 --dont forget to change this
-      if outcome <= largeProb then        
+      if outcome <= largeProb then
         local coin = CreateItem("item_large_coin", killerEntity, killerEntity)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
-        VAMPIRE_COINS[coin:GetEntityIndex()] = killerEntity:GetMainControllingPlayer()
+        print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
+        VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
+        print(VAMPIRE_COINS[coin:entindex()])
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(5) 
       elseif outcome <= smallProb then
         local coin = CreateItem("item_small_coin", killerEntity, killerEntity)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
-        VAMPIRE_COINS[coin:GetEntityIndex()] = killerEntity:GetMainControllingPlayer()
+        VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
         coin.player = killerEntity:GetMainControllingPlayer()
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(3)
@@ -701,6 +706,13 @@ function GameMode:OnEntityKilled( keys )
         end
       end
     end
+  end
+
+  -- Vampire killed a unit
+  if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS and killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
+    local vampPID = killerEntity:GetMainControllingPlayer()
+    GOLD[vampPID] = GOLD[vampPID] + killedUnit:GetGoldBounty()
+    FireGameEvent('vamp_gold_changed', {player_ID = vampPID, gold_total = GOLD[vampPID]})
   end
 
   -- If it's a building we need to remove the gridnav blocks
@@ -1060,8 +1072,8 @@ function GoldMineTimer()
       for k, mine in pairs(t4gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
-          local curGold = PlayerResource:GetGold(playerID)
-          PlayerResource:SetGold(playerID, curGold + 1, true) 
+          local curGold = GOLD[playerID]
+          GOLD[playerID] = GOLD[playerID] + 1
           FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
         end
       end      
@@ -1072,8 +1084,8 @@ function GoldMineTimer()
       for k, mine in pairs(t3gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer() 
-          local curGold = PlayerResource:GetGold(playerID)
-          PlayerResource:SetGold(playerID, curGold + 1, true)
+          local curGold = GOLD[playerID]
+          GOLD[playerID] = GOLD[playerID] + 1
           FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1}) 
         end
       end
@@ -1084,8 +1096,8 @@ function GoldMineTimer()
       for k, mine in pairs(t2gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
-          local curGold = PlayerResource:GetGold(playerID)
-          PlayerResource:SetGold(playerID, curGold + 1, true)
+          local curGold = GOLD[playerID]
+          GOLD[playerID] = GOLD[playerID] + 1
           FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
         end
       end
@@ -1096,8 +1108,8 @@ function GoldMineTimer()
       for k, mine in pairs(t1gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
-          local curGold = PlayerResource:GetGold(playerID)
-          PlayerResource:SetGold(playerID, curGold + 1, true)
+          local curGold = GOLD[playerID]
+          GOLD[playerID] = GOLD[playerID] + 1
           FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
         end
       end
@@ -1110,23 +1122,23 @@ function GoldMineTimer()
   end)
 end
 
---Runs every 15 seconds, checks wether vamps have sphere of doom
+--Runs every 15 seconds, checks whether vamps have sphere of doom
 function SphereTimer()
   local haveSphere = false
   Timers:CreateTimer(function()
-    for vamp in VAMPIRES do
-      if vamp:HasItemInInventory('item_sphere_of_doom') then
+    for k, v in pairs(VAMPIRES) do
+      if v:HasItemInInventory('item_sphere_of_doom') then
         haveSphere = true
       else
         haveSphere = false
       end
     end
 
-    for vamp in VAMPIRES do
+    for k, v in pairs(VAMPIRES) do
       if haveSphere then
-        vamp:SetBaseAgility(vamp:GetBaseAgility() +15)
-        vamp:SetBaseStrength(vamp:GetBaseStrength() +15)
-        vamp:SetBaseIntellect(vamp:GetBaseIntellect() +15)
+        v:SetBaseAgility(v:GetBaseAgility() +15)
+        v:SetBaseStrength(v:GetBaseStrength() +15)
+        v:SetBaseIntellect(v:GetBaseIntellect() +15)
       end
     end
     return 15

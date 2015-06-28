@@ -125,8 +125,8 @@ function build( keys )
     end
 
     if goldCost ~= nil then
-      PlayerResource:ModifyGold(pID, goldCost, true, 9)
-      FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
+      GOLD[pID] = GOLD[pID] + goldCost
+      FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
     end
 
   end)
@@ -167,7 +167,7 @@ function create_building_entity( keys )
   end
 
   if goldCost ~= nil then
-    if goldCost > PlayerResource:GetGold(pID) then
+    if goldCost > GOLD[pID] then
       FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "You need more gold" } )
     else
       goldOK = true
@@ -188,10 +188,10 @@ function create_building_entity( keys )
     end
 
     -- Deduct resources and start constructing
+    GOLD[pID] = GOLD[pID] - goldCost
     WOOD[pID] = WOOD[pID] - lumberCost
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    PlayerResource:SetGold(pID, PlayerResource:GetGold(pID) - goldCost, true)
-    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
+    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = GOLD[pID]})
 
     BuildingHelper:InitializeBuildingEntity(keys)
   end

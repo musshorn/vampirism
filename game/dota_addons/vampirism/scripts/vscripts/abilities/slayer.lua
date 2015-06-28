@@ -121,7 +121,7 @@ function SummonSlayer( keys )
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more wood" } )
     return
   end
-  if PlayerResource:GetGold(pID) < goldCost then
+  if GOLD[pID] < goldCost then
     caster:Stop()
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
     return
@@ -130,8 +130,8 @@ function SummonSlayer( keys )
   -- Checks passed, deduct the resources and start channeling
   WOOD[pID] = WOOD[pID] - lumberCost
   FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-  PlayerResource:ModifyGold(pID, -1 * goldCost, true, 9)
-  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})  
+  GOLD[pID] = GOLD[pID] - goldCost
+  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})  
 end
 
 function Refund( keys )
@@ -151,9 +151,9 @@ function Refund( keys )
 
   if HAS_SLAYER[pID] == nil then
     WOOD[pID] = WOOD[pID] + refundWood
+    GOLD[pID] = GOLD[pID] + refundGold
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    PlayerResource:ModifyGold(pID, refundGold, true, 9)
-    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)}) 
+    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]}) 
   end
 end
 

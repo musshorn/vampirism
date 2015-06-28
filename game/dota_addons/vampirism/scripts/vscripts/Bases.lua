@@ -60,8 +60,8 @@ function EnterBase( keys )
         end
 
         if goldCost ~= nil then
-          PlayerResource:ModifyGold(pID, goldCost, true, 9)
-          FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = PlayerResource:GetGold(pID)})
+          GOLD[pID] = GOLD[pID] + goldCost
+          FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
         end
 
         FireGameEvent( 'custom_error_show', { player_ID = pID, _error = name .. ' has claimed this base!' } )

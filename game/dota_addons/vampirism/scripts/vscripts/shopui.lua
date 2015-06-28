@@ -74,7 +74,7 @@ end
 
 function Purchase( itemname, buyer )
   local playerID = buyer:GetMainControllingPlayer()
-  local gold = PlayerResource:GetGold(playerID)
+  local gold = GOLD[playerID]
   local lumber = WOOD[playerID]
   local food = CURRENT_FOOD[playerID]
   local foodCap = TOTAL_FOOD[playerID]
@@ -126,8 +126,8 @@ function Purchase( itemname, buyer )
   				  buyer:AddItem(item)
   				  WOOD[playerID] = WOOD[playerID] - lumberCost
             CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + foodCost
-  				  PlayerResource:SetGold(playerID, gold - goldCost, true)
-  				  FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = PlayerResource:GetGold(playerID)})
+  				  GOLD[playerID] = GOLD[playerID] - goldCost
+  				  FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = GOLD[playerID]})
      			  FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
             FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
      			  FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = 0})
