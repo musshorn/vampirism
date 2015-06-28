@@ -62,7 +62,6 @@ function VenomOrb( keys )
 end
 
 function GhostRing( keys )
-	print('inGhostring')
 	local caster = keys.caster
 	local ability = keys.ability
 	local ghostRange = ability:GetLevelSpecialValueFor('range', 1)
@@ -77,8 +76,6 @@ function GhostRing( keys )
 	local interval = false
 	local casterTeam = caster:GetTeamNumber()
 	local particleDamageBuilding = "particles/units/heroes/hero_death_prophet/death_prophet_exorcism_attack_building_glows.vpcf"
-
-	print('specials', ghostRange,  ghostDamage, maxGhosts, ghostSpeed, ringCD, ghostInterval, abilityDamageType)
 
 	Timers:CreateTimer(function ()
       	local units = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, ghostRange, ability:GetAbilityTargetTeam(), DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
@@ -212,5 +209,8 @@ function HireUnit( keys )
 	-- initialize specific mercenary abilities
 	if mercName == 'merc_shade' then
 		merc:AddNewModifier(caster, nil, "modifier_invisible", {})
+	end
+	if mercName == 'merc_avernal' then
+		merc:FindAbilityByName('avernal_particles'):OnUpgrade()
 	end
 end

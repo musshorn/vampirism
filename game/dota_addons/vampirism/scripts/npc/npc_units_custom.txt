@@ -4995,7 +4995,6 @@
   //================================================================================= 
   // Avernal
   //=================================================================================
-
   "merc_avernal"
   {
     // General
@@ -5006,10 +5005,10 @@
     // Abilities
     //----------------------------------------------------------------
     
-    "Ability1"          ""     // Ability 1.
-    "Ability2"          ""      // Ability 2.
-    "Ability3"          ""      // Ability 3.
-    "Ability4"          ""      // Ability 4.
+    "Ability1"          "avernal_hp_growth"                 // Ability 1.
+    "Ability2"          "avernal_dmg_growth"                 // Ability 2.
+    "Ability3"          "upgrade_to_invisible_avernal"      // Ability 3.
+    "Ability4"          "upgrade_to_ranged_avernal"         // Ability 4.
     "Ability5"          ""      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
@@ -5059,7 +5058,7 @@
 
     // Team
     //----------------------------------------------------------------
-    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_SIEGE"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
     
     // Vision

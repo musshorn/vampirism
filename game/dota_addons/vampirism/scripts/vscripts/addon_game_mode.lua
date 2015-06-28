@@ -22,6 +22,7 @@ require('shopui')
 require('trade')
 require('notifications')
 require('Bases')
+require('units.avernal')
 
 function Precache( context )
 		--[[
@@ -112,6 +113,7 @@ function Precache( context )
 		PrecacheModel("models/heroes/venomancer/venomancer_ward.vmdl", context)
 		PrecacheModel("models/items/death_prophet/hecate_ghosts/hecate_ghosts.vmdl", context)
 		PrecacheModel("models/heroes/nevermore/nevermore.vmdl", context) 
+		PrecacheModel("models/heroes/warlock/warlock_demon.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

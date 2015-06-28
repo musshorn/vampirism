@@ -65,6 +65,7 @@ VAMPIRES = {} -- table of all created vampires
 ABILITY_HOLDERS = {} --[[table containing units which hold extra abilities when another unit does not have enough slots to store them all.
                           Remember that in order to be used with buildUI, all abilities need to exist in abilities_custom]]
 SHOPS = {} --table of all shops, by entindex.
+AVERNALS = {} --table of all avernals, by playerID
 
 Bases = {}     -- Access by owner pID, has int value baseID and a table of shared builders pIDs
 Bases.Owners = {}
@@ -76,6 +77,7 @@ end
 VAMPIRE_FEED = {}
 for i = 0, 9 do
 	VAMPIRE_FEED[i] = 0
+  AVERNALS[i] = {}
 end
 
 -- Fill this table up with the required XP per level if you want to change it
@@ -480,6 +482,17 @@ function GameMode:OnPlayerLevelUp(keys)
 
   local player = EntIndexToHScript(keys.player)
   local level = keys.level
+  local playerID = player:GetPlayerID()
+
+  if PlayerResource:GetTeam(playerID) == DOTA_TEAM_BADGUYS then
+    for k, v in pairs(AVERNALS[playerID]) do
+      local avernal = EntIndexToHScript(v)
+
+      avernal:SetMaxHealth(avernal:GetMaxHealth() + 50)
+      avernal:SetBaseDamageMin(avernal:GetBaseDamageMin() + 10)
+      avernal:SetBaseDamageMax(avernal:GetBaseDamageMax() + 10)
+    end
+  end
 end
 
 -- A player last hit a creep, a tower, or a hero

@@ -9,29 +9,6 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "BaseClass" "ability_datadriven"
     "AbilityTextureName"  ""
-
-    "AbilitySpecial"
-    {
-      "01"
-      {
-        "var_type"  "FIELD_INTEGER"
-        "health_radius" "1200"
-      }
-
-      "02"
-      {
-        "var_type"  "FIELD_FLOAT"
-        "health_regen_amount" "1"
-      }
-
-      "03"
-      {
-        "var_type"  "FIELD_FLOAT"
-        "mana_regen_amount" "1"
-      }
-    }
-
-
     "OnSpellStart"
     {
       "ApplyModifier"
@@ -44,31 +21,13 @@
           "Teams" "DOTA_UNIT_TARGET_TEAM_BOTH"
           "Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
         }
-      }
-      "ApplyModifier"
-      {
-        "ModifierName"  "modifier_hider"
-        "Target"
-        {
-          "Center"  "CASTER"
-        }
+
       }
 
     }
 
     "Modifiers"
     {
-      "modifier_hider"
-      {
-        "IsHidden"  "1"
-        "Passive"   "1"
-        "States"
-        {
-          "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
-          "MODIFIER_STATE_NO_HEALTH_BAR"  "MODIFIER_STATE_VALUE_ENABLED"
-          "MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
-        }
-      }
       "fx_heal_aura"
       {
         "Passive" "1"
@@ -113,7 +72,31 @@
         }
 
       }
+
     }
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "health_radius" "450"
+      }
+
+      "02"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "health_regen_amount" "22.0"
+      }
+
+      "03"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "mana_regen_amount" "8.0"
+      }
+
+    }
+
   }
 
   "vamp_farsight"
@@ -5956,6 +5939,10 @@
     "AbilityManaCost"       "0"
   }
 
+  //================================================================================= 
+  // Ghost phasing
+  //=================================================================================
+
   "ghost_phasing"
   {
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -5995,6 +5982,88 @@
       {
         "ModifierName"  "modifier_ghost_phasing"
         "Target"  "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Avernal - Vampiric Constitution (some functionality in vampirism.lua:487)
+  //=================================================================================
+  "avernal_hp_growth"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"            "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "0"
+
+    "Modifiers"
+    {
+      "modifier_avernal_constitution"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "AddAvernal"
+          }
+        }
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "RemoveAvernal"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Avernal - Vampiric Strength (placeholder for ui purposes only.)
+  //=================================================================================
+  "avernal_hp_growth"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"             "ability_datadriven"
+    "AbilityTextureName"    "cancel"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+    "MaxLevel"                "1"
+  }
+
+  //================================================================================= /
+  // Avernal - Upgrade to Invisible Avernal
+  //================================================================================= /
+  "upgrade_to_invisible_avernal"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+        "Function"    "UpgradeAvernal"
+        "TARGET"      "CASTER"
+        "UpgradeTo"   "avernal_invisible"
+        "GoldCost"    "0"
+        "WoodCost"    "0"
+        "FoodCost"    "0"
       }
     }
   }
