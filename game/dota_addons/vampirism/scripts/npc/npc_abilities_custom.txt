@@ -21,13 +21,13 @@
       "02"
       {
         "var_type"  "FIELD_FLOAT"
-        "health_regen_amount" "22.0"
+        "health_regen_amount" "1"
       }
 
       "03"
       {
         "var_type"  "FIELD_FLOAT"
-        "mana_regen_amount" "8.0"
+        "mana_regen_amount" "1"
       }
     }
 
