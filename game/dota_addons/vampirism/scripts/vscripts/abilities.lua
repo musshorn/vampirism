@@ -285,7 +285,7 @@ function VerifyAttacker( keys )
   local targetPID = target:GetMainControllingPlayer()
 
   -- if you're attacking a unit that's not yours but in your base then its ok, otherwise stop the attacker
-  if attackerPID < 8 then
+  if attacker:GetUnitName() ~= "npc_dota_hero_night_stalker" then
     if attackerPID ~= targetPID then
       if  Bases.Owners[targetPID] ~= nil then
         if target.inBase ~=  Bases.Owners[targetPID].BaseID then
