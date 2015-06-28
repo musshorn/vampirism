@@ -119,6 +119,8 @@ function GhostRing( keys )
 
 		local point = target:GetAbsOrigin()
 		ghost:OnPhysicsFrame(function ( ghost )
+
+
 			-- Move the unit orientation to adjust the particle
 			ghost:SetForwardVector( ( ghost:GetPhysicsVelocity() ):Normalized() )
 			ghost.current_target = target
@@ -126,7 +128,22 @@ function GhostRing( keys )
 	        	ghost:SetPhysicsVelocity(Vector(0,0,0))
 	        	ghost:OnPhysicsFrame(nil)
 	        	ghost:ForceKill(false)
+	        	ghost:Destroy()
+	        	Timers:CreateTimer(2, function ()
+	        		ghostStock = ghostStock + 1
+	        	end)
 			end
+
+			if ghost.current_target == nil or ghost.current_target:IsInvulnerable() == true then
+				ghost:SetPhysicsVelocity(Vector(0,0,0))
+	        	ghost:OnPhysicsFrame(nil)
+	        	ghost:ForceKill(false)
+	        	ghost:Destroy()
+	        	Timers:CreateTimer(2, function ()
+	        		ghostStock = ghostStock + 1
+	        	end)
+	        end
+
 			local source = caster:GetAbsOrigin()
 			local current_position = ghost:GetAbsOrigin()
 			local diff = point - ghost:GetAbsOrigin()
@@ -169,15 +186,6 @@ function GhostRing( keys )
 					ParticleManager:SetParticleControl(particle, 0, ghost.current_target:GetAbsOrigin())
 					ParticleManager:SetParticleControlEnt(particle, 1, ghost.current_target, PATTACH_POINT_FOLLOW, "attach_hitloc", ghost.current_target:GetAbsOrigin(), true)
 					ghost:SetPhysicsVelocity(Vector(0,0,0))
-	        		ghost:OnPhysicsFrame(nil)
-	        		ghost:ForceKill(false)
-	        		ghost:Destroy()
-
-	        		Timers:CreateTimer(2, function ()
-	        			ghostStock = ghostStock + 1
-	        		end)
-	        	else
-	        		ghost:SetPhysicsVelocity(Vector(0,0,0))
 	        		ghost:OnPhysicsFrame(nil)
 	        		ghost:ForceKill(false)
 	        		ghost:Destroy()
