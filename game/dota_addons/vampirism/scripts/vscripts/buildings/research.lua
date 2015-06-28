@@ -127,6 +127,7 @@ end
 
 function ImprovedWorkerMotivation(keys)
   local caster = keys.caster
+  local ability = keys.ability
   local pID = caster:GetMainControllingPlayer()
   
   -- Find all units with "MaximumLumber" not nil, these are all the harvesters
