@@ -158,6 +158,7 @@ function GemQuality(keys)
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
   local level = keys.Level
+  local ability = keys.ability
 
   -- Find all units with "AffectedByGemUpgrades" not nil, these are all the walls
   for key, value in pairs(UNIT_KV[pID]) do
