@@ -211,6 +211,6 @@ function HireUnit( keys )
 		merc:AddNewModifier(caster, nil, "modifier_invisible", {})
 	end
 	if mercName == 'merc_avernal' then
-		merc:FindAbilityByName('avernal_particles'):OnUpgrade()
+		merc:FindAbilityByName('avernal_hp_growth'):OnUpgrade()
 	end
 end

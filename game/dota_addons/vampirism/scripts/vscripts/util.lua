@@ -15,7 +15,6 @@
     return copy
 end]]
 
--- space_jam's find nearest unit.
 
 -- Finds the unit nearest from another unit, within a given range.
 function FindNearestUnit(sFindUnit, hFromUnit, fRange)
@@ -28,9 +27,7 @@ function FindNearestUnit(sFindUnit, hFromUnit, fRange)
 			end
 		end
 	end
-
 	return nearestEnt --returns the found unit (nil if not found)
-
 end
 
 -- Remove all abilities on a unit.

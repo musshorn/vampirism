@@ -75,7 +75,7 @@ for i = 0, 7 do
 end
 
 VAMPIRE_FEED = {}
-for i = 0, 9 do
+for i = -1, 9 do
 	VAMPIRE_FEED[i] = 0
   AVERNALS[i] = {}
 end
@@ -268,7 +268,8 @@ function GameMode:OnGameRulesStateChange(keys)
           vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
           vampire:SetAbilityPoints(0)
           VAMP_COUNT = VAMP_COUNT + 1
-          table.insert(VAMPIRES, vampire)
+          VAMPIRES[i] = vampire
+          VAMPIRES[-1] = vampire --nice game
           return nil
         end)
       end
@@ -484,14 +485,12 @@ function GameMode:OnPlayerLevelUp(keys)
   local level = keys.level
   local playerID = player:GetPlayerID()
 
-  if PlayerResource:GetTeam(playerID) == DOTA_TEAM_BADGUYS then
-    for k, v in pairs(AVERNALS[playerID]) do
-      local avernal = EntIndexToHScript(v)
-
-      avernal:SetMaxHealth(avernal:GetMaxHealth() + 50)
-      avernal:SetBaseDamageMin(avernal:GetBaseDamageMin() + 10)
-      avernal:SetBaseDamageMax(avernal:GetBaseDamageMax() + 10)
-    end
+  for k, v in pairs(AVERNALS[playerID]) do
+    Timers:CreateTimer(0.03, function ()
+      v:SetMaxHealth(v:GetMaxHealth() + 50)
+      v:SetBaseDamageMin(v:GetBaseDamageMin() + 10)
+      v:SetBaseDamageMax(v:GetBaseDamageMax() + 10)
+    end)
   end
 end
 

@@ -6004,6 +6004,15 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"       "0"
 
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_avernal_constitution"
+        "Target"        "CASTER"
+      }
+    }
+
     "Modifiers"
     {
       "modifier_avernal_constitution"
@@ -6033,7 +6042,7 @@
   //================================================================================= 
   // Avernal - Vampiric Strength (placeholder for ui purposes only.)
   //=================================================================================
-  "avernal_hp_growth"
+  "avernal_dmg_growth"
   {
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "BaseClass"             "ability_datadriven"
@@ -6060,13 +6069,48 @@
         "ScriptFile"  "scripts/vscripts/units/avernal.lua"
         "Function"    "UpgradeAvernal"
         "TARGET"      "CASTER"
-        "UpgradeTo"   "avernal_invisible"
+        "UpgradeTo"   "merc_avernal_invisible"
         "GoldCost"    "0"
         "WoodCost"    "0"
         "FoodCost"    "0"
       }
     }
   }
+
+  //================================================================================= /
+  // Invisible Avernal invisibility
+  //================================================================================= /
+  "avernal_invisibility"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"       "ability_datadriven"
+    
+    "Modifiers"
+    {
+      "modifier_avernal_invis"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "AvernalInvis"
+          }
+        }
+        "OnAttackStart"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "AvernalInvis"
+          }
+        }
+      }
+    }
+  }
+
 
   //================================================================================= 
   // Vampire: Particle Effects

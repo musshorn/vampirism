@@ -110,7 +110,7 @@
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"1"
 			"index"			"6"
 		}
 		"hire_avernal_meteor"		
