@@ -222,35 +222,38 @@ function Repair( keys )
   if not ability:IsChanneling() then
     if target:FindAbilityByName("is_a_building") ~= nil then
       if UNIT_KV[pID][targetName].RepairTime ~= nil then
-
-        local maxHP = target:GetMaxHealth()
-        local hpPerSec = maxHP / (UNIT_KV[pID][targetName].RepairTime * repairTimeRatio)
-        local repairTickRate = 0.03  -- No idea what it actually is, Just going to adjust HP/Sec to suit
-        local HPPerTick = repairTickRate * hpPerSec
-        local smallHPPerTick = HPPerTick - math.floor(HPPerTick)
-        HPPerTick = math.floor(HPPerTick)
-        local smallHPAdjustment = 0
-
-        local timerName = DoUniqueString("Repair")
-        Timers:CreateTimer(timerName,{
-          endtime = 0.03,
-          callback = function ()
-            if target:GetHealth() < target:GetMaxHealth() then
-              target:SetHealth(target:GetHealth() + HPPerTick)
-              smallHPAdjustment = smallHPAdjustment + smallHPPerTick
-              if smallHPAdjustment > 1 then
-                target:SetHealth(target:GetHealth() + 1)
-                smallHPAdjustment = smallHPAdjustment - 1
+        if not target:HasModifier('modifier_freezing_breath_effect') then
+          local maxHP = target:GetMaxHealth()
+          local hpPerSec = maxHP / (UNIT_KV[pID][targetName].RepairTime * repairTimeRatio)
+          local repairTickRate = 0.03  -- No idea what it actually is, Just going to adjust HP/Sec to suit
+          local HPPerTick = repairTickRate * hpPerSec
+          local smallHPPerTick = HPPerTick - math.floor(HPPerTick)
+          HPPerTick = math.floor(HPPerTick)
+          local smallHPAdjustment = 0
+  
+          local timerName = DoUniqueString("Repair")
+          Timers:CreateTimer(timerName,{
+            endtime = 0.03,
+            callback = function ()
+              if target:GetHealth() < target:GetMaxHealth() then
+                target:SetHealth(target:GetHealth() + HPPerTick)
+                smallHPAdjustment = smallHPAdjustment + smallHPPerTick
+                if smallHPAdjustment > 1 then
+                  target:SetHealth(target:GetHealth() + 1)
+                  smallHPAdjustment = smallHPAdjustment - 1
+                end
+              else
+                caster:Stop()
+                return nil
               end
-            else
-              caster:Stop()
-              return nil
+              return 0.03
             end
-            return 0.03
-          end
-        })
-        target.RepairTimer = timerName
-
+          })
+          target.RepairTimer = timerName
+        else
+          FireGameEvent('custom_error_show', {player_ID = pID, _error = "Can't repair a frozen building!"})
+          caster:Hold()
+        end
       end
     end
   end
