@@ -6099,7 +6099,22 @@
             "Function"    "AvernalInvis"
           }
         }
-        "OnAttackStart"
+        "OnAttackLanded"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_avernal_invis_fade"
+            "Target"        "CASTER"
+            "Duration"      "2"
+          }
+        }
+      }
+
+      "modifier_avernal_invis_fade"
+      {
+        "Passive"     "1"
+        "IsHidden"    "1"
+        "OnDestroy"
         {
           "RunScript"
           {
@@ -6110,7 +6125,6 @@
       }
     }
   }
-
 
   //================================================================================= 
   // Vampire: Particle Effects

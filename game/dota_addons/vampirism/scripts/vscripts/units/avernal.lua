@@ -65,7 +65,5 @@ function UpgradeAvernal(keys)
 end
 
 function AvernalInvis( keys )
-	Timers:CreateTimer(2, function ()
-		keys.caster:AddNewModifier(keys.caster, nil, "modifier_invisibility", {})
-	end)
+	keys.caster:AddNewModifier(keys.caster, nil, "modifier_invisible", {})
 end
