@@ -13,10 +13,12 @@ function AddAvernal( keys )
 		local hpBonus = vampLevel * 50
 		caster:SetMaxHealth(baseHP + hpBonus)
 		caster:SetHealth(caster:GetMaxHealth())
-	
-		local dmgBonus = vampLevel * 10
-		caster:SetBaseDamageMin(caster:GetBaseDamageMin() + dmgBonus)
-		caster:SetBaseDamageMax(caster:GetBaseDamageMax() + dmgBonus)
+		
+		if caster:HasAbility('avernal_dmg_growth') then
+			local dmgBonus = vampLevel * 10
+			caster:SetBaseDamageMin(caster:GetBaseDamageMin() + dmgBonus)
+			caster:SetBaseDamageMax(caster:GetBaseDamageMax() + dmgBonus)
+		end
 	end)
 end
 
@@ -66,4 +68,14 @@ end
 
 function AvernalInvis( keys )
 	keys.caster:AddNewModifier(keys.caster, nil, "modifier_invisible", {})
+end
+
+-- Stops avernal from attacking non-buildings
+function AvernalRangedAttack( keys )
+	local caster = keys.caster
+	local target = keys.target
+
+	if not target:HasAbility('is_a_building') then
+		caster:Interrupt()
+	end
 end

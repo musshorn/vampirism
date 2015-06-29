@@ -248,9 +248,9 @@ function GameMode:OnGameRulesStateChange(keys)
       })
     for i = 0, 9 do
       local playerTeam = PlayerResource:GetTeam(i)
-      if playerTeam == 3 then
+      if playerTeam == 2 then
         CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
-      elseif playerTeam == 2 then
+      elseif playerTeam == 3 then
         local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
         GOLD[i] = 1000000 --cheats on
         WOOD[i] = 1000000 --cheats on
@@ -488,8 +488,10 @@ function GameMode:OnPlayerLevelUp(keys)
   for k, v in pairs(AVERNALS[playerID]) do
     Timers:CreateTimer(0.03, function ()
       v:SetMaxHealth(v:GetMaxHealth() + 50)
-      v:SetBaseDamageMin(v:GetBaseDamageMin() + 10)
-      v:SetBaseDamageMax(v:GetBaseDamageMax() + 10)
+      if v:HasAbility('avernal_dmg_growth') then
+        v:SetBaseDamageMin(v:GetBaseDamageMin() + 10)
+        v:SetBaseDamageMax(v:GetBaseDamageMax() + 10)
+      end
     end)
   end
 
@@ -497,8 +499,10 @@ function GameMode:OnPlayerLevelUp(keys)
   for k, v in pairs(AVERNALS[-1]) do
     Timers:CreateTimer(0.03, function ()
       v:SetMaxHealth(v:GetMaxHealth() + 50)
-      v:SetBaseDamageMin(v:GetBaseDamageMin() + 10)
-      v:SetBaseDamageMax(v:GetBaseDamageMax() + 10)
+      if v:HasAbility('avernal_dmg_growth') then
+        v:SetBaseDamageMin(v:GetBaseDamageMin() + 10)
+        v:SetBaseDamageMax(v:GetBaseDamageMax() + 10)
+      end
     end)
   end
 end

@@ -6040,7 +6040,7 @@
   }
 
   //================================================================================= 
-  // Avernal - Vampiric Strength (placeholder for ui purposes only.)
+  // Avernal - Vampiric Strength
   //=================================================================================
   "avernal_dmg_growth"
   {
@@ -6120,6 +6120,56 @@
           {
             "ScriptFile"  "scripts/vscripts/units/avernal.lua"
             "Function"    "AvernalInvis"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Avernal - Upgrade to Ranged Avernal
+  //================================================================================= /
+  "upgrade_to_ranged_avernal"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+        "Function"    "UpgradeAvernal"
+        "TARGET"      "CASTER"
+        "UpgradeTo"   "merc_avernal_ranged"
+        "GoldCost"    "0"
+        "WoodCost"    "0"
+        "FoodCost"    "0"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Ranged Avernal Attack (stops from attacking non-buildings)
+  //================================================================================= /
+  "avernal_ranged_attack"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"       "ability_datadriven"
+    
+    "Modifiers"
+    {
+      "modifier_avernal_ranged_attack"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "OnAttackStart"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "AvernalRangedAttack"
+            "Target"      "CASTER"
           }
         }
       }
