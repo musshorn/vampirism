@@ -64,6 +64,8 @@ function UpgradeAvernal(keys)
 		newUnit:SetHealth(currentHP)
 		return nil
 	end)
+	GOLD[playerID] = GOLD[playerID] - goldCost
+	FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
 end
 
 function AvernalInvis( keys )
@@ -78,4 +80,48 @@ function AvernalRangedAttack( keys )
 	if not target:HasAbility('is_a_building') then
 		caster:Interrupt()
 	end
+end
+
+-- Disables HP regen on wall towers and gold mines for 5 seconds.
+function CorruptingBreath( keys )
+	local caster = keys.caster
+	local target = keys.target
+
+	local targetName = target:GetUnitName()
+
+	if string.find(targetName, "tower_wall") ~= nil or string.find(targetName, "gold_mine") then
+		local hpRegen = target:GetHealthRegen()
+		target:SetBaseHealthRegen(0)
+		Timers:CreateTimer(5, function ()
+			target:SetBaseHealthRegen(hpRegen)
+		end)
+	end
+end
+
+function FreezingBreath( keys )
+	local caster = keys.caster
+	local ability = keys.ability
+	local target = keys.target
+
+	if target:HasAbility('is_a_building') then
+		ability:ApplyDataDrivenModifier(caster, target, 'modifier_freezing_breath_effect', {duration = 3})
+	end
+end
+
+function AvernalParticles( keys )
+	local caster = keys.caster
+
+	local aFire =  ParticleManager:CreateParticle("particles/avernal/avernal_ambient.vpcf", PATTACH_POINT_FOLLOW, caster)
+	ParticleManager:SetParticleControlEnt(aFire, 0, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 1, caster, PATTACH_POINT_FOLLOW, "attach_mane1", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 2, caster, PATTACH_POINT_FOLLOW, "attach_mane2", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 3, caster, PATTACH_POINT_FOLLOW, "attach_mane3", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 4, caster, PATTACH_POINT_FOLLOW, "attach_mane4", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 5, caster, PATTACH_POINT_FOLLOW, "attach_mane5", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 6, caster, PATTACH_POINT_FOLLOW, "attach_mane6", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 7, caster, PATTACH_POINT_FOLLOW, "attach_mane7", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 8, caster, PATTACH_POINT_FOLLOW, "attach_mane8", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 10, caster, PATTACH_POINT_FOLLOW, "attach_hand_r", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 11, caster, PATTACH_POINT_FOLLOW, "attach_hand_l", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(aFire, 12, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", caster:GetAbsOrigin(), true)
 end

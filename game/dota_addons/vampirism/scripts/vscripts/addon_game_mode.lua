@@ -58,7 +58,10 @@ function Precache( context )
 		PrecacheResource("particle", "particles/units/heroes/hero_abaddon/abaddon_death_coil.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_death_prophet/death_prophet_exorcism_attack_building_glows.vpcf", context)
 		PrecacheResource("particle", "particles/base_attacks/ranged_siege_bad.vpcf", context)
-		
+		PrecacheResource("particle", "particles/econ/items/necrolyte/necronub_base_attack/necrolyte_base_attack_ka.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_winter_wyvern/winter_wyvern_arctic_attack.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf", context) 
+
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
 		--PrecacheResource("model_folder", "particles/heroes/antimage", context)
@@ -116,6 +119,8 @@ function Precache( context )
 		PrecacheModel("models/heroes/nevermore/nevermore.vmdl", context) 
 		PrecacheModel("models/heroes/warlock/warlock_demon.vmdl", context)
 		PrecacheModel("models/items/warlock/archivist_golem/archivist_golem.vmdl", context)
+		PrecacheModel("models/items/warlock/golem/ahmhedoq/ahmhedoq.vmdl", context)
+		PrecacheModel("models/items/warlock/golem/obsidian_golem/obsidian_golem.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

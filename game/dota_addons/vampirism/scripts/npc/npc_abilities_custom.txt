@@ -45,11 +45,8 @@
               "01"  "%health_radius 0 0"
               "02"  "0 0 -200"
             }
-
           }
-
         }
-
       }
 
       "aura_health_regen"
@@ -6070,7 +6067,7 @@
         "Function"    "UpgradeAvernal"
         "TARGET"      "CASTER"
         "UpgradeTo"   "merc_avernal_invisible"
-        "GoldCost"    "0"
+        "GoldCost"    "10"
         "WoodCost"    "0"
         "FoodCost"    "0"
       }
@@ -6142,7 +6139,7 @@
         "Function"    "UpgradeAvernal"
         "TARGET"      "CASTER"
         "UpgradeTo"   "merc_avernal_ranged"
-        "GoldCost"    "0"
+        "GoldCost"    "10"
         "WoodCost"    "0"
         "FoodCost"    "0"
       }
@@ -6175,6 +6172,150 @@
       }
     }
   }
+
+  //================================================================================= /
+  // Ranged Avernal - Upgrade to Corrupted Avernal
+  //================================================================================= /
+  "upgrade_to_corrupted_avernal"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+        "Function"    "UpgradeAvernal"
+        "TARGET"      "CASTER"
+        "UpgradeTo"   "merc_avernal_corrupted"
+        "GoldCost"    "20"
+        "WoodCost"    "0"
+        "FoodCost"    "0"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Ranged Avernal - Upgrade to Frozen Avernal
+  //================================================================================= /
+  "upgrade_to_frozen_avernal"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+        "Function"    "UpgradeAvernal"
+        "TARGET"      "CASTER"
+        "UpgradeTo"   "merc_avernal_frozen"
+        "GoldCost"    "40"
+        "WoodCost"    "0"
+        "FoodCost"    "0"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Corrupting Breath
+  //================================================================================= /
+  "avernal_corrupting_breath"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"       "ability_datadriven"
+    
+    "Modifiers"
+    {
+      "modifier_avernal_corrupting_breath"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "OnAttackLanded"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "CorruptingBreath"
+            "Target"      "CASTER"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Freezing Breath
+  //================================================================================= /
+  "avernal_freezing_breath"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"       "ability_datadriven"
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf"
+    }
+    
+    "Modifiers"
+    {
+      "modifier_avernal_freezing_breath"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "OnAttackLanded"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "FreezingBreath"
+            "Target"      "CASTER"
+          }
+        }
+      }
+      "modifier_freezing_breath_effect"
+      {
+        "Passive"       "1"
+        "IsHidden"      "0"
+        "EffectName"        "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf"
+        "EffectAttatchType" "follow_origin"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Avernal Particles - take 2
+  //================================================================================= /
+  "avernal_particles"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass"       "ability_datadriven"
+
+    "precache"
+    {
+      "particle"  "particles/avernal/avernal_ambient.vpcf"
+    }
+    
+    "Modifiers"
+    {
+      "modifier_avernal_particles"
+      {
+        "Passive"       "1"
+        "IsHidden"      "0"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "AvernalParticles"
+          }
+        }
+      }
+    }
+  }
+
 
   //================================================================================= 
   // Vampire: Particle Effects
