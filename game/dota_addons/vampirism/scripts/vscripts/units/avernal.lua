@@ -1,9 +1,7 @@
 function AddAvernal( keys )
-	print('addavernal')
 	local caster = keys.caster
 	local casterIndex = caster:entindex()
 	local playerID = caster:GetMainControllingPlayer()
-	print('addavernal', playerID)
 	AVERNALS[playerID][casterIndex] = caster
 
 	-- Add hp, damage based off vampire's level. Needs frameskip.
@@ -78,7 +76,17 @@ function AvernalRangedAttack( keys )
 	local target = keys.target
 
 	if not target:HasAbility('is_a_building') then
-		caster:Interrupt()
+		caster:AddNewModifier(caster, ability, 'modifier_disarmed', {duration = 0.1}
+	end
+end
+
+-- Stops avernal from attacking non-harvesters
+function AvernalMeteorAttack( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+	if not target:HasAbility('harvest_channel') then
+		caster:AddNewModifier(caster, ability, 'modifier_disarmed', {duration = 0.1})
 	end
 end
 
@@ -151,5 +159,17 @@ function AvernalParticles( keys )
 		ParticleManager:SetParticleControlEnt(aFire, 2, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", casterPos, true)
 		ParticleManager:SetParticleControlEnt(aFire, 5, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", casterPos, true)
 		ParticleManager:SetParticleControlEnt(aFire, 12, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", casterPos, true)
+	end
+	if caster:GetUnitName() == 'merc_avernal_meteor' then
+		local aFire =  ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_egg_glow.vpcf", PATTACH_POINT_FOLLOW, caster)
+		local casterPos = caster:GetAbsOrigin()
+		ParticleManager:SetParticleControlEnt(aFire, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 3, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", casterPos, true)
+		local bFire =  ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ground_ring_energy.vpcf", PATTACH_POINT_FOLLOW, caster)
+		ParticleManager:SetParticleControlEnt(bFire, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", casterPos, true)
+		local cFire =  ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_egg_lava.vpcf", PATTACH_POINT_FOLLOW, caster)
+		ParticleManager:SetParticleControlEnt(cFire, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", casterPos, true)
+		local dFire =  ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_egg_steam.vpcf", PATTACH_POINT_FOLLOW, caster)
+		ParticleManager:SetParticleControlEnt(dFire, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", casterPos, true)
 	end
 end

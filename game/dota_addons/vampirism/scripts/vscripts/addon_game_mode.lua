@@ -63,6 +63,11 @@ function Precache( context )
 		PrecacheResource("particle", "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_warlock/golem_ambient.vpcf", context)
 		PrecacheResource("particle", "particles/econ/items/warlock/warlock_golem_obsidian/golem_ambient_obsidian.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_glow.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ground_ring_energy.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_lava.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_steam.vpcf", context)
+		PrecacheResource("particle", "particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_fire_arcana.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
@@ -123,6 +128,7 @@ function Precache( context )
 		PrecacheModel("models/items/warlock/archivist_golem/archivist_golem.vmdl", context)
 		PrecacheModel("models/items/warlock/golem/ahmhedoq/ahmhedoq.vmdl", context)
 		PrecacheModel("models/items/warlock/golem/obsidian_golem/obsidian_golem.vmdl", context)
+		PrecacheModel("models/phoenix_egg_reference.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

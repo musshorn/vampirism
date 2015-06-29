@@ -6174,6 +6174,33 @@
   }
 
   //================================================================================= /
+  // Meteor Avernal Attack (attacks only harvesters)
+  //================================================================================= /
+  "avernal_meteor_attack"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"       "ability_datadriven"
+    
+    "Modifiers"
+    {
+      "modifier_avernal_meteor_attack"
+      {
+        "Passive"       "1"
+        "IsHidden"      "0"
+        "OnAttackStart"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "AvernalMeteorAttack"
+            "Target"      "CASTER"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
   // Ranged Avernal - Upgrade to Corrupted Avernal
   //================================================================================= /
   "upgrade_to_corrupted_avernal"

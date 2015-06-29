@@ -699,7 +699,6 @@ function GameMode:OnEntityKilled( keys )
     FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Dead"})
   end
 
-
   -- If the killed unit increased the players food cap then it needs to decrease when it dies
   if UNIT_KV[playerID] ~= nil then
     if UNIT_KV[playerID][unitName] ~= nil then
