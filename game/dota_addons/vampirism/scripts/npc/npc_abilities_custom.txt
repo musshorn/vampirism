@@ -2398,7 +2398,7 @@
       "modifier_healing_vitality"
       {
         "Passive"       "1"
-        "IsHidden"      "0"
+        "IsHidden"      "1"
 
         "OnCreated"
         {
@@ -6239,7 +6239,27 @@
           {
             "ScriptFile"  "scripts/vscripts/units/avernal.lua"
             "Function"    "CorruptingBreath"
-            "Target"      "CASTER"
+          }
+        }
+      }
+      "modifier_corrupting_effect"
+      {
+        "IsBuff"    "0"
+        "Duration"  "5"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "ApplyCorrupting"
+          }
+        }
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "Function"    "RemoveCorrupting"
           }
         }
       }
@@ -6286,24 +6306,19 @@
   }
 
   //================================================================================= /
-  // Avernal Particles - take 2
+  // Avernal Particles
   //================================================================================= /
   "avernal_particles"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "BaseClass"       "ability_datadriven"
-
-    "precache"
-    {
-      "particle"  "particles/avernal/avernal_ambient.vpcf"
-    }
     
     "Modifiers"
     {
       "modifier_avernal_particles"
       {
         "Passive"       "1"
-        "IsHidden"      "0"
+        "IsHidden"      "1"
         "OnCreated"
         {
           "RunScript"

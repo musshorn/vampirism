@@ -60,7 +60,9 @@ function Precache( context )
 		PrecacheResource("particle", "particles/base_attacks/ranged_siege_bad.vpcf", context)
 		PrecacheResource("particle", "particles/econ/items/necrolyte/necronub_base_attack/necrolyte_base_attack_ka.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_winter_wyvern/winter_wyvern_arctic_attack.vpcf", context)
-		PrecacheResource("particle", "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf", context) 
+		PrecacheResource("particle", "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_warlock/golem_ambient.vpcf", context)
+		PrecacheResource("particle", "particles/econ/items/warlock/warlock_golem_obsidian/golem_ambient_obsidian.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models

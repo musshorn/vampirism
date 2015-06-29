@@ -26,6 +26,7 @@
     "ModelScale"        "0.5"
     "RingRadius"        "40"
     "StatusHealth"        "600"
+    "StatusHealthRegen"        "10"
     "AttributeBaseStrength"   "0"
     "StatusManaRegen"     "0.5"
     "AbilityLayout"       "4"

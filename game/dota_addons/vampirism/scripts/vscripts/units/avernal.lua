@@ -82,20 +82,36 @@ function AvernalRangedAttack( keys )
 	end
 end
 
--- Disables HP regen on wall towers and gold mines for 5 seconds.
+-- Check whether the unit should be effected by corruption.
 function CorruptingBreath( keys )
 	local caster = keys.caster
 	local target = keys.target
+	local ability = keys.ability
 
 	local targetName = target:GetUnitName()
 
 	if string.find(targetName, "tower_wall") ~= nil or string.find(targetName, "gold_mine") then
-		local hpRegen = target:GetHealthRegen()
-		target:SetBaseHealthRegen(0)
-		Timers:CreateTimer(5, function ()
-			target:SetBaseHealthRegen(hpRegen)
-		end)
+		target:ApplyDataDrivenModifier(caster, target, 'modifier_corrupting_effect', {})
 	end
+end
+
+-- Disables HP regen on wall towers and gold mines for 5 seconds.
+function ApplyCorrupting( keys )
+	local caster = keys.caster
+	local target = keys.target
+
+	target:SetBaseHealthRegen(0)
+end
+
+-- Give unit back their regen, based on what is in the KV's. (May need to change if other effects alter this.)
+function RemoveCorrupting( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local playerID = caster:GetMainControllingPlayer()
+
+	local hpRegen = UNIT_KV[playerID][target:GetUnitName()]['StatusHealthRegen']
+
+	target:SetBaseHealthRegen(hpRegen)
 end
 
 function FreezingBreath( keys )
@@ -109,19 +125,31 @@ function FreezingBreath( keys )
 end
 
 function AvernalParticles( keys )
+	print('in particles')
 	local caster = keys.caster
 
-	local aFire =  ParticleManager:CreateParticle("particles/avernal/avernal_ambient.vpcf", PATTACH_POINT_FOLLOW, caster)
-	ParticleManager:SetParticleControlEnt(aFire, 0, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 1, caster, PATTACH_POINT_FOLLOW, "attach_mane1", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 2, caster, PATTACH_POINT_FOLLOW, "attach_mane2", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 3, caster, PATTACH_POINT_FOLLOW, "attach_mane3", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 4, caster, PATTACH_POINT_FOLLOW, "attach_mane4", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 5, caster, PATTACH_POINT_FOLLOW, "attach_mane5", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 6, caster, PATTACH_POINT_FOLLOW, "attach_mane6", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 7, caster, PATTACH_POINT_FOLLOW, "attach_mane7", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 8, caster, PATTACH_POINT_FOLLOW, "attach_mane8", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 10, caster, PATTACH_POINT_FOLLOW, "attach_hand_r", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 11, caster, PATTACH_POINT_FOLLOW, "attach_hand_l", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(aFire, 12, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", caster:GetAbsOrigin(), true)
+	if caster:GetUnitName() == 'merc_avernal' or caster:GetUnitName() == 'merc_avernal_invisible' or caster:GetUnitName() == 'merc_avernal_ranged' or caster:GetUnitName() == 'merc_avernal_corrupted' then
+		local aFire =  ParticleManager:CreateParticle("particles/units/heroes/hero_warlock/golem_ambient.vpcf", PATTACH_POINT_FOLLOW, caster)
+		local casterPos = caster:GetAbsOrigin()
+		ParticleManager:SetParticleControlEnt(aFire, 0, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 1, caster, PATTACH_POINT_FOLLOW, "attach_mane1", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 2, caster, PATTACH_POINT_FOLLOW, "attach_mane2", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 3, caster, PATTACH_POINT_FOLLOW, "attach_mane3", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 4, caster, PATTACH_POINT_FOLLOW, "attach_mane4", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 5, caster, PATTACH_POINT_FOLLOW, "attach_mane5", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 6, caster, PATTACH_POINT_FOLLOW, "attach_mane6", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 7, caster, PATTACH_POINT_FOLLOW, "attach_mane7", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 8, caster, PATTACH_POINT_FOLLOW, "attach_mane8", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 10, caster, PATTACH_POINT_FOLLOW, "attach_hand_r", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 11, caster, PATTACH_POINT_FOLLOW, "attach_hand_l", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 12, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", casterPos, true)
+	end
+	if caster:GetUnitName() == 'merc_avernal_frozen' then
+		local aFire =  ParticleManager:CreateParticle("particles/econ/items/warlock/warlock_golem_obsidian/golem_ambient_obsidian.vpcf", PATTACH_POINT_FOLLOW, caster)
+		local casterPos = caster:GetAbsOrigin()
+		ParticleManager:SetParticleControlEnt(aFire, 0, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 2, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 5, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", casterPos, true)
+		ParticleManager:SetParticleControlEnt(aFire, 12, caster, PATTACH_POINT_FOLLOW, "attach_mouthFire", casterPos, true)
+	end
 end

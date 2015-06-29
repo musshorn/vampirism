@@ -1868,8 +1868,8 @@
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"        "500"   // Base health.
-    "StatusHealthRegen"     "0"   // Health regeneration rate.
+    "StatusHealth"        "2500"   // Base health.
+    "StatusHealthRegen"     "500"   // Health regeneration rate.
     "StatusMana"        "120"     // Base mana.
     "StatusManaRegen"     "-0.01"     // Mana regeneration rate.
 
@@ -5085,7 +5085,7 @@
     "Ability2"          "avernal_dmg_growth"                 // Ability 2.
     "Ability3"          "upgrade_to_ranged_avernal"      // Ability 3.
     "Ability4"          "avernal_invisibility"         // Ability 4.
-    "Ability5"          ""      // Ability 5.
+    "Ability5"          "avernal_particles"      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
@@ -5162,7 +5162,7 @@
     "Ability2"          "avernal_ranged_attack"                 // Ability 2.
     "Ability3"          "upgrade_to_corrupted_avernal"      // Ability 3.
     "Ability4"          "upgrade_to_frozen_avernal"         // Ability 4.
-    "Ability5"          ""      // Ability 5.
+    "Ability5"          "avernal_particles"      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
@@ -5236,7 +5236,7 @@
     
     "Ability1"          "avernal_hp_growth"                 // Ability 1.
     "Ability2"          "avernal_corrupting_breath"                 // Ability 2.
-    "Ability3"          ""      // Ability 3.
+    "Ability3"          "avernal_particles"      // Ability 3.
     "Ability4"          ""         // Ability 4.
     "Ability5"          ""      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
@@ -5311,7 +5311,7 @@
     
     "Ability1"          "avernal_hp_growth"                 // Ability 1.
     "Ability2"          "avernal_freezing_breath"                 // Ability 2.
-    "Ability3"          ""      // Ability 3.
+    "Ability3"          "avernal_particles"      // Ability 3.
     "Ability4"          ""         // Ability 4.
     "Ability5"          ""      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
