@@ -367,3 +367,62 @@ function FelHoundAttack( keys )
 		FireGameEvent('custom_error_show', {player_ID = caster:GetMainControllingPlayer(), _error = 'Unit may only attack engineers!'})
 	end
 end
+
+-- Trades 8000 wood for 1 gold.
+function TradeWood( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local playerID = caster:GetMainControllingPlayer()
+
+	GOLD[playerID] = GOLD[playerID] + 1
+end
+
+-- Targets a building, deals damage.
+function BurstGem( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local targetPos = target:GetAbsOrigin()
+	local ability = keys.ability
+	local targetTeam = ability:GetAbilityTargetTeam()
+	local targetType = ability:GetAbilityTargetType()
+	local abilityDamage = ability:GetSpecialValueFor('damage')
+	local damageType = ability:GetAbilityDamageType()
+
+	if target:HasAbility('is_a_building') then
+		local burst_projectile = {
+			Target = target,
+			Source = caster,
+			Ability = ability,	
+			EffectName = "particles/items_fx/ethereal_blade.vpcf",
+			vSpawnOrigin = caster:GetAbsOrigin(),
+			bHasFrontalCone = false,
+			bReplaceExisting = false,
+			iUnitTargetTeam = targetTeam,
+			iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
+			iUnitTargetType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+			bDeleteOnHit = true,
+			iMoveSpeed = 600,
+			bProvidesVision = false,
+			bDodgeable = false,
+			iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_HITLOCATION
+		}
+	else
+		ability:EndCooldown()
+		ability:RefundManaCost()
+		caster:Stop() 
+		FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Can only target buildings!'})
+	end
+	
+	projectile = ProjectileManager:CreateTrackingProjectile(burst_projectile)
+end
+
+-- Fires when the projectile connects.
+function BurstHit( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+	local abilityDamage = ability:GetSpecialValueFor('damage')
+	local damageType = ability:GetAbilityDamageType()
+
+	ApplyDamage({victim = target, attacker = caster, damage = abilityDamage, damage_type = damageType})
+end

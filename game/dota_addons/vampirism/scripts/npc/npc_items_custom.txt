@@ -1068,7 +1068,7 @@
   		"GoldCost"				"0"
   		"LumberCost"			"8000"
 
-  		"OnSpellStart"
+  		"OnEquip"
   		{
   			"RunScript"
   			{
@@ -1088,7 +1088,8 @@
   		"AbilityTextureName"	"item_gem"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
   		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
+    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1114,8 +1115,19 @@
   			{
   				"ScriptFile"	"vscripts/scripts/items.lua"
   				"Function"		"BurstGem"
+          "Target"      "TARGET"
   			}
   		}
+      "OnProjectileHitUnit"
+      {
+        "DeleteOnHit"  "1"
+        "RunScript"
+        {
+          "ScriptFile"  "vscripts/scripts/items.lua"
+          "Function"    "BurstHit"
+          "Target"      "TARGET"
+        }
+      }
   	}
 
   	//================================================================================= 
