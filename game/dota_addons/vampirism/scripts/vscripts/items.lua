@@ -261,3 +261,18 @@ function PulseStaff( keys )
 		end)
 	end
 end
+
+function ShieldParticle(keys)
+	local caster = keys.caster
+	local casterPos = caster:GetAbsOrigin()
+	particle = ParticleManager:CreateParticle("particles/econ/items/abaddon/abaddon_alliance/abaddon_aphotic_shield_alliance.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	ParticleManager:SetParticleControl(particle, 1, Vector(100,0,100))
+	ParticleManager:SetParticleControl(particle, 2, Vector(100,0,100))
+	ParticleManager:SetParticleControl(particle, 4, Vector(100,0,100))
+	ParticleManager:SetParticleControl(particle, 5, Vector(100,0,10))
+	ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", casterPos, true)
+
+	Timers:CreateTimer(10, function() 
+    	ParticleManager:DestroyParticle(particle,false)
+	end)
+end

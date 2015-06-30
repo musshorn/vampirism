@@ -871,30 +871,48 @@
   		"ID"					"2021"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_immunity_shield"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
   		"ItemPermanent"			"0"
   		"ItemRequiresCharges"   "0"
   		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
+  		"AbilityCooldown"		"60"
   		"GoldCost"				"70"
   		"LumberCost"			"0"
 
+      "OnSpellStart"
+      {
+        "ApplyModifier"
+        {
+          "ModifierName"  "modifier_immunity_shield"
+          "Target"     "CASTER"
+        }
+      }
   		"Modifiers"
   		{
   			"modifier_immunity_shield"
   			{
-  				"Passive"			"0"
+  				"Passive"			  "0"
   				"IsHidden"			"0"
   				"IsDebuff"			"0"
-  				"Duration"			"1"
+  				"Duration"			"10"
   		  		
   				"States"
   				{
   					"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
   				}
+
+          "OnCreated"
+          {
+            "RunScript"
+            {
+              "ScriptFile"  "items.lua"
+              "Function"    "ShieldParticle"
+              "Target"      "CASTER"
+            }
+          } 
   			}
   		}
   	}
