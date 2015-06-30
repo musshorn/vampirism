@@ -827,41 +827,40 @@
   		"ID"					"2020"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_dagon"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-  		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
   		"ItemPermanent"			"0"
   		"ItemRequiresCharges"   "0"
   		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
+  		"AbilityCooldown"		"30"
+      "AbilityManaCost"   "500"
   		"GoldCost"				"70"
   		"LumberCost"			"0"
-
-  		"AbilitySpecial"
-  		{
-  			"01"
-  			{
-  				"var_type"			"FIELD_INTEGER"
-  				"damage"			"5000"
-  			}
-  			"02"
-  			{
-  				"var_type"			"FIELD_INTEGER"
-  				"jumps"				"1"
-  			}
-  		}
-
-  		"OnSpellStart"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"scripts/vscripts/items.lua"
-  				"Function"		"PulseStaff"
-  			}
-  		}
+      "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+      "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
+      "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+      "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+      "AbilityCastRange"          "500"
+  
+      "AbilitySpecial"
+      {
+        "01"
+        {
+          "var_type"          "FIELD_INTEGER"
+          "damage"            "5000"
+        }
+      }
+      
+      "OnSpellStart"
+      {
+        "RunScript"
+        {
+          "ScriptFile"  "scripts/vscripts/items.lua"
+          "Function"    "PulseStaffCheck"
+          "Target"      "TARGET"
+        }
+      }
   	}
 
   	//================================================================================= 

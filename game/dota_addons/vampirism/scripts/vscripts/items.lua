@@ -214,3 +214,50 @@ function HireUnit( keys )
 		merc:FindAbilityByName('avernal_hp_growth'):OnUpgrade()
 	end
 end
+
+-- Stops from casting on non-slayers.
+function PulseStaffCheck( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+
+	if target:GetUnitName() ~= 'npc_dota_hero_invoker' then
+		target:Stop()
+		FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Can only be cast on Slayers!'})
+		ability:EndCooldown()
+		ability:RefundManaCost()
+	else
+		PulseStaff(keys)
+	end
+end
+
+function PulseStaff( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local targetPos = target:GetAbsOrigin()
+	local ability = keys.ability
+	local targetTeam = ability:GetAbilityTargetTeam()
+	local targetType = ability:GetAbilityTargetType()
+	local abilityDamage = ability:GetSpecialValueFor('damage')
+	local damageType = ability:GetAbilityDamageType()
+
+	local chainP = ParticleManager:CreateParticle("particles/items_fx/chain_lightning.vpcf", PATTACH_CUSTOMORIGIN, caster)
+	ParticleManager:SetParticleControlEnt(chainP, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(chainP, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
+	ApplyDamage({victim = target, attacker = caster, damage = abilityDamage, damage_type = damageType})
+
+	local newUnit = FindUnitsInRadius(caster:GetTeam(), targetPos, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, FIND_CLOSEST, false)
+
+	for k, v in pairs(newUnit) do
+		if v:GetUnitName() == 'npc_dota_hero_invoker' then
+			newUnit = v
+		end
+	end
+	if newUnit ~= nil then
+		Timers:CreateTimer(0.15, function ()
+			ParticleManager:SetParticleControlEnt(chainP, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
+			ParticleManager:SetParticleControlEnt(chainP, 1, newUnit, PATTACH_POINT_FOLLOW, "attach_hitloc", newUnit:GetAbsOrigin(), true)
+			ApplyDamage({victim = newUnit, attacker = caster, damage = abilityDamage * 0.85, damage_type = damageType})
+		end)
+	end
+end
