@@ -6174,7 +6174,7 @@
   }
 
   //================================================================================= /
-  // Meteor Avernal Attack (attacks only harvesters)
+  // Avernal Meteor Attack (attacks only harvesters)
   //================================================================================= /
   "avernal_meteor_attack"
   {
@@ -6199,6 +6199,40 @@
       }
     }
   }
+
+  //================================================================================= /
+  // Avernal Meteor Destruction
+  //================================================================================= /
+  "avernal_meteor_destruction"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityCastRange"        "50"
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_techies/techies_suicide.vpcf"
+    }
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+        "Function"    "MeteorDestruction"
+        "Target"      "CASTER"
+      }
+      "FireEffect"
+      {
+        "EffectName"        "particles/units/heroes/hero_techies/techies_suicide.vpcf"
+        "EffectAttachType"  "attach_origin"
+        "Target"            "TARGET"
+      }
+    }
+  }
+  
 
   //================================================================================= /
   // Ranged Avernal - Upgrade to Corrupted Avernal

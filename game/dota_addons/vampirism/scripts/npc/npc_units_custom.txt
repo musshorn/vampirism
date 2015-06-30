@@ -5388,7 +5388,7 @@
     //----------------------------------------------------------------
     
     "Ability1"          "avernal_meteor_attack"                 // Ability 1.
-    "Ability2"          ""                 // Ability 2.
+    "Ability2"          "avernal_meteor_destruction"                 // Ability 2.
     "Ability3"          "avernal_particles"      // Ability 3.
     "Ability4"          ""         // Ability 4.
     "Ability5"          ""      // Ability 5.

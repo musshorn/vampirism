@@ -76,7 +76,7 @@ function AvernalRangedAttack( keys )
 	local target = keys.target
 
 	if not target:HasAbility('is_a_building') then
-		caster:AddNewModifier(caster, ability, 'modifier_disarmed', {duration = 0.1}
+		caster:AddNewModifier(caster, ability, 'modifier_disarmed', {duration = 0.1})
 	end
 end
 
@@ -122,6 +122,7 @@ function RemoveCorrupting( keys )
 	target:SetBaseHealthRegen(hpRegen)
 end
 
+-- Stops building from being repaired
 function FreezingBreath( keys )
 	local caster = keys.caster
 	local ability = keys.ability
@@ -132,8 +133,27 @@ function FreezingBreath( keys )
 	end
 end
 
+function MeteorDestruction( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local targetPos = target:GetAbsOrigin()
+	local ability = keys.ability
+	local targetTeam = ability:GetAbilityTargetTeam()
+	local targetType = ability:GetAbilityTargetType()
+
+	local nearUnits = FindUnitsInRadius(caster:GetTeam(), targetPos, nil, 200, targetTeam, targetType, 0, FIND_CLOSEST, false)
+
+	for k, v in pairs(nearUnits) do
+		if v:HasAbility('harvest_channel') then
+			ApplyDamage({victim = v, attacker = caster, damage = v:GetMaxHealth(), damage_type = DAMAGE_TYPE_PURE}) 
+		end
+	end
+
+	caster:Destroy()
+end
+
+-- Adds particles to correct avernal.
 function AvernalParticles( keys )
-	print('in particles')
 	local caster = keys.caster
 
 	if caster:GetUnitName() == 'merc_avernal' or caster:GetUnitName() == 'merc_avernal_invisible' or caster:GetUnitName() == 'merc_avernal_ranged' or caster:GetUnitName() == 'merc_avernal_corrupted' then
