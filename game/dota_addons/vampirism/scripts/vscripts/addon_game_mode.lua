@@ -70,6 +70,8 @@ function Precache( context )
 		PrecacheResource("particle", "particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_fire_arcana.vpcf", context)
 		PrecacheResource("particle", "particles/items_fx/chain_lightning.vpcf", context)
 		PrecacheResource("particle", "particles/econ/items/abaddon/abaddon_alliance/abaddon_aphotic_shield_alliance.vpcf", context) 
+		PrecacheResource("particle", "particles/items2_fx/teleport_start.vpcf", context)
+		PrecacheResource("particle", "particles/items2_fx/teleport_end.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models

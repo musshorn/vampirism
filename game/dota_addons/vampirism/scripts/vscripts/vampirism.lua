@@ -253,6 +253,7 @@ function GameMode:OnGameRulesStateChange(keys)
         CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
       elseif playerTeam == 3 then
         local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
+        vampire:SetHullRadius(48)
         GOLD[i] = 1000000 --cheats on
         WOOD[i] = 1000000 --cheats on
         TOTAL_FOOD[i] = 10
@@ -313,7 +314,7 @@ function GameMode:OnNPCSpawned(keys)
     end
   end
 
-local unitName = string.lower(npc:GetUnitName())
+  local unitName = string.lower(npc:GetUnitName())
 
   if npc:IsRealHero() then
     npc.bFirstSpawned = true

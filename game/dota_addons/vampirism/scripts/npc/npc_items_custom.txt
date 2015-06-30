@@ -953,12 +953,13 @@
   	//=================================================================================
   	"item_rod_teleportation"
   	{
-  		"ID"					"2023"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_staff_of_wizardry"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  		"ID"					             "2023"
+  		"BaseClass"				         "item_datadriven"
+  		"AbilityTextureName"	     "item_staff_of_wizardry"
+  		"AbilityBehavior"		         "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
   		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
+      "AbilityChannelTime" "3.0"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -973,10 +974,18 @@
   		{
   			"RunScript"
   			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"ScriptFile"	"items.lua"
   				"Function"		"RodTeleportation"
   			}
   		}
+      "OnChannelSucceeded"
+      {
+        "RunScript"
+        {
+          "ScriptFile"  "items.lua"
+          "Function"    "RodFinish"
+        }
+      }
   	}
 
   	//================================================================================= 

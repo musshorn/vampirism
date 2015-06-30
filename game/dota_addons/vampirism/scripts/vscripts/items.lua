@@ -288,3 +288,54 @@ function UrnReveal( keys )
 		urnSight:Destroy()
 	end)
 end
+
+function RodTeleportation( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+	local playerID = caster:GetMainControllingPlayer()
+
+	local detectRange = 32
+
+	local checkUnits = FindUnitsInRadius(caster:GetTeam(), target:GetAbsOrigin(), nil, detectRange, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL, 0, FIND_ANY_ORDER, false)
+	local isBlocked = false
+
+	for k, v in pairs(checkUnits) do
+		if v:GetTeam() == DOTA_TEAM_GOODGUYS then
+			isBlocked = true
+		end
+	end
+
+	if isBlocked then
+		ability:EndCooldown()
+		ability:RefundManaCost()
+		caster:Stop()
+		FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Need more space to teleport!'})
+	else
+		local pStart = ParticleManager:CreateParticle("particles/items2_fx/teleport_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+		local casterPos = caster:GetAbsOrigin()
+		ParticleManager:SetParticleControl(pStart, 0, casterPos)
+		ParticleManager:SetParticleControl(pStart, 1, Vector(255,0,0))
+		ParticleManager:SetParticleControl(pStart, 2, casterPos)
+		ParticleManager:SetParticleControl(pStart, 3, casterPos)
+		ParticleManager:SetParticleControl(pStart, 4, casterPos)
+		ParticleManager:SetParticleControl(pStart, 5, casterPos)
+		ParticleManager:SetParticleControl(pStart, 6, casterPos)
+
+		local pEnd = ParticleManager:CreateParticle("particles/items2_fx/teleport_end.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+		ParticleManager:SetParticleControl(pEnd, 0, target:GetAbsOrigin())
+		ParticleManager:SetParticleControl(pEnd, 1, target:GetAbsOrigin())
+		ParticleManager:SetParticleControl(pEnd, 2, Vector(255,0,0))
+		Timers:CreateTimer(3, function (  )
+			ParticleManager:DestroyParticle(pStart, false)
+			ParticleManager:DestroyParticle(pEnd, false)
+		end)
+	end
+end
+
+function RodFinish( keys )
+	local caster = keys.caster
+	local target = keys.target
+
+	FindClearSpaceForUnit(caster, target:GetAbsOrigin(), true)
+end
