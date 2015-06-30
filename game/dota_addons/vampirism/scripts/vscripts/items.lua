@@ -276,3 +276,15 @@ function ShieldParticle(keys)
     	ParticleManager:DestroyParticle(particle,false)
 	end)
 end
+
+function UrnReveal( keys )
+	local caster = keys.caster
+	local playerID = caster:GetMainControllingPlayer()
+	local target = keys.target_points[1]
+
+	local urnSight = CreateUnitByName('vampire_vision_dummy_urn', target, false, caster, PlayerResource:GetPlayer(playerID), caster:GetTeam())
+
+	Timers:CreateTimer(30, function ()
+		urnSight:Destroy()
+	end)
+end

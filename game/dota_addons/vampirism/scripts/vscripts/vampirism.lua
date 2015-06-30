@@ -205,6 +205,7 @@ function GameMode:OnGameInProgress()
   ShopUI:ProcessQueues()
   GoldMineTimer()
   SphereTimer()
+  UrnTimer()
 end
 
 -- Cleanup a player when they leave
@@ -1166,6 +1167,19 @@ function SphereTimer()
       end
     end
     return 15
+  end)
+end
+
+-- Runs each minute, adds 35 gold if the vampire has an urn of dracula.
+function UrnTimer()
+  Timers:CreateTimer(function ()
+    for k, v in pairs(VAMPIRES) do
+      if v:HasItemInInventory('item_dracula_urn') then
+        local playerID = v:GetMainControllingPlayer()
+        GOLD[playerID] = GOLD[playerID] + 35
+        FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+      end
+    end
   end)
 end
 

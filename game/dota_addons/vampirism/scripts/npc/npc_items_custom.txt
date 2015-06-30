@@ -925,25 +925,17 @@
   		"ID"					"2022"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_urn_of_shadows"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+      "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
   		"ItemPermanent"			"0"
   		"ItemRequiresCharges"   "0"
   		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
+  		"AbilityCooldown"		"30"
+      "AbilityManaCost"   "300"
   		"GoldCost"				"200"
   		"LumberCost"			"0"
-
-  		"OnEquip"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
-  				"Function"		"DraculaUrn"
-  			}
-  		}
 
   		"OnSpellStart"
   		{
@@ -951,6 +943,7 @@
   			{
   				"ScriptFile"	"vscripts/scripts/items.lua"
   				"Function"		"UrnReveal"
+          "Target"    "POINT"
   			}
   		}
   	}

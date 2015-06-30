@@ -3565,7 +3565,7 @@
 
             // Vision
         //----------------------------------------------------------------
-        "VisionDaytimeRange"    "2500"    // Range of vision during day light.
+        "VisionDaytimeRange"       "2500"    // Range of vision during day light.
         "VisionNighttimeRange"    "2500"    // Range of vision at night time.
     }
 
@@ -3588,6 +3588,26 @@
         "VisionDaytimeRange"      "3000"    // Range of vision during day light.
         "VisionNighttimeRange"      "3000"    // Range of vision at night time.
     }
+  //================================================================================= 
+  // Vampire: Reveal Dummy (Urn of Dracula)
+  //=================================================================================
+  "vampire_vision_dummy_urn"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "npc_dota_creature"
+        "Model"                         "models/development/invisiblebox.vmdl"  // Model
+        "MaxLevel"                      "1"
+        "MovementCapabilities"          "DOTA_UNIT_CAP_MOVE_FLY"
+        "Ability1"                      "vampire_vision_dummy_lock"
+
+
+            // Vision
+        //----------------------------------------------------------------
+        "VisionDaytimeRange"      "2000"    // Range of vision during day light.
+        "VisionNighttimeRange"      "2000"    // Range of vision at night time.
+    }
+
 
   //================================================================================= 
   // Vampire: Reveal Dummy (Level 3) - Portal vision
