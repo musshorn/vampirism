@@ -165,10 +165,14 @@ function FinishUpgrade( keys )
   
   if UNIT_KV[pID][caster:GetUnitName()].SpawnsUnits == "true" then
     Timers:RemoveTimer(caster.spawnName)
-  end 
+  end
+
+  local blockers = caster.blockers
+
 
   caster:Destroy()
   local unit = CreateUnitByName(targetUnit, pos, false, nil, nil, team)
+  unit.blockers = blockers
   unit:SetControllableByPlayer(pID, true)
   if keys.Scale ~= nil then
     unit:SetModelScale(keys.Scale)
@@ -193,6 +197,18 @@ function FinishUpgrade( keys )
 
   if UNIT_KV[pID][unit:GetUnitName()].SpawnsUnits == "true" then
     unit:UnitSpawner()
+  end
+
+  function unit:RemoveBuilding( bForcedKill )
+    -- Thanks based T__
+    for k, v in pairs(unit.blockers) do
+      DoEntFireByInstanceHandle(v, "Disable", "1", 0, nil, nil)
+      DoEntFireByInstanceHandle(v, "Kill", "1", 1, nil, nil)
+    end
+
+    if bForcedKill then
+      unit:ForceKill(bForcedKill)
+    end
   end
 
   TechTree:AddTech(targetUnit, pID)
