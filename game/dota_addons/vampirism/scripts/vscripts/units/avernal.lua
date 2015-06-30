@@ -77,6 +77,7 @@ function AvernalRangedAttack( keys )
 
 	if not target:HasAbility('is_a_building') then
 		caster:AddNewModifier(caster, ability, 'modifier_disarmed', {duration = 0.1})
+		FireGameEvent('custom_error_show', {player_ID = caster:GetMainControllingPlayer(), _error = 'Unit may only attack buildings!'})
 	end
 end
 
@@ -87,6 +88,7 @@ function AvernalMeteorAttack( keys )
 	local ability = keys.ability
 	if not target:HasAbility('harvest_channel') then
 		caster:AddNewModifier(caster, ability, 'modifier_disarmed', {duration = 0.1})
+		FireGameEvent('custom_error_show', {player_ID = caster:GetMainControllingPlayer(), _error = 'Unit may only attack workers!'})
 	end
 end
 

@@ -6456,18 +6456,31 @@
           "MODIFIER_PROPERTY_MANA_BONUS"  "10"
         }
       }
-      "modifier_assassin_attack_filter"
+    }
+  }
+
+  //================================================================================= /
+  // Ranged Avernal Attack (stops from attacking non-buildings)
+  //================================================================================= /
+  "fel_hound_attack_filter"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"       "ability_datadriven"
+    
+    "Modifiers"
+    {
+      "modifier_fel_hound_attack_filter"
       {
-        "Passive"     "1"
-        "IsHidden"    "1"
+        "Passive"       "1"
+        "IsHidden"      "0"
         "OnAttackStart"
         {
-         "RunScript"
-         {
-           "ScriptFile"  "items.lua"
-           "Function"    "AssassinAttack"
-           "Target"      "TARGET"
-         }
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/items.lua"
+            "Function"    "FelHoundAttack"
+            "Target"      "CASTER"
+          }
         }
       }
     }

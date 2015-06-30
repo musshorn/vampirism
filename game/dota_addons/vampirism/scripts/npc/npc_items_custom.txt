@@ -1023,7 +1023,7 @@
   	//=================================================================================
   	"hire_fallen_hound"
   	{
-  		"ID"					"2025"
+  		"ID"					     "2025"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_hire_fallen_hound"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -1038,11 +1038,11 @@
   		"LumberCost"			"0"
   		"FoodCost"				"2"
 
-  		"OnSpellStart"
+  		"OnEquip"
   		{
   			"RunScript"
   			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"ScriptFile"	"items.lua"
   				"Function"		"HireUnit"
   				"Mercenary"		"merc_fallen_hound"
   			}

@@ -355,13 +355,15 @@ function RodFinish( keys )
 	FindClearSpaceForUnit(caster, target:GetAbsOrigin(), true)
 end
 
--- Stops Assassins from attacking non-workers.
-function AssassinAttack( keys )
+-- Fel founds may only attack Engineers.
+function FelHoundAttack( keys )
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
+	local targetName = target:GetUnitName()
 
-	if not target:HasAbility('harvest_channel') then
-		AddNewModifier(caster, ability, "modifier_disarmed", {duration = 0.1})
+	if targetName ~= 'toolkit_engineer' then
+		caster:AddNewModifier(caster, ability, 'modifier_disarmed', {duration = 0.1})
+		FireGameEvent('custom_error_show', {player_ID = caster:GetMainControllingPlayer(), _error = 'Unit may only attack engineers!'})
 	end
 end
