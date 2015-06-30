@@ -226,7 +226,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
     for x = location.x - (size / 2) * 32 , location.x + (size / 2) * 32 , 32 do
       for y = location.y - (size / 2) * 32 , location.y + (size / 2) * 32 , 32 do
         local testLocation = Vector(x, y, location.z)
-        if GridNav:IsBlocked(testLocation) then
+        if GridNav:IsBlocked(testLocation) or GridNav:IsTraversable(testLocation) == false then
           ParticleManager:DestroyParticle(work.particles, true)
           if callbacks.onConstructionFailed ~= nil then
             callbacks.onConstructionFailed(work)
@@ -239,7 +239,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
     for x = location.x - (size / 2) * 32 - 16, location.x + (size / 2) * 32 + 16, 32 do
       for y = location.y - (size / 2) * 32 - 16, location.y + (size / 2) * 32 + 16, 32 do
         local testLocation = Vector(x, y, location.z)
-        if GridNav:IsBlocked(testLocation) then
+         if GridNav:IsBlocked(testLocation) or GridNav:IsTraversable(testLocation) == false then
           ParticleManager:DestroyParticle(work.particles, true)
           if callbacks.onConstructionFailed ~= nil then
             callbacks.onConstructionFailed(work)

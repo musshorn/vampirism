@@ -26,7 +26,7 @@ function EnterBase( keys )
     Bases.Owners[pID].SharedBuilders = {}
 
     local name = PlayerResource:GetPlayerName(pID)
-    GameRules:SendCustomMessage(ColorIt(name, IDToColour(pID)) .. " has claimed base " .. baseID, 0, 0)
+    Notifications:BottomToTeam(unit:GetTeam(), name .. " has claimed base " .. baseID, 5, nil, {color="yellow", ["font-size"]="24px"})
   else
 
     -- Check the unit is a building
