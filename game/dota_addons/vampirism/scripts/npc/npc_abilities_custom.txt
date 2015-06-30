@@ -6392,6 +6392,87 @@
     }
   }
 
+  //================================================================================= /
+  // Assassin Blink
+  //================================================================================= /
+  "assassin_blink"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT"
+    "BaseClass"       "ability_datadriven"
+    "AbilityManaCost"       "30"
+    "AbilityCastPoint"        "0.3"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+    "OnSpellStart"
+    { 
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/items.lua"
+        "Function"    "SphereDoom"
+        "Target"      "POINT"
+        "MaxBlink"    "200"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Assassin Passives - Mana gain on kill worker, spell immunity, attack targetting.
+  //================================================================================= /
+  "assassin_passives"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"       "ability_datadriven"
+    
+    "Modifiers"
+    {
+
+      "modifier_assassin_spell_immune"
+      {
+        "Passive"   "1"
+        "IsHidden"  "1"
+        "States"
+        {
+          "MODIFIER_STATE_MAGIC_IMMUNE"   "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+      "modifier_assassin_mana_gain"
+      {
+        "Passive"   "1"
+        "IsHidden"  "1"
+        "OnKill"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_assassin_mana_bonus"
+            "Target"      "CASTER"
+          }
+        }
+      }
+      "modifier_assassin_mana_bonus"
+      {
+        "Passive"     "0"
+        "IsHidden"    "1"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MANA_BONUS"  "10"
+        }
+      }
+      "modifier_assassin_attack_filter"
+      {
+        "Passive"     "1"
+        "IsHidden"    "1"
+        "OnAttackStart"
+        {
+         "RunScript"
+         {
+           "ScriptFile"  "items.lua"
+           "Function"    "AssassinAttack"
+           "Target"      "TARGET"
+         }
+        }
+      }
+    }
+  }
+
 
   //================================================================================= 
   // Vampire: Particle Effects
@@ -6551,12 +6632,6 @@
               {
                 "ModifierName"  "modifier_vampire_critical_strike_hit"
                 "Target"    "CASTER"
-              }
-
-              "RunScript"
-              {
-                "ScriptFile"  "scripts/vscripts/abilities.lua"
-                "Function"    "test"
               }
             }
           }

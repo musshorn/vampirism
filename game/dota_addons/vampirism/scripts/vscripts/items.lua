@@ -197,11 +197,13 @@ end
 
 -- Handles all unit hiring behavior
 function HireUnit( keys )
+	print('hireunit')
 	local caster = keys.caster
 	local ability = keys.ability
 	local foodCost = ITEM_KV[ability:GetAbilityName()]['FoodCost']
 	local mercName = keys.Mercenary
 	local playerID = caster:GetMainControllingPlayer()
+	print(mercName)
 
 	local merc = CreateUnitByName(mercName, caster:GetAbsOrigin(), true, caster, PlayerResource:GetPlayer(playerID), caster:GetTeam())
 	merc:SetControllableByPlayer(playerID, true)
@@ -231,6 +233,7 @@ function PulseStaffCheck( keys )
 	end
 end
 
+-- Targets a slayer, and jumps to the next nearest.
 function PulseStaff( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -262,6 +265,7 @@ function PulseStaff( keys )
 	end
 end
 
+-- Particles for immunity shield
 function ShieldParticle(keys)
 	local caster = keys.caster
 	local casterPos = caster:GetAbsOrigin()
@@ -277,6 +281,7 @@ function ShieldParticle(keys)
 	end)
 end
 
+-- Urn of dracula active, gold gain is in vampirism.lua
 function UrnReveal( keys )
 	local caster = keys.caster
 	local playerID = caster:GetMainControllingPlayer()
@@ -289,6 +294,7 @@ function UrnReveal( keys )
 	end)
 end
 
+-- Rod of teleport area check and particles.
 function RodTeleportation( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -304,6 +310,14 @@ function RodTeleportation( keys )
 		if v:GetTeam() == DOTA_TEAM_GOODGUYS then
 			isBlocked = true
 		end
+	end
+
+	if target:GetUnitName() == 'merc_assassin' then
+		ability:EndCooldown()
+		ability:RefundManaCost()
+		caster:Stop()
+		FireGameEvent('custom_error_show', {player_ID = playerID, _error = "Can't teleport to Assassins!"})
+		return
 	end
 
 	if isBlocked then
@@ -333,9 +347,21 @@ function RodTeleportation( keys )
 	end
 end
 
+-- Rod of teleport actual teleport.
 function RodFinish( keys )
 	local caster = keys.caster
 	local target = keys.target
 
 	FindClearSpaceForUnit(caster, target:GetAbsOrigin(), true)
+end
+
+-- Stops Assassins from attacking non-workers.
+function AssassinAttack( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+
+	if not target:HasAbility('harvest_channel') then
+		AddNewModifier(caster, ability, "modifier_disarmed", {duration = 0.1})
+	end
 end

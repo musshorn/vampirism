@@ -1008,17 +1008,16 @@
   		"LumberCost"			"0"
   		"FoodCost"				"2"
 
-  		"OnSpellStart"
+  		"OnEquip"
   		{
   			"RunScript"
   			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
+  				"ScriptFile"	"items.lua"
   				"Function"		"HireUnit"
   				"Mercenary"		"merc_assassin"
   			}
   		}
   	}
-
   	//================================================================================= 
   	// Hire Fallen Hound
   	//=================================================================================

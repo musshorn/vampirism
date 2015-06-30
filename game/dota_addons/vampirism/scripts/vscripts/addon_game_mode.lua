@@ -157,6 +157,7 @@ function Precache( context )
 		PrecacheUnitByNameSync("human_gargoyle", context)
 		PrecacheUnitByNameSync("npc_vamp_fountain", context)
 		PrecacheUnitByNameSync("toolkit_engineer", context)
+		PrecacheUnitByNameSync("merc_assassin", context)
 
 
 		
