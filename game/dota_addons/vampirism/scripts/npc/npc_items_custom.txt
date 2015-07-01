@@ -1332,18 +1332,54 @@
   		"ID"					"2034"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_claws_dreadlord"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
   		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+  		"ItemRequiresCharges"   "1"
+      "ItemInitialCharges"  "50"
   		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
+  		"AbilityCooldown"		"10"
+      "AbilityManaCost"   "1000"
   		"GoldCost"				"125"
   		"LumberCost"			"0"
 
-		//mana regen hp regen. 		
+      "precache"
+      {
+        "particle"  "particles/units/heroes/hero_warlock/warlock_shadow_word_debuff.vpcf"
+      }
+
+      "OnSpellStart"
+      {
+        "SpendCharge" {}
+        "ApplyModifier"
+        {
+          "ModifierName"  "modifier_dreadlord_buff"
+          "Target"     "CASTER"
+          "Duration"    "5"
+        }
+      }
+
+		  "Modifiers"
+      {
+        "modifier_dreadlord_buff"
+        {
+          "Passive"       "0"
+          "IsHidden"      "0"
+          "IsDebuff"      "0"
+      
+          "EffectName"        "particles/units/heroes/hero_warlock/warlock_shadow_word_debuff.vpcf"
+          "EffectAttachType"  "follow_origin"
+      
+          "Properties"
+          {
+            "MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "20"
+            "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "500" 
+            "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"   "200"
+          }          
+        }
+      }	
   	}
 
   	//================================================================================= 
