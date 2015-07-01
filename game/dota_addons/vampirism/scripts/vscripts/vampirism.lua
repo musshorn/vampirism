@@ -111,10 +111,16 @@ end
 ]]
 function GameMode:PostLoadPrecache()
   print("[vampirism] Performing Post-Load precache") 
-  PrecacheUnitByNameAsync("house_t1", function(...) end)   
+  --PrecacheUnitByNameAsync("house_t1", function(...) end)   
   --PrecacheItemByNameAsync("item_example_item", function(...) end)
   --PrecacheItemByNameAsync("example_ability", function(...) end)
 
+  PrecacheItemByNameAsync("item_vampiric_concoction", function( ... ) end)
+  PrecacheItemByNameAsync("item_cloak_shadows", function( ... ) end)
+  PrecacheItemByNameAsync("item_avernus_rain", function( ... ) end)
+  PrecacheItemByNameAsync("item_claws_dreadlord", function( ... ) end)
+  PrecacheItemByNameAsync("item_silent_whisper", function( ... ) end)
+  PrecacheItemByNameAsync("item_refresh_potion", function( ... ) end)
   --PrecacheUnitByNameAsync("npc_dota_hero_viper", function(...) end)
   --PrecacheUnitByNameAsync("npc_dota_hero_enigma", function(...) end)
   --PrecacheUnitByNameAsync("npc_precache_everything", function(...) end)

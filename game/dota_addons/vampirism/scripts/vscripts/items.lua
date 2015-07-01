@@ -358,7 +358,7 @@ function RodFinish( keys )
 	local caster = keys.caster
 	local target = keys.target
 
-	FindClearSpaceForUnit(caster, target:GetAbsOrigin(), true)
+	FindClearSpaceForUnit(caster, target:GetAbsOrigin(), false)
 end
 
 -- Fel founds may only attack Engineers.

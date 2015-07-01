@@ -164,7 +164,6 @@ function Precache( context )
 		PrecacheUnitByNameSync("merc_assassin", context)
 		PrecacheUnitByNameSync("merc_meat_carrier", context)
 
-		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 
 		-- Sounds can precached here like anything else
