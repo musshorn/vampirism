@@ -1409,7 +1409,7 @@
 		  	{
 		  		"ScriptFile"	"vscripts/scripts/items.lua"
 		  		"Function"		"HireUnit"
-		  		"Mercenary"		"MeatCarrier"
+		  		"Mercenary"		"merc_meat_carrier"
 		  	}
 		  } 		
   	}

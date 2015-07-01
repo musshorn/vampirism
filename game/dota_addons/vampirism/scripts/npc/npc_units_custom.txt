@@ -5805,4 +5805,85 @@
 
     "ConsumesFood"              "2"
   }
+  
+  //================================================================================= 
+  // Meat Carrier
+  //=================================================================================
+  "merc_meat_carrier"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                 "npc_dota_creature"
+    "Model"                     "models/courier/minipudge/minipudge.vmdl"
+    "ModelScale"                "1" 
+    "ConsideredHero"            "0"
+
+    // Abilities
+    //----------------------------------------------------------------
+    
+    "Ability1"          ""      // 
+    "Ability2"          ""      // 
+    "Ability3"          ""      // Ability 3.
+    "Ability4"          ""         // Ability 4.
+    "Ability5"          ""      // Ability 5.
+    "Ability6"          ""      // Ability 6 - Extra.
+    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "0"     // Physical protection.
+    "MagicalResistance"         "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackDamageMin"           "451"
+    "AttackDamageMax"           "451"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "1.5"
+    "AttackAnimationPoint"      "0"
+    "AttackAcquisitionRange"    "0"
+    "AttackRange"               "50"
+    "ProjectileModel"           "particles/base_attacks/ranged_siege_bad.vpcf"
+    "ProjectileSpeed"           "1500"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"           "170"
+    "RingRadius"                "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"             "50"   // Speed
+    "MovementTurnRate"          "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "25000"   // Base health.
+    "StatusHealthRegen"         "20"   // Health regeneration rate.
+    "StatusMana"                "0"      // Base mana.
+    "StatusManaRegen"           "0"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1200"   // Range of vision during day light.
+    "VisionNighttimeRange"      "1200"   // Range of vision at night time.
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "25"
+    "BountyGoldMin"             "3"
+    "BountyGoldMax"             "3"
+
+    "ProvidesFood"  "5"
+  }
 }

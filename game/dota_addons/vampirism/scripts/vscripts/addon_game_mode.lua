@@ -162,7 +162,7 @@ function Precache( context )
 		PrecacheUnitByNameSync("npc_vamp_fountain", context)
 		PrecacheUnitByNameSync("toolkit_engineer", context)
 		PrecacheUnitByNameSync("merc_assassin", context)
-
+		PrecacheUnitByNameSync("merc_meat_carrier", context)
 
 		
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
