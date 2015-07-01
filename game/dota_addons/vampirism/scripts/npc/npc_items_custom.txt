@@ -86,7 +86,6 @@
 	{
 		"ID"	"2001"
 		"BaseClass"	"item_datadriven"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"	"item_wraith_band"
 		"ItemQuality"	"rare"
 		"ItemDeclarations"	"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -113,7 +112,6 @@
 	{
 		"ID"	"2002"
 		"BaseClass"	"item_datadriven"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"	"item_vladmir"
 		"ItemQuality"	"rare"
 		"ItemDeclarations"	"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -131,11 +129,8 @@
 					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"250"
 					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"2000"
 				}
-
 			}
-
 		}
-
 	}
 
 	//================================================================================= 
@@ -219,7 +214,6 @@
 	{
 		"ID"	"2005"
 		"BaseClass"	"item_datadriven"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 		"Model"	"models/coin_reference.vmdl"
     "AbilityTextureName"  "item_phase_boots"
 		"ItemStackable"	"0"
@@ -316,7 +310,6 @@
   		"ID"	"2008"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_glimmer_cape"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"		"0"
   		"ItemKillable"		"1"
   		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
@@ -403,7 +396,6 @@
   		"ID"	"2011"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_circlet"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"		"0"
   		"ItemKillable"		"1"
   		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
@@ -449,7 +441,6 @@
   		"ID"	"2012"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_point_booster"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
   		"ItemStackable"		"0"
   		"ItemKillable"		"1"
   		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
@@ -497,7 +488,6 @@
   		"ID"	"2013"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_null_talisman"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"		"0"
   		"ItemKillable"		"1"
   		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
@@ -543,7 +533,6 @@
   		"ID"	"2014"
   		"BaseClass"		"item_datadriven"
   		"AbilityTextureName"	"item_medallion_of_courage"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"		"0"
   		"ItemKillable"		"1"
   		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
@@ -651,7 +640,6 @@
   		"ID"	"2016"
   		"BaseClass"		         "item_datadriven"
   		"AbilityTextureName"	"item_ring_aquila"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
       "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
   		"ItemStackable"		"0"
   		"ItemKillable"		"1"
@@ -1165,7 +1153,7 @@
   		{
   			"RunScript"
   			{
-  				"ScriptFile"	  "vscripts/scripts/items.lua"
+  				"ScriptFile"	  "items.lua"
   				"Function"		  "AddBuildingToCaster"
           "AbilityToAdd"  "build_massive_grave"
   			}
@@ -1180,7 +1168,6 @@
   		"ID"					"2030"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_hood_of_defiance"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1610,7 +1597,6 @@
   		"ID"					"2041"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_blades_of_attack"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1632,7 +1618,6 @@
   		"ID"					"2042"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_ring_of_regen"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1676,7 +1661,6 @@
   		"ID"					"2044"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_solar_crest"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1698,7 +1682,6 @@
   		"ID"					"2045"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_robe"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1742,7 +1725,6 @@
   		"ID"					"2047"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_armlet_active"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1764,7 +1746,6 @@
   		"ID"					"2048"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_gauntlets_hellfire"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"

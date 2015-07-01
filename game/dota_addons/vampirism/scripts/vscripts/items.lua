@@ -175,9 +175,11 @@ function GhostRing( keys )
 			if collision then
 				if ghost.current_target ~= nil and ghost.current_target:IsInvulnerable() ~= true then
 
+					local playerID = caster:GetMainControllingPlayer()
+					local owner = VAMPIRES[playerID]
 					local damage_table = {
 						victim = ghost.current_target,
-						attacker = caster,
+						attacker = owner,
 						damage_type = DAMAGE_TYPE_MAGICAL,
 						damage = 50
 					}
@@ -249,11 +251,13 @@ function PulseStaff( keys )
 	local targetType = ability:GetAbilityTargetType()
 	local abilityDamage = ability:GetSpecialValueFor('damage')
 	local damageType = ability:GetAbilityDamageType()
+	local playerID = caster:GetMainControllingPlayer()
+	local owner = VAMPIRES[playerID]
 
 	local chainP = ParticleManager:CreateParticle("particles/items_fx/chain_lightning.vpcf", PATTACH_CUSTOMORIGIN, caster)
 	ParticleManager:SetParticleControlEnt(chainP, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
 	ParticleManager:SetParticleControlEnt(chainP, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
-	ApplyDamage({victim = target, attacker = caster, damage = abilityDamage, damage_type = damageType})
+	ApplyDamage({victim = target, attacker = owner, damage = abilityDamage, damage_type = damageType})
 
 	local newUnit = FindUnitsInRadius(caster:GetTeam(), targetPos, nil, 500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, FIND_CLOSEST, false)
 
@@ -266,7 +270,7 @@ function PulseStaff( keys )
 		Timers:CreateTimer(0.15, function ()
 			ParticleManager:SetParticleControlEnt(chainP, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
 			ParticleManager:SetParticleControlEnt(chainP, 1, newUnit, PATTACH_POINT_FOLLOW, "attach_hitloc", newUnit:GetAbsOrigin(), true)
-			ApplyDamage({victim = newUnit, attacker = caster, damage = abilityDamage * 0.85, damage_type = damageType})
+			ApplyDamage({victim = newUnit, attacker = owner, damage = abilityDamage * 0.85, damage_type = damageType})
 		end)
 	end
 end
@@ -429,19 +433,25 @@ function BurstHit( keys )
 	local ability = keys.ability
 	local abilityDamage = ability:GetSpecialValueFor('damage')
 	local damageType = ability:GetAbilityDamageType()
+	local playerID = caster:GetMainControllingPlayer()
+	local owner = VAMPIRES[playerID]
 
-	ApplyDamage({victim = target, attacker = caster, damage = abilityDamage, damage_type = damageType})
+	ApplyDamage({victim = target, attacker = owner, damage = abilityDamage, damage_type = damageType})
 end
 
 -- Applies the damage to a unit entering a grave area.
 function GraveDamage( keys )
-	print('GraveDamage')
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
+	local playerID = caster:GetMainControllingPlayer()
+	-- Retrieve correct vampire owner.
+	local owner = VAMPIRES[playerID]
 
-	ApplyDamage({victim = target, attacker = caster, damage = 35, damage_type = DAMAGE_TYPE_MAGICAL})
-	ability:ApplyDataDrivenModifier(caster, target, 'modifier_grave_apply_damage', {})
+	if not target:HasAbility('is_a_building') then
+		ApplyDamage({victim = target, attacker = owner, damage = 35, damage_type = DAMAGE_TYPE_MAGICAL})
+		ability:ApplyDataDrivenModifier(owner, target, 'modifier_grave_apply_damage', {})
+	end
 end
 
 -- Continually applies damage to unit if they are still within the grave radius.
@@ -449,7 +459,6 @@ function ReApplyGraveDamage( keys )
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
-
 	if target:HasModifier('modifier_grave_damage_aura') then
 		GraveDamage(keys)
 	end
@@ -459,12 +468,14 @@ end
 function RainOfAvernus( keys )
 	local caster = keys.caster
 	local target = keys.target
+	local playerID = caster:GetMainControllingPlayer()
+	local owner = VAMPIRES[playerID]
 
 	local nearBuildings = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, 300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_ANY_ORDER, false)
 
 	for k, v in pairs(nearBuildings) do
 		if v:HasAbility('is_a_building') then
-			ApplyDamage({victim = v, attacker = caster, damage = 1500, damage_type = DAMAGE_TYPE_MAGICAL})
+			ApplyDamage({victim = v, attacker = owner, damage = 1500, damage_type = DAMAGE_TYPE_MAGICAL})
 		end
 	end
 end

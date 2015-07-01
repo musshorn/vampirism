@@ -269,6 +269,7 @@ function GameMode:OnGameRulesStateChange(keys)
         FireGameEvent("vamp_wood_changed", {player_ID = i, wood_total = WOOD[i]})
         FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
         FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
+        UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
         --Next frame timer
         Timers:CreateTimer(0.03, function ()

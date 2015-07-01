@@ -166,7 +166,7 @@ function TechTree:AddTechAbility(playerID, tech)
 	end
 end
 
---[[Check if a building was the last to be destroyed, if so remove it from the tree.]]
+-- Check if a building was the last to be destroyed, if so remove it from the tree.
 
 function TechTree:RemoveTech(unitName, playerID)
 	local tech = unitName
