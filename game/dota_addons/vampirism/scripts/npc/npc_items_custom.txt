@@ -738,23 +738,25 @@
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+      "ItemPermanent" "0"
+      "ItemInitialCharges"  "1"
+      "ItemCastOnPickup"  "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"5"
   		"LumberCost"			"0"
   		"FoodCost"				"1"
 
-  		"OnEquip"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"scripts/vscripts/items.lua"
-  				"Function"		"HireUnit"
-  				"Mercenary"		"merc_shade"
-  			}
-  		}
+      "OnSpellStart"
+      {
+        "SpendCharge" {}
+        "RunScript"
+        {
+          "ScriptFile"  "scripts/vscripts/items.lua"
+          "Function"    "HireUnit"
+          "Mercenary"   "merc_shade"
+        }
+      }
   	}
 
   	//================================================================================= 
@@ -769,16 +771,18 @@
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+      "ItemPermanent" "0"
+      "ItemInitialCharges"  "1"
+      "ItemCastOnPickup"  "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"20"
   		"LumberCost"			"0"
   		"FoodCost"				"1"
 
-  		"OnEquip"
+  		"OnSpellStart"
   		{
+        "SpendCharge" {}
   			"RunScript"
   			{
   				"ScriptFile"	"scripts/vscripts/items.lua"
@@ -800,16 +804,18 @@
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+      "ItemPermanent" "0"
+      "ItemInitialCharges"  "1"
+      "ItemCastOnPickup"  "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"70"
   		"LumberCost"			"0"
   		"FoodCost"				"1"
 
-  		"OnEquip"
+  		"OnSpellStart"
   		{
+        "SpendCharge" {}
   			"RunScript"
   			{
   				"ScriptFile"	"scripts/vscripts/items.lua"
@@ -1000,16 +1006,18 @@
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+      "ItemPermanent" "0"
+      "ItemInitialCharges"  "1"
+      "ItemCastOnPickup"  "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"75"
   		"LumberCost"			"0"
   		"FoodCost"				"2"
 
-  		"OnEquip"
+  		"OnSpellStart"
   		{
+        "SpendCharge" {}
   			"RunScript"
   			{
   				"ScriptFile"	"items.lua"
@@ -1030,16 +1038,18 @@
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+      "ItemPermanent" "0"
+      "ItemInitialCharges"  "1"
+      "ItemCastOnPickup"  "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"75"
   		"LumberCost"			"0"
   		"FoodCost"				"2"
 
-  		"OnEquip"
+  		"OnSpellStart"
   		{
+        "SpendCharge" {}
   			"RunScript"
   			{
   				"ScriptFile"	"items.lua"
@@ -1061,15 +1071,17 @@
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+      "ItemPermanent" "0"
+      "ItemInitialCharges"  "1"
+      "ItemCastOnPickup"  "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"0"
   		"LumberCost"			"8000"
 
-  		"OnEquip"
+  		"OnSpellStart"
   		{
+        "SpendCharge" {}
   			"RunScript"
   			{
   				"ScriptFile"	"vscripts/scripts/items.lua"
@@ -1257,11 +1269,26 @@
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
   		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+  		"ItemRequiresCharges"   "1"
+      "ItemInitialCharges"     "3"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"30"
   		"LumberCost"			"0"
+
+      //Needs passive ItemMoveSpeed
+
+      "OnSpellStart"
+      {
+        "SpendCharge" {}
+
+        "ApplyModifier"
+        {
+          "ModifierName"  "modifier_invisible"
+          "Target"     "CASTER"
+          "Duration"    "600"
+        }
+      }
   	}
 
   	//================================================================================= 
@@ -1276,8 +1303,9 @@
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+      "ItemPermanent" "0"
+      "ItemInitialCharges"  "1"
+      "ItemCastOnPickup"  "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"5"
@@ -1286,6 +1314,7 @@
 
   		"OnSpellStart"
   		{
+        "SpendCharge" {}
   			"RunScript"
   			{
   				"ScriptFile"	"vscripts/scripts/items.lua"
@@ -1329,22 +1358,24 @@
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+      "ItemPermanent" "0"
+      "ItemInitialCharges"  "1"
+      "ItemCastOnPickup"  "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"60"
   		"LumberCost"			"0"
 
-		"OnEquip"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"vscripts/scripts/items.lua"
-				"Function"		"HireUnit"
-				"Mercenary"		"MeatCarrier"
-			}
-		} 		
+		  "OnSpellStart"
+		  {
+        "SpendCharge" {}
+		  	"RunScript"
+		  	{
+		  		"ScriptFile"	"vscripts/scripts/items.lua"
+		  		"Function"		"HireUnit"
+		  		"Mercenary"		"MeatCarrier"
+		  	}
+		  } 		
   	}
 
   	//================================================================================= 
@@ -1366,14 +1397,14 @@
   		"GoldCost"				"50"
   		"LumberCost"			"0"
 
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"vscripts/scripts/items.lua"
-				"Function"		"SilentWhisper"
-			}
-		}	
+		  "OnSpellStart"
+		  {
+		  	"RunScript"
+		  	{
+		  		"ScriptFile"	"vscripts/scripts/items.lua"
+		  		"Function"		"SilentWhisper"
+		  	}
+		  }	
   	}
 
   	//================================================================================= 
