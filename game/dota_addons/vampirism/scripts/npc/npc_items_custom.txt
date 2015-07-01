@@ -1179,10 +1179,28 @@
   		"GoldCost"				"325"
   		"LumberCost"			"0"
 
-  		"States"
-  		{
-  			"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_ENABLED"
-  		}
+      "precache"
+      {
+        "particle"  "particles/items2_fx/shadow_amulet.vpcf"
+      }
+
+      "Modifiers"
+      {
+        "modifier_cloak_invis"
+        {
+          "Passive"      "1"
+          "IsHidden"      "1"
+          "IsDebuff"      "0"
+      
+          "EffectName"        "particles/items2_fx/shadow_amulet.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "States"
+          {
+            "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
+          }
+        }
+
+      }
   	}
 
   	//================================================================================= 
