@@ -129,7 +129,9 @@ function Upgrade( keys )
     caster.refundLumber = lumberCost
     caster:SetModel(targetModel)
     
-    caster:SetModelScale(UNIT_KV[pID][targetUnit].ModelScale)
+    if UNIT_KV[pID][targetUnit].ModelScale ~= nil then
+      caster:SetModelScale(UNIT_KV[pID][targetUnit].ModelScale)
+    end
   
   
     -- If the unit has a HealthModifier (gem upgrades) then they gain the bonus of the targets HP straight away
