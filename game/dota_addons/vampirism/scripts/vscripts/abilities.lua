@@ -102,7 +102,6 @@ function build( keys )
 
     --lazy fix for making graves work properly.
     if unit:GetUnitName() == 'massive_grave' then
-      print('grave_done')
       unit:AddAbility('grave_aura')
       unit:FindAbilityByName('grave_aura'):OnUpgrade()
     end

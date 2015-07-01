@@ -454,7 +454,16 @@ function ReApplyGraveDamage( keys )
 	end
 end
 
-function AddGrave( keys )
+-- Applies damage to nearby buildings.
+function RainOfAvernus( keys )
 	local caster = keys.caster
-	caster:AddAbility('grave_aura')
+	local target = keys.target
+
+	local nearBuildings = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, 300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_ANY_ORDER, false)
+
+	for k, v in pairs(nearBuildings) do
+		if v:HasAbility('is_a_building') then
+			ApplyDamage({victim = v, attacker = caster, damage = 1500, damage_type = DAMAGE_TYPE_MAGICAL})
+		end
+	end
 end

@@ -1218,9 +1218,30 @@
   		"ItemPermanent"			"0"
   		"ItemRequiresCharges"   "0"
   		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
+  		"AbilityCooldown"		"30"
+      "AbilityManaCost"       "1000"
   		"GoldCost"				"150"
   		"LumberCost"			"0"
+
+      "precache"
+      {
+        "particle"  "particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf"
+      }
+
+      "OnSpellStart"
+      {
+        "RunScript"
+        {
+          "ScriptFile"  "items.lua"
+          "Function"    "RainOfAvernus"
+        }
+        "FireEffect"
+        {
+          "EffectName"        "particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf"
+          "EffectAttachType"  "follow_origin"
+          "Target"            "CASTER"
+        }
+      }
   	}
 
   	//================================================================================= 
