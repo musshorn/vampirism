@@ -99,6 +99,13 @@ function build( keys )
     if unit:HasModifier("modifier_disarmed") then
       unit:RemoveModifierByName("modifier_disarmed")
     end
+
+    --lazy fix for making graves work properly.
+    if unit:GetUnitName() == 'massive_grave' then
+      print('grave_done')
+      unit:AddAbility('grave_aura')
+      unit:FindAbilityByName('grave_aura'):OnUpgrade()
+    end
   end)
 
   -- These callbacks will only fire when the state between below half health/above half health changes.

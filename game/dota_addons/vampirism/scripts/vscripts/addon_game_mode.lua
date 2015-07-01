@@ -135,6 +135,7 @@ function Precache( context )
 		PrecacheModel("models/items/warlock/golem/obsidian_golem/obsidian_golem.vmdl", context)
 		PrecacheModel("models/phoenix_egg_reference.vmdl", context)
 		PrecacheModel("models/items/beastmaster/boar/shrieking_razorback/shrieking_razorback.vmdl", context)
+		PrecacheModel("models/items/undying/idol_of_ruination/idol_tower.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

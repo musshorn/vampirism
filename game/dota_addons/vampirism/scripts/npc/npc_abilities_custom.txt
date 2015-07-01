@@ -6486,6 +6486,137 @@
     }
   }
 
+  //================================================================================= 
+  // Build Massive Grave
+  //=================================================================================
+  "build_massive_grave"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "20"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "0.5"
+    "MaxScale"                  "0.6"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "0"
+    "GoldCost"                  "0"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "massive_grave"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+        "ItemBuilding"          "massive_grave"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Grave Damage Aura (applies when grave complete)
+  //================================================================================= /
+  "grave_aura"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "rubick_empty1"
+    "MaxLevel"                  "1"
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_night_stalker/nightstalker_void.vpcf"
+    }
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"      "modifier_grave_damage"
+        "Target"            "CASTER"
+      }
+    }
+   
+    "Modifiers"
+    {
+      "modifier_grave_damage"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "Aura"            "modifier_grave_damage_aura"
+        "Aura_Radius"     "1200"
+        "Aura_Teams"      "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "Aura_Types"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "Aura_Flags"      "DOTA_UNIT_TARGET_FLAG_NONE"
+        "Aura_ApplyToCaster" "0"
+      }
+
+      "modifier_grave_damage_aura"
+      {
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items.lua"
+            "Function"    "GraveDamage"
+            "Target"      "TARGET"
+          }
+        }
+      }
+      "modifier_grave_apply_damage"
+      {
+        "Passive"       "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "1"
+        "Duration"      "1"
+        "OnCreated"
+        {
+          "AttachEffect"
+          {
+            "EffectName"  "particles/units/heroes/hero_night_stalker/nightstalker_void.vpcf"
+            "Target" "TARGET"
+            "EffectAttachType" "follow_origin"
+          }
+        }
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items.lua"
+            "Function"    "ReApplyGraveDamage"
+            "Target"      "TARGET"
+          }
+        }
+      }
+    }
+  }
+
+
 
   //================================================================================= 
   // Vampire: Particle Effects

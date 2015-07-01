@@ -389,7 +389,7 @@
         "RunScript"
         {
           "ScriptFile"  "scripts/vscripts/items.lua"
-          "Function"    "VenomOrb"
+          "Function"    "AddBuildingToCaster"
           "AbilityToAdd"  "build_tower_venom_t1"
         }
       }
@@ -1135,10 +1135,10 @@
   	//=================================================================================
   	"item_massive_grave"
   	{
-  		"ID"					"2029"
-  		"BaseClass"				"item_datadriven"
+  		"ID"					     "2029"
+  		"BaseClass"				     "item_datadriven"
   		"AbilityTextureName"	"item_massive_grave"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1153,8 +1153,9 @@
   		{
   			"RunScript"
   			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
-  				"Function"		"MassiveGrave"
+  				"ScriptFile"	  "vscripts/scripts/items.lua"
+  				"Function"		  "AddBuildingToCaster"
+          "AbilityToAdd"  "build_massive_grave"
   			}
   		}
   	}

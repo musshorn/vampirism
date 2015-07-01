@@ -254,6 +254,7 @@ function GameMode:OnGameRulesStateChange(keys)
       elseif playerTeam == 3 then
         local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
         vampire:SetHullRadius(48)
+        FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
         GOLD[i] = 1000000 --cheats on
         WOOD[i] = 1000000 --cheats on
         TOTAL_FOOD[i] = 10

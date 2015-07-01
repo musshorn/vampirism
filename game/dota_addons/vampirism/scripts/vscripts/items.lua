@@ -3,6 +3,7 @@ function CheckLumber( keys )
 	PrintTable(keys)
 end
 
+-- Adds gold based on the coin picked up.
 function CoinUsed(keys)
 	local caster = keys.caster
 	local coin = keys.ability
@@ -24,6 +25,7 @@ function ItemMoveSpeed( keys )
 	--do this later hehe
 end
 
+-- Caster blinks a small distance if space is available.
 function SphereDoom( keys )
 	local caster = keys.caster
 	local ability = keys.ability
@@ -40,6 +42,7 @@ function SphereDoom( keys )
 	FindClearSpaceForUnit(caster, point, false)
 end
 
+-- Spawns four engineers by the caster.
 function SpawnEngineers( keys )
 	local caster = keys.caster
 	local playerID = caster:GetMainControllingPlayer()
@@ -51,7 +54,8 @@ function SpawnEngineers( keys )
 	end
 end
 
-function VenomOrb( keys )
+-- Adds a regular BH ability to the caster, then casts that.
+function AddBuildingToCaster( keys )
 	local caster = keys.caster
 	local ability = keys.ability
 	local abilityToAdd = keys.AbilityToAdd
@@ -61,6 +65,7 @@ function VenomOrb( keys )
 	caster:CastAbilityNoTarget(added, caster:GetMainControllingPlayer())
 end
 
+-- Ring of hell lords passive. Ghosts attack nearby enemy units.
 function GhostRing( keys )
 	local caster = keys.caster
 	local ability = keys.ability
@@ -425,4 +430,31 @@ function BurstHit( keys )
 	local damageType = ability:GetAbilityDamageType()
 
 	ApplyDamage({victim = target, attacker = caster, damage = abilityDamage, damage_type = damageType})
+end
+
+-- Applies the damage to a unit entering a grave area.
+function GraveDamage( keys )
+	print('GraveDamage')
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+
+	ApplyDamage({victim = target, attacker = caster, damage = 35, damage_type = DAMAGE_TYPE_MAGICAL})
+	ability:ApplyDataDrivenModifier(caster, target, 'modifier_grave_apply_damage', {})
+end
+
+-- Continually applies damage to unit if they are still within the grave radius.
+function ReApplyGraveDamage( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+
+	if target:HasModifier('modifier_grave_damage_aura') then
+		GraveDamage(keys)
+	end
+end
+
+function AddGrave( keys )
+	local caster = keys.caster
+	caster:AddAbility('grave_aura')
 end
