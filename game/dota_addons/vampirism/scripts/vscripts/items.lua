@@ -468,3 +468,25 @@ function RainOfAvernus( keys )
 		end
 	end
 end
+
+-- Silences enemy units in a radius.
+function SilentWhisper( keys )
+	local caster = keys.caster
+	local radius = 500
+	local ability = keys.ability
+
+	local nearUnits = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+
+	for k, v in pairs(nearUnits) do
+		if not v:HasAbility('is_a_building') then
+			v:AddNewModifier(caster, nil, "modifier_silence", {duration = 30})
+		end
+	end
+end
+
+-- Removes negative debuffs, adds mana.
+function RefreshPotion( keys )
+	local caster = keys.caster
+	caster:Purge(false, true, false, false, false)
+	caster:GiveMana(25000)
+end

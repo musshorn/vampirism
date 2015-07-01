@@ -1422,16 +1422,23 @@
   		"ID"					"2036"
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_orchid"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
   		"ItemPermanent"			"0"
   		"ItemRequiresCharges"   "0"
   		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
+  		"AbilityCooldown"		"60"
+      "AbilityManaCost"   "1000"
   		"GoldCost"				"50"
   		"LumberCost"			"0"
+
+      "precache"
+      {
+        "particle"  "particles/units/heroes/hero_death_prophet/death_prophet_silence.vpcf"
+        "particle"  "particles/units/heroes/hero_death_prophet/death_prophet_silence_impact.vpcf"
+      }
 
 		  "OnSpellStart"
 		  {
@@ -1440,6 +1447,34 @@
 		  		"ScriptFile"	"vscripts/scripts/items.lua"
 		  		"Function"		"SilentWhisper"
 		  	}
+
+        //Particles taken from SpellLibrary.
+        "FireEffect"
+        {
+          "EffectName"        "particles/units/heroes/hero_death_prophet/death_prophet_silence.vpcf"
+          "EffectAttachType"  "world_origin"
+          "Target"            "CASTER"
+          "ControlPoints"
+          {
+            "01"  "500 0 0"
+          }
+        }
+        "FireEffect"
+        {
+          "EffectName"        "particles/units/heroes/hero_death_prophet/death_prophet_silence_impact.vpcf"
+          "EffectAttachType"  "follow_overhead"
+          "Target"
+          {
+            "Center"  "CASTER"
+            "Radius"  "500"
+            "Teams"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+            "Types"   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+          }
+          "ControlPoints"
+          {
+            "00"  "1 0 0"
+          }       
+        }
 		  }	
   	}
 
@@ -1456,13 +1491,49 @@
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
   		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+  		"ItemRequiresCharges"   "1"
+      "ItemInitialCharges"     "1"
   		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
+  		"AbilityCooldown"		"450"
   		"GoldCost"				"275"
   		"LumberCost"			"0"
 
-  		//add hp. mp
+      "precache"
+      {
+        "particle"  "particles/items2_fx/refresher.vpcf"
+      }
+
+      "Modifiers"
+      {
+        "modifier_refresh_potion_buff"
+        {
+          "Passive"      "0"
+          "IsHidden"      "1"
+          "IsDebuff"      "0"
+      
+          "EffectName"    "particles/items2_fx/refresher.vpcf"
+          "EffectAttachType"  "follow_origin"
+        }
+      }
+
+      "OnSpellStart"
+      {
+        "ApplyModifier"
+        {
+          "ModifierName"  "modifier_refresh_potion_buff"
+          "Target"     "CASTER"
+        }
+        "RunScript"
+        {
+          "ScriptFile"  "items.lua"
+          "Function"    "RefreshPotion"
+        }
+        "Heal"
+        {
+          "Target"        "CASTER"
+          "HealAmount"  "25000"
+        }
+      }
   	}
 
   	//================================================================================= 
