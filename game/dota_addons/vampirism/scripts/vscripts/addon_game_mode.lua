@@ -73,6 +73,7 @@ function Precache( context )
 		PrecacheResource("particle", "particles/items2_fx/teleport_start.vpcf", context)
 		PrecacheResource("particle", "particles/items2_fx/teleport_end.vpcf", context)
 		PrecacheResource("particle", "particles/items_fx/ethereal_blade.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_brewmaster/brewmaster_cyclone.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models

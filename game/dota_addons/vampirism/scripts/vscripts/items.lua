@@ -501,3 +501,33 @@ function RefreshPotion( keys )
 	caster:Purge(false, true, false, false, false)
 	caster:GiveMana(25000)
 end
+
+-- Grants vision of a unit
+function ShadowSight( keys )
+	local caster = keys.caster
+	local playerID = caster:GetMainControllingPlayer()
+	local casterTeam = caster:GetTeam()
+	local target = keys.target
+	print(HUMANS[playerID]:GetTeam())
+
+	if not target:HasAbility('is_a_building') then
+		print('not a building')
+		if target:IsHero() then
+			print('is hero, make visible')
+			print(casterTeam, target:GetUnitName())
+			target:MakeVisibleToTeam(casterTeam, 30)
+		else
+			target:MakeVisibleToTeam(casterTeam, 120)
+		end
+	else
+		FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Cannot target buildings!'})
+	end
+end
+
+-- Cyclones an enemy.
+function CycloneWand( keys )
+	local caster = keys.caster
+	local target = keys.target
+
+	target:AddNewModifier(caster, nil, "modifier_cyclone", {duration = 5})
+end

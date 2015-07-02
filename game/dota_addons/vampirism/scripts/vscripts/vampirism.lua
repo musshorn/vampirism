@@ -61,6 +61,7 @@ HUMAN_COUNT = 0
 HAS_SLAYER = {}
 SLAYERS = {}
 VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
+HUMANS = {}
 VAMPIRES = {} -- table of all created vampires
 ABILITY_HOLDERS = {} --[[table containing units which hold extra abilities when another unit does not have enough slots to store them all.
                           Remember that in order to be used with buildUI, all abilities need to exist in abilities_custom]]
@@ -319,6 +320,7 @@ function GameMode:OnNPCSpawned(keys)
       FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
       FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
+      HUMANS[playerID] = npc
     end
   end
 

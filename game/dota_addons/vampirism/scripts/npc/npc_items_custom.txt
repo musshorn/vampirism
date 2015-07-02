@@ -1532,6 +1532,8 @@
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_magic_wand"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+      "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+      "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1542,7 +1544,15 @@
   		"GoldCost"				"10"
   		"LumberCost"			"0"
 
-  		//give vision
+  		"OnSpellStart"
+      {
+        "RunScript"
+        {
+          "ScriptFile"  "items.lua"
+          "Function"    "ShadowSight"
+          "Target"      "TARGET"
+        }
+      }
   	}
 
   	//================================================================================= 
@@ -1554,6 +1564,8 @@
   		"BaseClass"				"item_datadriven"
   		"AbilityTextureName"	"item_cyclone"
   		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+      "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+      "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
   		"ItemStackable"			"0"
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
@@ -1564,7 +1576,21 @@
   		"GoldCost"				"2"
   		"LumberCost"			"0"
 
-  		//cyclone human
+  		"OnSpellStart"
+      {
+        "RunScript"
+        {
+          "ScriptFile"  "items"
+          "Function"    "CycloneWand"
+          "Target"      "TARGET"
+        }
+        "FireEffect"
+        {
+          "EffectName"        ""
+          "EffectAttachType"  "follow_origin"
+          "Target"            "TARGET"
+        }
+      }
   	}
 
   	//================================================================================= 
@@ -1607,7 +1633,20 @@
   		"GoldCost"				"2"
   		"LumberCost"			"0"
 
-  		//give damages
+  		"Modifiers"
+      {
+        "modifier_claws_damage"
+        {
+          "Passive"      "1"
+          "IsHidden"      "1"
+      
+          "Properties"
+          {
+            "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
+            "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%bonus_movement_speed" 
+          }
+        }
+      }
   	}
 
   	//================================================================================= 
