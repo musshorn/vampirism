@@ -57,3 +57,7 @@ content/dota_addons/ui_example
 *.vcss_c
 *.vjs_c
 *.cfg
+*.vmdl_c
+*.vpcf_c
+*.vtex_c
+*.vmat_c
