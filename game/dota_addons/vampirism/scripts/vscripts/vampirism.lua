@@ -379,14 +379,16 @@ end
 -- operations here
 function GameMode:OnEntityHurt(keys)
   print("[vampirism] Entity Hurt")
-  local entCause = EntIndexToHScript(keys.entindex_attacker)
-  local entVictim = EntIndexToHScript(keys.entindex_killed)
+  if keys.entindex_attacker ~= nil then
+    local entCause = EntIndexToHScript(keys.entindex_attacker)
+    local entVictim = EntIndexToHScript(keys.entindex_killed)
 
-  -- Buildings attacked by the worker are instantly killed
-  if entCause:GetMainControllingPlayer() == entVictim:GetMainControllingPlayer() then
-    local ability = entVictim:FindAbilityByName("is_a_building")
-    if entCause:GetUnitName() == "npc_dota_hero_omniknight" and ability ~= nil then
-      entVictim:ForceKill(true)
+    -- Buildings attacked by the worker are instantly killed
+    if entCause:GetMainControllingPlayer() == entVictim:GetMainControllingPlayer() then
+      local ability = entVictim:FindAbilityByName("is_a_building")
+      if entCause:GetUnitName() == "npc_dota_hero_omniknight" and ability ~= nil then
+        entVictim:ForceKill(true)
+      end
     end
   end
 end
@@ -610,6 +612,8 @@ function GameMode:OnEntityKilled( keys )
 
   if keys.entindex_attacker ~= nil then
     killerEntity = EntIndexToHScript( keys.entindex_attacker )
+  else
+    return
   end
 
   if killedUnit:IsRealHero() then 

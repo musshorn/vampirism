@@ -138,6 +138,7 @@ function Precache( context )
 		PrecacheModel("models/items/beastmaster/boar/shrieking_razorback/shrieking_razorback.vmdl", context)
 		PrecacheModel("models/items/undying/idol_of_ruination/idol_tower.vmdl", context)
 		PrecacheModel("models/heroes/meepo/meepo.vmdl", context)
+		PrecacheModel("models/props_gameplay/default_ward.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

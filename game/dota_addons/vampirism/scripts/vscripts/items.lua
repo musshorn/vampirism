@@ -531,3 +531,14 @@ function CycloneWand( keys )
 
 	target:AddNewModifier(caster, nil, "modifier_cyclone", {duration = 5})
 end
+
+-- Creates an observer ward, sets invisible.
+function SpawnWard( keys )
+	local caster = keys.caster
+	local ability = keys.ability
+	local point = keys.target_points[1]
+
+	local ward = CreateUnitByName("observer_ward", point, false, caster, caster, caster:GetTeam())
+	ward:AddNewModifier(caster, nil, "modifier_invisible", {duration = 450})
+	ability:ApplyDataDrivenModifier(ward, ward, "modifier_ward_time", {duration = 10})
+end

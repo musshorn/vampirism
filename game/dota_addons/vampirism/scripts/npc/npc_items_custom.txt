@@ -1580,15 +1580,9 @@
       {
         "RunScript"
         {
-          "ScriptFile"  "items"
+          "ScriptFile"  "items.lua"
           "Function"    "CycloneWand"
           "Target"      "TARGET"
-        }
-        "FireEffect"
-        {
-          "EffectName"        ""
-          "EffectAttachType"  "follow_origin"
-          "Target"            "TARGET"
         }
       }
   	}
@@ -1606,13 +1600,41 @@
   		"ItemKillable"			"1"
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
   		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
+      "ItemInitialCharges"    "3"
+  		"ItemRequiresCharges"   "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"15"
   		"LumberCost"			"0"
 
-  		//plant ward
+  		"OnSpellStart"
+      {
+        "SpendCharge" {}
+        "RunScript"
+        {
+          "ScriptFile"  "items.lua"
+          "Function"    "SpawnWard"
+          "Target"      "POINT"
+        }
+      }
+
+      "Modifiers"
+      {
+        "modifier_ward_time"
+        {
+          "Passive"      "0"
+          "IsHidden"      "0"
+          "Duration"      "10"
+           
+          "OnDestroy"
+          {
+            "RemoveUnit"
+            {
+              "Target"    "CASTER"
+            }
+          }
+        }
+      }
   	}
 
   	//================================================================================= 
