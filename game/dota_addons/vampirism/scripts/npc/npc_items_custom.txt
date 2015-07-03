@@ -1717,12 +1717,54 @@
   		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
   		"ItemPermanent"			"0"
   		"ItemRequiresCharges"   "0"
+      "ItemInitialCharges"    "1"
   		"SideShop"				"1"
   		"AbilityCooldown"		"0"
   		"GoldCost"				"2"
   		"LumberCost"			"0"
 
-  		//give regen
+  		"precache"
+      {
+        "particle"  "particles/items_fx/bottle.vpcf"
+      }
+
+      "Modifiers"
+      {
+        "modifier_replenish_bonus"
+        {
+          "Passive"      "0"
+          "IsHidden"      "0"
+      
+          "EffectName"    "particles/items_fx/bottle.vpcf"
+          "EffectAttachType"  "follow_origin"
+      
+          "Properties"
+          {
+            "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"       "66.66"
+            "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"         "33.33" 
+          }
+
+          "OnAttacked"
+          {
+            "RemoveModifier"
+            {
+              "ModifierName"  "modifier_replenish_bonus"
+              "Target"     "TARGET"
+            }
+          }
+        }
+      }
+
+      "OnSpellStart"
+      {
+        "SpendCharge" {}
+        "ApplyModifier"
+        {
+          "ModifierName"  "modifier_replenish_bonus"
+          "Target"     "CASTER"
+          "Duration"    "30"
+        }
+      }
   	}
 
   	//================================================================================= 
