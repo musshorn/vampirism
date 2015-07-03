@@ -1638,9 +1638,9 @@
   	}
 
   	//================================================================================= 
-  	// Claws of Attack
+  	// Blades of Attack
   	//=================================================================================
-  	"item_claws_attack"
+  	"item_blades_attack"
   	{
   		"ID"					"2041"
   		"BaseClass"				"item_datadriven"
@@ -1664,8 +1664,7 @@
       
           "Properties"
           {
-            "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%bonus_attack_speed"
-            "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%bonus_movement_speed" 
+            "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"    "20"
           }
         }
       }
