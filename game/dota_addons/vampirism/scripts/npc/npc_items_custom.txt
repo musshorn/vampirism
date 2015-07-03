@@ -1785,7 +1785,19 @@
   		"GoldCost"				"2"
   		"LumberCost"			"0"
 
-  		//give armor
+  		"Modifiers"
+      {
+        "modifier_amulet_armor"
+        {
+          "Passive"      "0"
+          "IsHidden"      "0"
+            
+          "Properties"
+          {
+            "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"    "1"
+          }
+        }
+      }
   	}
 
   	//================================================================================= 
