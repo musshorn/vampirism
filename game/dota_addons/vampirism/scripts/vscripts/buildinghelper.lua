@@ -20,13 +20,15 @@ MODEL_ALPHA = 100 -- Defines the transparency of the ghost model.
 
 function BuildingHelper:Init(...)
 
-  Convars:RegisterCommand( "BuildingPosChosen", function(name, params)
-
-    local x, y, z = params:match("([^,]+),([^,]+),([^,]+)")
+  CustomGameEventManager:RegisterListener( "building_helper_build_command", function( eventSourceIndex, args )
+    PrintTable(args)
+    local x = args['X']
+    local y = args['Y']
+    local z = args['Z']
     local location = Vector(x, y, z)
 
     --get the player that sent the command
-    local cmdPlayer = Convars:GetCommandClient()
+    local cmdPlayer = PlayerResource:GetPlayer(args['PlayerID'])
     
     if cmdPlayer.activeBuilder:HasAbility("has_build_queue") == false then
       cmdPlayer.activeBuilder:AddAbility("has_build_queue")
@@ -37,11 +39,11 @@ function BuildingHelper:Init(...)
     if cmdPlayer then
       cmdPlayer.activeBuilder:AddToQueue(location)
     end
-  end, "", 0 )
+  end )
 
-  Convars:RegisterCommand( "CancelBuilding", function()
+  CustomGameEventManager:RegisterListener( "building_helper_cancel_command", function( eventSourceIndex, args )
     --get the player that sent the command
-    local cmdPlayer = Convars:GetCommandClient()
+    local cmdPlayer = PlayerResource:GetPlayer(args['PlayerID'])
     if cmdPlayer then
       cmdPlayer.activeBuilder:ClearQueue()
       cmdPlayer.activeBuilding = nil
@@ -49,7 +51,7 @@ function BuildingHelper:Init(...)
       cmdPlayer.activeBuilder.ProcessingBuilding = false
       
     end
-  end, "", 0 )
+  end )
 
   AbilityKVs = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
   ItemKVs = LoadKeyValues("scripts/npc/npc_items_custom.txt")
@@ -196,9 +198,8 @@ function BuildingHelper:AddBuilding(keys)
   player.activeBuildingTable = buildingTable
   player.activeCallbacks = callbacks
 
-  FireGameEvent('build_command_executed', { player_id = builder:GetMainControllingPlayer(), building_size = size })
+  CustomGameEventManager:Send_ServerToPlayer(player, "building_helper_enable", {["state"] = "active"} )
 end
-
 
 
 --[[
@@ -217,9 +218,9 @@ function BuildingHelper:InitializeBuildingEntity( keys )
   local playersHero = player:GetAssignedHero()
   local buildingTable = work.buildingTable
   local size = buildingTable:GetVal("BuildingSize", "number")
+
   -- Worker is done with this building
   builder.ProcessingBuilding = false
-
 
   -- Check gridnav.
   if size % 2 == 1 then
