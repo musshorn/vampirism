@@ -595,6 +595,14 @@ function RicochetGem( keys )
 	local hit_table = {}
 
 	local count = 0
+
+	if not target:HasAbility('is_a_building') then
+		FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Can only target buildings!'})
+		caster:Stop()
+		ability:EndCooldown()
+		ability:RefundManaCost()
+		return
+	end
 	
 	--No priority unlike in heal beam, just find nearest
 	Timers:CreateTimer(function ()
@@ -624,7 +632,7 @@ function RicochetGem( keys )
 		local units = FindUnitsInRadius(caster:GetTeam(), target_location, nil, bounce_radius, targetTeam, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
 
 		for k, v in pairs(units) do
-			if v:FindAbilityByName("is_a_building") ~= nil or v:NotOnMinimap() == true then
+			if not v:HasAbility("is_a_building") or v:NotOnMinimap() == true then
 				units[k] = nil
 			end
 		end

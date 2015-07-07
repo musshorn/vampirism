@@ -37,6 +37,7 @@ function TrainUnit( keys )
   end
 end
 
+-- A building upgrade is cancelled.
 function Cancel( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
@@ -64,7 +65,6 @@ function Cancel( keys )
         end
       end
     end
-    print('goldcancel')
     GOLD[pID] = GOLD[pID] + caster.refundGold
     WOOD[pID] = WOOD[pID] + caster.refundLumber
     FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
@@ -132,8 +132,7 @@ function Upgrade( keys )
     if UNIT_KV[pID][targetUnit].ModelScale ~= nil then
       caster:SetModelScale(UNIT_KV[pID][targetUnit].ModelScale)
     end
-  
-  
+
     -- If the unit has a HealthModifier (gem upgrades) then they gain the bonus of the targets HP straight away
     -- "Muh Parity" - Space Germ, 2015
     caster.originalMaxHP = caster:GetMaxHealth()

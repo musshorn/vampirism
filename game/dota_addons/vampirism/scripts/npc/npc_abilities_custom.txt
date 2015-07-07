@@ -2841,6 +2841,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "5" 
+    "AbilityTextureName"      "upgrade_to_wall_t2"
     
     "OnSpellStart"
     {
@@ -2863,6 +2864,14 @@
         "Scale"       ".5"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //================================================================================= /
@@ -2872,7 +2881,8 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityChannelTime"  "10" 
+    "AbilityChannelTime"  "10"
+    "AbilityTextureName"      "upgrade_to_wall_t3" 
     
     "OnSpellStart"
     {
@@ -2895,6 +2905,14 @@
         "Scale"       "0.8"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //================================================================================= /
@@ -2905,6 +2923,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "20"
+    "AbilityTextureName"      "upgrade_to_wall_t4"
     "OnSpellStart"
     {
       "RunScript"
@@ -2926,6 +2945,14 @@
         "Scale"       "0.5"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //================================================================================= /
@@ -2936,6 +2963,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "30"
+    "AbilityTextureName"      "upgrade_to_wall_t5"
     
     "OnSpellStart"
     {
@@ -2957,6 +2985,14 @@
         "TargetUnit"  "wall_t5"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
   //================================================================================= /
   // Upgrade unit to Chrysoprase Wall
@@ -2966,6 +3002,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "40" 
+    "AbilityTextureName"      "upgrade_to_wall_t6"
     
     "OnSpellStart"
     {
@@ -2989,6 +3026,14 @@
         "Scale"       "1"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //================================================================================= /
@@ -2999,6 +3044,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "50"
+    "AbilityTextureName"      "upgrade_to_wall_t7"
 
     "OnSpellStart"
     {
@@ -3022,6 +3068,14 @@
         "Scale"       "0.9"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //================================================================================= /
@@ -3032,6 +3086,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "60"
+    "AbilityTextureName"      "upgrade_to_wall_t8"
     
     "OnSpellStart"
     {
@@ -3054,6 +3109,14 @@
         "TargetUnit"  "wall_t8"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //================================================================================= /
@@ -3064,6 +3127,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "70" // #DEBUG, true value is 
+    "AbilityTextureName"      "upgrade_to_wall_t9"
     
     "OnSpellStart"
     {
@@ -3086,6 +3150,14 @@
         "TargetUnit"  "wall_t9"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //================================================================================= /
@@ -3096,6 +3168,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "100" // #DEBUG, true value is 
+    "AbilityTextureName"      "upgrade_to_wall_t10"
     
     "OnSpellStart"
     {
@@ -3116,6 +3189,14 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "wall_t10"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
       }
     }
   }
