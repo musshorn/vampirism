@@ -263,7 +263,7 @@
   "worker_det"
   {
     "BaseClass"                 "ability_datadriven"
-    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityTextureName"        "bloodseeker_rupture"
     "MaxLevel"             "1"
@@ -2740,7 +2740,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "5.0"
-    "AbilityTextureName"      "upgrade_to_wall_t2"
+    "AbilityTextureName"      "upgrade_to_t2_tent"
     
     "OnSpellStart"
     {
