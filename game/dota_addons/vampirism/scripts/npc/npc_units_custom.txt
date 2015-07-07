@@ -2642,7 +2642,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "npc_dota_creature"
-    "Model"                         "models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
+    "Model"                         "models/stair_urn001_reference.vmdl"
     "ModelScale"                    "1"
         
     "ConsideredHero"                "0"

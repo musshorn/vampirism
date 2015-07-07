@@ -3265,6 +3265,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "5"
+    "AbilityTextureName"    "upgrade_to_tower_manaburn_t1"
     
     "OnSpellStart"
     {
@@ -3422,6 +3423,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "25"
+    "AbilityTextureName"  "upgrade_to_tower_flame_t1"  
     
     "OnSpellStart"
     {
@@ -3445,6 +3447,14 @@
         "Scale"     "1"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //=================================================================================/
@@ -3455,6 +3465,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "25"
+    "AbilityTextureName"    "upgrade_to_tower_blood_t1"
     
     "OnSpellStart"
     {
@@ -3478,6 +3489,14 @@
         "Scale"     "2.5"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //=================================================================================/
@@ -3497,7 +3516,7 @@
     {
       "modifier_holy_blood_debuff"
       {
-        "Passive"     "1"
+        "Passive"     "0"
         "IsHidden"      "0"
         "IsDebuff"      "1"
       
@@ -3540,6 +3559,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "10"
+    "AbilityTextureName"    "upgrade_to_tower_calcite_t1"
     
     "OnSpellStart"
     {
@@ -3561,6 +3581,14 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "tower_calcite_t1"
         "Scale"     "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
       }
     }
   }
@@ -3642,6 +3670,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "30"
+    "AbilityTextureName"    "upgrade_to_tower_frost"
     
     "OnSpellStart"
     {
@@ -3665,6 +3694,14 @@
         "Scale"     "0.7"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //=================================================================================/
@@ -3675,6 +3712,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "upgrade_to_wall_seeing"
     
     "OnSpellStart"
     {
@@ -3696,6 +3734,14 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "wall_seeing"
         "Scale"     "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
       }
     }
   }
@@ -3850,12 +3896,12 @@
   }
 
   //=================================================================================/
-  // Lesser Mana Energy Tower - Feedback
+  // Mana Energy Tower - Feedback
   //=================================================================================/
   // Ability taken from SpellLibrary. - https://github.com/Pizzalol/SpellLibrary
   // Author: Pizzalol
   // Date: 16.12.2014.
-  "tower_manaburn_t1_feedback"
+  "tower_manaburn_t2_feedback"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
@@ -3886,7 +3932,7 @@
       "02"
       {
         "var_type"        "FIELD_INTEGER"
-        "mana_per_hit"      "50"
+        "mana_per_hit"      "100"
       }
     }
   
@@ -3919,71 +3965,6 @@
             "Target"      "TARGET"
           }
         }
-      }
-    }
-  }
-  //=================================================================================/
-  // Upgrade to Tower of Flame
-  //=================================================================================/
-  "upgrade_to_tower_flame_t1"
-  {
-    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "BaseClass"       "ability_datadriven"
-    "AbilityChannelTime"  "25"
-    
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "Upgrade"
-        "TARGET"    "CASTER"
-        "TargetUnit"  "tower_flame_t1"
-        "LumberCost"  "4000"
-        "GoldCost"    "0"
-      }
-    }
-    "OnChannelSucceeded"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "FinishUpgrade"
-        "TargetUnit"  "tower_flame_t1"
-        "Scale"     "1"
-      }
-    }
-  }
-
-  //=================================================================================/
-  // Upgrade to Tower of Blood
-  //=================================================================================/
-  "upgrade_to_tower_blood_t1"
-  {
-    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "BaseClass"       "ability_datadriven"
-    "AbilityChannelTime"  "25"
-    
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "Upgrade"
-        "TARGET"    "CASTER"
-        "TargetUnit"  "tower_blood_t1"
-        "LumberCost"  "15000"
-        "GoldCost"    "1"
-      }
-    }
-    "OnChannelSucceeded"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "FinishUpgrade"
-        "TargetUnit"  "tower_blood_t1"
-        "Scale"     "1"
       }
     }
   }
@@ -5161,8 +5142,8 @@
     "BuildTime"                 "10"
     "AbilityCastRange"          "200"
     "UpdateHealth"              "1"
-    "Scale"                     "1"
-    "MaxScale"                  "0.7"
+    "Scale"                     "4"
+    "MaxScale"                  "2"
     "CasterCanControl"          "1"
 
     "AbilityCooldown"           "0"
