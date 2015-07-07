@@ -61,6 +61,7 @@ HUMAN_COUNT = 0
 HAS_SLAYER = {}
 SLAYERS = {}
 VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
+HUMANS = {}
 VAMPIRES = {} -- table of all created vampires
 ABILITY_HOLDERS = {} --[[table containing units which hold extra abilities when another unit does not have enough slots to store them all.
                           Remember that in order to be used with buildUI, all abilities need to exist in abilities_custom]]
@@ -121,9 +122,8 @@ function GameMode:PostLoadPrecache()
   PrecacheItemByNameAsync("item_claws_dreadlord", function( ... ) end)
   PrecacheItemByNameAsync("item_silent_whisper", function( ... ) end)
   PrecacheItemByNameAsync("item_refresh_potion", function( ... ) end)
-  --PrecacheUnitByNameAsync("npc_dota_hero_viper", function(...) end)
-  --PrecacheUnitByNameAsync("npc_dota_hero_enigma", function(...) end)
-  --PrecacheUnitByNameAsync("npc_precache_everything", function(...) end)
+  PrecacheItemByNameAsync("item_replenish_potion", function ( ... ) end)
+  PrecacheItemByNameAsync("item_gauntlets_hellfire", function ( ... ) end)
 end
 
 --[[
@@ -319,6 +319,7 @@ function GameMode:OnNPCSpawned(keys)
       FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
       FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
+      HUMANS[playerID] = npc
     end
   end
 
@@ -377,14 +378,16 @@ end
 -- operations here
 function GameMode:OnEntityHurt(keys)
   print("[vampirism] Entity Hurt")
-  local entCause = EntIndexToHScript(keys.entindex_attacker)
-  local entVictim = EntIndexToHScript(keys.entindex_killed)
+  if keys.entindex_attacker ~= nil then
+    local entCause = EntIndexToHScript(keys.entindex_attacker)
+    local entVictim = EntIndexToHScript(keys.entindex_killed)
 
-  -- Buildings attacked by the worker are instantly killed
-  if entCause:GetMainControllingPlayer() == entVictim:GetMainControllingPlayer() then
-    local ability = entVictim:FindAbilityByName("is_a_building")
-    if entCause:GetUnitName() == "npc_dota_hero_omniknight" and ability ~= nil then
-      entVictim:ForceKill(true)
+    -- Buildings attacked by the worker are instantly killed
+    if entCause:GetMainControllingPlayer() == entVictim:GetMainControllingPlayer() then
+      local ability = entVictim:FindAbilityByName("is_a_building")
+      if entCause:GetUnitName() == "npc_dota_hero_omniknight" and ability ~= nil then
+        entVictim:ForceKill(true)
+      end
     end
   end
 end
@@ -608,6 +611,8 @@ function GameMode:OnEntityKilled( keys )
 
   if keys.entindex_attacker ~= nil then
     killerEntity = EntIndexToHScript( keys.entindex_attacker )
+  else
+    return
   end
 
   if killedUnit:IsRealHero() then 

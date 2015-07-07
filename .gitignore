@@ -14,6 +14,7 @@ game/dota_addons/addon_template/
 dota/
 dota_ugc/
 game/dota_addons/dota_pvp/
+game/dota_addons/ui_example/
 game/dota_addons/overthrow/
 game/dota_addons/multiteam_example/
 game/dota_addons/lua_ability_example/
