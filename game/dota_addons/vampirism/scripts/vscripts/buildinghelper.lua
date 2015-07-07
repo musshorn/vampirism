@@ -198,7 +198,7 @@ function BuildingHelper:AddBuilding(keys)
   player.activeBuildingTable = buildingTable
   player.activeCallbacks = callbacks
 
-  CustomGameEventManager:Send_ServerToPlayer(player, "building_helper_enable", {["state"] = "active"} )
+  CustomGameEventManager:Send_ServerToPlayer(player, "building_helper_enable", {["state"] = "active", ["size"] = size} )
 end
 
 
