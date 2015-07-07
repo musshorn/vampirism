@@ -304,8 +304,6 @@ function ChainOfDeath(keys)
         end
       end
 
-      -- HURT HEROES --
-      -- First we check for hurt heroes
       for _,unit in pairs(units) do
         if unit ~= caster then
           local check_unit = 0  -- Helper variable to determine if a unit has been hit or not

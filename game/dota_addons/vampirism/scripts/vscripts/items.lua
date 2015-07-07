@@ -10,14 +10,14 @@ function CoinUsed(keys)
 	local playerID = caster:GetMainControllingPlayer()
 
 	if caster:IsRealHero() then
-    	if keys.Type == "small" then
-    		GOLD[playerID] = GOLD[playerID] + 1
-    		FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
-    end
-    	if keys.Type == "large" then
-    		GOLD[playerID] = GOLD[playerID] + 2
-      		FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
-    	end
+		if keys.Type == "small" then
+			GOLD[playerID] = GOLD[playerID] + 1
+			FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+	end
+		if keys.Type == "large" then
+			GOLD[playerID] = GOLD[playerID] + 2
+			FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+		end
 	end
 end
 
@@ -83,7 +83,7 @@ function GhostRing( keys )
 	local particleDamageBuilding = "particles/units/heroes/hero_death_prophet/death_prophet_exorcism_attack_building_glows.vpcf"
 
 	Timers:CreateTimer(function ()
-      	local units = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, ghostRange, ability:GetAbilityTargetTeam(), DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+		local units = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, ghostRange, ability:GetAbilityTargetTeam(), DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
 		for k, v in pairs(units) do
 			--finds nearest enemy unit.
 			if v:GetTeamNumber() ~= casterTeam and v:GetUnitName() ~= 'ring_ghost' and v:IsInvulnerable() ~= true and v:NotOnMinimap() ~= true then
@@ -126,32 +126,32 @@ function GhostRing( keys )
 			ghost:SetForwardVector( ( ghost:GetPhysicsVelocity() ):Normalized() )
 			ghost.current_target = target
 			if ghost.current_target:IsNull() then
-	        	ghost:SetPhysicsVelocity(Vector(0,0,0))
-	        	ghost:OnPhysicsFrame(nil)
-	        	ghost:ForceKill(false)
-	        	ghost:Destroy()
-	        	Timers:CreateTimer(2, function ()
-	        		ghostStock = ghostStock + 1
-	        	end)
+				ghost:SetPhysicsVelocity(Vector(0,0,0))
+				ghost:OnPhysicsFrame(nil)
+				ghost:ForceKill(false)
+				ghost:Destroy()
+				Timers:CreateTimer(2, function ()
+					ghostStock = ghostStock + 1
+				end)
 			end
 
 			if ghost.current_target == nil or ghost.current_target:IsInvulnerable() == true then
 				ghost:SetPhysicsVelocity(Vector(0,0,0))
-	        	ghost:OnPhysicsFrame(nil)
-	        	ghost:ForceKill(false)
-	        	ghost:Destroy()
-	        	Timers:CreateTimer(2, function ()
-	        		ghostStock = ghostStock + 1
-	        	end)
-	        end
+				ghost:OnPhysicsFrame(nil)
+				ghost:ForceKill(false)
+				ghost:Destroy()
+				Timers:CreateTimer(2, function ()
+					ghostStock = ghostStock + 1
+				end)
+			end
 
 			local source = caster:GetAbsOrigin()
 			local current_position = ghost:GetAbsOrigin()
 			local diff = point - ghost:GetAbsOrigin()
-        	diff.z = 0
-        	local direction = diff:Normalized()
+			diff.z = 0
+			local direction = diff:Normalized()
 
-        	-- Calculate the angle difference
+			-- Calculate the angle difference
 			local angle_difference = RotationDelta(VectorToAngles(ghost:GetPhysicsVelocity():Normalized()), VectorToAngles(direction)).y
 			
 			-- Set the new velocity
@@ -166,7 +166,7 @@ function GhostRing( keys )
 				local newVel = RotatePosition(Vector(0,0,0), QAngle(0,-10,0), ghost:GetPhysicsVelocity())
 				ghost:SetPhysicsVelocity(newVel)
 			end
-        	local distance = (point - current_position):Length()
+			local distance = (point - current_position):Length()
 			local collision = distance < 50
 			if ghost.current_target then
 				point = ghost.current_target:GetAbsOrigin()
@@ -189,14 +189,14 @@ function GhostRing( keys )
 					ParticleManager:SetParticleControl(particle, 0, ghost.current_target:GetAbsOrigin())
 					ParticleManager:SetParticleControlEnt(particle, 1, ghost.current_target, PATTACH_POINT_FOLLOW, "attach_hitloc", ghost.current_target:GetAbsOrigin(), true)
 					ghost:SetPhysicsVelocity(Vector(0,0,0))
-	        		ghost:OnPhysicsFrame(nil)
-	        		ghost:ForceKill(false)
-	        		ghost:Destroy()
+					ghost:OnPhysicsFrame(nil)
+					ghost:ForceKill(false)
+					ghost:Destroy()
 
-	        		Timers:CreateTimer(2, function ()
-	        			ghostStock = ghostStock + 1
-	        		end)
-	        	end
+					Timers:CreateTimer(2, function ()
+						ghostStock = ghostStock + 1
+					end)
+				end
 			end
 		end)
 	end
@@ -287,7 +287,7 @@ function ShieldParticle(keys)
 	ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", casterPos, true)
 
 	Timers:CreateTimer(10, function() 
-    	ParticleManager:DestroyParticle(particle,false)
+		ParticleManager:DestroyParticle(particle,false)
 	end)
 end
 
@@ -416,6 +416,7 @@ function BurstGem( keys )
 			bDodgeable = false,
 			iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_HITLOCATION
 		}
+		projectile = ProjectileManager:CreateTrackingProjectile(burst_projectile)
 	else
 		ability:EndCooldown()
 		ability:RefundManaCost()
@@ -423,7 +424,6 @@ function BurstGem( keys )
 		FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Can only target buildings!'})
 	end
 	
-	projectile = ProjectileManager:CreateTrackingProjectile(burst_projectile)
 end
 
 -- Fires when the projectile connects.
@@ -508,13 +508,9 @@ function ShadowSight( keys )
 	local playerID = caster:GetMainControllingPlayer()
 	local casterTeam = caster:GetTeam()
 	local target = keys.target
-	print(HUMANS[playerID]:GetTeam())
 
 	if not target:HasAbility('is_a_building') then
-		print('not a building')
 		if target:IsHero() then
-			print('is hero, make visible')
-			print(casterTeam, target:GetUnitName())
 			target:MakeVisibleToTeam(casterTeam, 30)
 		else
 			target:MakeVisibleToTeam(casterTeam, 120)
@@ -541,4 +537,140 @@ function SpawnWard( keys )
 	local ward = CreateUnitByName("observer_ward", point, false, caster, caster, caster:GetTeam())
 	ward:AddNewModifier(caster, nil, "modifier_invisible", {duration = 450})
 	ability:ApplyDataDrivenModifier(ward, ward, "modifier_ward_time", {duration = 10})
+end
+
+-- Credit to kritth from SpellLibrary for this.
+function HellfireGauntlets( keys )
+	-- Variables
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+	local modifierName = "modifier_hellfire_gauntlets_target_datadriven"
+	local damageType = ability:GetAbilityDamageType()
+	local exceptionName = "put_your_exception_unit_here"
+	
+	-- Necessary value from KV
+	local duration = ability:GetLevelSpecialValueFor( "bonus_reset_time", ability:GetLevel() - 1 )
+	local damage_per_stack = ability:GetLevelSpecialValueFor( "damage_per_stack", ability:GetLevel() - 1 )
+
+	-- Check if unit already have stack
+	if target:HasModifier( modifierName ) then
+		local current_stack = target:GetModifierStackCount( modifierName, ability )
+		
+		-- Deal damage
+		local damage_table = {
+			victim = target,
+			attacker = caster,
+			damage = damage_per_stack * current_stack,
+			damage_type = damageType
+		}
+		ApplyDamage( damage_table )
+		
+		ability:ApplyDataDrivenModifier( caster, target, modifierName, { Duration = duration } )
+		target:SetModifierStackCount( modifierName, ability, current_stack + 1 )
+	else
+		ability:ApplyDataDrivenModifier( caster, target, modifierName, { Duration = duration } )
+		target:SetModifierStackCount( modifierName, ability, 1 )
+	end
+end
+
+-- Once again based heavily from SpellLibrary.
+function RicochetGem( keys )
+	local caster = keys.caster
+	local target = keys.target
+	local ability = keys.ability
+	local targetTeam = ability:GetAbilityTargetTeam()
+	local targetType = ability:GetAbilityTargetType()
+	local target_location = target:GetAbsOrigin()
+	local abilityDamage = ability:GetSpecialValueFor('damage')
+	local damageType = ability:GetAbilityDamageType()
+	local playerID = caster:GetMainControllingPlayer()
+	local owner = VAMPIRES[playerID]
+	local jumps = 2
+	local ricochetParticle = "particles/units/heroes/hero_rubick/rubick_fade_bolt.vpcf"
+	local bounce_radius = 500
+	local s_damage = 1500
+
+	-- Setting up the hit table
+	local hit_table = {}
+
+	local count = 0
+	
+	--No priority unlike in heal beam, just find nearest
+	Timers:CreateTimer(function ()
+	if count <= jumps then
+		count = count + 1
+
+		if count == 1 then
+			local particle = ParticleManager:CreateParticle(ricochetParticle, PATTACH_CUSTOMORIGIN, caster)
+			ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
+			ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
+			local damageTable = {
+				victim = target,
+				attacker = caster,
+				damage = s_damage,
+				damage_type = DAMAGE_TYPE_MAGICAL,
+			}
+			ApplyDamage(damageTable)
+			s_damage = s_damage * 0.85
+			table.insert(hit_table, target)
+			return 0.15
+		end
+		
+		-- Helper variable to keep track if we damaged a unit already
+		unit_damaged = false
+	
+		-- Find all the units in bounce radius
+		local units = FindUnitsInRadius(caster:GetTeam(), target_location, nil, bounce_radius, targetTeam, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+
+		for k, v in pairs(units) do
+			if v:FindAbilityByName("is_a_building") ~= nil or v:NotOnMinimap() == true then
+				units[k] = nil
+			end
+		end
+
+	  	for _,unit in pairs(units) do
+		if unit ~= caster then
+			local check_unit = 0  -- Helper variable to determine if a unit has been hit or not
+	
+			-- Checking the hit table to see if the unit is hit
+			for c = 0, #hit_table do
+				if hit_table[c] == unit then
+					check_unit = 1
+				end
+			end
+	
+			-- If its not hit then check if the unit has been hit
+			if check_unit == 0 then
+	
+				table.insert(hit_table, unit)
+				local unit_location = unit:GetAbsOrigin()
+		
+				-- Create the particle for the visual effect
+				local particle = ParticleManager:CreateParticle(ricochetParticle, PATTACH_CUSTOMORIGIN, caster)
+				ParticleManager:SetParticleControlEnt(particle, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target_location, true)
+				ParticleManager:SetParticleControlEnt(particle, 1, unit, PATTACH_POINT_FOLLOW, "attach_hitloc", unit_location, true)
+		
+				-- Set the unit as the new target
+				target = unit
+				target_location = unit_location
+		
+				local damageTable = {
+					victim = unit,
+					attacker = caster,
+					damage = s_damage,
+					damage_type = DAMAGE_TYPE_MAGICAL,
+				}
+				ApplyDamage(damageTable)
+  	
+				-- Set the helper variable to true
+				unit_damaged = true
+				s_damage = s_damage * 0.85
+			break
+			end
+		end
+	  end
+	end
+  return .15
+  end)
 end

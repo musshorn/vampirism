@@ -100,7 +100,42 @@ function Purchase( itemname, buyer )
   if food + foodCost > foodCap then
     FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough food!'})
   end
+
+  local isRecipe = false
+
+  if string.find(itemname, 'recipe') then
+    print('ITS A RECIPE FOR DISASTER')
+    isRecipe = true
+  end
+
   if buyer:HasInventory() then
+    -- table of item handles to remove if buyer passes all requirements
+    local itemsToRemove = {}
+
+    if isRecipe then
+      local hasComponents = true
+      for k, v in pairs(ITEM_KV[itemname]['ItemRequirements']) do
+        if not buyer:HasItemInInventory(v) then
+          hasComponents = false
+        end
+      end
+
+      if hasComponents then
+        for k, v in pairs(ITEM_KV[itemname]['ItemRequirements']) do
+          for i = 0, buyer:GetNumItemsInInventory() do
+            if buyer:GetItemInSlot(i) ~= nil then
+              if buyer:GetItemInSlot(i):GetName() == tostring(v) then
+                table.insert(itemsToRemove, buyer:GetItemInSlot(i))
+              end
+            end
+          end
+        end
+      else
+        FireGameEvent('custom_error_show', {player_ID = playerID, _error = "Missing required items!"})
+        return
+      end
+    end
+
   	if buyer:HasAnyAvailableInventorySpace() then
   		if gold >= goldCost and lumber >= lumberCost then
   			--check if user is still near shop, decrease that shops stock.
@@ -115,29 +150,42 @@ function Purchase( itemname, buyer )
               index = k
             end
           end
-
+  
           --check stock
           if SHOPS[shopIndex][index]['stock'] > 0 then
-  				  local item = CreateItem(itemname, buyer, buyer)
-  				  item:SetPurchaser(buyer)
-  				  item:SetOwner(buyer)
-  				  item:SetOwner(PlayerResource:GetPlayer(playerID))
-  				  item:SetPurchaser(PlayerResource:GetPlayer(playerID))
-  				  buyer:AddItem(item)
-  				  WOOD[playerID] = WOOD[playerID] - lumberCost
-            CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + foodCost
-  				  GOLD[playerID] = GOLD[playerID] - goldCost
-  				  FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = GOLD[playerID]})
-     			  FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
-            FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
-     			  FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = 0})
-            SHOPS[shopIndex][index]['stock'] = SHOPS[shopIndex][index]['stock'] - 1
-            table.insert(SHOPS[shopIndex][index]['queue'],  SHOPS[shopIndex][index]['stocktime'])
+           if itemsToRemove[1] ~= nil then
+              for k, v in pairs(itemsToRemove) do
+                buyer:RemoveItem(v)
+              end
+              local recipeResult = ITEM_KV[itemname]['ItemResult']
+              local item = CreateItem(recipeResult, buyer, buyer)
+              item:SetPurchaser(buyer)
+              item:SetOwner(buyer)
+              item:SetOwner(PlayerResource:GetPlayer(playerID))
+              item:SetPurchaser(PlayerResource:GetPlayer(playerID))
+              buyer:AddItem(item)
+           else
+              local item = CreateItem(itemname, buyer, buyer)
+              item:SetPurchaser(buyer)
+              item:SetOwner(buyer)
+              item:SetOwner(PlayerResource:GetPlayer(playerID))
+              item:SetPurchaser(PlayerResource:GetPlayer(playerID))
+              buyer:AddItem(item)
+           end
+  				 WOOD[playerID] = WOOD[playerID] - lumberCost
+           CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + foodCost
+  				 GOLD[playerID] = GOLD[playerID] - goldCost
+  				 FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = GOLD[playerID]})
+      		 FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
+           FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
+      		 FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = 0})
+           SHOPS[shopIndex][index]['stock'] = SHOPS[shopIndex][index]['stock'] - 1
+           table.insert(SHOPS[shopIndex][index]['queue'],  SHOPS[shopIndex][index]['stocktime'])
           else
             --out of stock, fire event anyway and send remaining time for next restock.
             FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = SHOPS[shopIndex][index]['queue'][1]})
           end
-     		end
+        end
   		end
   	else
   		FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "No room in inventory!" } )

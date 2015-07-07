@@ -123,9 +123,7 @@ function GameMode:PostLoadPrecache()
   PrecacheItemByNameAsync("item_silent_whisper", function( ... ) end)
   PrecacheItemByNameAsync("item_refresh_potion", function( ... ) end)
   PrecacheItemByNameAsync("item_replenish_potion", function ( ... ) end)
-  --PrecacheUnitByNameAsync("npc_dota_hero_viper", function(...) end)
-  --PrecacheUnitByNameAsync("npc_dota_hero_enigma", function(...) end)
-  --PrecacheUnitByNameAsync("npc_precache_everything", function(...) end)
+  PrecacheItemByNameAsync("item_gauntlets_hellfire", function ( ... ) end)
 end
 
 --[[

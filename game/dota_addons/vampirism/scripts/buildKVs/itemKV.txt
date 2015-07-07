@@ -302,14 +302,14 @@
 			"stocktime"		"120"
 			"index"			"33"
 		}
-		"item_recipie_dracula_cloak"		
+		"item_recipe_dracula_cloak"		
 		{
 			"initstock"		"1"
 			"stock"			"1"
 			"stocktime"		"60"
 			"index"			"34"
 		}
-		"item_recipie_ricochet_gem"			
+		"item_recipe_ricochet_gem"			
 		{
 			"initstock"		"1"
 			"stock"			"1"
