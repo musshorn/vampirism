@@ -1814,7 +1814,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"         "npc_dota_creature"
-    "Model"           "models/mine_cart_reference.vmdl"
+    "Model"             "models/mine_cart_reference.vmdl"
     "ModelScale"        "1"
     
     "ConsideredHero"      "0"
@@ -3909,7 +3909,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "models/props_mines/mine_cart002.vmdl"
+    "Model"                     "models/gold_mine_2.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 

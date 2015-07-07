@@ -7,8 +7,8 @@ CVModel CVModel_0
 		[
 			CVmesh
 			{
-				string m_meshName = "mine_cart_reference"
-				string m_meshFile = "models/mine_cart_reference.smd"
+				string m_meshName = "gold_mine_2"
+				string m_meshFile = "models/gold_mine_2.smd"
 				string m_materialSearchPath = ""
 				bool m_bSkinParentedObjects = true
 				bool m_bLegacySkinParentedTransforms = false
@@ -20,8 +20,8 @@ CVModel CVModel_0
 			},
 			CVmesh
 			{
-				string m_meshName = "gold_bag_reference"
-				string m_meshFile = "models/gold_bag_reference.smd"
+				string m_meshName = "gold_bag_2.001"
+				string m_meshFile = "models/gold_bag_2.001.smd"
 				string m_materialSearchPath = ""
 				bool m_bSkinParentedObjects = true
 				bool m_bLegacySkinParentedTransforms = false
@@ -164,8 +164,8 @@ CVhitBoxSetList CVhitBoxSetList_0
 					string m_sSurfaceProperty = ""
 					int m_nGroupId = 0
 					string m_sBoneName = "scroll_root"
-					float(3) m_vMinBounds = ( 40.552689, 3.372543, 12.226566 )
-					float(3) m_vMaxBounds = ( 83.551071, 51.287994, 59.786556 )
+					float(3) m_vMinBounds = ( 37.486141, -42.895061, 12.226265 )
+					float(3) m_vMaxBounds = ( 101.170044, 51.288479, 91.574005 )
 					uint(4) m_cRenderColor = ( 0, 0, 0, 0 )
 				}
 			]
