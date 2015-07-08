@@ -207,6 +207,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "visage_summon_familiars"
     "OnSpellStart"
     {
       "RunScript"
@@ -223,6 +224,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
+    "AbilityTextureName"    "life_stealer_feast"
     "OnSpellStart"
     {
       "RunScript"
@@ -346,7 +348,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityTextureName"  "basher"
+    "AbilityTextureName"  "spawn_worker_t2"
     "AbilityModifierSupportValue" "0.5"
     "MaxLevel"  "1"
     "AbilityManaCost" "0"
@@ -399,7 +401,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
-    "AbilityTextureName"  "basher"
+    "AbilityTextureName"  "spawn_worker_t3"
     "AbilityModifierSupportValue" "0.5"
     "MaxLevel"  "1"
     "AbilityManaCost" "0"
@@ -2822,6 +2824,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "5.0"
+    "AbilityTextureName"   "upgrade_to_t3_house"
     
     "OnSpellStart"
     {
@@ -5838,15 +5841,6 @@
     "AbilityTextureName"      "cancel"
     "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
     // BuildingHelper info
-    "Building"            "1"
-    "BuildingSize"          "3"
-    "BuildTime"           "4.0"
-    "AbilityCastRange"        "200"
-    "UpdateHealth"          "1"
-    "Scale"             "1"
-    "MaxScale"            ".5"
-    "CasterCanControl"        "1"
-
     "AbilityCooldown"       "0"
     
     // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
@@ -5866,7 +5860,7 @@
       "RunScript"
       {
         "ScriptFile"      "scripts/vscripts/abilities.lua"
-        "Function"        "build"
+        "Function"        "BuildCancel"
       }
     }
   }
@@ -6125,7 +6119,7 @@
   {
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "BaseClass"           "ability_datadriven"
-    "AbilityTextureName"      "cancel"
+    "AbilityTextureName"      "warlock_golem_permanent_immolation"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
@@ -6178,7 +6172,7 @@
   {
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "BaseClass"             "ability_datadriven"
-    "AbilityTextureName"    "cancel"
+    "AbilityTextureName"    "warlock_golem_flaming_fists"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
@@ -6193,6 +6187,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
+    "AbilityTextureName"    "clinkz_wind_walk"
     
     "OnSpellStart"
     {
@@ -6216,6 +6211,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "BaseClass"       "ability_datadriven"
+    "AbilityTextureName"    "clinkz_wind_walk"
     
     "Modifiers"
     {
@@ -6265,6 +6261,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
+    "AbilityTextureName"    "brewmaster_earth_hurl_boulder"
     
     "OnSpellStart"
     {
@@ -6345,6 +6342,7 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityCastRange"        "50"
+    "AbilityTextureName"      "techies_suicide"
 
     "precache"
     {
@@ -6376,6 +6374,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
+    "AbilityTextureName"    "viper_viper_strike"
     
     "OnSpellStart"
     {
@@ -6399,6 +6398,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
+    "AbilityTextureName"  "upgrade_to_frozen_avernal"
     
     "OnSpellStart"
     {
@@ -6422,6 +6422,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "BaseClass"       "ability_datadriven"
+    "AbilityTextureName"    "viper_viper_strike"
     
     "Modifiers"
     {
@@ -6469,6 +6470,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
     "BaseClass"       "ability_datadriven"
+    "AbilityTextureName"    "upgrade_to_frozen_avernal"
 
     "precache"
     {
@@ -6537,6 +6539,8 @@
     "AbilityManaCost"       "30"
     "AbilityCastPoint"        "0.3"
     "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+    "AbilityTextureName"        "antimage_blink"
+
     "OnSpellStart"
     { 
       "RunScript"
@@ -6756,7 +6760,6 @@
   //================================================================================= 
   // Vampire: Particle Effects
   //=================================================================================
-
   "vampire_particles"
   {
     "BaseClass"                 "ability_datadriven"

@@ -310,3 +310,8 @@ function worker_debug( keys )
   print(worker.inTriggerZone)
   print(worker.thinking)
 end
+
+function BuildCancel( keys )
+  local caster = keys.caster
+  caster:Stop()
+end

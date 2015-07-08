@@ -184,7 +184,7 @@
     "VisionDaytimeRange"    "1400"
     "VisionNighttimeRange"    "1600"
 
-    "ParticleFile"        "particles/units/heroes/hero_invoker.pcf"
+    "ParticleFile"        "particles/units/heroes/hero_invoker.vpcf"
     "ProjectileModel"     "particles/units/heroes/hero_invoker/invoker_base_attack.vpcf"
     "ProjectileSpeed"     "1200"
 
@@ -204,7 +204,7 @@
 
   "vamp_convert"
   {
-    "override_hero"       "npc_dota_hero_queenofpain"
+    "override_hero"       "npc_dota_hero_life_stealer"
     "Ability1"          "vampire_shadow_sight"
     "Ability2"          "vampire_particles"
     //"Ability3"          "vampire_cyka_speed"//"vampire_poison"
@@ -227,7 +227,7 @@
     "AbilityLayout"       "5"
     "NewHero"           "0"
 
-    "Model" "models/heroes/queenofpain/queenofpain.vmdl"
+    "Model" "models/heroes/life_stealer/life_stealer.vmdl"
 
 
     // Armor
@@ -271,5 +271,15 @@
     "VisionDaytimeRange"    "1400"
     "VisionNighttimeRange"    "1600"
 
+    "Creature"
+    {
+      "AttachWearables"
+      {
+        "Wearble1"  { "ItemDef"   "7475" }
+        "Wearble2"  { "ItemDef"   "7474" }
+        "Wearble3"  { "ItemDef"   "7473" }
+        "Wearble4"  { "ItemDef"   "7471" }
+      }
+    }
   }
 }
