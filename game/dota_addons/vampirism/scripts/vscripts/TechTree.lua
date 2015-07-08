@@ -180,8 +180,6 @@ function TechTree:RemoveTech(unitName, playerID)
 
 	if playerTrees[playerID][tech] > 0 then
 		playerTrees[playerID][tech] = playerTrees[playerID][tech] - 1
-	--else
-		--print('TECH ' .. tech .. ' is already 0!')
 	end
 end
 

@@ -1430,7 +1430,7 @@
     "BaseClass" "ability_datadriven"
 
     "NeedTech"  "research_insane_lumber_harvesting"
-    
+
     "OnSpellStart"
     {
       "RunScript"
@@ -2957,7 +2957,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
-        "TARGET"  "CASTER"
+        "TARGET"      "CASTER"
         "TargetUnit"  "wall_t4"
         "LumberCost"  "5000"
       }
@@ -5832,6 +5832,47 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "gold_mine_t4"
         "Scale"       "1"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Super Wall Tower
+  //================================================================================= /
+  "upgrade_to_tower_wall_t2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "35"
+    "AbilityTextureName"  "upgrade_to_tower_wall_t2"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_wall_t2"
+        "LumberCost"  "50000"
+        "GoldCost"    "10"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_wall_t2"
+        "Scale"       "0.5"
       }
     }
   }

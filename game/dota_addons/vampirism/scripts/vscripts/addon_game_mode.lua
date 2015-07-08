@@ -141,6 +141,7 @@ function Precache( context )
 		PrecacheModel("models/heroes/meepo/meepo.vmdl", context)
 		PrecacheModel("models/props_gameplay/default_ward.vmdl", context)
 		PrecacheModel("models/bad_crystals003_reference.vmdl", context)
+		PrecacheModel("models/good_column004_reference.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)
