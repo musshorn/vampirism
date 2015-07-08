@@ -30,7 +30,7 @@ function ShopUI:Init()
             for k, v in pairs(SHOPS[shopIndex]) do
               --only sending the timer of the TOP item in the queue, not the queue itself.
               --player owning shop has needed tech
-              local hasTech = TechTree:GetRequired(v['name'], shop:GetMainControllingPlayer(), "item")
+              local hasTech = TechTree:GetRequired(v['name'], shop:GetMainControllingPlayer(), shopName, "item")
               print(hasTech)
               FireGameEvent('shop_preload', {player_ID = playerID, shop_index = shopIndex, shop_type = shopName, item_name = v['name'], item_stock = v['stock'], item_time = v['queue'][0], item_index = k, has_tech = hasTech})
             end

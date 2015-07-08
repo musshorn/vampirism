@@ -111,6 +111,7 @@
 	{
 		"player_ID"		"short"
 		"building"		"string"
+		"owner"			"string"
 		"buildable"		"bool"
 	}
 

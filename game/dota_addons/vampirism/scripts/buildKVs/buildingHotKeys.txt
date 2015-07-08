@@ -88,7 +88,7 @@
 		"research_improved_gem_quality"						"a"
 		"upgrade_to_research_center_t2"						"a"
 		"build_cancel"										"q"
-		"build_empty"										"q"
+		"build_empty"										" "
 	}
 	//=================================================================================================================
 	// Human Vault

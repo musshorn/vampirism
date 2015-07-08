@@ -25,6 +25,22 @@
   // 
   //   To indicate a units real name / the name that is shown to the player, place   
   //   it in the ascii header above the unit.
+  //
+  // Custom Keys
+  //    
+  //    These are custom keys that are used by various components of the game.
+  //    
+  //     "AffectedByGemUpgrades" "true" -- Whether a unit will be affected by the basic gem upgrades.
+  //     "RepairTime"            "15" -- The amount of time to repair this from 0-100% HP.
+  //     "IsTech"                "true" -- Whether this unit should be tracked by TechTree.
+  //     "NeedTech"              "house_t1 wall_t1" -- Any buildings that are needed to build this unit, seperated by spaces.
+  //     "SpawnsUnits"           "true"  -- Whether this unit can spawn harvesters/workers.
+  //     "TechModifiers"
+  //     {
+  //        "1"             "research_healing_vitality" -- A list of research upgrades that this unit is affected by.
+  //     }
+  //     "ParentUnit"       "house_t2" -- The unit that this unit was made from.
+  //
   //=================================================================================//
   
   //================================================================================= 
@@ -1630,7 +1646,7 @@
     "Ability4"          "build_cancel"
     "Ability5"          "build_blocked3"
     "Ability6"          "build_blocked4"
-    "Ability7"          "build_cancel"
+    "Ability7"          "build_blocked5"
     "Ability8"          "is_a_building"
 
     "AbilityHolder"    "10"
@@ -2880,11 +2896,12 @@
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
   
-    "IsTech"    "true"
-    "NeedTech"    "human_vault"
+    "IsTech"            "true"
+    "NeedTech"          "human_vault"
     "RecievesLumber"    "true"
     "SpawnsUnits"       "true" 
-    "RepairTime"  "20"
+    "RepairTime"        "20"
+    "ParentUnit"        "house_t1"
   }
   //================================================================================= 
   // Human Building T3 - Deforestation House
@@ -2967,6 +2984,7 @@
     "RecievesLumber"    "true"
     "SpawnsUnits"       "true" 
     "RepairTime"  "10"
+    "ParentUnit"        "house_t2"
   }
 
   //================================================================================= 
@@ -3145,6 +3163,7 @@
       "IsTech"        "true"
       "NeedTech"      "house_t2 gold_mine_t1"
       "RepairTime"  "15"
+      "ParentUnit"        "research_center_t1"
   }
 
   //================================================================================= 
@@ -4669,6 +4688,7 @@
     "SpawnsUnits" "true"
     "NeedTech"    "house_t3 research_center_t2"
     "RepairTime"  "20"
+    "ParentUnit"  "human_vault"
   }
 
 
