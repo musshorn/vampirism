@@ -511,9 +511,10 @@ function ShadowSight( keys )
 
 	if not target:HasAbility('is_a_building') then
 		if target:IsHero() then
-			target:MakeVisibleToTeam(casterTeam, 30)
+			target:AddNewModifier(caster, nil, 'modifier_bloodseeker_thirst_vision', {duration = 30})
+			DeepPrintTable(target)
 		else
-			target:MakeVisibleToTeam(casterTeam, 120)
+			target:AddNewModifier(caster, nil, 'modifier_bloodseeker_thirst_vision', {duration = 120})
 		end
 	else
 		FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Cannot target buildings!'})
