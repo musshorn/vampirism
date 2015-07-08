@@ -1,4 +1,4 @@
-print ('[vampirism] vampirism.lua' )
+print ('[VAMPIRISM] vampirism.lua' )
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false             -- Should the main shop contain Secret Shop items as well as regular items
@@ -765,9 +765,23 @@ function GameMode:OnEntityKilled( keys )
 
 
   if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
-    TechTree:RemoveTech(unitName, playerID)
+    -- The killed unit was upgraded from another, remove those from the tree too.
+    if UNIT_KV[playerID][unitName]['ParentUnit'] ~= nil then
+      TechTree:RemoveTech(unitName, playerID)
+      local clearedParents = false
+      local parent = unitName
+      while clearedParents == false do
+        if UNIT_KV[playerID][parent]['ParentUnit'] ~= nil then
+          parent = UNIT_KV[playerID][parent]['ParentUnit']
+          TechTree:RemoveTech(parent, playerID)
+        else
+          clearedParents = true
+        end
+      end
+    else
+      TechTree:RemoveTech(unitName, playerID)
+    end
   end
-
 end
 
 
