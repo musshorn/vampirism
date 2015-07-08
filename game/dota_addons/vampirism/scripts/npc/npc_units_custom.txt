@@ -1630,7 +1630,7 @@
     "Ability4"          "build_cancel"
     "Ability5"          "build_blocked3"
     "Ability6"          "build_blocked4"
-    "Ability7"          "build_cancel"
+    "Ability7"          "build_blocked5"
     "Ability8"          "is_a_building"
 
     "AbilityHolder"    "10"

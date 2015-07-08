@@ -31,7 +31,7 @@
     "StatusManaRegen"     "0.5"
     "AbilityLayout"       "4"
 
-    "AbilityHolder"       "13"
+    "AbilityHolder"       "12"
 
     "ExtraAbility1"       "build_house1"
     "ExtraAbility2"       "build_tent_t1"
@@ -45,7 +45,6 @@
     "ExtraAbility10"      "build_gold_mine_t1"
     "ExtraAbility11"      "build_human_vault"
     "ExtraAbility12"      "build_cancel"
-    "ExtraAbility13"      "build_empty"
   }
 
   "vamp_vampire"

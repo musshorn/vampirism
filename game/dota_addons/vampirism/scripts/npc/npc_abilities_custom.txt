@@ -1428,6 +1428,9 @@
     "AbilityChannelTime"  "40"
     "LumberCost" "1000"
     "BaseClass" "ability_datadriven"
+
+    "NeedTech"  "research_insane_lumber_harvesting"
+    
     "OnSpellStart"
     {
       "RunScript"

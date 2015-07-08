@@ -104,7 +104,7 @@
 			"research_unbeatable_gem_quality"		"2"
 			"OrderPosition"							"9"		
 		}
-		"upgrade_to_research_center_t2"							"10"
+		"upgrade_to_research_center_t2"			"10"
 		"build_cancel"							"11"
 	}
 
