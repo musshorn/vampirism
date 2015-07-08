@@ -2823,8 +2823,8 @@
   
     "Ability1"          "spawn_worker_t2"  //Human test
     "Ability2"          "spawn_simple_tower_builder"         // Ability 2.
-  	"Ability3"             "set_rally_point"         // Ability 3.
-  	"Ability4"             "cancel_training"          // Ability 4.
+  	"Ability3"          "set_rally_point"         // Ability 3.
+  	"Ability4"          "cancel_training"          // Ability 4.
     "Ability5"          "upgrade_to_t3_house"                       // Ability 5.
     "Ability6"          "simple_tower_builder_training"          // Ability 6 - Extra.
     "Ability7"          "t2_worker_training"          // Ability 7 - Extra.
