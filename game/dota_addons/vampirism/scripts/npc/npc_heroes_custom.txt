@@ -65,6 +65,7 @@
     "ConsideredHero"      "1"
     "NewHero"         "0"
     "TeamName"          "DOTA_TEAM_BADGUYS"
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"
 
     // Armor
     //-------------------------------------------------------------------------------------------------------------

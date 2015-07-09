@@ -255,9 +255,9 @@ function GameMode:OnGameRulesStateChange(keys)
       })
     for i = 0, 9 do
       local playerTeam = PlayerResource:GetTeam(i)
-      if playerTeam == 2 then
+      if playerTeam == 3 then
         CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
-      elseif playerTeam == 3 then
+      elseif playerTeam == 2 then
         local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
         vampire:SetHullRadius(48)
         FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)

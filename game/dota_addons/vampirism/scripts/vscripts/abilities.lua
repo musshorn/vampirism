@@ -29,6 +29,13 @@ function build( keys )
     -- Play construction sound
     -- FindClearSpace for the builder
     FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
+
+    -- FindClearSpaceForUnit does not play nice with large hull units. Using this till a better solution is found.
+    local nearVamps = FindUnitsInRadius(caster:GetTeam(), unit:GetAbsOrigin(), nil, 100, DOTA_TEAM_BADGUYS, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+    for k, v in pairs(nearVamps) do
+      print('pushing vamp')
+      v:AddNewModifier(caster, nil, "modifier_item_forcestaff_active", {push_length = 200})
+    end
     -- start the building with 0 mana.
     unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})
     unit:AddNewModifier(silencer, nil, "modifier_disarmed", {duration=10000})
@@ -281,9 +288,9 @@ function BecomeVampire( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
 
-  PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BAD_GUYS, true)
+  PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BADGUYS, true)
   
-  local vamp = CreateUnitByName("npc_dota_hero_queenofpain", caster:GetAbsOrigin(), true, nil, nil, DOTA_TEAM_BAD_GUYS)
+  local vamp = CreateUnitByName("npc_dota_hero_queenofpain", caster:GetAbsOrigin(), true, nil, nil, DOTA_TEAM_BADGUYS)
   vamp:SetControllableByPlayer(pID, true)
 
   caster:RemoveSelf()
