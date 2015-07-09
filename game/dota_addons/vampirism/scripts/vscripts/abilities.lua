@@ -33,8 +33,9 @@ function build( keys )
     -- FindClearSpaceForUnit does not play nice with large hull units. Using this till a better solution is found.
     local nearVamps = FindUnitsInRadius(caster:GetTeam(), unit:GetAbsOrigin(), nil, 100, DOTA_TEAM_BADGUYS, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
     for k, v in pairs(nearVamps) do
-      print('pushing vamp')
-      v:AddNewModifier(caster, nil, "modifier_item_forcestaff_active", {push_length = 200})
+      if v:GetUnitName() == "npc_dota_hero_night_stalker" then
+        v:AddNewModifier(caster, nil, "modifier_item_forcestaff_active", {push_length = 200})
+      end
     end
     -- start the building with 0 mana.
     unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})

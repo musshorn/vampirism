@@ -107,18 +107,19 @@
 		"build_empty"										"q"
 	}
 	//=================================================================================================================
-	// Human Vault
+	// Research Center T2
 	//=================================================================================================================
 	"research_center_t2"
 	{
-		"research_gem_quality_1"			"g"
+		"research_spire_quality_1"			"s"
 		"research_basic_human_survival"		"t"
 		"research_holy_essence"				"d"
-		"upgrade_plating_1"					"p"
-		"upgrade_healing_vitality"			"h"
+		"research_wall_plating_1"			"p"
+		"research_healing_vitality"			"h"
 		"research_human_teleport"			"r"
 		"research_tower_defenses"			"o"
 		"research_engineer_vitality"		"e"
+		"build_empty"						" "
 		"build_cancel"						"q"
 	}
 	//=================================================================================================================

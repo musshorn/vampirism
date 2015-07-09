@@ -408,6 +408,8 @@ function TechUpgrade( keys )
   local ability = keys.ability
   local abilityName = ability:GetAbilityName()
   local techMod = ABILITY_KV[abilityName]['GiveModifier']
+  local level = keys.NextLevel
+  local baseAbility = keys.BaseAbility
 
   --get all alive entities
 
@@ -426,6 +428,11 @@ function TechUpgrade( keys )
         end
       end
     end
+  end
+
+  if level ~= nil then
+    print('upgrade', abilityName, baseAbility, level)
+    FireGameEvent("build_ui_upgrade", {player_ID = playerID, ability_name = baseAbility, builder = caster:GetUnitName(), tier = level}) 
   end
 end
 

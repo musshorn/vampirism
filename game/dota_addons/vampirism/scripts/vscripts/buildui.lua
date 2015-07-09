@@ -30,6 +30,7 @@ function BuildUI:Init()
   end, "checking selected unit", 0)
 end
 
+-- Opens build menu.
 function CallMenu(keys)
   print('callmenu')
     local caster = keys.caster
@@ -40,6 +41,8 @@ function CallMenu(keys)
     --using ablity holder
     if ABILITY_HOLDERS[unitName] ~= nil then
       for k, v in pairs(ABILITY_HOLDERS[unitName]) do
+        -- If you get errors here, you need to check abilities_custom. Can't find the ability.
+        print(unitName, v)
         if ABILITY_KV[v]['UnitName'] ~= nil then
           local tech = ABILITY_KV[v]['UnitName']
           TechTree:GetRequired(tech, playerID, caster:GetUnitName(), "building")

@@ -185,10 +185,9 @@ end
 
 -- Quick check if a player has a given tech, used for checking tech modifiers.
 function TechTree:HasTech(playerID, tech)
-	for k, v in pairs(playerTrees[playerID]) do
-		if v[tech] ~= nil then
-			return true
-		end
+	if playerTrees[playerID][tech] ~= nil then
+		return true
+	else
+		return false
 	end
-	return false
 end

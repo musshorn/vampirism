@@ -212,6 +212,20 @@ function FinishUpgrade( keys )
     end
   end
 
+  -- Check it for tech modifiers.
+  if UNIT_KV[pID][targetUnit]['TechModifiers'] ~= nil then
+    local modTable = UNIT_KV[pID][targetUnit]['TechModifiers']
+    for k, v in pairs(UNIT_KV[pID][targetUnit]['TechModifiers']) do
+      if TechTree:HasTech(pID, v) then
+        local modName =  ABILITY_KV[v]['GiveModifier']
+        unit:AddAbility(modName)
+        local addedMod = unit:FindAbilityByName(modName)
+        addedMod:SetLevel(1)
+        addedMod:OnUpgrade()
+      end
+    end
+  end
+
   TechTree:AddTech(targetUnit, pID)
 end
 
