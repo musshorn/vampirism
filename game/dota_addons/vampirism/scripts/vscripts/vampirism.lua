@@ -201,11 +201,13 @@ function GameMode:OnGameInProgress()
   print("[vampirism] The game has officially begun")
   local vamps = Entities:FindAllByName("npc_dota_hero_night_stalker")
 
-  for i = 1, table.getn(vamps) do
+  for i = 1, #vamps do
   	print(vamps[i]:GetUnitName())
   	vamps[i]:RemoveModifierByName("modifier_init_hider")
   	vamps[i]:SetAbilityPoints(3)
     FindClearSpaceForUnit(vamps[i], Vector(96, -416, 256), false)
+    vamps[i]:SetForwardVector(RandomVector(1))
+    vamps[i]:AddNewModifier(vampire, nil, "modifier_item_forcestaff_active", {push_length = 200})
   end
 
   ShopUI:ProcessQueues()
