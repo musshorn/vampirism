@@ -7410,6 +7410,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "5"
+    "AbilityTextureName"  "spectre_dispersion"
     "GoldCost"          "5"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
@@ -7458,6 +7459,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "30"
+    "AbilityTextureName"    "chaos_knight_reality_rift"
     "GoldCost"          "50"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
@@ -7506,6 +7508,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "attribute_bonus"
     "GoldCost"          "500"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
@@ -7554,6 +7557,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "30"
+    "AbilityTextureName"    "night_stalker_crippling_fear"
     "GoldCost"          "2000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
@@ -7602,6 +7606,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "troll_warlord_fervor"
     "GoldCost"          "250"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
@@ -7650,6 +7655,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "30"
+    "AbilityTextureName"    "axe_battle_hunger"
     "GoldCost"          "300"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
@@ -7698,6 +7704,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "rubick_spell_steal"
     "GoldCost"          "90"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"

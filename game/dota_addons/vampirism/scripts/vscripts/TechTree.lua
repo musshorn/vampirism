@@ -71,7 +71,7 @@ function TechTree:GetRequired(unitName, playerID, ownerName, sType)
 		FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, owner = ownerName, buildable = true})
 		return true
 	elseif sType == "ability" then
-		print('tt ability received', unitName)
+		--print('tt ability received', unitName)
 		local techlist = {}
 		if ABILITY_KV[unitName] ~= nil then
 			if ABILITY_KV[unitName].NeedTech ~= nil then
@@ -82,7 +82,7 @@ function TechTree:GetRequired(unitName, playerID, ownerName, sType)
 					end
 				end
 			else
-				print('no techs needed for '..tostring(unitName))
+				--print('no techs needed for '..tostring(unitName))
 				FireGameEvent("tech_return", {player_ID = playerID, building = unitName, owner = ownerName, buildable = true})
 				return true
 			end
@@ -93,18 +93,18 @@ function TechTree:GetRequired(unitName, playerID, ownerName, sType)
 				local check = tostring(techlist[i])
 				if playerTrees[playerID][check] ~= nil then
 					if playerTrees[playerID][check] < 1 then
-						print('missing tech for '..tostring(unitName))
+						--print('missing tech for '..tostring(unitName))
 						FireGameEvent("tech_return", {player_ID = playerID, building = unitName, owner = ownerName, buildable = false})
 						return false
 					end
 				else
-					print('missing tech for '..tostring(unitName).. ' (none in tree)')
+					--print('missing tech for '..tostring(unitName).. ' (none in tree)')
 					FireGameEvent("tech_return", {player_ID = playerID, building = unitName, owner = ownerName, buildable = false})
 					return false
 				end
 			end
 		end
-		print(tostring(unitName)..' is buildable!')
+		--print(tostring(unitName)..' is buildable!')
 		FireGameEvent("tech_return", {player_ID = playerID, building = unitName, owner = ownerName, buildable = true})
 		return true
 	elseif sType == "item" then

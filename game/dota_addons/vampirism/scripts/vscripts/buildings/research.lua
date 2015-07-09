@@ -253,6 +253,7 @@ function VampiricSkills( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
 
   if vampire.VampiricSkills == nil then
     vampire.VampiricSkills = 0
@@ -263,6 +264,8 @@ function VampiricSkills( keys )
 
   if vampire.VampiricSkills == 33 then
     caster:RemoveAbility('research_vampiric_skills')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
   end
 end
 
@@ -271,6 +274,7 @@ function VampiricDamage( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
 
   if vampire.VampiricDamage == nil then
     vampire.VampiricDamage = 0
@@ -282,6 +286,8 @@ function VampiricDamage( keys )
 
   if vampire.VampiricDamage == 50 then
     caster:RemoveAbility('research_vampiric_damage')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
   end
 end
 
@@ -290,6 +296,7 @@ function VampiricStats( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
 
   if vampire.VampiricStats == nil then
     vampire.VampiricStats = 0
@@ -302,6 +309,8 @@ function VampiricStats( keys )
 
   if vampire.VampiricStats == 50 then
     caster:RemoveAbility('research_vampiric_stats')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
   end
 end
 
@@ -310,6 +319,7 @@ function PowerUnderworld( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
 
   if vampire.PowerUnderworld == nil then
     vampire.PowerUnderworld = 0
@@ -324,6 +334,8 @@ function PowerUnderworld( keys )
 
   if vampire.PowerUnderworld == 30 then
     caster:RemoveAbility('research_power_underworld')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
   end
 end
 
@@ -332,6 +344,7 @@ function VampiricStrength( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
 
   if vampire.VampiricStrength == nil then
     vampire.VampiricStrength = 0
@@ -342,6 +355,8 @@ function VampiricStrength( keys )
 
   if vampire.VampiricStrength == 50 then
     caster:RemoveAbility('research_vampiric_strength')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
   end
 end
 
@@ -350,6 +365,7 @@ function VampiricAgility( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
 
   if vampire.VampiricAgility == nil then
     vampire.VampiricAgility = 0
@@ -360,6 +376,8 @@ function VampiricAgility( keys )
 
   if vampire.VampiricAgility == 50 then
     caster:RemoveAbility('research_vampiric_agility') 
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
   end
 end
 
@@ -368,6 +386,7 @@ function VampiricIntellect( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
 
   if vampire.VampiricIntellect == nil then
     vampire.VampiricIntellect = 0
@@ -378,7 +397,9 @@ function VampiricIntellect( keys )
 
   if vampire.VampiricIntellect == 50 then
     caster:RemoveAbility('research_vampiric_intellect')
-  end
+  else
+   FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
+ end
 end
 
 function TechUpgrade( keys )

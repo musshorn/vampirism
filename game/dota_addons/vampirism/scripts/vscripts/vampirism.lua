@@ -305,7 +305,7 @@ function GameMode:OnNPCSpawned(keys)
     npc:FindAbilityByName('research_healing_vitality'):SetLevel(1)
     if playerID < 8 then 
       WOOD[playerID] = 10000000 --cheats, real is 50.
-      GOLD[playerID] = 0 --this is how it should look on ship. if you want to add more gold for testing, add to another line -> PlayerResource:SetGold(playerID, 1000, true)
+      GOLD[playerID] = 0 --this is how it should look on ship.
       GOLD[playerID] = 10000000
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
@@ -322,9 +322,12 @@ function GameMode:OnNPCSpawned(keys)
       HUMANS[playerID] = npc
     end
   end
+
   if npc:GetName() == "npc_dota_hero_night_stalker" then
-    local item = CreateItem('item_vampiric_research_center', npc, npc)
-    npc:AddItem(item)
+    if npc:GetItemInSlot(0) == nil then
+      local item = CreateItem('item_vampiric_research_center', npc, npc)
+      npc:AddItem(item)
+    end
   end
 
   local unitName = string.lower(npc:GetUnitName())
@@ -377,7 +380,7 @@ function GameMode:OnNPCSpawned(keys)
     table.insert(INVENTORIES[playerID], npc)
   end
 
-  
+
 end
 
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive
