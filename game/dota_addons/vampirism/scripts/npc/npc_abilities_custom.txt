@@ -5877,6 +5877,50 @@
     }
   }
 
+  //================================================================================= /
+  // Build vampiric research center
+  //================================================================================= /
+  "build_research_center_vampire"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "1"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  ".5"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0.05"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "research_center_vampire"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+        "ItemBuilding"          "item_vampiric_research_center"
+      }
+    }
+  }
 
   "build_cancel"
   {
@@ -7355,6 +7399,360 @@
         {
           "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
         }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Skills
+  //================================================================================= /
+  "research_vampiric_skills"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "5"
+    "GoldCost"          "5"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricSkills"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Damage
+  //================================================================================= /
+  "research_vampiric_damage"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "GoldCost"          "50"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricDamage"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Stats
+  //================================================================================= /
+  "research_vampiric_stats"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "GoldCost"          "500"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricStats"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Power of the Underworld
+  //================================================================================= /
+  "research_power_underworld"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "GoldCost"          "2000"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "PowerUnderworld"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Strength
+  //================================================================================= /
+  "research_vampiric_strength"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "GoldCost"          "250"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricStrength"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Agility
+  //================================================================================= /
+  "research_vampiric_agility"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "GoldCost"          "300"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricAgility"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Intellect
+  //================================================================================= /
+  "research_vampiric_intellect"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "GoldCost"          "90"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricIntellect"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Vampire Sell item
+  //================================================================================= /
+  "vampire_sell_item"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"    "alchemist_goblins_greed"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "VampireSell"
       }
     }
   }

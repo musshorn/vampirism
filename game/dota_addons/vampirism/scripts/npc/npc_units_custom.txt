@@ -6079,4 +6079,89 @@
     "BountyGoldMin"             "0"
     "BountyGoldMax"             "0"
   }
+
+  //================================================================================= 
+  // Vampiric Research Center
+  //=================================================================================
+  "research_center_vampire"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                 "npc_dota_creature"
+    "Model"                     "models/props_structures/bad_barracks001_ranged.vmdl"
+    "ModelScale"                "0.5" 
+    "ConsideredHero"            "0"
+    "HasInventory"              "1" 
+
+    // Abilities
+    //----------------------------------------------------------------
+    
+    "Ability1"          "call_buildui"      // 
+    "Ability2"          "vampire_sell_item"      // 
+    "Ability3"          "build_blocked2"      // Ability 3.
+    "Ability4"          "build_blocked3"         // Ability 4.
+    "Ability5"          "build_blocked4"      // Ability 5.
+    "Ability6"          "build_cancel"      // Ability 6 - Extra.
+    "Ability7"          "research_vampiric_skills"      // Ability 7 - Extra.
+    "Ability8"          "research_vampiric_damage"      // Ability 8 - Extra.
+    "Ability9"          "research_vampiric_stats"
+    "Ability10"         "research_power_underworld"
+    "Ability11"         "research_vampiric_strength"
+    "Ability12"         "research_vampiric_agility"
+    "Ability13"         "research_vampiric_intellect"
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "15"     // Physical protection.
+    "MagicalResistance"         "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackDamageMin"           "0"
+    "AttackDamageMax"           "0"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "0"
+    "AttackAnimationPoint"      "0"
+    "AttackAcquisitionRange"    "0"
+    "AttackRange"               "0"
+    "ProjectileModel"           ""
+    "ProjectileSpeed"           ""
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"           "170"
+    "RingRadius"                "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"     // Type of locomotion - ground, air
+    "MovementSpeed"             "0"   // Speed
+    "MovementTurnRate"          "0"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "2500"   // Base health.
+    "StatusHealthRegen"         "0"   // Health regeneration rate.
+    "StatusMana"                "0"      // Base mana.
+    "StatusManaRegen"           "0"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "900"   // Range of vision during day light.
+    "VisionNighttimeRange"      "800"   // Range of vision at night time.
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "0"
+    "BountyGoldMin"             "0"
+    "BountyGoldMax"             "0"
+  }
+
 }

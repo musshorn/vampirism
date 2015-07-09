@@ -279,1791 +279,1828 @@
 	//================================================================================= 
   // Human Surplus - Engineers
   //=================================================================================
-  	"item_engineer_toolkit"
+  "item_engineer_toolkit"
+  {
+  	"ID"	"2007"
+  	"BaseClass"		"item_datadriven"
+  	"AbilityTextureName"	"item_maelstrom"
+  	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+  	"ItemStackable"		"0"
+  	"ItemKillable"		"1"
+  	"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"		"1"
+  	"ItemRequiresCharges" "0"
+  	"SideShop"			"1"
+  	"AbilityCooldown"	"240"
+  	"GoldCost"			"5"
+  	"LumberCost"		"20000"
+  	"OnSpellStart"
   	{
-  		"ID"	"2007"
-  		"BaseClass"		"item_datadriven"
-  		"AbilityTextureName"	"item_maelstrom"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-  		"ItemStackable"		"0"
-  		"ItemKillable"		"1"
-  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"		"1"
-  		"ItemRequiresCharges" "0"
-  		"SideShop"			"1"
-  		"AbilityCooldown"	"240"
-  		"GoldCost"			"5"
-  		"LumberCost"		"20000"
-  		"OnSpellStart"
+  		"RunScript"
   		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"items.lua"
-  				"Function"		"SpawnEngineers"
-  			}
+  			"ScriptFile"	"items.lua"
+  			"Function"		"SpawnEngineers"
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Human Surplus - Master Vampire Slayer Vest
+  //=================================================================================
+  "item_master_slayer_vest"
+  {
+  	"ID"	"2008"
+  	"BaseClass"		"item_datadriven"
+  	"AbilityTextureName"	"item_glimmer_cape"
+  	"ItemStackable"		"0"
+  	"ItemKillable"		"1"
+  	"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"		"1"
+  	"ItemRequiresCharges" "0"
+  	"SideShop"			"1"
+  	"AbilityCooldown"	"0"
+  	"GoldCost"			"10"
+  	"LumberCost"		"5000"
+
+  	"AbilitySpecial"
+  	{
+  		"01"
+  		{
+  			"var_type"			"FIELD_INTEGER"
+  			"health_bonus"			"3000"
+  		}
+  		"02"
+  		{
+  			"var_type"			"FIELD_INTEGER"
+  			"damage_bonus"		"300"
   		}
   	}
 
-  	//================================================================================= 
-  	// Human Surplus - Master Vampire Slayer Vest
-  	//=================================================================================
-  	"item_master_slayer_vest"
+  	"Modifiers"
   	{
-  		"ID"	"2008"
-  		"BaseClass"		"item_datadriven"
-  		"AbilityTextureName"	"item_glimmer_cape"
-  		"ItemStackable"		"0"
-  		"ItemKillable"		"1"
-  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"		"1"
-  		"ItemRequiresCharges" "0"
-  		"SideShop"			"1"
-  		"AbilityCooldown"	"0"
-  		"GoldCost"			"10"
-  		"LumberCost"		"5000"
-
-  		"AbilitySpecial"
+  		"modifier_master_vest_stats"
   		{
-  			"01"
+  			"Passive"			"1"
+  			"IsHidden"			"1"
+  			"IsDebuff"			"0"
+  	  			
+  			"Properties"
   			{
-  				"var_type"			"FIELD_INTEGER"
-  				"health_bonus"			"3000"
-  			}
-  			"02"
-  			{
-  				"var_type"			"FIELD_INTEGER"
-  				"damage_bonus"		"300"
-  			}
-  		}
-
-  		"Modifiers"
-  		{
-  			"modifier_master_vest_stats"
-  			{
-  				"Passive"			"1"
-  				"IsHidden"			"1"
-  				"IsDebuff"			"0"
-  		  			
-  				"Properties"
-  				{
-  					"MODIFIER_PROPERTY_HEALTH_BONUS" "%health_bonus"
-  				    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage_bonus" 
-  				}
+  				"MODIFIER_PROPERTY_HEALTH_BONUS" "%health_bonus"
+  			    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage_bonus" 
   			}
   		}
   	}
+  }
 
-  	//================================================================================= 
-  	// Human Surplus - Venom Orb
-  	//=================================================================================
-  	"item_venom_orb"
-  	{
-  		"ID"	"2010"
-  		"BaseClass"		"item_datadriven"
-  		"AbilityTextureName"	"item_orb_of_venom"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"		"0"
-  		"ItemKillable"		"1"
-  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"		"0"
-  		"ItemRequiresCharges" "0"
-  		"SideShop"			"1"
-  		"AbilityCooldown"	"0"
-      "Building"      "1"
-      "BuildingSize"  "2"
-      "BuildTime"     "1"
-      "Scale"         "1"
-      "MaxScale"      "2"
-      "CasterCanControl"    "1"
-      "UnitName"            "tower_venom_t1"
-  		"GoldCost"			       "1"
-  		"LumberCost"		        "10000"
+  //================================================================================= 
+  // Human Surplus - Venom Orb
+  //=================================================================================
+  "item_venom_orb"
+  {
+  	"ID"	"2010"
+  	"BaseClass"		"item_datadriven"
+  	"AbilityTextureName"	"item_orb_of_venom"
+  	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"		"0"
+  	"ItemKillable"		"1"
+  	"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"		"0"
+  	"ItemRequiresCharges" "0"
+  	"SideShop"			"1"
+  	"AbilityCooldown"	"0"
+    "Building"      "1"
+    "BuildingSize"  "2"
+    "BuildTime"     "1"
+    "Scale"         "1"
+    "MaxScale"      "2"
+    "CasterCanControl"    "1"
+    "UnitName"            "tower_venom_t1"
+  	"GoldCost"			       "1"
+  	"LumberCost"		        "10000"
 
-      "OnSpellStart"
+    "OnSpellStart"
+    {
+      "RunScript"
       {
-        "RunScript"
-        {
-          "ScriptFile"  "items.lua"
-          "Function"    "AddBuildingToCaster"
-          "AbilityToAdd"  "build_tower_venom_t1"
-        }
+        "ScriptFile"  "items.lua"
+        "Function"    "AddBuildingToCaster"
+        "AbilityToAdd"  "build_tower_venom_t1"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Human Surplus - Circlet of the Vampire Slayer
+  //=================================================================================
+  "item_circlet_slayer"
+  {
+  	"ID"	"2011"
+  	"BaseClass"		"item_datadriven"
+  	"AbilityTextureName"	"item_circlet"
+  	"ItemStackable"		"0"
+  	"ItemKillable"		"1"
+  	"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"		"0"
+  	"ItemRequiresCharges" "0"
+  	"SideShop"			"1"
+  	"AbilityCooldown"	"0"
+  	"GoldCost"			"5"
+  	"LumberCost"		"2000"
+
+  	"AbilitySpecial"
+  	{
+  		"01"
+  		{
+  			"var_type"			"FIELD_INTEGER"
+  			"stat_bonus"		"50"
+  		}
+  	}
+
+  	"Modifiers"
+  	{
+  		"modifier_circlet_stats"
+  		{
+  			"Passive"			"1"
+  			"IsHidden"			"1"
+  			"IsDebuff"			"0"
+  	  			
+  			"Properties"
+  			{
+  				"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%stat_bonus"
+  			    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%stat_bonus"
+  			    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%stat_bonus"  
+  			}
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Human Surplus - Divinity Jewel
+  //=================================================================================
+  "item_divinity_jewel"
+  {
+  	"ID"	"2012"
+  	"BaseClass"		"item_datadriven"
+  	"AbilityTextureName"	"item_point_booster"
+  	"ItemStackable"		"0"
+  	"ItemKillable"		"1"
+  	"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"		"0"
+  	"ItemRequiresCharges" "0"
+  	"SideShop"			"1"
+  	"AbilityCooldown"	"0"
+  	"GoldCost"			"150"
+  	"LumberCost"		"10000"
+
+  	"NeedTech"			"citadel_of_faith"
+
+  	"AbilitySpecial"
+  	{
+  		"01"
+  		{
+  			"var_type"			"FIELD_INTEGER"
+  			"stat_bonus"		"250"
+  		}
+  	}
+
+  	"Modifiers"
+  	{
+  		"modifier_divinity_stats"
+  		{
+  			"Passive"			"1"
+  			"IsHidden"			"1"
+  			"IsDebuff"			"0"
+  	  			
+  			"Properties"
+  			{
+  				"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%stat_bonus"
+  			    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%stat_bonus"
+  			    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%stat_bonus"  
+  			}
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Human Surplus - Pendant of Mana
+  //=================================================================================
+  "item_pendant_mana"
+  {
+  	"ID"	"2013"
+  	"BaseClass"		"item_datadriven"
+  	"AbilityTextureName"	"item_null_talisman"
+  	"ItemStackable"		"0"
+  	"ItemKillable"		"1"
+  	"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"		"0"
+  	"ItemRequiresCharges" "0"
+  	"SideShop"			"1"
+  	"AbilityCooldown"	"0"
+  	"GoldCost"			"5"
+  	"LumberCost"		"2500"
+
+  	"NeedTech"			"citadel_of_faith"
+
+  	"AbilitySpecial"
+  	{
+  		"01"
+  		{
+  			"var_type"			"FIELD_INTEGER"
+  			"mana_bonus"		"10000"
+  		}
+  	}
+
+  	"Modifiers"
+  	{
+  		"modifier_mana_pendant_stats"
+  		{
+  			"Passive"			"1"
+  			"IsHidden"			"1"
+  			"IsDebuff"			"0"
+  	  			
+  			"Properties"
+  			{
+  				"MODIFIER_PROPERTY_MANA_BONUS"			"%mana_bonus"
+  			}
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Human Surplus - Pendant of Vitality
+  //=================================================================================
+  "item_pendant_vitality"
+  {
+  	"ID"	"2014"
+  	"BaseClass"		"item_datadriven"
+  	"AbilityTextureName"	"item_medallion_of_courage"
+  	"ItemStackable"		"0"
+  	"ItemKillable"		"1"
+  	"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"		"0"
+  	"ItemRequiresCharges" "0"
+  	"SideShop"			"1"
+  	"AbilityCooldown"	"0"
+  	"GoldCost"			"5"
+  	"LumberCost"		"5000"
+
+  	"NeedTech"			"citadel_of_faith"
+
+  	"AbilitySpecial"
+  	{
+  		"01"
+  		{
+  			"var_type"			"FIELD_INTEGER"
+  			"health_bonus"		"10000"
+  		}
+  	}
+
+  	"Modifiers"
+  	{
+  		"modifier_vitality_pendant_stats"
+  		{
+  			"Passive"			"1"
+  			"IsHidden"			"1"
+  			"IsDebuff"			"0"
+  	  			
+  			"Properties"
+  			{
+  				"MODIFIER_PROPERTY_HEALTH_BONUS"			"%health_bonus"
+  			}
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Vampiric Concoction
+  //=================================================================================
+  "item_vampiric_concoction"
+  {
+  	"ID"	"2015"
+  	"BaseClass"		"item_datadriven"
+  	"AbilityTextureName"	"item_smoke_of_deceit"
+  	"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"		"0"
+  	"ItemKillable"		"1"
+  	"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"		"0"
+  	"ItemRequiresCharges" "0"
+  	"SideShop"			"1"
+  	"AbilityCooldown"	"150"
+  	"GoldCost"			"40"
+  	"LumberCost"		"0"
+
+    "precache"
+    {
+      "particle"  "particles/items3_fx/lotus_orb_shield.vpcf"
+    }
+
+  	"AbilitySpecial"
+  	{
+  		"01"
+  		{
+  			"var_type"			"FIELD_FLOAT"
+  			"duration"		"15.0"
+  		}
+  	}
+
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_vampiric_concoction"
+        "Target"        "CASTER"
+      }
+    }
+
+  	"Modifiers"
+  	{
+  		"modifier_vampiric_concoction"
+  		{
+  			"Passive"			  "0"
+  			"IsHidden"			"0"
+  			"IsDebuff"			"0"
+  			"Duration"			"%duration"
+
+        "EffectName"        "particles/items3_fx/lotus_orb_shield.vpcf"
+        "EffectAttachType"  "follow_origin"
+
+  			"States"
+  			{
+  				"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+  			}		
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Ring of the Hell Lords
+  //=================================================================================
+  "item_ring_hell_lords"
+  {
+  	"ID"	"2016"
+  	"BaseClass"		         "item_datadriven"
+  	"AbilityTextureName"	"item_ring_aquila"
+    "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+  	"ItemStackable"		"0"
+  	"ItemKillable"		"1"
+  	"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"		"0"
+  	"ItemRequiresCharges" "0"
+  	"SideShop"			"1"
+  	"AbilityCooldown"	"0"
+  	"GoldCost"			"300"
+  	"LumberCost"		"0"
+
+  	"AbilitySpecial"
+  	{
+  		"01"
+  		{
+  			"var_type"			"FIELD_FLOAT"
+  			"range"		      "300"
+  		}
+      "02"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "damage"        "50"
+      }
+      "03"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "max_ghosts"      "5"
+      }
+      "04"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "ghost_speed"     "400"
+      }
+      "05"
+      {
+        "var_type"      "FIELD_FLOAT" 
+        "ring_cd"       "2.0"
+      }
+      "06"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "ghost_interval"  "0.2"
       }
   	}
 
-  	//================================================================================= 
-  	// Human Surplus - Circlet of the Vampire Slayer
-  	//=================================================================================
-  	"item_circlet_slayer"
-  	{
-  		"ID"	"2011"
-  		"BaseClass"		"item_datadriven"
-  		"AbilityTextureName"	"item_circlet"
-  		"ItemStackable"		"0"
-  		"ItemKillable"		"1"
-  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"		"0"
-  		"ItemRequiresCharges" "0"
-  		"SideShop"			"1"
-  		"AbilityCooldown"	"0"
-  		"GoldCost"			"5"
-  		"LumberCost"		"2000"
-
-  		"AbilitySpecial"
-  		{
-  			"01"
-  			{
-  				"var_type"			"FIELD_INTEGER"
-  				"stat_bonus"		"50"
-  			}
-  		}
-
-  		"Modifiers"
-  		{
-  			"modifier_circlet_stats"
-  			{
-  				"Passive"			"1"
-  				"IsHidden"			"1"
-  				"IsDebuff"			"0"
-  		  			
-  				"Properties"
-  				{
-  					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%stat_bonus"
-  				    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%stat_bonus"
-  				    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%stat_bonus"  
-  				}
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Human Surplus - Divinity Jewel
-  	//=================================================================================
-  	"item_divinity_jewel"
-  	{
-  		"ID"	"2012"
-  		"BaseClass"		"item_datadriven"
-  		"AbilityTextureName"	"item_point_booster"
-  		"ItemStackable"		"0"
-  		"ItemKillable"		"1"
-  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"		"0"
-  		"ItemRequiresCharges" "0"
-  		"SideShop"			"1"
-  		"AbilityCooldown"	"0"
-  		"GoldCost"			"150"
-  		"LumberCost"		"10000"
-
-  		"NeedTech"			"citadel_of_faith"
-
-  		"AbilitySpecial"
-  		{
-  			"01"
-  			{
-  				"var_type"			"FIELD_INTEGER"
-  				"stat_bonus"		"250"
-  			}
-  		}
-
-  		"Modifiers"
-  		{
-  			"modifier_divinity_stats"
-  			{
-  				"Passive"			"1"
-  				"IsHidden"			"1"
-  				"IsDebuff"			"0"
-  		  			
-  				"Properties"
-  				{
-  					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%stat_bonus"
-  				    "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "%stat_bonus"
-  				    "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%stat_bonus"  
-  				}
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Human Surplus - Pendant of Mana
-  	//=================================================================================
-  	"item_pendant_mana"
-  	{
-  		"ID"	"2013"
-  		"BaseClass"		"item_datadriven"
-  		"AbilityTextureName"	"item_null_talisman"
-  		"ItemStackable"		"0"
-  		"ItemKillable"		"1"
-  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"		"0"
-  		"ItemRequiresCharges" "0"
-  		"SideShop"			"1"
-  		"AbilityCooldown"	"0"
-  		"GoldCost"			"5"
-  		"LumberCost"		"2500"
-
-  		"NeedTech"			"citadel_of_faith"
-
-  		"AbilitySpecial"
-  		{
-  			"01"
-  			{
-  				"var_type"			"FIELD_INTEGER"
-  				"mana_bonus"		"10000"
-  			}
-  		}
-
-  		"Modifiers"
-  		{
-  			"modifier_mana_pendant_stats"
-  			{
-  				"Passive"			"1"
-  				"IsHidden"			"1"
-  				"IsDebuff"			"0"
-  		  			
-  				"Properties"
-  				{
-  					"MODIFIER_PROPERTY_MANA_BONUS"			"%mana_bonus"
-  				}
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Human Surplus - Pendant of Vitality
-  	//=================================================================================
-  	"item_pendant_vitality"
-  	{
-  		"ID"	"2014"
-  		"BaseClass"		"item_datadriven"
-  		"AbilityTextureName"	"item_medallion_of_courage"
-  		"ItemStackable"		"0"
-  		"ItemKillable"		"1"
-  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"		"0"
-  		"ItemRequiresCharges" "0"
-  		"SideShop"			"1"
-  		"AbilityCooldown"	"0"
-  		"GoldCost"			"5"
-  		"LumberCost"		"5000"
-
-  		"NeedTech"			"citadel_of_faith"
-
-  		"AbilitySpecial"
-  		{
-  			"01"
-  			{
-  				"var_type"			"FIELD_INTEGER"
-  				"health_bonus"		"10000"
-  			}
-  		}
-
-  		"Modifiers"
-  		{
-  			"modifier_vitality_pendant_stats"
-  			{
-  				"Passive"			"1"
-  				"IsHidden"			"1"
-  				"IsDebuff"			"0"
-  		  			
-  				"Properties"
-  				{
-  					"MODIFIER_PROPERTY_HEALTH_BONUS"			"%health_bonus"
-  				}
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Vampiric Concoction
-  	//=================================================================================
-  	"item_vampiric_concoction"
-  	{
-  		"ID"	"2015"
-  		"BaseClass"		"item_datadriven"
-  		"AbilityTextureName"	"item_smoke_of_deceit"
-  		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"		"0"
-  		"ItemKillable"		"1"
-  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"		"0"
-  		"ItemRequiresCharges" "0"
-  		"SideShop"			"1"
-  		"AbilityCooldown"	"150"
-  		"GoldCost"			"40"
-  		"LumberCost"		"0"
-
-      "precache"
+    "OnEquip"
+    {
+      "ApplyModifier"
       {
-        "particle"  "particles/items3_fx/lotus_orb_shield.vpcf"
+        "ModifierName"  "modifier_ring_hell_lords"
+        "Target"     "CASTER"
       }
+    }
 
-  		"AbilitySpecial"
-  		{
-  			"01"
-  			{
-  				"var_type"			"FIELD_FLOAT"
-  				"duration"		"15.0"
-  			}
-  		}
-
-      "OnSpellStart"
-      {
-        "ApplyModifier"
-        {
-          "ModifierName"  "modifier_vampiric_concoction"
-          "Target"        "CASTER"
-        }
-      }
-
-  		"Modifiers"
-  		{
-  			"modifier_vampiric_concoction"
-  			{
-  				"Passive"			  "0"
-  				"IsHidden"			"0"
-  				"IsDebuff"			"0"
-  				"Duration"			"%duration"
-
-          "EffectName"        "particles/items3_fx/lotus_orb_shield.vpcf"
-          "EffectAttachType"  "follow_origin"
-
-  				"States"
-  				{
-  					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-  				}		
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Ring of the Hell Lords
-  	//=================================================================================
-  	"item_ring_hell_lords"
+  	"Modifiers"
   	{
-  		"ID"	"2016"
-  		"BaseClass"		         "item_datadriven"
-  		"AbilityTextureName"	"item_ring_aquila"
-      "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-  		"ItemStackable"		"0"
-  		"ItemKillable"		"1"
-  		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"		"0"
-  		"ItemRequiresCharges" "0"
-  		"SideShop"			"1"
-  		"AbilityCooldown"	"0"
-  		"GoldCost"			"300"
-  		"LumberCost"		"0"
-
-  		"AbilitySpecial"
+  		"modifier_ring_hell_lords"
   		{
-  			"01"
-  			{
-  				"var_type"			"FIELD_FLOAT"
-  				"range"		      "300"
-  			}
-        "02"
-        {
-          "var_type"      "FIELD_INTEGER"
-          "damage"        "50"
-        }
-        "03"
-        {
-          "var_type"      "FIELD_INTEGER"
-          "max_ghosts"      "5"
-        }
-        "04"
-        {
-          "var_type"      "FIELD_INTEGER"
-          "ghost_speed"     "400"
-        }
-        "05"
-        {
-          "var_type"      "FIELD_FLOAT" 
-          "ring_cd"       "2.0"
-        }
-        "06"
-        {
-          "var_type"      "FIELD_FLOAT"
-          "ghost_interval"  "0.2"
-        }
-  		}
+  			"Passive"			  "0"
+  			"IsHidden"			"0"
+  			"IsDebuff"			"0"
 
-      "OnEquip"
-      {
-        "ApplyModifier"
+        "OnCreated"
         {
-          "ModifierName"  "modifier_ring_hell_lords"
-          "Target"     "CASTER"
-        }
-      }
-
-  		"Modifiers"
-  		{
-  			"modifier_ring_hell_lords"
-  			{
-  				"Passive"			  "0"
-  				"IsHidden"			"0"
-  				"IsDebuff"			"0"
-
-          "OnCreated"
+          "RunScript"
           {
-            "RunScript"
-            {
-              "ScriptFile"  "items.lua"
-              "Function"    "GhostRing"
-            }
+            "ScriptFile"  "items.lua"
+            "Function"    "GhostRing"
           }
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Hire Shade
-  	//=================================================================================
-  	"hire_shade"
-  	{
-  		"ID"	"2017"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_hire_shade"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-      "ItemPermanent" "0"
-      "ItemInitialCharges"  "1"
-      "ItemCastOnPickup"  "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"5"
-  		"LumberCost"			"0"
-  		"FoodCost"				"1"
-
-      "OnSpellStart"
-      {
-        "SpendCharge" {}
-        "RunScript"
-        {
-          "ScriptFile"  "items.lua"
-          "Function"    "HireUnit"
-          "Mercenary"   "merc_shade"
         }
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Hire Shade
+  //=================================================================================
+  "hire_shade"
+  {
+  	"ID"	"2017"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_hire_shade"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+    "ItemPermanent" "0"
+    "ItemInitialCharges"  "1"
+    "ItemCastOnPickup"  "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"5"
+  	"LumberCost"			"0"
+  	"FoodCost"				"1"
+
+    "OnSpellStart"
+    {
+      "SpendCharge" {}
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "HireUnit"
+        "Mercenary"   "merc_shade"
       }
-  	}
+    }
+  }
 
-  	//================================================================================= 
-  	// Hire Avernal
-  	//=================================================================================
-  	"hire_avernal"
+  //================================================================================= 
+  // Hire Avernal
+  //=================================================================================
+  "hire_avernal"
+  {
+  	"ID"					"2018"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_hire_avernal"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+    "ItemPermanent" "0"
+    "ItemInitialCharges"  "1"
+    "ItemCastOnPickup"  "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"20"
+  	"LumberCost"			"0"
+  	"FoodCost"				"1"
+
+  	"OnSpellStart"
   	{
-  		"ID"					"2018"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_hire_avernal"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-      "ItemPermanent" "0"
-      "ItemInitialCharges"  "1"
-      "ItemCastOnPickup"  "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"20"
-  		"LumberCost"			"0"
-  		"FoodCost"				"1"
-
-  		"OnSpellStart"
+      "SpendCharge" {}
+  		"RunScript"
   		{
-        "SpendCharge" {}
-  			"RunScript"
-  			{
-  				"ScriptFile"	"items.lua"
-  				"Function"		"HireUnit"
-  				"Mercenary"		"merc_avernal"
-  			}
+  			"ScriptFile"	"items.lua"
+  			"Function"		"HireUnit"
+  			"Mercenary"		"merc_avernal"
   		}
   	}
+  }
 
-  	//================================================================================= 
-  	// Hire Avernal Meteor
-  	//=================================================================================
-  	"hire_avernal_meteor"
+  //================================================================================= 
+  // Hire Avernal Meteor
+  //=================================================================================
+  "hire_avernal_meteor"
+  {
+  	"ID"					"2019"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_hire_avernal_meteor"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+    "ItemPermanent" "0"
+    "ItemInitialCharges"  "1"
+    "ItemCastOnPickup"  "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"70"
+  	"LumberCost"			"0"
+  	"FoodCost"				"1"
+
+  	"OnSpellStart"
   	{
-  		"ID"					"2019"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_hire_avernal_meteor"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-      "ItemPermanent" "0"
-      "ItemInitialCharges"  "1"
-      "ItemCastOnPickup"  "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"70"
-  		"LumberCost"			"0"
-  		"FoodCost"				"1"
-
-  		"OnSpellStart"
+      "SpendCharge" {}
+  		"RunScript"
   		{
-        "SpendCharge" {}
-  			"RunScript"
-  			{
-  				"ScriptFile"	"items.lua"
-  				"Function"		"HireUnit"
-  				"Mercenary"		"merc_avernal_meteor"
-  			}
+  			"ScriptFile"	"items.lua"
+  			"Function"		"HireUnit"
+  			"Mercenary"		"merc_avernal_meteor"
   		}
   	}
+  }
 
-  	//================================================================================= 
-  	// Pulse Staff
-  	//=================================================================================
-  	"item_pulse_staff"
-  	{
-  		"ID"					"2020"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_dagon"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"30"
-      "AbilityManaCost"   "500"
-  		"GoldCost"				"70"
-  		"LumberCost"			"0"
-      "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-      "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
-      "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-      "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
-      "AbilityCastRange"          "500"
+  //================================================================================= 
+  // Pulse Staff
+  //=================================================================================
+  "item_pulse_staff"
+  {
+  	"ID"					"2020"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_dagon"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"30"
+    "AbilityManaCost"   "500"
+  	"GoldCost"				"70"
+  	"LumberCost"			"0"
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "AbilityCastRange"          "500"
   
-      "AbilitySpecial"
-      {
-        "01"
-        {
-          "var_type"          "FIELD_INTEGER"
-          "damage"            "5000"
-        }
-      }
-      
-      "OnSpellStart"
-      {
-        "RunScript"
-        {
-          "ScriptFile"  "items.lua"
-          "Function"    "PulseStaffCheck"
-          "Target"      "TARGET"
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Immunity Shield
-  	//=================================================================================
-  	"item_immunity_shield"
-  	{
-  		"ID"					"2021"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_immunity_shield"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"60"
-  		"GoldCost"				"70"
-  		"LumberCost"			"0"
-
-      "OnSpellStart"
-      {
-        "ApplyModifier"
-        {
-          "ModifierName"  "modifier_immunity_shield"
-          "Target"     "CASTER"
-        }
-      }
-  		"Modifiers"
-  		{
-  			"modifier_immunity_shield"
-  			{
-  				"Passive"			  "0"
-  				"IsHidden"			"0"
-  				"IsDebuff"			"0"
-  				"Duration"			"10"
-  		  		
-  				"States"
-  				{
-  					"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
-  				}
-
-          "OnCreated"
-          {
-            "RunScript"
-            {
-              "ScriptFile"  "items.lua"
-              "Function"    "ShieldParticle"
-              "Target"      "CASTER"
-            }
-          } 
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Dracula's Urn
-  	//=================================================================================
-  	"item_dracula_urn"
-  	{
-  		"ID"					"2022"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_urn_of_shadows"
-      "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"30"
-      "AbilityManaCost"   "300"
-  		"GoldCost"				"200"
-  		"LumberCost"			"0"
-
-  		"OnSpellStart"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
-  				"Function"		"UrnReveal"
-          "Target"    "POINT"
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Rod of Teleportation
-  	//=================================================================================
-  	"item_rod_teleportation"
-  	{
-  		"ID"					             "2023"
-  		"BaseClass"				         "item_datadriven"
-  		"AbilityTextureName"	     "item_staff_of_wizardry"
-  		"AbilityBehavior"		         "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
-  		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
-      "AbilityChannelTime" "3.0"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"100"
-  		"LumberCost"			"0"
-
-  		"OnSpellStart"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"items.lua"
-  				"Function"		"RodTeleportation"
-  			}
-  		}
-      "OnChannelSucceeded"
-      {
-        "RunScript"
-        {
-          "ScriptFile"  "items.lua"
-          "Function"    "RodFinish"
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Hire Assassin
-  	//=================================================================================
-  	"hire_assassin"
-  	{
-  		"ID"					"2024"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_hire_assassin"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-      "ItemPermanent" "0"
-      "ItemInitialCharges"  "1"
-      "ItemCastOnPickup"  "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"75"
-  		"LumberCost"			"0"
-  		"FoodCost"				"2"
-
-  		"OnSpellStart"
-  		{
-        "SpendCharge" {}
-  			"RunScript"
-  			{
-  				"ScriptFile"	"items.lua"
-  				"Function"		"HireUnit"
-  				"Mercenary"		"merc_assassin"
-  			}
-  		}
-  	}
-  	//================================================================================= 
-  	// Hire Fallen Hound
-  	//=================================================================================
-  	"hire_fallen_hound"
-  	{
-  		"ID"					     "2025"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_hire_fallen_hound"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-      "ItemPermanent" "0"
-      "ItemInitialCharges"  "1"
-      "ItemCastOnPickup"  "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"75"
-  		"LumberCost"			"0"
-  		"FoodCost"				"2"
-
-  		"OnSpellStart"
-  		{
-        "SpendCharge" {}
-  			"RunScript"
-  			{
-  				"ScriptFile"	"items.lua"
-  				"Function"		"HireUnit"
-  				"Mercenary"		"merc_fallen_hound"
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Trade Wood
-  	//=================================================================================
-  	"item_trade_wood"
-  	{
-  		"ID"					"2026"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_trade_wood"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-      "ItemPermanent" "0"
-      "ItemInitialCharges"  "1"
-      "ItemCastOnPickup"  "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"0"
-  		"LumberCost"			"8000"
-
-  		"OnSpellStart"
-  		{
-        "SpendCharge" {}
-  			"RunScript"
-  			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
-  				"Function"		"TradeWood"
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Burst Gem
-  	//=================================================================================
-  	"item_burst_gem"
-  	{
-  		"ID"					"2027"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_gem"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-  		"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-      "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"290"
-  		"LumberCost"			"0"
-
-  		"AbilitySpecial"
-  		{
-  			"01"
-  			{
-  				"var_type"			"FIELD_INTEGER"
-  				"damage"			"1500"
-  			}
-  		}
-
-  		"OnSpellStart"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
-  				"Function"		"BurstGem"
-          "Target"      "TARGET"
-  			}
-  		}
-      "OnProjectileHitUnit"
-      {
-        "DeleteOnHit"  "1"
-        "RunScript"
-        {
-          "ScriptFile"  "vscripts/scripts/items.lua"
-          "Function"    "BurstHit"
-          "Target"      "TARGET"
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Massive Grave
-  	//=================================================================================
-  	"item_massive_grave"
-  	{
-  		"ID"					     "2029"
-  		"BaseClass"				     "item_datadriven"
-  		"AbilityTextureName"	"item_massive_grave"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"30"
-  		"LumberCost"			"0"
-
-  		"OnSpellStart"
-  		{
-  			"RunScript"
-  			{
-  				"ScriptFile"	  "items.lua"
-  				"Function"		  "AddBuildingToCaster"
-          "AbilityToAdd"  "build_massive_grave"
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Cloak of Shadows
-  	//=================================================================================
-  	"item_cloak_shadows"
-  	{
-  		"ID"					"2030"
-  		"BaseClass"				"item_datadriven"
-      "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"AbilityTextureName"	"item_hood_of_defiance"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"325"
-  		"LumberCost"			"0"
-
-      "precache"
-      {
-        "particle"  "particles/items2_fx/shadow_amulet.vpcf"
-      }
-
-      "Modifiers"
-      {
-        "modifier_cloak_invis"
-        {
-          "Passive"      "1"
-          "IsHidden"      "1"
-          "IsDebuff"      "0"
-      
-          "EffectName"        "particles/items2_fx/shadow_amulet.vpcf"
-          "EffectAttachType"  "follow_origin"
-          "States"
-          {
-            "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
-          }
-        }
-
-      }
-  	}
-
-  	//================================================================================= 
-  	// Rain of Avernus
-  	//=================================================================================
-  	"item_avernus_rain"
-  	{
-  		"ID"					"2031"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_avernus_rain"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"30"
-      "AbilityManaCost"       "1000"
-  		"GoldCost"				"150"
-  		"LumberCost"			"0"
-
-      "precache"
-      {
-        "particle"  "particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf"
-      }
-
-      "OnSpellStart"
-      {
-        "RunScript"
-        {
-          "ScriptFile"  "items.lua"
-          "Function"    "RainOfAvernus"
-        }
-        "FireEffect"
-        {
-          "EffectName"        "particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf"
-          "EffectAttachType"  "follow_origin"
-          "Target"            "CASTER"
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Wind Walk Potion
-  	//=================================================================================
-  	"item_wind_walk_potion"
-  	{
-  		"ID"					"2032"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_bottle_invisibility"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "1"
-      "ItemInitialCharges"     "3"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"30"
-  		"LumberCost"			"0"
-
-      //Needs passive ItemMoveSpeed
-
-      "OnSpellStart"
-      {
-        "SpendCharge" {}
-
-        "ApplyModifier"
-        {
-          "ModifierName"  "modifier_invisible"
-          "Target"     "CASTER"
-          "Duration"    "600"
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Hire French Man
-  	//=================================================================================
-  	"hire_french_man"
-  	{
-  		"ID"					"2033"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_hire_french_man"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-      "ItemPermanent" "0"
-      "ItemInitialCharges"  "1"
-      "ItemCastOnPickup"  "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"5"
-  		"LumberCost"			"0"
-  		"FoodCost"				"2"
-
-  		"OnSpellStart"
-  		{
-        "SpendCharge" {}
-  			"RunScript"
-  			{
-  				"ScriptFile"	"vscripts/scripts/items.lua"
-  				"Function"		"HireUnit"
-  				"Mercenary"		"french_man"
-  			}
-  		}
-  	}
-
-  	//================================================================================= 
-  	// Claws of the Dreadlord
-  	//=================================================================================
-  	"item_claws_dreadlord"
-  	{
-  		"ID"					"2034"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_claws_dreadlord"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "1"
-      "ItemInitialCharges"  "50"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"10"
-      "AbilityManaCost"   "1000"
-  		"GoldCost"				"125"
-  		"LumberCost"			"0"
-
-      "precache"
-      {
-        "particle"  "particles/units/heroes/hero_warlock/warlock_shadow_word_debuff.vpcf"
-      }
-
-      "OnSpellStart"
-      {
-        "SpendCharge" {}
-        "ApplyModifier"
-        {
-          "ModifierName"  "modifier_dreadlord_buff"
-          "Target"     "CASTER"
-          "Duration"    "5"
-        }
-      }
-
-		  "Modifiers"
-      {
-        "modifier_dreadlord_buff"
-        {
-          "Passive"       "0"
-          "IsHidden"      "0"
-          "IsDebuff"      "0"
-      
-          "EffectName"        "particles/units/heroes/hero_warlock/warlock_shadow_word_debuff.vpcf"
-          "EffectAttachType"  "follow_origin"
-      
-          "Properties"
-          {
-            "MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "20"
-            "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "500" 
-            "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"   "200"
-          }          
-        }
-      }	
-  	}
-
-  	//================================================================================= 
-  	// Hire Meat Carrier
-  	//=================================================================================
-  	"hire_meat_carrier"
-  	{
-  		"ID"					"2035"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_winter_ham"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-      "ItemPermanent" "0"
-      "ItemInitialCharges"  "1"
-      "ItemCastOnPickup"  "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"60"
-  		"LumberCost"			"0"
-
-		  "OnSpellStart"
-		  {
-        "SpendCharge" {}
-		  	"RunScript"
-		  	{
-		  		"ScriptFile"	"vscripts/scripts/items.lua"
-		  		"Function"		"HireUnit"
-		  		"Mercenary"		"merc_meat_carrier"
-		  	}
-		  } 		
-  	}
-
-  	//================================================================================= 
-  	// Silent Whisper
-  	//=================================================================================
-  	"item_silent_whisper"
-  	{
-  		"ID"					"2036"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_orchid"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"60"
-      "AbilityManaCost"   "1000"
-  		"GoldCost"				"50"
-  		"LumberCost"			"0"
-
-      "precache"
-      {
-        "particle"  "particles/units/heroes/hero_death_prophet/death_prophet_silence.vpcf"
-        "particle"  "particles/units/heroes/hero_death_prophet/death_prophet_silence_impact.vpcf"
-      }
-
-		  "OnSpellStart"
-		  {
-		  	"RunScript"
-		  	{
-		  		"ScriptFile"	"vscripts/scripts/items.lua"
-		  		"Function"		"SilentWhisper"
-		  	}
-
-        //Particles taken from SpellLibrary.
-        "FireEffect"
-        {
-          "EffectName"        "particles/units/heroes/hero_death_prophet/death_prophet_silence.vpcf"
-          "EffectAttachType"  "world_origin"
-          "Target"            "CASTER"
-          "ControlPoints"
-          {
-            "01"  "500 0 0"
-          }
-        }
-        "FireEffect"
-        {
-          "EffectName"        "particles/units/heroes/hero_death_prophet/death_prophet_silence_impact.vpcf"
-          "EffectAttachType"  "follow_overhead"
-          "Target"
-          {
-            "Center"  "CASTER"
-            "Radius"  "500"
-            "Teams"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
-            "Types"   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-          }
-          "ControlPoints"
-          {
-            "00"  "1 0 0"
-          }       
-        }
-		  }	
-  	}
-
-  	//================================================================================= 
-  	// Refresh Potion
-  	//=================================================================================
-  	"item_refresh_potion"
-  	{
-  		"ID"					"2037"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_greater_salve"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "1"
-      "ItemInitialCharges"     "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"450"
-  		"GoldCost"				"275"
-  		"LumberCost"			"0"
-
-      "precache"
-      {
-        "particle"  "particles/items2_fx/refresher.vpcf"
-      }
-
-      "Modifiers"
-      {
-        "modifier_refresh_potion_buff"
-        {
-          "Passive"      "0"
-          "IsHidden"      "1"
-          "IsDebuff"      "0"
-      
-          "EffectName"    "particles/items2_fx/refresher.vpcf"
-          "EffectAttachType"  "follow_origin"
-        }
-      }
-
-      "OnSpellStart"
-      {
-        "ApplyModifier"
-        {
-          "ModifierName"  "modifier_refresh_potion_buff"
-          "Target"     "CASTER"
-        }
-        "RunScript"
-        {
-          "ScriptFile"  "items.lua"
-          "Function"    "RefreshPotion"
-        }
-        "Heal"
-        {
-          "Target"        "CASTER"
-          "HealAmount"  "25000"
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Wand of Shadowsight
-  	//=================================================================================
-  	"item_wand_shadowsight"
-  	{
-  		"ID"					"2038"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_magic_wand"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-      "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-      "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"10"
-  		"LumberCost"			"0"
-
-  		"OnSpellStart"
-      {
-        "RunScript"
-        {
-          "ScriptFile"  "items.lua"
-          "Function"    "ShadowSight"
-          "Target"      "TARGET"
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Cyclone Wand
-  	//=================================================================================
-  	"item_wand_cyclone"
-  	{
-  		"ID"					"2039"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_cyclone"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-      "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-      "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"2"
-  		"LumberCost"			"0"
-
-  		"OnSpellStart"
-      {
-        "RunScript"
-        {
-          "ScriptFile"  "items.lua"
-          "Function"    "CycloneWand"
-          "Target"      "TARGET"
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Sentry Wards
-  	//=================================================================================
-  	"item_sentry_wards"
-  	{
-  		"ID"					"2040"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_ward_observer"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-      "ItemInitialCharges"    "3"
-  		"ItemRequiresCharges"   "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"15"
-  		"LumberCost"			"0"
-
-  		"OnSpellStart"
-      {
-        "SpendCharge" {}
-        "RunScript"
-        {
-          "ScriptFile"  "items.lua"
-          "Function"    "SpawnWard"
-          "Target"      "POINT"
-        }
-      }
-
-      "Modifiers"
-      {
-        "modifier_ward_time"
-        {
-          "Passive"      "0"
-          "IsHidden"      "0"
-          "Duration"      "10"
-           
-          "OnDestroy"
-          {
-            "RemoveUnit"
-            {
-              "Target"    "CASTER"
-            }
-          }
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Blades of Attack
-  	//=================================================================================
-  	"item_blades_attack"
-  	{
-  		"ID"					"2041"
-  		"BaseClass"				"item_datadriven"
-      "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"AbilityTextureName"	"item_blades_of_attack"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"2"
-  		"LumberCost"			"0"
-
-  		"Modifiers"
-      {
-        "modifier_claws_damage"
-        {
-          "Passive"      "1"
-          "IsHidden"      "1"
-      
-          "Properties"
-          {
-            "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"    "20"
-          }
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Ring of Regeneration
-  	//=================================================================================
-  	"item_ring_regen"
-  	{
-  		"ID"					"2042"
-  		"BaseClass"				"item_datadriven"
-      "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"AbilityTextureName"	"item_ring_of_regen"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"6"
-  		"LumberCost"			"0"
-
-  		"Modifiers"
-      {
-        "modifier_ring_regen"
-        {
-          "Passive"      "1"
-          "IsHidden"      "1"
-            
-          "Properties"
-          {
-            "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"    "20"
-          }
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Replenish Potion
-  	//=================================================================================
-  	"item_replenish_potion"
-  	{
-  		"ID"					"2043"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_salve"
-  		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-      "ItemInitialCharges"    "1"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"2"
-  		"LumberCost"			"0"
-
-  		"precache"
-      {
-        "particle"  "particles/items_fx/bottle.vpcf"
-      }
-
-      "Modifiers"
-      {
-        "modifier_replenish_bonus"
-        {
-          "Passive"      "0"
-          "IsHidden"      "0"
-      
-          "EffectName"    "particles/items_fx/bottle.vpcf"
-          "EffectAttachType"  "follow_origin"
-      
-          "Properties"
-          {
-            "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"       "66.66"
-            "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"         "33.33" 
-          }
-
-          "OnAttacked"
-          {
-            "RemoveModifier"
-            {
-              "ModifierName"  "modifier_replenish_bonus"
-              "Target"     "TARGET"
-            }
-          }
-        }
-      }
-
-      "OnSpellStart"
-      {
-        "SpendCharge" {}
-        "ApplyModifier"
-        {
-          "ModifierName"  "modifier_replenish_bonus"
-          "Target"     "CASTER"
-          "Duration"    "30"
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Amulet of Protection
-  	//=================================================================================
-  	"item_amulet_protection"
-  	{
-  		"ID"					"2044"
-  		"BaseClass"				"item_datadriven"
-      "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"AbilityTextureName"	"item_solar_crest"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"2"
-  		"LumberCost"			"0"
-
-  		"Modifiers"
-      {
-        "modifier_amulet_armor"
-        {
-          "Passive"      "0"
-          "IsHidden"      "0"
-            
-          "Properties"
-          {
-            "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"    "1"
-          }
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Dracula's Cloak - recipie -- Your KV's shouldn't look like this unless you're using shopUI.
-  	//=================================================================================
-  	"item_recipe_dracula_cloak"
-  	{
-  		"ID"					"2045"
-  		"BaseClass"				"item_recipe_arcane_boots"
-  		"AbilityTextureName"	"item_assault"
-
-  		// Recipe
-      //-------------------------------------------------------------------------------------------------------------
-      "ItemRecipe"          "1"
-      "ItemResult"          "item_dracula_cloak"
-      "ItemRequirements"
-      {
-        "01"            "item_cloak_shadows"
-        "02"            "item_demonic_remains"
-        "03"            "item_gauntlets_underworld"
-      }
-  	}
-
-  	//================================================================================= 
-  	// Ricochet Gem - recipie -- Your KV's shouldn't look like this unless you're using shopUI.
-  	//=================================================================================
-  	"item_recipe_ricochet_gem"
-  	{
-  		"ID"					        "2046"
-  		"BaseClass"				    "item_recipe_arcane_boots"
-  		"AbilityTextureName"	"item_skadi"
-  		"GoldCost"				    "200"
-
-  		// Recipe
-      //-------------------------------------------------------------------------------------------------------------
-      "ItemRecipe"          "1"
-      "ItemResult"          "item_ricochet_gem"
-      "ItemRequirements"
-      {
-        "01"            "item_pulse_staff"
-        "02"            "item_burst_gem"
-      } 
-  	}
-
-  	//================================================================================= 
-  	// Gauntlets of the Underworld
-  	//=================================================================================
-  	"item_gauntlets_underworld"
-  	{
-  		"ID"					"2047"
-  		"BaseClass"				"item_datadriven"
-  		"AbilityTextureName"	"item_armlet_active"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"2000"
-  		"LumberCost"			"0"
-
-  		"Modifiers"
-      {
-        "modifier_gauntlets_underworld"
-        {
-          "Passive"      "0"
-          "IsHidden"      "0"
-            
-          "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
-          "Properties"
-          {
-            "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "2500"
-            "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "2500"
-            "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "2500"
-            "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"  "6000"
-          }
-          "States"
-          {
-            "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
-          }
-        }
-      }
-  	}
-
-  	//================================================================================= 
-  	// Gauntlets of Hellfire - Credit to SpellLibrary.
-  	//=================================================================================
-  	"item_gauntlets_hellfire"
-  	{
-  		"ID"					"2048"
-  		"BaseClass"				"item_datadriven"
-      "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-  		"AbilityTextureName"	"item_gauntlets_hellfire"
-      "AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"
-  		"ItemStackable"			"0"
-  		"ItemKillable"			"1"
-  		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-  		"ItemPermanent"			"0"
-  		"ItemRequiresCharges"   "0"
-  		"SideShop"				"1"
-  		"AbilityCooldown"		"0"
-  		"GoldCost"				"1800"
-  		"LumberCost"			"0"
-
-  		// Special
-      //-------------------------------------------------------------------------------------------------------------
-      "AbilitySpecial"
-      {
-        "01"
-        {
-          "var_type"            "FIELD_FLOAT"
-          "bonus_reset_time"        "5"
-        }
-        "02"
-        {
-          "var_type"            "FIELD_INTEGER"
-          "damage_per_stack"        "50"
-        }
-      }
-      
-      // Data driven
-      //-------------------------------------------------------------------------------------------------------------
-      "precache"
-      {
-        "particle"              "particles/units/heroes/hero_ursa/ursa_fury_swipes.vpcf"
-        "particle"              "particles/units/heroes/hero_ursa/ursa_fury_swipes_debuff.vpcf"
-      }
-      
-      "Modifiers"
-      {
-        "modifier_hellfire_gauntlets_caster_datadriven"
-        {
-          "Passive"             "1"
-          "IsHidden"            "0"
-          "IsPurgable"          "0"
-        
-          "OnAttackLanded"
-          {
-            "RunScript"
-            {
-              "ScriptFile"      "items.lua"
-              "Function"        "HellfireGauntlets"
-            }
-          }
-
-          "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
-          "Properties"
-          {
-            "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "250"
-            "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "250"
-            "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "250"
-            "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"  "2000"
-          }
-        }
-        
-        "modifier_hellfire_gauntlets_target_datadriven"
-        {
-          "IsHidden"          "0"
-          "IsPurgable"        "0"
-          "IsDebuff"          "1"
-          
-          "EffectName"        "particles/units/heroes/hero_ursa/ursa_fury_swipes_debuff.vpcf"
-          "EffectAttachType"      "follow_overhead"
-          
-          "OnCreated"
-          {
-            "AttachEffect"
-            {
-              "Target"        "TARGET"
-              "EffectName"      "particles/units/heroes/hero_ursa/ursa_fury_swipes.vpcf"
-              "EffectAttachType"    "follow_overhead"
-            }
-          }
-        }
-      }
-  	}
-
-    //================================================================================= 
-    // Dracula's Cloak
-    //=================================================================================
-    "item_dracula_cloak"
+    "AbilitySpecial"
     {
-      "ID"          "2049"
-      "BaseClass"       "item_datadriven"
-      "AbilityTextureName"  "item_assault"
-      "ItemStackable"     "0"
-      "ItemKillable"      "1"
-      "ItemShareability"    "ITEM_FULLY_SHAREABLE"
-      "ItemPermanent"     "0"
-      "ItemRequiresCharges"   "0"
-      "SideShop"        "1"
-      "AbilityCooldown"   "0"
-      "GoldCost"        "3275"
-      "LumberCost"      "0"
-
-      "Modifiers"
+      "01"
       {
-        "modifier_dracula_cloak"
+        "var_type"          "FIELD_INTEGER"
+        "damage"            "5000"
+      }
+    }
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "PulseStaffCheck"
+        "Target"      "TARGET"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Immunity Shield
+  //=================================================================================
+  "item_immunity_shield"
+  {
+  	"ID"					"2021"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_immunity_shield"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"60"
+  	"GoldCost"				"70"
+  	"LumberCost"			"0"
+
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_immunity_shield"
+        "Target"     "CASTER"
+      }
+    }
+  	"Modifiers"
+  	{
+  		"modifier_immunity_shield"
+  		{
+  			"Passive"			  "0"
+  			"IsHidden"			"0"
+  			"IsDebuff"			"0"
+  			"Duration"			"10"
+  	  		
+  			"States"
+  			{
+  				"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
+  			}
+
+        "OnCreated"
         {
-          "Passive"      "1"
-          "IsHidden"      "1"
-          "IsDebuff"      "0"
-            
-          "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
-          "Properties"
+          "RunScript"
           {
-            "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "2500"
-            "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "2500"
-            "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "2500"
-            "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"  "6000"
+            "ScriptFile"  "items.lua"
+            "Function"    "ShieldParticle"
+            "Target"      "CASTER"
           }
-          "States"
+        } 
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Dracula's Urn
+  //=================================================================================
+  "item_dracula_urn"
+  {
+  	"ID"					"2022"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_urn_of_shadows"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"30"
+    "AbilityManaCost"   "300"
+  	"GoldCost"				"200"
+  	"LumberCost"			"0"
+
+  	"OnSpellStart"
+  	{
+  		"RunScript"
+  		{
+  			"ScriptFile"	"vscripts/scripts/items.lua"
+  			"Function"		"UrnReveal"
+        "Target"    "POINT"
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Rod of Teleportation
+  //=================================================================================
+  "item_rod_teleportation"
+  {
+  	"ID"					             "2023"
+  	"BaseClass"				         "item_datadriven"
+  	"AbilityTextureName"	     "item_staff_of_wizardry"
+  	"AbilityBehavior"		         "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+  	"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+  	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
+    "AbilityChannelTime" "3.0"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"100"
+  	"LumberCost"			"0"
+
+  	"OnSpellStart"
+  	{
+  		"RunScript"
+  		{
+  			"ScriptFile"	"items.lua"
+  			"Function"		"RodTeleportation"
+  		}
+  	}
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "RodFinish"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Hire Assassin
+  //=================================================================================
+  "hire_assassin"
+  {
+  	"ID"					"2024"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_hire_assassin"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+    "ItemPermanent" "0"
+    "ItemInitialCharges"  "1"
+    "ItemCastOnPickup"  "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"75"
+  	"LumberCost"			"0"
+  	"FoodCost"				"2"
+
+  	"OnSpellStart"
+  	{
+      "SpendCharge" {}
+  		"RunScript"
+  		{
+  			"ScriptFile"	"items.lua"
+  			"Function"		"HireUnit"
+  			"Mercenary"		"merc_assassin"
+  		}
+  	}
+  }
+  //================================================================================= 
+  // Hire Fallen Hound
+  //=================================================================================
+  "hire_fallen_hound"
+  {
+  	"ID"					     "2025"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_hire_fallen_hound"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+    "ItemPermanent" "0"
+    "ItemInitialCharges"  "1"
+    "ItemCastOnPickup"  "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"75"
+  	"LumberCost"			"0"
+  	"FoodCost"				"2"
+
+  	"OnSpellStart"
+  	{
+      "SpendCharge" {}
+  		"RunScript"
+  		{
+  			"ScriptFile"	"items.lua"
+  			"Function"		"HireUnit"
+  			"Mercenary"		"merc_fallen_hound"
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Trade Wood
+  //=================================================================================
+  "item_trade_wood"
+  {
+  	"ID"					"2026"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_trade_wood"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+    "ItemPermanent" "0"
+    "ItemInitialCharges"  "1"
+    "ItemCastOnPickup"  "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"0"
+  	"LumberCost"			"8000"
+
+  	"OnSpellStart"
+  	{
+      "SpendCharge" {}
+  		"RunScript"
+  		{
+  			"ScriptFile"	"vscripts/scripts/items.lua"
+  			"Function"		"TradeWood"
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Burst Gem
+  //=================================================================================
+  "item_burst_gem"
+  {
+  	"ID"					"2027"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_gem"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  	"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+  	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"290"
+  	"LumberCost"			"0"
+
+  	"AbilitySpecial"
+  	{
+  		"01"
+  		{
+  			"var_type"			"FIELD_INTEGER"
+  			"damage"			"1500"
+  		}
+  	}
+
+  	"OnSpellStart"
+  	{
+  		"RunScript"
+  		{
+  			"ScriptFile"	"vscripts/scripts/items.lua"
+  			"Function"		"BurstGem"
+        "Target"      "TARGET"
+  		}
+  	}
+    "OnProjectileHitUnit"
+    {
+      "DeleteOnHit"  "1"
+      "RunScript"
+      {
+        "ScriptFile"  "vscripts/scripts/items.lua"
+        "Function"    "BurstHit"
+        "Target"      "TARGET"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Massive Grave
+  //=================================================================================
+  "item_massive_grave"
+  {
+  	"ID"					     "2029"
+  	"BaseClass"				     "item_datadriven"
+  	"AbilityTextureName"	"item_massive_grave"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"30"
+  	"LumberCost"			"0"
+
+  	"OnSpellStart"
+  	{
+  		"RunScript"
+  		{
+  			"ScriptFile"	  "items.lua"
+  			"Function"		  "AddBuildingToCaster"
+        "AbilityToAdd"  "build_massive_grave"
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Cloak of Shadows
+  //=================================================================================
+  "item_cloak_shadows"
+  {
+  	"ID"					"2030"
+  	"BaseClass"				"item_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"AbilityTextureName"	"item_hood_of_defiance"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"325"
+  	"LumberCost"			"0"
+
+    "precache"
+    {
+      "particle"  "particles/items2_fx/shadow_amulet.vpcf"
+    }
+
+    "Modifiers"
+    {
+      "modifier_cloak_invis"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+    
+        "EffectName"        "particles/items2_fx/shadow_amulet.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "States"
+        {
+          "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+
+    }
+  }
+
+  //================================================================================= 
+  // Rain of Avernus
+  //=================================================================================
+  "item_avernus_rain"
+  {
+  	"ID"					"2031"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_avernus_rain"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"30"
+    "AbilityManaCost"       "1000"
+  	"GoldCost"				"150"
+  	"LumberCost"			"0"
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf"
+    }
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "RainOfAvernus"
+      }
+      "FireEffect"
+      {
+        "EffectName"        "particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Wind Walk Potion
+  //=================================================================================
+  "item_wind_walk_potion"
+  {
+  	"ID"					"2032"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_bottle_invisibility"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "1"
+    "ItemInitialCharges"     "3"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"30"
+  	"LumberCost"			"0"
+
+    //Needs passive ItemMoveSpeed
+
+    "OnSpellStart"
+    {
+      "SpendCharge" {}
+
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_invisible"
+        "Target"     "CASTER"
+        "Duration"    "600"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Hire French Man
+  //=================================================================================
+  "hire_french_man"
+  {
+  	"ID"					"2033"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_hire_french_man"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+    "ItemPermanent" "0"
+    "ItemInitialCharges"  "1"
+    "ItemCastOnPickup"  "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"5"
+  	"LumberCost"			"0"
+  	"FoodCost"				"2"
+
+  	"OnSpellStart"
+  	{
+      "SpendCharge" {}
+  		"RunScript"
+  		{
+  			"ScriptFile"	"vscripts/scripts/items.lua"
+  			"Function"		"HireUnit"
+  			"Mercenary"		"french_man"
+  		}
+  	}
+  }
+
+  //================================================================================= 
+  // Claws of the Dreadlord
+  //=================================================================================
+  "item_claws_dreadlord"
+  {
+  	"ID"					"2034"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_claws_dreadlord"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "1"
+    "ItemInitialCharges"  "50"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"10"
+    "AbilityManaCost"   "1000"
+  	"GoldCost"				"125"
+  	"LumberCost"			"0"
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_warlock/warlock_shadow_word_debuff.vpcf"
+    }
+
+    "OnSpellStart"
+    {
+      "SpendCharge" {}
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_dreadlord_buff"
+        "Target"     "CASTER"
+        "Duration"    "5"
+      }
+    }
+
+	  "Modifiers"
+    {
+      "modifier_dreadlord_buff"
+      {
+        "Passive"       "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "0"
+    
+        "EffectName"        "particles/units/heroes/hero_warlock/warlock_shadow_word_debuff.vpcf"
+        "EffectAttachType"  "follow_origin"
+    
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "20"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "500" 
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"   "200"
+        }          
+      }
+    }	
+  }
+
+  //================================================================================= 
+  // Hire Meat Carrier
+  //=================================================================================
+  "hire_meat_carrier"
+  {
+  	"ID"					"2035"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_winter_ham"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+    "ItemPermanent" "0"
+    "ItemInitialCharges"  "1"
+    "ItemCastOnPickup"  "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"60"
+  	"LumberCost"			"0"
+
+	  "OnSpellStart"
+	  {
+      "SpendCharge" {}
+	  	"RunScript"
+	  	{
+	  		"ScriptFile"	"vscripts/scripts/items.lua"
+	  		"Function"		"HireUnit"
+	  		"Mercenary"		"merc_meat_carrier"
+	  	}
+	  } 		
+  }
+
+  //================================================================================= 
+  // Silent Whisper
+  //=================================================================================
+  "item_silent_whisper"
+  {
+  	"ID"					"2036"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_orchid"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"60"
+    "AbilityManaCost"   "1000"
+  	"GoldCost"				"50"
+  	"LumberCost"			"0"
+
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_death_prophet/death_prophet_silence.vpcf"
+      "particle"  "particles/units/heroes/hero_death_prophet/death_prophet_silence_impact.vpcf"
+    }
+
+	  "OnSpellStart"
+	  {
+	  	"RunScript"
+	  	{
+	  		"ScriptFile"	"vscripts/scripts/items.lua"
+	  		"Function"		"SilentWhisper"
+	  	}
+
+      //Particles taken from SpellLibrary.
+      "FireEffect"
+      {
+        "EffectName"        "particles/units/heroes/hero_death_prophet/death_prophet_silence.vpcf"
+        "EffectAttachType"  "world_origin"
+        "Target"            "CASTER"
+        "ControlPoints"
+        {
+          "01"  "500 0 0"
+        }
+      }
+      "FireEffect"
+      {
+        "EffectName"        "particles/units/heroes/hero_death_prophet/death_prophet_silence_impact.vpcf"
+        "EffectAttachType"  "follow_overhead"
+        "Target"
+        {
+          "Center"  "CASTER"
+          "Radius"  "500"
+          "Teams"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+          "Types"   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        }
+        "ControlPoints"
+        {
+          "00"  "1 0 0"
+        }       
+      }
+	  }	
+  }
+
+  //================================================================================= 
+  // Refresh Potion
+  //=================================================================================
+  "item_refresh_potion"
+  {
+  	"ID"					"2037"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_greater_salve"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "1"
+    "ItemInitialCharges"     "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"450"
+  	"GoldCost"				"275"
+  	"LumberCost"			"0"
+
+    "precache"
+    {
+      "particle"  "particles/items2_fx/refresher.vpcf"
+    }
+
+    "Modifiers"
+    {
+      "modifier_refresh_potion_buff"
+      {
+        "Passive"      "0"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+    
+        "EffectName"    "particles/items2_fx/refresher.vpcf"
+        "EffectAttachType"  "follow_origin"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_refresh_potion_buff"
+        "Target"     "CASTER"
+      }
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "RefreshPotion"
+      }
+      "Heal"
+      {
+        "Target"        "CASTER"
+        "HealAmount"  "25000"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Wand of Shadowsight
+  //=================================================================================
+  "item_wand_shadowsight"
+  {
+  	"ID"					"2038"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_magic_wand"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"10"
+  	"LumberCost"			"0"
+
+  	"OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "ShadowSight"
+        "Target"      "TARGET"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Cyclone Wand
+  //=================================================================================
+  "item_wand_cyclone"
+  {
+  	"ID"					"2039"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_cyclone"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"2"
+  	"LumberCost"			"0"
+
+  	"OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "CycloneWand"
+        "Target"      "TARGET"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Sentry Wards
+  //=================================================================================
+  "item_sentry_wards"
+  {
+  	"ID"					"2040"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_ward_observer"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+    "ItemInitialCharges"    "3"
+  	"ItemRequiresCharges"   "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"15"
+  	"LumberCost"			"0"
+
+  	"OnSpellStart"
+    {
+      "SpendCharge" {}
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "SpawnWard"
+        "Target"      "POINT"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_ward_time"
+      {
+        "Passive"      "0"
+        "IsHidden"      "0"
+        "Duration"      "10"
+         
+        "OnDestroy"
+        {
+          "RemoveUnit"
           {
-            "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
+            "Target"    "CASTER"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Blades of Attack
+  //=================================================================================
+  "item_blades_attack"
+  {
+  	"ID"					"2041"
+  	"BaseClass"				"item_datadriven"
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"AbilityTextureName"	"item_blades_of_attack"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"2"
+  	"LumberCost"			"0"
+
+  	"Modifiers"
+    {
+      "modifier_claws_damage"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+    
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"    "20"
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Ring of Regeneration
+  //=================================================================================
+  "item_ring_regen"
+  {
+  	"ID"					"2042"
+  	"BaseClass"				"item_datadriven"
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"AbilityTextureName"	"item_ring_of_regen"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"6"
+  	"LumberCost"			"0"
+
+  	"Modifiers"
+    {
+      "modifier_ring_regen"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+          
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"    "20"
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Replenish Potion
+  //=================================================================================
+  "item_replenish_potion"
+  {
+  	"ID"					"2043"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_salve"
+  	"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+    "ItemInitialCharges"    "1"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"2"
+  	"LumberCost"			"0"
+
+  	"precache"
+    {
+      "particle"  "particles/items_fx/bottle.vpcf"
+    }
+
+    "Modifiers"
+    {
+      "modifier_replenish_bonus"
+      {
+        "Passive"      "0"
+        "IsHidden"      "0"
+    
+        "EffectName"    "particles/items_fx/bottle.vpcf"
+        "EffectAttachType"  "follow_origin"
+    
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"       "66.66"
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"         "33.33" 
+        }
+
+        "OnAttacked"
+        {
+          "RemoveModifier"
+          {
+            "ModifierName"  "modifier_replenish_bonus"
+            "Target"     "TARGET"
           }
         }
       }
     }
 
-    //================================================================================= 
-    // Ricochet Gem
-    //=================================================================================
-    "item_ricochet_gem"
+    "OnSpellStart"
     {
-      "ID"          "2050"
-      "BaseClass"       "item_datadriven"
-      "AbilityTextureName"  "item_skadi"
-      "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-      "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-      "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-      "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
-      "ItemStackable"     "0"
-      "ItemKillable"      "1"
-      "ItemShareability"    "ITEM_FULLY_SHAREABLE"
-      "ItemPermanent"     "0"
-      "ItemRequiresCharges"   "0"
-      "SideShop"        "1"
-      "AbilityCooldown"   "0" //30
-      "GoldCost"        "200"
-      "LumberCost"      "0"
-
-      "AbilitySpecial"
+      "SpendCharge" {}
+      "ApplyModifier"
       {
-        "01"
-        {
-          "var_type"      "FIELD_INTEGER"
-          "damage"      "2000"
-        }
+        "ModifierName"  "modifier_replenish_bonus"
+        "Target"     "CASTER"
+        "Duration"    "30"
       }
+    }
+  }
 
-      "OnSpellStart"
+  //================================================================================= 
+  // Amulet of Protection
+  //=================================================================================
+  "item_amulet_protection"
+  {
+  	"ID"					"2044"
+  	"BaseClass"				"item_datadriven"
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"AbilityTextureName"	"item_solar_crest"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"2"
+  	"LumberCost"			"0"
+
+  	"Modifiers"
+    {
+      "modifier_amulet_armor"
       {
-        "RunScript"
+        "Passive"      "0"
+        "IsHidden"      "0"
+          
+        "Properties"
         {
-          "ScriptFile"  "items.lua"
-          "Function"    "RicochetGem"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"    "1"
         }
       }
     }
+  }
+
+  //================================================================================= 
+  // Dracula's Cloak - recipie -- Your KV's shouldn't look like this unless you're using shopUI.
+  //=================================================================================
+  "item_recipe_dracula_cloak"
+  {
+  	"ID"					"2045"
+  	"BaseClass"				"item_recipe_arcane_boots"
+  	"AbilityTextureName"	"item_assault"
+
+  	// Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_dracula_cloak"
+    "ItemRequirements"
+    {
+      "01"            "item_cloak_shadows"
+      "02"            "item_demonic_remains"
+      "03"            "item_gauntlets_underworld"
+    }
+  }
+
+  //================================================================================= 
+  // Ricochet Gem - recipie -- Your KV's shouldn't look like this unless you're using shopUI.
+  //=================================================================================
+  "item_recipe_ricochet_gem"
+  {
+  	"ID"					        "2046"
+  	"BaseClass"				    "item_recipe_arcane_boots"
+  	"AbilityTextureName"	"item_skadi"
+  	"GoldCost"				    "200"
+
+  	// Recipe
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemRecipe"          "1"
+    "ItemResult"          "item_ricochet_gem"
+    "ItemRequirements"
+    {
+      "01"            "item_pulse_staff"
+      "02"            "item_burst_gem"
+    } 
+  }
+
+  //================================================================================= 
+  // Gauntlets of the Underworld
+  //=================================================================================
+  "item_gauntlets_underworld"
+  {
+  	"ID"					"2047"
+  	"BaseClass"				"item_datadriven"
+  	"AbilityTextureName"	"item_armlet_active"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"2000"
+  	"LumberCost"			"0"
+
+  	"Modifiers"
+    {
+      "modifier_gauntlets_underworld"
+      {
+        "Passive"      "0"
+        "IsHidden"      "0"
+          
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "2500"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "2500"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "2500"
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"  "6000"
+        }
+        "States"
+        {
+          "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Gauntlets of Hellfire - Credit to SpellLibrary.
+  //=================================================================================
+  "item_gauntlets_hellfire"
+  {
+  	"ID"					"2048"
+  	"BaseClass"				"item_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  	"AbilityTextureName"	"item_gauntlets_hellfire"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"
+  	"ItemStackable"			"0"
+  	"ItemKillable"			"1"
+  	"ItemShareability"		"ITEM_FULLY_SHAREABLE"
+  	"ItemPermanent"			"0"
+  	"ItemRequiresCharges"   "0"
+  	"SideShop"				"1"
+  	"AbilityCooldown"		"0"
+  	"GoldCost"				"1800"
+  	"LumberCost"			"0"
+
+  	// Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"            "FIELD_FLOAT"
+        "bonus_reset_time"        "5"
+      }
+      "02"
+      {
+        "var_type"            "FIELD_INTEGER"
+        "damage_per_stack"        "50"
+      }
+    }
+    
+    // Data driven
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      "particle"              "particles/units/heroes/hero_ursa/ursa_fury_swipes.vpcf"
+      "particle"              "particles/units/heroes/hero_ursa/ursa_fury_swipes_debuff.vpcf"
+    }
+    
+    "Modifiers"
+    {
+      "modifier_hellfire_gauntlets_caster_datadriven"
+      {
+        "Passive"             "1"
+        "IsHidden"            "0"
+        "IsPurgable"          "0"
+      
+        "OnAttackLanded"
+        {
+          "RunScript"
+          {
+            "ScriptFile"      "items.lua"
+            "Function"        "HellfireGauntlets"
+          }
+        }
+
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "250"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "250"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "250"
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"  "2000"
+        }
+      }
+      
+      "modifier_hellfire_gauntlets_target_datadriven"
+      {
+        "IsHidden"          "0"
+        "IsPurgable"        "0"
+        "IsDebuff"          "1"
+        
+        "EffectName"        "particles/units/heroes/hero_ursa/ursa_fury_swipes_debuff.vpcf"
+        "EffectAttachType"      "follow_overhead"
+        
+        "OnCreated"
+        {
+          "AttachEffect"
+          {
+            "Target"        "TARGET"
+            "EffectName"      "particles/units/heroes/hero_ursa/ursa_fury_swipes.vpcf"
+            "EffectAttachType"    "follow_overhead"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Dracula's Cloak
+  //=================================================================================
+  "item_dracula_cloak"
+  {
+    "ID"          "2049"
+    "BaseClass"       "item_datadriven"
+    "AbilityTextureName"  "item_assault"
+    "ItemStackable"     "0"
+    "ItemKillable"      "1"
+    "ItemShareability"    "ITEM_FULLY_SHAREABLE"
+    "ItemPermanent"     "0"
+    "ItemRequiresCharges"   "0"
+    "SideShop"        "1"
+    "AbilityCooldown"   "0"
+    "GoldCost"        "3275"
+    "LumberCost"      "0"
+
+    "Modifiers"
+    {
+      "modifier_dracula_cloak"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+          
+        "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "2500"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "2500"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "2500"
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"  "6000"
+        }
+        "States"
+        {
+          "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Ricochet Gem
+  //=================================================================================
+  "item_ricochet_gem"
+  {
+    "ID"          "2050"
+    "BaseClass"       "item_datadriven"
+    "AbilityTextureName"  "item_skadi"
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "ItemStackable"     "0"
+    "ItemKillable"      "1"
+    "ItemShareability"    "ITEM_FULLY_SHAREABLE"
+    "ItemPermanent"     "0"
+    "ItemRequiresCharges"   "0"
+    "SideShop"        "1"
+    "AbilityCooldown"   "0" //30
+    "GoldCost"        "200"
+    "LumberCost"      "0"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "damage"      "2000"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "RicochetGem"
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Vampiric Research Center
+  //=================================================================================
+  "item_vampiric_research_center"
+  {
+    "ID"  "2051"
+    "BaseClass"           "item_datadriven"
+    "AbilityTextureName"  "item_tombstone"
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "ItemStackable"   "0"
+    "ItemKillable"    "1"
+    "ItemShareability"  "ITEM_FULLY_SHAREABLE"
+    "ItemPermanent"   "0"
+    "ItemRequiresCharges" "0"
+    "SideShop"      "1"
+    "AbilityCooldown" "0"
+    "Building"      "1"
+    "BuildingSize"  "2"
+    "BuildTime"     "1"
+    "Scale"         "1"
+    "MaxScale"      "2"
+    "CasterCanControl"    "1"
+    "UnitName"            "research_center_vampire"
+    "GoldCost"             "0"
+    "LumberCost"            "0"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "AddBuildingToCaster"
+        "AbilityToAdd"  "build_research_center_vampire"
+      }
+    }
+  }
 
 	"item_health_modifier"
 	{

@@ -141,7 +141,7 @@
 	}
 
 	//=================================================================================================================
-	// Research Center T1
+	// Research Center T2
 	//=================================================================================================================
 	"research_center_t2"
 	{
@@ -170,5 +170,22 @@
 		"build_empty"					"9"
 		"build_empty"					"10"
 		"build_cancel"					"11"
+	}
+	//=================================================================================================================
+	// Vampiric Research Center
+	//=================================================================================================================
+	"research_center_vampire"
+	{
+		"research_vampiric_skills"			"0"
+		"research_vampiric_damage"			"1"
+		"research_vampiric_stats"			"2"
+		"research_power_underworld"			"3"
+		"research_vampiric_strength"		"4"
+		"research_vampiric_agility"			"5"
+		"research_vampiric_intellect"		"6"
+		"build_empty"						"7"
+		"build_empty"						"8"
+		"build_empty"						"10"
+		"build_cancel"						"11"
 	}
 }

@@ -51,6 +51,7 @@ function CallMenu(keys)
       end
     -- Not using ability holder.
     else -- caster is not using ability holders
+      print('not an ability holder')
       for i = 0, caster:GetAbilityCount() do
         --print(i)
         if caster:GetAbilityByIndex(i) ~= nil then
@@ -62,6 +63,9 @@ function CallMenu(keys)
           if buildName ~= nil then
             --print('callmenu get req')
             TechTree:GetRequired(buildName, playerID, caster:GetUnitName(), "building")
+          else
+            print('checking tech on', ability, playerID, caster:GetUnitName())
+            TechTree:GetRequired(ability, playerID, caster:GetUnitName(), "ability")
           end
         end
       end

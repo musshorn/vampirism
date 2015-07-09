@@ -1,5 +1,4 @@
 function CheckLumber( keys )
-	print('checking lumber for item')
 	PrintTable(keys)
 end
 
@@ -62,6 +61,7 @@ function AddBuildingToCaster( keys )
 
 	caster:AddAbility(abilityToAdd)
 	local added = caster:FindAbilityByName(abilityToAdd)
+	added:SetLevel(1)
 	caster:CastAbilityNoTarget(added, caster:GetMainControllingPlayer())
 end
 
@@ -682,4 +682,28 @@ function RicochetGem( keys )
 	end
   return .15
   end)
+end
+
+-- Sells the item in the first slot.
+function VampireSell( keys )
+	local caster = keys.caster
+	local playerID = caster:GetMainControllingPlayer()
+
+	if caster:GetItemInSlot(0) ~= nil then
+		local item = caster:GetItemInSlot(0)
+		local itemName = item:GetName()
+		local woodCost = 0
+		local goldCost = 0
+		if ITEM_KV[itemName]['LumberCost'] ~= nil then
+			woodCost = ITEM_KV[itemName]['LumberCost']
+			WOOD[playerID] = WOOD[playerID] + woodCost / 2
+			FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
+		end
+		if ITEM_KV[itemName]['GoldCost'] ~= nil then
+			goldCost = ITEM_KV[itemName]['GoldCost']
+			GOLD[playerID] = GOLD[playerID] + goldCost / 2
+			FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+		end
+		caster:RemoveItem(item)
+	end
 end

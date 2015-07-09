@@ -322,6 +322,10 @@ function GameMode:OnNPCSpawned(keys)
       HUMANS[playerID] = npc
     end
   end
+  if npc:GetName() == "npc_dota_hero_night_stalker" then
+    local item = CreateItem('item_vampiric_research_center', npc, npc)
+    npc:AddItem(item)
+  end
 
   local unitName = string.lower(npc:GetUnitName())
 
@@ -372,6 +376,8 @@ function GameMode:OnNPCSpawned(keys)
     end
     table.insert(INVENTORIES[playerID], npc)
   end
+
+  
 end
 
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive

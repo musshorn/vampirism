@@ -121,4 +121,19 @@
 		"research_engineer_vitality"		"e"
 		"build_cancel"						"q"
 	}
+	//=================================================================================================================
+	// Vampiric Research Center
+	//=================================================================================================================
+	"research_center_vampire"
+	{
+		"research_vampiric_skills"			"l"
+		"research_vampiric_damage"			"d"
+		"research_vampiric_stats"			"t"
+		"research_power_underworld"			"u"
+		"research_vampiric_strength"		"s"
+		"research_vampiric_agility"			"a"
+		"research_vampiric_intellect"		"i"
+		"build_empty"						" "
+		"build_cancel"						"q"
+	}
 }

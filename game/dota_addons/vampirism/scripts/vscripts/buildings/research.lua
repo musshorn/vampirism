@@ -248,6 +248,139 @@ function SpireQuality(keys)
   local level = keys.level
 end
 
+-- Grants and extra skill point to the players vampire (up to 33)
+function VampiricSkills( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+
+  if vampire.VampiricSkills == nil then
+    vampire.VampiricSkills = 0
+  end
+
+  vampire:SetAbilityPoints(vampire:GetAbilityPoints() + 1)
+  vampire.VampiricSkills = vampire.VampiricSkills + 1
+
+  if vampire.VampiricSkills == 33 then
+    caster:RemoveAbility('research_vampiric_skills')
+  end
+end
+
+-- Give the vampire an extra 100 damage.
+function VampiricDamage( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+
+  if vampire.VampiricDamage == nil then
+    vampire.VampiricDamage = 0
+  end
+
+  vampire:SetBaseDamageMin(vampire:GetBaseDamageMin() + 100)
+  vampire:SetBaseDamageMax(vampire:GetBaseDamageMax() + 100)
+  vampire.VampiricDamage = vampire.VampiricDamage + 1
+
+  if vampire.VampiricDamage == 50 then
+    caster:RemoveAbility('research_vampiric_damage')
+  end
+end
+
+-- Give the vampire an extra 300 to all stats.
+function VampiricStats( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+
+  if vampire.VampiricStats == nil then
+    vampire.VampiricStats = 0
+  end
+
+  vampire:SetBaseStrength(vampire:GetBaseStrength() + 300)
+  vampire:SetBaseAgility(vampire:GetBaseAgility() + 300)
+  vampire:SetBaseIntellect(vampire:GetBaseIntellect() + 300)
+  vampire.VampiricStats = vampire.VampiricStats + 1
+
+  if vampire.VampiricStats == 50 then
+    caster:RemoveAbility('research_vampiric_stats')
+  end
+end
+
+-- Give the vampire an extra 2000 to all stats and 500 damage.
+function PowerUnderworld( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+
+  if vampire.PowerUnderworld == nil then
+    vampire.PowerUnderworld = 0
+  end
+
+  vampire:SetBaseStrength(vampire:GetBaseStrength() + 2000)
+  vampire:SetBaseAgility(vampire:GetBaseAgility() + 2000)
+  vampire:SetBaseIntellect(vampire:GetBaseIntellect() + 2000)
+  vampire:SetBaseDamageMax(vampire:GetBaseDamageMax() + 500)
+  vampire:SetBaseDamageMin(vampire:GetBaseDamageMin() + 500) 
+  vampire.PowerUnderworld = vampire.PowerUnderworld + 1
+
+  if vampire.PowerUnderworld == 30 then
+    caster:RemoveAbility('research_power_underworld')
+  end
+end
+
+-- Give the vampire an extra 300 strength.
+function VampiricStrength( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+
+  if vampire.VampiricStrength == nil then
+    vampire.VampiricStrength = 0
+  end
+
+  vampire:SetBaseStrength(vampire:GetBaseStrength() + 300) 
+  vampire.VampiricStrength = vampire.VampiricStrength + 1
+
+  if vampire.VampiricStrength == 50 then
+    caster:RemoveAbility('research_vampiric_strength')
+  end
+end
+
+-- Give the vampire an extra 300 agility.
+function VampiricAgility( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+
+  if vampire.VampiricAgility == nil then
+    vampire.VampiricAgility = 0
+  end
+
+  vampire:SetBaseAgility(vampire:GetBaseAgility() + 300)
+  vampire.VampiricAgility = vampire.VampiricAgility + 1
+
+  if vampire.VampiricAgility == 50 then
+    caster:RemoveAbility('research_vampiric_agility') 
+  end
+end
+
+-- Give the vampire an extra 300 intellect.
+function VampiricIntellect( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+
+  if vampire.VampiricIntellect == nil then
+    vampire.VampiricIntellect = 0
+  end
+
+  vampire:SetBaseIntellect(vampire:GetBaseIntellect() + 300)
+  vampire.VampiricIntellect = vampire.VampiricIntellect + 1
+
+  if vampire.VampiricIntellect == 50 then
+    caster:RemoveAbility('research_vampiric_intellect')
+  end
+end
+
 function TechUpgrade( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()

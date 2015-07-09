@@ -105,6 +105,11 @@ function build( keys )
       unit:AddAbility('grave_aura')
       unit:FindAbilityByName('grave_aura'):OnUpgrade()
     end
+
+    --adds invulnerable to vamp res center
+    if unit:GetUnitName() == 'research_center_vampire' then
+      unit:AddNewModifier(unit, nil, 'modifier_invulnerable', {})
+    end
   end)
 
   -- These callbacks will only fire when the state between below half health/above half health changes.
