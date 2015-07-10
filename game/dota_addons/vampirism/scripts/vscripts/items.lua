@@ -10,12 +10,10 @@ function CoinUsed(keys)
 
 	if caster:IsRealHero() then
 		if keys.Type == "small" then
-			GOLD[playerID] = GOLD[playerID] + 1
-			FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
-	end
+			ChangeGold(playerID, 1)
+		end
 		if keys.Type == "large" then
-			GOLD[playerID] = GOLD[playerID] + 2
-			FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+			ChangeGold(playerID, 2)
 		end
 	end
 end
@@ -696,13 +694,11 @@ function VampireSell( keys )
 		local goldCost = 0
 		if ITEM_KV[itemName]['LumberCost'] ~= nil then
 			woodCost = ITEM_KV[itemName]['LumberCost']
-			WOOD[playerID] = WOOD[playerID] + woodCost / 2
-			FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
+			ChangeWood(playerID, (woodCost / 2))
 		end
 		if ITEM_KV[itemName]['GoldCost'] ~= nil then
 			goldCost = ITEM_KV[itemName]['GoldCost']
-			GOLD[playerID] = GOLD[playerID] + goldCost / 2
-			FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+			ChangeGold(playerID, (goldCost / 2))
 		end
 		caster:RemoveItem(item)
 	end

@@ -139,13 +139,11 @@ function build( keys )
     local goldCost = unit.buildingTable.GoldCost
 
     if lumberCost ~= nil then
-      WOOD[pID] = WOOD[pID] + lumberCost
-      FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+      ChangeWood(pID, lumberCost)
     end
 
     if goldCost ~= nil then
-      GOLD[pID] = GOLD[pID] + goldCost
-      FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
+      ChangeGold(pID, goldCost)
     end
 
   end)
@@ -207,10 +205,8 @@ function create_building_entity( keys )
     end
 
     -- Deduct resources and start constructing
-    GOLD[pID] = GOLD[pID] - goldCost
-    WOOD[pID] = WOOD[pID] - lumberCost
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = GOLD[pID]})
+    ChangeGold(pID, -1 * goldCost)
+    ChangeWood(pID, -1 * lumberCost)
 
     BuildingHelper:InitializeBuildingEntity(keys)
   end

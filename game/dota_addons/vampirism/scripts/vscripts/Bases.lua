@@ -55,13 +55,11 @@ function EnterBase( keys )
         local goldCost = unit.buildingTable.GoldCost
 
         if lumberCost ~= nil then
-          WOOD[pID] = WOOD[pID] + lumberCost
-          FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+          ChangeWood(pID, lumberCost)
         end
 
         if goldCost ~= nil then
-          GOLD[pID] = GOLD[pID] + goldCost
-          FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
+          ChangeGold(pID, goldCost)
         end
 
         FireGameEvent( 'custom_error_show', { player_ID = pID, _error = name .. ' has claimed this base!' } )

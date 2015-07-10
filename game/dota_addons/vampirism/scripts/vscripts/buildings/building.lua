@@ -65,10 +65,8 @@ function Cancel( keys )
         end
       end
     end
-    GOLD[pID] = GOLD[pID] + caster.refundGold
-    WOOD[pID] = WOOD[pID] + caster.refundLumber
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = GOLD[pID]})
+    ChangeGold(pID, caster.refundGold)
+    ChangeWood(pID, caster.refundLumber)
     caster:SetMaxHealth(caster.originalMaxHP)
   end
 end
@@ -115,11 +113,8 @@ function Upgrade( keys )
 
   if canUpgrade == true then
     -- Deduct resources
-    GOLD[pID] = GOLD[pID] - goldCost
-    WOOD[pID] = WOOD[pID] - lumberCost
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
-
+    ChangeGold(pID, -1 * goldCost)
+    ChangeWood(pID, -1 * lumberCost)
   
     -- Change the model
     if caster.oldModel == nil then

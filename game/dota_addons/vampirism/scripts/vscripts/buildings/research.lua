@@ -27,10 +27,8 @@ function Research( keys )
   end
 
   -- Player is ok to commence research, deduct resources
-  WOOD[pID] = WOOD[pID] - lumberCost
-  GOLD[pID] = GOLD[pID] - goldCost
-  FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
+  ChangeWood(pID, -1 * lumberCost)
+  ChangeGold(pID, -1 * goldCost)
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
   FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
@@ -53,10 +51,8 @@ function Cancelled(keys)
   end
 
   -- Return the cost of the research
-  WOOD[playerID] = WOOD[playerID] + lumberCost
-  GOLD[playerID] = GOLD[playerID] + goldCost
-  FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
-  FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+  ChangeWood(playerID, lumberCost)
+  ChangeGold(playerID, goldCost)
 
   --Show the hidden icon in flash
   FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})

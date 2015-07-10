@@ -164,9 +164,7 @@ function DropLumber( keys )
       ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
 
       local pid = worker:GetMainControllingPlayer() 
-      WOOD[pid] = WOOD[pid] + currentLumber
-
-      FireGameEvent('vamp_wood_changed', { player_ID = pid, wood_total = WOOD[pid]})
+      ChangeWood(pid, currentLumber)
 
       worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
       local ability = worker:FindAbilityByName("find_lumber")

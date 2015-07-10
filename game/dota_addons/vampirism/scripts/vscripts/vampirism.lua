@@ -761,8 +761,7 @@ function GameMode:OnEntityKilled( keys )
   -- Vampire killed a unit
   if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS and killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
     local vampPID = killerEntity:GetMainControllingPlayer()
-    GOLD[vampPID] = GOLD[vampPID] + killedUnit:GetGoldBounty()
-    FireGameEvent('vamp_gold_changed', {player_ID = vampPID, gold_total = GOLD[vampPID]})
+    ChangeGold(vampPID, killedUnit:GetGoldBounty())
   end
 
   -- If it's a building we need to remove the gridnav blocks
@@ -1136,9 +1135,7 @@ function GoldMineTimer()
       for k, mine in pairs(t4gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
-          local curGold = GOLD[playerID]
-          GOLD[playerID] = GOLD[playerID] + 1
-          FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
+          ChangeGold(playerID, 1)
         end
       end      
     end
@@ -1148,9 +1145,7 @@ function GoldMineTimer()
       for k, mine in pairs(t3gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer() 
-          local curGold = GOLD[playerID]
-          GOLD[playerID] = GOLD[playerID] + 1
-          FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1}) 
+          ChangeGold(playerID, 1)
         end
       end
     end
@@ -1160,9 +1155,7 @@ function GoldMineTimer()
       for k, mine in pairs(t2gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
-          local curGold = GOLD[playerID]
-          GOLD[playerID] = GOLD[playerID] + 1
-          FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
+          ChangeGold(playerID, 1)
         end
       end
     end
@@ -1172,9 +1165,7 @@ function GoldMineTimer()
       for k, mine in pairs(t1gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
-          local curGold = GOLD[playerID]
-          GOLD[playerID] = GOLD[playerID] + 1
-          FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = curGold + 1})
+          ChangeGold(playerID, 1)
         end
       end
     end
@@ -1215,8 +1206,7 @@ function UrnTimer()
     for k, v in pairs(VAMPIRES) do
       if v:HasItemInInventory('item_dracula_urn') then
         local playerID = v:GetMainControllingPlayer()
-        GOLD[playerID] = GOLD[playerID] + 35
-        FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+        ChangeGold(playerID, 35)
       end
     end
   end)
@@ -1312,5 +1302,32 @@ function Bases:HandleChat( keys )
     else
       FireGameEvent( 'custom_error_show', { player_ID = ownerpID, _error = "You have not claimed a base" } )
     end
+  end
+end
+
+-- Used to add and remove gold.
+function ChangeGold( playerID, amount )
+  if amount ~= nil then
+    if GOLD[playerID] + amount > 1000000 then
+      GOLD[playerID] = 1000000
+    elseif GOLD[playerID] + amount < 0 then
+      GOLD[playerID] = 0
+    else
+      GOLD[playerID] = GOLD[playerID] + amount
+    end
+    FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+  end
+end
+
+function ChangeWood( playerID, amount )
+  if amount ~= nil then
+    if WOOD[playerID] + amount > 1000000 then
+      WOOD[playerID] = 1000000
+    elseif WOOD[playerID] + amount < 0 then
+      WOOD[playerID] = 0
+    else
+      WOOD[playerID] = WOOD[playerID] + amount
+    end
+    FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
   end
 end

@@ -128,10 +128,8 @@ function SummonSlayer( keys )
   end
 
   -- Checks passed, deduct the resources and start channeling
-  WOOD[pID] = WOOD[pID] - lumberCost
-  FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-  GOLD[pID] = GOLD[pID] - goldCost
-  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})  
+  ChangeWood(pID, -1 * lumberCost)
+  ChangeGold(pID, -1 * goldCost)
 end
 
 function Refund( keys )
@@ -150,10 +148,8 @@ function Refund( keys )
   end
 
   if HAS_SLAYER[pID] == nil then
-    WOOD[pID] = WOOD[pID] + refundWood
-    GOLD[pID] = GOLD[pID] + refundGold
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]}) 
+    ChangeWood(pID, refundWood)
+    ChangeGold(pID, refundGold)
   end
 end
 
