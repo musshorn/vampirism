@@ -3458,8 +3458,9 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "120"
-    "LumberCost"   "75000"
-    "GoldCost"     "20"
+    "AbilityTextureName"    "buildings/research_tower_defenses"
+    "LumberCost"        "75000"
+    "GoldCost"          "20"
     "BaseClass"         "ability_datadriven"
     //when this completes, this is the modifier(ability) we need to add.
     "GiveModifier"      "tech_tower_defenses"
@@ -3528,10 +3529,7 @@
         "Passive"       "1"
         "IsHidden"      "1"
 
-        "Properties"
-        {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
-        }
+        "MODIFIER_PROPERTY_HEALTH_BONUS"      "1500"
       }
     }
   }
