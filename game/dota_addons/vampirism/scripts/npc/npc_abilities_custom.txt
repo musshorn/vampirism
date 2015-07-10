@@ -3009,6 +3009,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "20"
+    "AbilityTextureName"    "buildings/research_wall_plating_1"
     "LumberCost"   "20000"
     "GoldCost"     "5"
     "BaseClass"         "ability_datadriven"
@@ -3049,6 +3050,8 @@
         "ScriptFile"        "scripts/vscripts/buildings/research.lua"
         "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
         "TARGET"            "CASTER"
+        "NextLevel"         "1" 
+        "BaseAbility"       "research_wall_plating_1"
       }
     }
   }
@@ -3061,14 +3064,14 @@
     "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "BaseClass"                 "ability_datadriven"
-    "MaxLevel"                  "1"
+    "MaxLevel"                  "8"
 
-    "OnUpgrade"
+    "AbilitySpecial"
     {
-      "ApplyModifier"
+      "01"
       {
-        "ModifierName"  "modifier_wall_plating_1"
-        "Target"        "CASTER"
+        "var_type"      "FIELD_INTEGER"
+        "armor_bonus"      "5 10 15 20 25 30 35 45"
       }
     }
 
@@ -3076,12 +3079,23 @@
     {
       "modifier_wall_plating_1"
       {
-        "Passive"       "1"
+        "Passive"      "1"
         "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "buildings/research.lua"
+            "Function"    "TechPlating"
+            "Target"      "CASTER"
+          }
+        }
 
         "Properties"
         {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
         }
       }
     }
@@ -3094,6 +3108,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "40"
+    "AbilityTextureName"    "buildings/research_wall_plating_2"
     "LumberCost"   "60000"
     "GoldCost"     "15"
     "BaseClass"         "ability_datadriven"
@@ -3134,6 +3149,8 @@
         "ScriptFile"        "scripts/vscripts/buildings/research.lua"
         "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
         "TARGET"            "CASTER"
+        "NextLevel"         "2" 
+        "BaseAbility"       "research_wall_plating_1"
       }
     }
   }
@@ -3146,14 +3163,14 @@
     "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "BaseClass"                 "ability_datadriven"
-    "MaxLevel"                  "1"
+    "MaxLevel"                  "8"
 
-    "OnUpgrade"
+    "AbilitySpecial"
     {
-      "ApplyModifier"
+      "01"
       {
-        "ModifierName"  "modifier_wall_plating_2"
-        "Target"        "CASTER"
+        "var_type"      "FIELD_INTEGER"
+        "armor_bonus"      "5 10 15 20 25 30 35 45"
       }
     }
 
@@ -3161,15 +3178,27 @@
     {
       "modifier_wall_plating_2"
       {
-        "Passive"       "1"
+        "Passive"      "1"
         "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "buildings/research.lua"
+            "Function"    "TechPlating"
+            "Target"      "CASTER"
+          }
+        }
 
         "Properties"
         {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
         }
       }
     }
+
   }
 
   //================================================================================= /
@@ -3179,6 +3208,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "60"
+    "AbilityTextureName"    "buildings/research_wall_plating_3"
     "LumberCost"   "100000"
     "GoldCost"     "25"
     "BaseClass"         "ability_datadriven"
@@ -3219,6 +3249,8 @@
         "ScriptFile"        "scripts/vscripts/buildings/research.lua"
         "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
         "TARGET"            "CASTER"
+        "NextLevel"         "3" 
+        "BaseAbility"       "research_wall_plating_1"
       }
     }
   }
@@ -3231,14 +3263,14 @@
     "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "BaseClass"                 "ability_datadriven"
-    "MaxLevel"                  "1"
+    "MaxLevel"                  "8"
 
-    "OnUpgrade"
+    "AbilitySpecial"
     {
-      "ApplyModifier"
+      "01"
       {
-        "ModifierName"  "modifier_wall_plating_3"
-        "Target"        "CASTER"
+        "var_type"      "FIELD_INTEGER"
+        "armor_bonus"      "5 10 15 20 25 30 35 45"
       }
     }
 
@@ -3246,15 +3278,27 @@
     {
       "modifier_wall_plating_3"
       {
-        "Passive"       "1"
+        "Passive"      "1"
         "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "buildings/research.lua"
+            "Function"    "TechPlating"
+            "Target"      "CASTER"
+          }
+        }
 
         "Properties"
         {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
         }
       }
     }
+
   }
 
   //================================================================================= /
@@ -3264,6 +3308,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "80"
+    "AbilityTextureName"    "buildings/research_wall_plating_4"
     "LumberCost"   "140000"
     "GoldCost"     "35"
     "BaseClass"         "ability_datadriven"
@@ -3316,14 +3361,14 @@
     "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "BaseClass"                 "ability_datadriven"
-    "MaxLevel"                  "1"
+    "MaxLevel"                  "8"
 
-    "OnUpgrade"
+    "AbilitySpecial"
     {
-      "ApplyModifier"
+      "01"
       {
-        "ModifierName"  "modifier_wall_plating_4"
-        "Target"        "CASTER"
+        "var_type"      "FIELD_INTEGER"
+        "armor_bonus"      "5 10 15 20 25 30 35 45"
       }
     }
 
@@ -3331,15 +3376,27 @@
     {
       "modifier_wall_plating_4"
       {
-        "Passive"       "1"
+        "Passive"      "1"
         "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "buildings/research.lua"
+            "Function"    "TechPlating"
+            "Target"      "CASTER"
+          }
+        }
 
         "Properties"
         {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
         }
       }
     }
+
   }
 
   //================================================================================= /

@@ -410,6 +410,33 @@ function HumanSurvival( keys )
   end)
 end
 
+-- Multiply this by the level of the tech to get armor bonus.
+WALL_PLATING_SCALE = {
+  wall_t1 = 1,
+  wall_t2 = 2,
+  wall_t3 = 3,
+  wall_t4 = 4,
+  wall_t5 = 5,
+  wall_t6 = 5,
+  wall_t7 = 6,
+  wall_t8 = 6,
+  wall_t9 = 7,
+  wall_t10 = 8
+}
+
+function TechPlating( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local wallName = caster:GetUnitName()
+  local abilityName = keys.ability:GetAbilityName() 
+  
+  Timers:CreateTimer(.03, function ()
+    local armorLevel = WALL_PLATING_SCALE[wallName]
+    caster:FindAbilityByName(abilityName):SetLevel(armorLevel)
+    return nil
+  end)
+end
+
 function TechUpgrade( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
@@ -431,7 +458,8 @@ function TechUpgrade( keys )
           if mod == abilityName and v:GetMainControllingPlayer() == playerID then
             v:AddAbility(techMod)
             v:FindAbilityByName(techMod):SetLevel(1)
-            v:FindAbilityByName(techMod):OnUpgrade()
+            --v:FindAbilityByName(techMod):OnUpgrade()
+            v = nil
           end
         end
       end
@@ -439,7 +467,7 @@ function TechUpgrade( keys )
   end
 
   if level ~= nil then
-    print('upgrade', abilityName, baseAbility, level)
+    print('upgrading, ', baseAbility, level, abilityName)
     FireGameEvent("build_ui_upgrade", {player_ID = playerID, ability_name = baseAbility, builder = caster:GetUnitName(), tier = level}) 
   end
 end

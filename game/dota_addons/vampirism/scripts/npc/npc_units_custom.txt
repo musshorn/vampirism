@@ -205,6 +205,14 @@
 
     "IsTech"    "true"
     "NeedTech"    "house_t1"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
 
   //================================================================================= 
@@ -280,6 +288,14 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "15"
     "NeedTech"    "research_center_t1"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Amethyst Wall
@@ -354,6 +370,14 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
     "NeedTech"      "research_center_t1"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Sapphire Wall
@@ -428,6 +452,14 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
     "NeedTech"      "human_vault"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Emerald Wall
@@ -502,6 +534,14 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
     "NeedTech"      "human_vault"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Chrysoprase Wall
@@ -575,6 +615,14 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Garnet Wall
@@ -649,6 +697,14 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
     "NeedTech"      "research_center_t2 house_t3"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Ruby Wall
@@ -723,6 +779,14 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "45"
     "NeedTech"      "research_center_t2 house_t3 citadel_of_faith"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Diamond Wall
@@ -797,6 +861,14 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "65"
     "NeedTech"      "command_center"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Onyx Wall
@@ -871,6 +943,14 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "75"
     "NeedTech"      "gold_mine_t3 base_operations"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Worker T1 - Peasant
