@@ -3596,7 +3596,7 @@
   }
 
   //================================================================================= /
-  // Tower Defenses modifier
+  // Engineer Vitality modifier
   //================================================================================= /
   "tech_engineer_vitality"
   {
@@ -4687,6 +4687,48 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "tower_flame_t1"
         "Scale"     "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Lantern Tower
+  //=================================================================================/
+  "upgrade_to_tower_lantern"
+  {
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"           "ability_datadriven"
+    "AbilityChannelTime"  "5"
+    "AbilityTextureName"  "upgrade_to_tower_lantern"  
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_lantern"
+        "LumberCost"  "3500"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_lantern"
+        "Scale"       "1"
       }
     }
     "OnChannelInterrupted"
