@@ -10,8 +10,8 @@
     "Ability3"          "call_buildui"
     "Ability4"          "human_blink"
     "Ability5"          "human_manaburn"
-      "Ability6"              "build_blocked"
-      "Ability7"              "build_blocked2"
+    "Ability6"          "human_teleport"
+    "Ability7"          "build_blocked2"
 
 
     "MovementSpeed"       "350"
@@ -29,7 +29,7 @@
     "StatusHealthRegen"        "10"
     "AttributeBaseStrength"   "0"
     "StatusManaRegen"     "0.5"
-    "AbilityLayout"       "4"
+    "AbilityLayout"       "5"
 
     "AbilityHolder"       "12"
 

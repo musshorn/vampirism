@@ -3406,6 +3406,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "20"
+    "AbilityTextureName"    "buildings/research_human_teleport"
     "LumberCost"   "1000"
     "GoldCost"     "1"
     "BaseClass"         "ability_datadriven"
@@ -3444,42 +3445,8 @@
       "RunScript"
       {
         "ScriptFile"        "scripts/vscripts/buildings/research.lua"
-        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "Function"          "AddTeleport" 
         "TARGET"            "CASTER"
-      }
-    }
-  }
-
-  //================================================================================= /
-  // Human Teleport modifier
-  //================================================================================= /
-  "tech_human_teleport"
-  {
-    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    "BaseClass"                 "ability_datadriven"
-    "MaxLevel"                  "1"
-
-    "OnUpgrade"
-    {
-      "ApplyModifier"
-      {
-        "ModifierName"  "modifier_human_teleport"
-        "Target"        "CASTER"
-      }
-    }
-
-    "Modifiers"
-    {
-      "modifier_human_teleport"
-      {
-        "Passive"       "1"
-        "IsHidden"      "1"
-
-        "Properties"
-        {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
-        }
       }
     }
   }
@@ -3654,6 +3621,37 @@
     }
   }
 
+  //================================================================================= /
+  // Human Teleport
+  //================================================================================= /
+  "human_teleport"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
+    "AbilityChannelTime"        "3.0"
+    "AbilityCooldown"           "60"
+    "AbilityTextureName"        "buildings/research_human_teleport"
+    "MaxLevel"                  "1"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "abilities.lua"
+        "Function"    "HumanTeleport"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "abilities.lua"
+        "Function"    "TeleportFinish"
+      }
+    }
+  }
 
   //================================================================================= /
   // Train Super Tower Builder

@@ -410,7 +410,7 @@ function HumanSurvival( keys )
   end)
 end
 
--- Multiply this by the level of the tech to get armor bonus.
+-- Sets the level of armor bonus
 WALL_PLATING_SCALE = {
   wall_t1 = 1,
   wall_t2 = 2,
@@ -435,6 +435,16 @@ function TechPlating( keys )
     caster:FindAbilityByName(abilityName):SetLevel(armorLevel)
     return nil
   end)
+end
+
+-- Adds human teleport.
+function AddTeleport( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+
+  local human = HUMANS[playerID]
+
+  human:FindAbilityByName('human_teleport'):SetLevel(1)
 end
 
 function TechUpgrade( keys )
