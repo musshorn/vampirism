@@ -12,7 +12,7 @@ if playerTrees == nil then
 end
 
 function TechTree:Init()
-	for i = 0, 9 do
+	for i = -1, 9 do
 		playerTrees[i] = {}
 	end
 

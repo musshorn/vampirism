@@ -3529,7 +3529,16 @@
         "Passive"       "1"
         "IsHidden"      "1"
 
-        "MODIFIER_PROPERTY_HEALTH_BONUS"      "1500"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+            "Function"          "AddHealthUpgrade" //adds a flat health bonus.
+            "TARGET"            "CASTER"
+            "Amount"            "1500"
+          }
+        }
       }
     }
   }
@@ -3541,8 +3550,9 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "60"
-    "LumberCost"   "20000"
-    "GoldCost"     "10"
+    "AbilityTextureName"    "buildings/research_engineer_vitality"
+    "LumberCost"          "20000"
+    "GoldCost"            "10"
     "BaseClass"         "ability_datadriven"
     //when this completes, this is the modifier(ability) we need to add.
     "GiveModifier"      "tech_engineer_vitality"
@@ -3611,9 +3621,15 @@
         "Passive"       "1"
         "IsHidden"      "1"
 
-        "Properties"
+        "OnCreated"
         {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+          "RunScript"
+          {
+            "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+            "Function"          "AddHealthUpgrade" //adds a flat health bonus.
+            "TARGET"            "CASTER"
+            "Amount"            "1000"
+          }
         }
       }
     }

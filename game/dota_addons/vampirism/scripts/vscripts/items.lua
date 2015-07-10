@@ -48,6 +48,13 @@ function SpawnEngineers( keys )
 	for i = 1, 4 do
 		local engi = CreateUnitByName("toolkit_engineer", caster:GetAbsOrigin(), true, nil, nil, 0)
 		engi:SetControllableByPlayer(playerID, true)
+		if TechTree:HasTech(playerID, 'research_engineer_vitality') then
+			Timers:CreateTimer(.03, function ()
+				engi:SetMaxHealth(2000)
+				engi:Heal(1000, engi)
+				return nil
+			end)
+		end
 	end
 end
 

@@ -4096,6 +4096,11 @@
     "BountyXP"            "25"
     "BountyGoldMin"       "10"
     "BountyGoldMax"       "10"
+
+    "TechModifiers"
+    {
+        "1"     "research_engineer_vitality"
+    }
   }
 
   //================================================================================= 

@@ -483,15 +483,21 @@ function TechUpgrade( keys )
 end
 
 function AddHealthUpgrade( keys )
+  print('in addhp')
   local caster = keys.caster
   local amount = keys.Amount
+  print(caster:GetUnitName(), 'addhp')
 
   -- yeah this is how it should be
-  Timers:CreateTimer(.03, function ()
+  Timers:CreateTimer(.09, function ()
     caster:SetMaxHealth(caster:GetMaxHealth() + amount)
     --SNIPPET PLS, if finished, add hp if not dont.
-    if caster.state == "complete" then
-      caster:SetHealth(caster:GetHealth() + amount)
+    if caster:HasAbility('is_a_building') then
+      if caster.state == "complete" then
+        caster:Heal(amount, caster)
+      end
+    else
+      caster:Heal(amount, caster)
     end
     return nil
   end)

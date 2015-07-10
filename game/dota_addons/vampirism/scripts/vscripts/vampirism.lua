@@ -298,7 +298,7 @@ function GameMode:OnNPCSpawned(keys)
 
   local npc = EntIndexToHScript(keys.entindex)
   print(npc:HasInventory())
-  local playerID = npc:GetPlayerOwnerID()
+  local playerID = npc:GetMainControllingPlayer()
   print(npc:GetUnitName())
   if npc:GetName() == "npc_dota_hero_omniknight" then
   	npc:FindAbilityByName("call_buildui"):SetLevel(1)
@@ -381,8 +381,6 @@ function GameMode:OnNPCSpawned(keys)
     end
     table.insert(INVENTORIES[playerID], npc)
   end
-
-
 end
 
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive
