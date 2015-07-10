@@ -245,8 +245,8 @@ function WorkerDet( keys )
   -- Refund any food if any
   if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
     local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
-    CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
-    FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+      CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
+      FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
   end
 
   Timers:CreateTimer(0.03, function ()

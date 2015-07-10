@@ -93,12 +93,19 @@ function Purchase( itemname, buyer )
 
   if lumber < lumberCost then
     FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough lumber!'})
+    return
   end
   if gold < goldCost then
     FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough gold!'})
+    return
   end
   if food + foodCost > foodCap then
     FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough food!'})
+    return
+  end
+  if food + foodCost >= 250 then
+    FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Food cap reached!'})
+    return
   end
 
   local isRecipe = false
