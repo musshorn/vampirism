@@ -2873,11 +2873,11 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "20"
+    "AbilityTextureName"    "buildings/research_basic_human_survival"
     "LumberCost"   "2500"
     "GoldCost"     "5"
     "BaseClass"         "ability_datadriven"
     //when this completes, this is the modifier(ability) we need to add.
-    "GiveModifier"      "tech_basic_human_survival"
 
     "OnSpellStart"
     {
@@ -2911,42 +2911,8 @@
       "RunScript"
       {
         "ScriptFile"        "scripts/vscripts/buildings/research.lua"
-        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "Function"          "HumanSurvival" //potentially a generic function that will handle all future techs.
         "TARGET"            "CASTER"
-      }
-    }
-  }
-
-  //================================================================================= /
-  // Basic Human Survival modifier
-  //================================================================================= /
-  "tech_basic_human_survival"
-  {
-    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    "BaseClass"                 "ability_datadriven"
-    "MaxLevel"                  "1"
-
-    "OnUpgrade"
-    {
-      "ApplyModifier"
-      {
-        "ModifierName"  "modifier_basic_human_survival"
-        "Target"        "CASTER"
-      }
-    }
-
-    "Modifiers"
-    {
-      "modifier_basic_human_survival"
-      {
-        "Passive"       "1"
-        "IsHidden"      "1"
-
-        "Properties"
-        {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
-        }
       }
     }
   }

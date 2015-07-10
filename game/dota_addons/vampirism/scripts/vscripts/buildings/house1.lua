@@ -52,7 +52,7 @@ function House1:Init(unit)
 							endTime = spawnTime,
 							callback = function()
 								if TOTAL_FOOD[playerID] >= CURRENT_FOOD[playerID] + requestingFood then
-									if CURRENT_FOOD[playerID] + requestingFood =< 250 then
+									if CURRENT_FOOD[playerID] + requestingFood <= 250 then
 										local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
 										
 										CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + requestingFood

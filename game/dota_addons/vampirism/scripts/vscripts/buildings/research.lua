@@ -398,6 +398,18 @@ function VampiricIntellect( keys )
  end
 end
 
+function HumanSurvival( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local human = HUMANS[playerID]
+
+  Timers:CreateTimer(.03, function ()
+      human:SetMaxHealth(human:GetMaxHealth() + 400)
+      human:SetHealth(human:GetHealth() + 400)
+      return nil
+  end)
+end
+
 function TechUpgrade( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
