@@ -18,41 +18,9 @@ end
 
 MODEL_ALPHA = 100 -- Defines the transparency of the ghost model.
 
+
+
 function BuildingHelper:Init(...)
-
-  CustomGameEventManager:RegisterListener( "building_helper_build_command", function( eventSourceIndex, args )
-    PrintTable(args)
-    local x = args['X']
-    local y = args['Y']
-    local z = args['Z']
-    local location = Vector(x, y, z)
-
-    --get the player that sent the command
-    local cmdPlayer = PlayerResource:GetPlayer(args['PlayerID'])
-    
-    if cmdPlayer.activeBuilder:HasAbility("has_build_queue") == false then
-      cmdPlayer.activeBuilder:AddAbility("has_build_queue")
-      local abil = cmdPlayer.activeBuilder:FindAbilityByName("has_build_queue")
-      abil:SetLevel(1)
-    end
-
-    if cmdPlayer then
-      cmdPlayer.activeBuilder:AddToQueue(location)
-    end
-  end )
-
-  CustomGameEventManager:RegisterListener( "building_helper_cancel_command", function( eventSourceIndex, args )
-    --get the player that sent the command
-    local cmdPlayer = PlayerResource:GetPlayer(args['PlayerID'])
-    if cmdPlayer then
-      cmdPlayer.activeBuilder:ClearQueue()
-      cmdPlayer.activeBuilding = nil
-      cmdPlayer.activeBuilder:Stop()
-      cmdPlayer.activeBuilder.ProcessingBuilding = false
-      
-    end
-  end )
-
   AbilityKVs = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
   ItemKVs = LoadKeyValues("scripts/npc/npc_items_custom.txt")
   UnitKVs = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -72,6 +40,38 @@ function BuildingHelper:Init(...)
         end
       end
     end
+  end
+end
+
+function BuildingHelper:RegisterLeftClick( args )
+  local x = args['X']
+  local y = args['Y']
+  local z = args['Z']
+  local location = Vector(x, y, z)
+
+  --get the player that sent the command
+  local cmdPlayer = PlayerResource:GetPlayer(args['PlayerID'])
+  
+  if cmdPlayer.activeBuilder:HasAbility("has_build_queue") == false then
+    cmdPlayer.activeBuilder:AddAbility("has_build_queue")
+    local abil = cmdPlayer.activeBuilder:FindAbilityByName("has_build_queue")
+    abil:SetLevel(1)
+  end
+
+  if cmdPlayer then
+    cmdPlayer.activeBuilder:AddToQueue(location)
+  end
+end
+
+function BuildingHelper:RegisterRightClick( args )
+  --get the player that sent the command
+  local cmdPlayer = PlayerResource:GetPlayer(args['PlayerID'])
+  if cmdPlayer then
+    cmdPlayer.activeBuilder:ClearQueue()
+    cmdPlayer.activeBuilding = nil
+    cmdPlayer.activeBuilder:Stop()
+    cmdPlayer.activeBuilder.ProcessingBuilding = false
+    
   end
 end
 
@@ -185,7 +185,7 @@ function BuildingHelper:AddBuilding(keys)
   -- Prepare the builder, if it hasn't already been done. Since this would need to be done for every builder in some games, might as well do it here.
   local builder = keys.caster
 
-  if builder.buildingQueue == nil then
+  if builder.buildingQueue == nil or Timers.timers[builder.workTimer] == nil then    
     InitializeBuilder(builder)
   end
 
@@ -276,7 +276,6 @@ function BuildingHelper:InitializeBuildingEntity( keys )
   -- Spawn the building
   local building = CreateUnitByName(unitName, location, false, playersHero, nil, builder:GetTeam())
   building:SetControllableByPlayer(pID, true)
-  
   building.blockers = gridNavBlockers
   building.buildingTable = buildingTable
   building.state = "building"
@@ -316,7 +315,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
       end
     end
   end
-
+  
   --[[
         Code to update unit health and scale over the build time, maths is a bit spooky but here's whats happening
         Logic follows:
@@ -528,6 +527,32 @@ function InitializeBuilder( builder )
       location.y = SnapToGrid64(location.y)
     end
 
+    if size % 2 == 1 then
+    for x = location.x - (size / 2) * 32 , location.x + (size / 2) * 32 , 32 do
+      for y = location.y - (size / 2) * 32 , location.y + (size / 2) * 32 , 32 do
+        local testLocation = Vector(x, y, location.z)
+        if GridNav:IsBlocked(testLocation) or GridNav:IsTraversable(testLocation) == false then
+          if callbacks.onConstructionFailed ~= nil then
+            callbacks.onConstructionFailed(work)
+          end
+          return
+        end
+      end
+    end
+  else
+    for x = location.x - (size / 2) * 32 - 16, location.x + (size / 2) * 32 + 16, 32 do
+      for y = location.y - (size / 2) * 32 - 16, location.y + (size / 2) * 32 + 16, 32 do
+        local testLocation = Vector(x, y, location.z)
+         if GridNav:IsBlocked(testLocation) or GridNav:IsTraversable(testLocation) == false then
+          if callbacks.onConstructionFailed ~= nil then
+            callbacks.onConstructionFailed(work)
+          end
+          return
+        end
+      end
+    end
+  end
+
     -- Create model ghost dummy out of the map, then make pretty particles
     mgd = CreateUnitByName(building, OutOfWorldVector, false, nil, nil, builder:GetTeam())
 
@@ -555,6 +580,7 @@ function InitializeBuilder( builder )
 
     while #builder.buildingQueue > 0 do
       local work = builder.buildingQueue[1]
+      print(work.particles)
       ParticleManager:DestroyParticle(work.particles, true)
       table.remove(builder.buildingQueue, 1)
       if work.callbacks.onConstructionCancelled ~= nil then
@@ -604,7 +630,7 @@ function InitializeBuilder( builder )
   end
 end
 
-
+BuildingHelper:Init()
 
 --[[
       Utility functions
