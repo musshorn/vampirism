@@ -1,5 +1,4 @@
 function CheckLumber( keys )
-	print('checking lumber for item')
 	PrintTable(keys)
 end
 
@@ -11,12 +10,10 @@ function CoinUsed(keys)
 
 	if caster:IsRealHero() then
 		if keys.Type == "small" then
-			GOLD[playerID] = GOLD[playerID] + 1
-			FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
-	end
+			ChangeGold(playerID, 1)
+		end
 		if keys.Type == "large" then
-			GOLD[playerID] = GOLD[playerID] + 2
-			FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+			ChangeGold(playerID, 2)
 		end
 	end
 end
@@ -51,6 +48,13 @@ function SpawnEngineers( keys )
 	for i = 1, 4 do
 		local engi = CreateUnitByName("toolkit_engineer", caster:GetAbsOrigin(), true, nil, nil, 0)
 		engi:SetControllableByPlayer(playerID, true)
+		if TechTree:HasTech(playerID, 'research_engineer_vitality') then
+			Timers:CreateTimer(.03, function ()
+				engi:SetMaxHealth(2000)
+				engi:Heal(1000, engi)
+				return nil
+			end)
+		end
 	end
 end
 
@@ -62,6 +66,7 @@ function AddBuildingToCaster( keys )
 
 	caster:AddAbility(abilityToAdd)
 	local added = caster:FindAbilityByName(abilityToAdd)
+	added:SetLevel(1)
 	caster:CastAbilityNoTarget(added, caster:GetMainControllingPlayer())
 end
 
@@ -511,9 +516,10 @@ function ShadowSight( keys )
 
 	if not target:HasAbility('is_a_building') then
 		if target:IsHero() then
-			target:MakeVisibleToTeam(casterTeam, 30)
+			target:AddNewModifier(caster, nil, 'modifier_bloodseeker_thirst_vision', {duration = 30})
+			DeepPrintTable(target)
 		else
-			target:MakeVisibleToTeam(casterTeam, 120)
+			target:AddNewModifier(caster, nil, 'modifier_bloodseeker_thirst_vision', {duration = 120})
 		end
 	else
 		FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Cannot target buildings!'})
@@ -681,4 +687,26 @@ function RicochetGem( keys )
 	end
   return .15
   end)
+end
+
+-- Sells the item in the first slot.
+function VampireSell( keys )
+	local caster = keys.caster
+	local playerID = caster:GetMainControllingPlayer()
+
+	if caster:GetItemInSlot(0) ~= nil then
+		local item = caster:GetItemInSlot(0)
+		local itemName = item:GetName()
+		local woodCost = 0
+		local goldCost = 0
+		if ITEM_KV[itemName]['LumberCost'] ~= nil then
+			woodCost = ITEM_KV[itemName]['LumberCost']
+			ChangeWood(playerID, (woodCost / 2))
+		end
+		if ITEM_KV[itemName]['GoldCost'] ~= nil then
+			goldCost = ITEM_KV[itemName]['GoldCost']
+			ChangeGold(playerID, (goldCost / 2))
+		end
+		caster:RemoveItem(item)
+	end
 end

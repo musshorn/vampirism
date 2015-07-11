@@ -29,6 +29,14 @@ function build( keys )
     -- Play construction sound
     -- FindClearSpace for the builder
     FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
+
+    -- FindClearSpaceForUnit does not play nice with large hull units. Using this till a better solution is found.
+    local nearVamps = FindUnitsInRadius(caster:GetTeam(), unit:GetAbsOrigin(), nil, 100, DOTA_TEAM_BADGUYS, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+    for k, v in pairs(nearVamps) do
+      if v:GetUnitName() == "npc_dota_hero_night_stalker" then
+        v:AddNewModifier(caster, nil, "modifier_item_forcestaff_active", {push_length = 200})
+      end
+    end
     -- start the building with 0 mana.
     unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})
     unit:AddNewModifier(silencer, nil, "modifier_disarmed", {duration=10000})
@@ -105,6 +113,11 @@ function build( keys )
       unit:AddAbility('grave_aura')
       unit:FindAbilityByName('grave_aura'):OnUpgrade()
     end
+
+    --adds invulnerable to vamp res center
+    if unit:GetUnitName() == 'research_center_vampire' then
+      unit:AddNewModifier(unit, nil, 'modifier_invulnerable', {})
+    end
   end)
 
   -- These callbacks will only fire when the state between below half health/above half health changes.
@@ -126,13 +139,11 @@ function build( keys )
     local goldCost = unit.buildingTable.GoldCost
 
     if lumberCost ~= nil then
-      WOOD[pID] = WOOD[pID] + lumberCost
-      FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
+      ChangeWood(pID, lumberCost)
     end
 
     if goldCost ~= nil then
-      GOLD[pID] = GOLD[pID] + goldCost
-      FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
+      ChangeGold(pID, goldCost)
     end
 
   end)
@@ -194,10 +205,8 @@ function create_building_entity( keys )
     end
 
     -- Deduct resources and start constructing
-    GOLD[pID] = GOLD[pID] - goldCost
-    WOOD[pID] = WOOD[pID] - lumberCost
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = GOLD[pID]})
+    ChangeGold(pID, -1 * goldCost)
+    ChangeWood(pID, -1 * lumberCost)
 
     BuildingHelper:InitializeBuildingEntity(keys)
   end
@@ -236,8 +245,8 @@ function WorkerDet( keys )
   -- Refund any food if any
   if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
     local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
-    CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
-    FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+      CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
+      FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
   end
 
   Timers:CreateTimer(0.03, function ()
@@ -276,9 +285,9 @@ function BecomeVampire( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
 
-  PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BAD_GUYS, true)
+  PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BADGUYS, true)
   
-  local vamp = CreateUnitByName("npc_dota_hero_queenofpain", caster:GetAbsOrigin(), true, nil, nil, DOTA_TEAM_BAD_GUYS)
+  local vamp = CreateUnitByName("npc_dota_hero_queenofpain", caster:GetAbsOrigin(), true, nil, nil, DOTA_TEAM_BADGUYS)
   vamp:SetControllableByPlayer(pID, true)
 
   caster:RemoveSelf()
@@ -314,4 +323,48 @@ end
 function BuildCancel( keys )
   local caster = keys.caster
   caster:Stop()
+end
+
+-- Human teleport ability.
+function HumanTeleport( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local target = keys.target
+  local ability = keys.ability
+
+  if not target:HasAbility('is_a_building') then
+    ability:EndCooldown() 
+    ability:RefundManaCost()
+    caster:Stop()
+    FireGameEvent('custom_error_show', {player_ID = playerID, _error = "May only teleport to buildings!"})
+    return
+  end
+
+  local pStart = ParticleManager:CreateParticle("particles/items2_fx/teleport_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+
+  local casterPos = caster:GetAbsOrigin()
+  ParticleManager:SetParticleControl(pStart, 0, casterPos)
+  ParticleManager:SetParticleControl(pStart, 1, Vector(0,0,255))
+  ParticleManager:SetParticleControl(pStart, 2, casterPos)
+  ParticleManager:SetParticleControl(pStart, 3, casterPos)
+  ParticleManager:SetParticleControl(pStart, 4, casterPos)
+  ParticleManager:SetParticleControl(pStart, 5, casterPos)
+  ParticleManager:SetParticleControl(pStart, 6, casterPos)
+
+  local pEnd = ParticleManager:CreateParticle("particles/items2_fx/teleport_end.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+  ParticleManager:SetParticleControl(pEnd, 0, target:GetAbsOrigin())
+  ParticleManager:SetParticleControl(pEnd, 1, target:GetAbsOrigin())
+  ParticleManager:SetParticleControl(pEnd, 2, Vector(0,0,255))
+  Timers:CreateTimer(3, function ()
+    ParticleManager:DestroyParticle(pStart, false)
+    ParticleManager:DestroyParticle(pEnd, false)
+  end)
+end
+
+function TeleportFinish( keys )
+  local caster = keys.caster
+  local target = keys.target
+
+  FindClearSpaceForUnit(caster, target:GetAbsOrigin(), false)
+
 end

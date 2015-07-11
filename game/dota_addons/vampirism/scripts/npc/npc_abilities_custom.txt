@@ -1430,7 +1430,7 @@
     "BaseClass" "ability_datadriven"
 
     "NeedTech"  "research_insane_lumber_harvesting"
-    
+
     "OnSpellStart"
     {
       "RunScript"
@@ -2396,7 +2396,7 @@
   //================================================================================= /
   "tech_healing_vitality"
   {
-    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "BaseClass"                 "ability_datadriven"
     "MaxLevel"                  "1"
@@ -2427,6 +2427,1242 @@
             "Amount"            "1500"
           }
         }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Spire Quality 1
+  //================================================================================= /
+  "research_spire_quality_1"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "20"
+    "AbilityTextureName"    "buildings/research_spire_quality_1"
+    "LumberCost"   "1000"
+    "GoldCost"     "1"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_spire_quality_1"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+        "NextLevel"       "1" //Tells buildui to replace the ability. Remember that it is level - 1.
+        "BaseAbility"     "research_spire_quality_1" //The base ability that it was upgraded from.
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Spire Quality 1 modifier
+  //================================================================================= /
+  "tech_spire_quality_1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_spire_quality_1"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_spire_quality_1"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Spire Quality 2
+  //================================================================================= /
+  "research_spire_quality_2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "25"
+    "AbilityTextureName"    "buildings/research_spire_quality_2"
+    "LumberCost"          "1500"
+    "GoldCost"            "2"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_spire_quality_2"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+        "NextLevel"       "2" //Tells buildui to replace the ability. Remember that it is level - 1.
+        "BaseAbility"     "research_spire_quality_1" //The base ability that it was upgraded from.
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Spire Quality 2 modifier
+  //================================================================================= /
+  "tech_spire_quality_2"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_spire_quality_2"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_spire_quality_2"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Spire Quality 3
+  //================================================================================= /
+  "research_spire_quality_3"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"    "buildings/research_spire_quality_3"
+    "LumberCost"          "2000"
+    "GoldCost"            "3"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_spire_quality_3"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+        "NextLevel"         "3" //Tells buildui to replace the ability. Remember that it is level - 1.
+        "BaseAbility"       "research_spire_quality_1" //The base ability that it was upgraded from.
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Spire Quality 3 modifier
+  //================================================================================= /
+  "tech_spire_quality_3"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_spire_quality_3"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_spire_quality_3"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Spire Quality 4
+  //================================================================================= /
+  "research_spire_quality_4"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "35"
+    "AbilityTextureName"    "buildings/research_spire_quality_4"
+    "LumberCost"          "2500"
+    "GoldCost"            "4"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_spire_quality_4"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Spire Quality 4 modifier
+  //================================================================================= /
+  "tech_spire_quality_4"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_spire_quality_4"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_spire_quality_4"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Spire Quality 5
+  //================================================================================= /
+  "research_spire_quality_5"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "40"
+    "LumberCost"          "3000"
+    "GoldCost"            "5"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_spire_quality_5"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Spire Quality 5 modifier
+  //================================================================================= /
+  "tech_spire_quality_5"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_spire_quality_5"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_spire_quality_5"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Basic Human Survival
+  //================================================================================= /
+  "research_basic_human_survival"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "20"
+    "AbilityTextureName"    "buildings/research_basic_human_survival"
+    "LumberCost"   "2500"
+    "GoldCost"     "5"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "HumanSurvival" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Holy Essence
+  //================================================================================= /
+  "research_holy_essence"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "20"
+    "LumberCost"   "10000"
+    "GoldCost"     "5"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_holy_essence"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Holy Essence modifier
+  //================================================================================= /
+  "tech_holy_essence"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_holy_essence"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_holy_essence"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Iron Plating
+  //================================================================================= /
+  "research_wall_plating_1"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "20"
+    "AbilityTextureName"    "buildings/research_wall_plating_1"
+    "LumberCost"   "20000"
+    "GoldCost"     "5"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_wall_plating_1"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+        "NextLevel"         "1" 
+        "BaseAbility"       "research_wall_plating_1"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Iron Plating modifier
+  //================================================================================= /
+  "tech_wall_plating_1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "8"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "armor_bonus"      "5 10 15 20 25 30 35 45"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_wall_plating_1"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "buildings/research.lua"
+            "Function"    "TechPlating"
+            "Target"      "CASTER"
+          }
+        }
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Steel Plating
+  //================================================================================= /
+  "research_wall_plating_2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "40"
+    "AbilityTextureName"    "buildings/research_wall_plating_2"
+    "LumberCost"   "60000"
+    "GoldCost"     "15"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_wall_plating_2"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+        "NextLevel"         "2" 
+        "BaseAbility"       "research_wall_plating_1"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Steel Plating modifier
+  //================================================================================= /
+  "tech_wall_plating_2"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "8"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "armor_bonus"      "5 10 15 20 25 30 35 45"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_wall_plating_2"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "buildings/research.lua"
+            "Function"    "TechPlating"
+            "Target"      "CASTER"
+          }
+        }
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
+        }
+      }
+    }
+
+  }
+
+  //================================================================================= /
+  // Research Mithril Plating
+  //================================================================================= /
+  "research_wall_plating_3"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "60"
+    "AbilityTextureName"    "buildings/research_wall_plating_3"
+    "LumberCost"   "100000"
+    "GoldCost"     "25"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_wall_plating_3"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+        "NextLevel"         "3" 
+        "BaseAbility"       "research_wall_plating_1"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Mithril Plating modifier
+  //================================================================================= /
+  "tech_wall_plating_3"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "8"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "armor_bonus"      "5 10 15 20 25 30 35 45"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_wall_plating_3"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "buildings/research.lua"
+            "Function"    "TechPlating"
+            "Target"      "CASTER"
+          }
+        }
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
+        }
+      }
+    }
+
+  }
+
+  //================================================================================= /
+  // Research Mithril Plating
+  //================================================================================= /
+  "research_wall_plating_4"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "80"
+    "AbilityTextureName"    "buildings/research_wall_plating_4"
+    "LumberCost"   "140000"
+    "GoldCost"     "35"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_wall_plating_4"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Mithril Plating modifier
+  //================================================================================= /
+  "tech_wall_plating_4"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "8"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "armor_bonus"      "5 10 15 20 25 30 35 45"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_wall_plating_4"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "buildings/research.lua"
+            "Function"    "TechPlating"
+            "Target"      "CASTER"
+          }
+        }
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
+        }
+      }
+    }
+
+  }
+
+  //================================================================================= /
+  // Research Human Teleport
+  //================================================================================= /
+  "research_human_teleport"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "20"
+    "AbilityTextureName"    "buildings/research_human_teleport"
+    "LumberCost"   "1000"
+    "GoldCost"     "1"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_human_teleport"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "AddTeleport" 
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Tower Defenses
+  //================================================================================= /
+  "research_tower_defenses"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "120"
+    "AbilityTextureName"    "buildings/research_tower_defenses"
+    "LumberCost"        "75000"
+    "GoldCost"          "20"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_tower_defenses"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Tower Defenses modifier
+  //================================================================================= /
+  "tech_tower_defenses"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_tower_defenses"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_tower_defenses"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+            "Function"          "AddHealthUpgrade" //adds a flat health bonus.
+            "TARGET"            "CASTER"
+            "Amount"            "1500"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Engineer Vitality
+  //================================================================================= /
+  "research_engineer_vitality"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "60"
+    "AbilityTextureName"    "buildings/research_engineer_vitality"
+    "LumberCost"          "20000"
+    "GoldCost"            "10"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_engineer_vitality"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Engineer Vitality modifier
+  //================================================================================= /
+  "tech_engineer_vitality"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_engineer_vitality"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_engineer_vitality"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+            "Function"          "AddHealthUpgrade" //adds a flat health bonus.
+            "TARGET"            "CASTER"
+            "Amount"            "1000"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Human Teleport
+  //================================================================================= /
+  "human_teleport"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
+    "AbilityChannelTime"        "3.0"
+    "AbilityCooldown"           "60"
+    "AbilityTextureName"        "buildings/research_human_teleport"
+    "MaxLevel"                  "1"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "abilities.lua"
+        "Function"    "HumanTeleport"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "abilities.lua"
+        "Function"    "TeleportFinish"
       }
     }
   }
@@ -2957,7 +4193,7 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "Upgrade"
-        "TARGET"  "CASTER"
+        "TARGET"      "CASTER"
         "TargetUnit"  "wall_t4"
         "LumberCost"  "5000"
       }
@@ -3451,6 +4687,48 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "tower_flame_t1"
         "Scale"     "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Lantern Tower
+  //=================================================================================/
+  "upgrade_to_tower_lantern"
+  {
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"           "ability_datadriven"
+    "AbilityChannelTime"  "5"
+    "AbilityTextureName"  "upgrade_to_tower_lantern"  
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_lantern"
+        "LumberCost"  "3500"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_lantern"
+        "Scale"       "1"
       }
     }
     "OnChannelInterrupted"
@@ -5836,6 +7114,91 @@
     }
   }
 
+  //================================================================================= /
+  // Super Wall Tower
+  //================================================================================= /
+  "upgrade_to_tower_wall_t2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "35"
+    "AbilityTextureName"  "upgrade_to_tower_wall_t2"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_wall_t2"
+        "LumberCost"  "50000"
+        "GoldCost"    "10"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_wall_t2"
+        "Scale"       "0.5"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Build vampiric research center
+  //================================================================================= /
+  "build_research_center_vampire"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "1"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  ".5"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0.05"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "research_center_vampire"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+        "ItemBuilding"          "item_vampiric_research_center"
+      }
+    }
+  }
 
   "build_cancel"
   {
@@ -7314,6 +8677,367 @@
         {
           "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
         }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Skills
+  //================================================================================= /
+  "research_vampiric_skills"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "5"
+    "AbilityTextureName"  "spectre_dispersion"
+    "GoldCost"          "5"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricSkills"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Damage
+  //================================================================================= /
+  "research_vampiric_damage"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"    "chaos_knight_reality_rift"
+    "GoldCost"          "50"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricDamage"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Stats
+  //================================================================================= /
+  "research_vampiric_stats"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "attribute_bonus"
+    "GoldCost"          "500"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricStats"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Power of the Underworld
+  //================================================================================= /
+  "research_power_underworld"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"    "night_stalker_crippling_fear"
+    "GoldCost"          "2000"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "PowerUnderworld"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Strength
+  //================================================================================= /
+  "research_vampiric_strength"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "troll_warlord_fervor"
+    "GoldCost"          "250"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricStrength"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Agility
+  //================================================================================= /
+  "research_vampiric_agility"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"    "axe_battle_hunger"
+    "GoldCost"          "300"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricAgility"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research: Vampiric Intellect
+  //================================================================================= /
+  "research_vampiric_intellect"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "rubick_spell_steal"
+    "GoldCost"          "90"
+    "BaseClass" "ability_datadriven"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "VampiricIntellect"
+        "Level"       "1"
+        "TARGET"      "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Vampire Sell item
+  //================================================================================= /
+  "vampire_sell_item"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"    "alchemist_goblins_greed"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "items.lua"
+        "Function"    "VampireSell"
       }
     }
   }

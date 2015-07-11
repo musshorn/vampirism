@@ -21,6 +21,7 @@ game/dota_addons/lua_ability_example/
 game/dota_addons/tutorial_assist_game/
 game/dota_addons/tutorial_basics/
 game/dota_addons/hero_demo/
+game/dota_addons/rpg_example/
 content/dota_core/
 game/dota_addons/adventure_example/
 dota.exe
@@ -34,6 +35,7 @@ content/dota_addons/dota_pvp/
 content/dota_addons/multiteam_example/
 content/dota_addons/lua_ability_example/
 content/dota_addons/holdout_example/
+content/dota_addons/rpg_example/
 steam_appid.txt
 content/core/
 bin/

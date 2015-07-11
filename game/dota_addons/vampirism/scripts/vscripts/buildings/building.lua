@@ -65,10 +65,8 @@ function Cancel( keys )
         end
       end
     end
-    GOLD[pID] = GOLD[pID] + caster.refundGold
-    WOOD[pID] = WOOD[pID] + caster.refundLumber
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    FireGameEvent('vamp_gold_changed', {player_ID = pID, gold_total = GOLD[pID]})
+    ChangeGold(pID, caster.refundGold)
+    ChangeWood(pID, caster.refundLumber)
     caster:SetMaxHealth(caster.originalMaxHP)
   end
 end
@@ -115,11 +113,8 @@ function Upgrade( keys )
 
   if canUpgrade == true then
     -- Deduct resources
-    GOLD[pID] = GOLD[pID] - goldCost
-    WOOD[pID] = WOOD[pID] - lumberCost
-    FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-    FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
-
+    ChangeGold(pID, -1 * goldCost)
+    ChangeWood(pID, -1 * lumberCost)
   
     -- Change the model
     if caster.oldModel == nil then
@@ -209,6 +204,21 @@ function FinishUpgrade( keys )
 
     if bForcedKill then
       unit:ForceKill(bForcedKill)
+    end
+  end
+
+  -- Give it tech modifiers.
+  if UNIT_KV[pID][targetUnit]['TechModifiers'] ~= nil then
+    local modTable = UNIT_KV[pID][targetUnit]['TechModifiers']
+    print('building.lua')
+    for k, v in pairs(modTable) do
+      if TechTree:HasTech(pID, v) then
+        local modName =  ABILITY_KV[v]['GiveModifier']
+        unit:AddAbility(modName)
+        local addedMod = unit:FindAbilityByName(modName)
+        addedMod:SetLevel(1)
+        --addedMod:OnUpgrade()
+      end
     end
   end
 

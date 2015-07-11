@@ -93,12 +93,19 @@ function Purchase( itemname, buyer )
 
   if lumber < lumberCost then
     FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough lumber!'})
+    return
   end
   if gold < goldCost then
     FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough gold!'})
+    return
   end
   if food + foodCost > foodCap then
     FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough food!'})
+    return
+  end
+  if food + foodCost >= 250 then
+    FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Food cap reached!'})
+    return
   end
 
   local isRecipe = false
@@ -151,7 +158,7 @@ function Purchase( itemname, buyer )
             end
           end
   
-          --check stock
+          --check stock, handle recipies
           if SHOPS[shopIndex][index]['stock'] > 0 then
            if itemsToRemove[1] ~= nil then
               for k, v in pairs(itemsToRemove) do
@@ -172,11 +179,9 @@ function Purchase( itemname, buyer )
               item:SetPurchaser(PlayerResource:GetPlayer(playerID))
               buyer:AddItem(item)
            end
-  				 WOOD[playerID] = WOOD[playerID] - lumberCost
            CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + foodCost
-  				 GOLD[playerID] = GOLD[playerID] - goldCost
-  				 FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = GOLD[playerID]})
-      		 FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
+           ChangeWood(playerID, -1 * lumberCost)
+           ChangeGold(playerID, -1 * goldCost)
            FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
       		 FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = 0})
            SHOPS[shopIndex][index]['stock'] = SHOPS[shopIndex][index]['stock'] - 1

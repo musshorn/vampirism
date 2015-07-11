@@ -12,7 +12,7 @@ if playerTrees == nil then
 end
 
 function TechTree:Init()
-	for i = 0, 9 do
+	for i = -1, 9 do
 		playerTrees[i] = {}
 	end
 
@@ -180,17 +180,14 @@ function TechTree:RemoveTech(unitName, playerID)
 
 	if playerTrees[playerID][tech] > 0 then
 		playerTrees[playerID][tech] = playerTrees[playerID][tech] - 1
-	--else
-		--print('TECH ' .. tech .. ' is already 0!')
 	end
 end
 
 -- Quick check if a player has a given tech, used for checking tech modifiers.
 function TechTree:HasTech(playerID, tech)
-	for k, v in pairs(playerTrees[playerID]) do
-		if v[tech] ~= nil then
-			return true
-		end
+	if playerTrees[playerID][tech] ~= nil then
+		return true
+	else
+		return false
 	end
-	return false
 end

@@ -52,31 +52,39 @@ function House1:Init(unit)
 							endTime = spawnTime,
 							callback = function()
 								if TOTAL_FOOD[playerID] >= CURRENT_FOOD[playerID] + requestingFood then
-									local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
-									
-									CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + requestingFood
-									FireGameEvent('vamp_food_changed', { player_ID = playerID , food_total = CURRENT_FOOD[playerID]})
-									
-									caster:RemoveModifierByName(house1.workHandler:GetName())
-									house1.workHandler:SetChanneling(false)
-									house1.doingWork = false
-
-									-- If a rally point is set for this building then move the worker to it.
-									-- Needs a delay as movement cant happen on the same frame as spawn
-									-- If a rally point is not set then the worker will move to the nearest tree
-									if house1.rallyPoint ~= nil then
-										Timers:CreateTimer(0.05, function()
-											unit:MoveToPosition(house1.rallyPoint)
-											return nil
-										end)
+									if CURRENT_FOOD[playerID] + requestingFood <= 250 then
+										local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
+										
+										CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + requestingFood
+										FireGameEvent('vamp_food_changed', { player_ID = playerID , food_total = CURRENT_FOOD[playerID]})
+										
+										caster:RemoveModifierByName(house1.workHandler:GetName())
+										house1.workHandler:SetChanneling(false)
+										house1.doingWork = false
+	
+										-- If a rally point is set for this building then move the worker to it.
+										-- Needs a delay as movement cant happen on the same frame as spawn
+										-- If a rally point is not set then the worker will move to the nearest tree
+										if house1.rallyPoint ~= nil then
+											Timers:CreateTimer(0.05, function()
+												unit:MoveToPosition(house1.rallyPoint)
+												return nil
+											end)
+										else
+  											local tree = Entities:FindByClassnameNearest("ent_dota_tree",unit:GetAbsOrigin(),1000)
+  											if tree ~= nil then
+	  											Timers:CreateTimer(0.05, function()
+														unit:MoveToPosition(tree:GetAbsOrigin())
+														return nil
+													end)
+	  										end
+										end
 									else
-  										local tree = Entities:FindByClassnameNearest("ent_dota_tree",unit:GetAbsOrigin(),1000)
-  										if tree ~= nil then
-	  										Timers:CreateTimer(0.05, function()
-													unit:MoveToPosition(tree:GetAbsOrigin())
-													return nil
-												end)
-	  									end
+										FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Food cap reached" } )
+										table.remove(house1.queue)
+										caster:RemoveModifierByName(house1.workHandler:GetName())
+										house1.workHandler:SetChanneling(false)
+										house1.doingWork = false
 									end
 								else
 									FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Build more farms" } )

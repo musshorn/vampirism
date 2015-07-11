@@ -205,6 +205,14 @@
 
     "IsTech"    "true"
     "NeedTech"    "house_t1"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
 
   //================================================================================= 
@@ -279,6 +287,15 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "15"
+    "NeedTech"    "research_center_t1"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Amethyst Wall
@@ -352,6 +369,15 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
+    "NeedTech"      "research_center_t1"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Sapphire Wall
@@ -425,6 +451,15 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
+    "NeedTech"      "human_vault"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Emerald Wall
@@ -498,6 +533,15 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
+    "NeedTech"      "human_vault"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Chrysoprase Wall
@@ -571,6 +615,14 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Garnet Wall
@@ -644,6 +696,15 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
+    "NeedTech"      "research_center_t2 house_t3"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Ruby Wall
@@ -717,6 +778,15 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "45"
+    "NeedTech"      "research_center_t2 house_t3 citadel_of_faith"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Diamond Wall
@@ -790,6 +860,15 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "65"
+    "NeedTech"      "command_center"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Building: Onyx Wall
@@ -863,6 +942,15 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "75"
+    "NeedTech"      "gold_mine_t3 base_operations"
+
+    "TechModifiers"
+    {
+        "1" "research_wall_plating_1"
+        "2" "research_wall_plating_2"
+        "3" "research_wall_plating_3"
+        "4" "research_wall_plating_4"
+    }
   }
   //================================================================================= 
   // Worker T1 - Peasant
@@ -2024,7 +2112,7 @@
     "BaseClass"                 "npc_dota_creature"
     "Model"                     "models/bad_crystals003_reference.vmdl"
     "ModelScale"                "0.5"
-    "AbilityLayout"             "5"
+    "AbilityLayout"             "6"
     
     "ConsideredHero"            "0"
     // Abilities
@@ -2035,7 +2123,7 @@
     "Ability3"                  "upgrade_to_tower_calcite_t1"               // Ability 3.
     "Ability4"                  "upgrade_to_tower_frost"                    // Ability 4.
     "Ability5"                  "upgrade_to_wall_seeing"                    // Ability 5.
-    "Ability6"                  ""                  // Ability 6 - Extra.
+    "Ability6"                  "upgrade_to_tower_lantern"                  // Ability 6 - Extra.
     "Ability7"                  ""                  // Ability 7 - Extra.
     "Ability8"                  "is_a_building"                 // Ability 8 - Extra.
 
@@ -2105,6 +2193,14 @@
     "IsTech"        "true"
     "NeedTech"      "house_t1"
     "RepairTime"  "10"
+
+    "TechModifiers"
+    {
+       "1"      "research_spire_quality_1"
+       "2"      "research_spire_quality_2"
+       "3"      "research_spire_quality_3"
+       "4"      "research_spire_quality_4"
+    }
   }
 
   //================================================================================= 
@@ -2290,6 +2386,96 @@
 
   //================================================================================= 
   // Tower of Flame
+  //=================================================================================
+  "tower_flame_t1"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                     "npc_dota_creature"
+    "Model"                         "models/bad_column_torch_reference.vmdl"
+    "ModelScale"                    "1"
+    
+    "ConsideredHero"                "0"
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"                  ""  //Human test
+    "Ability2"                  ""                  // Ability 2.
+    "Ability3"                  ""                  // Ability 3.
+    "Ability4"                  ""                  // Ability 4.
+    "Ability5"                  ""                  // Ability 5.
+    "Ability6"                  ""                  // Ability 6 - Extra.
+    "Ability7"                  ""                  // Ability 7 - Extra.
+    "Ability8"                  "is_a_building"                 // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "5"         // Physical protection.
+    "MagicalResistance"         "0"         // Magical protection.
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackDamageMin"           "300"
+    "AttackDamageMax"           "300"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "0.5"
+    "AttackAnimationPoint"      "0"
+    "AttackAcquisitionRange"    "1000"
+    "AttackRange"               "1000"
+    "ProjectileModel"           "particles/base_attacks/ranged_tower_bad.vpcf"
+    "ProjectileSpeed"           "900"
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+
+    // Attributes
+    //----------------------------------------------------------------
+    "AttributeBaseIntelligence" "0"
+    "AttributeBaseIntelligenceGain" "0"
+  
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"           // Hull type used for navigation/locomotion.
+    "HealthBarOffset"           "170"
+    "RingRadius"                "50"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"           // Type of locomotion - ground, air
+    "MovementSpeed"             "300"       // Speed
+    "MovementTurnRate"          "0.5"       // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "500"       // Base health.
+    "StatusHealthRegen"         "5"     // Health regeneration rate.
+    "StatusMana"                "0"         // Base mana.
+    "StatusManaRegen"           "-0.01"         // Mana regeneration rate.
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1900"      // Range of vision during day light.
+    "VisionNighttimeRange"      "800"       // Range of vision at night time.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                  "DOTA_TEAM_GOODGUYS"            // Team name.
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+    
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "125"
+    "BountyGoldMin"             "25"
+    "BountyGoldMax"             "25"
+
+    "IsTech"        "true"
+    "NeedTech"      "house_t1"
+    "RepairTime"  "20"
+  }
+
+  //================================================================================= 
+  // Super Tower of Flame
   //=================================================================================
   "tower_flame_t1"
   {
@@ -2651,6 +2837,91 @@
 
   
   //================================================================================= 
+  // Super Wall Tower
+  //=================================================================================
+  "tower_wall_t2"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                     "npc_dota_creature"
+    "Model"                         "models/good_column004_reference.vmdl"
+    "ModelScale"                    "1"
+        
+    "ConsideredHero"                "0"
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"                  "tower_wall_t1_splash"  //Human test
+    "Ability2"                  ""                  // Ability 2.
+    "Ability3"                  ""                  // Ability 3.
+    "Ability4"                  ""                  // Ability 4.
+    "Ability5"                  ""                  // Ability 5.
+    "Ability6"                  ""                  // Ability 6 - Extra.
+    "Ability7"                  ""                  // Ability 7 - Extra.
+    "Ability8"                  "is_a_building"                 // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "100"            // Physical protection.
+    "MagicalResistance"         "0"         // Magical protection.
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackDamageMin"           "585"
+    "AttackDamageMax"           "635"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "1"
+    "AttackAnimationPoint"      "0"
+    "AttackAcquisitionRange"    "500"
+    "AttackRange"               "500"
+    "ProjectileModel"           "particles/base_attacks/ranged_siege_good.vpcf"
+    "ProjectileSpeed"           "900"
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"           // Hull type used for navigation/locomotion.
+    "HealthBarOffset"           "170"
+    "RingRadius"                "50"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"           // Type of locomotion - ground, air
+    "MovementSpeed"             "300"       // Speed
+    "MovementTurnRate"          "0.5"       // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "10000"      // Base health.
+    "StatusHealthRegen"         "500"       // Health regeneration rate.
+    "StatusMana"                "0"         // Base mana.
+    "StatusManaRegen"           "-0.01"         // Mana regeneration rate.
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1900"      // Range of vision during day light.
+    "VisionNighttimeRange"      "1500"      // Range of vision at night time.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                  "DOTA_TEAM_GOODGUYS"            // Team name.
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+    
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "25"
+    "BountyGoldMin"             "25"
+    "BountyGoldMax"             "25"
+
+    "IsTech"        "true"
+    "NeedTech"      "command_center"
+    "RepairTime"  "30"
+  }
+
+  //================================================================================= 
   // Wall Tower
   //=================================================================================
   "tower_wall_t1"
@@ -2666,7 +2937,7 @@
     //----------------------------------------------------------------
 
     "Ability1"                  "tower_wall_t1_splash"  //Human test
-    "Ability2"                  ""                  // Ability 2.
+    "Ability2"                  "upgrade_to_tower_wall_t2"                  // Ability 2.
     "Ability3"                  ""                  // Ability 3.
     "Ability4"                  ""                  // Ability 4.
     "Ability5"                  ""                  // Ability 5.
@@ -2734,6 +3005,7 @@
     "NeedTech"      "house_t2"
     "RepairTime"  "30"
   }
+
 
   //================================================================================= 
   // Wall of Seeing
@@ -2819,6 +3091,92 @@
     "NeedTech"      "house_t1"
     "RepairTime"  "20"
   }
+
+  //================================================================================= 
+  // Lantern Tower (formerly pink diamond)
+  //=================================================================================
+  "tower_lantern"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"         "npc_dota_creature"
+    "Model"             "models/chinese_lantern002_reference.vmdl"
+    "ModelScale"        "1"
+    
+    "ConsideredHero"      "0"
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"                  ""                  //Human test
+    "Ability2"                  ""                  // Ability 2.
+    "Ability3"                  ""                  // Ability 3.
+    "Ability4"                  ""                  // Ability 4.
+    "Ability5"                  ""                  // Ability 5.
+    "Ability6"                  ""                  // Ability 6 - Extra.
+    "Ability7"                  ""                  // Ability 7 - Extra.
+    "Ability8"                  "is_a_building"                 // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "7"     // Physical protection.
+    "MagicalResistance"     "0"     // Magical protection.
+
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackDamageMin"     "191"
+    "AttackDamageMax"     "247"
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "0.6"
+    "AttackAnimationPoint"    "0"
+    "AttackAcquisitionRange"  "1300"
+    "AttackRange"       "1300"
+    "ProjectileModel"     "particles/econ/items/leshrac/leshrac_tormented_staff/leshrac_base_attack_tormented.vpcf"
+    "ProjectileSpeed"     "1800"
+
+    // Attributes
+    //----------------------------------------------------------------
+    "AttributeBaseIntelligence" "0"
+    "AttributeBaseIntelligenceGain" "0"
+  
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"     "170"
+    "RingRadius"        "50"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_NONE"     // Type of locomotion - ground, air
+    "MovementSpeed"       "300"   // Speed
+    "MovementTurnRate"      "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "2500"    // Base health.
+    "StatusHealthRegen"     "5"   // Health regeneration rate.
+    "StatusMana"        "0"     // Base mana.
+    "StatusManaRegen"     "-0.01"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+    
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "25"
+    "BountyGoldMax"       "25"
+
+    "IsTech"    "true"
+    "NeedTech"    "human_vault"
+    "RepairTime"  "10"
+  }
+
 
   //================================================================================= 
   // Human Building T2 - Lumber House
@@ -3093,22 +3451,25 @@
       "Ability1"                    "call_buildui"                             //Human test
       "Ability2"                    "build_cancel"                             // Ability 2.
       "Ability3"                    "build_blocked"                            // Ability 3.
-      "Ability4"                    "build_blocked2"                           // Ability 4.
+      "Ability4"                    "build_blocked2"
+      "Ability5"                    "build_blocked3"
+      "Ability6"                    "build_blocked4"  
+      "Ability7"                    "build_blocked5"                         // Ability 4.
 
       "AbilityHolder"               "16"
 
-      "ExtraAbility1"               "research_gem_quality_1"
-      "ExtraAbility2"               "research_gem_quality_2"
-      "ExtraAbility3"               "research_gem_quality_3"
-      "ExtraAbility4"               "reserach_gem_quality_4"
-      "ExtraAbility5"               "reserach_gem_quality_5"
+      "ExtraAbility1"               "research_spire_quality_1"
+      "ExtraAbility2"               "research_spire_quality_2"
+      "ExtraAbility3"               "research_spire_quality_3"
+      "ExtraAbility4"               "research_spire_quality_4"
+      "ExtraAbility5"               "research_spire_quality_5"
       "ExtraAbility6"               "research_basic_human_survival"
       "ExtraAbility7"               "research_holy_essence"
-      "ExtraAbility8"               "upgrade_plating_1"
-      "ExtraAbility9"               "upgrade_plating_2"
-      "ExtraAbility10"              "upgrade_plating_3"
-      "ExtraAbility11"              "upgrade_plating_4"
-      "ExtraAbility12"              "upgrade_healing_vitality"
+      "ExtraAbility8"               "research_wall_plating_1"
+      "ExtraAbility9"               "research_wall_plating_2"
+      "ExtraAbility10"              "research_wall_plating_3"
+      "ExtraAbility11"              "research_wall_plating_4"
+      "ExtraAbility12"              "research_healing_vitality"
       "ExtraAbility13"              "research_human_teleport"
       "ExtraAbility14"              "research_tower_defenses"
       "ExtraAbility15"              "research_engineer_vitality"
@@ -3821,6 +4182,11 @@
     "BountyXP"            "25"
     "BountyGoldMin"       "10"
     "BountyGoldMax"       "10"
+
+    "TechModifiers"
+    {
+        "1"     "research_engineer_vitality"
+    }
   }
 
   //================================================================================= 
@@ -5985,4 +6351,89 @@
     "BountyGoldMin"             "0"
     "BountyGoldMax"             "0"
   }
+
+  //================================================================================= 
+  // Vampiric Research Center
+  //=================================================================================
+  "research_center_vampire"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                 "npc_dota_creature"
+    "Model"                     "models/props_structures/bad_barracks001_ranged.vmdl"
+    "ModelScale"                "0.5" 
+    "ConsideredHero"            "0"
+    "HasInventory"              "1" 
+
+    // Abilities
+    //----------------------------------------------------------------
+    
+    "Ability1"          "call_buildui"      // 
+    "Ability2"          "vampire_sell_item"      // 
+    "Ability3"          "build_blocked2"      // Ability 3.
+    "Ability4"          "build_blocked3"         // Ability 4.
+    "Ability5"          "build_blocked4"      // Ability 5.
+    "Ability6"          "build_cancel"      // Ability 6 - Extra.
+    "Ability7"          "research_vampiric_skills"      // Ability 7 - Extra.
+    "Ability8"          "research_vampiric_damage"      // Ability 8 - Extra.
+    "Ability9"          "research_vampiric_stats"
+    "Ability10"         "research_power_underworld"
+    "Ability11"         "research_vampiric_strength"
+    "Ability12"         "research_vampiric_agility"
+    "Ability13"         "research_vampiric_intellect"
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "15"     // Physical protection.
+    "MagicalResistance"         "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackDamageMin"           "0"
+    "AttackDamageMax"           "0"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "0"
+    "AttackAnimationPoint"      "0"
+    "AttackAcquisitionRange"    "0"
+    "AttackRange"               "0"
+    "ProjectileModel"           ""
+    "ProjectileSpeed"           ""
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"           "170"
+    "RingRadius"                "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"     // Type of locomotion - ground, air
+    "MovementSpeed"             "0"   // Speed
+    "MovementTurnRate"          "0"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "2500"   // Base health.
+    "StatusHealthRegen"         "0"   // Health regeneration rate.
+    "StatusMana"                "0"      // Base mana.
+    "StatusManaRegen"           "0"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "900"   // Range of vision during day light.
+    "VisionNighttimeRange"      "800"   // Range of vision at night time.
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "0"
+    "BountyGoldMin"             "0"
+    "BountyGoldMax"             "0"
+  }
+
 }

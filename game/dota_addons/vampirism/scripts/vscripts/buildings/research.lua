@@ -27,10 +27,8 @@ function Research( keys )
   end
 
   -- Player is ok to commence research, deduct resources
-  WOOD[pID] = WOOD[pID] - lumberCost
-  GOLD[pID] = GOLD[pID] - goldCost
-  FireGameEvent('vamp_wood_changed', { player_ID = pID, wood_total = WOOD[pID]})
-  FireGameEvent('vamp_gold_changed', { player_ID = pID, gold_total = GOLD[pID]})
+  ChangeWood(pID, -1 * lumberCost)
+  ChangeGold(pID, -1 * goldCost)
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
   FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
@@ -53,10 +51,8 @@ function Cancelled(keys)
   end
 
   -- Return the cost of the research
-  WOOD[playerID] = WOOD[playerID] + lumberCost
-  GOLD[playerID] = GOLD[playerID] + goldCost
-  FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
-  FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+  ChangeWood(playerID, lumberCost)
+  ChangeGold(playerID, goldCost)
 
   --Show the hidden icon in flash
   FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
@@ -248,12 +244,217 @@ function SpireQuality(keys)
   local level = keys.level
 end
 
+-- Grants and extra skill point to the players vampire (up to 33)
+function VampiricSkills( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
+
+  if vampire.VampiricSkills == nil then
+    vampire.VampiricSkills = 0
+  end
+
+  vampire:SetAbilityPoints(vampire:GetAbilityPoints() + 1)
+  vampire.VampiricSkills = vampire.VampiricSkills + 1
+
+  if vampire.VampiricSkills == 33 then
+    caster:RemoveAbility('research_vampiric_skills')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
+  end
+end
+
+-- Give the vampire an extra 100 damage.
+function VampiricDamage( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
+
+  if vampire.VampiricDamage == nil then
+    vampire.VampiricDamage = 0
+  end
+
+  vampire:SetBaseDamageMin(vampire:GetBaseDamageMin() + 100)
+  vampire:SetBaseDamageMax(vampire:GetBaseDamageMax() + 100)
+  vampire.VampiricDamage = vampire.VampiricDamage + 1
+
+  if vampire.VampiricDamage == 50 then
+    caster:RemoveAbility('research_vampiric_damage')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
+  end
+end
+
+-- Give the vampire an extra 300 to all stats.
+function VampiricStats( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
+
+  if vampire.VampiricStats == nil then
+    vampire.VampiricStats = 0
+  end
+
+  vampire:SetBaseStrength(vampire:GetBaseStrength() + 300)
+  vampire:SetBaseAgility(vampire:GetBaseAgility() + 300)
+  vampire:SetBaseIntellect(vampire:GetBaseIntellect() + 300)
+  vampire.VampiricStats = vampire.VampiricStats + 1
+
+  if vampire.VampiricStats == 50 then
+    caster:RemoveAbility('research_vampiric_stats')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
+  end
+end
+
+-- Give the vampire an extra 2000 to all stats and 500 damage.
+function PowerUnderworld( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
+
+  if vampire.PowerUnderworld == nil then
+    vampire.PowerUnderworld = 0
+  end
+
+  vampire:SetBaseStrength(vampire:GetBaseStrength() + 2000)
+  vampire:SetBaseAgility(vampire:GetBaseAgility() + 2000)
+  vampire:SetBaseIntellect(vampire:GetBaseIntellect() + 2000)
+  vampire:SetBaseDamageMax(vampire:GetBaseDamageMax() + 500)
+  vampire:SetBaseDamageMin(vampire:GetBaseDamageMin() + 500) 
+  vampire.PowerUnderworld = vampire.PowerUnderworld + 1
+
+  if vampire.PowerUnderworld == 30 then
+    caster:RemoveAbility('research_power_underworld')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
+  end
+end
+
+-- Give the vampire an extra 300 strength.
+function VampiricStrength( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
+
+  if vampire.VampiricStrength == nil then
+    vampire.VampiricStrength = 0
+  end
+
+  vampire:SetBaseStrength(vampire:GetBaseStrength() + 300) 
+  vampire.VampiricStrength = vampire.VampiricStrength + 1
+
+  if vampire.VampiricStrength == 50 then
+    caster:RemoveAbility('research_vampiric_strength')
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
+  end
+end
+
+-- Give the vampire an extra 300 agility.
+function VampiricAgility( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
+
+  if vampire.VampiricAgility == nil then
+    vampire.VampiricAgility = 0
+  end
+
+  vampire:SetBaseAgility(vampire:GetBaseAgility() + 300)
+  vampire.VampiricAgility = vampire.VampiricAgility + 1
+
+  if vampire.VampiricAgility == 50 then
+    caster:RemoveAbility('research_vampiric_agility') 
+  else
+    FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
+  end
+end
+
+-- Give the vampire an extra 300 intellect.
+function VampiricIntellect( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local vampire = VAMPIRES[playerID]
+  local ability = keys.ability
+
+  if vampire.VampiricIntellect == nil then
+    vampire.VampiricIntellect = 0
+  end
+
+  vampire:SetBaseIntellect(vampire:GetBaseIntellect() + 300)
+  vampire.VampiricIntellect = vampire.VampiricIntellect + 1
+
+  if vampire.VampiricIntellect == 50 then
+    caster:RemoveAbility('research_vampiric_intellect')
+  else
+   FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = 0})
+ end
+end
+
+function HumanSurvival( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local human = HUMANS[playerID]
+
+  Timers:CreateTimer(.03, function ()
+      human:SetMaxHealth(human:GetMaxHealth() + 400)
+      human:SetHealth(human:GetHealth() + 400)
+      return nil
+  end)
+end
+
+-- Sets the level of armor bonus
+WALL_PLATING_SCALE = {
+  wall_t1 = 1,
+  wall_t2 = 2,
+  wall_t3 = 3,
+  wall_t4 = 4,
+  wall_t5 = 5,
+  wall_t6 = 5,
+  wall_t7 = 6,
+  wall_t8 = 6,
+  wall_t9 = 7,
+  wall_t10 = 8
+}
+
+function TechPlating( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local wallName = caster:GetUnitName()
+  local abilityName = keys.ability:GetAbilityName() 
+  
+  Timers:CreateTimer(.03, function ()
+    local armorLevel = WALL_PLATING_SCALE[wallName]
+    caster:FindAbilityByName(abilityName):SetLevel(armorLevel)
+    return nil
+  end)
+end
+
+-- Adds human teleport.
+function AddTeleport( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+
+  local human = HUMANS[playerID]
+
+  human:FindAbilityByName('human_teleport'):SetLevel(1)
+end
+
 function TechUpgrade( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local ability = keys.ability
   local abilityName = ability:GetAbilityName()
   local techMod = ABILITY_KV[abilityName]['GiveModifier']
+  local level = keys.NextLevel
+  local baseAbility = keys.BaseAbility
 
   --get all alive entities
 
@@ -267,24 +468,36 @@ function TechUpgrade( keys )
           if mod == abilityName and v:GetMainControllingPlayer() == playerID then
             v:AddAbility(techMod)
             v:FindAbilityByName(techMod):SetLevel(1)
-            v:FindAbilityByName(techMod):OnUpgrade()
+            --v:FindAbilityByName(techMod):OnUpgrade()
+            v = nil
           end
         end
       end
     end
   end
+
+  if level ~= nil then
+    print('upgrading, ', baseAbility, level, abilityName)
+    FireGameEvent("build_ui_upgrade", {player_ID = playerID, ability_name = baseAbility, builder = caster:GetUnitName(), tier = level}) 
+  end
 end
 
 function AddHealthUpgrade( keys )
+  print('in addhp')
   local caster = keys.caster
   local amount = keys.Amount
+  print(caster:GetUnitName(), 'addhp')
 
   -- yeah this is how it should be
-  Timers:CreateTimer(.03, function ()
+  Timers:CreateTimer(.09, function ()
     caster:SetMaxHealth(caster:GetMaxHealth() + amount)
     --SNIPPET PLS, if finished, add hp if not dont.
-    if caster.state == "complete" then
-      caster:SetHealth(caster:GetHealth() + amount)
+    if caster:HasAbility('is_a_building') then
+      if caster.state == "complete" then
+        caster:Heal(amount, caster)
+      end
+    else
+      caster:Heal(amount, caster)
     end
     return nil
   end)

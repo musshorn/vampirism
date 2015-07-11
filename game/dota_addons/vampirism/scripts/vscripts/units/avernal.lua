@@ -62,8 +62,7 @@ function UpgradeAvernal(keys)
 		newUnit:SetHealth(currentHP)
 		return nil
 	end)
-	GOLD[playerID] = GOLD[playerID] - goldCost
-	FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+	ChangeGold(playerID, -1 * goldCost)
 end
 
 function AvernalInvis( keys )
