@@ -121,11 +121,14 @@ function SummonSlayer( keys )
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more wood" } )
     return
   end
+  caster.refundWood = lumberCost
+
   if GOLD[pID] < goldCost then
     caster:Stop()
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
     return
   end
+  caster.refundGold = goldCost
 
   -- Checks passed, deduct the resources and start channeling
   ChangeWood(pID, -1 * lumberCost)
@@ -137,8 +140,8 @@ function Refund( keys )
   local pID = caster:GetMainControllingPlayer()
   local ability = keys.ability
   
-  local refundWood = ABILITY_KV[ability:GetAbilityName()].LumberCost
-  local refundGold = ABILITY_KV[ability:GetAbilityName()].GoldCost
+  local refundWood = caster.refundWood
+  local refundGold = caster.refundGold
 
   if refundWood == nil then
     refundWood = 0
@@ -160,7 +163,7 @@ function SpawnSlayer( keys )
   local pID = caster:GetMainControllingPlayer()
 
   SLAYERS[pID] = {["state"] = "alive"}
-  SLAYERS[pID] = {["upgrades"] = {}}
+  SLAYERS[pID]["upgrades"] = {}
 
   local slayer = CreateUnitByName("npc_dota_hero_invoker", caster:GetAbsOrigin(), true, nil, nil, caster:GetTeam())
   slayer:SetControllableByPlayer(pID, true)
@@ -188,7 +191,7 @@ end
 function SlayerRespawnStart( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
-  
+
   if SLAYERS[pID] == nil then
     caster:Stop()
     return nil

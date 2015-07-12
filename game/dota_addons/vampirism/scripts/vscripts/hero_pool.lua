@@ -10,7 +10,7 @@ function Activate()
           end
         end
       end
-      return 0
+      return 60
     end
   )
 end
