@@ -616,6 +616,8 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
 
+    "NeedTech"     "research_center_t2 house_t3"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -696,7 +698,7 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
-    "NeedTech"      "research_center_t2 house_t3"
+    "NeedTech"     "research_center_t2 house_t3 citadel_of_faith"
 
     "TechModifiers"
     {
@@ -2012,13 +2014,13 @@
 
     "Ability1"          "call_buildui"  //Human test
     "Ability2"          ""
-    "Ability3"          ""
-    "Ability4"          "build_cancel"
-    "Ability5"          "build_blocked3"
-    "Ability6"          "build_blocked4"
-    "Ability7"          "is_a_building"         		// Ability 8 - Extra.
-
-
+    "Ability3"                  "super_tower_builder_training"               // Ability 3.
+    "Ability4"                  "is_a_building"               // Ability 4.
+    "Ability5"                  "build_blocked3"               // Ability 5.
+    "Ability6"                  "build_blocked4"               // Ability 6 - Extra.
+    "Ability7"                  "t4_worker_training"               // Ability 7 - Extra.
+    "Ability8"                  "t5_worker_training"               // Ability 8 - Extra.
+    "Ability9"                  "build_cancel"
 
     "AbilityHolder"          "17"
 
@@ -2036,8 +2038,8 @@
     "ExtraAbility12"         "research_blink_extension"         
     "ExtraAbility13"         "research_healing_vitality"         
     "ExtraAbility14"         "spawn_super_tower_builder"         
-    "ExtraAbility15"         "train_worker_t4"
-    "ExtraAbility16"         "train_worker_t5"
+    "ExtraAbility15"         "spawn_worker_t4"
+    "ExtraAbility16"         "spawn_worker_t5"
     "ExtraAbility17"         "upgrade_to_citadel_of_faith" 
 
     // Armor
@@ -2140,18 +2142,13 @@
     "AttackDamageMin"           "56"
     "AttackDamageMax"           "58"
     "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
-    "AttackRate"                "0.1"
+    "AttackRate"                "0.3"
     "AttackAnimationPoint"      "0"
     "AttackAcquisitionRange"    "1000"
     "AttackRange"               "600"
     "ProjectileModel"           "particles/neutral_fx/satyr_trickster_projectile.vpcf"
     "ProjectileSpeed"           "600"
     "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
-
-    // Attributes
-    //----------------------------------------------------------------
-    "AttributeBaseIntelligence" "0"
-    "AttributeBaseIntelligenceGain" "0"
   
     // Bounds
     //----------------------------------------------------------------
@@ -2470,14 +2467,14 @@
     "BountyGoldMax"             "25"
 
     "IsTech"        "true"
-    "NeedTech"      "house_t1"
+    "NeedTech"      "human_vault"
     "RepairTime"  "20"
   }
 
   //================================================================================= 
   // Super Tower of Flame
   //=================================================================================
-  "tower_flame_t1"
+  "tower_flame_t2"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
@@ -2560,7 +2557,7 @@
     "BountyGoldMax"             "25"
 
     "IsTech"        "true"
-    "NeedTech"      "house_t1"
+    "NeedTech"      "research_center_t2"
     "RepairTime"  "20"
   }
 
@@ -3346,6 +3343,180 @@
   }
 
   //================================================================================= 
+  // Worker T4 - Fire Spawn Deforester
+  //=================================================================================
+  "worker_t4"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "npc_dota_creature"
+    "Model" "models/heroes/invoker/forge_spirit.vmdl"
+    "ModelScale"  "0.8" 
+    "ConsideredHero"  "0"
+    "AbilityLayout"        "6"
+
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"          "harvest_channel"   //harvest test
+    "Ability2"          "carrying_lumber"     // Ability 2.
+    "Ability3"          "drop_lumber"     // Ability 3.
+    "Ability4"          "worker_det"      // Ability 4.
+    "Ability5"          "worker_debug"      // Ability 5.
+    "Ability6"          "find_lumber"      // Ability 6 - Extra.
+    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
+    "AbilityLayout"     "5"
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "100"     // Physical protection.
+    "MagicalResistance"     "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackDamageMin"     "0"
+    "AttackDamageMax"     "0"
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "0"
+    "AttackAnimationPoint"    "0"
+    "AttackAcquisitionRange"  "0"
+    "AttackRange"       "0"
+    "ProjectileModel"     ""
+    "ProjectileSpeed"     "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"     "170"
+    "RingRadius"        "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"       "500"   // Speed
+    "MovementTurnRate"      "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "10000"   // Base health.
+    "StatusHealthRegen"     "100"   // Health regeneration rate.
+    "StatusMana"        "1000"      // Base mana.
+    "StatusManaRegen"     "5"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "900"    // Range of vision during day light.
+    "VisionNighttimeRange"    "900"    // Range of vision at night time.
+
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"          "25"
+    "BountyGoldMin"       "2"
+    "BountyGoldMax"       "2"
+
+    // Vamp
+    "MaximumLumber" "4000" // Base max lumber
+    "LumberPerChop" "400"
+    "ConsumesFood"  "40"
+  }
+
+  //================================================================================= 
+  // Worker T5 - Satyr harvester
+  //=================================================================================
+  "worker_t5"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "npc_dota_creature"
+    "Model" "models/creeps/neutral_creeps/n_creep_satyr_b/n_creep_satyr_b.vmdl"
+    "ModelScale"  "1" 
+    "ConsideredHero"  "0"
+    "AbilityLayout"        "6"
+
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"          "harvest_channel"   //harvest test
+    "Ability2"          "carrying_lumber"     // Ability 2.
+    "Ability3"          "drop_lumber"     // Ability 3.
+    "Ability4"          "worker_det"      // Ability 4.
+    "Ability5"          "worker_debug"      // Ability 5.
+    "Ability6"          "find_lumber"      // Ability 6 - Extra.
+    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
+    "AbilityLayout"     "5"
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "100"     // Physical protection.
+    "MagicalResistance"     "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackDamageMin"     "0"
+    "AttackDamageMax"     "0"
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "0"
+    "AttackAnimationPoint"    "0"
+    "AttackAcquisitionRange"  "0"
+    "AttackRange"       "0"
+    "ProjectileModel"     ""
+    "ProjectileSpeed"     "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"     "170"
+    "RingRadius"        "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"       "500"   // Speed
+    "MovementTurnRate"      "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "10000"   // Base health.
+    "StatusHealthRegen"     "500"   // Health regeneration rate.
+    "StatusMana"        "1000"      // Base mana.
+    "StatusManaRegen"     "5"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "900"    // Range of vision during day light.
+    "VisionNighttimeRange"    "900"    // Range of vision at night time.
+
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"          "25"
+    "BountyGoldMin"       "100"
+    "BountyGoldMax"       "100"
+
+    // Vamp
+    "MaximumLumber" "20000" // Base max lumber
+    "LumberPerChop" "2000"
+    "ConsumesFood"  "40"
+  }
+
+  //================================================================================= 
   // Simple Tower Builder
   //=================================================================================
   "simple_tower_builder"
@@ -3754,22 +3925,22 @@
   "worker_t2"
   {
     // General
-        //-------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------
     "BaseClass"           "npc_dota_creature"
     "Model" "models/heroes/ursa/ursa.vmdl"
     "ModelScale"  "0.8" 
     "ConsideredHero"  "0"
+    "AbilityLayout"         "6"
 
 
     // Abilities
     //----------------------------------------------------------------
-
-    "Ability1"          "harvest_channel"   //harvest test
-    "Ability2"          "carrying_lumber"     // Ability 2.
-    "Ability3"          "drop_lumber"     // Ability 3.
-    "Ability4"          "worker_det"      // Ability 4.
-    "Ability5"          ""      // Ability 5.
-    "Ability6"          ""      // Ability 6 - Extra.
+    "Ability1"          "harvest_channel"
+    "Ability2"          "carrying_lumber"
+    "Ability3"          "drop_lumber"    
+    "Ability4"          "worker_det"     
+    "Ability5"          "worker_debug"   
+    "Ability6"          "find_lumber"    
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
 
@@ -3840,6 +4011,7 @@
     "Model" "models/heroes/sven/sven.vmdl"
     "ModelScale"  "0.8" 
     "ConsideredHero"  "0"
+    "AbilityLayout"     "6"
 
     "precache"
     {
@@ -3853,13 +4025,12 @@
 
     // Abilities
     //----------------------------------------------------------------
-
-    "Ability1"          "harvest_channel"   //harvest test
-    "Ability2"          "carrying_lumber"     // Ability 2.
-    "Ability3"          "drop_lumber"     // Ability 3.
-    "Ability4"          "worker_det"      // Ability 4.
-    "Ability5"          ""      // Ability 5.
-    "Ability6"          ""      // Ability 6 - Extra.
+    "Ability1"          "harvest_channel"
+    "Ability2"          "carrying_lumber"
+    "Ability3"          "drop_lumber"    
+    "Ability4"          "worker_det"     
+    "Ability5"          "worker_debug"   
+    "Ability6"          "find_lumber"    
     "Ability7"          ""      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
 
@@ -3943,7 +4114,7 @@
         "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_FLY"
         "Ability1"            "vampire_vision_dummy_lock"
 
-            // Vision
+        // Vision
         //----------------------------------------------------------------
         "VisionDaytimeRange"       "2500"    // Range of vision during day light.
         "VisionNighttimeRange"    "2500"    // Range of vision at night time.
@@ -4284,7 +4455,125 @@
     "BountyXP"                  "25"
     "BountyGoldMin"             "25"
     "BountyGoldMax"             "25"
+
+    "NeedTech"                  "citadel_of_faith"
+
+    "TechModifiers"
+    {
+        "1"     "research_blink_extension"
+    }
   }
+
+  //================================================================================= 
+  // Goblin Tower Builder
+  //=================================================================================
+  "goblin_tower_builder"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                 "npc_dota_creature"
+    "Model"                     "models/heroes/techies/techies.vmdl"
+    "ModelScale"                "0.7" 
+    "ConsideredHero"            "0"
+    "AbilityLayout"             "4"
+
+    "Creature"
+    {
+      "AttachWearables"
+      {
+        "Wearble1"  { "ItemDef"   "489" }
+        "Wearble2"  { "ItemDef"   "490" }
+        "Wearble3"  { "ItemDef"   "491" }
+        "Wearble4"  { "ItemDef"   "492" }
+        "Wearble5"  { "ItemDef"   "487" }
+      }
+    }
+
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"                  "call_buildui"   //harvest test
+    "Ability2"                  "super_blink"    // Ability 2.
+    "Ability3"                  "build_blocked"               // Ability 3.
+    "Ability4"                  "build_blocked2"               // Ability 4.
+    "Ability5"                  "build_blocked3"               // Ability 5.
+    "Ability6"                  "build_blocked4"               // Ability 6 - Extra.
+    "Ability7"                  ""               // Ability 7 - Extra.
+    "Ability8"                  ""               // Ability 8 - Extra.
+
+    "AbilityHolder"             "12"
+
+    "ExtraAbility1"             "build_house_t3"            
+    "ExtraAbility2"             "build_tower_blood_t1"      
+    "ExtraAbility3"             "build_gold_mine_t4"        
+    "ExtraAbility4"             "build_tower_cripple_t3"    
+    "ExtraAbility5"             "build_tower_pink_t1"       
+    "ExtraAbility6"             "build_wall_t9"             
+    "ExtraAbility7"             "build_tower_lightning_t2"
+    "ExtraAbility8"             "build_tower_spire_t2"      
+    "ExtraAbility9"             "build_empty"             
+    "ExtraAbility10"            "build_tower_wall_t2"       
+    "ExtraAbility11"            "build_heal_wall_t2"        
+    "ExtraAbility12"            "build_cancel"              
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "5"     // Physical protection.
+    "MagicalResistance"         "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackDamageMin"           "0"
+    "AttackDamageMax"           "0"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "0.1"
+    "AttackAnimationPoint"      "0"
+    "AttackAcquisitionRange"    "0"
+    "AttackRange"               "0"
+    "ProjectileModel"           ""
+    "ProjectileSpeed"           "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"           "170"
+    "RingRadius"                "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"             "500"   // Speed
+    "MovementTurnRate"          "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "400"   // Base health.
+    "StatusHealthRegen"         "7"   // Health regeneration rate.
+    "StatusMana"                "10"      // Base mana.
+    "StatusManaRegen"           "0.2"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                  "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "900"   // Range of vision during day light.
+    "VisionNighttimeRange"      "900"   // Range of vision at night time.
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "25"
+    "BountyGoldMin"             "250"
+    "BountyGoldMax"             "250"
+
+    "NeedTech"                  "citadel_of_faith"
+  }
+
 
   //================================================================================= 
   // Super Gold Mine
@@ -4823,6 +5112,39 @@
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
+    "Ability1"                  "call_buildui"   //harvest test
+    "Ability2"                  ""    // Ability 2.
+    "Ability3"                  "super_tower_builder_training"               // Ability 3.
+    "Ability4"                  "is_a_building"               // Ability 4.
+    "Ability5"                  "build_blocked3"               // Ability 5.
+    "Ability6"                  "build_blocked4"               // Ability 6 - Extra.
+    "Ability7"                  "t4_worker_training"               // Ability 7 - Extra.
+    "Ability8"                  "t5_worker_training"               // Ability 8 - Extra.
+    "Ability9"                  "build_cancel"
+
+    "AbilityHolder"             "19"
+
+    "ExtraAbility1"             "upgrade_human_damage_1"               
+    "ExtraAbility2"             "upgrade_human_damage_2"                    
+    "ExtraAbility3"             "upgrade_human_damage_3"                
+    "ExtraAbility4"             "upgrade_human_damage_4"                   
+    "ExtraAbility5"             "upgrade_human_damage_5"                         
+    "ExtraAbility6"             "upgrade_human_damage_6"              
+    "ExtraAbility7"             "upgrade_human_damage_7"                  
+    "ExtraAbility8"             "upgrade_human_damage_8"                         
+    "ExtraAbility9"             "upgrade_human_damage_9"                   
+    "ExtraAbility10"            "upgrade_human_damage_10"                  
+    "ExtraAbility11"            "research_slayer_godlike"
+    "ExtraAbility12"            "research_blink_extension"                              
+    "ExtraAbility13"            "research_healing_vitality"                 
+    "ExtraAbility14"            "spawn_super_tower_builder"                 
+    "ExtraAbility15"            "spawn_worker_t4"
+    "ExtraAbility16"            "spawn_worker_t5"
+    "ExtraAbility17"            "research_master_human_survival"
+    "ExtraAbility18"            "upgrade_to_base_operations"
+    "ExtraAbility19"            "build_cancel"                              
+
+
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"             "100"     // Physical protection.
@@ -4879,6 +5201,7 @@
     "BountyGoldMax"             "250"
 
     "RepairTime"  "120"
+    "SpawnsUnits" "true"
   }
 
   //================================================================================= 
@@ -4892,6 +5215,40 @@
     "Model"                     "models/props_structures/good_ancient001.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
+
+    "Ability1"                  "call_buildui"   //harvest test
+    "Ability2"                  "goblin_tower_builder_training"    // Ability 2.
+    "Ability3"                  "super_tower_builder_training"               // Ability 3.
+    "Ability4"                  "is_a_building"               // Ability 4.
+    "Ability5"                  "build_blocked3"               // Ability 5.
+    "Ability6"                  "build_blocked4"               // Ability 6 - Extra.
+    "Ability7"                  "t4_worker_training"               // Ability 7 - Extra.
+    "Ability8"                  "t5_worker_training"               // Ability 8 - Extra.
+    "Ability9"                  ""
+    "Ability10"                 "build_cancel"
+
+    "AbilityHolder"             "20"
+
+    "ExtraAbility1"             "upgrade_human_damage_1"               
+    "ExtraAbility2"             "upgrade_human_damage_2"                    
+    "ExtraAbility3"             "upgrade_human_damage_3"                
+    "ExtraAbility4"             "upgrade_human_damage_4"                   
+    "ExtraAbility5"             "upgrade_human_damage_5"                         
+    "ExtraAbility6"             "upgrade_human_damage_6"              
+    "ExtraAbility7"             "upgrade_human_damage_7"                  
+    "ExtraAbility8"             "upgrade_human_damage_8"                         
+    "ExtraAbility9"             "upgrade_human_damage_9"                   
+    "ExtraAbility10"            "upgrade_human_damage_10"                  
+    "ExtraAbility11"            "research_slayer_godlike"
+    "ExtraAbility12"            "research_blink_extension"                              
+    "ExtraAbility13"            "research_healing_vitality"                 
+    "ExtraAbility14"            "spawn_super_tower_builder"                 
+    "ExtraAbility15"            "spawn_worker_t4"
+    "ExtraAbility16"            "spawn_worker_t5"
+    "ExtraAbility17"            "research_master_human_survival"
+    "ExtraAbility18"            "spawn_goblin_tower_builder"
+    "ExtraAbility19"            "upgrade_to_base_operations"
+    "ExtraAbility20"            "build_cancel"        
 
     // Armor
     //----------------------------------------------------------------
@@ -4949,9 +5306,8 @@
     "BountyGoldMax"             "500"
 
     "RepairTime"  "65"
+    "SpawnsUnits" "true"
   }
-
-
 
   //================================================================================= 
   // Citadel of Faith
@@ -4970,29 +5326,36 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"                  "spawn_super_tower_builder"   //harvest test
+    "Ability1"                  "call_buildui"   //harvest test
     "Ability2"                  ""    // Ability 2.
     "Ability3"                  "super_tower_builder_training"               // Ability 3.
-    "Ability4"                  "build_blocked2"               // Ability 4.
+    "Ability4"                  "is_a_building"               // Ability 4.
     "Ability5"                  "build_blocked3"               // Ability 5.
     "Ability6"                  "build_blocked4"               // Ability 6 - Extra.
-    "Ability7"                  ""               // Ability 7 - Extra.
-    "Ability8"                  "is_a_building"               // Ability 8 - Extra.
+    "Ability7"                  "t4_worker_training"               // Ability 7 - Extra.
+    "Ability8"                  "t5_worker_training"               // Ability 8 - Extra.
+    "Ability9"                  "build_cancel"
 
-    "AbilityHolder"             "12"
+    "AbilityHolder"             "18"
 
-    "ExtraAbility1"             "build_tower_manaburn_t2"               
-    "ExtraAbility2"             "build_gold_mine_t2"                    
-    "ExtraAbility3"             "build_tower_cripple_t1"                
-    "ExtraAbility4"             "build_human_surplus"                   
-    "ExtraAbility5"             "build_wall_t8"                         
-    "ExtraAbility6"             "build_tower_lightning_t1"              
-    "ExtraAbility7"             "build_tower_spire_t1"                  
-    "ExtraAbility8"             "build_feed_t2"                         
-    "ExtraAbility9"             "build_tower_wall_t1"                   
-    "ExtraAbility10"            "build_command_center"                  
-    "ExtraAbility11"            "build_base_operations"                 
-    "ExtraAbility12"            "build_cancel"                              
+    "ExtraAbility1"             "upgrade_human_damage_1"               
+    "ExtraAbility2"             "upgrade_human_damage_2"                    
+    "ExtraAbility3"             "upgrade_human_damage_3"                
+    "ExtraAbility4"             "upgrade_human_damage_4"                   
+    "ExtraAbility5"             "upgrade_human_damage_5"                         
+    "ExtraAbility6"             "upgrade_human_damage_6"              
+    "ExtraAbility7"             "upgrade_human_damage_7"                  
+    "ExtraAbility8"             "upgrade_human_damage_8"                         
+    "ExtraAbility9"             "upgrade_human_damage_9"                   
+    "ExtraAbility10"            "upgrade_human_damage_10"                  
+    "ExtraAbility11"            "research_slayer_godlike"
+    "ExtraAbility12"            "research_blink_extension"                              
+    "ExtraAbility13"            "research_healing_vitality"                 
+    "ExtraAbility14"            "spawn_super_tower_builder"                 
+    "ExtraAbility15"            "spawn_worker_t4"
+    "ExtraAbility16"            "spawn_worker_t5"
+    "ExtraAbility17"            "upgrade_to_command_center"
+    "ExtraAbility18"            "build_cancel"                              
 
 
 

@@ -378,6 +378,8 @@
             "Function"    "TrainUnit"
             "AddToQueue"  "t2_worker_training"
             "SpawnUnit"   "worker_t2"
+            "GoldCost"    "1"
+            "WoodCost"    "1000"
           }
         }
       }
@@ -431,6 +433,8 @@
             "Function"    "TrainUnit"
             "AddToQueue"  "t3_worker_training"
             "SpawnUnit"   "worker_t3"
+            "GoldCost"    "20"
+            "WoodCost"    "1000"
           }
         }
       }
@@ -461,6 +465,142 @@
       }
     }
   }
+
+  //==============================================================
+  // T4 Worker Spawning
+  //==============================================================
+  "spawn_worker_t4"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "spawn_worker_t4"
+    "AbilityModifierSupportValue" "0.5"
+    "MaxLevel"        "1"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "t4_worker_training"
+        "Target"    "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "t4_worker_training"
+      {
+        "IsPurgable"  "false"
+        "IsStunDebuff" "false"
+        "IsHidden"  "false"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+            "Function"    "TrainUnit"
+            "AddToQueue"  "t4_worker_training"
+            "SpawnUnit"   "worker_t4"
+            "GoldCost"    "70"
+            "WoodCost"    "0"
+          }
+        }
+      }
+    }
+  }
+  //======================================================
+  // T4 worker channel time
+  //======================================================
+  "t4_worker_training"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    "AbilityCastPoint"  "0"
+    "AbilityChannelTime" "1.0"
+  }
+
+  "cancel_training"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "build_cancel"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //==============================================================
+  // T5 Worker Spawning
+  //==============================================================
+  "spawn_worker_t5"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "spawn_worker_t5"
+    "AbilityModifierSupportValue" "0.5"
+    "MaxLevel"        "1"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "t5_worker_training"
+        "Target"    "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "t5_worker_training"
+      {
+        "IsPurgable"  "false"
+        "IsStunDebuff" "false"
+        "IsHidden"  "false"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+            "Function"    "TrainUnit"
+            "AddToQueue"  "t5_worker_training"
+            "SpawnUnit"   "worker_t5"
+            "GoldCost"    "400"
+            "WoodCost"    "0"
+          }
+        }
+      }
+    }
+  }
+  //======================================================
+  // T5 worker channel time
+  //======================================================
+  "t5_worker_training"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    "AbilityCastPoint"  "0"
+    "AbilityChannelTime" "1.0"
+  }
+
+  "cancel_training"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "build_cancel"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+
 
   //==============================================================
   // Simple Tower Builder spawning
@@ -565,6 +705,61 @@
   // Super Tower builder channel timer
   //======================================================
   "super_tower_builder_training"
+  {
+    "AbilityBehavior"                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"                           "ability_datadriven"
+    "AbilityCastPoint"                    "0"
+    "AbilityChannelTime"                  "1.0"
+    "AbilityTextureName"                  "bounty_hunter_wind_walk"
+  }
+
+  //==============================================================
+  // Goblin Tower Builder spawning
+  //==============================================================
+  "spawn_goblin_tower_builder"
+  {
+    "AbilityBehavior"                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"                           "ability_datadriven"
+    "AbilityTextureName"                  "bounty_hunter_wind_walk"
+    "AbilityModifierSupportValue"         "0.5"
+    "MaxLevel"                            "1"
+    "AbilityManaCost"                     "0"
+    "GoldCost"                            "150"
+    "LumberCost"                          "0"
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"                    "goblin_tower_builder_training"
+        "Target"                          "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "goblin_tower_builder_training"
+      {
+        "IsPurgable"                      "false"
+        "IsStunDebuff"                    "false"
+        "IsHidden"                        "false"
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"                  "scripts/vscripts/buildings/building.lua"
+            "Function"                    "TrainUnit"
+            "AddToQueue"                  "goblin_tower_builder_training"
+            "SpawnUnit"                   "goblin_tower_builder"
+          }
+        }
+      }
+    }
+  }
+
+  //======================================================
+  // Super Tower builder channel timer
+  //======================================================
+  "goblin_tower_builder_training"
   {
     "AbilityBehavior"                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "BaseClass"                           "ability_datadriven"
@@ -735,22 +930,21 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT"
     "BaseClass" "ability_datadriven"
     "AbilityTextureName"  "antimage_blink"
-    "MaxLevel"  "1"
+    "MaxLevel"  "2"
     "AbilityCastRange"  "1000000"
-    "AbilityCastPoint"  "0.3"
+    "AbilityCastPoint"  "0.33"
     "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_1"
     "AbilityManaCost" "1"
+
     "OnSpellStart"
     {
       "RunScript"
       {
         "ScriptFile"  "scripts/vscripts/abilities.lua"
-        "Target"  "POINT"
-        "Function"  "human_blink"
+        "Target"      "POINT"
+        "Function"    "HumanBlink"
       }
-
     }
-
   }
 
   "human_manaburn"
@@ -773,9 +967,7 @@
         "var_type"  "FIELD_INTEGER"
         "burn_amount" "500"
       }
-
     }
-
   }
 
 
@@ -844,10 +1036,11 @@
   "slayer_blink"
   {
     "BaseClass"               "ability_datadriven"
-    "AbilityTextureName"      "ability_name"
+    "AbilityTextureName"      "antimage_blink"
     "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT"
     "MaxLevel"                "1"
     "AbilityManaCost"         "500"
+    "AbilityCooldown"         "5"
     "AbilityCastRange"        "150000"
     "AbilityCastPoint"        "0.3"
     "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_6"
@@ -856,8 +1049,32 @@
       "RunScript"
       {
         "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
-        "Target"  "POINT"
-        "Function"  "SlayerBlink"
+        "Target"      "POINT"
+        "Function"    "SlayerBlink"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Super blink
+  //================================================================================= /
+  "super_blink"
+  {
+    "BaseClass"               "ability_datadriven"
+    "AbilityTextureName"      "antimage_blink"
+    "AbilityBehavior"         "DOTA_ABILITY_BEHAVIOR_POINT"
+    "MaxLevel"                "1"
+    "AbilityCooldown"         "5"
+    "AbilityCastRange"        "150000"
+    "AbilityCastPoint"        "0.3"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_6"
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
+        "Target"      "POINT"
+        "Function"    "SlayerBlink"
       }
     }
   }
@@ -1618,8 +1835,8 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/research.lua"
         "Function"    "GemQuality"
-        "TARGET"  "CASTER"
-        "Level" "1"
+        "TARGET"      "CASTER"
+        "Level"       "1"
       }
     }
   }
@@ -2290,54 +2507,6 @@
       }
     }
   }
-  //=================================================================================/
-  // Reseach Slayer Blink Extension
-  //================================================================================= /
-  "research_blink_extension"
-  {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
-    "AbilityChannelTime"  "15"
-    "LumberCost"   "46000"
-    "GoldCost"     "45"
-    "BaseClass"         "ability_datadriven"
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Research"
-        "TARGET"  "CASTER"
-      }
-    }
-    "OnChannelInterrupted"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Cancelled"
-        "TARGET"      "CASTER"
-      }
-    }
-    "OnChannelFinish"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Finished"
-        "TARGET"      "CASTER"
-      }
-    }
-    "OnChannelSucceeded"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "HumanDamage"
-        "TARGET"  "CASTER"
-        "Level" "10"
-      }
-    }
-  }
 
   //================================================================================= /
   // Research Healing Vitality
@@ -2425,6 +2594,96 @@
             "Function"          "AddHealthUpgrade" //adds a flat health bonus.
             "TARGET"            "CASTER"
             "Amount"            "1500"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Blink Extension
+  //================================================================================= /
+  "research_blink_extension"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "60"
+    "LumberCost"          "50000"
+    "GoldCost"            "10"
+    "BaseClass"           "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"        "tech_blink_extension"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Blink Extension tech
+  //================================================================================= /
+  "tech_blink_extension"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_blink_extension"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_blink_extension"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+            "Function"          "AddBlinkExtension" //adds a flat health bonus.
+            "TARGET"            "CASTER"
           }
         }
       }
@@ -2911,8 +3170,61 @@
       "RunScript"
       {
         "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "HumanSurvival"
+        "TARGET"            "CASTER"
+        "Amount"            "400"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Master Human Survival
+  //================================================================================= /
+  "research_master_human_survival"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "20"
+    "AbilityTextureName"    "buildings/research_basic_human_survival"
+    "LumberCost"   "2500"
+    "GoldCost"     "5"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
         "Function"          "HumanSurvival" //potentially a generic function that will handle all future techs.
         "TARGET"            "CASTER"
+        "Amount"            "300"
       }
     }
   }
@@ -3666,151 +3978,6 @@
       }
     }
   }
-
-  //================================================================================= /
-  // Train Super Tower Builder
-  //================================================================================= /
-  "train_super_tower_builder"
-  {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
-    "AbilityChannelTime"  "15"
-    "LumberCost"   "46000"
-    "GoldCost"     "45"
-    "BaseClass"         "ability_datadriven"
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Research"
-        "TARGET"  "CASTER"
-      }
-    }
-    "OnChannelInterrupted"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Cancelled"
-        "TARGET"      "CASTER"
-      }
-    }
-    "OnChannelFinish"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Finished"
-        "TARGET"      "CASTER"
-      }
-    }
-    "OnChannelSucceeded"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "HumanDamage"
-        "TARGET"  "CASTER"
-        "Level" "10"
-      }
-    }
-  }
-  //================================================================================= /
-  // Train Worker T4 (fix name)
-  //================================================================================= /
-  "train_worker_t4"
-  {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
-    "AbilityChannelTime"  "15"
-    "LumberCost"   "46000"
-    "GoldCost"     "45"
-    "BaseClass"         "ability_datadriven"
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Research"
-        "TARGET"  "CASTER"
-      }
-    }
-    "OnChannelInterrupted"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Cancelled"
-        "TARGET"      "CASTER"
-      }
-    }
-    "OnChannelFinish"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Finished"
-        "TARGET"      "CASTER"
-      }
-    }
-    "OnChannelSucceeded"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "HumanDamage"
-        "TARGET"  "CASTER"
-        "Level" "10"
-      }
-    }
-  }
-  //================================================================================= /
-  // Train Worker T5 (fix name)
-  //================================================================================= /
-  "train_worker_t5"
-  {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
-    "AbilityChannelTime"  "15"
-    "LumberCost"   "46000"
-    "GoldCost"     "45"
-    "BaseClass"         "ability_datadriven"
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Research"
-        "TARGET"  "CASTER"
-      }
-    }
-    "OnChannelInterrupted"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Cancelled"
-        "TARGET"      "CASTER"
-      }
-    }
-    "OnChannelFinish"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "Finished"
-        "TARGET"      "CASTER"
-      }
-    }
-    "OnChannelSucceeded"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "HumanDamage"
-        "TARGET"  "CASTER"
-        "Level" "10"
-      }
-    }
-  }
   
   //================================================================================= /
   // Upgrade to Citadel of Faith
@@ -4497,6 +4664,14 @@
         "Scale"     "1"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //=================================================================================/
@@ -5175,6 +5350,14 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "tower_manaburn_t1"
         "Scale"     "0.7"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
       }
     }
   }
@@ -6239,6 +6422,14 @@
         "Scale"       "1"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //================================================================================= 
@@ -6315,6 +6506,14 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "gold_mine_t2"
         "Scale"       "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
       }
     }
   }
@@ -6970,24 +7169,24 @@
   }
 
   //=================================================================================/
-  // Upgrade to Super Gold Mine
+  // Upgrade to Command Center
   //=================================================================================/
-  "upgrade_to_gold_mine_t2"
+  "upgrade_to_command_center"
   {
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "BaseClass"       "ability_datadriven"
+    "BaseClass"        "ability_datadriven"
     "AbilityChannelTime"  "1"
     
     "OnSpellStart"
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "Upgrade"
-        "TARGET"    "CASTER"
-        "TargetUnit"  "gold_mine_t2"
-        "LumberCost"  "50000"
-        "GoldCost"    "0"
+        "ScriptFile"   "scripts/vscripts/buildings/building.lua"
+        "Function"     "Upgrade"
+        "TARGET"       "CASTER"
+        "TargetUnit"   "command_center"
+        "LumberCost"   "100000"
+        "GoldCost"     "400"
       }
     }
     "OnChannelSucceeded"
@@ -6996,8 +7195,57 @@
       {
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
-        "TargetUnit"  "gold_mine_t2"
-        "Scale"       "1"
+        "TargetUnit"  "command_center"
+        "Scale"       "0.7"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Base of Operations
+  //=================================================================================/
+  "upgrade_to_base_operations"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"        "ability_datadriven"
+    "AbilityChannelTime"  "1"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"   "scripts/vscripts/buildings/building.lua"
+        "Function"     "Upgrade"
+        "TARGET"       "CASTER"
+        "TargetUnit"   "base_operations"
+        "LumberCost"   "0"
+        "GoldCost"     "1000"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "base_operations"
+        "Scale"       "0.5"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
       }
     }
   }
@@ -7079,6 +7327,14 @@
         "Scale"       "1"
       }
     }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
   }
 
   //=================================================================================/
@@ -7110,6 +7366,55 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "gold_mine_t4"
         "Scale"       "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Super Gold Mine
+  //=================================================================================/
+  "upgrade_to_gold_mine_t2"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "1"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"    "CASTER"
+        "TargetUnit"  "gold_mine_t2"
+        "LumberCost"  "50000"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "gold_mine_t2"
+        "Scale"       "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
       }
     }
   }

@@ -81,15 +81,16 @@
 	//=================================================================================================================
 	"research_center_t1"
 	{
-		"research_improved_lumber_harvesting"				"a"
-		"research_sharpened_hatchets"						"a"
-		"research_rifles"									"a"
-		"research_improved_worker_motivation"				"a"
-		"research_improved_gem_quality"						"a"
-		"upgrade_to_research_center_t2"						"a"
+		"research_improved_lumber_harvesting"				"l"
+		"research_sharpened_hatchets"						"h"
+		"research_rifles"									"r"
+		"research_improved_worker_motivation"				"m"
+		"research_improved_gem_quality"						"g"
+		"upgrade_to_research_center_t2"						"u"
 		"build_cancel"										"q"
 		"build_empty"										" "
 	}
+
 	//=================================================================================================================
 	// Human Vault
 	//=================================================================================================================
@@ -99,13 +100,67 @@
 		"research_slayer_godlike"							"y"
 		"research_blink_extension"							"x"
 		"research_healing_vitality"							"h"
-		"train_super_tower_builder"							"s"
-		"train_worker_t4"									"f"
-		"train_worker_t5"									"w"
-		"upgrade_to_citadel_of_faith"						"t"
+		"spawn_super_tower_builder"							"s"
+		"spawn_worker_t4"									"f"
+		"spawn_worker_t5"									"w"
+		"upgrade_to_citadel_of_faith"						"c"
 		"build_cancel"										"q"
-		"build_empty"										"q"
+		"build_empty"										" "
 	}
+
+	//=================================================================================================================
+	// Citadel of Faith
+	//=================================================================================================================
+	"citadel_of_faith"
+	{
+		"upgrade_human_damage_1"				"d"
+		"research_slayer_godlike"				"y"
+		"research_blink_extension"				"x"
+		"research_healing_vitality"				"h"
+		"spawn_super_tower_builder"				"s"
+		"spawn_worker_t4"						"f"
+		"spawn_worker_t5"						"w"
+		"upgrade_to_command_center"				"z"
+		"build_empty"							" "
+		"build_cancel"							"q"
+	}
+
+	//=================================================================================================================
+	// Command Center
+	//=================================================================================================================
+	"command_center"
+	{
+		"upgrade_human_damage_1"				"d"
+		"research_slayer_godlike"				"y"
+		"research_blink_extension"				"x"
+		"research_healing_vitality"				"h"
+		"spawn_super_tower_builder"				"s"
+		"spawn_worker_t4"						"f"
+		"spawn_worker_t5"						"w"
+		"research_master_human_survival"		"t"
+		"upgrade_to_base_operations"			"o"
+		"build_empty"							" "
+		"build_cancel"							"q"
+	}
+
+	//=================================================================================================================
+	// Base of Operations
+	//=================================================================================================================
+	"base_operations"
+	{
+		"upgrade_human_damage_1"				"d"
+		"research_slayer_godlike"				"y"
+		"research_blink_extension"				"x"
+		"research_healing_vitality"				"h"
+		"spawn_super_tower_builder"				"s"
+		"spawn_worker_t4"						"f"
+		"spawn_worker_t5"						"w"
+		"research_master_human_survival"		"t"
+		"spawn_goblin_tower_builder"			"g"
+		"build_empty"							" "
+		"build_cancel"							"q"
+	}
+
 	//=================================================================================================================
 	// Research Center T2
 	//=================================================================================================================

@@ -97,7 +97,7 @@ function House1:Init(unit)
 							return nil
 						end})
 				-- Unit was created, pop the queue
-				table.remove(house1.queue)
+				house1.popped = table.remove(house1.queue)
 			else
 				FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Build more farms" } )
 				table.remove(house1.queue)

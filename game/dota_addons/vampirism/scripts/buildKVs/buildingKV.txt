@@ -91,19 +91,18 @@
 		"research_sharpened_hatchets"			"1"
 		"research_rifles"						"2"
 		"research_improved_worker_motivation"	"3"
-		"build_empty"							"4"
-		"build_empty"							"5"
-		"build_empty"							"6"
-		"build_empty"							"7"
-		"build_empty"							"8"
-
 		"research_improved_gem_quality"			
 		{
 			"research_improved_gem_quality"			"0"
 			"research_advanced_gem_quality"			"1"
 			"research_unbeatable_gem_quality"		"2"
-			"OrderPosition"							"9"		
+			"OrderPosition"							"4"		
 		}
+		"build_empty"							"5"
+		"build_empty"							"6"
+		"build_empty"							"7"
+		"build_empty"							"8"
+		"build_empty"							"9"
 		"upgrade_to_research_center_t2"			"10"
 		"build_cancel"							"11"
 	}
@@ -130,10 +129,106 @@
 		"research_slayer_godlike"				"1"
 		"research_blink_extension"				"2"
 		"research_healing_vitality"				"3"
-		"train_super_tower_builder"				"4"
-		"train_worker_t4"						"5"
-		"train_worker_t5"						"6"
+		"spawn_super_tower_builder"				"4"
+		"spawn_worker_t4"						"5"
+		"spawn_worker_t5"						"6"
 		"upgrade_to_citadel_of_faith"			"7"
+		"build_empty"							"8"
+		"build_empty"							"9"
+		"build_empty"							"10"
+		"build_cancel"							"11"
+	}
+
+	//=================================================================================================================
+	// Citadel of Faith
+	//=================================================================================================================
+	"citadel_of_faith"
+	{
+		"upgrade_human_damage_1"
+		{
+			"upgrade_human_damage_1"		"0"
+			"upgrade_human_damage_2"		"1"
+			"upgrade_human_damage_3"		"2"
+			"upgrade_human_damage_4"		"3"
+			"upgrade_human_damage_5"		"4"
+			"upgrade_human_damage_6"		"5"
+			"upgrade_human_damage_7"		"6"
+			"upgrade_human_damage_8"		"7"
+			"upgrade_human_damage_9"		"8"
+			"upgrade_human_damage_10"		"9"
+			"OrderPosition"							"0"		
+		}
+		"research_slayer_godlike"				"1"
+		"research_blink_extension"				"2"
+		"research_healing_vitality"				"3"
+		"spawn_super_tower_builder"				"4"
+		"spawn_worker_t4"						"5"
+		"spawn_worker_t5"						"6"
+		"upgrade_to_command_center"				"7"
+		"build_empty"							"8"
+		"build_empty"							"9"
+		"build_empty"							"10"
+		"build_cancel"							"11"
+	}
+
+	//=================================================================================================================
+	// Command Center
+	//=================================================================================================================
+	"command_center"
+	{
+		"upgrade_human_damage_1"
+		{
+			"upgrade_human_damage_1"		"0"
+			"upgrade_human_damage_2"		"1"
+			"upgrade_human_damage_3"		"2"
+			"upgrade_human_damage_4"		"3"
+			"upgrade_human_damage_5"		"4"
+			"upgrade_human_damage_6"		"5"
+			"upgrade_human_damage_7"		"6"
+			"upgrade_human_damage_8"		"7"
+			"upgrade_human_damage_9"		"8"
+			"upgrade_human_damage_10"		"9"
+			"OrderPosition"							"0"		
+		}
+		"research_slayer_godlike"				"1"
+		"research_blink_extension"				"2"
+		"research_healing_vitality"				"3"
+		"spawn_super_tower_builder"				"4"
+		"spawn_worker_t4"						"5"
+		"spawn_worker_t5"						"6"
+		"research_master_human_survival"		"7"
+		"upgrade_to_base_operations"			"8"
+		"build_empty"							"9"
+		"build_empty"							"10"
+		"build_cancel"							"11"
+	}
+
+	//=================================================================================================================
+	// Base of Operations
+	//=================================================================================================================
+	"base_operations"
+	{
+		"upgrade_human_damage_1"
+		{
+			"upgrade_human_damage_1"		"0"
+			"upgrade_human_damage_2"		"1"
+			"upgrade_human_damage_3"		"2"
+			"upgrade_human_damage_4"		"3"
+			"upgrade_human_damage_5"		"4"
+			"upgrade_human_damage_6"		"5"
+			"upgrade_human_damage_7"		"6"
+			"upgrade_human_damage_8"		"7"
+			"upgrade_human_damage_9"		"8"
+			"upgrade_human_damage_10"		"9"
+			"OrderPosition"							"0"		
+		}
+		"research_slayer_godlike"				"1"
+		"research_blink_extension"				"2"
+		"research_healing_vitality"				"3"
+		"spawn_super_tower_builder"				"4"
+		"spawn_worker_t4"						"5"
+		"spawn_worker_t5"						"6"
+		"spawn_goblin_tower_builder"			"7"
 		"build_empty"							"8"
 		"build_empty"							"9"
 		"build_empty"							"10"

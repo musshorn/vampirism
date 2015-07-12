@@ -22,6 +22,14 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
   worker.skipTicks = 0 -- If this is > 0 the worker will ignore this many ticks
 
+  --attach fire spawn particles.
+  if unitName == 'worker_t4' then
+    local wAmb = ParticleManager:CreateParticle("particles/units/heroes/hero_invoker/invoker_forge_spirit_ambient.vpcf", PATTACH_POINT_FOLLOW , worker)
+    local wPos = worker:GetAbsOrigin()
+    ParticleManager:SetParticleControlEnt(wAmb, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", wPos, true)
+    ParticleManager:SetParticleControlEnt(wAmb, 1, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", wPos, true)
+  end
+
   local ability = worker:FindAbilityByName("find_lumber")
   ability:ToggleAutoCast() 
 

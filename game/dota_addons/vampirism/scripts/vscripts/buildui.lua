@@ -83,6 +83,7 @@ function CallMenu(keys)
 end
 
 function BuildUI:BuildChosen(building, playerID)
+    print(building)
 
     local caster = playerCasters[playerID]
 

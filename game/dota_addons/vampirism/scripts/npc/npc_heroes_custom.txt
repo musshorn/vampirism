@@ -4,14 +4,13 @@
 {
   "vamp_human"
   {
-    "override_hero"       "npc_dota_hero_omniknight"
+    "override_hero"     "npc_dota_hero_omniknight"
     "Ability1"          "build_silence"
-    "Ability2"          "research_healing_vitality"
+    "Ability2"          "human_blink"
     "Ability3"          "call_buildui"
-    "Ability4"          "human_blink"
-    "Ability5"          "human_manaburn"
-    "Ability6"          "human_teleport"
-    "Ability7"          "build_blocked2"
+    "Ability4"          "human_manaburn"
+    "Ability5"          "human_teleport"
+    "Ability6"          "build_blocked2"
 
 
     "MovementSpeed"       "350"

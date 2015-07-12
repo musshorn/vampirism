@@ -3,22 +3,6 @@
 "DOTAAbilities"
 {
 	"Version"	"1"
-	//Courier
-	"item_scroll_beast"
-	{
-		"ItemPurchasable"	"1"
-		"ItemDroppable"	"1"
-	}
-	"item_dracula_helmet"
-	{
-		"ItemPurchasable"	"1"
-		"ItemDroppable"	"1"
-	}
-	"item_demonic_remains"
-	{
-		"ItemPurchasable"	"1"
-		"ItemDroppable"	"1"
-	}
 
 	"item_courier"
 	{

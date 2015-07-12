@@ -218,7 +218,7 @@ function harvest_t1(keys)
   caster:MoveToPosition(point)
 end
 
-function human_blink(keys)
+function HumanBlink(keys)
   --DeepPrintTable(keys)
   local caster = keys.caster
   local point = keys.target_points[1]
@@ -226,8 +226,8 @@ function human_blink(keys)
 
   local diff = point - casterpos
 
-  if diff:Length2D() > 1000 then
-    point = casterpos + (point - casterpos):Normalized() * 1000
+  if diff:Length2D() > 2000 then
+    point = casterpos + (point - casterpos):Normalized() * 2000
   end
 
   FindClearSpaceForUnit(caster, point, false)

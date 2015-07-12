@@ -145,6 +145,8 @@ function Precache( context )
 		PrecacheModel("models/good_column004_reference.vmdl", context)
 		PrecacheModel("models/props_structures/bad_barracks001_ranged.vmdl", context)
 		PrecacheModel("models/chinese_lantern002_reference.vmdl", context)
+		PrecacheModel("models/heroes/invoker/forge_spirit.vmdl", context)
+		PrecacheModel("models/creeps/neutral_creeps/n_creep_satyr_b/n_creep_satyr_b.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)
@@ -171,6 +173,7 @@ function Precache( context )
 		PrecacheUnitByNameSync("toolkit_engineer", context)
 		PrecacheUnitByNameSync("merc_assassin", context)
 		PrecacheUnitByNameSync("merc_meat_carrier", context)
+		PrecacheUnitByNameSync("goblin_tower_builder", context)
 
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 

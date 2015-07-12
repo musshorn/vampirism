@@ -4,7 +4,9 @@ function Research( keys )
   local lumberCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
   local goldCost = ABILITY_KV[ability:GetAbilityName()].GoldCost
   local pID = caster:GetMainControllingPlayer()
-
+  local ability = keys.ability
+  local abilityName = ability:GetAbilityName()
+  local unitName = caster:GetUnitName()
   -- Not all research requires lumber or gold
   if lumberCost == nil then
     lumberCost = 0
@@ -32,7 +34,18 @@ function Research( keys )
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
   FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
-  TechTree:AddTechAbility(pID, keys.ability:GetAbilityName())
+
+  -- Find all other buildings with this ability, hide it on those too. (only checking abilityholders. (which all research buildings are using at this point.))
+  for name, table in pairs(ABILITY_HOLDERS) do
+    if name ~= unitName then
+      for k, v in pairs(ABILITY_HOLDERS[name]) do
+        -- another unit had this ability, hide it.
+        if v == abilityName then
+          FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = abilityName, builder = name, tier = keys.level})
+        end
+      end
+    end
+  end
 end
 
 -- Research was cancelled. Show the icon again, return cost to player.
@@ -56,6 +69,17 @@ function Cancelled(keys)
 
   --Show the hidden icon in flash
   FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
+
+  -- Find all other buildings with this ability, show it on those too.
+  for name, table in pairs(ABILITY_HOLDERS) do if name ~= unitName then
+      for k, v in pairs(ABILITY_HOLDERS[name]) do
+        -- another unit had this ability, hide it.
+        if v == abilityName then
+          FireGameEvent('build_ui_show', {player_ID = playerID, ability_name = ability:GetAbilityName(), builder = name, tier = keys.level})
+        end
+      end
+    end
+  end  
 end
 
 -- Used to catch if cancelled by casting another ability
@@ -167,15 +191,14 @@ function GemQuality(keys)
         if wall:GetMainControllingPlayer() == pID then
           local increasedHP = 0
           if level == 1 then
+            print('go upgrade zaebal')
             wall.baseMaxHP = wall:GetMaxHealth()
             increasedHP = wall:GetMaxHealth() * 1.2  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.2
-            FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_gem_quality', builder = caster:GetUnitName(), tier = level})
           end
           if level == 2 then
             increasedHP = wall.baseMaxHP * 1.4  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.4
-            FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_gem_quality', builder = caster:GetUnitName(), tier = level})
           end
           if level == 3 then
             increasedHP = wall.baseMaxHP * 1.6  - wall:GetHealth()
@@ -185,6 +208,10 @@ function GemQuality(keys)
           wall:SetHealth(wall:GetHealth() + increasedHP)
         end
       end
+    end
+
+    if level < 3 then
+      FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_gem_quality', builder = caster:GetUnitName(), tier = level})
     end
   end
 
@@ -203,8 +230,7 @@ function HealingTower(keys)
   -- Note there needs to be a flag set for all future heal towers built to auto level this
 end
 
--- Human Vault Researches
-
+-- Human Damage Researches
 function HumanDamage(keys)
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
@@ -215,7 +241,20 @@ function HumanDamage(keys)
   human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
   human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
   human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
+
   FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+
+  -- Find all other buildings with this and set their level to the right one too.
+  for name, table in pairs(ABILITY_HOLDERS) do
+    if name ~= unitName then
+      for k, v in pairs(ABILITY_HOLDERS[name]) do
+        -- another unit had this ability, hide it.
+        if v == abilityName then
+          FireGameEvent('build_ui_upgrade', {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = name, tier = level})
+        end
+      end
+    end
+  end
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
@@ -402,10 +441,11 @@ function HumanSurvival( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local human = HUMANS[playerID]
+  local amount = keys.Amount
 
   Timers:CreateTimer(.03, function ()
-      human:SetMaxHealth(human:GetMaxHealth() + 400)
-      human:SetHealth(human:GetHealth() + 400)
+      human:SetMaxHealth(human:GetMaxHealth() + amount)
+      human:SetHealth(human:GetHealth() + amount)
       return nil
   end)
 end
@@ -447,6 +487,16 @@ function AddTeleport( keys )
   human:FindAbilityByName('human_teleport'):SetLevel(1)
 end
 
+-- Upgrades the blink of super tower builders
+function AddBlinkExtension( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+
+  caster:RemoveAbility('human_blink')
+  caster:AddAbility('super_blink')
+  caster:FindAbilityByName('super_blink'):SetLevel(1)
+end
+
 function TechUpgrade( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
@@ -477,21 +527,28 @@ function TechUpgrade( keys )
   end
 
   if level ~= nil then
-    print('upgrading, ', baseAbility, level, abilityName)
-    FireGameEvent("build_ui_upgrade", {player_ID = playerID, ability_name = baseAbility, builder = caster:GetUnitName(), tier = level}) 
+    FireGameEvent("build_ui_upgrade", {player_ID = playerID, ability_name = baseAbility, builder = caster:GetUnitName(), tier = level})
+    -- Find all other buildings with this and set their level to the right one too.
+    for name, table in pairs(ABILITY_HOLDERS) do
+      if name ~= unitName then
+        for k, v in pairs(ABILITY_HOLDERS[name]) do
+          -- another unit had this ability, hide it.
+          if v == abilityName then
+            FireGameEvent('build_ui_upgrade', {player_ID = playerID, ability_name = baseAbility, builder = name, tier = level})
+          end
+        end
+      end
+    end
   end
 end
 
 function AddHealthUpgrade( keys )
-  print('in addhp')
   local caster = keys.caster
   local amount = keys.Amount
-  print(caster:GetUnitName(), 'addhp')
 
   -- yeah this is how it should be
   Timers:CreateTimer(.09, function ()
     caster:SetMaxHealth(caster:GetMaxHealth() + amount)
-    --SNIPPET PLS, if finished, add hp if not dont.
     if caster:HasAbility('is_a_building') then
       if caster.state == "complete" then
         caster:Heal(amount, caster)

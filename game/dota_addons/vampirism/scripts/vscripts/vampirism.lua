@@ -64,7 +64,7 @@ VAMPIRE_COINS = {} --table for tracking which vampire dropped which coins
 HUMANS = {}
 VAMPIRES = {} -- table of all created vampires
 ABILITY_HOLDERS = {} --[[table containing units which hold extra abilities when another unit does not have enough slots to store them all.
-                          Remember that in order to be used with buildUI, all abilities need to exist in abilities_custom]]
+                         Remember that in order to be used with buildUI, all abilities need to exist in abilities_custom]]
 SHOPS = {} --table of all shops, by entindex.
 AVERNALS = {} --table of all avernals, by playerID
 
@@ -158,6 +158,18 @@ function GameMode:OnAllPlayersLoaded()
   vshop:FindAbilityByName('bh_dummy_unit'):OnSpellStart()
 
   CreateUnitByName("npc_vamp_fountain", Vector(779, 430, 128), false, nil, nil, DOTA_TEAM_BADGUYS)
+
+  -- Create ABILITY_HOLDERS
+  for unitName, h in pairs(UNIT_KV[-1]) do
+    if UNIT_KV[-1][unitName]['AbilityHolder'] ~= nil then
+      if ABILITY_HOLDERS[unitName] == nil then
+        ABILITY_HOLDERS[unitName] = {}
+        for i = 1, UNIT_KV[-1][unitName]["AbilityHolder"] do
+          table.insert(ABILITY_HOLDERS[unitName], UNIT_KV[-1][unitName]["ExtraAbility"..i])
+        end
+      end
+    end
+  end
 end
 
 --[[
@@ -214,6 +226,7 @@ function GameMode:OnGameInProgress()
   GoldMineTimer()
   SphereTimer()
   UrnTimer()
+  AutoGoldTimer()
 end
 
 -- Cleanup a player when they leave
@@ -297,14 +310,11 @@ function GameMode:OnNPCSpawned(keys)
   print("[vampirism] NPC Spawned")
 
   local npc = EntIndexToHScript(keys.entindex)
-  print(npc:HasInventory())
   local playerID = npc:GetMainControllingPlayer()
-  print(npc:GetUnitName())
   if npc:GetName() == "npc_dota_hero_omniknight" then
   	npc:FindAbilityByName("call_buildui"):SetLevel(1)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
-    npc:FindAbilityByName('research_healing_vitality'):SetLevel(1)
     if playerID < 8 then 
       WOOD[playerID] = 10000000 --cheats, real is 50.
       GOLD[playerID] = 0 --this is how it should look on ship.
@@ -315,7 +325,7 @@ function GameMode:OnNPCSpawned(keys)
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
       HUMAN_COUNT = HUMAN_COUNT + 1
       npc:SetAbilityPoints(0)
-      --npc:SetHasInventory(false) testing
+      npc:SetHasInventory(false) --testing
       FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = GOLD[playerID]})
       FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
       FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
@@ -334,6 +344,7 @@ function GameMode:OnNPCSpawned(keys)
 
   local unitName = string.lower(npc:GetUnitName())
 
+  -- Adds omniknight to abilityholder.
   if npc:IsRealHero() then
     npc.bFirstSpawned = true
     GameMode:OnHeroInGame(npc)
@@ -353,18 +364,7 @@ function GameMode:OnNPCSpawned(keys)
           table.insert(ABILITY_HOLDERS[unitName], HERO_KV[name]["ExtraAbility"..i])
         end
       end
-    end
-  else
-    if UNIT_KV[-1][unitName]['AbilityHolder'] ~= nil then
-      if ABILITY_HOLDERS[unitName] == nil then
-        ABILITY_HOLDERS[unitName] = {}
-        print('has holder adding', UNIT_KV[-1][unitName]["AbilityHolder"])
-        for i = 1, UNIT_KV[-1][unitName]["AbilityHolder"] do
-          print(UNIT_KV[-1][unitName]["ExtraAbility"..i], 'went into holder')
-          table.insert(ABILITY_HOLDERS[unitName], UNIT_KV[-1][unitName]["ExtraAbility"..i])
-        end
-      end
-    end
+    end 
   end
 
   if npc:GetUnitName() == "tower_pearls" then
@@ -1217,6 +1217,40 @@ function UrnTimer()
   end)
 end
 
+-- Automatically gives gold at certain intervals.
+function AutoGoldTimer()
+  local time = 0
+  Timers:CreateTimer(function ()
+    if time == 90 then
+      for k, v in pairs(VAMPIRES) do
+        ChangeGold(v:GetMainControllingPlayer(), 25)
+      end
+    end
+    if time == 720 then
+      for k, v in pairs(VAMPIRES) do
+        ChangeGold(v:GetMainControllingPlayer(), 100)
+      end
+    end
+    if time == 1440 then
+      for k, v in pairs(VAMPIRES) do
+        ChangeGold(v:GetMainControllingPlayer(), 200)
+      end
+    end
+    if time == 2160 then
+      for k, v in pairs(VAMPIRES) do
+        ChangeGold(v:GetMainControllingPlayer(), 300)
+      end
+    end
+    if time == 2880 then
+      for k, v in pairs(VAMPIRES) do
+        ChangeGold(v:GetMainControllingPlayer(), 400)
+      end
+    end
+    time = time + 1
+    return 1
+  end)
+end
+
 function GameMode:OnPlayerSay(keys)
   local player = keys.ply
   local msg = keys.text
@@ -1314,7 +1348,8 @@ end
 function ChangeGold( playerID, amount )
   if amount ~= nil then
     if GOLD[playerID] + amount > 1000000 then
-      GOLD[playerID] = 1000000
+      --GOLD[playerID] = 1000000
+      GOLD[playerID] = GOLD[playerID] + amount --cheats
     elseif GOLD[playerID] + amount < 0 then
       GOLD[playerID] = 0
     else
@@ -1327,7 +1362,8 @@ end
 function ChangeWood( playerID, amount )
   if amount ~= nil then
     if WOOD[playerID] + amount > 1000000 then
-      WOOD[playerID] = 1000000
+      --WOOD[playerID] = 1000000
+      WOOD[playerID] = WOOD[playerID] + amount --cheats
     elseif WOOD[playerID] + amount < 0 then
       WOOD[playerID] = 0
     else

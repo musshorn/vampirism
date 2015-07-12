@@ -3,6 +3,10 @@ function TrainUnit( keys )
   local unitToSpawn = keys.SpawnUnit
   local pID = building:GetMainControllingPlayer()
   local requestingFood = nil
+  local goldCost = keys.GoldCost
+  local woodCost = keys.WoodCost
+  local affordWood = true
+  local affordGold = true
 
   -- Parity with WC3 behaviour
   if UNIT_KV[pID][unitToSpawn].ConsumesFood ~= nil then
@@ -23,9 +27,33 @@ function TrainUnit( keys )
     end
   end
 
-  if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood then
-    if table.getn(building.queue) <= 7 then
+  if goldCost ~= nil then
+    if goldCost > GOLD[pID] then
+      FireGameEvent('custom_error_show', {player_ID = pID, _error = 'Need more gold!'})
+      building:RemoveModifierByName(keys.AddToQueue)
+      affordGold = false
+      return
+    end
+  else
+    goldCost = 0
+  end
+
+  if woodCost ~= nil then
+    if woodCost > WOOD[pID] then
+      FireGameEvent('custom_error_show', {player_ID = pID, _error = 'Need more wood!'})
+      building:RemoveModifierByName(keys.AddToQueue)
+      affordWood = false
+      return
+    end
+  else
+    woodCost = 0
+  end
+
+  if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood and affordWood and affordGold then
+    if #building.queue < 7 then
       table.insert(building.queue, keys)
+      ChangeGold(pID, -1 * goldCost)
+      ChangeWood(pID, -1 * woodCost)
     else
       FireGameEvent( 'custom_error_show', { player_ID = building:GetMainControllingPlayer() , _error = "Too many units in queue" } )
       building:RemoveModifierByName(keys.AddToQueue)
@@ -37,7 +65,7 @@ function TrainUnit( keys )
   end
 end
 
--- A building upgrade is cancelled.
+-- A building upgrade is cancelled. Also cancels workers in queue?
 function Cancel( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
@@ -48,6 +76,16 @@ function Cancel( keys )
     caster.doingWork = false
     caster:RemoveModifierByName(caster.workHandler:GetName())
     caster.workHandler = nil
+    -- handle worker refunds... gj le snip man.
+    local workerGold = caster.popped.GoldCost
+    local workerWood = caster.popped.WoodCost
+
+    if workerGold ~= nil then
+      ChangeGold(pID, workerGold)
+    end
+    if workerWood ~= nil then
+      ChangeWood(pID, workerWood)
+    end
   end
 
   if caster.oldModel ~= nil then
