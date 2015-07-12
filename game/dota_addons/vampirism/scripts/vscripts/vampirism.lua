@@ -689,7 +689,7 @@ function GameMode:OnEntityKilled( keys )
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
-      outcome = 1 --dont forget to change this
+      --outcome = 1 --dont forget to change this
       if outcome <= largeProb then
         local coin = CreateItem("item_large_coin", killerEntity, killerEntity)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
@@ -1229,6 +1229,9 @@ function AutoGoldTimer()
     if time == 720 then
       for k, v in pairs(VAMPIRES) do
         ChangeGold(v:GetMainControllingPlayer(), 100)
+      end
+      for k, v in pairs(HUMANS) do
+        ChangeGold(v:GetMainControllingPlayer(), 2)
       end
     end
     if time == 1440 then

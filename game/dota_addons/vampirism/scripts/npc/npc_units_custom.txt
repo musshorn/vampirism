@@ -198,6 +198,11 @@
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"          "25"
+    "BountyGoldMin"       "1"
+    "BountyGoldMax"       "1"
 
     // Vamp
     "AffectedByGemUpgrades" "true"
@@ -289,6 +294,12 @@
     "RepairTime"  "15"
     "NeedTech"    "research_center_t1"
 
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "2"
+    "BountyGoldMax"       "2"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -370,6 +381,12 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
     "NeedTech"      "research_center_t1"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "5"
+    "BountyGoldMax"       "5"
 
     "TechModifiers"
     {
@@ -453,6 +470,12 @@
     "RepairTime"  "25"
     "NeedTech"      "human_vault"
 
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "20"
+    "BountyGoldMax"       "20"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -535,6 +558,12 @@
     "RepairTime"  "25"
     "NeedTech"      "human_vault"
 
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "50"
+    "BountyGoldMax"       "50"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -615,6 +644,12 @@
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "75"
+    "BountyGoldMax"       "75"
 
     "NeedTech"     "research_center_t2 house_t3"
 
@@ -700,6 +735,12 @@
     "RepairTime"  "25"
     "NeedTech"     "research_center_t2 house_t3 citadel_of_faith"
 
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "75"
+    "BountyGoldMax"       "75"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -781,6 +822,12 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "45"
     "NeedTech"      "research_center_t2 house_t3 citadel_of_faith"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "250"
+    "BountyGoldMax"       "250"
 
     "TechModifiers"
     {
@@ -864,6 +911,12 @@
     "RepairTime"  "65"
     "NeedTech"      "command_center"
 
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "500"
+    "BountyGoldMax"       "500"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -945,6 +998,12 @@
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "75"
     "NeedTech"      "gold_mine_t3 base_operations"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "1000"
+    "BountyGoldMax"       "1000"
 
     "TechModifiers"
     {
@@ -2183,7 +2242,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    "BountyXP"                  "25"
     "BountyGoldMin"             "2"
     "BountyGoldMax"             "2"
 
@@ -2281,7 +2340,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    "BountyXP"                  "25"
     "BountyGoldMin"             "5"
     "BountyGoldMax"             "5"
 
@@ -2371,7 +2430,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    "BountyXP"                  "25"
     "BountyGoldMin"             "10"
     "BountyGoldMax"             "10"
 
@@ -2462,7 +2521,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    "BountyXP"                  "25"
     "BountyGoldMin"             "25"
     "BountyGoldMax"             "25"
 
@@ -2552,7 +2611,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    "BountyXP"                  "25"
     "BountyGoldMin"             "25"
     "BountyGoldMax"             "25"
 
@@ -2643,7 +2702,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    "BountyXP"                  "25"
     "BountyGoldMin"             "60"
     "BountyGoldMax"             "60"
 
@@ -2733,7 +2792,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    "BountyXP"                  "25"
     "BountyGoldMin"             "10"
     "BountyGoldMax"             "10"
 
@@ -2823,7 +2882,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    "BountyXP"                  "25"
     "BountyGoldMin"             "100"
     "BountyGoldMax"             "100"
 
@@ -3250,6 +3309,12 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "10"
+    "BountyGoldMax"       "10"
   
     "IsTech"            "true"
     "NeedTech"          "human_vault"
@@ -3333,6 +3398,12 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "50"
+    "BountyGoldMax"       "50"
   
     "IsTech"    "true"
     "NeedTech"    "gold_mine_t1 human_vault"
@@ -3420,8 +3491,8 @@
     // Bounty
     //----------------------------------------------------------------
     "BountyXP"          "25"
-    "BountyGoldMin"       "2"
-    "BountyGoldMax"       "2"
+    "BountyGoldMin"       "50"
+    "BountyGoldMax"       "50"
 
     // Vamp
     "MaximumLumber" "4000" // Base max lumber
@@ -3601,6 +3672,12 @@
     "CombatClassDefend"           "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"       "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"            "25"
+    "BountyGoldMin"       "5"
+    "BountyGoldMax"       "5"
+
     "IsUnique"                    "true"
   }
 
@@ -3691,6 +3768,12 @@
       "CombatClassAttack"           "DOTA_COMBAT_CLASS_ATTACK_BASIC"
       "CombatClassDefend"           "DOTA_COMBAT_CLASS_DEFEND_STRONG"
       "UnitRelationshipClass"       "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+      // Bounty
+      //----------------------------------------------------------------
+      "BountyXP"            "25"
+      "BountyGoldMin"       "5"
+      "BountyGoldMax"       "5"
 
       "IsTech"        "true"
       "NeedTech"      "house_t2 gold_mine_t1"
@@ -3991,8 +4074,8 @@
     // Bounty
     //----------------------------------------------------------------
     "BountyXP"          "25"
-    "BountyGoldMin"       "2"
-    "BountyGoldMax"       "2"
+    "BountyGoldMin"       "15"
+    "BountyGoldMax"       "15"
 
     // Vamp
     "MaximumLumber" "100" // Base max lumber
@@ -4081,8 +4164,8 @@
     // Bounty
     //----------------------------------------------------------------
     "BountyXP"          "25"
-    "BountyGoldMin"       "2"
-    "BountyGoldMax"       "2"
+    "BountyGoldMin"       "25"
+    "BountyGoldMax"       "25"
 
     // Vamp
     "MaximumLumber" "1000" // Base max lumber
