@@ -425,7 +425,14 @@ end
 -- state as necessary
 function GameMode:OnPlayerReconnect(keys)
   print ( '[vampirism] OnPlayerReconnect' )
-  PrintTable(keys) 
+  local pID = keys.PlayerID
+  Timers:CreateTimer(2.0, function()
+    FireGameEvent("vamp_gold_changed", { player_ID = pID, gold_total = GOLD[pID]})
+    FireGameEvent("vamp_wood_changed", { player_ID = pID, wood_total = WOOD[pID]})
+    FireGameEvent("vamp_food_changed", { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+    FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+    return nil
+  end)
 end
 
 -- An item was purchased by a player
