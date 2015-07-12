@@ -284,13 +284,24 @@ end
 function BecomeVampire( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
 
-  PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BADGUYS, true)
-  
-  local vamp = CreateUnitByName("npc_dota_hero_queenofpain", caster:GetAbsOrigin(), true, nil, nil, DOTA_TEAM_BADGUYS)
-  vamp:SetControllableByPlayer(pID, true)
+  if caster.onBlight ~= nil then
+    if caster.onBlight == true then
+      player:SetTeam(DOTA_TEAM_BADGUYS)
+      PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BADGUYS, true)
 
-  caster:RemoveSelf()
+      local vamp = PlayerResource:ReplaceHeroWith(pID, "npc_dota_hero_life_stealer", 0, 0)
+      vamp:SetControllableByPlayer(pID, true)
+      vamp:SetAbsOrigin(caster:GetAbsOrigin())
+
+      caster:RemoveSelf()
+    else
+      FireGameEvent( 'custom_error_show', { player_ID = pID , _error = "You must be on Blight to do that!" } )
+    end
+  else
+    FireGameEvent( 'custom_error_show', { player_ID = pID , _error = "You must be on Blight to do that!" } )
+  end
 end
 
 function VerifyAttacker( keys )

@@ -67,6 +67,8 @@ function Cancel( keys )
     end
     ChangeGold(pID, caster.refundGold)
     ChangeWood(pID, caster.refundLumber)
+    caster.refundLumber = 0
+    caster.refundGold = 0
     caster:SetMaxHealth(caster.originalMaxHP)
   end
 end

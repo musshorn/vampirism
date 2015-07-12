@@ -74,6 +74,7 @@ end
 -- Called when a unit enters the center of the map. (Vampire's home).
 function InVampireHome( keys )
   local unit = keys.activator
+  unit.onBlight = true
 
   if unit:GetUnitName() == 'merc_meat_carrier' then
     unit:AddNewModifier(unit, nil, 'modifier_invulnerable', {})
@@ -83,6 +84,7 @@ end
 -- Called when a unit leaves the center of the map.
 function OutVampireHome( keys )
   local unit = keys.activator
+  unit.onBlight = false
 
   if unit:GetUnitName() == 'merc_meat_carrier' then
     if unit:HasModifier('modifier_invulnerable') then
