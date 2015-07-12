@@ -15,6 +15,7 @@ dota/
 dota_ugc/
 game/dota_addons/dota_pvp/
 game/dota_addons/ui_example/
+game/dota_addons/samplerts/
 game/dota_addons/overthrow/
 game/dota_addons/multiteam_example/
 game/dota_addons/lua_ability_example/
@@ -32,6 +33,7 @@ content/dota_addons/overthrow/
 game/dota_core/
 game/dota_imported/
 content/dota_addons/dota_pvp/
+content/dota_addons/samplerts/
 content/dota_addons/multiteam_example/
 content/dota_addons/lua_ability_example/
 content/dota_addons/holdout_example/
