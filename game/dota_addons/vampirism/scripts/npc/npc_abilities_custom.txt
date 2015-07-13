@@ -141,11 +141,6 @@
             "Function"    "VerifyAttacker"
           }
         }
-
-        "Properties"
-        {
-          "MODIFIER_PROPERTY_DISABLE_TURNING" "1"
-        }
       }
     }
   }
@@ -4967,6 +4962,90 @@
   }
 
   //=================================================================================/
+  // Upgrade to Super Tower of Flame
+  //=================================================================================/
+  "upgrade_to_tower_flame_t2"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "upgrade_to_tower_flame_t2"  
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_flame_t2"
+        "LumberCost"  "10000"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_flame_t2"
+        "Scale"       "1.4"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Ultimate Tower of Flame
+  //=================================================================================/
+  "upgrade_to_tower_flame_t3"
+  {
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"           "ability_datadriven"
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "upgrade_to_tower_flame_t3"  
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_flame_t3"
+        "LumberCost"  "40000"
+        "GoldCost"    "1"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_flame_t3"
+        "Scale"       "1.8"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
   // Upgrade to Lantern Tower
   //=================================================================================/
   "upgrade_to_tower_lantern"
@@ -7829,9 +7908,37 @@
   }
 
   //================================================================================= 
+  // Tower Ambient Particles
+  //=================================================================================
+  "ambient_tower_particles"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+
+    "Modifiers"
+    {
+      "modifier_tower_ambient"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+    
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "abilities.lua"
+            "Function"    "AmbientParticles"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
   // Ghost phasing
   //=================================================================================
-
   "ghost_phasing"
   {
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"

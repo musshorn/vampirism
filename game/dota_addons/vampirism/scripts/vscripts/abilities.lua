@@ -418,3 +418,33 @@ function HolyAttack( keys )
     end
   end
 end
+
+TOWER_PARTICLES = {
+  tower_flame = "particles/world_environmental_fx/fire_torch.vpcf"
+}
+
+-- Attach ambient particles to certain towers.
+function AmbientParticles( keys )
+  local tower = keys.caster
+  local towerName = tower:GetUnitName()
+  local towerPos = tower:GetAbsOrigin()
+  local partcile = TOWER_PARTICLES[towerName]
+
+  if particle == nil then
+    for k, v in pairs(TOWER_PARTICLES) do
+      print(k, v)
+      print(string.find(k, towerName), string.find(towerName, k))
+      if string.find(towerName, k) then
+        print('fouind')
+        particle = v
+      end
+    end
+  end
+
+  -- Its a flame tower
+  if string.find(towerName, 'flame') then
+    print('its fire')
+    local ambient = ParticleManager:CreateParticle(particle, PATTACH_POINT_FOLLOW, tower)
+    ParticleManager:SetParticleControlEnt(ambient, 0, tower, PATTACH_POINT_FOLLOW, "attach_attack1", towerPos, true)
+  end
+end

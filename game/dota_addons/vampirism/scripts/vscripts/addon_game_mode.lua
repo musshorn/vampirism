@@ -78,6 +78,7 @@ function Precache( context )
 		PrecacheResource("particle", "particles/units/heroes/hero_rubick/rubick_fade_bolt.vpcf", context)
 		PrecacheResource("particle", "particles/econ/items/leshrac/leshrac_tormented_staff/leshrac_base_attack_tormented.vpcf", context)
 		PrecacheResource("particle", "particles/econ/items/puck/puck_alliance_set/puck_base_attack_aproset.vpcf", context)
+		PrecacheResource("particle", "particles/world_environmental_fx/fire_torch.vpcf", context) 
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
