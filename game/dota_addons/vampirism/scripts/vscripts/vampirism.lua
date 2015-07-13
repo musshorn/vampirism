@@ -276,8 +276,8 @@ function GameMode:OnGameRulesStateChange(keys)
         local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
         vampire:SetHullRadius(48)
         FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
-        GOLD[i] = 1000000 --cheats on
-        WOOD[i] = 1000000 --cheats on
+        GOLD[i] = 0 --cheats on
+        WOOD[i] = 0 --cheats on
         TOTAL_FOOD[i] = 10
         CURRENT_FOOD[i] = 0
         FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
@@ -316,9 +316,9 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 10000000 --cheats, real is 50.
+      WOOD[playerID] = 50 --cheats, real is 50.
       GOLD[playerID] = 0 --this is how it should look on ship.
-      GOLD[playerID] = 10000000
+      GOLD[playerID] = 0
       TOTAL_FOOD[playerID] = 15
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -1351,8 +1351,8 @@ end
 function ChangeGold( playerID, amount )
   if amount ~= nil then
     if GOLD[playerID] + amount > 1000000 then
-      --GOLD[playerID] = 1000000
-      GOLD[playerID] = GOLD[playerID] + amount --cheats
+      GOLD[playerID] = 1000000
+      --GOLD[playerID] = GOLD[playerID] + amount --cheats
     elseif GOLD[playerID] + amount < 0 then
       GOLD[playerID] = 0
     else
@@ -1365,8 +1365,8 @@ end
 function ChangeWood( playerID, amount )
   if amount ~= nil then
     if WOOD[playerID] + amount > 1000000 then
-      --WOOD[playerID] = 1000000
-      WOOD[playerID] = WOOD[playerID] + amount --cheats
+      WOOD[playerID] = 1000000
+      --WOOD[playerID] = WOOD[playerID] + amount --cheats
     elseif WOOD[playerID] + amount < 0 then
       WOOD[playerID] = 0
     else

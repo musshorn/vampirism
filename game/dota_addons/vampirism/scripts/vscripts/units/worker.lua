@@ -1,3 +1,8 @@
+--[[
+Worker AI 2, workers go to tree and dont move from there. They need to be within range of a house,
+starting with 300? 
+]]
+
 VECTOR_BUMP = Vector(50, 0, 0)
 
 if Worker == nil then
@@ -19,6 +24,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
   worker.pos = worker:GetAbsOrigin()
   worker.moving = false
   worker.housePos = nil
+  worker.moveLocked = false -- Has the worker found a tree, and had their movement locked.
 
   worker.skipTicks = 0 -- If this is > 0 the worker will ignore this many ticks
 
@@ -70,6 +76,12 @@ function Worker:Worker1(vPos, hOwner, unitName)
           if (harvest:IsChanneling() == false) then
             local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
             worker:CastAbilityOnTarget(tree, harvest, worker:GetMainControllingPlayer())
+          else
+            --worker is harvesting, lock their movement.
+            if not worker.moveLocked then
+              worker:SetMoveCapability(DOTA_UNIT_CAP_MOVE_NONE)
+              worker.moveLocked = true
+            end
           end
         end
       end
@@ -149,7 +161,7 @@ function DropLumber( keys )
   local targetHouse = nil
 
   for k, v in pairs(LUMBER_DROPS) do
-    if CalcDistanceBetweenEntityOBB(worker, v) < 180 and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
+    if CalcDistanceBetweenEntityOBB(worker, v) < 300 and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
       targetHouse = v
     end
   end

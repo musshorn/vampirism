@@ -806,6 +806,18 @@
   }
 
   //======================================================
+  // Lets player see how close to a house the worker needs to be.
+  //======================================================
+  "harvest_indicator"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass" "ability_datadriven"
+    "MaxLevel"  "1"
+    "AbilityManaCost" "0"
+    "AbilityCastRange" "300"
+  }
+
+  //======================================================
   // Harvest Channelling ability
   //======================================================
   "harvest_channel"
@@ -862,7 +874,7 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
     "AbilityTextureName"        "undying_soul_rip"
     "AbilityCastPoint"  "0"
-    "AbilityCastRange"        "120"
+    "AbilityCastRange"        "300"
     "OnSpellStart"
     {
       "RunScript"
