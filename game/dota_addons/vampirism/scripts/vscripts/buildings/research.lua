@@ -116,6 +116,8 @@ function ImproveLumber(keys)
     Notifications:Bottom(pID, "Researched: Insane Lumber Havesting", 5, nil, {color="yellow", ["font-size"]="24px"})
   end
 
+  TechTree:AddTechAbility(pID, ability:GetAbilityName())
+
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
   end
@@ -129,6 +131,7 @@ function SharpenedHatchets(keys)
   -- This research only applies to t1 workers so we don't need to search for any worker
   UNIT_KV[pID]["worker_t1"].LumberPerChop = 2
   Notifications:Bottom(pID, "Researched: Sharpened Hatchets", 5, nil, {color="yellow", ["font-size"]="24px"})
+  TechTree:AddTechAbility(pID, ability:GetAbilityName())
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
@@ -141,6 +144,7 @@ function Rifles(keys)
   local pID = caster:GetMainControllingPlayer()
   local phandle = PlayerResource:GetPlayer(pID)
   local hero = phandle:GetAssignedHero()
+  TechTree:AddTechAbility(pID, ability:GetAbilityName())
 
   ability:ApplyDataDrivenModifier(caster, hero, "rifle_attack_range", nil)
   Notifications:Bottom(pID, "Researched: Rifles", 5, nil, {color="yellow", ["font-size"]="24px"})
@@ -154,6 +158,7 @@ function ImprovedWorkerMotivation(keys)
   local caster = keys.caster
   local ability = keys.ability
   local pID = caster:GetMainControllingPlayer()
+  TechTree:AddTechAbility(pID, ability:GetAbilityName())
   
   -- Find all units with "MaximumLumber" not nil, these are all the harvesters
   for key, value in pairs(UNIT_KV[pID]) do
@@ -186,6 +191,7 @@ function GemQuality(keys)
   local pID = caster:GetMainControllingPlayer()
   local level = keys.Level
   local ability = keys.ability
+  TechTree:AddTechAbility(pID, ability:GetAbilityName())
 
   -- Find all units with "AffectedByGemUpgrades" not nil, these are all the walls
   for key, value in pairs(UNIT_KV[pID]) do
@@ -241,6 +247,7 @@ function HealingTower(keys)
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
   local ability = caster:FindAbilityByName("heal_tower_heal_aura")
+  TechTree:AddTechAbility(pID, ability:GetAbilityName())
 
   ability:SetLevel(2)
 
@@ -256,6 +263,7 @@ function HumanDamage(keys)
   local level = keys.Level
   local human = PlayerResource:GetPlayer(playerID):GetAssignedHero()
   local ability = caster:FindAbilityByName('upgrade_human_damage_'..level)
+  TechTree:AddTechAbility(playerID, ability:GetAbilityName())
 
   human:SetBaseDamageMin(human:GetBaseDamageMin() + 100)
   human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
@@ -287,6 +295,7 @@ function SlayerGodlike(keys)
   local playerID = caster:GetMainControllingPlayer()
   local ability = keys.ability
 
+  TechTree:AddTechAbility(playerID, ability:GetAbilityName())
   local slayer = SLAYERS[playerID].handle
   slayer:SetBaseDamageMax(slayer:GetBaseDamageMax() + 1000)
   slayer:SetBaseDamageMin(slayer:GetBaseDamageMin() + 1000)
@@ -304,6 +313,8 @@ function SpireQuality(keys)
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local level = keys.level
+  local ability = keys.ability
+  TechTree:AddTechAbility(pID, ability:GetAbilityName())
 
   Notifications:Bottom(playerID, "Researched: Spire Quality "..level, 5, nil, {color="yellow", ["font-size"]="24px"})
 end
@@ -314,6 +325,7 @@ function VampiricSkills( keys )
   local playerID = caster:GetMainControllingPlayer()
   local vampire = VAMPIRES[playerID]
   local ability = keys.ability
+  TechTree:AddTechAbility(playerID, ability:GetAbilityName())
 
   if vampire.VampiricSkills == nil then
     vampire.VampiricSkills = 0
@@ -481,6 +493,8 @@ function HumanSurvival( keys )
   local playerID = caster:GetMainControllingPlayer()
   local human = HUMANS[playerID]
   local amount = keys.Amount
+  local ability = keys.ability
+  TechTree:AddTechAbility(playerID, ability:GetAbilityName())
 
   Notifications:Bottom(playerID, "Researched: Basic Human Survival", 5, nil, {color="yellow", ["font-size"]="24px"})
 
@@ -510,8 +524,9 @@ function TechPlating( keys )
   local playerID = caster:GetMainControllingPlayer()
   local wallName = caster:GetUnitName()
   local abilityName = keys.ability:GetAbilityName() 
+  TechTree:AddTechAbility(playerID, abilityName)
 
-  Notifications:Bottom(playerID, "Researched: Wall Plating", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, "Researched: "..ABILITY_NAMES[abilityName], 5, nil, {color="yellow", ["font-size"]="24px"})
   
   Timers:CreateTimer(.03, function ()
     local armorLevel = WALL_PLATING_SCALE[wallName]
@@ -524,8 +539,10 @@ end
 function AddTeleport( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
+  local ability = keys.ability
 
   local human = HUMANS[playerID]
+  TechTree:AddTechAbility(playerID, ability:GetAbilityName())
 
   Notifications:Bottom(playerID, "Researched: Human Teleport", 5, nil, {color="yellow", ["font-size"]="24px"})
 
@@ -536,6 +553,8 @@ end
 function AddBlinkExtension( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
+  local ability = keys.ability
+  TechTree:AddTechAbility(playerID, ability:GetAbilityName())
 
   caster:RemoveAbility('human_blink')
   caster:AddAbility('super_blink')
@@ -549,8 +568,7 @@ function AddEssence( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
 
-  caster:AddAbility('upgrade_to_lantern_tower_t2')
-  caster:FindAbilityByName('upgrade_to_lantern_tower_t2'):SetLevel(1)
+  caster:AddAbility('upgrade_to_tower_lantern_t2')
 end
 
 function TechUpgrade( keys )
@@ -561,7 +579,7 @@ function TechUpgrade( keys )
   local techMod = ABILITY_KV[abilityName]['GiveModifier']
   local level = keys.NextLevel
   local baseAbility = keys.BaseAbility
-  print(ABILITY_NAMES[abilityName])
+  TechTree:AddTechAbility(playerID, abilityName)
 
   --get all alive entities
 

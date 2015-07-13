@@ -149,6 +149,7 @@ function Precache( context )
 		PrecacheModel("models/chinese_lantern002_reference.vmdl", context)
 		PrecacheModel("models/heroes/invoker/forge_spirit.vmdl", context)
 		PrecacheModel("models/creeps/neutral_creeps/n_creep_satyr_b/n_creep_satyr_b.vmdl", context)
+		PrecacheModel("models/chinese_lantern001_reference.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

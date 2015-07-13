@@ -141,6 +141,11 @@
             "Function"    "VerifyAttacker"
           }
         }
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_DISABLE_TURNING" "1"
+        }
       }
     }
   }
@@ -4067,6 +4072,47 @@
   }
 
   //================================================================================= /
+  // Upgrade to Lantern tower T2
+  //================================================================================= /
+  "upgrade_to_tower_lantern_t2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "5"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_lantern_2"
+        "LumberCost"  "3500"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_lantern_2"
+        "Scale"       "1"
+      }
+    }
+  }
+
+  //================================================================================= /
   // Debugging: Draw building boxes
   //================================================================================= /
   "debug_draw_building_boxes"
@@ -4962,47 +5008,6 @@
     }
   }
 
-  //=================================================================================/
-  // Upgrade to Lantern Tower
-  //=================================================================================/
-  "upgrade_to_tower_lantern_t2"
-  {
-    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "BaseClass"           "ability_datadriven"
-    "AbilityChannelTime"  "5"
-    "AbilityTextureName"  "upgrade_to_tower_lantern_t2"  
-    
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "Upgrade"
-        "TARGET"      "CASTER"
-        "TargetUnit"  "tower_lantern_t2"
-        "LumberCost"  "3500"
-        "GoldCost"    "0"
-      }
-    }
-    "OnChannelSucceeded"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "FinishUpgrade"
-        "TargetUnit"  "tower_lantern_t2"
-        "Scale"       "1"
-      }
-    }
-    "OnChannelInterrupted"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
-        "Function"    "Cancel"
-      }
-    }
-  }
   //=================================================================================/
   // Upgrade to Tower of Blood
   //=================================================================================/

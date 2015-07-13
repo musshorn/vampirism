@@ -8,5 +8,6 @@ ABILITY_NAMES = {
   research_wall_plating_4 = 'Magic Plating',
   research_human_teleport = 'Human Teleport',
   research_tower_defenses = 'Tower Defenses',
-  research_engineer_vitality = 'Engineer Vitality'
+  research_engineer_vitality = 'Engineer Vitality',
+  research_holy_essence = 'Holy Essence'
 }

@@ -250,7 +250,6 @@ function FinishUpgrade( keys )
   -- Give it tech modifiers.
   if UNIT_KV[pID][targetUnit]['TechModifiers'] ~= nil then
     local modTable = UNIT_KV[pID][targetUnit]['TechModifiers']
-    print('building.lua')
     for k, v in pairs(modTable) do
       if TechTree:HasTech(pID, v) then
         local modName =  ABILITY_KV[v]['GiveModifier']
