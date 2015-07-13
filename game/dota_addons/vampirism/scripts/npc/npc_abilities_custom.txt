@@ -1553,7 +1553,7 @@
   }
 
   //================================================================================= /
-  // Research: Improved Lumber Havesting (2)
+  // Research: Advanced Lumber Havesting (2)
   //================================================================================= /
   "research_advanced_lumber_harvesting"
   {
@@ -1601,7 +1601,7 @@
   }
 
   //================================================================================= /
-  // Research: Improved Lumber Havesting (3)
+  // Research: Insane Lumber Havesting (3)
   //================================================================================= /
   "research_insane_lumber_harvesting"
   {
@@ -3318,9 +3318,13 @@
         "Passive"       "1"
         "IsHidden"      "1"
 
-        "Properties"
+        "OnCreated"
         {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+            "Function"    "AddEssence"
+          }
         }
       }
     }
@@ -3626,7 +3630,7 @@
   }
 
   //================================================================================= /
-  // Research Mithril Plating
+  // Research Magic Plating
   //================================================================================= /
   "research_wall_plating_4"
   {
@@ -3678,7 +3682,7 @@
   }
 
   //================================================================================= /
-  // Mithril Plating modifier
+  // Magic Plating modifier
   //================================================================================= /
   "tech_wall_plating_4"
   {
@@ -4928,6 +4932,47 @@
     }
   }
 
+  //=================================================================================/
+  // Upgrade to Lantern Tower
+  //=================================================================================/
+  "upgrade_to_tower_lantern_t2"
+  {
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"           "ability_datadriven"
+    "AbilityChannelTime"  "5"
+    "AbilityTextureName"  "upgrade_to_tower_lantern_t2"  
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_lantern_t2"
+        "LumberCost"  "3500"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_lantern_t2"
+        "Scale"       "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
   //=================================================================================/
   // Upgrade to Tower of Blood
   //=================================================================================/

@@ -23,6 +23,7 @@ require('trade')
 require('notifications')
 require('Bases')
 require('units.avernal')
+require('util.abilitynames')
 
 function Precache( context )
 		--[[

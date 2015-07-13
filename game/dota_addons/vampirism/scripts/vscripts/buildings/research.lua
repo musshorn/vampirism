@@ -82,7 +82,8 @@ function Cancelled(keys)
   end  
 end
 
--- Used to catch if cancelled by casting another ability
+-- Used to catch if cancelled by casting another ability. Don't use this for when a reseach completes
+-- by finishing channeling.
 function Finished(keys)
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
@@ -90,7 +91,6 @@ function Finished(keys)
   if keys.interrupted == 1 then
     Cancelled(keys)
   end
-  Notifications:Bottom(pID, "Research Complete", 5, nil, {color="yellow", ["font-size"]="24px"})
 end
 
 --Research center upgrades
@@ -106,11 +106,14 @@ function ImproveLumber(keys)
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 10
     -- On completed, send the "parent" key of the ability to flash, along with the tier of the next tech.
     FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_lumber_harvesting', builder = caster:GetUnitName(), tier = level})
+    Notifications:Bottom(pID, "Researched: Improved Lumber Havesting", 5, nil, {color="yellow", ["font-size"]="24px"})
   elseif level == 2 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 15
     FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_lumber_harvesting', builder = caster:GetUnitName(), tier = level})
+    Notifications:Bottom(pID, "Researched: Advanced Lumber Havesting", 5, nil, {color="yellow", ["font-size"]="24px"})
   elseif level == 3 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 20
+    Notifications:Bottom(pID, "Researched: Insane Lumber Havesting", 5, nil, {color="yellow", ["font-size"]="24px"})
   end
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
@@ -125,6 +128,7 @@ function SharpenedHatchets(keys)
   
   -- This research only applies to t1 workers so we don't need to search for any worker
   UNIT_KV[pID]["worker_t1"].LumberPerChop = 2
+  Notifications:Bottom(pID, "Researched: Sharpened Hatchets", 5, nil, {color="yellow", ["font-size"]="24px"})
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
@@ -139,6 +143,7 @@ function Rifles(keys)
   local hero = phandle:GetAssignedHero()
 
   ability:ApplyDataDrivenModifier(caster, hero, "rifle_attack_range", nil)
+  Notifications:Bottom(pID, "Researched: Rifles", 5, nil, {color="yellow", ["font-size"]="24px"})
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
@@ -169,6 +174,8 @@ function ImprovedWorkerMotivation(keys)
     end
   end
 
+  Notifications:Bottom(pID, "Researched: Improved Worker Motivation", 5, nil, {color="yellow", ["font-size"]="24px"})
+
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
   end
@@ -191,7 +198,6 @@ function GemQuality(keys)
         if wall:GetMainControllingPlayer() == pID then
           local increasedHP = 0
           if level == 1 then
-            print('go upgrade zaebal')
             wall.baseMaxHP = wall:GetMaxHealth()
             increasedHP = wall:GetMaxHealth() * 1.2  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.2
@@ -203,16 +209,27 @@ function GemQuality(keys)
           if level == 3 then
             increasedHP = wall.baseMaxHP * 1.6  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.6
+            Notifications:Bottom(pID, "Researched: Insane Gem Quality", 5, nil, {color="yellow", ["font-size"]="24px"})
           end
           wall:SetMaxHealth(wall.baseMaxHP + increasedHP)
           wall:SetHealth(wall:GetHealth() + increasedHP)
         end
       end
     end
+  end
 
-    if level < 3 then
-      FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_gem_quality', builder = caster:GetUnitName(), tier = level})
-    end
+  if level == 1 then
+    Notifications:Bottom(pID, "Researched: Improved Gem Quality", 5, nil, {color="yellow", ["font-size"]="24px"})
+  end
+  if level == 2 then
+    Notifications:Bottom(pID, "Researched: Advanced Gem Quality", 5, nil, {color="yellow", ["font-size"]="24px"})
+  end
+  if level == 3 then
+    Notifications:Bottom(pID, "Researched: Insane Gem Quality", 5, nil, {color="yellow", ["font-size"]="24px"})
+  end
+
+  if level < 3 then
+    FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_gem_quality', builder = caster:GetUnitName(), tier = level})
   end
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
@@ -226,6 +243,8 @@ function HealingTower(keys)
   local ability = caster:FindAbilityByName("heal_tower_heal_aura")
 
   ability:SetLevel(2)
+
+  Notifications:Bottom(pID, "Researched: Mana Regeneration", 5, nil, {color="yellow", ["font-size"]="24px"})
 
   -- Note there needs to be a flag set for all future heal towers built to auto level this
 end
@@ -242,7 +261,7 @@ function HumanDamage(keys)
   human:SetBaseDamageMax(human:GetBaseDamageMax() + 100)
   human:SetBaseAttackTime(human:GetBaseAttackTime() + 0.1)
 
-  FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
+  FireGameEvent("build_ui_upgrade", {player_ID = playerID, ability_name = 'upgrade_human_damage_1', builder = caster:GetUnitName(), tier = level}) 
 
   -- Find all other buildings with this and set their level to the right one too.
   for name, table in pairs(ABILITY_HOLDERS) do
@@ -250,11 +269,13 @@ function HumanDamage(keys)
       for k, v in pairs(ABILITY_HOLDERS[name]) do
         -- another unit had this ability, hide it.
         if v == abilityName then
-          FireGameEvent('build_ui_upgrade', {player_ID = pID, ability_name = 'upgrade_human_damage_1', builder = name, tier = level})
+          FireGameEvent('build_ui_upgrade', {player_ID = playerID, ability_name = 'upgrade_human_damage_1', builder = name, tier = level})
         end
       end
     end
   end
+
+  Notifications:Bottom(playerID, "Researched: Human Damage "..level, 5, nil, {color="yellow", ["font-size"]="24px"})
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
@@ -272,6 +293,8 @@ function SlayerGodlike(keys)
   slayer:SetMaxHealth(slayer:GetMaxHealth() + 10000)
   slayer:SetHealth(slayer:GetHealth() + 10000)
 
+  Notifications:Bottom(playerID, "Researched: Slayer Godlike Training", 5, nil, {color="yellow", ["font-size"]="24px"})
+
   table.insert(SLAYERS[playerID]['health'], 10000)
   table.insert(SLAYERS[playerID]['damage'], 1000)
 end 
@@ -281,6 +304,8 @@ function SpireQuality(keys)
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()
   local level = keys.level
+
+  Notifications:Bottom(playerID, "Researched: Spire Quality "..level, 5, nil, {color="yellow", ["font-size"]="24px"})
 end
 
 -- Grants and extra skill point to the players vampire (up to 33)
@@ -296,6 +321,8 @@ function VampiricSkills( keys )
 
   vampire:SetAbilityPoints(vampire:GetAbilityPoints() + 1)
   vampire.VampiricSkills = vampire.VampiricSkills + 1
+
+  Notifications:Bottom(playerID, "Researched: Vampiric Skills", 5, nil, {color="yellow", ["font-size"]="24px"})
 
   if vampire.VampiricSkills == 33 then
     caster:RemoveAbility('research_vampiric_skills')
@@ -319,6 +346,8 @@ function VampiricDamage( keys )
   vampire:SetBaseDamageMax(vampire:GetBaseDamageMax() + 100)
   vampire.VampiricDamage = vampire.VampiricDamage + 1
 
+  Notifications:Bottom(playerID, "Researched: Vampiric Damage", 5, nil, {color="yellow", ["font-size"]="24px"})
+
   if vampire.VampiricDamage == 50 then
     caster:RemoveAbility('research_vampiric_damage')
   else
@@ -332,6 +361,8 @@ function VampiricStats( keys )
   local playerID = caster:GetMainControllingPlayer()
   local vampire = VAMPIRES[playerID]
   local ability = keys.ability
+
+  Notifications:Bottom(playerID, "Researched: Vampiric Stats", 5, nil, {color="yellow", ["font-size"]="24px"})
 
   if vampire.VampiricStats == nil then
     vampire.VampiricStats = 0
@@ -360,6 +391,8 @@ function PowerUnderworld( keys )
     vampire.PowerUnderworld = 0
   end
 
+  Notifications:Bottom(playerID, "Researched: Power of the Underworld", 5, nil, {color="yellow", ["font-size"]="24px"})
+
   vampire:SetBaseStrength(vampire:GetBaseStrength() + 2000)
   vampire:SetBaseAgility(vampire:GetBaseAgility() + 2000)
   vampire:SetBaseIntellect(vampire:GetBaseIntellect() + 2000)
@@ -385,6 +418,8 @@ function VampiricStrength( keys )
     vampire.VampiricStrength = 0
   end
 
+  Notifications:Bottom(playerID, "Researched: Vampiric Strength", 5, nil, {color="yellow", ["font-size"]="24px"})
+
   vampire:SetBaseStrength(vampire:GetBaseStrength() + 300) 
   vampire.VampiricStrength = vampire.VampiricStrength + 1
 
@@ -405,6 +440,8 @@ function VampiricAgility( keys )
   if vampire.VampiricAgility == nil then
     vampire.VampiricAgility = 0
   end
+
+  Notifications:Bottom(playerID, "Researched: Vampiric Agility", 5, nil, {color="yellow", ["font-size"]="24px"})
 
   vampire:SetBaseAgility(vampire:GetBaseAgility() + 300)
   vampire.VampiricAgility = vampire.VampiricAgility + 1
@@ -427,6 +464,8 @@ function VampiricIntellect( keys )
     vampire.VampiricIntellect = 0
   end
 
+  Notifications:Bottom(playerID, "Researched: Vampiric Intellect", 5, nil, {color="yellow", ["font-size"]="24px"})
+
   vampire:SetBaseIntellect(vampire:GetBaseIntellect() + 300)
   vampire.VampiricIntellect = vampire.VampiricIntellect + 1
 
@@ -442,6 +481,8 @@ function HumanSurvival( keys )
   local playerID = caster:GetMainControllingPlayer()
   local human = HUMANS[playerID]
   local amount = keys.Amount
+
+  Notifications:Bottom(playerID, "Researched: Basic Human Survival", 5, nil, {color="yellow", ["font-size"]="24px"})
 
   Timers:CreateTimer(.03, function ()
       human:SetMaxHealth(human:GetMaxHealth() + amount)
@@ -469,6 +510,8 @@ function TechPlating( keys )
   local playerID = caster:GetMainControllingPlayer()
   local wallName = caster:GetUnitName()
   local abilityName = keys.ability:GetAbilityName() 
+
+  Notifications:Bottom(playerID, "Researched: Wall Plating", 5, nil, {color="yellow", ["font-size"]="24px"})
   
   Timers:CreateTimer(.03, function ()
     local armorLevel = WALL_PLATING_SCALE[wallName]
@@ -484,6 +527,8 @@ function AddTeleport( keys )
 
   local human = HUMANS[playerID]
 
+  Notifications:Bottom(playerID, "Researched: Human Teleport", 5, nil, {color="yellow", ["font-size"]="24px"})
+
   human:FindAbilityByName('human_teleport'):SetLevel(1)
 end
 
@@ -495,6 +540,17 @@ function AddBlinkExtension( keys )
   caster:RemoveAbility('human_blink')
   caster:AddAbility('super_blink')
   caster:FindAbilityByName('super_blink'):SetLevel(1)
+
+  Notifications:Bottom(playerID, "Researched: Blink Extension", 5, nil, {color="yellow", ["font-size"]="24px"})
+end
+
+-- Adds Holy Upgrade to lantern towers.
+function AddEssence( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+
+  caster:AddAbility('upgrade_to_lantern_tower_t2')
+  caster:FindAbilityByName('upgrade_to_lantern_tower_t2'):SetLevel(1)
 end
 
 function TechUpgrade( keys )
@@ -505,6 +561,7 @@ function TechUpgrade( keys )
   local techMod = ABILITY_KV[abilityName]['GiveModifier']
   local level = keys.NextLevel
   local baseAbility = keys.BaseAbility
+  print(ABILITY_NAMES[abilityName])
 
   --get all alive entities
 
@@ -540,6 +597,8 @@ function TechUpgrade( keys )
       end
     end
   end
+
+  Notifications:Bottom(playerID, "Researched: "..ABILITY_NAMES[abilityName], 5, nil, {color="yellow", ["font-size"]="24px"})
 end
 
 function AddHealthUpgrade( keys )

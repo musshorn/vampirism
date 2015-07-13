@@ -1156,7 +1156,7 @@ function GoldMineTimer()
     end
     --check t2 gold mines
     if goldTime % 15 == 0 then
-      local t2gold = Entities:FindAllByModel('models/props_mines/mine_cart002.vmdl')
+      local t2gold = Entities:FindAllByModel('models/gold_mine_2.vmdl')
       for k, mine in pairs(t2gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
@@ -1166,7 +1166,7 @@ function GoldMineTimer()
     end
     --check t1 gold mines
     if goldTime == 0 then
-      local t1gold = Entities:FindAllByModel('models/props_cave/mine_cart.vmdl')
+      local t1gold = Entities:FindAllByModel('models/mine_cart_reference.vmdl')
       for k, mine in pairs(t1gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
