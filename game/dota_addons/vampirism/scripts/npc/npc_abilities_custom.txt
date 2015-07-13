@@ -3325,6 +3325,36 @@
             "ScriptFile"  "scripts/vscripts/buildings/research.lua"
             "Function"    "AddEssence"
           }
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_holy_essence_attack"
+            "Target"     "CASTER"
+            "Duration"    "0.65"
+          }
+        }
+      }
+      "modifier_holy_essence_attack"
+      {
+        "Passive"       "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "0"
+            
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "abilities.lua"
+            "Function"    "HolyAttack"
+          }
+        }
+        "OnDestroy"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_holy_essence_attack"
+            "Target"     "CASTER"
+            "Duration"    "0.65"
+          }
         }
       }
     }

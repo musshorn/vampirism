@@ -377,5 +377,44 @@ function TeleportFinish( keys )
   local target = keys.target
 
   FindClearSpaceForUnit(caster, target:GetAbsOrigin(), false)
+end
 
+function HolyAttack( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local ability = keys.ability
+
+  local avernals = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, 1300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
+
+  local count = 8
+  for k, v in pairs(avernals) do
+    if v:HasAbility('avernal_particles') and count > 0 then
+      local attack_projectile = {
+        Target = v,
+        Source = caster,
+        Ability = ability,  
+        EffectName = "particles/items_fx/ethereal_blade.vpcf",
+        vSpawnOrigin = caster:GetAbsOrigin(),
+        bHasFrontalCone = false,
+        bReplaceExisting = false,
+        iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
+        iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
+        iUnitTargetType = DOTA_UNIT_TARGET_BASIC,
+        bDeleteOnHit = true,
+        iMoveSpeed = 1800,
+        bProvidesVision = false,
+        bDodgeable = false,
+        iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_HITLOCATION
+      }
+      projectile = ProjectileManager:CreateTrackingProjectile(attack_projectile)
+      local damage_table = {
+        victim = v,
+        attacker = caster,
+        damage = caster:GetBaseDamageMax(),
+        damage_type = DAMAGE_TYPE_PHYSICAL
+      }
+      ApplyDamage(damage_table)
+      count = count - 1
+    end
+  end
 end

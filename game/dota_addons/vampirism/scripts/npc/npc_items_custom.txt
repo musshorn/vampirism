@@ -1098,7 +1098,8 @@
   	"ItemPermanent"			"0"
   	"ItemRequiresCharges"   "0"
   	"SideShop"				"1"
-  	"AbilityCooldown"		"0"
+  	"AbilityCooldown"		"30"
+    "AbilityManaCost"   "500"
   	"GoldCost"				"290"
   	"LumberCost"			"0"
 
