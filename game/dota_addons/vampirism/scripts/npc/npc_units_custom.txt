@@ -4846,6 +4846,8 @@
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
+    "Ability1"                  "upgrade_to_gold_mine_t3"
+
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"             "30"     // Physical protection.
@@ -4902,6 +4904,8 @@
     "BountyGoldMax"             "50"
 
     "RepairTime"  "40"
+
+    "NeedTech"                  "citadel_of_faith"
   }
 
   //================================================================================= 
@@ -4912,14 +4916,14 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"         "npc_dota_creature"
-    "Model"             "models/t3gold.vmdl"
+    "Model"             "models/gold_mine_3.vmdl"
     "ModelScale"        "1"
     
     "ConsideredHero"      "0"
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"          ""          // Human test
+    "Ability1"          "upgrade_to_gold_mine_t4"          // Human test
     "Ability2"          ""          // Ability 2.
     "Ability3"          ""          // Ability 3.
     "Ability4"          ""          // Ability 4.
@@ -4990,7 +4994,7 @@
     "BountyGoldMax"       "100"
 
     "IsTech"    "true"
-    "NeedTech"    "human_vault house_t2"
+    "NeedTech"    "command_center"
     "RepairTime"  "40"
   }
 
@@ -5002,7 +5006,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"         "npc_dota_creature"
-    "Model"             "models/t4gold.vmdl"
+    "Model"             "models/gold_mine_4.vmdl"
     "ModelScale"        "1"
     
     "ConsideredHero"      "0"
@@ -5075,7 +5079,7 @@
     "BountyGoldMax"       "100"
 
     "IsTech"    "true"
-    "NeedTech"    "human_vault house_t2"
+    "NeedTech"    "base_operations"
     "RepairTime"  "40"
   }
 

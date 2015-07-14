@@ -6657,6 +6657,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "1"
+    "AbilityTextureName"    "upgrade_to_gold_mine_t2"
     
     "OnSpellStart"
     {
@@ -7475,7 +7476,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "1"
-    
+    "AbilityTextureName"    "upgrade_to_gold_mine_t3"
     "OnSpellStart"
     {
       "RunScript"
@@ -7516,6 +7517,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "1"
+    "AbilityTextureName"    "upgrade_to_gold_mine_t4"
     
     "OnSpellStart"
     {
