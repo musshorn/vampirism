@@ -334,7 +334,7 @@ function ChainOfDeath(keys)
               victim = unit,
               attacker = caster,
               damage = s_damage,
-              damage_type = DAMAGE_TYPE_MAGICAL,
+              damage_type = DAMAGE_TYPE_MAGICAL
             }
             ApplyDamage(damageTable)
   
