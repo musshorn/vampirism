@@ -9141,7 +9141,7 @@
       "02"
       { 
         "var_type"          "FIELD_INTEGER"
-        "speed"         "20 30 50"
+        "speed"             "20 30 50"
       }
     }
 
@@ -9151,8 +9151,8 @@
       "ApplyModifier"
       {
         "ModifierName"  "modifier_veil_of_darkness"
-        "Target"    "CASTER"
-        "Duration"    "%duration"
+        "Target"        "CASTER"
+        "Duration"      "%duration"
       }
 
       "RunScript"
@@ -9162,8 +9162,6 @@
       }
     }
 
-
-
     "Modifiers"
     {
       "modifier_veil_of_darkness"
@@ -9172,16 +9170,21 @@
         "IsHidden"      "0"
         "isBuff"      "1"
         "IsDebuff"      "0"
-    
-    
-        "Properties"
-        {
-            "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%speed" 
-        }
-
         "States"
         {
           "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%speed" 
+        }
+        "OnAttackLanded"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "abilities/vampire.lua"
+            "Function"    "RemoveSpeed"
+          }
         }
       }
     }

@@ -24,12 +24,14 @@ Buildings do not have a cancel ability, however they may be cancelled during any
 
 ## Credits
 
-[BMD](https://github.com/bmddota) : Being the Based Modding Dude, [Barebones](https://github.com/bmddota/barebones) and answering so many questions on IRC.
+[BMD](https://github.com/bmddota) : Being the Based Modding Dude, [Barebones](https://github.com/bmddota/barebones), [PlayerSay](https://github.com/bmddota/PlayerSay) and answering so many questions on IRC.
 
 [Myll](https://github.com/Myll) : The [BuildingHelper](https://github.com/Myll/Dota-2-Building-Helper) library.
 
 [Pizzalol](https://github.com/Pizzalol), [Noya](https://github.com/MNoya), [kritth](https://github.com/kritth), [Rook](https://github.com/Rookdota) : And everyone else who worked on [SpellLibrary](https://github.com/Pizzalol/SpellLibrary).
 
 [carligit](https://github.com/carligit) : For much of the original flash that buildUI is based on.
+
+[zedor](https://github.com/zedor) : [CustomError]
 
 [snippet](https://github.com/snipplets) : Dodgy maths, git conflicts and shipping content.
