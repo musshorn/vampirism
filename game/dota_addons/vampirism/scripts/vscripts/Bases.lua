@@ -92,3 +92,26 @@ function OutVampireHome( keys )
     end
   end
 end
+
+-- List of vectors that a teleport exits at.
+TELEPORT_EXITS = {
+  Vector(-2656, 4128, 272),
+  Vector(7840, 2400, 400),
+  Vector(-4704, -5600, 528),
+  Vector(7968, -5536, 16),
+  Vector(-4640, 6112, 160)
+}
+
+-- Called when a unit enters a teleporter.
+function BaseTeleport( keys )
+  local unit = keys.activator
+  local trigger = keys.caller
+  local teleID = trigger:Attribute_GetIntValue("tele_ID", 0)
+
+  if unit:HasAbility('is_a_building') ~= true and teleID ~= 5 then
+    FindClearSpaceForUnit(unit, TELEPORT_EXITS[teleID], true)
+  end
+  if unit:HasAbility('is_a_building') ~= true and teleID == 5 and unit:GetTeam() ~= DOTA_TEAM_BADGUYS then
+    FindClearSpaceForUnit(unit, TELEPORT_EXITS[teleID], true)
+  end
+end
