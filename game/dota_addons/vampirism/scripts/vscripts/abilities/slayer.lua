@@ -162,8 +162,7 @@ function SpawnSlayer( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
 
-  SLAYERS[pID] = {["state"] = "alive"}
-  SLAYERS[pID]["upgrades"] = {}
+  SLAYERS[pID] = {["state"] = "alive", ["upgrades"] = {}}
 
   local slayer = CreateUnitByName("npc_dota_hero_invoker", caster:GetAbsOrigin(), true, nil, nil, caster:GetTeam())
   slayer:SetControllableByPlayer(pID, true)
@@ -182,7 +181,21 @@ function SpawnSlayer( keys )
     
   local name = PlayerResource:GetPlayerName(pID)
   local time = GameRules:GetDOTATime(false, false)
-  Notifications:BottomToTeam(caster:GetTeam(), name .. " has completed a slayer in " .. tostring( round(time, 2)) .. "s", 5, nil, {color="yellow", ["font-size"]="24px"})
+  local formatted = ''
+
+  local mins = math.floor(time / 60)
+  local secs = math.floor(time % 60)
+  if secs < 10 then
+    formatted = "0"..tostring(secs)
+  else
+    formatted = tostring(secs)
+  end
+  if mins > 0  then
+    formatted = mins..":"..formatted
+  else
+    formatted = '0'..":"..secs
+  end
+  GameRules:SendCustomMessage(ColorIt(name, IDToColour(pID)) .. " created a slayer at "..formatted, 0, 0)
 
   GameMode:ModifyStatBonuses(slayer)
 end

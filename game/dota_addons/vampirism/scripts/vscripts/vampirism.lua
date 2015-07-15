@@ -712,9 +712,9 @@ function GameMode:OnEntityKilled( keys )
       if outcome <= largeProb then
         local coin = CreateItem("item_large_coin", killerEntity, killerEntity)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
-        print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
+        --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
         VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
-        print(VAMPIRE_COINS[coin:entindex()])
+        --print(VAMPIRE_COINS[coin:entindex()])
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(5) 
       elseif outcome <= smallProb then
@@ -724,6 +724,34 @@ function GameMode:OnEntityKilled( keys )
         coin.player = killerEntity:GetMainControllingPlayer()
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(3)
+      end
+    end
+
+    local stackAbility = killedUnit:FindAbilityByName('worker_stack')
+    if killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) ~= nil then
+      local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
+      while stacks > 0 do
+        outcome = RandomInt(1, 200)
+        largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
+        smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
+        --outcome = 1 --dont forget to change this
+        if outcome <= largeProb then
+          local newcoin = CreateItem("item_large_coin", killerEntity, killerEntity)
+          local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
+          --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
+          VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
+          --print(VAMPIRE_COINS[coin:entindex()])
+          newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
+          newcoinP:SetModelScale(5) 
+        elseif outcome <= smallProb then
+          local newcoin = CreateItem("item_small_coin", killerEntity, killerEntity)
+          local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
+          VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
+          newcoin.player = killerEntity:GetMainControllingPlayer()
+          newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
+          newcoinP:SetModelScale(3)
+        end
+        stacks = stacks - 1
       end
     end
 

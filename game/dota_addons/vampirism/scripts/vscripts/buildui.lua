@@ -32,7 +32,7 @@ end
 
 -- Opens build menu.
 function CallMenu(keys)
-  print('callmenu')
+  --print('callmenu')
     local caster = keys.caster
     local playerID = caster:GetMainControllingPlayer()
     local unitName = caster:GetUnitName()
@@ -42,7 +42,7 @@ function CallMenu(keys)
     if ABILITY_HOLDERS[unitName] ~= nil then
       for k, v in pairs(ABILITY_HOLDERS[unitName]) do
         -- If you get errors here, you need to check abilities_custom. Can't find the ability.
-        print(unitName, v)
+        --print(unitName, v)
         if ABILITY_KV[v]['UnitName'] ~= nil then
           local tech = ABILITY_KV[v]['UnitName']
           TechTree:GetRequired(tech, playerID, caster:GetUnitName(), "building")
@@ -54,7 +54,7 @@ function CallMenu(keys)
       end
     -- Not using ability holder.
     else -- caster is not using ability holders
-      print('not an ability holder')
+      --print('not an ability holder')
       for i = 0, caster:GetAbilityCount() do
         --print(i)
         if caster:GetAbilityByIndex(i) ~= nil then
@@ -67,7 +67,7 @@ function CallMenu(keys)
             --print('callmenu get req')
             TechTree:GetRequired(buildName, playerID, caster:GetUnitName(), "building")
           else
-            print('checking tech on', ability, playerID, caster:GetUnitName())
+            --print('checking tech on', ability, playerID, caster:GetUnitName())
             TechTree:GetRequired(ability, playerID, caster:GetUnitName(), "ability")
           end
         end
@@ -83,7 +83,7 @@ function CallMenu(keys)
 end
 
 function BuildUI:BuildChosen(building, playerID)
-    print(building)
+   --print(building)
 
     local caster = playerCasters[playerID]
 

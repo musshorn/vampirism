@@ -1021,7 +1021,7 @@
     "MaxLevel"            "1"
     "AbilityTextureName"      "summon_slayer_m"
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "AbilityChannelTime"  "1"
+    "AbilityChannelTime"  "60"
     "LumberCost" "400"
     "OnSpellStart"
     {
