@@ -203,3 +203,8 @@ function DropLumber( keys )
     end
   end
 end
+
+function StackAttacked( keys )
+  local caster = keys.caster
+  caster:SetHealth(caster:GetMaxHealth())
+end

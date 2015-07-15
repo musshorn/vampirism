@@ -61,6 +61,15 @@ function ShopUI:Init()
   	end, "user purchases an item", 0)
 end
 
+function ShopUI:InitVampShop( vampshop )
+  local shopIndex = vampshop:entindex()
+  local shopName = vampshop:GetUnitName()
+
+  for k, v in pairs(SHOP_KV[shopName]) do
+    local index = v['index']
+  end
+end
+
 function FindNearestShop(vPos, fRange)
 	local shopEnts = Entities:FindAllInSphere(vPos, fRange)
 	for k, v in pairs(shopEnts) do
