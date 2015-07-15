@@ -11,8 +11,11 @@ There are many differences from the original map, players of the original map wo
 
 - Workers
 
-Worker AI works differently than it does in the original. The goal is to minimize the movement made by workers, in order to reduce the bandwidth required to host the game. This means that workers
-now 'lock' in place after reaching their first harvesting location and cannot move from then on. Players will need to build houses within 300 range of a worker in order for it to drop off its lumber.
+Workers behave somewhat differently in this mod. The reason for this is that having too many moving units uses a lot of bandwidth, this is most noticable at the start of the game,
+when a few hundered tier 1 workers are active. To assure a good experience for the majority of players, workers can be "stacked", which means that one phyiscal worker can represent
+any number of workers. By default, tier 1 workers are stacked four times, tier 2 workers are stacked twice, and each worker from then on is not stacked. The host may specify how much
+worker stacking they wish to use, with 1 being no stacking and 4 being the default. (Giving stacking of 4, 2, 1, 1, 1). It is possible that no stacking may be possible on a LAN,
+but this has not been tested.
 
 - Slayers
 
