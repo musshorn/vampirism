@@ -308,7 +308,18 @@
       "modifier_worker_stack"
       {
         "Passive"       "0"
-        "IsHidden"      "0"   
+        "IsHidden"      "0"
+
+        "OnTakeDamage"
+        // "%attack_damage" is set to the damage value after mitigation
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "units/worker.lua"
+            "Function"    "StackDamaged"
+          }
+        }
+        
       }
     }
   }
