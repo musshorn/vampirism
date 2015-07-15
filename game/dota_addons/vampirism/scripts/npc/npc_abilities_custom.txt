@@ -892,7 +892,7 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
     "AbilityTextureName"        "undying_soul_rip"
     "AbilityCastPoint"  "0"
-    "AbilityCastRange"        "300"
+    "AbilityCastRange"        "128"
     "OnSpellStart"
     {
       "RunScript"
