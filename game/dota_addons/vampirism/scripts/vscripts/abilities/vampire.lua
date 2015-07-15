@@ -334,7 +334,7 @@ function ChainOfDeath(keys)
               victim = unit,
               attacker = caster,
               damage = s_damage,
-              damage_type = DAMAGE_TYPE_MAGICAL,
+              damage_type = DAMAGE_TYPE_MAGICAL
             }
             ApplyDamage(damageTable)
   
@@ -353,16 +353,24 @@ end
 function CykaSpeed(keys)
   local caster = keys.caster
   local ability = keys.ability
-  local ability_level = ability:GetLevel()
+  local ability_level = ability:GetLevel() - 1
   local duration = ability:GetLevelSpecialValueFor("duration", ability_level)
+  local speed = ability:GetLevelSpecialValueFor("speed", ability_level)
 
   caster:AddNewModifier(caster, ability, "modifier_invisible", {duration = duration})
-  caster:AddNewModifier(caster, ability, "modifier_bloodseeker_thirst_speed", {duration = duration, visibility_threshold_pct = 100, invis_threshold_pct = 100, bonus_damage = 0})
-  if ability_level == 1 then
-    caster:AddNewModifier(caster, ability, "modifier_item_orb_of_venom_slow", {duration = duration, slow = -42})
-  elseif ability_level == 2 then 
-    caster:AddNewModifier(caster, ability, "modifier_item_orb_of_venom_slow", {duration = duration, slow = -41})
-  elseif ability_level == 3 then
-    caster:AddNewModifier(caster, ability, "modifier_item_orb_of_venom_slow", {duration = duration, slow = -39})
+  caster:AddNewModifier(caster, ability, "modifier_bloodseeker_thirst_speed", {duration = duration})
+end
+
+function RemoveSpeed( keys )
+  local caster = keys.caster
+
+  if caster:HasModifier('modifier_invisible') then
+    caster:RemoveModifierByName('modifier_invisible')
+  end
+  if caster:HasModifier('modifier_bloodseeker_thirst_speed') then
+    caster:RemoveModifierByName('modifier_bloodseeker_thirst_speed')
+  end
+  if caster:HasModifier('modifier_veil_of_darkness') then
+    caster:RemoveModifierByName('modifier_veil_of_darkness')
   end
 end

@@ -36,12 +36,15 @@ ENABLE_TOWER_BACKDOOR_PROTECTION = false-- Should we enable backdoor protection 
 REMOVE_ILLUSIONS_ON_DEATH = false       -- Should we remove all illusions if the main hero dies?
 DISABLE_GOLD_SOUNDS = false             -- Should we disable the gold sound when players get gold?
 
-END_GAME_ON_KILLS = false                -- Should the game end after a certain number of kills?
+END_GAME_ON_KILLS = false               -- Should the game end after a certain number of kills?
 KILLS_TO_END_GAME_FOR_TEAM = 50         -- How many kills for a team should signify an end of game?
 
 USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom levels?
-MAX_LEVEL = 200                          -- What level should we let heroes get to?
+MAX_LEVEL = 200                         -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
+
+WORKER_FACTOR = 4                       -- How many workers does a single worker count for. This can only be set once.
+FACTOR_SET = false
 
 GOLD = {}
 WOOD = {}
@@ -80,6 +83,15 @@ for i = -1, 9 do
 	VAMPIRE_FEED[i] = 0
   AVERNALS[i] = {}
 end
+
+-- Default worker stacking factors.
+WORKER_STACKS = {
+  worker_t1 = 4,
+  worker_t2 = 2,
+  worker_t3 = 1,
+  worker_t4 = 1,
+  worker_t5 = 1
+}
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
@@ -170,6 +182,8 @@ function GameMode:OnAllPlayersLoaded()
       end
     end
   end
+
+  GameRules:SendCustomMessage("By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here - ", 0, 1)
 end
 
 --[[
@@ -276,8 +290,8 @@ function GameMode:OnGameRulesStateChange(keys)
         local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
         vampire:SetHullRadius(48)
         FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
-        GOLD[i] = 1000000 --cheats on
-        WOOD[i] = 1000000 --cheats on
+        GOLD[i] = 0 --cheats on
+        WOOD[i] = 0 --cheats on
         TOTAL_FOOD[i] = 10
         CURRENT_FOOD[i] = 0
         FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
@@ -292,6 +306,7 @@ function GameMode:OnGameRulesStateChange(keys)
           vampire:SetAbsOrigin(OutOfWorldVector)
           vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
           vampire:SetAbilityPoints(0)
+          vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
           VAMP_COUNT = VAMP_COUNT + 1
           VAMPIRES[i] = vampire
           VAMPIRES[-1] = vampire --nice game
@@ -301,6 +316,9 @@ function GameMode:OnGameRulesStateChange(keys)
     end
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
     GameMode:OnGameInProgress()
+    if HOST_LOW_BANDWIDTH == nil then
+      HOST_LOW_BANDWIDTH = false
+    end
   end
 end
 
@@ -319,7 +337,7 @@ function GameMode:OnNPCSpawned(keys)
       WOOD[playerID] = 10000000 --cheats, real is 50.
       GOLD[playerID] = 0 --this is how it should look on ship.
       GOLD[playerID] = 10000000
-      TOTAL_FOOD[playerID] = 15
+      TOTAL_FOOD[playerID] = 20
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
@@ -689,7 +707,7 @@ function GameMode:OnEntityKilled( keys )
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
-      outcome = 1 --dont forget to change this
+      --outcome = 1 --dont forget to change this
       if outcome <= largeProb then
         local coin = CreateItem("item_large_coin", killerEntity, killerEntity)
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
@@ -1156,7 +1174,7 @@ function GoldMineTimer()
     end
     --check t2 gold mines
     if goldTime % 15 == 0 then
-      local t2gold = Entities:FindAllByModel('models/props_mines/mine_cart002.vmdl')
+      local t2gold = Entities:FindAllByModel('models/gold_mine_2.vmdl')
       for k, mine in pairs(t2gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
@@ -1166,7 +1184,7 @@ function GoldMineTimer()
     end
     --check t1 gold mines
     if goldTime == 0 then
-      local t1gold = Entities:FindAllByModel('models/props_cave/mine_cart.vmdl')
+      local t1gold = Entities:FindAllByModel('models/mine_cart_reference.vmdl')
       for k, mine in pairs(t1gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
@@ -1230,6 +1248,9 @@ function AutoGoldTimer()
       for k, v in pairs(VAMPIRES) do
         ChangeGold(v:GetMainControllingPlayer(), 100)
       end
+      for k, v in pairs(HUMANS) do
+        ChangeGold(v:GetMainControllingPlayer(), 2)
+      end
     end
     if time == 1440 then
       for k, v in pairs(VAMPIRES) do
@@ -1273,6 +1294,26 @@ function GameMode:OnPlayerSay(keys)
 
   if string.find(msg, "-disallow") ~= nil then
     Bases:HandleChat(keys)
+  end
+
+  if string.find(msg, "-wf") ~= nil and player == GetListenServerHost() and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS and FACTOR_SET ~= true then
+    local chat = ParseChat(keys)
+
+    WORKER_FACTOR = string.gsub(chat[2], '%D', '')
+
+    for i = 1, 5 do
+      local tier = i - 1
+      local workerFactor = WORKER_FACTOR / math.pow(2, tier)
+
+      if workerFactor < 1 then
+        workerFactor = 1
+      end
+
+      workerFactor = math.floor(workerFactor)
+
+      WORKER_STACKS[i] = workerFactor
+    end
+    FACTOR_SET = true
   end
 end
 
@@ -1348,8 +1389,8 @@ end
 function ChangeGold( playerID, amount )
   if amount ~= nil then
     if GOLD[playerID] + amount > 1000000 then
-      --GOLD[playerID] = 1000000
-      GOLD[playerID] = GOLD[playerID] + amount --cheats
+      GOLD[playerID] = 1000000
+      --GOLD[playerID] = GOLD[playerID] + amount --cheats
     elseif GOLD[playerID] + amount < 0 then
       GOLD[playerID] = 0
     else
@@ -1362,8 +1403,8 @@ end
 function ChangeWood( playerID, amount )
   if amount ~= nil then
     if WOOD[playerID] + amount > 1000000 then
-      --WOOD[playerID] = 1000000
-      WOOD[playerID] = WOOD[playerID] + amount --cheats
+      WOOD[playerID] = 1000000
+      --WOOD[playerID] = WOOD[playerID] + amount --cheats
     elseif WOOD[playerID] + amount < 0 then
       WOOD[playerID] = 0
     else

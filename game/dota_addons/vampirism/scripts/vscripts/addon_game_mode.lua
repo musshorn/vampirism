@@ -23,6 +23,7 @@ require('trade')
 require('notifications')
 require('Bases')
 require('units.avernal')
+require('util.abilitynames')
 
 function Precache( context )
 		--[[
@@ -76,6 +77,9 @@ function Precache( context )
 		PrecacheResource("particle", "particles/units/heroes/hero_brewmaster/brewmaster_cyclone.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_rubick/rubick_fade_bolt.vpcf", context)
 		PrecacheResource("particle", "particles/econ/items/leshrac/leshrac_tormented_staff/leshrac_base_attack_tormented.vpcf", context)
+		PrecacheResource("particle", "particles/econ/items/puck/puck_alliance_set/puck_base_attack_aproset.vpcf", context)
+		PrecacheResource("particle", "particles/world_environmental_fx/fire_torch.vpcf", context)
+		PrecacheResource("particle", "particles/items2_fx/rod_of_atos.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
@@ -147,6 +151,9 @@ function Precache( context )
 		PrecacheModel("models/chinese_lantern002_reference.vmdl", context)
 		PrecacheModel("models/heroes/invoker/forge_spirit.vmdl", context)
 		PrecacheModel("models/creeps/neutral_creeps/n_creep_satyr_b/n_creep_satyr_b.vmdl", context)
+		PrecacheModel("models/chinese_lantern001_reference.vmdl", context)
+		PrecacheModel("models/gold_mine_3.vmdl", context)
+		PrecacheModel("models/gold_mine_4.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

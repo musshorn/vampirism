@@ -40,6 +40,9 @@ function House1:Init(unit)
 				requestingFood = 0
 			end
 
+			if WORKER_STACKS[unitToSpawn] ~= nil then
+				requestingFood = requestingFood * WORKER_STACKS[unitToSpawn]
+			end
 
 			if TOTAL_FOOD[playerID] >= CURRENT_FOOD[playerID ] + requestingFood then
 				house1.workHandler:SetChanneling(true)
@@ -52,7 +55,7 @@ function House1:Init(unit)
 							endTime = spawnTime,
 							callback = function()
 								if TOTAL_FOOD[playerID] >= CURRENT_FOOD[playerID] + requestingFood then
-									if CURRENT_FOOD[playerID] + requestingFood <= 250 then
+									--if CURRENT_FOOD[playerID] + requestingFood <= 250 then
 										local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
 										
 										CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + requestingFood
@@ -79,13 +82,13 @@ function House1:Init(unit)
 													end)
 	  										end
 										end
-									else
-										FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Food cap reached" } )
+									--else
+										--FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Food cap reached" } )
 										table.remove(house1.queue)
 										caster:RemoveModifierByName(house1.workHandler:GetName())
 										house1.workHandler:SetChanneling(false)
 										house1.doingWork = false
-									end
+									--end
 								else
 									FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Build more farms" } )
 									table.remove(house1.queue)

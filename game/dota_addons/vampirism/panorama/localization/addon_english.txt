@@ -3,4 +3,3 @@
 	"DOTA_GoodGuys"   								"Humans"
 	"DOTA_BadGuys"    								"Vampires"
 }
-

@@ -1,3 +1,6 @@
+--[[ Worker AI v3, Worker Stacking.
+]]
+
 VECTOR_BUMP = Vector(50, 0, 0)
 
 if Worker == nil then
@@ -19,8 +22,19 @@ function Worker:Worker1(vPos, hOwner, unitName)
   worker.pos = worker:GetAbsOrigin()
   worker.moving = false
   worker.housePos = nil
+  worker.moveLocked = false -- Has the worker found a tree, and had their movement locked.
 
   worker.skipTicks = 0 -- If this is > 0 the worker will ignore this many ticks
+  worker.stackAbility = worker:FindAbilityByName('worker_stack')
+  worker.stackAbility:ApplyDataDrivenModifier( worker, worker, "modifier_worker_stack", {})
+  worker:SetModifierStackCount("modifier_worker_stack", worker.stackAbility, WORKER_STACKS[unitName])
+  worker.currentStacks = WORKER_STACKS[unitName]
+  worker.ability = worker:FindAbilityByName("find_lumber")
+  worker.harvest = worker:FindAbilityByName("harvest_channel")
+  worker.playerID = pID
+  worker.unitName = worker:GetUnitName()
+  worker.carryTotal = worker:FindAbilityByName("carrying_lumber")
+  worker.dropAbiltiy = worker:FindAbilityByName("drop_lumber")
 
   --attach fire spawn particles.
   if unitName == 'worker_t4' then
@@ -56,27 +70,27 @@ function Worker:Worker1(vPos, hOwner, unitName)
 				return nil
 			end
 
-      local ability = worker:FindAbilityByName("find_lumber")
-      if ability:GetAutoCastState() then
-        local harvest = worker:FindAbilityByName("harvest_channel")
-        local pID = worker:GetMainControllingPlayer()
-        local unitName = worker:GetUnitName()
-
-        local carryTotal= worker:FindAbilityByName("carrying_lumber")
+      if worker.ability:GetAutoCastState() then
         local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
-        if (worker.moving == false and currentLumber < UNIT_KV[pID][unitName].MaximumLumber) then
+        if (worker.moving == false and currentLumber < UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
           
           -- If they are not working, start them working
-          if (harvest:IsChanneling() == false) then
+          if (worker.harvest:IsChanneling() == false) then
             local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
-            worker:CastAbilityOnTarget(tree, harvest, worker:GetMainControllingPlayer())
+            worker:CastAbilityOnTarget(tree, worker.harvest, worker:GetMainControllingPlayer())
+          else
+            --worker is harvesting, lock their movement.
+            if not worker.moveLocked and HOST_LOW_BANDWIDTH == true then
+              worker:SetMoveCapability(DOTA_UNIT_CAP_MOVE_NONE)
+              worker.moveLocked = true
+            end
           end
         end
       end
 
 			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
       local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
-			if (currentLumber == UNIT_KV[pID][unitName].MaximumLumber) then
+			if (currentLumber == UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
 		
 				-- Search for the nearest unit that can recieve lumber and is owned by the correct player
 				if (worker.housePos == nil) then
@@ -90,8 +104,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
             end
           end
 					worker.housePos = bestDrop:GetAbsOrigin()
-          local drop_ability = worker:FindAbilityByName("drop_lumber")
-          worker:CastAbilityOnTarget(bestDrop, drop_ability,  worker:GetMainControllingPlayer())
+          worker:CastAbilityOnTarget(bestDrop, worker.dropAbiltiy, worker:GetMainControllingPlayer())
         end
 			end
 			return .1
@@ -108,10 +121,12 @@ function FindLumber( keys )
   local ability = worker:FindAbilityByName("harvest_channel")
   local pID = worker:GetMainControllingPlayer()
   local unitName = worker:GetUnitName()
+  local stackAbility = worker:FindAbilityByName('worker_stack')
 
-  local carryTotal= worker:FindAbilityByName("carrying_lumber")
+  local carryTotal = worker:FindAbilityByName("carrying_lumber")
+
   local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
-  if (worker.moving == false and currentLumber < UNIT_KV[pID][unitName].MaximumLumber) then
+  if (worker.moving == false and currentLumber < UNIT_KV[pID][unitName].MaximumLumber * worker.currentStacks) then
     local ability = worker:FindAbilityByName("harvest_channel")
 
     -- If they are not working, start them working
@@ -129,9 +144,10 @@ function ChoppedLumber( keys )
   local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
   local pID = worker:GetMainControllingPlayer()
   local unitName = worker:GetUnitName()
+  local stackAbility = worker:FindAbilityByName('worker_stack')
 
-  if currentLumber + UNIT_KV[pID][unitName].LumberPerChop <= UNIT_KV[pID][unitName].MaximumLumber then
-    worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + UNIT_KV[pID][unitName].LumberPerChop))
+  if currentLumber + UNIT_KV[pID][unitName].LumberPerChop <= UNIT_KV[pID][unitName].MaximumLumber * worker.currentStacks then
+    worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + UNIT_KV[pID][unitName].LumberPerChop * worker.currentStacks))
     worker.housePos = nil
   end
 end
@@ -147,9 +163,14 @@ function DropLumber( keys )
   local carryTotal = worker:FindAbilityByName("carrying_lumber")
   local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
   local targetHouse = nil
+  local searchRange = 180
+
+  if HOST_LOW_BANDWIDTH == true then
+    searchRange = 300
+  end
 
   for k, v in pairs(LUMBER_DROPS) do
-    if CalcDistanceBetweenEntityOBB(worker, v) < 180 and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
+    if CalcDistanceBetweenEntityOBB(worker, v) < searchRange and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
       targetHouse = v
     end
   end

@@ -237,22 +237,55 @@ function WorkerDet( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
 
-  -- Tidy up the Timers
-  if caster.moveTimer ~= nil then 
-    Timers:RemoveTimer(caster.moveTimer)
-  end
+  if caster:HasModifier('modifier_worker_stack') then
+    local stackAbility = caster:FindAbilityByName('worker_stack') 
+    local stacks = caster:GetModifierStackCount("modifier_worker_stack", stackAbility)
 
-  -- Refund any food if any
-  if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
-    local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
-      CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
-      FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+    if stacks > 1 then
+      -- Refund any food if any
+      if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
+        local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
+        CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
+        FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+        caster:SetModifierStackCount('modifier_worker_stack', stackAbility, stacks - 1)
+        return
+      end
+    else
+      -- Tidy up the Timers
+      if caster.moveTimer ~= nil then 
+        Timers:RemoveTimer(caster.moveTimer)
+      end
+    
+      -- Refund any food if any
+      if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
+        local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
+          CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
+          FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+      end
+    
+      Timers:CreateTimer(0.03, function ()
+        caster:Destroy()
+        return nil
+      end)
+    end
+  else
+    -- Tidy up the Timers
+    if caster.moveTimer ~= nil then 
+      Timers:RemoveTimer(caster.moveTimer)
+    end
+  
+    -- Refund any food if any
+    if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
+      local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
+        CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
+        FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+    end
+  
+    Timers:CreateTimer(0.03, function ()
+      caster:Destroy()
+      return nil
+    end)
   end
-
-  Timers:CreateTimer(0.03, function ()
-    caster:Destroy()
-    return nil
-  end)
 end
 
 function BuildingQ( keys )
@@ -377,5 +410,79 @@ function TeleportFinish( keys )
   local target = keys.target
 
   FindClearSpaceForUnit(caster, target:GetAbsOrigin(), false)
+end
 
+function HolyAttack( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+  local ability = keys.ability
+
+  local avernals = FindUnitsInRadius(caster:GetTeam(), caster:GetAbsOrigin(), nil, 1300, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
+
+  local count = 8
+  for k, v in pairs(avernals) do
+    if v:HasAbility('avernal_particles') and count > 0 then
+      local attack_projectile = {
+        Target = v,
+        Source = caster,
+        Ability = ability,  
+        EffectName = "particles/items_fx/ethereal_blade.vpcf",
+        vSpawnOrigin = caster:GetAbsOrigin(),
+        bHasFrontalCone = false,
+        bReplaceExisting = false,
+        iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
+        iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_NONE,
+        iUnitTargetType = DOTA_UNIT_TARGET_BASIC,
+        bDeleteOnHit = true,
+        iMoveSpeed = 1800,
+        bProvidesVision = false,
+        bDodgeable = false,
+        iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_HITLOCATION
+      }
+      projectile = ProjectileManager:CreateTrackingProjectile(attack_projectile)
+      local damage_table = {
+        victim = v,
+        attacker = caster,
+        damage = caster:GetBaseDamageMax(),
+        damage_type = DAMAGE_TYPE_PHYSICAL
+      }
+      ApplyDamage(damage_table)
+      count = count - 1
+    end
+  end
+end
+
+TOWER_PARTICLES = {
+  tower_flame = "particles/world_environmental_fx/fire_torch.vpcf"
+}
+
+-- Attach ambient particles to certain towers.
+function AmbientParticles( keys )
+  local tower = keys.caster
+  local towerName = tower:GetUnitName()
+  local towerPos = tower:GetAbsOrigin()
+  local partcile = TOWER_PARTICLES[towerName]
+
+  if particle == nil then
+    for k, v in pairs(TOWER_PARTICLES) do
+      print(k, v)
+      print(string.find(k, towerName), string.find(towerName, k))
+      if string.find(towerName, k) then
+        print('fouind')
+        particle = v
+      end
+    end
+  end
+
+  -- Its a flame tower
+  if string.find(towerName, 'flame') then
+    print('its fire')
+    local ambient = ParticleManager:CreateParticle(particle, PATTACH_POINT_FOLLOW, tower)
+    ParticleManager:SetParticleControlEnt(ambient, 0, tower, PATTACH_POINT_FOLLOW, "attach_attack1", towerPos, true)
+  end
+end
+
+function CrippleAttackSpeed( keys )
+  local caster = keys.caster
+  local target = keys.target
 end

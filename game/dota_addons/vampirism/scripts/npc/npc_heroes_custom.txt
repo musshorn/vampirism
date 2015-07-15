@@ -50,17 +50,16 @@
   {
     "override_hero"       "npc_dota_hero_night_stalker"
     "AbilityLayout"       "6"
-    "Ability1"          "vampire_shadow_sight"
-    "Ability2"          "vampire_critical_strike"
-    //"Ability3"          "vampire_cyka_speed"//"vampire_poison"
-    "Ability3"          "vampire_health_beam"
-    "Ability4"          "vampire_chain_of_death"
-    "Ability5"          "vampire_veil_of_darkness"
-    "Ability6"          ""
-    "Ability7"          "vampire_init_hider"
-    "Ability8"          "vampire_particles"
+    "Ability1"            "vampire_shadow_sight"
+    "Ability2"            "vampire_critical_strike"
+    "Ability3"            "vampire_health_beam"
+    "Ability4"            "vampire_chain_of_death"
+    "Ability5"            "vampire_veil_of_darkness"
+    "Ability6"            "vampire_poison"
+    "Ability7"            "vampire_init_hider"
+    "Ability8"            "vampire_particles"
     //"Ability8"        "vampire_cyka_speed"
-    "Level"           "1"
+    "Level"           "6"
     "ConsideredHero"      "1"
     "NewHero"         "0"
     "TeamName"          "DOTA_TEAM_BADGUYS"
@@ -93,7 +92,7 @@
 
     // Movement
     //-------------------------------------------------------------------------------------------------------------
-    "MovementSpeed"       "522" // Speed.
+    "MovementSpeed"       "400" // Speed.
     "MovementTurnRate"      "0.5" // Turning rate.
 
     // Status

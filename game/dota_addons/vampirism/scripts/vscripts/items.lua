@@ -403,7 +403,17 @@ function BurstGem( keys )
 	local abilityDamage = ability:GetSpecialValueFor('damage')
 	local damageType = ability:GetAbilityDamageType()
 
+
 	if target:HasAbility('is_a_building') then
+		-- Deal damage
+		local damage_table = {
+			victim = target,
+			attacker = caster,
+			damage = abilityDamage,
+			damage_type = damageType
+		}
+		ApplyDamage( damage_table )
+
 		local burst_projectile = {
 			Target = target,
 			Source = caster,
@@ -422,6 +432,7 @@ function BurstGem( keys )
 			iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_HITLOCATION
 		}
 		projectile = ProjectileManager:CreateTrackingProjectile(burst_projectile)
+
 	else
 		ability:EndCooldown()
 		ability:RefundManaCost()

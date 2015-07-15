@@ -295,6 +295,24 @@
     }
   }
 
+  //===================================================================
+  // Worker Stack
+  //===================================================================
+  "worker_stack"
+  {
+    "BaseClass"                  "ability_datadriven"
+    "AbilityBehavior"            "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+    "Modifiers"
+    {
+      "modifier_worker_stack"
+      {
+        "Passive"       "0"
+        "IsHidden"      "0"   
+      }
+    }
+  }
+
   "spawn_worker_t1"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -806,6 +824,18 @@
   }
 
   //======================================================
+  // Lets player see how close to a house the worker needs to be.
+  //======================================================
+  "harvest_indicator"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass" "ability_datadriven"
+    "MaxLevel"  "1"
+    "AbilityManaCost" "0"
+    "AbilityCastRange" "300"
+  }
+
+  //======================================================
   // Harvest Channelling ability
   //======================================================
   "harvest_channel"
@@ -862,7 +892,7 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
     "AbilityTextureName"        "undying_soul_rip"
     "AbilityCastPoint"  "0"
-    "AbilityCastRange"        "120"
+    "AbilityCastRange"        "128"
     "OnSpellStart"
     {
       "RunScript"
@@ -1541,7 +1571,7 @@
   }
 
   //================================================================================= /
-  // Research: Improved Lumber Havesting (2)
+  // Research: Advanced Lumber Havesting (2)
   //================================================================================= /
   "research_advanced_lumber_harvesting"
   {
@@ -1589,7 +1619,7 @@
   }
 
   //================================================================================= /
-  // Research: Improved Lumber Havesting (3)
+  // Research: Insane Lumber Havesting (3)
   //================================================================================= /
   "research_insane_lumber_harvesting"
   {
@@ -3306,9 +3336,43 @@
         "Passive"       "1"
         "IsHidden"      "1"
 
-        "Properties"
+        "OnCreated"
         {
-          "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "20"
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+            "Function"    "AddEssence"
+          }
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_holy_essence_attack"
+            "Target"     "CASTER"
+            "Duration"    "0.65"
+          }
+        }
+      }
+      "modifier_holy_essence_attack"
+      {
+        "Passive"       "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "0"
+            
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "abilities.lua"
+            "Function"    "HolyAttack"
+          }
+        }
+        "OnDestroy"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_holy_essence_attack"
+            "Target"     "CASTER"
+            "Duration"    "0.65"
+          }
         }
       }
     }
@@ -3614,7 +3678,7 @@
   }
 
   //================================================================================= /
-  // Research Mithril Plating
+  // Research Magic Plating
   //================================================================================= /
   "research_wall_plating_4"
   {
@@ -3666,7 +3730,7 @@
   }
 
   //================================================================================= /
-  // Mithril Plating modifier
+  // Magic Plating modifier
   //================================================================================= /
   "tech_wall_plating_4"
   {
@@ -4015,6 +4079,47 @@
         "ScriptFile"  "scripts/vscripts/buildings/building.lua"
         "Function"    "FinishUpgrade"
         "TargetUnit"  "citadel_of_faith"
+        "Scale"       "1"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Upgrade to Lantern tower T2
+  //================================================================================= /
+  "upgrade_to_tower_lantern_t2"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass" "ability_datadriven"
+    "AbilityChannelTime"  "5"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_lantern_2"
+        "LumberCost"  "3500"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_lantern_2"
         "Scale"       "1"
       }
     }
@@ -4862,6 +4967,90 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "tower_flame_t1"
         "Scale"     "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Super Tower of Flame
+  //=================================================================================/
+  "upgrade_to_tower_flame_t2"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "upgrade_to_tower_flame_t2"  
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_flame_t2"
+        "LumberCost"  "10000"
+        "GoldCost"    "0"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_flame_t2"
+        "Scale"       "1.4"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Ultimate Tower of Flame
+  //=================================================================================/
+  "upgrade_to_tower_flame_t3"
+  {
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"           "ability_datadriven"
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "upgrade_to_tower_flame_t3"  
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"      "CASTER"
+        "TargetUnit"  "tower_flame_t3"
+        "LumberCost"  "40000"
+        "GoldCost"    "1"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_flame_t3"
+        "Scale"       "1.8"
       }
     }
     "OnChannelInterrupted"
@@ -6486,6 +6675,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "1"
+    "AbilityTextureName"    "upgrade_to_gold_mine_t2"
     
     "OnSpellStart"
     {
@@ -7076,6 +7266,57 @@
     }
   }
 
+  //======================================================
+  // Cripple tower active
+  //======================================================
+  "tower_cripple_active"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetType" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "BaseClass" "ability_datadriven"
+    "AbilityCastPoint"  "0"
+    "AbilityCastRange"        "1000"
+    "AbilityTextureName"    "skywrath_mage_concussive_shot"
+    "AbilityManaCost"       "250"
+    "AbilityCooldown"       "60"
+
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_cripple"
+        "Target"     "TARGET"
+        "Duration"    "10"
+      }
+      "RunScript"
+      {
+        "ScriptFile"  "abilities.lua"
+        "Function"    "CrippleAttackSpeed"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_cripple"
+      {
+        "Passive"       "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "1"
+    
+        "EffectName"        "particles/items2_fx/rod_of_atos.vpcf"
+        "EffectAttachType"  "follow_origin"
+    
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "-25"
+          //"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "-50"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-25" 
+        }
+      }
+    }
+  }
+
   //================================================================================= 
   // Build Command Center
   //=================================================================================
@@ -7304,7 +7545,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "1"
-    
+    "AbilityTextureName"    "upgrade_to_gold_mine_t3"
     "OnSpellStart"
     {
       "RunScript"
@@ -7345,6 +7586,7 @@
     "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"       "ability_datadriven"
     "AbilityChannelTime"  "1"
+    "AbilityTextureName"    "upgrade_to_gold_mine_t4"
     
     "OnSpellStart"
     {
@@ -7737,9 +7979,37 @@
   }
 
   //================================================================================= 
+  // Tower Ambient Particles
+  //=================================================================================
+  "ambient_tower_particles"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"           "ability_datadriven"
+    "AbilityTextureName"      "cancel"
+
+    "Modifiers"
+    {
+      "modifier_tower_ambient"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+    
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "abilities.lua"
+            "Function"    "AmbientParticles"
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
   // Ghost phasing
   //=================================================================================
-
   "ghost_phasing"
   {
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
@@ -8940,7 +9210,7 @@
       "02"
       { 
         "var_type"          "FIELD_INTEGER"
-        "speed"         "20 30 50"
+        "speed"             "20 30 50"
       }
     }
 
@@ -8950,8 +9220,8 @@
       "ApplyModifier"
       {
         "ModifierName"  "modifier_veil_of_darkness"
-        "Target"    "CASTER"
-        "Duration"    "%duration"
+        "Target"        "CASTER"
+        "Duration"      "%duration"
       }
 
       "RunScript"
@@ -8961,8 +9231,6 @@
       }
     }
 
-
-
     "Modifiers"
     {
       "modifier_veil_of_darkness"
@@ -8971,16 +9239,21 @@
         "IsHidden"      "0"
         "isBuff"      "1"
         "IsDebuff"      "0"
-    
-    
-        "Properties"
-        {
-            "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%speed" 
-        }
-
         "States"
         {
           "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%speed" 
+        }
+        "OnAttackLanded"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "abilities/vampire.lua"
+            "Function"    "RemoveSpeed"
+          }
         }
       }
     }
