@@ -5,7 +5,6 @@ function EnterBase( keys )
 
   local baseID = ent:Attribute_GetIntValue("BaseID", 0)
 
-
   if unit:GetUnitName() == "human_flag" then
 
     -- Check claim to this base

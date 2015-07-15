@@ -32,6 +32,6 @@ Buildings do not have a cancel ability, however they may be cancelled during any
 
 [carligit](https://github.com/carligit) : For much of the original flash that buildUI is based on.
 
-[zedor](https://github.com/zedor) : [CustomError]
+[zedor](https://github.com/zedor) : [CustomError](https://github.com/zedor/CustomError)
 
 [snippet](https://github.com/snipplets) : Dodgy maths, git conflicts and shipping content.

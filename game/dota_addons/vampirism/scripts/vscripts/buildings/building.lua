@@ -27,6 +27,14 @@ function TrainUnit( keys )
     end
   end
 
+  -- Adjust food and resource needs based off worker stacking.
+  if WORKER_STACKS[unitToSpawn] ~= nil then
+    print('has tacks')
+    if goldCost ~= nil then goldCost = goldCost * WORKER_STACKS[unitToSpawn] end
+    if woodCost ~= nil then woodCost = woodCost * WORKER_STACKS[unitToSpawn] end
+    if requestingFood ~= nil then requestingFood = requestingFood * WORKER_STACKS[unitToSpawn] end
+  end
+
   if goldCost ~= nil then
     if goldCost > GOLD[pID] then
       FireGameEvent('custom_error_show', {player_ID = pID, _error = 'Need more gold!'})
@@ -50,7 +58,7 @@ function TrainUnit( keys )
   end
 
   if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood and affordWood and affordGold then
-    if #building.queue < 7 then
+    if #building.queue < 6 then
       table.insert(building.queue, keys)
       ChangeGold(pID, -1 * goldCost)
       ChangeWood(pID, -1 * woodCost)
@@ -221,6 +229,9 @@ function FinishUpgrade( keys )
       TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood - UNIT_KV[pID][casterName].ProvidesFood
     else
       TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood
+      if TOTAL_FOOD[pID] > 250 then
+        TOTAL_FOOD[pID] = 250
+      end
     end
     FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
   end

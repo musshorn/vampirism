@@ -1035,7 +1035,7 @@
     "Ability4"          "worker_det"      // Ability 4.
     "Ability5"          "harvest_indicator"      // Ability 5.
     "Ability6"          "find_lumber"      // Ability 6 - Extra.
-    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
     "AbilityLayout"     "6"
     // Armor
@@ -5095,6 +5095,8 @@
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
+    "Ability1"                  "tower_cripple_active"
+
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"             "30"     // Physical protection.
@@ -5102,7 +5104,7 @@
 
     //Attack
     //----------------------------------------------------------------
-    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
     "AttackDamageMin"           "15000"
     "AttackDamageMax"           "15000"
     "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
@@ -5127,10 +5129,10 @@
 
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"              "3500"   // Base health.
-    "StatusHealthRegen"         "500"   // Health regeneration rate.
-    "StatusMana"                "0"      // Base mana.
-    "StatusManaRegen"           "0"     // Mana regeneration rate.
+    "StatusHealth"              "5000"   // Base health.
+    "StatusHealthRegen"         "50"   // Health regeneration rate.
+    "StatusMana"                "1000"      // Base mana.
+    "StatusManaRegen"           "2.5"     // Mana regeneration rate.
 
     // Team
     //----------------------------------------------------------------

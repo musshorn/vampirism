@@ -36,12 +36,15 @@ ENABLE_TOWER_BACKDOOR_PROTECTION = false-- Should we enable backdoor protection 
 REMOVE_ILLUSIONS_ON_DEATH = false       -- Should we remove all illusions if the main hero dies?
 DISABLE_GOLD_SOUNDS = false             -- Should we disable the gold sound when players get gold?
 
-END_GAME_ON_KILLS = false                -- Should the game end after a certain number of kills?
+END_GAME_ON_KILLS = false               -- Should the game end after a certain number of kills?
 KILLS_TO_END_GAME_FOR_TEAM = 50         -- How many kills for a team should signify an end of game?
 
 USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom levels?
-MAX_LEVEL = 200                          -- What level should we let heroes get to?
+MAX_LEVEL = 200                         -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
+
+WORKER_FACTOR = 4                       -- How many workers does a single worker count for. This can only be set once.
+FACTOR_SET = false
 
 GOLD = {}
 WOOD = {}
@@ -80,6 +83,15 @@ for i = -1, 9 do
 	VAMPIRE_FEED[i] = 0
   AVERNALS[i] = {}
 end
+
+-- Default worker stacking factors.
+WORKER_STACKS = {
+  worker_t1 = 4,
+  worker_t2 = 2,
+  worker_t3 = 1,
+  worker_t4 = 1,
+  worker_t5 = 1
+}
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
@@ -170,6 +182,8 @@ function GameMode:OnAllPlayersLoaded()
       end
     end
   end
+
+  GameRules:SendCustomMessage("By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here - ", 0, 1)
 end
 
 --[[
@@ -302,6 +316,9 @@ function GameMode:OnGameRulesStateChange(keys)
     end
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
     GameMode:OnGameInProgress()
+    if HOST_LOW_BANDWIDTH == nil then
+      HOST_LOW_BANDWIDTH = false
+    end
   end
 end
 
@@ -320,7 +337,7 @@ function GameMode:OnNPCSpawned(keys)
       WOOD[playerID] = 10000000 --cheats, real is 50.
       GOLD[playerID] = 0 --this is how it should look on ship.
       GOLD[playerID] = 10000000
-      TOTAL_FOOD[playerID] = 15
+      TOTAL_FOOD[playerID] = 20
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
       UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
@@ -1277,6 +1294,26 @@ function GameMode:OnPlayerSay(keys)
 
   if string.find(msg, "-disallow") ~= nil then
     Bases:HandleChat(keys)
+  end
+
+  if string.find(msg, "-wf") ~= nil and player == GetListenServerHost() and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS and FACTOR_SET ~= true then
+    local chat = ParseChat(keys)
+
+    WORKER_FACTOR = string.gsub(chat[2], '%D', '')
+
+    for i = 1, 5 do
+      local tier = i - 1
+      local workerFactor = WORKER_FACTOR / math.pow(2, tier)
+
+      if workerFactor < 1 then
+        workerFactor = 1
+      end
+
+      workerFactor = math.floor(workerFactor)
+
+      WORKER_STACKS[i] = workerFactor
+    end
+    FACTOR_SET = true
   end
 end
 

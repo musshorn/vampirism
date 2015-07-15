@@ -295,6 +295,24 @@
     }
   }
 
+  //===================================================================
+  // Worker Stack
+  //===================================================================
+  "worker_stack"
+  {
+    "BaseClass"                  "ability_datadriven"
+    "AbilityBehavior"            "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+    "Modifiers"
+    {
+      "modifier_worker_stack"
+      {
+        "Passive"       "0"
+        "IsHidden"      "0"   
+      }
+    }
+  }
+
   "spawn_worker_t1"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
@@ -7243,6 +7261,57 @@
         {
           "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "-20"
           "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "-20"
+        }
+      }
+    }
+  }
+
+  //======================================================
+  // Cripple tower active
+  //======================================================
+  "tower_cripple_active"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetType" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "BaseClass" "ability_datadriven"
+    "AbilityCastPoint"  "0"
+    "AbilityCastRange"        "1000"
+    "AbilityTextureName"    "skywrath_mage_concussive_shot"
+    "AbilityManaCost"       "250"
+    "AbilityCooldown"       "60"
+
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_cripple"
+        "Target"     "TARGET"
+        "Duration"    "10"
+      }
+      "RunScript"
+      {
+        "ScriptFile"  "abilities.lua"
+        "Function"    "CrippleAttackSpeed"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_cripple"
+      {
+        "Passive"       "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "1"
+    
+        "EffectName"        "particles/items2_fx/rod_of_atos.vpcf"
+        "EffectAttachType"  "follow_origin"
+    
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "-25"
+          //"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "-50"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-25" 
         }
       }
     }

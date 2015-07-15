@@ -237,22 +237,55 @@ function WorkerDet( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
 
-  -- Tidy up the Timers
-  if caster.moveTimer ~= nil then 
-    Timers:RemoveTimer(caster.moveTimer)
-  end
+  if caster:HasModifier('modifier_worker_stack') then
+    local stackAbility = caster:FindAbilityByName('worker_stack') 
+    local stacks = caster:GetModifierStackCount("modifier_worker_stack", stackAbility)
 
-  -- Refund any food if any
-  if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
-    local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
-      CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
-      FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+    if stacks > 1 then
+      -- Refund any food if any
+      if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
+        local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
+        CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
+        FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+        caster:SetModifierStackCount('modifier_worker_stack', stackAbility, stacks - 1)
+        return
+      end
+    else
+      -- Tidy up the Timers
+      if caster.moveTimer ~= nil then 
+        Timers:RemoveTimer(caster.moveTimer)
+      end
+    
+      -- Refund any food if any
+      if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
+        local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
+          CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
+          FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+      end
+    
+      Timers:CreateTimer(0.03, function ()
+        caster:Destroy()
+        return nil
+      end)
+    end
+  else
+    -- Tidy up the Timers
+    if caster.moveTimer ~= nil then 
+      Timers:RemoveTimer(caster.moveTimer)
+    end
+  
+    -- Refund any food if any
+    if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
+      local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
+        CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
+        FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+    end
+  
+    Timers:CreateTimer(0.03, function ()
+      caster:Destroy()
+      return nil
+    end)
   end
-
-  Timers:CreateTimer(0.03, function ()
-    caster:Destroy()
-    return nil
-  end)
 end
 
 function BuildingQ( keys )
@@ -447,4 +480,9 @@ function AmbientParticles( keys )
     local ambient = ParticleManager:CreateParticle(particle, PATTACH_POINT_FOLLOW, tower)
     ParticleManager:SetParticleControlEnt(ambient, 0, tower, PATTACH_POINT_FOLLOW, "attach_attack1", towerPos, true)
   end
+end
+
+function CrippleAttackSpeed( keys )
+  local caster = keys.caster
+  local target = keys.target
 end
