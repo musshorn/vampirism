@@ -9822,4 +9822,39 @@
     "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_1"
     "AbilityManaCost" "1"
   }
+
+  "operations_particles"
+  {
+    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetType"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "BaseClass"                 "ability_datadriven"
+
+    "precache"
+    {
+      "particle"  "particles/radiant_fx2/good_ancient001_ambient.vpcf"
+    }
+
+    "Modifiers"
+    {
+      "modifier_operations_particles"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+    
+        "OnCreated"
+        {
+          "AttachEffect"
+          {
+            "EffectName"        "particles/radiant_fx2/good_ancient001_ambient.vpcf"
+            "EffectAttachType"  "start_at_customorigin"
+            "Target"            "CASTER"
+            "ControlPointEntities"
+            {
+              "CASTER"  "attach_fx"
+            }
+          }
+        }
+      }
+    }
+  }
 }

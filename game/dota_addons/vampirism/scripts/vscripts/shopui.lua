@@ -144,7 +144,6 @@ function Purchase( itemname, buyer )
   local isRecipe = false
 
   if string.find(itemname, 'recipe') then
-    print('ITS A RECIPE FOR DISASTER')
     isRecipe = true
   end
 
