@@ -189,6 +189,14 @@ function Purchase( itemname, buyer )
               index = k
             end
           end
+
+          if shop:GetUnitName() ~= 'vampire_shop' then
+            local hasTech = TechTree:GetRequired(itemname, playerID, shop:GetUnitName(), "item")
+            if not hasTech then
+              FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Shop owner is missing tech!" } )
+              return
+            end
+          end
   
           --check stock, handle recipies
           if SHOPS[shopIndex][index]['stock'] > 0 then
