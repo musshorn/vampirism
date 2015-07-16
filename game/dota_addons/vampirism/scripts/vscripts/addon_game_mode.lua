@@ -80,6 +80,8 @@ function Precache( context )
 		PrecacheResource("particle", "particles/econ/items/puck/puck_alliance_set/puck_base_attack_aproset.vpcf", context)
 		PrecacheResource("particle", "particles/world_environmental_fx/fire_torch.vpcf", context)
 		PrecacheResource("particle", "particles/items2_fx/rod_of_atos.vpcf", context)
+		PrecacheResource("particle", "particles/neutral_fx/thunderlizard_base_attack.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_jakiro/jakiro_base_attack_fire.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
@@ -154,6 +156,8 @@ function Precache( context )
 		PrecacheModel("models/chinese_lantern001_reference.vmdl", context)
 		PrecacheModel("models/gold_mine_3.vmdl", context)
 		PrecacheModel("models/gold_mine_4.vmdl", context)
+		PrecacheModel("models/dire_ward_eye_reference.vmdl", context)
+		PrecacheModel("models/d2lp_4_ward_reference.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)
