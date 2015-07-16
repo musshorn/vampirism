@@ -535,6 +535,7 @@ function InitializeBuilder( builder )
         local testLocation = Vector(x, y, location.z)
         if GridNav:IsBlocked(testLocation) or GridNav:IsTraversable(testLocation) == false then
           if callbacks.onConstructionFailed ~= nil then
+            local work = builder.work
             callbacks.onConstructionFailed(work)
           end
           return
@@ -547,6 +548,7 @@ function InitializeBuilder( builder )
         local testLocation = Vector(x, y, location.z)
          if GridNav:IsBlocked(testLocation) or GridNav:IsTraversable(testLocation) == false then
           if callbacks.onConstructionFailed ~= nil then
+            local work = builder.work
             callbacks.onConstructionFailed(work)
           end
           return
