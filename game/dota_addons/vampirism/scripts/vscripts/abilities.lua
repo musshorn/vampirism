@@ -135,17 +135,6 @@ function build( keys )
   end)
 
   keys:OnConstructionFailed(function( unit )
-    local lumberCost = unit.buildingTable.LumberCost
-    local goldCost = unit.buildingTable.GoldCost
-
-    if lumberCost ~= nil then
-      ChangeWood(pID, lumberCost)
-    end
-
-    if goldCost ~= nil then
-      ChangeGold(pID, goldCost)
-    end
-
   end)
 
   --[[keys:OnCanceled(function()
