@@ -119,6 +119,7 @@
 			"stock"			"1"
 			"stocktime"		"420"
 			"index"			"7"
+			"unlocktime"	"900"
 		}
 		"item_pulse_staff"					
 		{
@@ -140,6 +141,7 @@
 			"stock"			"1"
 			"stocktime"		"30"
 			"index"			"10"
+			"unlocktime"	"660"
 		}
 		"item_rod_teleportation"			
 		{
@@ -154,6 +156,7 @@
 			"stock"			"1"
 			"stocktime"		"60"
 			"index"			"12"
+			"unlocktime"	"1500"
 		}
 		"hire_assassin"				
 		{
@@ -175,6 +178,7 @@
 			"stock"			"1"
 			"stocktime"		"420"
 			"index"			"15"
+			"unlocktime"	"720"
 		}
 		"item_burst_gem"					
 		{
@@ -213,9 +217,9 @@
 		}
 		"hire_french_man"					
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"3"
+			"stock"			"3"
+			"stocktime"		"30"
 			"index"			"21"
 		}
 		"item_claws_dreadlord"				
@@ -229,8 +233,9 @@
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"180"
 			"index"			"23"
+			"unlocktime"	"720"
 		}
 		"item_silent_whisper"				
 		{
@@ -238,6 +243,7 @@
 			"stock"			"1"
 			"stocktime"		"120"
 			"index"			"24"
+			"unlocktime"	"720"	
 		}
 		"item_refresh_potion"
 		{
@@ -308,6 +314,7 @@
 			"stock"			"1"
 			"stocktime"		"60"
 			"index"			"34"
+			"unlocktime"	"900"
 		}
 		"item_recipe_ricochet_gem"			
 		{
@@ -315,6 +322,7 @@
 			"stock"			"1"
 			"stocktime"		"120"
 			"index"			"35"
+			"unlocktime"	"900"
 		}
 		"item_gauntlets_underworld"			
 		{
@@ -322,6 +330,7 @@
 			"stock"			"1"
 			"stocktime"		"120"
 			"index"			"36"
+			"unlocktime"	"2100"
 		}
 		"item_gauntlets_hellfire"
 		{
@@ -329,6 +338,7 @@
 			"stock"			"1"
 			"stocktime"		"180"
 			"index"			"37"
+			"unlocktime"	"2100"
 		}		
 	}	
 }

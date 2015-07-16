@@ -27,6 +27,9 @@
     "StatusHealth"        "600"
     "StatusHealthRegen"        "10"
     "AttributeBaseStrength"   "0"
+    "AttributeBaseAgility"    "0"
+    "AttributeBaseIntelligence" "0"
+    "StatusMana"        "10"
     "StatusManaRegen"     "0.5"
     "AbilityLayout"       "5"
 

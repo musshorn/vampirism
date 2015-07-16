@@ -27,12 +27,17 @@ function ShopUI:Init()
                 end
               end             
             end
-            for k, v in pairs(SHOPS[shopIndex]) do
-              --only sending the timer of the TOP item in the queue, not the queue itself.
-              --player owning shop has needed tech
-              local hasTech = TechTree:GetRequired(v['name'], shop:GetMainControllingPlayer(), shopName, "item")
-              print(hasTech)
-              FireGameEvent('shop_preload', {player_ID = playerID, shop_index = shopIndex, shop_type = shopName, item_name = v['name'], item_stock = v['stock'], item_time = v['queue'][0], item_index = k, has_tech = hasTech})
+            if shopName ~= 'vampire_shop' then
+              for k, v in pairs(SHOPS[shopIndex]) do
+                --only sending the timer of the TOP item in the queue, not the queue itself.
+                --player owning shop has needed tech
+                local hasTech = TechTree:GetRequired(v['name'], shop:GetMainControllingPlayer(), shopName, "item")
+                FireGameEvent('shop_preload', {player_ID = playerID, shop_index = shopIndex, shop_type = shopName, item_name = v['name'], item_stock = v['stock'], item_time = v['queue'][0], item_index = k, has_tech = hasTech})
+              end
+            else
+              for k,v in pairs(SHOPS[shopIndex]) do
+                FireGameEvent('shop_preload', {player_ID = playerID, shop_index = shopIndex, shop_type = shopName, item_name = v['name'], item_stock = v['stock'], item_time = v['queue'][0], item_index = k, has_tech = true})
+              end
             end
         		FireGameEvent('shop_open', {player_ID = playerID, shop_type = shopName, shop_user = tonumber(p), shop_index = shopIndex})
             Timers:CreateTimer(function ()
@@ -61,12 +66,31 @@ function ShopUI:Init()
   	end, "user purchases an item", 0)
 end
 
+-- Add stock delay to vampire items.
 function ShopUI:InitVampShop( vampshop )
+  print('making vamp shop')
   local shopIndex = vampshop:entindex()
   local shopName = vampshop:GetUnitName()
 
+  SHOPS[shopIndex] = {}
+  print(shopIndex, 'VAMP SHOP INDEX')
+
   for k, v in pairs(SHOP_KV[shopName]) do
     local index = v['index']
+    SHOPS[shopIndex][index] = {}
+    SHOPS[shopIndex][index]['name'] = k
+    SHOPS[shopIndex][index]['stock'] = v['initstock']
+    SHOPS[shopIndex][index]['queue'] = {}
+    SHOPS[shopIndex][index]['stocktime'] = v['stocktime']
+    SHOPS[shopIndex][index]['unlocktime'] = v['unlocktime']
+    if SHOPS[shopIndex][index]['unlocktime'] ~= nil then
+      print('this item unlcoks delayed', k)
+      SHOPS[shopIndex][index]['stock'] = 0
+      table.insert(SHOPS[shopIndex][index]['queue'], SHOPS[shopIndex][index]['unlocktime'])
+    end
+    for i = -1, 10 do
+      FireGameEvent('shop_preload', {player_ID = i, shop_index = shopIndex, shop_type = shopName, item_name = k, item_stock = SHOPS[shopIndex][index]['stock'], item_time = SHOPS[shopIndex][index]['queue'][0], item_index = v['index'], has_tech = true})
+    end
   end
 end
 
@@ -214,7 +238,7 @@ function ShopUI:ProcessQueues()
         --for each item in shop
         for index, item in pairs(v) do
           --if a queue exists
-          if table.getn(item['queue']) > 0 then
+          if #item['queue'] > 0 then
             for qIndex, qTime in pairs(item['queue']) do
               if item['queue'][qIndex] > 0 then
                 --lower that timer
