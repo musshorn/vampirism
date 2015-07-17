@@ -2080,6 +2080,8 @@
     "Ability7"                  "t4_worker_training"               // Ability 7 - Extra.
     "Ability8"                  "t5_worker_training"               // Ability 8 - Extra.
     "Ability9"                  "build_cancel"
+    "Ability10"                  "build_blocked"
+    "Ability11"                  "build_blocked2"
 
     "AbilityHolder"          "17"
 
@@ -2787,7 +2789,7 @@
     "BountyGoldMax"             "60"
 
     "IsTech"        "true"
-    "NeedTech"      "house_t1"
+    "NeedTech"      "human_vault"
     "RepairTime"  "20"
   }
 
@@ -2877,7 +2879,7 @@
     "BountyGoldMax"             "10"
 
     "IsTech"        "true"
-    "NeedTech"      "house_t1"
+    "NeedTech"      "human_vault"
     "RepairTime"  "10"
   }
 
@@ -2969,6 +2971,7 @@
     "IsTech"        "true"
     "NeedTech"      "house_t1"
     "RepairTime"  "35"
+    "NeedTec"       "human_vault"
   }
 
   
@@ -3611,7 +3614,7 @@
     "Ability4"          "worker_det"      // Ability 4.
     "Ability5"          "worker_debug"      // Ability 5.
     "Ability6"          "find_lumber"      // Ability 6 - Extra.
-    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
     "AbilityLayout"     "5"
     // Armor
@@ -3698,7 +3701,7 @@
     "Ability4"          "worker_det"      // Ability 4.
     "Ability5"          "worker_debug"      // Ability 5.
     "Ability6"          "find_lumber"      // Ability 6 - Extra.
-    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
     "AbilityLayout"     "5"
     // Armor
@@ -4200,7 +4203,7 @@
     "Ability4"          "worker_det"     
     "Ability5"          "worker_debug"   
     "Ability6"          "find_lumber"    
-    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
 
     // Armor
@@ -4290,7 +4293,7 @@
     "Ability4"          "worker_det"     
     "Ability5"          "worker_debug"   
     "Ability6"          "find_lumber"    
-    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
     "Ability8"          ""      // Ability 8 - Extra.
 
     // Armor
@@ -5153,6 +5156,7 @@
     "BountyGoldMin"             "50"
     "BountyGoldMax"             "50"
     "RepairTime"  "25"
+    "NeedTech"                  "citadel_of_faith"
   }
 
   //================================================================================= 
@@ -5369,6 +5373,7 @@
     "BountyGoldMin"             "1000"
     "BountyGoldMax"             "1000"
     "RepairTime"  "25"
+    "NeedTech"                  "command_center"
   }
   
   //================================================================================= 
@@ -5509,7 +5514,7 @@
     "BountyXP"                  "25"
     "BountyGoldMin"             "200"
     "BountyGoldMax"             "200"
-
+    "NeedTech"                  "command_center"
     "RepairTime"  "25"
   }
 
@@ -5614,6 +5619,7 @@
     "BountyGoldMax"             "250"
 
     "RepairTime"  "120"
+    "NeedTech"    "citadel_of_faith"
     "SpawnsUnits" "true"
   }
 
@@ -5719,6 +5725,7 @@
     "BountyGoldMax"             "500"
 
     "RepairTime"  "65"
+    "NeedTech"          "command_center"
     "SpawnsUnits" "true"
   }
 
