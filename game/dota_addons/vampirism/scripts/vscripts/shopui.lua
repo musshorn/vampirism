@@ -32,6 +32,7 @@ function ShopUI:Init()
                 --only sending the timer of the TOP item in the queue, not the queue itself.
                 --player owning shop has needed tech
                 local hasTech = TechTree:GetRequired(v['name'], shop:GetMainControllingPlayer(), shopName, "item")
+                if hasTech ~= true then hasTech = false
                 FireGameEvent('shop_preload', {player_ID = playerID, shop_index = shopIndex, shop_type = shopName, item_name = v['name'], item_stock = v['stock'], item_time = v['queue'][0], item_index = k, has_tech = hasTech})
               end
             else
@@ -192,7 +193,7 @@ function Purchase( itemname, buyer )
 
           if shop:GetUnitName() ~= 'vampire_shop' then
             local hasTech = TechTree:GetRequired(itemname, playerID, shop:GetUnitName(), "item")
-            if not hasTech then
+            if hasTech ~= true then
               FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Shop owner is missing tech!" } )
               return
             end

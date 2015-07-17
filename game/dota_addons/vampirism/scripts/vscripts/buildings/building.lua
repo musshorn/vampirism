@@ -153,9 +153,10 @@ function Upgrade( keys )
     canUpgrade = false
   end
 
-  if TechTree:GetRequired(targetUnit, pID, caster:GetUnitName(), "building") == false then
+  local hasTech = TechTree:GetRequired(targetUnit, pID, caster:GetUnitName(), "building")
+  if hasTech ~= true then
     caster:Stop()
-    FireGameEvent('custom_error_show', {player_ID = pID, _error = "You are missing tech for this!"})
+    FireGameEvent('custom_error_show', {player_ID = pID, _error = "You are missing "..hasTech.."!"})
     canUpgrade = false
   end
 
