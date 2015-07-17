@@ -7632,11 +7632,6 @@
         "Target"     "TARGET"
         "Duration"    "10"
       }
-      "RunScript"
-      {
-        "ScriptFile"  "abilities.lua"
-        "Function"    "CrippleAttackSpeed"
-      }
     }
 
     "Modifiers"
@@ -7653,7 +7648,7 @@
         "Properties"
         {
           "MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "-25"
-          //"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "-50"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "-100"
           "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-25" 
         }
       }

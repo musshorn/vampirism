@@ -470,8 +470,3 @@ function AmbientParticles( keys )
     ParticleManager:SetParticleControlEnt(ambient, 0, tower, PATTACH_POINT_FOLLOW, "attach_attack1", towerPos, true)
   end
 end
-
-function CrippleAttackSpeed( keys )
-  local caster = keys.caster
-  local target = keys.target
-end

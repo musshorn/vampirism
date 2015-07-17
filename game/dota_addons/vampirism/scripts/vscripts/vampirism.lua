@@ -185,6 +185,14 @@ function GameMode:OnAllPlayersLoaded()
   end
 
   GameRules:SendCustomMessage("By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here - ", 0, 1)
+  Timers:CreateTimer(10, function (  )
+    if not FACTOR_SET and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+      GameRules:SendCustomMessage("The host has not set a worker factor. By default a single tier 1 worker represents 4 workers. To change this setting the host may use -wf (number) to ignore type -ok or read about -wf here - ", 0, 1)
+      return 10
+    else
+      return nil
+    end
+  end)
 end
 
 --[[
@@ -338,9 +346,9 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
     npc:FindAbilityByName("human_repair"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 50 --cheats, real is 50.
+      WOOD[playerID] = 10000000 --cheats, real is 50.
       GOLD[playerID] = 0 --this is how it should look on ship.
-      GOLD[playerID] = 0
+      GOLD[playerID] = 10000000
       TOTAL_FOOD[playerID] = 20
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -1275,12 +1283,11 @@ function AutoGoldTimer()
         ChangeGold(v:GetMainControllingPlayer(), 25)
       end
     end
-    if time == 20 then
+    if time == 720 then
       for k, v in pairs(VAMPIRES) do
         ChangeGold(v:GetMainControllingPlayer(), 100)
       end
       for k, v in pairs(HUMANS) do
-        print('got geld')
         ChangeGold(v:GetMainControllingPlayer(), 2)
       end
     end
@@ -1345,6 +1352,10 @@ function GameMode:OnPlayerSay(keys)
 
       WORKER_STACKS[i] = workerFactor
     end
+    FACTOR_SET = true
+  end
+
+  if string.find(msg, "-ok") ~= nil and player == GetListenServerHost() and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS and FACTOR_SET ~= true then
     FACTOR_SET = true
   end
 end
