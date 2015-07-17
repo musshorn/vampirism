@@ -1890,7 +1890,7 @@
 
     "Ability1"          "heal_tower_heal_beam" //Human test
     "Ability2"          "heal_tower_heal_aura"          // Ability 2.
-    "Ability3"          ""          // Ability 3.
+    "Ability3"          "upgrade_to_heal_wall_t2"          // Ability 3.
     "Ability4"          ""          // Ability 4.
     "Ability5"          ""          // Ability 5.
     "Ability6"          ""          // Ability 6 - Extra.
@@ -1899,7 +1899,7 @@
 
     // Armor
     //----------------------------------------------------------------
-    "ArmorPhysical"       "0"     // Physical protection.
+    "ArmorPhysical"       "75"     // Physical protection.
     "MagicalResistance"     "0"     // Magical protection.
 
 
@@ -1937,8 +1937,8 @@
     //----------------------------------------------------------------
     "StatusHealth"        "500"   // Base health.
     "StatusHealthRegen"     "0"   // Health regeneration rate.
-    "StatusMana"        "120"     // Base mana.
-    "StatusManaRegen"     "-0.01"     // Mana regeneration rate.
+    "StatusMana"        "1000"     // Base mana.
+    "StatusManaRegen"     "10"     // Mana regeneration rate.
 
     // Team
     //----------------------------------------------------------------
@@ -1946,6 +1946,12 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1600"      // Range of vision during day light.
+    "VisionNighttimeRange"      "1000"      // Range of vision at night time.
+
 
 
     // Bounty
@@ -1965,6 +1971,102 @@
     //will be hidden passives.)
     //note - we need to put the ability that gets channeled in here, not the tech modifier. this is because
     //the ability is what is tracked by techtrees, not the modifier.
+    "TechModifiers"
+    {
+        "1"             "research_healing_vitality"
+    }
+  }
+
+  //================================================================================= 
+  // Super Wall of Healing
+  //=================================================================================
+  "heal_wall_t2"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"         "npc_dota_creature"
+    "Model"             "models/items/juggernaut/ward/healing_gills_of_the_lost_isles/healing_gills_of_the_lost_isles.vmdl"
+    "ModelScale"        "1"
+    
+    "ConsideredHero"      "0"
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"          "heal_tower_heal_beam" //Human test
+    "Ability2"          "heal_tower_heal_aura"          // Ability 2.
+    "Ability3"          ""          // Ability 3.
+    "Ability4"          ""          // Ability 4.
+    "Ability5"          ""          // Ability 5.
+    "Ability6"          ""          // Ability 6 - Extra.
+    "Ability7"          ""          // Ability 7 - Extra.
+    "Ability8"          "is_a_building"         // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "100"     // Physical protection.
+    "MagicalResistance"     "0"     // Magical protection.
+
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackDamageMin"     "0"
+    "AttackDamageMax"     "0"
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "0"
+    "AttackAnimationPoint"    "0"
+    "AttackAcquisitionRange"  "0"
+    "AttackRange"       "0"
+    "ProjectileModel"     ""
+    "ProjectileSpeed"     "0"
+
+    // Attributes
+    //----------------------------------------------------------------
+    "AttributeBaseIntelligence" "0"
+    "AttributeBaseIntelligenceGain" "0"
+  
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"     "170"
+    "RingRadius"        "50"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_NONE"     // Type of locomotion - ground, air
+    "MovementSpeed"       "300"   // Speed
+    "MovementTurnRate"      "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "1750"   // Base health.
+    "StatusHealthRegen"     "20"   // Health regeneration rate.
+    "StatusMana"        "1000"     // Base mana.
+    "StatusManaRegen"     "10"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1600"      // Range of vision during day light.
+    "VisionNighttimeRange"      "1000"      // Range of vision at night time.
+
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"          "25"
+    "BountyGoldMin"       "15"
+    "BountyGoldMax"       "15"
+
+    "IsTech"      "true"
+    "NeedTech"    "research_center_t2"
+    "RepairTime"  "20"
+
     "TechModifiers"
     {
         "1"             "research_healing_vitality"
@@ -3057,7 +3159,7 @@
 
     "IsTech"        "true"
     "NeedTech"      "command_center"
-    "RepairTime"  "30"
+    "RepairTime"    "30"
   }
 
   //================================================================================= 

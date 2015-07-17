@@ -2122,6 +2122,7 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"6"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "0.02"
 				}
 			}
 			"modifier_health_mod_2"
@@ -2133,6 +2134,7 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"12"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "0.04"
 				}
 			}
 			"modifier_health_mod_4"
@@ -2144,6 +2146,7 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"24"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "0.08"
 				}
 			}
 			"modifier_health_mod_8"
@@ -2155,6 +2158,7 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"48"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "0.16"
 				}
 			}
 			"modifier_health_mod_16"
@@ -2166,6 +2170,7 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"96"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "0.32"
 				}
 			}
 			"modifier_health_mod_32"
@@ -2177,6 +2182,7 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"192"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "0.64"
 				}
 			}
 			"modifier_health_mod_64"
@@ -2188,6 +2194,7 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"384"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "1.28"
 				}
 			}
 			"modifier_health_mod_128"
@@ -2199,6 +2206,7 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"768"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "2.56"
 				}
 			}
 			"modifier_health_mod_256"
@@ -2210,6 +2218,7 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"1536"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "5.12"
 				}
 			}
 			"modifier_health_mod_512"
@@ -2221,8 +2230,275 @@
 				{
 					// You may use "modifierProperty" completions within quotes here. Below is an example
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"3072"
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"  "10.24"
 				}
 			}
 		}
 	}
+  "item_agility_modifier"
+  {
+    "ID"              "2103"
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"           "item_datadriven"
+
+    "Modifiers"
+    {
+      "modifier_agility_mod_1"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "0.16"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "1"
+        }
+      }
+      "modifier_agility_mod_2"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "0.32"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "2"
+        }
+      }
+      "modifier_agility_mod_4"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "0.64"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "4"
+        }
+      }
+      "modifier_agility_mod_8"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "1.28"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "8"
+        }
+      }
+      "modifier_agility_mod_16"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "2.56"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "16"
+        }
+      }
+      "modifier_agility_mod_32"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "5.12"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "32"
+        }
+      }
+      "modifier_agility_mod_64"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "10.24"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "64"
+        }
+      }
+      "modifier_agility_mod_128"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "20.48"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "128"
+        }
+      }
+      "modifier_agility_mod_256"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "40.96"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "256"
+        }
+      }
+      "modifier_agility_mod_512"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"  "81.92"
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "512"
+        }
+      }
+    }
+  }
+
+  "item_intellect_modifier"
+  {
+    "ID"              "2104"
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"           "item_datadriven"
+
+    "Modifiers"
+    {
+      "modifier_intellect_mod_1"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "0.01"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "2"
+        }
+      }
+      "modifier_intellect_mod_2"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "0.02"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "4"
+        }
+      }
+      "modifier_intellect_mod_4"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "0.04"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "8"
+        }
+      }
+      "modifier_intellect_mod_8"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "0.08"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "16"
+        }
+      }
+      "modifier_intellect_mod_16"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "0.16"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "32"
+        }
+      }
+      "modifier_intellect_mod_32"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "0.32"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "64"
+        }
+      }
+      "modifier_intellect_mod_64"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "0.64"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "128"
+        }
+      }
+      "modifier_intellect_mod_128"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "1.28"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "256"
+        }
+      }
+      "modifier_intellect_mod_256"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "2.56"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "512"
+        }
+      }
+      "modifier_intellect_mod_512"
+      {
+        "Passive"             "1"
+        "IsHidden"        "1"  
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"  
+        "Properties"
+        {
+          // You may use "modifierProperty" completions within quotes here. Below is an example
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"  "5.12"
+          "MODIFIER_PROPERTY_MANA_BONUS"  "1024"
+        }
+      }
+    }
+  }
+
 }

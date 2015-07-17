@@ -160,6 +160,7 @@ function Precache( context )
 		PrecacheModel("models/gold_mine_4.vmdl", context)
 		PrecacheModel("models/dire_ward_eye_reference.vmdl", context)
 		PrecacheModel("models/d2lp_4_ward_reference.vmdl", context)
+		PrecacheModel("models/items/juggernaut/ward/healing_gills_of_the_lost_isles/healing_gills_of_the_lost_isles.vmdl", context)
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)

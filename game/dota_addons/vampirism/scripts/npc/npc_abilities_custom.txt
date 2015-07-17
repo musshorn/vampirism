@@ -6665,7 +6665,7 @@
       "02"
       {
         "var_type"  "FIELD_FLOAT"
-        "health_regen_amount" "22.0 22.0"
+        "health_regen_amount" "0.2 0.2"
       }
 
       "03"

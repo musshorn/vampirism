@@ -863,7 +863,7 @@ function GameMode:ModifyStatBonuses(unit)
     endTime = 0.25, 
     callback = function() 
       -- ================================== 
-      -- Adjust health based on strength 
+      -- Adjust health, regen based on strength 
       -- ================================== 
 
       -- Get player strength 
@@ -905,7 +905,96 @@ function GameMode:ModifyStatBonuses(unit)
         healthUpdater = nil 
       end 
       -- Updates the stored strength bonus value for next timer cycle 
-      spawnedUnitIndex.strBonus = spawnedUnitIndex:GetStrength() 
+      spawnedUnitIndex.strBonus = spawnedUnitIndex:GetStrength()
+      -- ================================== 
+      -- Adjust armor, attack speed based on agility 
+      -- ================================== 
+
+      -- Get player agility 
+      local agility = spawnedUnitIndex:GetAgility() 
+
+      --Check if agiBonus is stored on hero, if not set it to 0 
+      if spawnedUnitIndex.agiBonus == nil then 
+        spawnedUnitIndex.agiBonus = 0 
+      end 
+
+      -- If player agility is different this time around, start the adjustment 
+      if agility ~= spawnedUnitIndex.agiBonus then 
+        -- Modifier values 
+        local bitTable = {512,256,128,64,32,16,8,4,2,1} 
+
+        -- Gets the list of modifiers on the hero and loops through removing and health modifier 
+        local modCount = spawnedUnitIndex:GetModifierCount() 
+        for i = 0, modCount do 
+          for u = 1, #bitTable do 
+            local val = bitTable[u] 
+            if spawnedUnitIndex:GetModifierNameByIndex(i) == "modifier_agility_mod_" .. val  then 
+              spawnedUnitIndex:RemoveModifierByName("modifier_agility_mod_" .. val) 
+            end 
+          end 
+        end 
+         
+        -- Creates temporary item to steal the modifiers from 
+        local agiUpdater = CreateItem("item_agility_modifier", nil, nil)  
+        for p=1, #bitTable do 
+          local val = bitTable[p] 
+          local count = math.floor(agility / val) 
+          if count >= 1 then 
+            agiUpdater:ApplyDataDrivenModifier(spawnedUnitIndex, spawnedUnitIndex, "modifier_agility_mod_" .. val, {}) 
+            agility = agility - val 
+          end 
+        end 
+        -- Cleanup 
+        UTIL_RemoveImmediate(agiUpdater) 
+        agiUpdater = nil 
+      end 
+      -- Updates the stored agility bonus value for next timer cycle 
+      spawnedUnitIndex.agiBonus = spawnedUnitIndex:GetAgility()
+
+      -- ================================== 
+      -- Adjust mana regen, mana based on intellect 
+      -- ================================== 
+
+      -- Get player intellect 
+      local intellect = spawnedUnitIndex:GetIntellect() 
+
+      --Check if intBonus is stored on hero, if not set it to 0 
+      if spawnedUnitIndex.intBonus == nil then 
+        spawnedUnitIndex.intBonus = 0 
+      end 
+
+      -- If player intellect is different this time around, start the adjustment 
+      if intellect ~= spawnedUnitIndex.intBonus then 
+        -- Modifier values 
+        local bitTable = {512,256,128,64,32,16,8,4,2,1} 
+
+        -- Gets the list of modifiers on the hero and loops through removing and health modifier 
+        local modCount = spawnedUnitIndex:GetModifierCount() 
+        for i = 0, modCount do 
+          for u = 1, #bitTable do 
+            local val = bitTable[u] 
+            if spawnedUnitIndex:GetModifierNameByIndex(i) == "modifier_intellect_mod_" .. val  then 
+              spawnedUnitIndex:RemoveModifierByName("modifier_intellect_mod_" .. val) 
+            end 
+          end 
+        end 
+         
+        -- Creates temporary item to steal the modifiers from 
+        local intUpdater = CreateItem("item_intellect_modifier", nil, nil)  
+        for p=1, #bitTable do 
+          local val = bitTable[p] 
+          local count = math.floor(intellect / val) 
+          if count >= 1 then 
+            intUpdater:ApplyDataDrivenModifier(spawnedUnitIndex, spawnedUnitIndex, "modifier_intellect_mod_" .. val, {}) 
+            intellect = intellect - val 
+          end 
+        end 
+        -- Cleanup 
+        UTIL_RemoveImmediate(intUpdater) 
+        intUpdater = nil 
+      end 
+      -- Updates the stored intellect bonus value for next timer cycle 
+      spawnedUnitIndex.intBonus = spawnedUnitIndex:GetIntellect()
       return 0.25 
     end 
   }) 

@@ -63,7 +63,7 @@
     "Ability7"            "vampire_init_hider"
     "Ability8"            "vampire_particles"
     //"Ability8"          "vampire_cyka_speed"
-    "Level"               "1"
+    "Level"               "3"
     "ConsideredHero"      "1"
     "NewHero"         "0"
     "TeamName"          "DOTA_TEAM_BADGUYS"
