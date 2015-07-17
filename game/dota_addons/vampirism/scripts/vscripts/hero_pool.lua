@@ -1,12 +1,17 @@
+if SlayerPool == nil then
+  SlayerPool = {}
+end
+
 Slayers_list = {}
 
-function Activate()
+function SlayerPool:ActivatePool()
   Timers:CreateTimer(0, --Start the timer for the slayer leveling pool
     function()
-      for i=0, 9 do
+      for i=-1, 9 do
         if PlayerResource:GetTeam(i) == DOTA_TEAM_GOODGUYS then
           if Slayers_list[i] ~= nil then
-            Slayers_list[i]:HeroLevelUp(true)
+            Slayers_list[i]:HeroLevelUp()
+            print('level slayer')
           end
         end
       end
@@ -16,6 +21,7 @@ function Activate()
 end
 
 function OnStartTouch( trigger )
+  print('in pool')
   if trigger.activator:GetName() == "npc_dota_hero_Invoker" then
     Slayers_list[trigger.activator:GetMainControllingPlayer()] = trigger.activator
   end

@@ -24,6 +24,7 @@ require('notifications')
 require('Bases')
 require('units.avernal')
 require('util.abilitynames')
+require('hero_pool')
 
 function Precache( context )
 		--[[

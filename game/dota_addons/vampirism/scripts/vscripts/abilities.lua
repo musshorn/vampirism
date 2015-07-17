@@ -7,7 +7,7 @@ function build( keys )
   local buildName = ABILITY_KV[keys.ability:GetAbilityName()][UnitName]
   --print("CALLED THE BUILD")
   if buildName ~= nil then
-    if TechTree:GetRequired(buildName, pID, caster:GetUnitName(), "building") == false then
+    if TechTree:GetRequired(buildName, pID, caster:GetUnitName(), "building") ~= true then
       return
     end
   end

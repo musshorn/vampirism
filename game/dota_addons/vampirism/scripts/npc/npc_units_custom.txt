@@ -1084,7 +1084,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "25"
+    "BountyXP"            "25"
     "BountyGoldMin"       "2"
     "BountyGoldMax"       "2"
 

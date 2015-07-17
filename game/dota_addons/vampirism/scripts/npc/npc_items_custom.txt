@@ -21,6 +21,7 @@
 		"ItemStackable"	"1"
 		"ItemInitialCharges"	"1"
 		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
+    "GoldCost"      "2"
 		"AbilitySpecial"
 		{
 			"01"
@@ -49,7 +50,7 @@
 					"Types"	"DOTA_UNIT_TARGET_ALL"
 				}
 
-				"ModifierName"	"item_kata_InvulnerablBottle_M"
+				"ModifierName"	"modifier_beast_scroll_buff"
 			}
 
 			"SpendCharge"
@@ -60,9 +61,8 @@
 
 		"Modifiers"
 		{
-			"item_kata_InvulnerablBottle_M"
+			"modifier_beast_scroll_buff"
 			{
-				"TextureName"	"item_kata_InvulnerablBottle"
 				"IsHidden"	"0"
 				"Passive"	"0"
 				"Duration"	"%duration"
@@ -72,11 +72,8 @@
 				{
 					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"	"%damageout"
 				}
-
 			}
-
 		}
-
 	}
 
 	//================================================================================= 
@@ -90,6 +87,7 @@
 		"AbilityTextureName"	"item_wraith_band"
 		"ItemQuality"	"rare"
 		"ItemDeclarations"	"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+    "GoldCost"      "210"
 		"Modifiers"
 		{
 			"modifier_item_dracula_helm"
@@ -101,7 +99,6 @@
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"3000"
 					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"300"
 				}
-
 			}
 		}
 	}
@@ -117,6 +114,7 @@
 		"AbilityTextureName"	"item_vladmir"
 		"ItemQuality"	"rare"
 		"ItemDeclarations"	"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS"
+    "GoldCost"        "850"
 		"Modifiers"
 		{
 			"item_demonic_stats"
@@ -223,7 +221,8 @@
 		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"	"0"
 		"ItemInitialCharges"	"1"
-		"AbilityCooldown"   "1"	
+		"AbilityCooldown"   "1"
+    "GoldCost"          "100"	
 
 		"AbilitySpecial"
 		{
@@ -264,6 +263,7 @@
 		"AbilityCastRange"				"0"
 		"AbilityCastPoint"				"0.3"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
+    "GoldCost"              "800"
 		"OnSpellStart"
 		{	
 			"RunScript"

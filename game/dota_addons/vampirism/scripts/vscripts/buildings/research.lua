@@ -34,6 +34,7 @@ function Research( keys )
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
   FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
+  print('ui hide on ', pID)
 
   -- Find all other buildings with this ability, hide it on those too. (only checking abilityholders. (which all research buildings are using at this point.))
   for name, table in pairs(ABILITY_HOLDERS) do
@@ -42,6 +43,7 @@ function Research( keys )
         -- another unit had this ability, hide it.
         if v == abilityName then
           FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = abilityName, builder = name, tier = keys.level})
+          print('ability holder hide on ', pID)
         end
       end
     end

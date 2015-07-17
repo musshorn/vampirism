@@ -5,11 +5,12 @@
   "vamp_human"
   {
     "override_hero"     "npc_dota_hero_omniknight"
-    "Ability1"          "build_silence"
-    "Ability2"          "human_blink"
-    "Ability3"          "call_buildui"
+    "Ability1"          "human_repair"
+    "Ability2"          "call_buildui"
+    "Ability3"          "human_blink"
     "Ability4"          "human_manaburn"
     "Ability5"          "human_teleport"
+    "Ability6"          "build_blocked"
     "Ability6"          "build_blocked2"
 
 
@@ -61,8 +62,8 @@
     "Ability6"            "vampire_poison"
     "Ability7"            "vampire_init_hider"
     "Ability8"            "vampire_particles"
-    //"Ability8"        "vampire_cyka_speed"
-    "Level"           "6"
+    //"Ability8"          "vampire_cyka_speed"
+    "Level"               "1"
     "ConsideredHero"      "1"
     "NewHero"         "0"
     "TeamName"          "DOTA_TEAM_BADGUYS"

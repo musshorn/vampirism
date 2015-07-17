@@ -58,12 +58,12 @@ function TechTree:GetRequired(unitName, playerID, ownerName, sType)
 					if playerTrees[playerID][check] < 1 then
 						FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, owner = ownerName, buildable = false})
 						--print('missing tech for '..tostring(unitName))
-						return false
+						return check
 					end
 				else
 					--print('missing tech for '..tostring(unitName).. ' (none in tree)')
 					FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, owner = ownerName, buildable = false})
-					return false
+					return check
 				end
 			end
 		end
@@ -95,12 +95,12 @@ function TechTree:GetRequired(unitName, playerID, ownerName, sType)
 					if playerTrees[playerID][check] < 1 then
 						print('missing tech for '..tostring(unitName))
 						FireGameEvent("tech_return", {player_ID = playerID, building = unitName, owner = ownerName, buildable = false})
-						return false
+						return check
 					end
 				else
 					print('missing tech for '..tostring(unitName).. ' (none in tree)')
 					FireGameEvent("tech_return", {player_ID = playerID, building = unitName, owner = ownerName, buildable = false})
-					return false
+					return check
 				end
 			end
 		end
@@ -130,12 +130,12 @@ function TechTree:GetRequired(unitName, playerID, ownerName, sType)
 					if playerTrees[check] < 1 then
 						FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, owner = ownerName, buildable = false})
 						--print('missing tech for '..tostring(unitName))
-						return false
+						return check
 					end
 				else
 					--print('missing tech for '..tostring(unitName).. ' (none in tree)')
 					FireGameEvent("tech_return", {player_ID = playerID, building = 'build_'..unitName, owner = ownerName, buildable = false})
-					return false
+					return check
 				end
 			end
 		end
