@@ -287,7 +287,8 @@ function GameMode:OnGameRulesStateChange(keys)
     for i = 0, 9 do
       local playerTeam = PlayerResource:GetTeam(i)
       if playerTeam == 2 then
-        CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
+        local human = CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
+        HUMANS[i] = human
       elseif playerTeam == 3 then
         local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
         vampire:SetHullRadius(48)
@@ -335,6 +336,7 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("call_buildui"):SetLevel(1)
   	npc:FindAbilityByName("human_blink"):SetLevel(1)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
+    npc:FindAbilityByName("human_repair"):SetLevel(1)
     if playerID < 8 then 
       WOOD[playerID] = 50 --cheats, real is 50.
       GOLD[playerID] = 0 --this is how it should look on ship.
@@ -351,7 +353,6 @@ function GameMode:OnNPCSpawned(keys)
       FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
       FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
-      HUMANS[playerID] = npc
     end
   end
 
@@ -1184,7 +1185,7 @@ function GoldMineTimer()
   Timers:CreateTimer(function()
     --check t4 gold
     if goldTime % 4 == 0 then
-      local t4gold = Entities:FindAllByModel('t4gold') --change this later
+      local t4gold = Entities:FindAllByModel('models/gold_mine_4.vmdl')
       for k, mine in pairs(t4gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
@@ -1194,7 +1195,7 @@ function GoldMineTimer()
     end
     --check t3 gold
     if goldTime % 6 == 0 then
-      local t3gold = Entities:FindAllByModel('t3gold') --change this later
+      local t3gold = Entities:FindAllByModel('models/gold_mine_3.vmdl')
       for k, mine in pairs(t3gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer() 
@@ -1274,11 +1275,12 @@ function AutoGoldTimer()
         ChangeGold(v:GetMainControllingPlayer(), 25)
       end
     end
-    if time == 720 then
+    if time == 20 then
       for k, v in pairs(VAMPIRES) do
         ChangeGold(v:GetMainControllingPlayer(), 100)
       end
       for k, v in pairs(HUMANS) do
+        print('got geld')
         ChangeGold(v:GetMainControllingPlayer(), 2)
       end
     end
