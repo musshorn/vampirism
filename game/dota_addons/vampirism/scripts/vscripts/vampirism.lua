@@ -771,7 +771,7 @@ function GameMode:OnEntityKilled( keys )
       if nearVamps ~= nil then
       	local xpSplit = expReward / #nearVamps
       	for k,v in pairs(nearVamps) do
-      		v:AddExperience(xpSplit, 0, 0, true)
+      		v:AddExperience(xpSplit, 0, false, false)
       	end
       end
     end
