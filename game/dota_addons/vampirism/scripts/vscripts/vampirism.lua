@@ -12,7 +12,7 @@ TREE_REGROW_TIME = 60.0                 -- How long should it take individual tr
 GOLD_PER_TICK = 0                     -- How much gold should players get per tick?
 GOLD_TICK_TIME = 10000                      -- How long should we wait in seconds between gold ticks?
 
-RECOMMENDED_BUILDS_DISABLED = true     -- Should we disable the recommened builds for heroes (Note: this is not working currently I believe)
+RECOMMENDED_BUILDS_DISABLED = true     	-- Should we disable the recommened builds for heroes (Note: this is not working currently I believe)
 CAMERA_DISTANCE_OVERRIDE = 1500.0        -- How far out should we allow the camera to go?  1134 is the default in Dota
 
 MINIMAP_ICON_SIZE = 1                   -- What icon size should we use for our heroes?
@@ -160,7 +160,7 @@ function GameMode:OnAllPlayersLoaded()
   local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
   sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
 
-  local portalvision = CreateUnitByName("vampire_vision_dummy_3", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
+  local portalvision = CreateUnitByName("vampire_vision_dummy_spawn", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
   GameRules:SetHeroRespawnEnabled(false)
   for i = 0, 9 do
   	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
@@ -184,10 +184,10 @@ function GameMode:OnAllPlayersLoaded()
     end
   end
 
-  GameRules:SendCustomMessage("By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here - ", 0, 1)
+  GameRules:SendCustomMessage("By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", 0, 1)
   Timers:CreateTimer(10, function (  )
     if not FACTOR_SET and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-      GameRules:SendCustomMessage("The host has not set a worker factor. By default a single tier 1 worker represents 4 workers. To change this setting the host may use -wf (number) to ignore type -ok or read about -wf here - ", 0, 1)
+      GameRules:SendCustomMessage("The host has not set a worker factor. By default a single tier 1 worker represents 4 workers. To change this setting the host may use -wf (number) to ignore type -ok or read about -wf here -http://bit.ly/WorkerStacks", 0, 1)
       return 10
     else
       return nil
@@ -712,6 +712,8 @@ function GameMode:OnEntityKilled( keys )
     end
   end
 
+  local stackAbility = killedUnit:FindAbilityByName('worker_stack')
+
   if killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
     if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_Invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil then
       -- Probability function for a coin drop
@@ -736,8 +738,8 @@ function GameMode:OnEntityKilled( keys )
         coinP:SetModelScale(3)
       end
     end
-
-    local stackAbility = killedUnit:FindAbilityByName('worker_stack')
+    --roll for extra coins, grant extra exp, bounty. if the unit was stacked.
+    local expReward = 0
     if killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) ~= nil then
       local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
       while stacks > 0 do
@@ -761,7 +763,16 @@ function GameMode:OnEntityKilled( keys )
           newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
           newcoinP:SetModelScale(3)
         end
+        ChangeGold(killedUnit:GetMainControllingPlayer(), killedUnit:GetGoldBounty())
+        expReward = expReward + 25
         stacks = stacks - 1
+      end
+      local nearVamps = FindUnitsInRadius(killerEntity:GetTeam(), killedUnit:GetAbsOrigin(), nil, 1000, DOTA_TEAM_BADGUYS, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+      if nearVamps ~= nil then
+      	local xpSplit = expReward / #nearVamps
+      	for k,v in pairs(nearVamps) do
+      		v:AddExperience(xpSplit, 0, 0, true)
+      	end
       end
     end
 
@@ -802,6 +813,11 @@ function GameMode:OnEntityKilled( keys )
         lostfood = UNIT_KV[playerID][unitName].ConsumesFood
         CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] - lostfood
         FireGameEvent("vamp_food_changed", { player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
+        -- Decrease food based on stack count.
+        local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
+        if stacks ~= nil then
+        	FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = stacks * lostfood})
+        end
       end
 
       if UNIT_KV[playerID][unitName].SpawnsUnits == "true" then

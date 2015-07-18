@@ -204,6 +204,11 @@
     "BountyGoldMin"       "1"
     "BountyGoldMax"       "1"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
+
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "15"
@@ -288,6 +293,11 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
     "AffectedByGemUpgrades" "true"
@@ -377,6 +387,12 @@
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
+
+
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
@@ -464,6 +480,12 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
+
 
     // Vamp
     "AffectedByGemUpgrades" "true"
@@ -553,6 +575,11 @@
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
+
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
@@ -640,6 +667,11 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
     "AffectedByGemUpgrades" "true"
@@ -730,6 +762,11 @@
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
+
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
@@ -817,6 +854,11 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
     "AffectedByGemUpgrades" "true"
@@ -906,6 +948,11 @@
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
+
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "65"
@@ -994,6 +1041,11 @@
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1600"    // Range of vision at night time.
+
     // Vamp
     "AffectedByGemUpgrades" "true"
     "RepairTime"  "75"
@@ -1081,6 +1133,11 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "800"    // Range of vision during day light.
+    "VisionNighttimeRange"      "600"    // Range of vision at night time.
 
     // Bounty
     //----------------------------------------------------------------
@@ -1175,6 +1232,11 @@
     "BountyGoldMin"       "1"
     "BountyGoldMax"       "1"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1000"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1000"    // Range of vision at night time.
+
     // Vamp
     "SpawnsUnits" "true"
     "RecievesLumber"  "true"
@@ -1267,6 +1329,11 @@
     "BountyGoldMin"       "1"
     "BountyGoldMax"       "1"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "800"    // Range of vision during day light.
+    "VisionNighttimeRange"      "800"    // Range of vision at night time.
+
     // Vamp
     "ProvidesFood"  "25"
     "RepairTime"  "10"
@@ -1351,6 +1418,11 @@
     "BountyXP"          "150"
     "BountyGoldMin"       "4"
     "BountyGoldMax"       "4"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "800"    // Range of vision during day light.
+    "VisionNighttimeRange"      "800"    // Range of vision at night time.
 
     // Vamp
     "ProvidesFood"  "65"
@@ -1439,6 +1511,11 @@
     "BountyGoldMax"       "3"
     "BountyGoldMin"       "3"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "900"    // Range of vision during day light.
+    "VisionNighttimeRange"      "900"    // Range of vision at night time.
+
     "IsTech"    "true"
     //Key which contains each neccessary tech for this unit, sperated by spaces.
     "NeedTech"    "house_t1"
@@ -1518,6 +1595,11 @@
     "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
     "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
     "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "500"    // Range of vision during day light.
+    "VisionNighttimeRange"      "500"    // Range of vision at night time.
 
     "IsTech"    "true"
     "NeedTech"    "human_vault"
@@ -1605,6 +1687,11 @@
     "BountyGoldMin"       "1"
     "BountyGoldMax"       "1"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1500"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1500"    // Range of vision at night time.
+
     "IsTech"    "true"
     "NeedTech"    "house_t1"
     "RepairTime"  "10"
@@ -1686,9 +1773,14 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "125"
-    "BountyGoldMin"       "1"
-    "BountyGoldMax"       "1"
+    "BountyXP"          "25"
+    "BountyGoldMin"       "5"
+    "BountyGoldMax"       "5"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1000"    // Range of vision during day light.
+    "VisionNighttimeRange"      "750"    // Range of vision at night time.
 
     "IsTech"        "true"
     "NeedTech"      "house_t1"
@@ -1868,6 +1960,11 @@
     "BountyGoldMin"       "3"
     "BountyGoldMax"       "3"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1000"    // Range of vision during day light.
+    "VisionNighttimeRange"      "750"    // Range of vision at night time.
+
     "IsTech"    "true"
     "NeedTech"    "house_t1"
     "RepairTime"  "15"
@@ -1953,7 +2050,6 @@
     "VisionNighttimeRange"      "1000"      // Range of vision at night time.
 
 
-
     // Bounty
     //----------------------------------------------------------------
     "BountyXP"          "200"
@@ -1993,7 +2089,7 @@
     //----------------------------------------------------------------
 
     "Ability1"          "heal_tower_heal_beam" //Human test
-    "Ability2"          "heal_tower_heal_aura"          // Ability 2.
+    "Ability2"          "super_heal_tower_heal_aura"          // Ability 2.
     "Ability3"          ""          // Ability 3.
     "Ability4"          ""          // Ability 4.
     "Ability5"          ""          // Ability 5.
@@ -2153,6 +2249,11 @@
     "BountyGoldMin"       "2"
     "BountyGoldMax"       "2"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1600"    // Range of vision during day light.
+    "VisionNighttimeRange"      "800"    // Range of vision at night time.
+
     "IsTech"    "true"
     "NeedTech"    "human_vault house_t2"
     "RepairTime"  "40"
@@ -2261,6 +2362,11 @@
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1000"    // Range of vision during day light.
+    "VisionNighttimeRange"      "900"    // Range of vision at night time.
+
     "IsTech"        "true"
     "NeedTech"      "house_t1 slayer_tavern"
     "SpawnsUnits"       "true" 
@@ -2349,6 +2455,11 @@
     "BountyXP"                  "25"
     "BountyGoldMin"             "2"
     "BountyGoldMax"             "2"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1500"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1500"    // Range of vision at night time.
 
     "IsTech"        "true"
     "NeedTech"      "house_t1"
@@ -2821,7 +2932,7 @@
     //----------------------------------------------------------------
 
     "Ability1"                  "tower_blood_t1_holy_blood" //Human test
-    "Ability2"                  ""                  // Ability 2.
+    "Ability2"                  "upgrade_to_tower_blood_t2"                  // Ability 2.
     "Ability3"                  ""                  // Ability 3.
     "Ability4"                  ""                  // Ability 4.
     "Ability5"                  ""                  // Ability 5.
@@ -2894,6 +3005,92 @@
     "NeedTech"      "human_vault"
     "RepairTime"  "20"
   }
+
+  //================================================================================= 
+  // Holy Blood Tower
+  //=================================================================================
+  "tower_blood_t2"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                     "npc_dota_creature"
+    "Model"                         "modelme.vmdl"
+    "ModelScale"                    "3"
+    
+    "ConsideredHero"                "0"
+    // Abilities
+    //----------------------------------------------------------------
+
+    "Ability1"                  "tower_blood_t2_holy_blood" //Human test
+    "Ability2"                  ""                  // Ability 2.
+    "Ability3"                  ""                  // Ability 3.
+    "Ability4"                  ""                  // Ability 4.
+    "Ability5"                  ""                  // Ability 5.
+    "Ability6"                  ""                  // Ability 6 - Extra.
+    "Ability7"                  ""                  // Ability 7 - Extra.
+    "Ability8"                  "is_a_building"                 // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "25"            // Physical protection.
+    "MagicalResistance"         "0"         // Magical protection.
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackDamageMin"           "10000"
+    "AttackDamageMax"           "10000"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "0.1"
+    "AttackAnimationPoint"      "0"
+    "AttackAcquisitionRange"    "1500"
+    "AttackRange"               "1500"
+    "ProjectileModel"           "particleme.vpcf"
+    "ProjectileSpeed"           "2000"
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+  
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"           // Hull type used for navigation/locomotion.
+    "HealthBarOffset"           "170"
+    "RingRadius"                "50"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"           // Type of locomotion - ground, air
+    "MovementSpeed"             "300"       // Speed
+    "MovementTurnRate"          "0.5"       // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "5000"      // Base health.
+    "StatusHealthRegen"         "50"        // Health regeneration rate.
+    "StatusMana"                "0"         // Base mana.
+    "StatusManaRegen"           "-0.01"         // Mana regeneration rate.
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1800"      // Range of vision during day light.
+    "VisionNighttimeRange"      "1800"      // Range of vision at night time.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                  "DOTA_TEAM_GOODGUYS"            // Team name.
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+    
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "25"
+    "BountyGoldMin"             "1000"
+    "BountyGoldMax"             "1000"
+
+    "IsTech"        "true"
+    "NeedTech"      "base_operations"
+    "RepairTime"  "25"
+  }
+
 
   //================================================================================= 
   // Calcite Outpost
@@ -4543,6 +4740,25 @@
         "VisionDaytimeRange"      "3500"    // Range of vision during day light.
         "VisionNighttimeRange"      "3500"    // Range of vision at night time.
   }
+  //================================================================================= 
+  // Vampire spawn vision dummy
+  //=================================================================================
+  "vampire_vision_dummy_spawn"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "npc_dota_creature"
+    "Model"             "models/development/invisiblebox.vmdl"  // Model
+    "MaxLevel"                      "1"
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_FLY"
+    "Ability1"            "vampire_vision_dummy_lock2"
+
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"      "1200"    // Range of vision during day light.
+    "VisionNighttimeRange"      "1200"    // Range of vision at night time.
+  }
 
   //================================================================================= 
   // BuildingHelper Dummy
@@ -5477,6 +5693,76 @@
     "RepairTime"  "25"
     "NeedTech"                  "command_center"
   }
+
+  //================================================================================= 
+  // Ultra Lightning Oracle
+  //=================================================================================
+  "tower_lightning_t2"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                 "npc_dota_creature"
+    "Model"                     "modelme.vmdl"
+    "ModelScale"                "1" 
+    "ConsideredHero"            "0"
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "25"     // Physical protection.
+    "MagicalResistance"         "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackDamageMin"           "249750"
+    "AttackDamageMax"           "249750"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "0.2"
+    "AttackAnimationPoint"      "0"
+    "AttackAcquisitionRange"    "2500"
+    "AttackRange"               "2500"
+    "ProjectileModel"           "particleme.vpcf"
+    "ProjectileSpeed"           "2000"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"           "170"
+    "RingRadius"                "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"     // Type of locomotion - ground, air
+    "MovementSpeed"             "500"   // Speed
+    "MovementTurnRate"          "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "15000"   // Base health.
+    "StatusHealthRegen"         "50"   // Health regeneration rate.
+    "StatusMana"                "0"      // Base mana.
+    "StatusManaRegen"           "0"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                  "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1800"   // Range of vision during day light.
+    "VisionNighttimeRange"      "1800"   // Range of vision at night time.
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "25"
+    "BountyGoldMin"             "1000"
+    "BountyGoldMax"             "1000"
+    "RepairTime"  "25"
+    "NeedTech"                  "base_operations"
+  }
   
   //================================================================================= 
   // Venom Spire
@@ -5618,6 +5904,76 @@
     "BountyGoldMax"             "200"
     "NeedTech"                  "command_center"
     "RepairTime"  "25"
+  }
+
+  //================================================================================= 
+  // Ultra Vampire Spire Tower
+  //=================================================================================
+  "tower_spire_t2"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"                 "npc_dota_creature"
+    "Model"                     "modelme.vmdl"
+    "ModelScale"                "1" 
+    "ConsideredHero"            "0"
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "20"     // Physical protection.
+    "MagicalResistance"         "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
+    "AttackDamageMin"           "2500"
+    "AttackDamageMax"           "2500"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "0.1"
+    "AttackAnimationPoint"      "0"
+    "AttackAcquisitionRange"    "1500"
+    "AttackRange"               "1500"
+    "ProjectileModel"           "particleme.vpcf"
+    "ProjectileSpeed"           "5000"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"           "170"
+    "RingRadius"                "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"     // Type of locomotion - ground, air
+    "MovementSpeed"             "500"   // Speed
+    "MovementTurnRate"          "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "2500"   // Base health.
+    "StatusHealthRegen"         "5"   // Health regeneration rate.
+    "StatusMana"                "0"      // Base mana.
+    "StatusManaRegen"           "0"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"                  "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1800"   // Range of vision during day light.
+    "VisionNighttimeRange"      "1800"   // Range of vision at night time.
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "25"
+    "BountyGoldMin"             "500"
+    "BountyGoldMax"             "500"
+    "NeedTech"                  "base_operations"
+    "RepairTime"                "25"
   }
 
   //================================================================================= 

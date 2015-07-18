@@ -22,7 +22,6 @@ function Research( keys )
     return
   end
   if GOLD[pID] < goldCost then
-    print(goldCost)
     caster:Stop()
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
     return
@@ -34,7 +33,6 @@ function Research( keys )
     --used to temporarily hide research as it is being made, to ensure it is only done from
     --one research center at a time. 
   FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = keys.ability:GetAbilityName(), builder = caster:GetUnitName(), tier = keys.level})
-  print('ui hide on ', pID)
 
   -- Find all other buildings with this ability, hide it on those too. (only checking abilityholders. (which all research buildings are using at this point.))
   for name, table in pairs(ABILITY_HOLDERS) do

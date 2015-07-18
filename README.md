@@ -1,5 +1,5 @@
 # Vampirism
-Vampirism is a mod for Dota 2 based on the 'Vampirism Fire' map for Warcraft III. Human players gather resources and defend themselves agains powerful vampires who are seeking to convert all humans into vampires.
+Vampirism is a mod for Dota 2 based on the 'Vampirism Fire' map for Warcraft III. Human players gather resources and defend themselves against powerful vampires who are seeking to convert all humans into vampires.
 
 Please bear in mind that the mod is currently in **beta** and that there are likely bugs which may prevent you from completing a full game.
 

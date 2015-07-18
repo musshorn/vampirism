@@ -5397,6 +5397,49 @@
     }
   }
 
+  //=================================================================================/
+  // Upgrade to Tower of Blood
+  //=================================================================================/
+  "upgrade_to_tower_blood_t2"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"       "ability_datadriven"
+    "AbilityChannelTime"  "60"
+    "AbilityTextureName"    "upgrade_to_tower_blood_t2"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Upgrade"
+        "TARGET"    "CASTER"
+        "TargetUnit"  "tower_blood_t2"
+        "LumberCost"  "1000000"
+        "GoldCost"    "2000"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_blood_t2"
+        "Scale"       "2.5"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+
   //================================================================================= 
   // Build Tower of Blod
   //=================================================================================
@@ -5483,6 +5526,67 @@
       }
 
       "modifier_blood_armor_1"
+      {
+        "Passive" "1"
+        "IsHidden"  "0"
+        "IsDebuff"  "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "-1"
+        }
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Holy Tower of Blood - Holy Blood
+  //=================================================================================/
+  "tower_blood_t2_holy_blood"
+  {
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"      "dazzle_weave"
+    "MaxLevel"            "1"
+
+    "Modifiers"
+    {
+      "modifier_holy_blood_debuff"
+      {
+        "Passive"     "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "1"
+
+        "OnCreated"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_neutral_spell_immunity"
+            "Target"     "CASTER"
+          }
+        }
+      
+        "OnAttackLanded"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_blood_armor_2"
+            "Target"    "TARGET"
+            "Duration"    "5"
+          }
+
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/abilities/towers.lua"
+            "Function"    "bloodArmor"
+          }
+        }     
+      }
+
+      "modifier_blood_armor_2"
       {
         "Passive" "1"
         "IsHidden"  "0"
@@ -6712,11 +6816,8 @@
               "01"  "%health_radius 0 0"
               "02"  "0 0 -200"
             }
-
           }
-
         }
-
       }
 
       "aura_health_regen"
@@ -6742,6 +6843,98 @@
     }
   }
 
+  //=========================================================
+  // Super Healing Tower: Healing Aura
+  //=========================================================
+  "super_heal_tower_heal_aura"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "BaseClass" "ability_datadriven"
+    "AbilityTextureName"  "juggernaut_healing_ward"
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"  "FIELD_INTEGER"
+        "health_radius" "450 450"
+      }
+
+      "02"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "health_regen_amount" "0.5 0.5"
+      }
+
+      "03"
+      {
+        "var_type"  "FIELD_FLOAT"
+        "mana_regen_amount" "0 22.0"
+      }
+    }
+
+
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "health_regen"
+        "Target"
+        {
+          "Center"  "CASTER"
+          "Radius"  "%health_radius"
+          "Teams" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+          "Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+        }
+
+      }
+
+    }
+
+    "Modifiers"
+    {
+      "fx_heal_aura"
+      {
+        "Passive" "1"
+        "IsHidden"  "1"
+        "OnCreated"
+        {
+          "AttachEffect"
+          {
+            "Target"  "TARGET"
+            "EffectName"  "particles/generic_gameplay/radiant_fountain_regen_mist.vpcf"
+            "EffectAttatchType" "follow_origin"
+            "ControlPoints"
+            {
+              "00"  "0 0 0"
+              "01"  "%health_radius 0 0"
+              "02"  "0 0 -200"
+            }
+          }
+        }
+      }
+
+      "aura_health_regen"
+      {
+        "IsHidden"  "0"
+        "Passive" "1"
+        "Aura"  "health_regen"
+        "Aura_Radius" "%health_radius"
+        "Aura_Teams"  "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "Aura_Types"  "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
+        "Aura_ApplyToCaster"  "0"
+      }
+
+      "health_regen"
+      {
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE" "%health_regen_amount"
+          "MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE" "%mana_regen_amount"
+        }
+
+      }
+    }
+  }
 
   "build_gold_mine_t1"
   {
@@ -7461,6 +7654,52 @@
   }
 
   //================================================================================= 
+  // Build Ultra Lightning Oracle
+  //=================================================================================
+  "build_tower_lightning_t2"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "house_t1"
+    "AbilityCastAnimation"      "ACT_DOTA_DISABLED"
+    // BuildingHelper info
+    "Building"                  "1"
+    "BuildingSize"              "2"
+    "BuildTime"                 "20"
+    "AbilityCastRange"          "200"
+    "UpdateHealth"              "1"
+    "Scale"                     "1"
+    "MaxScale"                  "1"
+    "CasterCanControl"          "1"
+
+    "AbilityCooldown"           "0"
+    "LumberCost"                "1000000"
+    "GoldCost"                  "1600"
+    
+    // Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+    "UnitName"                  "tower_lightning_t2"
+    // End of BuildingHelper info
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"          "0.05"
+    "MaxLevel"                  "1"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"           "0"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"            "scripts/vscripts/abilities.lua"
+        "Function"              "build"
+      }
+    }
+  }
+
+  //================================================================================= 
   // Build Vampire Spire Tower
   //=================================================================================
   "build_tower_spire_t1"
@@ -7817,6 +8056,88 @@
         "Function"    "FinishUpgrade"
         "TargetUnit"  "base_operations"
         "Scale"       "0.5"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Ultra Lightning Oracle
+  //=================================================================================/
+  "upgrade_to_lightning_tower_t2"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"        "ability_datadriven"
+    "AbilityChannelTime"  "20"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"   "scripts/vscripts/buildings/building.lua"
+        "Function"     "Upgrade"
+        "TARGET"       "CASTER"
+        "TargetUnit"   "lightning_tower_t2"
+        "LumberCost"   "1000000"
+        "GoldCost"     "1600"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "lightning_tower_t2"
+        "Scale"       "1"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "Cancel"
+      }
+    }
+  }
+
+  //=================================================================================/
+  // Upgrade to Ultra Lightning Oracle
+  //=================================================================================/
+  "upgrade_to_tower_spire_t2"
+  {
+    "AbilityBehavior"   "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"        "ability_datadriven"
+    "AbilityChannelTime"  "45"
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"   "scripts/vscripts/buildings/building.lua"
+        "Function"     "Upgrade"
+        "TARGET"       "CASTER"
+        "TargetUnit"   "tower_spire_t2"
+        "LumberCost"   "100000"
+        "GoldCost"     "100"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+        "Function"    "FinishUpgrade"
+        "TargetUnit"  "tower_spire_t2"
+        "Scale"       "1"
       }
     }
     "OnChannelInterrupted"
