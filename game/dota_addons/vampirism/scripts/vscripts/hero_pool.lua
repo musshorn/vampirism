@@ -15,7 +15,7 @@ function SlayerPool:ActivatePool()
           end
         end
       end
-      return 10
+      return 60
     end
   )
 end
