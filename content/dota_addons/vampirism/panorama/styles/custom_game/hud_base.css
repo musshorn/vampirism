@@ -25,7 +25,7 @@
     horizontal-align: center;
     vertical-align: middle;
     animation-name: scalein;
-    animation-duration: .5s;
+    animation-duration: .3s;
     animation-timing-function: linear;
 }
 
@@ -47,7 +47,7 @@
     vertical-align: bottom;
     width: 100%;
     opacity: 1;
-    margin-bottom: 375px;
+    margin-bottom: 250px;
     visibility: visible;
     border: 0px solid blue;
 }
@@ -59,10 +59,13 @@
     horizontal-align: center;
     text-shadow: 4px 4px 4px #121212;
     font-size: 36px;
-    font-weight: bold;
     text-align: center;
 }
-
+.FadeOut{
+    animation-name: fadeout;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+}
 .HeroImage
 {
     vertical-align: center;
@@ -79,4 +82,12 @@
     opacity:1;
     transform: scaleX(1) scaleY(1);
   }
+}
+@keyframes 'fadeout' {
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
 }
