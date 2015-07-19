@@ -209,14 +209,11 @@ end
 
 -- Handles all unit hiring behavior
 function HireUnit( keys )
-	print('hireunit')
 	local caster = keys.caster
 	local ability = keys.ability
 	local foodCost = ITEM_KV[ability:GetAbilityName()]['FoodCost']
 	local mercName = keys.Mercenary
 	local playerID = caster:GetMainControllingPlayer()
-	print(mercName)
-	print(ability:GetAbilityName())
 
 	local merc = CreateUnitByName(mercName, caster:GetAbsOrigin(), true, caster, PlayerResource:GetPlayer(playerID), caster:GetTeam())
 	merc:SetControllableByPlayer(playerID, true)

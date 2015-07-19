@@ -183,16 +183,8 @@ function GameMode:OnAllPlayersLoaded()
       end
     end
   end
-
-  GameRules:SendCustomMessage("By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", 0, 1)
-  Timers:CreateTimer(10, function (  )
-    if not FACTOR_SET and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-      GameRules:SendCustomMessage("The host has not set a worker factor. By default a single tier 1 worker represents 4 workers. To change this setting the host may use -wf (number) to ignore type -ok or read about -wf here -http://bit.ly/WorkerStacks", 0, 1)
-      return 10
-    else
-      return nil
-    end
-  end)
+  
+  Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
 end
 
 --[[
@@ -310,6 +302,7 @@ function GameMode:OnGameRulesStateChange(keys)
         FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
         FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
         UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+        vampire:AddExperience(400, 0, false, true)
 
         --Next frame timer
         Timers:CreateTimer(0.03, function ()
@@ -318,6 +311,7 @@ function GameMode:OnGameRulesStateChange(keys)
           vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
           vampire:SetAbilityPoints(0)
           vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
+          print('added to vamp count, vamp table,')
           VAMP_COUNT = VAMP_COUNT + 1
           VAMPIRES[i] = vampire
           VAMPIRES[-1] = vampire --nice game
@@ -720,17 +714,18 @@ function GameMode:OnEntityKilled( keys )
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
+
       --outcome = 1 --dont forget to change this
       if outcome <= largeProb then
-        local coin = CreateItem("item_large_coin", killerEntity, killerEntity)
+        local coin = CreateItem("item_large_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
-        --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
+        --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())    
         VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
         --print(VAMPIRE_COINS[coin:entindex()])
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
-        coinP:SetModelScale(5) 
+        coinP:SetModelScale(5)
       elseif outcome <= smallProb then
-        local coin = CreateItem("item_small_coin", killerEntity, killerEntity)
+        local coin = CreateItem("item_small_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
         coin.player = killerEntity:GetMainControllingPlayer()
@@ -739,7 +734,7 @@ function GameMode:OnEntityKilled( keys )
       end
     end
     --roll for extra coins, grant extra exp, bounty. if the unit was stacked.
-    local expReward = 0
+    local expReward = 25
     if killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) ~= nil then
       local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
       while stacks > 0 do
@@ -748,7 +743,7 @@ function GameMode:OnEntityKilled( keys )
         smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
         --outcome = 1 --dont forget to change this
         if outcome <= largeProb then
-          local newcoin = CreateItem("item_large_coin", killerEntity, killerEntity)
+          local newcoin = CreateItem("item_large_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
           local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
           --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
           VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
@@ -756,22 +751,25 @@ function GameMode:OnEntityKilled( keys )
           newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
           newcoinP:SetModelScale(5) 
         elseif outcome <= smallProb then
-          local newcoin = CreateItem("item_small_coin", killerEntity, killerEntity)
+          local newcoin = CreateItem("item_small_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
           local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
-          VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
+          VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
           newcoin.player = killerEntity:GetMainControllingPlayer()
           newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
           newcoinP:SetModelScale(3)
         end
-        ChangeGold(killedUnit:GetMainControllingPlayer(), killedUnit:GetGoldBounty())
+        ChangeGold(killerEntity:GetMainControllingPlayer(), killedUnit:GetGoldBounty())
         expReward = expReward + 25
         stacks = stacks - 1
       end
-      local nearVamps = FindUnitsInRadius(killerEntity:GetTeam(), killedUnit:GetAbsOrigin(), nil, 1000, DOTA_TEAM_BADGUYS, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+      local nearVamps = FindUnitsInRadius(killedUnit:GetTeam(), killedUnit:GetAbsOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+      print(#nearVamps)
       if nearVamps ~= nil then
-      	local xpSplit = expReward / #nearVamps
+      	local xpSplit = expReward / (#nearVamps)
+        print(xpSplit)
       	for k,v in pairs(nearVamps) do
-      		v:AddExperience(xpSplit, 0, false, false)
+          print('adding to ', v:GetMainControllingPlayer(), ' vampire', v:GetUnitName())
+          v:AddExperience(xpSplit, 2, false, true)
       	end
       end
     end
@@ -814,9 +812,13 @@ function GameMode:OnEntityKilled( keys )
         CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] - lostfood
         FireGameEvent("vamp_food_changed", { player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
         -- Decrease food based on stack count.
-        local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
-        if stacks ~= nil then
-        	FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = stacks * lostfood})
+        local stackAbility = killedUnit:FindAbilityByName('worker_stack')
+        if stackAbility ~= nil then
+          local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
+          if stacks ~= nil then
+            CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] - (lostfood * stacks)
+          	FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total =  CURRENT_FOOD[playerID]})
+          end
         end
       end
 
@@ -1451,13 +1453,15 @@ function GameMode:OnPlayerSay(keys)
 
       if workerFactor < 1 then
         workerFactor = 1
-      end
+      end     
 
       workerFactor = math.floor(workerFactor)
 
       WORKER_STACKS[i] = workerFactor
     end
     FACTOR_SET = true
+    Notifications:ClearTopFromAll()
+    Notifications:TopToAll({text = "Host has chosen a worker factor of "..WORKER_FACTOR.." for the duration of this game.", duration = 5, nil, style = {color="white", ["font-size"]="20px"}})
   end
 
   if string.find(msg, "-ok") ~= nil and player == GetListenServerHost() and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS and FACTOR_SET ~= true then

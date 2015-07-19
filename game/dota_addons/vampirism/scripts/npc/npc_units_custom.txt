@@ -94,7 +94,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "0"     // Experience earn.
+    //"BountyXP"          "0"     // Experience earn.
     "BountyGoldMin"       "0"     // Gold earned min.
     "BountyGoldMax"       "0"     // Gold earned max.
 
@@ -200,7 +200,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "25"
+    //"BountyXP"          "25"
     "BountyGoldMin"       "1"
     "BountyGoldMax"       "1"
 
@@ -306,7 +306,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "2"
     "BountyGoldMax"       "2"
 
@@ -400,7 +400,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
@@ -494,7 +494,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "20"
     "BountyGoldMax"       "20"
 
@@ -587,7 +587,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "50"
     "BountyGoldMax"       "50"
 
@@ -679,7 +679,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "75"
     "BountyGoldMax"       "75"
 
@@ -774,7 +774,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "75"
     "BountyGoldMax"       "75"
 
@@ -867,7 +867,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "250"
     "BountyGoldMax"       "250"
 
@@ -960,7 +960,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "500"
     "BountyGoldMax"       "500"
 
@@ -1053,7 +1053,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "1000"
     "BountyGoldMax"       "1000"
 
@@ -1141,7 +1141,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "2"
     "BountyGoldMax"       "2"
 
@@ -1228,7 +1228,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "50"
+    //"BountyXP"          "50"
     "BountyGoldMin"       "1"
     "BountyGoldMax"       "1"
 
@@ -1325,7 +1325,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "75"
+    //"BountyXP"          "75"
     "BountyGoldMin"       "1"
     "BountyGoldMax"       "1"
 
@@ -1415,7 +1415,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "150"
+    //"BountyXP"          "150"
     "BountyGoldMin"       "4"
     "BountyGoldMax"       "4"
 
@@ -1507,7 +1507,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "50"
+    //"BountyXP"          "50"
     "BountyGoldMax"       "3"
     "BountyGoldMin"       "3"
 
@@ -1683,7 +1683,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "125"
+    //"BountyXP"          "125"
     "BountyGoldMin"       "1"
     "BountyGoldMax"       "1"
 
@@ -1773,7 +1773,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "25"
+    //"BountyXP"          "25"
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
@@ -1956,7 +1956,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "50"
+    //"BountyXP"          "50"
     "BountyGoldMin"       "3"
     "BountyGoldMax"       "3"
 
@@ -2052,7 +2052,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "200"
+    //"BountyXP"          "200"
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
@@ -2155,7 +2155,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "25"
+    //"BountyXP"          "25"
     "BountyGoldMin"       "15"
     "BountyGoldMax"       "15"
 
@@ -2245,7 +2245,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "2"
     "BountyGoldMax"       "2"
 
@@ -2358,7 +2358,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "100"
+    //"BountyXP"          "100"
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
@@ -2452,7 +2452,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "2"
     "BountyGoldMax"             "2"
 
@@ -2555,7 +2555,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "5"
     "BountyGoldMax"             "5"
 
@@ -2645,7 +2645,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "10"
     "BountyGoldMax"             "10"
 
@@ -2736,7 +2736,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "25"
     "BountyGoldMax"             "25"
 
@@ -2821,7 +2821,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "50"
     "BountyGoldMax"             "50"
 
@@ -2906,7 +2906,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "50"
     "BountyGoldMax"             "50"
 
@@ -2997,7 +2997,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "60"
     "BountyGoldMax"             "60"
 
@@ -3082,7 +3082,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "1000"
     "BountyGoldMax"             "1000"
 
@@ -3173,7 +3173,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "10"
     "BountyGoldMax"             "10"
 
@@ -3263,7 +3263,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "100"
     "BountyGoldMax"             "100"
 
@@ -3350,7 +3350,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "25"
     "BountyGoldMax"             "25"
 
@@ -3435,7 +3435,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    //"BountyXP"                  "125"
     "BountyGoldMin"             "10"
     "BountyGoldMax"             "10"
 
@@ -3521,7 +3521,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "125"
+    //"BountyXP"                  "125"
     "BountyGoldMin"             "0"
     "BountyGoldMax"             "0"
 
@@ -3606,7 +3606,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "25"
     "BountyGoldMax"       "25"
 
@@ -3697,7 +3697,7 @@
     
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "25"
     "BountyGoldMax"       "25"
 
@@ -3790,7 +3790,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "10"
     "BountyGoldMax"       "10"
   
@@ -3879,7 +3879,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "50"
     "BountyGoldMax"       "50"
   
@@ -3968,7 +3968,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "25"
+    //"BountyXP"          "25"
     "BountyGoldMin"       "50"
     "BountyGoldMax"       "50"
 
@@ -4055,7 +4055,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "25"
+    //"BountyXP"          "25"
     "BountyGoldMin"       "100"
     "BountyGoldMax"       "100"
 
@@ -4152,7 +4152,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
@@ -4249,7 +4249,7 @@
 
       // Bounty
       //----------------------------------------------------------------
-      "BountyXP"            "25"
+      //"BountyXP"            "25"
       "BountyGoldMin"       "5"
       "BountyGoldMax"       "5"
 
@@ -4551,7 +4551,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "25"
+    //"BountyXP"          "25"
     "BountyGoldMin"       "15"
     "BountyGoldMax"       "15"
 
@@ -4641,7 +4641,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "25"
+    //"BountyXP"          "25"
     "BountyGoldMin"       "25"
     "BountyGoldMax"       "25"
 
@@ -4815,7 +4815,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "0"     // Experience earn.
+    //"BountyXP"          "0"     // Experience earn.
     "BountyGoldMin"       "0"     // Gold earned min.
     "BountyGoldMax"       "0"     // Gold earned max.
 
@@ -4930,7 +4930,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "10"
     "BountyGoldMax"       "10"
 
@@ -5032,7 +5032,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "25"
     "BountyGoldMax"             "25"
 
@@ -5147,7 +5147,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "250"
     "BountyGoldMax"             "250"
 
@@ -5220,7 +5220,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "50"
     "BountyGoldMax"             "50"
 
@@ -5310,7 +5310,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "100"
     "BountyGoldMax"       "100"
 
@@ -5395,7 +5395,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"
+    //"BountyXP"            "25"
     "BountyGoldMin"       "100"
     "BountyGoldMax"       "100"
 
@@ -5470,7 +5470,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "50"
     "BountyGoldMax"             "50"
     "RepairTime"  "25"
@@ -5544,7 +5544,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "600"
     "BountyGoldMax"             "600"
     "RepairTime"  "25"
@@ -5616,7 +5616,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "1000"
     "BountyGoldMax"             "1000"
     "RepairTime"  "25"
@@ -5687,7 +5687,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "1000"
     "BountyGoldMax"             "1000"
     "RepairTime"  "25"
@@ -5757,7 +5757,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "1000"
     "BountyGoldMax"             "1000"
     "RepairTime"  "25"
@@ -5830,7 +5830,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "1000"
     "BountyGoldMax"             "1000"
     "RepairTime"  "35"
@@ -5899,7 +5899,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "200"
     "BountyGoldMax"             "200"
     "NeedTech"                  "command_center"
@@ -5969,7 +5969,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "500"
     "BountyGoldMax"             "500"
     "NeedTech"                  "base_operations"
@@ -6072,7 +6072,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "250"
     "BountyGoldMax"             "250"
 
@@ -6178,7 +6178,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "500"
     "BountyGoldMax"             "500"
 
@@ -6288,7 +6288,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "25"
     "BountyGoldMax"             "25"
 
@@ -6351,7 +6351,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "0"     // Experience earn.
+    //"BountyXP"          "0"     // Experience earn.
     "BountyGoldMin"       "0"     // Gold earned min.
     "BountyGoldMax"       "0"     // Gold earned max.
 
@@ -6436,7 +6436,7 @@
       "AttributeAgilityGain" "0" // Agility bonus per level.
       // Bounty
       //----------------------------------------------------------------
-      "BountyXP" "0" // Experience earn.
+      //"BountyXP" "0" // Experience earn.
       "BountyGoldMin" "0" // Gold earned min.
       "BountyGoldMax" "0" // Gold earned max.
       // Bounds
@@ -6521,7 +6521,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"          "0"     // Experience earn.
+    //"BountyXP"          "0"     // Experience earn.
     "BountyGoldMin"       "0"     // Gold earned min.
     "BountyGoldMax"       "0"     // Gold earned max.
 
@@ -6603,7 +6603,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "0"     // Experience earn.
+    //"BountyXP"            "0"     // Experience earn.
     "BountyGoldMin"       "0"     // Gold earned min.
     "BountyGoldMax"       "0"     // Gold earned max.
 
@@ -6680,7 +6680,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"     // Experience earn.
+    //"BountyXP"            "25"     // Experience earn.
     "BountyGoldMin"       "1"     // Gold earned min.
     "BountyGoldMax"       "1"     // Gold earned max.
 
@@ -6756,7 +6756,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"     // Experience earn.
+    //"BountyXP"            "25"     // Experience earn.
     "BountyGoldMin"       "1"     // Gold earned min.
     "BountyGoldMax"       "1"     // Gold earned max.
 
@@ -6833,7 +6833,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"     // Experience earn.
+    //"BountyXP"            "25"     // Experience earn.
     "BountyGoldMin"       "2"     // Gold earned min.
     "BountyGoldMax"       "2"     // Gold earned max.
 
@@ -6909,7 +6909,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"     // Experience earn.
+    //"BountyXP"            "25"     // Experience earn.
     "BountyGoldMin"       "10"     // Gold earned min.
     "BountyGoldMax"       "10"     // Gold earned max.
 
@@ -6984,7 +6984,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"            "25"     // Experience earn.
+    //"BountyXP"            "25"     // Experience earn.
     "BountyGoldMin"       "10"     // Gold earned min.
     "BountyGoldMax"       "10"     // Gold earned max.
 
@@ -7092,7 +7092,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "5"
     "BountyGoldMax"             "5"
 
@@ -7173,7 +7173,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "2"
     "BountyGoldMax"             "2"
 
@@ -7266,7 +7266,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "0"
     "BountyGoldMax"             "0"
 
@@ -7347,7 +7347,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "0"
+    //"BountyXP"                  "0"
     "BountyGoldMin"             "0"
     "BountyGoldMax"             "0"
   }
@@ -7426,7 +7426,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "0"
     "BountyGoldMax"             "0"
 
@@ -7507,7 +7507,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "25"
+    //"BountyXP"                  "25"
     "BountyGoldMin"             "3"
     "BountyGoldMax"             "3"
 
@@ -7588,7 +7588,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "0"
+    //"BountyXP"                  "0"
     "BountyGoldMin"             "0"
     "BountyGoldMax"             "0"
   }
@@ -7672,7 +7672,7 @@
 
     // Bounty
     //----------------------------------------------------------------
-    "BountyXP"                  "0"
+    //"BountyXP"                  "0"
     "BountyGoldMin"             "0"
     "BountyGoldMax"             "0"
   }

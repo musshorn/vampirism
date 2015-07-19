@@ -57,7 +57,7 @@ function TrainUnit( keys )
     woodCost = 0
   end
 
-  if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood and affordWood and affordGold then
+  if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood and affordWood and affordGold and requestingFood < 250 then
     if #building.queue < 6 then
       table.insert(building.queue, keys)
       ChangeGold(pID, -1 * goldCost)
@@ -227,7 +227,7 @@ function FinishUpgrade( keys )
 
   if UNIT_KV[pID][targetUnit].ProvidesFood ~= nil then
     if UNIT_KV[pID][casterName].ProvidesFood ~= nil then
-      TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood - UNIT_KV[pID][casterName].ProvidesFood
+      TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood
     else
       TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood
       if TOTAL_FOOD[pID] > 250 then

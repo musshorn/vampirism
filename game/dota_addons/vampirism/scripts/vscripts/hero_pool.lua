@@ -3,7 +3,7 @@ if SlayerPool == nil then
 end
 
 function SlayerPool:ActivatePool()
-  Timers:CreateTimer(50, function()
+  Timers:CreateTimer(function()
       for i=0, 9 do
         if PlayerResource:GetTeam(i) == DOTA_TEAM_GOODGUYS then
           if SLAYERS[i] ~= nil then
