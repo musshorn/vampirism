@@ -82,11 +82,15 @@ end
 
 -- Stops avernal from attacking non-harvesters
 function AvernalMeteorAttack( keys )
+	print('avernal attack')
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
+	print('target ability?')
 	if not target:HasAbility('harvest_channel') then
+		print('disarm owner')
 		caster:AddNewModifier(caster, ability, 'modifier_disarmed', {duration = 0.1})
+		print('fire error')
 		FireGameEvent('custom_error_show', {player_ID = caster:GetMainControllingPlayer(), _error = 'Unit may only attack workers!'})
 	end
 end
@@ -99,7 +103,7 @@ function CorruptingBreath( keys )
 
 	local targetName = target:GetUnitName()
 
-	if string.find(targetName, "tower_wall") ~= nil or string.find(targetName, "gold_mine") then
+	if string.find(targetName, "tower_wall") ~= nil or string.find(targetName, "gold_mine") ~= nil then
 		target:ApplyDataDrivenModifier(caster, target, 'modifier_corrupting_effect', {})
 	end
 end

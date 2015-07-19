@@ -8940,7 +8940,7 @@
         {
           "RunScript"
           {
-            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "ScriptFile"  "units/avernal.lua"
             "Function"    "AvernalRangedAttack"
             "Target"      "CASTER"
           }
@@ -8967,7 +8967,7 @@
         {
           "RunScript"
           {
-            "ScriptFile"  "scripts/vscripts/units/avernal.lua"
+            "ScriptFile"  "units/avernal.lua"
             "Function"    "AvernalMeteorAttack"
             "Target"      "CASTER"
           }

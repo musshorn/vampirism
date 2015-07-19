@@ -319,9 +319,9 @@ function GameMode:OnGameRulesStateChange(keys)
           vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
           vampire:SetAbilityPoints(0)
           vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
+          print('added to vamp count, vamp table,')
           VAMP_COUNT = VAMP_COUNT + 1
           VAMPIRES[i] = vampire
-          print('added to vamp table')
           VAMPIRES[-1] = vampire --nice game
           return nil
         end)
@@ -722,17 +722,18 @@ function GameMode:OnEntityKilled( keys )
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
+
       --outcome = 1 --dont forget to change this
       if outcome <= largeProb then
-        local coin = CreateItem("item_large_coin", killerEntity, killerEntity)
+        local coin = CreateItem("item_large_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
-        --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
+        --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())    
         VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
         --print(VAMPIRE_COINS[coin:entindex()])
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
-        coinP:SetModelScale(5) 
+        coinP:SetModelScale(5)
       elseif outcome <= smallProb then
-        local coin = CreateItem("item_small_coin", killerEntity, killerEntity)
+        local coin = CreateItem("item_small_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
         coin.player = killerEntity:GetMainControllingPlayer()
@@ -750,7 +751,7 @@ function GameMode:OnEntityKilled( keys )
         smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
         --outcome = 1 --dont forget to change this
         if outcome <= largeProb then
-          local newcoin = CreateItem("item_large_coin", killerEntity, killerEntity)
+          local newcoin = CreateItem("item_large_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
           local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
           --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
           VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
@@ -758,7 +759,7 @@ function GameMode:OnEntityKilled( keys )
           newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
           newcoinP:SetModelScale(5) 
         elseif outcome <= smallProb then
-          local newcoin = CreateItem("item_small_coin", killerEntity, killerEntity)
+          local newcoin = CreateItem("item_small_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
           local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
           VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
           newcoin.player = killerEntity:GetMainControllingPlayer()

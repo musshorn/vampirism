@@ -7116,7 +7116,7 @@
     
     "Ability1"          "assassin_blink"                 // Ability 1.
     "Ability2"          "assassin_passives"                 // Ability 2.
-    "Ability3"          "avernal_invisibility"      // Ability 3.
+    //"Ability3"          "avernal_invisibility"      // Ability 3.
     "Ability4"          "avernal_meteor_attack"         // Ability 4.
     "Ability5"          ""      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
