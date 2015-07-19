@@ -68,11 +68,13 @@ function AddNotification(msg, panel) {
   
   if (newNotification){
     $.Schedule(msg.duration, function(){
-      //$.Msg('callback')
       if (lastNotification.deleted)
         return;
       
-      lastNotification.DeleteAsync(0);
+      notification.AddClass('FadeOut');
+      $.Schedule(1.0, function(){
+        notification.DeleteAsync(0);
+      });
     });
   }
 
