@@ -183,16 +183,8 @@ function GameMode:OnAllPlayersLoaded()
       end
     end
   end
-
-  GameRules:SendCustomMessage("By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", 0, 1)
-  Timers:CreateTimer(10, function (  )
-    if not FACTOR_SET and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-      GameRules:SendCustomMessage("The host has not set a worker factor. By default a single tier 1 worker represents 4 workers. To change this setting the host may use -wf (number) to ignore type -ok or read about -wf here -http://bit.ly/WorkerStacks", 0, 1)
-      return 10
-    else
-      return nil
-    end
-  end)
+  
+  Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
 end
 
 --[[
@@ -766,7 +758,7 @@ function GameMode:OnEntityKilled( keys )
           newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
           newcoinP:SetModelScale(3)
         end
-        ChangeGold(killedUnit:GetMainControllingPlayer(), killedUnit:GetGoldBounty())
+        ChangeGold(killerEntity:GetMainControllingPlayer(), killedUnit:GetGoldBounty())
         expReward = expReward + 25
         stacks = stacks - 1
       end
@@ -1461,13 +1453,15 @@ function GameMode:OnPlayerSay(keys)
 
       if workerFactor < 1 then
         workerFactor = 1
-      end
+      end     
 
       workerFactor = math.floor(workerFactor)
 
       WORKER_STACKS[i] = workerFactor
     end
     FACTOR_SET = true
+    Notifications:ClearTopFromAll()
+    Notifications:TopToAll({text = "Host has chosen a worker factor of "..WORKER_FACTOR.." for the duration of this game.", duration = 5, nil, style = {color="white", ["font-size"]="20px"}})
   end
 
   if string.find(msg, "-ok") ~= nil and player == GetListenServerHost() and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS and FACTOR_SET ~= true then

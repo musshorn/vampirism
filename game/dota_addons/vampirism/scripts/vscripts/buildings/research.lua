@@ -106,14 +106,14 @@ function ImproveLumber(keys)
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 10
     -- On completed, send the "parent" key of the ability to flash, along with the tier of the next tech.
     FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_lumber_harvesting', builder = caster:GetUnitName(), tier = level})
-    Notifications:Bottom(pID, "Researched: Improved Lumber Havesting", 5, nil, {color="yellow", ["font-size"]="24px"})
+    Notifications:Bottom(pID, {text = "Researched: Improved Lumber Havesting", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
   elseif level == 2 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 15
     FireGameEvent("build_ui_upgrade", {player_ID = pID, ability_name = 'research_improved_lumber_harvesting', builder = caster:GetUnitName(), tier = level})
-    Notifications:Bottom(pID, "Researched: Advanced Lumber Havesting", 5, nil, {color="yellow", ["font-size"]="24px"})
+    Notifications:Bottom(pID, {text = "Researched: Advanced Lumber Havesting", duration =  5, nil, style = {color="yellow", ["font-size"]="24px"}})
   elseif level == 3 then
     UNIT_KV[pID]["worker_t1"].MaximumLumber = 20
-    Notifications:Bottom(pID, "Researched: Insane Lumber Havesting", 5, nil, {color="yellow", ["font-size"]="24px"})
+    Notifications:Bottom(pID, {text = "Researched: Insane Lumber Havesting", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
   end
 
   TechTree:AddTechAbility(pID, ability:GetAbilityName())
@@ -130,7 +130,7 @@ function SharpenedHatchets(keys)
   
   -- This research only applies to t1 workers so we don't need to search for any worker
   UNIT_KV[pID]["worker_t1"].LumberPerChop = 2
-  Notifications:Bottom(pID, "Researched: Sharpened Hatchets", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(pID, {text = "Researched: Sharpened Hatchets", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
   TechTree:AddTechAbility(pID, ability:GetAbilityName())
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
@@ -147,7 +147,7 @@ function Rifles(keys)
   TechTree:AddTechAbility(pID, ability:GetAbilityName())
 
   ability:ApplyDataDrivenModifier(caster, hero, "rifle_attack_range", nil)
-  Notifications:Bottom(pID, "Researched: Rifles", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(pID, {text = "Researched: Rifles", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
@@ -179,7 +179,7 @@ function ImprovedWorkerMotivation(keys)
     end
   end
 
-  Notifications:Bottom(pID, "Researched: Improved Worker Motivation", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(pID, {text = "Researched: Improved Worker Motivation", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
@@ -215,7 +215,7 @@ function GemQuality(keys)
           if level == 3 then
             increasedHP = wall.baseMaxHP * 1.6  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.6
-            Notifications:Bottom(pID, "Researched: Insane Gem Quality", 5, nil, {color="yellow", ["font-size"]="24px"})
+            Notifications:Bottom(pID, {text = "Researched: Insane Gem Quality", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
           end
           wall:SetMaxHealth(wall.baseMaxHP + increasedHP)
           wall:SetHealth(wall:GetHealth() + increasedHP)
@@ -225,13 +225,13 @@ function GemQuality(keys)
   end
 
   if level == 1 then
-    Notifications:Bottom(pID, "Researched: Improved Gem Quality", 5, nil, {color="yellow", ["font-size"]="24px"})
+    Notifications:Bottom(pID, {text = "Researched: Improved Gem Quality", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
   end
   if level == 2 then
-    Notifications:Bottom(pID, "Researched: Advanced Gem Quality", 5, nil, {color="yellow", ["font-size"]="24px"})
+    Notifications:Bottom(pID, {text = "Researched: Advanced Gem Quality", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
   end
   if level == 3 then
-    Notifications:Bottom(pID, "Researched: Insane Gem Quality", 5, nil, {color="yellow", ["font-size"]="24px"})
+    Notifications:Bottom(pID, {text = "Researched: Insane Gem Quality", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
   end
 
   if level < 3 then
@@ -251,7 +251,7 @@ function HealingTower(keys)
 
   ability:SetLevel(2)
 
-  Notifications:Bottom(pID, "Researched: Mana Regeneration", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(pID, {text = "Researched: Mana Regeneration", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   -- Note there needs to be a flag set for all future heal towers built to auto level this
 end
@@ -283,7 +283,7 @@ function HumanDamage(keys)
     end
   end
 
-  Notifications:Bottom(playerID, "Researched: Human Damage "..level, 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Human Damage "..level, duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   if ABILITY_HOLDERS[caster:GetUnitName()] ~= nil then
     caster:RemoveAbility(ability:GetAbilityName())
@@ -302,7 +302,7 @@ function SlayerGodlike(keys)
   slayer:SetMaxHealth(slayer:GetMaxHealth() + 10000)
   slayer:SetHealth(slayer:GetHealth() + 10000)
 
-  Notifications:Bottom(playerID, "Researched: Slayer Godlike Training", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Slayer Godlike Training", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   table.insert(SLAYERS[playerID]['health'], 10000)
   table.insert(SLAYERS[playerID]['damage'], 1000)
@@ -316,7 +316,7 @@ function SpireQuality(keys)
   local ability = keys.ability
   TechTree:AddTechAbility(pID, ability:GetAbilityName())
 
-  Notifications:Bottom(playerID, "Researched: Spire Quality "..level, 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Spire Quality "..level, duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 end
 
 -- Grants and extra skill point to the players vampire (up to 33)
@@ -334,7 +334,7 @@ function VampiricSkills( keys )
   vampire:SetAbilityPoints(vampire:GetAbilityPoints() + 1)
   vampire.VampiricSkills = vampire.VampiricSkills + 1
 
-  Notifications:Bottom(playerID, "Researched: Vampiric Skills", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Vampiric Skills", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   if vampire.VampiricSkills == 33 then
     caster:RemoveAbility('research_vampiric_skills')
@@ -358,7 +358,7 @@ function VampiricDamage( keys )
   vampire:SetBaseDamageMax(vampire:GetBaseDamageMax() + 100)
   vampire.VampiricDamage = vampire.VampiricDamage + 1
 
-  Notifications:Bottom(playerID, "Researched: Vampiric Damage", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Vampiric Damage", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   if vampire.VampiricDamage == 50 then
     caster:RemoveAbility('research_vampiric_damage')
@@ -374,7 +374,7 @@ function VampiricStats( keys )
   local vampire = VAMPIRES[playerID]
   local ability = keys.ability
 
-  Notifications:Bottom(playerID, "Researched: Vampiric Stats", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Vampiric Stats", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   if vampire.VampiricStats == nil then
     vampire.VampiricStats = 0
@@ -403,7 +403,7 @@ function PowerUnderworld( keys )
     vampire.PowerUnderworld = 0
   end
 
-  Notifications:Bottom(playerID, "Researched: Power of the Underworld", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Power of the Underworld", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   vampire:SetBaseStrength(vampire:GetBaseStrength() + 2000)
   vampire:SetBaseAgility(vampire:GetBaseAgility() + 2000)
@@ -430,7 +430,7 @@ function VampiricStrength( keys )
     vampire.VampiricStrength = 0
   end
 
-  Notifications:Bottom(playerID, "Researched: Vampiric Strength", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Vampiric Strength", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   vampire:SetBaseStrength(vampire:GetBaseStrength() + 300) 
   vampire.VampiricStrength = vampire.VampiricStrength + 1
@@ -453,7 +453,7 @@ function VampiricAgility( keys )
     vampire.VampiricAgility = 0
   end
 
-  Notifications:Bottom(playerID, "Researched: Vampiric Agility", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Vampiric Agility", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   vampire:SetBaseAgility(vampire:GetBaseAgility() + 300)
   vampire.VampiricAgility = vampire.VampiricAgility + 1
@@ -476,7 +476,7 @@ function VampiricIntellect( keys )
     vampire.VampiricIntellect = 0
   end
 
-  Notifications:Bottom(playerID, "Researched: Vampiric Intellect", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Vampiric Intellect", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   vampire:SetBaseIntellect(vampire:GetBaseIntellect() + 300)
   vampire.VampiricIntellect = vampire.VampiricIntellect + 1
@@ -496,7 +496,7 @@ function HumanSurvival( keys )
   local ability = keys.ability
   TechTree:AddTechAbility(playerID, ability:GetAbilityName())
 
-  Notifications:Bottom(playerID, "Researched: Basic Human Survival", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text= "Researched: Basic Human Survival", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   Timers:CreateTimer(.03, function ()
       human:SetMaxHealth(human:GetMaxHealth() + amount)
@@ -526,7 +526,7 @@ function TechPlating( keys )
   local abilityName = keys.ability:GetAbilityName() 
   TechTree:AddTechAbility(playerID, abilityName)
 
-  Notifications:Bottom(playerID, "Researched: "..ABILITY_NAMES[abilityName], 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: "..ABILITY_NAMES[abilityName], duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
   
   Timers:CreateTimer(.03, function ()
     local armorLevel = WALL_PLATING_SCALE[wallName]
@@ -544,7 +544,7 @@ function AddTeleport( keys )
   local human = HUMANS[playerID]
   TechTree:AddTechAbility(playerID, ability:GetAbilityName())
 
-  Notifications:Bottom(playerID, "Researched: Human Teleport", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Human Teleport", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 
   human:FindAbilityByName('human_teleport'):SetLevel(1)
 end
@@ -560,7 +560,7 @@ function AddBlinkExtension( keys )
   caster:AddAbility('super_blink')
   caster:FindAbilityByName('super_blink'):SetLevel(1)
 
-  Notifications:Bottom(playerID, "Researched: Blink Extension", 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: Blink Extension", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 end
 
 -- Adds Holy Upgrade to lantern towers.
@@ -616,7 +616,7 @@ function TechUpgrade( keys )
     end
   end
 
-  Notifications:Bottom(playerID, "Researched: "..ABILITY_NAMES[abilityName], 5, nil, {color="yellow", ["font-size"]="24px"})
+  Notifications:Bottom(playerID, {text = "Researched: "..ABILITY_NAMES[abilityName], duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
 end
 
 function AddHealthUpgrade( keys )

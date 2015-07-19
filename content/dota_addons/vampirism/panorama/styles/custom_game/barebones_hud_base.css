@@ -18,11 +18,22 @@
     flow-children: down;
 }
 
+.NotificationLine
+{
+    margin-top: 15px;
+    flow-children: right;
+    horizontal-align: center;
+    vertical-align: middle;
+    animation-name: scalein;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+}
+
 #TopNotifications
 {
     flow-children: down;
     horizontal-align: center;
-    width: 100%;
+    width:100%;
     opacity: 1;
     margin-top: 64px;
     visibility: visible;
@@ -36,27 +47,26 @@
     vertical-align: bottom;
     width: 100%;
     opacity: 1;
-    margin-bottom: 250px;
+    margin-bottom: 375px;
     visibility: visible;
     border: 0px solid blue;
 }
 
 .NotificationMessage
 {
-    margin-top: 5px;
     color: white;
+    vertical-align: center;
     horizontal-align: center;
     text-shadow: 4px 4px 4px #121212;
     font-size: 36px;
-    animation-name: scalein;
-    animation-duration: .1s;
-    animation-timing-function: linear;
+    font-weight: bold;
+    text-align: center;
 }
 
-.FadeOut{
-    animation-name: fadeout;
-    animation-duration: 1s;
-    animation-timing-function: linear;
+.HeroImage
+{
+    vertical-align: center;
+    horizontal-align: center;
 }
 
 @keyframes 'scalein' {
@@ -68,15 +78,5 @@
   to {
     opacity:1;
     transform: scaleX(1) scaleY(1);
-  }
-}
-
-@keyframes 'fadeout' {
-  from {
-    opacity:1;
-  }
-
-  to {
-    opacity:0;
   }
 }

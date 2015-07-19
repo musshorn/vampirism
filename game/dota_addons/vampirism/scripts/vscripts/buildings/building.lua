@@ -227,7 +227,7 @@ function FinishUpgrade( keys )
 
   if UNIT_KV[pID][targetUnit].ProvidesFood ~= nil then
     if UNIT_KV[pID][casterName].ProvidesFood ~= nil then
-      TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood - UNIT_KV[pID][casterName].ProvidesFood
+      TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood
     else
       TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood
       if TOTAL_FOOD[pID] > 250 then
