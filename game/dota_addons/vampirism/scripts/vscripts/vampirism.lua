@@ -803,6 +803,8 @@ function GameMode:OnEntityKilled( keys )
       
       if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
         lostfood = UNIT_KV[playerID][unitName].ProvidesFood
+        print(lostfood)
+        print(unitName)
         TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
         FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       end
