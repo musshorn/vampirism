@@ -23,6 +23,10 @@ Slayers are not a 'hero' by default, and as such will not be hotkeyed by default
 
 Buildings do not have a cancel ability, however they may be cancelled during any upgrade by issuing a 'Stop' command to break the channeling upgrade. ('S' is the default hotkey for this).
 
+- Selling items
+
+Vampires cannot sell items using the standard Dota UI. To sell an item, place it in the first slot of the Vampiric Research Center, then use the 'Sell Item' ability.
+
 ## Credits
 
 [BMD](https://github.com/bmddota) : Being the Based Modding Dude, [Barebones](https://github.com/bmddota/barebones), [PlayerSay](https://github.com/bmddota/PlayerSay) and answering so many questions on IRC.
