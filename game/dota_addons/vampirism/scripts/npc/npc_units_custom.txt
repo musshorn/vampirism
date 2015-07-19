@@ -5698,7 +5698,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "modelme.vmdl"
+    "Model"                     "models/statue_dragon001_reference.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
@@ -5717,7 +5717,7 @@
     "AttackAnimationPoint"      "0"
     "AttackAcquisitionRange"    "2500"
     "AttackRange"               "2500"
-    "ProjectileModel"           "particleme.vpcf"
+    "ProjectileModel"           "particles/units/heroes/hero_zuus/zuus_lightning_bolt.vpcf"
     "ProjectileSpeed"           "2000"
 
     // Bounds
@@ -5910,7 +5910,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "modelme.vmdl"
+    "Model"                     "models/nether_heart_reference.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
