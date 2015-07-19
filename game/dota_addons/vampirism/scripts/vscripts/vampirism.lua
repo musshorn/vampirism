@@ -310,6 +310,7 @@ function GameMode:OnGameRulesStateChange(keys)
         FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
         FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
         UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+        vampire:AddExperience(400, 0, false, true)
 
         --Next frame timer
         Timers:CreateTimer(0.03, function ()
@@ -320,6 +321,7 @@ function GameMode:OnGameRulesStateChange(keys)
           vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
           VAMP_COUNT = VAMP_COUNT + 1
           VAMPIRES[i] = vampire
+          print('added to vamp table')
           VAMPIRES[-1] = vampire --nice game
           return nil
         end)
@@ -739,7 +741,7 @@ function GameMode:OnEntityKilled( keys )
       end
     end
     --roll for extra coins, grant extra exp, bounty. if the unit was stacked.
-    local expReward = 0
+    local expReward = 25
     if killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) ~= nil then
       local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
       while stacks > 0 do
@@ -758,7 +760,7 @@ function GameMode:OnEntityKilled( keys )
         elseif outcome <= smallProb then
           local newcoin = CreateItem("item_small_coin", killerEntity, killerEntity)
           local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
-          VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
+          VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
           newcoin.player = killerEntity:GetMainControllingPlayer()
           newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
           newcoinP:SetModelScale(3)
@@ -767,11 +769,14 @@ function GameMode:OnEntityKilled( keys )
         expReward = expReward + 25
         stacks = stacks - 1
       end
-      local nearVamps = FindUnitsInRadius(killerEntity:GetTeam(), killedUnit:GetAbsOrigin(), nil, 1000, DOTA_TEAM_BADGUYS, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
+      local nearVamps = FindUnitsInRadius(killedUnit:GetTeam(), killedUnit:GetAbsOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+      print(#nearVamps)
       if nearVamps ~= nil then
-      	local xpSplit = expReward / #nearVamps
+      	local xpSplit = expReward / (#nearVamps)
+        print(xpSplit)
       	for k,v in pairs(nearVamps) do
-      		v:AddExperience(xpSplit, 0, false, false)
+          print('adding to ', v:GetMainControllingPlayer(), ' vampire', v:GetUnitName())
+          v:AddExperience(xpSplit, 2, false, true)
       	end
       end
     end
@@ -814,9 +819,13 @@ function GameMode:OnEntityKilled( keys )
         CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] - lostfood
         FireGameEvent("vamp_food_changed", { player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
         -- Decrease food based on stack count.
-        local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
-        if stacks ~= nil then
-        	FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = stacks * lostfood})
+        local stackAbility = killedUnit:FindAbilityByName('worker_stack')
+        if stackAbility ~= nil then
+          local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
+          if stacks ~= nil then
+            CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] - (lostfood * stacks)
+          	FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total =  CURRENT_FOOD[playerID]})
+          end
         end
       end
 
