@@ -82,13 +82,6 @@ function House1:Init(unit)
 													end)
 	  										end
 										end
-									else
-										FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Food cap reached" } )
-										table.remove(house1.queue)
-										caster:RemoveModifierByName(house1.workHandler:GetName())
-										house1.workHandler:SetChanneling(false)
-										house1.doingWork = false
-									end
 								else
 									FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Build more farms" } )
 									table.remove(house1.queue)
