@@ -332,8 +332,15 @@ function VerifyAttacker( keys )
   local attackerPID = attacker:GetMainControllingPlayer()
   local targetPID = target:GetMainControllingPlayer()
 
+  local isVamp = false
+  for k, v in pairs(VAMPIRES) do
+    if k == attackerPID then
+      isVamp = true
+    end
+  end
+
   -- if you're attacking a unit that's not yours but in your base then its ok, otherwise stop the attacker
-  if attacker:GetUnitName() ~= "npc_dota_hero_night_stalker" then
+  if isVamp == false then
     if attackerPID ~= targetPID then
       if  Bases.Owners[targetPID] ~= nil then
         if target.inBase ~=  Bases.Owners[targetPID].BaseID then
