@@ -316,6 +316,10 @@ function BecomeVampire( keys )
       local vamp = PlayerResource:ReplaceHeroWith(pID, "npc_dota_hero_life_stealer", 0, 0)
       vamp:SetControllableByPlayer(pID, true)
       vamp:SetAbsOrigin(caster:GetAbsOrigin())
+      TOTAL_FOOD[pID] = 10
+      CURRENT_FOOD[pID] = 0
+      GOLD[pID] = 0
+      WOOD[pID] = 0
 
       caster:RemoveSelf()
     else

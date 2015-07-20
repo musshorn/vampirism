@@ -1937,7 +1937,7 @@
   "research_improved_gem_quality"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
-    "AbilityChannelTime"  "2"
+    "AbilityChannelTime"  "40"
     "LumberCost" "2000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
@@ -1985,7 +1985,7 @@
   "research_advanced_gem_quality"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
-    "AbilityChannelTime"  "2"
+    "AbilityChannelTime"  "40"
     "LumberCost" "2000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
@@ -2033,7 +2033,7 @@
   "research_unbeatable_gem_quality"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
-    "AbilityChannelTime"  "2"
+    "AbilityChannelTime"  "40"
     "LumberCost" "2000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
