@@ -320,6 +320,8 @@ function BecomeVampire( keys )
       CURRENT_FOOD[pID] = 0
       GOLD[pID] = 0
       WOOD[pID] = 0
+      VAMPIRES[pID] = vamp
+      VAMP_COUNT = VAMP_COUNT + 1
 
       caster:RemoveSelf()
     else
