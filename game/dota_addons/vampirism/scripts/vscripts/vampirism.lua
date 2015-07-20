@@ -1,5 +1,7 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
+VERSION_NUMBER = 0.01                   -- Version number sent to panorama.
+
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false             -- Should the main shop contain Secret Shop items as well as regular items
 ALLOW_SAME_HERO_SELECTION = true        -- Should we let people select the same hero as each other
@@ -1196,8 +1198,9 @@ function GameMode:InitGameMode()
   TechTree:Init()
   ShopUI:Init()
 
-
   UNIT_KV[-1] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+
+  CustomGameEventManager:Send_ServerToAllClients("send_version", {text=VERSION_NUMBER} )
 
   print('[vampirism] Done loading vampirism gamemode!\n\n')
 end
