@@ -40,6 +40,7 @@
   //        "1"             "research_healing_vitality" -- A list of research upgrades that this unit is affected by.
   //     }
   //     "ParentUnit"       "house_t2" -- The unit that this unit was made from.
+  //     "AnnounceUnit"          "1" -- The unit will be announced the first time it is trained.
   //
   //=================================================================================//
   
@@ -4252,6 +4253,7 @@
       "NeedTech"      "house_t2 gold_mine_t1"
       "RepairTime"  "15"
       "ParentUnit"        "research_center_t1"
+      "AnnounceUnit"  "1"
   }
 
   //================================================================================= 
@@ -4644,6 +4646,7 @@
     "MaximumLumber" "1000" // Base max lumber
     "LumberPerChop" "100"
     "ConsumesFood"  "30"
+    "AnnounceUnit"  "1"
 
     "Creature"
     {
@@ -6075,6 +6078,7 @@
     "RepairTime"  "120"
     "NeedTech"    "citadel_of_faith"
     "SpawnsUnits" "true"
+    "AnnounceUnit"  "1"
   }
 
   //================================================================================= 
@@ -6181,6 +6185,7 @@
     "RepairTime"  "65"
     "NeedTech"          "command_center"
     "SpawnsUnits" "true"
+    "AnnounceUnit"  "1"
   }
 
   //================================================================================= 
@@ -6292,6 +6297,7 @@
     "NeedTech"    "house_t3 research_center_t2"
     "RepairTime"  "20"
     "ParentUnit"  "human_vault"
+    "AnnounceUnit"  "1"
   }
 
 

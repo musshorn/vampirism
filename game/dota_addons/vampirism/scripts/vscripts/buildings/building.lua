@@ -239,6 +239,12 @@ function FinishUpgrade( keys )
     FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
   end
 
+  if UNIT_KV[pID][targetUnit].AnnounceUnit == 1 and UNIQUE_TABLE[targetUnit] == nil then
+    local playerName = PlayerResource:GetPlayerName(unit:GetMainControllingPlayer())
+    GameRules:SendCustomMessage(ColorIt(playerName, IDToColour(pID))..' has completed a '..UNIT_NAMES[targetUnit]..'!', 0, 1)
+    UNIQUE_TABLE[targetUnit] = pID
+  end
+
   if UNIT_KV[pID][unit:GetUnitName()].RecievesLumber ~= nil then -- add new unit to the lumber drops if applicable
     if UNIT_KV[pID][unit:GetUnitName()].RecievesLumber == "true" then
       table.insert(LUMBER_DROPS, unit)

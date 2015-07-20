@@ -60,29 +60,29 @@ function build( keys )
     -- Give building its abilities
     -- add the mana
     unit:SetMana(unit:GetMaxMana())
-
+    local unitName = unit:GetUnitName()
     House1:Init(unit)
 
     -- Check if the building will create units, if so, give it a unit creation timer
-    if UNIT_KV[pID][unit:GetUnitName()].SpawnsUnits == "true" then
+    if UNIT_KV[pID][unitName].SpawnsUnits == "true" then
       unit:UnitSpawner()
     end
 
     -- If the building provides food, how much? Also alert the UI for an update
-    if UNIT_KV[pID][unit:GetUnitName()].ProvidesFood ~= nil then
-      local food = tonumber(UNIT_KV[pID][unit:GetUnitName()].ProvidesFood)
+    if UNIT_KV[pID][unitName].ProvidesFood ~= nil then
+      local food = tonumber(UNIT_KV[pID][unitName].ProvidesFood)
       if (TOTAL_FOOD[pID] < 250) then
         TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
         FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
       end
     end
 
-    if UNIT_KV[pID][unit:GetUnitName()].IsTech ~= nil then
-      TechTree:AddTech(unit:GetUnitName(), unit:GetMainControllingPlayer())
+    if UNIT_KV[pID][unitName].IsTech ~= nil then
+      TechTree:AddTech(unitName, unit:GetMainControllingPlayer())
     end
 
-    if UNIT_KV[pID][unit:GetUnitName()].RecievesLumber ~= nil then
-      if UNIT_KV[pID][unit:GetUnitName()].RecievesLumber == "true" then
+    if UNIT_KV[pID][unitName].RecievesLumber ~= nil then
+      if UNIT_KV[pID][unitName].RecievesLumber == "true" then
         table.insert(LUMBER_DROPS, unit)
       end
     end
@@ -94,10 +94,16 @@ function build( keys )
       end
     end
 
-    if UNIT_KV[pID][unit:GetUnitName()].ShopType ~= nil then
+    if UNIT_KV[pID][unitName].ShopType ~= nil then
       local shopEnt = Entities:FindByName(nil, "human_shop") -- entity name in hammer
       local newshop = SpawnEntityFromTableSynchronous('trigger_shop', {origin = unit:GetAbsOrigin(), shoptype = 1, model=shopEnt:GetModelName()}) -- shoptype is 0 for a "home" shop, 1 for a side shop and 2 for a secret shop
       unit.ShopEnt = newshop -- This needs to be removed if the shop is destroyed
+    end
+
+    if UNIT_KV[pID][unitName].AnnounceUnit == 1 and UNIQUE_TABLE[unitName] == nil then
+      local playerName = PlayerResource:GetPlayerName(unit:GetMainControllingPlayer())
+      GameRules:SendCustomMessage(ColorIt(playerName, IDToColour(pID))..' has completed a '..UNIT_NAMES[unitName]..'!', 0, 1)
+      UNIQUE_TABLE[unitName] = pID
     end
 
     --Remove Building Silence, Disarm
@@ -109,13 +115,13 @@ function build( keys )
     end
 
     --lazy fix for making graves work properly.
-    if unit:GetUnitName() == 'massive_grave' then
+    if unitName == 'massive_grave' then
       unit:AddAbility('grave_aura')
       unit:FindAbilityByName('grave_aura'):OnUpgrade()
     end
 
     --adds invulnerable to vamp res center
-    if unit:GetUnitName() == 'research_center_vampire' then
+    if unitName == 'research_center_vampire' then
       unit:AddNewModifier(unit, nil, 'modifier_invulnerable', {})
     end
   end)

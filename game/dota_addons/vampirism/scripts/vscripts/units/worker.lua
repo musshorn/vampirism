@@ -44,6 +44,12 @@ function Worker:Worker1(vPos, hOwner, unitName)
     ParticleManager:SetParticleControlEnt(wAmb, 1, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", wPos, true)
   end
 
+  if UNIT_KV[pID][unitName].AnnounceUnit == 1 and UNIQUE_TABLE[unitName] == nil then
+    local playerName = PlayerResource:GetPlayerName(worker:GetMainControllingPlayer())
+    GameRules:SendCustomMessage(ColorIt(playerName, IDToColour(pID))..' has completed a '..UNIT_NAMES[unitName]..'!', 0, 1)
+    UNIQUE_TABLE[unitName] = pID
+  end
+
   local ability = worker:FindAbilityByName("find_lumber")
   ability:ToggleAutoCast() 
 

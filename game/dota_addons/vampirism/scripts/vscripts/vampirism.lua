@@ -95,6 +95,9 @@ WORKER_STACKS = {
   worker_t5 = 1
 }
 
+-- Table used to check if something has been bought or built before.
+UNIQUE_TABLE = {}
+
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
 XP_PER_LEVEL_TABLE[1] = 0
@@ -344,9 +347,9 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
     npc:FindAbilityByName("human_repair"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 50 --cheats, real is 50.
+      WOOD[playerID] = 50000000 --cheats, real is 50.
       GOLD[playerID] = 0 --this is how it should look on ship.
-      GOLD[playerID] = 0
+      GOLD[playerID] = 1000000
       TOTAL_FOOD[playerID] = 20
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")

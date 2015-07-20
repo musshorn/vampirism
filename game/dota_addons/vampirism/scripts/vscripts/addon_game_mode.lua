@@ -26,6 +26,7 @@ require('units.avernal')
 require('util.abilitynames')
 require('hero_pool')
 require('util.unitnames')
+require('util.itemnames')
 
 function Precache( context )
 		--[[

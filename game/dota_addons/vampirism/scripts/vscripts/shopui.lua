@@ -227,6 +227,11 @@ function Purchase( itemname, buyer )
       		 FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = 0})
            SHOPS[shopIndex][index]['stock'] = SHOPS[shopIndex][index]['stock'] - 1
            table.insert(SHOPS[shopIndex][index]['queue'],  SHOPS[shopIndex][index]['stocktime'])
+           if ITEM_KV[itemname].AnnounceItem == 1 and UNIQUE_TABLE[itemname] == nil then
+             local playerName = PlayerResource:GetPlayerName(playerID)
+             GameRules:SendCustomMessage(ColorIt(playerName, IDToColour(playerID))..' has purchased '..ITEM_NAMES[itemname]..'!', 0, 1)
+             UNIQUE_TABLE[itemname] = playerID
+           end
           else
             --out of stock, fire event anyway and send remaining time for next restock.
             FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = SHOPS[shopIndex][index]['queue'][1]})
