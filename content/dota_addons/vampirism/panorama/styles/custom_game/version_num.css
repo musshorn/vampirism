@@ -1,9 +1,13 @@
-.versionText
+.FillScreen
 {
-	width: 100%;
-	height: 100%;
-	margin-top: 10px;
+  width: 100%;
+  height: 100%;
+}
+.VersionNumber
+{
+	margin-top: 11px;
 	margin-left: 50px;
 	color: white;
-	font-size: 24; 
+	font-size: 20; 
+  opacity: 0.3;
 }
