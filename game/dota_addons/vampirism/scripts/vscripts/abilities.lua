@@ -162,7 +162,6 @@ function create_building_entity( keys )
   local builderWork = keys.attacker.work
   local lumberCost = builderWork.buildingTable.LumberCost
   local goldCost = builderWork.buildingTable.GoldCost
-  print(builderWork.name)
 
   local lumberOK = false
   local goldOK = false
@@ -190,6 +189,8 @@ function create_building_entity( keys )
 
   -- If they cant afford it then stop building, otherwise resume
   if lumberOK == false or goldOK == false then
+    caster:ClearQueue()
+    caster:Stop()
     return
   else
     if lumberCost == nil then
@@ -292,10 +293,12 @@ function BuildingQ( keys )
   if caster.ProcessingBuilding ~= nil then
     -- caster is probably a builder, stop them
     player = PlayerResource:GetPlayer(caster:GetMainControllingPlayer())
-    player.activeBuilder:ClearQueue()
     player.activeBuilding = nil
-    player.activeBuilder:Stop()
-    player.activeBuilder.ProcessingBuilding = false
+    if player.activeBuilder and IsValidEntity(player.activeBuilder) then
+      player.activeBuilder:ClearQueue()
+      player.activeBuilder:Stop()
+      player.activeBuilder.ProcessingBuilding = false
+    end
   end
 end
 
