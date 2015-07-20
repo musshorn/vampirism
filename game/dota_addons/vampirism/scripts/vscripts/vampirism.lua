@@ -328,10 +328,12 @@ function GameMode:OnGameRulesStateChange(keys)
     end
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
     GameMode:OnGameInProgress()
+    CustomGameEventManager:Send_ServerToAllClients("send_version", {version=VERSION_NUMBER} )
     if HOST_LOW_BANDWIDTH == nil then
       HOST_LOW_BANDWIDTH = false
     end
   end
+
 end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
@@ -1203,9 +1205,6 @@ function GameMode:InitGameMode()
   ShopUI:Init()
 
   UNIT_KV[-1] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
-
-  CustomGameEventManager:Send_ServerToAllClients("send_version", {version=VERSION_NUMBER} )
-
 
   print('[vampirism] Done loading vampirism gamemode!\n\n')
 end
