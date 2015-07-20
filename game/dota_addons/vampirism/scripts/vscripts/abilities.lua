@@ -296,8 +296,12 @@ end
 function SpawnGargoyle( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
 
-  local unit = CreateUnitByName("human_gargoyle", caster:GetAbsOrigin(), false, nil, nil, caster:GetTeam())
+  player:SetTeam(DOTA_TEAM_BADGUYS)
+  PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BADGUYS, true)
+
+  local unit = CreateUnitByName("human_gargoyle", caster:GetAbsOrigin(), false, nil, nil, PlayerResource:GetTeam(pID))
   unit:SetControllableByPlayer(pID, true)
 
   caster:RemoveSelf()
@@ -310,9 +314,6 @@ function BecomeVampire( keys )
 
   if caster.onBlight ~= nil then
     if caster.onBlight == true then
-      player:SetTeam(DOTA_TEAM_BADGUYS)
-      PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BADGUYS, true)
-
       local vamp = PlayerResource:ReplaceHeroWith(pID, "npc_dota_hero_life_stealer", 0, 0)
       vamp:SetControllableByPlayer(pID, true)
       vamp:SetAbsOrigin(caster:GetAbsOrigin())
@@ -338,8 +339,15 @@ function VerifyAttacker( keys )
   local attackerPID = attacker:GetMainControllingPlayer()
   local targetPID = target:GetMainControllingPlayer()
 
+  local isVamp = false
+  for k, v in pairs(VAMPIRES) do
+    if k == attackerPID then
+      isVamp = true
+    end
+  end
+
   -- if you're attacking a unit that's not yours but in your base then its ok, otherwise stop the attacker
-  if attacker:GetUnitName() ~= "npc_dota_hero_night_stalker" then
+  if isVamp == false then
     if attackerPID ~= targetPID then
       if  Bases.Owners[targetPID] ~= nil then
         if target.inBase ~=  Bases.Owners[targetPID].BaseID then
