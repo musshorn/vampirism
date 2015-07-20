@@ -184,7 +184,9 @@ function GameMode:OnAllPlayersLoaded()
     end
   end
   
-  Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
+  if not FACTOR_SET then
+    Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
+  end
 end
 
 --[[
@@ -1453,6 +1455,7 @@ function GameMode:OnPlayerSay(keys)
 
     for i = 1, 5 do
       local tier = i - 1
+      local k = 'worker_t'..i
       local workerFactor = WORKER_FACTOR / math.pow(2, tier)
 
       if workerFactor < 1 then
@@ -1461,7 +1464,7 @@ function GameMode:OnPlayerSay(keys)
 
       workerFactor = math.floor(workerFactor)
 
-      WORKER_STACKS[i] = workerFactor
+      WORKER_STACKS[k] = workerFactor
     end
     FACTOR_SET = true
     Notifications:ClearTopFromAll()

@@ -29,12 +29,11 @@ function TrainUnit( keys )
 
   -- Adjust food and resource needs based off worker stacking.
   if WORKER_STACKS[unitToSpawn] ~= nil then
-    print('has tacks')
     if goldCost ~= nil then goldCost = goldCost * WORKER_STACKS[unitToSpawn] end
     if woodCost ~= nil then woodCost = woodCost * WORKER_STACKS[unitToSpawn] end
     if requestingFood ~= nil then requestingFood = requestingFood * WORKER_STACKS[unitToSpawn] end
   end
-
+  
   if goldCost ~= nil then
     if goldCost > GOLD[pID] then
       FireGameEvent('custom_error_show', {player_ID = pID, _error = 'Need more gold!'})
