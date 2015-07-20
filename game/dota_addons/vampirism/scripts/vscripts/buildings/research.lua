@@ -18,14 +18,21 @@ function Research( keys )
   -- Check that the player can afford the upgrade, if not break out of the function
   if WOOD[pID] < lumberCost then
     caster:Stop()
+    caster.goldCost = 0
+    caster.lumberCost = 0
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more wood" } )
     return
   end
   if GOLD[pID] < goldCost then
     caster:Stop()
+    caster.goldCost = 0
+    caster.lumberCost = 0
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
     return
   end
+
+  caster.lumberCost = lumberCost
+  caster.goldCost = goldCost
 
   -- Player is ok to commence research, deduct resources
   ChangeWood(pID, -1 * lumberCost)
@@ -52,8 +59,8 @@ end
 function Cancelled(keys)
   local caster = keys.caster
   local ability = keys.ability
-  local lumberCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
-  local goldCost = ABILITY_KV[ability:GetAbilityName()].GoldCost
+  local lumberCost = caster.lumberCost
+  local goldCost = caster.goldCost
   local playerID = caster:GetMainControllingPlayer()
 
   if goldCost == nil then

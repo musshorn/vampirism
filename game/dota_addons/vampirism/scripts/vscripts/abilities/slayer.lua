@@ -118,6 +118,8 @@ function SummonSlayer( keys )
   -- Check that the player can afford the slayer, if not break out of the function
   if WOOD[pID] < lumberCost then
     caster:Stop()
+    caster.refundGold = 0
+    caster.refundWood = 0
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more wood" } )
     return
   end
@@ -125,6 +127,8 @@ function SummonSlayer( keys )
 
   if GOLD[pID] < goldCost then
     caster:Stop()
+    caster.refundGold = 0
+    caster.refundWood = 0
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
     return
   end
