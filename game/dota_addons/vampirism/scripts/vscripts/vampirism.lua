@@ -702,12 +702,6 @@ function GameMode:OnEntityKilled( keys )
       -- Filter out ents that aren't the players.
       if not v:GetMainControllingPlayer() == killedUnit:GetMainControllingPlayer() then
         table.remove(playerEnts, k)
-      else
-        -- Remove non buildings from table, destroy them.
-        if not v:HasAbility('is_a_building') then
-          v:CastAbilityOnPosition(v:GetAbsOrigin(), v:FindAbilityByName('worker_det'), 0)
-          table.remove(playerEnts, k)
-        end
       end
     end
 
@@ -717,10 +711,16 @@ function GameMode:OnEntityKilled( keys )
         -- Silence, disarm buildings still alive.
         v:AddNewModifier(killedUnit, nil, "modifier_silence", {duration = 60})
         v:AddNewModifier(killedUnit, nil, "modifier_disarmed", {duration = 60})
-        Timers:CreateTimer(60, function ()
+
+        -- If its nbot a building kill it now, otherwise kill it in 60 seconds.
+        if not v:HasAbility('is_a_building') then
+          v:Destroy()
+        else
+          Timers:CreateTimer(60, function ()
           v:RemoveSelf()
           return nil
-        end)      
+          end)  
+        end    
       end
       return nil
     end)
@@ -730,7 +730,6 @@ function GameMode:OnEntityKilled( keys )
     tomb:SetControllableByPlayer(killedUnit:GetMainControllingPlayer(), true)
     TOTAL_FOOD[killedUnit:GetMainControllingPlayer()] = 0
     CURRENT_FOOD[killedUnit:GetMainControllingPlayer()] = 0
-    Bases.Owners[playerID] = nil
   end
 
   if killedUnit:GetName() == "npc_dota_hero_night_stalker" then
