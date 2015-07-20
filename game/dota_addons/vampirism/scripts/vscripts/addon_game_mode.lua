@@ -85,6 +85,7 @@ function Precache( context )
 		PrecacheResource("particle", "particles/neutral_fx/thunderlizard_base_attack.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_jakiro/jakiro_base_attack_fire.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_razor/razor_static_link_projectile.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_life_stealer/life_stealer_ambient.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
@@ -170,6 +171,7 @@ function Precache( context )
 
 		PrecacheResource("model_folder","models/items/omniknight", context)
 		PrecacheResource("model_folder","models/items/nightstalker", context)
+		PrecacheResource("model_folder", "models/heroes/life_stealer", context)
 
 		-- unit precache
 		PrecacheUnitByNameSync("tent_t2", context)
