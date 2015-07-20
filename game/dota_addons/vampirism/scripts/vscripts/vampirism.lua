@@ -696,6 +696,35 @@ function GameMode:OnEntityKilled( keys )
       GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
     end
 
+    local playerEnts = Entities:FindAllByClassname("npc_dota_creature")
+    -- Filter all creatures to only the players buildings.
+    for k,v in pairs(playerEnts) do
+      -- Filter out ents that aren't the players.
+      if not v:GetMainControllingPlayer() == killedUnit:GetMainControllingPlayer() then
+        table.remove(playerEnts, k)
+      else
+        -- Remove non buildings from table, destroy them.
+        if not v:HasAbility('is_a_building') then
+          v:CastAbilityOnPosition(v:GetAbsOrigin(), v:FindAbilityByName('worker_det'), 0)
+          table.remove(playerEnts, k)
+        end
+      end
+    end
+
+    -- Goes to next frame to stop bugs.
+    Timers:CreateTimer(.03, function ()
+        for k,v in pairs(playerEnts) do
+        -- Silence, disarm buildings still alive.
+        v:AddNewModifier(killedUnit, nil, "modifier_silence", {duration = 60})
+        v:AddNewModifier(killedUnit, nil, "modifier_disarmed", {duration = 60})
+        Timers:CreateTimer(60, function ()
+          v:RemoveSelf()
+          return nil
+        end)      
+      end
+      return nil
+    end)
+
     -- Create a tombstone, the player can then pick to become a human spectator or a vampire
     local tomb = CreateUnitByName("human_tomb", killedUnit:GetAbsOrigin(), true, nil, nil, killedOwner:GetTeam())
     tomb:SetControllableByPlayer(killedUnit:GetMainControllingPlayer(), true)
