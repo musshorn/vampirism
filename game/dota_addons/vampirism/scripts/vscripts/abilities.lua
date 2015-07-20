@@ -156,7 +156,6 @@ function create_building_entity( keys )
   local builderWork = keys.attacker.work
   local lumberCost = builderWork.buildingTable.LumberCost
   local goldCost = builderWork.buildingTable.GoldCost
-  print(builderWork.name)
 
   local lumberOK = false
   local goldOK = false
@@ -184,6 +183,8 @@ function create_building_entity( keys )
 
   -- If they cant afford it then stop building, otherwise resume
   if lumberOK == false or goldOK == false then
+    caster:ClearQueue()
+    caster:Stop()
     return
   else
     if lumberCost == nil then
