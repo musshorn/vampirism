@@ -10736,6 +10736,42 @@
   }
 
   //================================================================================= 
+  // self destruct
+  //=================================================================================
+  "util_self_destruct"
+  {
+    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"                 "ability_datadriven"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_self_destruct"
+        "Target"     "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_self_destruct"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+        
+        "OnCreated"
+        {
+          "RemoveUnit"
+          {
+            "Target"  "CASTER"   
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
   // Util - prevents coin drops on death
   //=================================================================================
   "no_coin_drops"
