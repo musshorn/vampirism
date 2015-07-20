@@ -2012,11 +2012,6 @@
     "AttackRange"       "0"
     "ProjectileModel"     ""
     "ProjectileSpeed"     "0"
-
-    // Attributes
-    //----------------------------------------------------------------
-    "AttributeBaseIntelligence" "0"
-    "AttributeBaseIntelligenceGain" "0"
   
     // Bounds
     //----------------------------------------------------------------
@@ -2394,7 +2389,7 @@
     "Ability3"                  "upgrade_to_tower_calcite_t1"               // Ability 3.
     "Ability4"                  "upgrade_to_tower_frost"                    // Ability 4.
     "Ability5"                  "upgrade_to_wall_seeing"                    // Ability 5.
-    "Ability6"                  "upgrade_to_tower_lantern"                  // Ability 6 - Extra.
+    "Ability6"                  "upgrade_to_tower_lantern_t1"                  // Ability 6 - Extra.
     "Ability7"                  ""                  // Ability 7 - Extra.
     "Ability8"                  "is_a_building"                 // Ability 8 - Extra.
 
@@ -3533,7 +3528,7 @@
   //================================================================================= 
   // Lantern Tower (formerly pink diamond)
   //=================================================================================
-  "tower_lantern"
+  "tower_lantern_t1"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
@@ -3624,7 +3619,7 @@
   //================================================================================= 
   // Lantern Tower T2 (formerly pink diamond)
   //=================================================================================
-  "tower_lantern_2"
+  "tower_lantern_t2"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
@@ -4778,7 +4773,7 @@
     
     "Ability1"          "bh_dummy"      // Ability 1.
     "Ability2"          "vampire_vision_dummy_lock2"      // Ability 2.
-    "Ability3"          ""      // Ability 3.
+    "Ability3"          "no_coin_drops"      // Ability 3.
     "Ability4"          ""      // Ability 4.
     "Ability5"          ""      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
@@ -5087,14 +5082,15 @@
     "ExtraAbility2"             "build_tower_blood_t1"      
     "ExtraAbility3"             "build_gold_mine_t4"        
     "ExtraAbility4"             "build_tower_cripple_t3"    
-    "ExtraAbility5"             "build_tower_pink_t1"       
+    "ExtraAbility5"             "build_tower_lantern_t1"       
     "ExtraAbility6"             "build_wall_t9"             
     "ExtraAbility7"             "build_tower_lightning_t2"
     "ExtraAbility8"             "build_tower_spire_t2"      
     "ExtraAbility9"             "build_empty"             
     "ExtraAbility10"            "build_tower_wall_t2"       
     "ExtraAbility11"            "build_heal_wall_t2"        
-    "ExtraAbility12"            "build_cancel"              
+    "ExtraAbility12"            "build_cancel"
+                  
 
     // Armor
     //----------------------------------------------------------------
@@ -5702,7 +5698,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "modelme.vmdl"
+    "Model"                     "models/statue_dragon001_reference.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
@@ -5721,7 +5717,7 @@
     "AttackAnimationPoint"      "0"
     "AttackAcquisitionRange"    "2500"
     "AttackRange"               "2500"
-    "ProjectileModel"           "particleme.vpcf"
+    "ProjectileModel"           "particles/units/heroes/hero_zuus/zuus_lightning_bolt.vpcf"
     "ProjectileSpeed"           "2000"
 
     // Bounds
@@ -5914,7 +5910,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
-    "Model"                     "modelme.vmdl"
+    "Model"                     "models/nether_heart_reference.vmdl"
     "ModelScale"                "1" 
     "ConsideredHero"            "0"
 
@@ -6313,7 +6309,7 @@
     //----------------------------------------------------------------
     
     "Ability1"          "vampire_particle_call"     // Ability 1.
-    "Ability2"          ""      // Ability 2.
+    "Ability2"          "no_coin_drops"      // Ability 2.
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""      // Ability 4.
     "Ability5"          ""      // Ability 5.

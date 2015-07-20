@@ -71,7 +71,7 @@ function build( keys )
     -- If the building provides food, how much? Also alert the UI for an update
     if UNIT_KV[pID][unit:GetUnitName()].ProvidesFood ~= nil then
       local food = tonumber(UNIT_KV[pID][unit:GetUnitName()].ProvidesFood)
-      if (TOTAL_FOOD[pID] < 300) then
+      if (TOTAL_FOOD[pID] < 250) then
         TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
         FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
       end
@@ -317,6 +317,12 @@ function BecomeVampire( keys )
       local vamp = PlayerResource:ReplaceHeroWith(pID, "npc_dota_hero_life_stealer", 0, 0)
       vamp:SetControllableByPlayer(pID, true)
       vamp:SetAbsOrigin(caster:GetAbsOrigin())
+      TOTAL_FOOD[pID] = 10
+      CURRENT_FOOD[pID] = 0
+      GOLD[pID] = 0
+      WOOD[pID] = 0
+      VAMPIRES[pID] = vamp
+      VAMP_COUNT = VAMP_COUNT + 1
 
       caster:RemoveSelf()
     else

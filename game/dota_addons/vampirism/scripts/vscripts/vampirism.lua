@@ -184,7 +184,9 @@ function GameMode:OnAllPlayersLoaded()
     end
   end
   
-  Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
+  if not FACTOR_SET then
+    Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
+  end
 end
 
 --[[
@@ -340,9 +342,9 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
     npc:FindAbilityByName("human_repair"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 10000000 --cheats, real is 50.
+      WOOD[playerID] = 50 --cheats, real is 50.
       GOLD[playerID] = 0 --this is how it should look on ship.
-      GOLD[playerID] = 10000000
+      GOLD[playerID] = 0
       TOTAL_FOOD[playerID] = 20
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -694,10 +696,40 @@ function GameMode:OnEntityKilled( keys )
       GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
     end
 
+    local playerEnts = Entities:FindAllByClassname("npc_dota_creature")
+    -- Filter all creatures to only the players buildings.
+    for k,v in pairs(playerEnts) do
+      -- Filter out ents that aren't the players.
+      if not v:GetMainControllingPlayer() == killedUnit:GetMainControllingPlayer() then
+        table.remove(playerEnts, k)
+      else
+        -- Remove non buildings from table, destroy them.
+        if not v:HasAbility('is_a_building') then
+          v:CastAbilityOnPosition(v:GetAbsOrigin(), v:FindAbilityByName('worker_det'), 0)
+          table.remove(playerEnts, k)
+        end
+      end
+    end
+
+    -- Goes to next frame to stop bugs.
+    Timers:CreateTimer(.03, function ()
+        for k,v in pairs(playerEnts) do
+        -- Silence, disarm buildings still alive.
+        v:AddNewModifier(killedUnit, nil, "modifier_silence", {duration = 60})
+        v:AddNewModifier(killedUnit, nil, "modifier_disarmed", {duration = 60})
+        Timers:CreateTimer(60, function ()
+          v:RemoveSelf()
+          return nil
+        end)      
+      end
+      return nil
+    end)
+
     -- Create a tombstone, the player can then pick to become a human spectator or a vampire
     local tomb = CreateUnitByName("human_tomb", killedUnit:GetAbsOrigin(), true, nil, nil, killedOwner:GetTeam())
     tomb:SetControllableByPlayer(killedUnit:GetMainControllingPlayer(), true)
-
+    TOTAL_FOOD[killedUnit:GetMainControllingPlayer()] = 0
+    CURRENT_FOOD[killedUnit:GetMainControllingPlayer()] = 0
     Bases.Owners[playerID] = nil
   end
 
@@ -805,6 +837,8 @@ function GameMode:OnEntityKilled( keys )
       
       if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
         lostfood = UNIT_KV[playerID][unitName].ProvidesFood
+        print(lostfood)
+        print(unitName)
         TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
         FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
       end
@@ -1451,6 +1485,7 @@ function GameMode:OnPlayerSay(keys)
 
     for i = 1, 5 do
       local tier = i - 1
+      local k = 'worker_t'..i
       local workerFactor = WORKER_FACTOR / math.pow(2, tier)
 
       if workerFactor < 1 then
@@ -1459,7 +1494,7 @@ function GameMode:OnPlayerSay(keys)
 
       workerFactor = math.floor(workerFactor)
 
-      WORKER_STACKS[i] = workerFactor
+      WORKER_STACKS[k] = workerFactor
     end
     FACTOR_SET = true
     Notifications:ClearTopFromAll()

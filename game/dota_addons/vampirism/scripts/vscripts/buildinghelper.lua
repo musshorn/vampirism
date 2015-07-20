@@ -414,7 +414,6 @@ function BuildingHelper:InitializeBuildingEntity( keys )
     if UNIT_KV[pID][unitName]['TechModifiers'] ~= nil then
       local modTable = UNIT_KV[pID][unitName]['TechModifiers']
       for k, v in pairs(UNIT_KV[pID][unitName]['TechModifiers']) do
-        print('bh looperdooper')
         if TechTree:HasTech(pID, v) then
           local modName =  ABILITY_KV[v]['GiveModifier']
           building:AddAbility(modName)
