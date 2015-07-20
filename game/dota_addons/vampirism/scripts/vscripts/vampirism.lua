@@ -697,6 +697,8 @@ function GameMode:OnEntityKilled( keys )
     -- Create a tombstone, the player can then pick to become a human spectator or a vampire
     local tomb = CreateUnitByName("human_tomb", killedUnit:GetAbsOrigin(), true, nil, nil, killedOwner:GetTeam())
     tomb:SetControllableByPlayer(killedUnit:GetMainControllingPlayer(), true)
+
+    Bases.Owners[playerID] = nil
   end
 
   if killedUnit:GetName() == "npc_dota_hero_night_stalker" then
