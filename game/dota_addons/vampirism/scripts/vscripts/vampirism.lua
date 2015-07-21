@@ -301,41 +301,46 @@ function GameMode:OnGameRulesStateChange(keys)
         return 1
       end
       })
-    for i = 0, 9 do
-      local playerTeam = PlayerResource:GetTeam(i)
-      if playerTeam == 2 then
-        local human = CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
-        HUMANS[i] = human
-      elseif playerTeam == 3 then
-        local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
-        vampire:SetHullRadius(48)
-        FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
-        GOLD[i] = 0 --cheats on
-        WOOD[i] = 0 --cheats on
-        TOTAL_FOOD[i] = 10
-        CURRENT_FOOD[i] = 0
-        FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
-        FireGameEvent("vamp_wood_changed", {player_ID = i, wood_total = WOOD[i]})
-        FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
-        FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
-        UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
-        vampire:AddExperience(400, 0, false, true)
 
-        --Next frame timer
-        Timers:CreateTimer(0.03, function ()
-          vampire:FindAbilityByName("vampire_init_hider"):OnUpgrade()
-          vampire:SetAbsOrigin(OutOfWorldVector)
-          vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
-          vampire:SetAbilityPoints(0)
-          vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
-          print('added to vamp count, vamp table,')
-          VAMP_COUNT = VAMP_COUNT + 1
-          VAMPIRES[i] = vampire
-          VAMPIRES[-1] = vampire --nice game
-          return nil
-        end)
-      end
+    -- Need to delay the human spawns, spawning 8 omnis at once is too much for the server.
+    for i = 0, 9 do
+      Timers:CreateTimer(.03, function ()
+        local playerTeam = PlayerResource:GetTeam(i)
+        if playerTeam == 2 then
+          local human = CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
+          HUMANS[i] = human
+        elseif playerTeam == 3 then
+          local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
+          vampire:SetHullRadius(48)
+          FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
+          GOLD[i] = 0 --cheats on
+          WOOD[i] = 0 --cheats on
+          TOTAL_FOOD[i] = 10
+          CURRENT_FOOD[i] = 0
+          FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
+          FireGameEvent("vamp_wood_changed", {player_ID = i, wood_total = WOOD[i]})
+          FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
+          FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
+          UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+          vampire:AddExperience(400, 0, false, true)
+  
+          --Next frame timer
+          Timers:CreateTimer(0.03, function ()
+            vampire:FindAbilityByName("vampire_init_hider"):OnUpgrade()
+            vampire:SetAbsOrigin(OutOfWorldVector)
+            vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
+            vampire:SetAbilityPoints(0)
+            vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
+            print('added to vamp count, vamp table,')
+            VAMP_COUNT = VAMP_COUNT + 1
+            VAMPIRES[i] = vampire
+            VAMPIRES[-1] = vampire --nice game
+            return nil
+          end)
+        end
+      end)
     end
+    
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
     GameMode:OnGameInProgress()
   elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
