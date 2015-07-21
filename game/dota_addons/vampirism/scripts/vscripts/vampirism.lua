@@ -360,8 +360,8 @@ function GameMode:OnNPCSpawned(keys)
   	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
     npc:FindAbilityByName("human_repair"):SetLevel(1)
     if playerID < 8 then 
-      WOOD[playerID] = 50 --cheats, real is 50.
-      GOLD[playerID] = 0 --this is how it should look on ship.
+      WOOD[playerID] = 100000 --cheats, real is 50.
+      GOLD[playerID] = 100000 --this is how it should look on ship.
       TOTAL_FOOD[playerID] = 20
       CURRENT_FOOD[playerID] = 0
       UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")

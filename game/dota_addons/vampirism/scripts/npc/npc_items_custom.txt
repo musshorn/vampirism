@@ -215,8 +215,8 @@
 	{
 		"ID"	"2005"
 		"BaseClass"	"item_datadriven"
-		"Model"	"models/coin_reference.vmdl"
     "AbilityTextureName"  "item_phase_boots"
+    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ItemStackable"	"0"
 		"ItemKillable"	"1"
 		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
@@ -225,23 +225,20 @@
 		"AbilityCooldown"   "1"
     "GoldCost"          "100"	
 
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"range"				"100"
-			}
-		}
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"items.lua"
-				"Function"		"ItemMoveSpeed"
-				"Speed"			  "100"
-			}
-		}
+    "Modifiers"
+    {
+      "modifier_boots_speed"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+    
+        "Properties"
+        {
+            "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT" "100" 
+        }
+      }
+    }
 	}
 
   //================================================================================= 
@@ -252,7 +249,6 @@
 		"ID"	"2006"
 		"BaseClass"	"item_datadriven"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
-		"Model"	"models/coin_reference.vmdl"
     "AbilityTextureName"  "item_soul_booster"
 		"ItemStackable"	"0"
 		"ItemKillable"	"1"
