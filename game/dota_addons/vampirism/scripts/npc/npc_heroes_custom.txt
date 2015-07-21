@@ -31,7 +31,7 @@
     "AttributeBaseAgility"    "0"
     "AttributeBaseIntelligence" "0"
     "StatusMana"        "10"
-    "StatusManaRegen"     "0.5"
+    "StatusManaRegen"     "0.1"
     "AbilityLayout"       "5"
 
     "AbilityHolder"       "12"

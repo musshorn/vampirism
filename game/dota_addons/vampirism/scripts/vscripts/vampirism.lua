@@ -48,6 +48,8 @@ USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to lev
 WORKER_FACTOR = 4                       -- How many workers does a single worker count for. This can only be set once.
 FACTOR_SET = false
 
+LOW_PLAYER_MAP = true
+
 GOLD = {}
 WOOD = {}
 TOTAL_FOOD = {}
@@ -168,17 +170,17 @@ function GameMode:OnAllPlayersLoaded()
   local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
   sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
 
-  local portalvision = CreateUnitByName("vampire_vision_dummy_spawn", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
+  local portalvision = CreateUnitByName("vampire_vision_dummy_spawn", Vector(96, -416, 220), false, nil, nil, 0)
   GameRules:SetHeroRespawnEnabled(false)
   for i = 0, 9 do
   	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
   end
 
-  local vshop = CreateUnitByName("vampire_shop", Vector(-1088, 512, 128), false, nil, nil, DOTA_TEAM_BADGUYS)
+  local vshop = CreateUnitByName("vampire_shop", Vector(-1088, 512, 128), false, nil, nil, 0)
   ShopUI:InitVampShop(vshop)
   vshop:FindAbilityByName('bh_dummy_unit'):OnSpellStart()
 
-  CreateUnitByName("npc_vamp_fountain", Vector(779, 430, 128), false, nil, nil, DOTA_TEAM_BADGUYS)
+  CreateUnitByName("npc_vamp_fountain", Vector(779, 430, 128), false, nil, nil, 0)
 
   -- Create ABILITY_HOLDERS
   for unitName, h in pairs(UNIT_KV[-1]) do
@@ -265,6 +267,17 @@ function GameMode:OnDisconnect(keys)
   local reason = keys.reason
   local userid = keys.userid
 
+  for i=-1,10 do
+    if PlayerResource:GetConnectionState(i) == 0 then
+      DISCONNECTED_PLAYERS[i] = true
+    end
+  end
+
+  --[[ Loop over playerIDs, check which playerID disconnected.
+  for i=-1,9 do
+    if PlayerResource:GetConnectionState(i) == 'dank'then end
+  end]]
+
 end
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
@@ -331,10 +344,6 @@ function GameMode:OnGameRulesStateChange(keys)
     end
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
     GameMode:OnGameInProgress()
-    
-    if HOST_LOW_BANDWIDTH == nil then
-      HOST_LOW_BANDWIDTH = false
-    end
   elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
     Timers:CreateTimer(1.0, function ( )
       CustomGameEventManager:Send_ServerToAllClients("send_version", {version=VERSION_NUMBER} )
@@ -473,6 +482,12 @@ function GameMode:OnPlayerReconnect(keys)
     CustomGameEventManager:Send_ServerToAllClients("send_version", {version=VERSION_NUMBER} )
     return nil
   end)
+
+  for i=-1,10 do
+    if PlayerResource:GetConnectionState(i) == 1 then
+      DISCONNECTED_PLAYERS[i] = false
+    end
+  end
 end
 
 -- An item was purchased by a player
@@ -693,7 +708,7 @@ function GameMode:OnEntityKilled( keys )
     end
   end
 
-  if killedUnit:GetUnitName() == "npc_dota_hero_omniknight" then
+  if killedUnit:GetUnitName() == "npc_dota_hero_omniknight" and DISCONNECTED_PLAYERS[killedUnit:GetMainControllingPlayer()] == false then
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", PATTACH_ABSORIGIN_FOLLOW, killedUnit)
     --[[create a unit and flip its facing, to overcome particles following killer, not direction
     killer was facing.]]
@@ -732,7 +747,7 @@ function GameMode:OnEntityKilled( keys )
           v:Destroy()
         else
           Timers:CreateTimer(60, function ()
-          v:RemoveSelf()
+          v:RemoveBuilding(true)
           return nil
           end)  
         end    
@@ -1091,8 +1106,16 @@ function GameMode:InitGameMode()
   GameRules:SetHeroMinimapIconScale( MINIMAP_ICON_SIZE )
   GameRules:SetCreepMinimapIconScale( MINIMAP_CREEP_ICON_SIZE )
   GameRules:SetRuneMinimapIconScale( MINIMAP_RUNE_ICON_SIZE )
-  GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 8 )
-  GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 2 )
+
+  if GetMapName() == 'vamp' then
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 8 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 2 )
+    LOW_PLAYER_MAP = false
+  elseif GetMapName() == 'vamp_5h_1v' then
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 5 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 1 )
+    LOW_PLAYER_MAP = true
+  end
 
   print('[vampirism] GameRules set')
 
@@ -1267,6 +1290,13 @@ function GameMode:PlayerConnect(keys)
   print('[vampirism] PlayerConnect')
   PrintTable(keys)
   
+  for i=-1,10 do
+    if PlayerResource:GetConnectionState(i) == 1 then
+      DISCONNECTED_PLAYERS[i] = false
+      print('player ', i, 'disconnected')
+    end
+  end
+
   if keys.bot == 1 then
     -- This user is a Bot, so add it to the bots table
     self.vBots[keys.userid] = 1
@@ -1278,7 +1308,7 @@ function GameMode:OnConnectFull(keys)
   print ('[vampirism] OnConnectFull')
   PrintTable(keys)
   GameMode:CaptureGameMode()
-  
+ 
   local entIndex = keys.index+1
   print('entindex'..tostring(entIndex))
 

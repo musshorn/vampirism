@@ -1,3 +1,14 @@
 "AddonInfo"
 {
+	"TeamCount"			"2"
+	"maps"				"vamp vamp_5h_1v"
+	"IsPlayable"		"1"
+	"vamp"
+	{
+		"MaxPlayers"	"10"
+	}
+	"vamp_5h_5v"
+	{
+		"MaxPlayers"	"6"
+	}
 }

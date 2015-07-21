@@ -56,7 +56,7 @@
     //----------------------------------------------------------------
 
     "Ability1"  "vamp_fountain_heal"
-    "Ability2"  ""
+    "Ability2"  "bh_dummy_unit"
     "Ability3"  ""
     "Ability4"  ""
     "Ability5"  ""
