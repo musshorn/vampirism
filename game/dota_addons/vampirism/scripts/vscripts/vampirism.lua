@@ -98,6 +98,9 @@ WORKER_STACKS = {
 -- Table used to check if something has been bought or built before.
 UNIQUE_TABLE = {}
 
+-- Table used to check if a player has disconnected, to stop auto-killing their buildings.
+DISCONNECTED_PLAYERS = {}
+
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
 XP_PER_LEVEL_TABLE[1] = 0

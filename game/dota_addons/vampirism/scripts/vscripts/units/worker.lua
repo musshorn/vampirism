@@ -22,7 +22,6 @@ function Worker:Worker1(vPos, hOwner, unitName)
   worker.pos = worker:GetAbsOrigin()
   worker.moving = false
   worker.housePos = nil
-  worker.moveLocked = false -- Has the worker found a tree, and had their movement locked.
 
   worker.skipTicks = 0 -- If this is > 0 the worker will ignore this many ticks
   worker.stackAbility = worker:FindAbilityByName('worker_stack')
@@ -77,25 +76,19 @@ function Worker:Worker1(vPos, hOwner, unitName)
 			end
 
       if worker.ability:GetAutoCastState() then
-        local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+        local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
         if (worker.moving == false and currentLumber < UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
           
           -- If they are not working, start them working
           if (worker.harvest:IsChanneling() == false) then
             local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
             worker:CastAbilityOnTarget(tree, worker.harvest, worker:GetMainControllingPlayer())
-          else
-            --worker is harvesting, lock their movement.
-            if not worker.moveLocked and HOST_LOW_BANDWIDTH == true then
-              worker:SetMoveCapability(DOTA_UNIT_CAP_MOVE_NONE)
-              worker.moveLocked = true
-            end
           end
         end
       end
 
 			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
-      local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+      local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
 			if (currentLumber == UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
 		
 				-- Search for the nearest unit that can recieve lumber and is owned by the correct player
