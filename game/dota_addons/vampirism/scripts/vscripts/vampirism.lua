@@ -309,6 +309,24 @@ function GameMode:OnGameRulesStateChange(keys)
         if playerTeam == 2 then
           local human = CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(i))
           HUMANS[i] = human
+          human:FindAbilityByName("call_buildui"):SetLevel(1)
+          human:FindAbilityByName("human_blink"):SetLevel(1)
+          human:FindAbilityByName("human_manaburn"):SetLevel(1)
+          human:FindAbilityByName("human_repair"):SetLevel(1)
+          WOOD[i] = 1000000 --cheats, real is 50.
+          GOLD[i] = 1000000 --this is how it should look on ship.
+          TOTAL_FOOD[i] = 20
+          CURRENT_FOOD[i] = 0
+          UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+          UNIT_KV[i].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
+          HUMAN_COUNT = HUMAN_COUNT + 1
+          human:SetAbilityPoints(0)
+          human:SetHasInventory(false) --testing
+          FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
+          FireGameEvent("vamp_wood_changed", {player_ID = i, wood_total = WOOD[i]})
+          FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
+          FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
+          PlayerResource:SetCustomTeamAssignment(i, DOTA_TEAM_GOODGUYS)
         elseif playerTeam == 3 then
           local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
           vampire:SetHullRadius(48)
@@ -323,6 +341,10 @@ function GameMode:OnGameRulesStateChange(keys)
           FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
           vampire:AddExperience(400, 0, false, true)
+
+          if GetMapName() == 'vamp_5h_1v' then
+            vampire:SetBaseMoveSpeed(500)
+          end
   
           --Next frame timer
           Timers:CreateTimer(0.03, function ()
@@ -359,28 +381,6 @@ function GameMode:OnNPCSpawned(keys)
 
   local npc = EntIndexToHScript(keys.entindex)
   local playerID = npc:GetMainControllingPlayer()
-  if npc:GetName() == "npc_dota_hero_omniknight" then
-  	npc:FindAbilityByName("call_buildui"):SetLevel(1)
-  	npc:FindAbilityByName("human_blink"):SetLevel(1)
-  	npc:FindAbilityByName("human_manaburn"):SetLevel(1)
-    npc:FindAbilityByName("human_repair"):SetLevel(1)
-    if playerID < 8 then 
-      WOOD[playerID] = 100000 --cheats, real is 50.
-      GOLD[playerID] = 100000 --this is how it should look on ship.
-      TOTAL_FOOD[playerID] = 20
-      CURRENT_FOOD[playerID] = 0
-      UNIT_KV[playerID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
-      UNIT_KV[playerID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
-      HUMAN_COUNT = HUMAN_COUNT + 1
-      npc:SetAbilityPoints(0)
-      npc:SetHasInventory(false) --testing
-      FireGameEvent("vamp_gold_changed", {player_ID = playerID, gold_total = GOLD[playerID]})
-      FireGameEvent("vamp_wood_changed", {player_ID = playerID, wood_total = WOOD[playerID]})
-      FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
-      FireGameEvent("vamp_food_cap_changed", {player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
-      PlayerResource:SetCustomTeamAssignment(playerID, DOTA_TEAM_GOODGUYS)
-    end
-  end
 
   if npc:GetName() == "npc_dota_hero_night_stalker" then
     if npc:GetItemInSlot(0) == nil then
@@ -707,7 +707,7 @@ function GameMode:OnEntityKilled( keys )
     end
   end
 
-  if killedUnit:GetUnitName() == "npc_dota_hero_omniknight" and DISCONNECTED_PLAYERS[killedUnit:GetMainControllingPlayer()] == false then
+  if killedUnit:GetUnitName() == "npc_dota_hero_omniknight" and DISCONNECTED_PLAYERS[killedUnit:GetMainControllingPlayer()] == false and killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", PATTACH_ABSORIGIN_FOLLOW, killedUnit)
     --[[create a unit and flip its facing, to overcome particles following killer, not direction
     killer was facing.]]
