@@ -181,18 +181,6 @@ function GameMode:OnAllPlayersLoaded()
   vshop:FindAbilityByName('bh_dummy_unit'):OnSpellStart()
 
   CreateUnitByName("npc_vamp_fountain", Vector(779, 430, 128), false, nil, nil, 0)
-
-  -- Create ABILITY_HOLDERS
-  for unitName, h in pairs(UNIT_KV[-1]) do
-    if UNIT_KV[-1][unitName]['AbilityHolder'] ~= nil then
-      if ABILITY_HOLDERS[unitName] == nil then
-        ABILITY_HOLDERS[unitName] = {}
-        for i = 1, UNIT_KV[-1][unitName]["AbilityHolder"] do
-          table.insert(ABILITY_HOLDERS[unitName], UNIT_KV[-1][unitName]["ExtraAbility"..i])
-        end
-      end
-    end
-  end
   
   if not FACTOR_SET then
     Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
@@ -361,6 +349,20 @@ function GameMode:OnGameRulesStateChange(keys)
           end)
         end
       end)
+
+      -- Create ABILITY_HOLDERS
+      print('ability holders made')
+      for unitName, h in pairs(UNIT_KV[-1]) do
+        print(unitName, h)
+        if UNIT_KV[-1][unitName]['AbilityHolder'] ~= nil then
+          if ABILITY_HOLDERS[unitName] == nil then
+            ABILITY_HOLDERS[unitName] = {}
+            for i = 1, UNIT_KV[-1][unitName]["AbilityHolder"] do
+              table.insert(ABILITY_HOLDERS[unitName], UNIT_KV[-1][unitName]["ExtraAbility"..i])
+            end
+          end
+        end
+      end
     end
     
   elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
@@ -1234,8 +1236,7 @@ function GameMode:InitGameMode()
   ShopUI:Init()
 
   UNIT_KV[-1] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
-
-
+  UNIT_KV[-1].Version = nil
 
   print('[vampirism] Done loading vampirism gamemode!\n\n')
 end

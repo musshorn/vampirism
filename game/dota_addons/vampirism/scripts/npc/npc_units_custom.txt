@@ -1852,7 +1852,7 @@
   //=================================================================================
   "research_center_t1"
   {
-  // General
+    // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"         "npc_dota_creature"
     "Model"           "models/weapon_rack_00_reference.vmdl"
@@ -6034,6 +6034,8 @@
     "Ability8"                  "t5_worker_training"               // Ability 8 - Extra.
     "Ability9"                  "operations_particles"
     "Ability10"                 "build_cancel"
+    "Ability11"                 "build_blocked2"
+    "Ability11"                 "build_blocked"  
 
     "AbilityHolder"             "20"
 
@@ -6137,7 +6139,7 @@
     //----------------------------------------------------------------
 
     "Ability1"                  "call_buildui"   //harvest test
-    "Ability2"                  ""    // Ability 2.
+    "Ability2"                  "build_blocked2"    // Ability 2.
     "Ability3"                  "super_tower_builder_training"               // Ability 3.
     "Ability4"                  "is_a_building"               // Ability 4.
     "Ability5"                  "build_blocked3"               // Ability 5.
@@ -6145,6 +6147,8 @@
     "Ability7"                  "t4_worker_training"               // Ability 7 - Extra.
     "Ability8"                  "t5_worker_training"               // Ability 8 - Extra.
     "Ability9"                  "build_cancel"
+    "Ability10"                 "build_blocked" 
+
 
     "AbilityHolder"             "18"
 

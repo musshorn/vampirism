@@ -7208,6 +7208,7 @@
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass" "ability_datadriven"
     "AbilityChannelTime"  "1"
+    "NeedTech"      "house_t2 gold_mine_t1"
     
     "OnSpellStart"
     {
