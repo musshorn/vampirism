@@ -1888,7 +1888,7 @@
   "research_improved_worker_motivation"
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
-    "AbilityChannelTime"  "2"
+    "AbilityChannelTime"  "60"
     "LumberCost" "2000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"

@@ -2972,7 +2972,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"                     "npc_dota_creature"
-    "Model"                         "modelme.vmdl"
+    "Model"                         "models/props_structures/dire_barracks_ranged001.vmdl"
     "ModelScale"                    "3"
     
     "ConsideredHero"                "0"

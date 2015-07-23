@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.02"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.03a"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -167,20 +167,20 @@ function GameMode:OnAllPlayersLoaded()
   dummy:FindAbilityByName("vampire_vision_dummy_lock2"):OnUpgrade()
   ParticleManager:SetParticleControl(particle, 0, Vector(96, -416, 570))
 
-  local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, 0)
+  local sigil = CreateUnitByName("util_vampire_spawn_particles", Vector(96, -416, -200), false, nil, nil, DOTA_TEAM_BADGUYS)
   sigil:FindAbilityByName("vampire_particle_call"):OnUpgrade()
 
-  local portalvision = CreateUnitByName("vampire_vision_dummy_spawn", Vector(96, -416, 220), false, nil, nil, 0)
+  local portalvision = CreateUnitByName("vampire_vision_dummy_spawn", Vector(96, -416, 220), false, nil, nil, DOTA_TEAM_BADGUYS)
   GameRules:SetHeroRespawnEnabled(false)
   for i = 0, 9 do
   	FireGameEvent("vamp_scoreboard_addplayer", {player_ID = i, player_name = PlayerResource:GetPlayerName(i)})
   end
 
-  local vshop = CreateUnitByName("vampire_shop", Vector(-1088, 512, 128), false, nil, nil, 0)
+  local vshop = CreateUnitByName("vampire_shop", Vector(-1088, 512, 128), false, nil, nil, DOTA_TEAM_BADGUYS)
   ShopUI:InitVampShop(vshop)
   vshop:FindAbilityByName('bh_dummy_unit'):OnSpellStart()
 
-  CreateUnitByName("npc_vamp_fountain", Vector(779, 430, 128), false, nil, nil, 0)
+  CreateUnitByName("npc_vamp_fountain", Vector(779, 430, 128), false, nil, nil, DOTA_TEAM_BADGUYS)
   
   if not FACTOR_SET then
     Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
@@ -301,8 +301,8 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_blink"):SetLevel(1)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
-          WOOD[i] = 1000000 --cheats, real is 50.
-          GOLD[i] = 1000000 --this is how it should look on ship.
+          WOOD[i] = 50 --cheats, real is 50.
+          GOLD[i] = 0 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -319,8 +319,8 @@ function GameMode:OnGameRulesStateChange(keys)
           local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
           vampire:SetHullRadius(48)
           FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
-          GOLD[i] = 0 --cheats on
-          WOOD[i] = 0 --cheats on
+          GOLD[i] = 0 --cheats off
+          WOOD[i] = 0 --cheats off
           TOTAL_FOOD[i] = 10
           CURRENT_FOOD[i] = 0
           FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
@@ -351,9 +351,7 @@ function GameMode:OnGameRulesStateChange(keys)
       end)
 
       -- Create ABILITY_HOLDERS
-      print('ability holders made')
       for unitName, h in pairs(UNIT_KV[-1]) do
-        print(unitName, h)
         if UNIT_KV[-1][unitName]['AbilityHolder'] ~= nil then
           if ABILITY_HOLDERS[unitName] == nil then
             ABILITY_HOLDERS[unitName] = {}
@@ -570,18 +568,14 @@ function GameMode:OnPlayerLevelUp(keys)
   local level = keys.level
   local playerID = player:GetPlayerID()
 
-  for k, v in pairs(AVERNALS[playerID]) do
-    Timers:CreateTimer(0.03, function ()
-      v:SetMaxHealth(v:GetMaxHealth() + 50)
-      if v:HasAbility('avernal_dmg_growth') then
-        v:SetBaseDamageMin(v:GetBaseDamageMin() + 10)
-        v:SetBaseDamageMax(v:GetBaseDamageMax() + 10)
-      end
-    end)
+  -- Omni leveled up.
+  if HUMANS[playerID] ~= nil then
+    local human = HUMANS[playerID]
+    human:SetLevel(1)
+    human:SetAbilityPoints(0)
   end
 
-  --test, disable in ship.
-  for k, v in pairs(AVERNALS[-1]) do
+  for k, v in pairs(AVERNALS[playerID]) do
     Timers:CreateTimer(0.03, function ()
       v:SetMaxHealth(v:GetMaxHealth() + 50)
       if v:HasAbility('avernal_dmg_growth') then
@@ -1379,6 +1373,7 @@ function GoldMineTimer()
   --adds gold from gold mines
   local goldTime = 0
   Timers:CreateTimer(function()
+    --print('tick')
     --check t4 gold
     if goldTime % 4 == 0 then
       local t4gold = Entities:FindAllByModel('models/gold_mine_4.vmdl')
@@ -1414,6 +1409,7 @@ function GoldMineTimer()
       local t1gold = Entities:FindAllByModel('models/mine_cart_reference.vmdl')
       for k, mine in pairs(t1gold) do
         if mine ~= nil then
+          print('found t1 mine', mine:GetMainControllingPlayer())
           local playerID = mine:GetMainControllingPlayer()
           ChangeGold(playerID, 1)
         end
@@ -1621,6 +1617,9 @@ end
 
 -- Used to add and remove gold.
 function ChangeGold( playerID, amount )
+  if GOLD[playerID] == nil then
+    GOLD[playerID] = 0
+  end
   if amount ~= nil then
     if GOLD[playerID] + amount > 1000000 then
       GOLD[playerID] = 1000000
@@ -1635,6 +1634,9 @@ function ChangeGold( playerID, amount )
 end
 
 function ChangeWood( playerID, amount )
+  if WOOD[playerID] == nil then
+    WOOD[playerID] = 50
+  end
   if amount ~= nil then
     if WOOD[playerID] + amount > 1000000 then
       WOOD[playerID] = 1000000
