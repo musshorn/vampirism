@@ -1373,7 +1373,7 @@ function GoldMineTimer()
       for k, mine in pairs(t4gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
-          ChangeGold(playerID, 1)
+          ChangeGold(playerID, 2)
         end
       end      
     end
@@ -1383,7 +1383,7 @@ function GoldMineTimer()
       for k, mine in pairs(t3gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer() 
-          ChangeGold(playerID, 1)
+          ChangeGold(playerID, 2)
         end
       end
     end
@@ -1393,7 +1393,7 @@ function GoldMineTimer()
       for k, mine in pairs(t2gold) do
         if mine ~= nil then
           local playerID = mine:GetMainControllingPlayer()
-          ChangeGold(playerID, 1)
+          ChangeGold(playerID, 2)
         end
       end
     end
@@ -1402,9 +1402,8 @@ function GoldMineTimer()
       local t1gold = Entities:FindAllByModel('models/mine_cart_reference.vmdl')
       for k, mine in pairs(t1gold) do
         if mine ~= nil then
-          print('found t1 mine', mine:GetMainControllingPlayer())
           local playerID = mine:GetMainControllingPlayer()
-          ChangeGold(playerID, 1)
+          ChangeGold(playerID, 2)
         end
       end
     end
