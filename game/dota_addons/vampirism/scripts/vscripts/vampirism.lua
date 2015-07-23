@@ -568,13 +568,6 @@ function GameMode:OnPlayerLevelUp(keys)
   local level = keys.level
   local playerID = player:GetPlayerID()
 
-  -- Omni leveled up.
-  if HUMANS[playerID] ~= nil then
-    local human = HUMANS[playerID]
-    human:SetLevel(1)
-    human:SetAbilityPoints(0)
-  end
-
   for k, v in pairs(AVERNALS[playerID]) do
     Timers:CreateTimer(0.03, function ()
       v:SetMaxHealth(v:GetMaxHealth() + 50)
