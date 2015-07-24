@@ -89,8 +89,11 @@ function Worker:Worker1(vPos, hOwner, unitName)
 
 			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
       local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
-			if (currentLumber == UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
-		
+			if (currentLumber >= UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
+        -- This occurs sometimes from sharpened hatchets, resets to default if it goes over.
+		    if currentLumber > UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks then
+          worker:SetModifierStackCount("modifier_carrying_lumber", worker.carryTotal, UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks)
+        end
 				-- Search for the nearest unit that can recieve lumber and is owned by the correct player
 				if (worker.housePos == nil) then
 					local bestDrop = nil
