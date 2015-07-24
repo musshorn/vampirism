@@ -243,6 +243,10 @@ function GameMode:OnGameInProgress()
   UrnTimer()
   AutoGoldTimer()
   SlayerPool:ActivatePool()
+
+  if tonumber(WORKER_FACTOR) > 1 then
+    Notifications:TopToAll({text = "Remember that there is a worker factor of "..WORKER_FACTOR.." for this game. That means that tier 1 workers will roll "..WORKER_FACTOR.." times to drop a coin, take "..WORKER_FACTOR.." times as many detonates to destroy, and give "..WORKER_FACTOR.." as much gold and XP. Read more here - http://bit.ly/WorkerStacks", duration = 15, nil, style = {color="white", ["font-size"]="20px"}})
+  end
 end
 
 -- Cleanup a player when they leave
@@ -319,8 +323,8 @@ function GameMode:OnGameRulesStateChange(keys)
           local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
           vampire:SetHullRadius(48)
           FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
-          GOLD[i] = 0 --cheats off
-          WOOD[i] = 0 --cheats off
+          GOLD[i] = 1000000 --cheats off
+          WOOD[i] = 50000 --cheats off
           TOTAL_FOOD[i] = 10
           CURRENT_FOOD[i] = 0
           FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
@@ -661,6 +665,7 @@ function GameMode:OnEntityKilled( keys )
   
   -- The Unit that was Killed
   local killedUnit = EntIndexToHScript( keys.entindex_killed )
+  print('ded xp', killedUnit:GetDeathXP())
   -- The Killing entity
   local killerEntity = nil
   local unitName = killedUnit:GetUnitName()
@@ -761,7 +766,6 @@ function GameMode:OnEntityKilled( keys )
 
   if killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
     if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil then
-      -- Probability function for a coin drop
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
@@ -813,15 +817,14 @@ function GameMode:OnEntityKilled( keys )
         expReward = expReward + 25
         stacks = stacks - 1
       end
-      local nearVamps = FindUnitsInRadius(killedUnit:GetTeam(), killedUnit:GetAbsOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
-      print(#nearVamps)
-      if nearVamps ~= nil then
-      	local xpSplit = expReward / (#nearVamps)
-        print(xpSplit)
-      	for k,v in pairs(nearVamps) do
-          print('adding to ', v:GetMainControllingPlayer(), ' vampire', v:GetUnitName())
-          v:AddExperience(xpSplit, 2, false, true)
-      	end
+      if killedUnit:FindAbilityByName('no_exp_gain') == nil then
+        local nearVamps = FindUnitsInRadius(killedUnit:GetTeam(), killedUnit:GetAbsOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+        if nearVamps ~= nil then
+        	local xpSplit = expReward / (#nearVamps)
+        	for k,v in pairs(nearVamps) do
+            v:AddExperience(xpSplit, 2, false, true)
+        	end
+        end
       end
     end
 
@@ -833,7 +836,6 @@ function GameMode:OnEntityKilled( keys )
   
   -- Update all the slayer taverns the player owns to the new respawn time
   if killedUnit:GetUnitName() == "npc_dota_hero_invoker" then
-    print('slayer dided')
     SLAYERS[playerID].state = "dead"
     SLAYERS[playerID].level = killedUnit:GetLevel()
     local house = nil
@@ -1516,6 +1518,7 @@ function GameMode:OnPlayerSay(keys)
     local chat = ParseChat(keys)
 
     WORKER_FACTOR = string.gsub(chat[2], '%D', '')
+    print(WORKER_FACTOR)
 
     for i = 1, 5 do
       local tier = i - 1

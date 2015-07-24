@@ -134,7 +134,7 @@ function GhostRing( keys )
 				ghost:SetPhysicsVelocity(Vector(0,0,0))
 				ghost:OnPhysicsFrame(nil)
 				ghost:ForceKill(false)
-				ghost:Destroy()
+				UTIL_Remove(ghost)
 				Timers:CreateTimer(2, function ()
 					ghostStock = ghostStock + 1
 				end)
@@ -144,7 +144,7 @@ function GhostRing( keys )
 				ghost:SetPhysicsVelocity(Vector(0,0,0))
 				ghost:OnPhysicsFrame(nil)
 				ghost:ForceKill(false)
-				ghost:Destroy()
+				UTIL_Remove(ghost)
 				Timers:CreateTimer(2, function ()
 					ghostStock = ghostStock + 1
 				end)
@@ -153,7 +153,7 @@ function GhostRing( keys )
 			local source = caster:GetAbsOrigin()
 			local current_position = ghost:GetAbsOrigin()
 			local diff = point - ghost:GetAbsOrigin()
-			diff.z = 0
+			--diff.z = 0
 			local direction = diff:Normalized()
 
 			-- Calculate the angle difference
@@ -171,6 +171,7 @@ function GhostRing( keys )
 				local newVel = RotatePosition(Vector(0,0,0), QAngle(0,-10,0), ghost:GetPhysicsVelocity())
 				ghost:SetPhysicsVelocity(newVel)
 			end
+
 			local distance = (point - current_position):Length()
 			local collision = distance < 50
 			if ghost.current_target then
@@ -196,8 +197,7 @@ function GhostRing( keys )
 					ghost:SetPhysicsVelocity(Vector(0,0,0))
 					ghost:OnPhysicsFrame(nil)
 					ghost:ForceKill(false)
-					ghost:Destroy()
-
+					UTIL_Remove(ghost)
 					Timers:CreateTimer(2, function ()
 						ghostStock = ghostStock + 1
 					end)

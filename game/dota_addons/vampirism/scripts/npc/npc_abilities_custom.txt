@@ -10776,7 +10776,21 @@
   //=================================================================================
   "no_coin_drops"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass" "ability_datadriven"
+    "MaxLevel"  "1"
+    "AbilityCastPoint"  "0.3"
+    "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_1"
+    "AbilityManaCost" "1"
+  }
+
+  
+  //================================================================================= 
+  // Util - prevents exp gain
+  //=================================================================================
+  "no_exp_gain"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
     "BaseClass" "ability_datadriven"
     "MaxLevel"  "1"
     "AbilityCastPoint"  "0.3"
