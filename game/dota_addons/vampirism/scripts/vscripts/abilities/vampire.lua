@@ -16,7 +16,7 @@ function ShadowSight(keys)
     -- Give the vampire vision on all buildings in that radius.
     local buildings = FindUnitsInRadius(DOTA_TEAM_BADGUYS, dummy:GetAbsOrigin(), nil, 2500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
     for k,v in pairs(buildings) do
-      if v:HasAbility('is_a_building') do
+      if v:HasAbility('is_a_building') then
         v:AddNewModifier(caster, nil, "modifier_bloodseeker_thirst_vision", {})
       end
     end
@@ -24,7 +24,7 @@ function ShadowSight(keys)
     CreateUnitByName("vampire_vision_dummy_2", target, false, caster, PlayerResource:GetPlayer(playerID), PlayerResource:GetTeam(playerID))
     local buildings = FindUnitsInRadius(DOTA_TEAM_BADGUYS, dummy:GetAbsOrigin(), nil, 3000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
     for k,v in pairs(buildings) do
-      if v:HasAbility('is_a_building') do
+      if v:HasAbility('is_a_building') then
         v:AddNewModifier(caster, nil, "modifier_bloodseeker_thirst_vision", {})
       end
     end

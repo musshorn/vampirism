@@ -301,8 +301,8 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_blink"):SetLevel(1)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
-          WOOD[i] = 50 --cheats, real is 50.
-          GOLD[i] = 0 --this is how it should look on ship.
+          WOOD[i] = 1000000 --cheats, real is 50.
+          GOLD[i] = 1000000 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -760,7 +760,7 @@ function GameMode:OnEntityKilled( keys )
   local stackAbility = killedUnit:FindAbilityByName('worker_stack')
 
   if killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
-    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_Invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil then
+    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil then
       -- Probability function for a coin drop
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
@@ -832,7 +832,8 @@ function GameMode:OnEntityKilled( keys )
   end
   
   -- Update all the slayer taverns the player owns to the new respawn time
-  if killedUnit:GetUnitName() == "npc_dota_hero_Invoker" then
+  if killedUnit:GetUnitName() == "npc_dota_hero_invoker" then
+    print('slayer dided')
     SLAYERS[playerID].state = "dead"
     SLAYERS[playerID].level = killedUnit:GetLevel()
     local house = nil
@@ -907,7 +908,7 @@ function GameMode:OnEntityKilled( keys )
   end
 
 
-  if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS then
+  if killedUnit:GetTeam() == DOTA_TEAM_GOODGUYS and killedUnit:IsHero() == false then
     -- The killed unit was upgraded from another, remove those from the tree too.
     if UNIT_KV[playerID][unitName]['ParentUnit'] ~= nil then
       TechTree:RemoveTech(unitName, playerID)
