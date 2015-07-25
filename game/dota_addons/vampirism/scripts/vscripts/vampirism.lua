@@ -100,9 +100,6 @@ WORKER_STACKS = {
 -- Table used to check if something has been bought or built before.
 UNIQUE_TABLE = {}
 
--- Table used to check if a player has disconnected, to stop auto-killing their buildings.
-DISCONNECTED_PLAYERS = {}
-
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
 XP_PER_LEVEL_TABLE[1] = 0
@@ -259,11 +256,6 @@ function GameMode:OnDisconnect(keys)
   local reason = keys.reason
   local userid = keys.userid
 
-  for i=-1,10 do
-    if PlayerResource:GetConnectionState(i) == 0 then
-      DISCONNECTED_PLAYERS[i] = true
-    end
-  end
 end
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
@@ -319,6 +311,7 @@ function GameMode:OnGameRulesStateChange(keys)
           FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
           FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
           PlayerResource:SetCustomTeamAssignment(i, DOTA_TEAM_GOODGUYS)
+          AddSwag(human)
         elseif playerTeam == 3 then
           local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
           vampire:SetHullRadius(48)
@@ -333,7 +326,7 @@ function GameMode:OnGameRulesStateChange(keys)
           FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
           vampire:AddExperience(400, 0, false, true)
-
+          AddSwag(vampire)
           if GetMapName() == 'vamp_5h_1v' then
             vampire:SetBaseMoveSpeed(500)
           end
@@ -396,7 +389,7 @@ function GameMode:OnNPCSpawned(keys)
   local unitName = string.lower(npc:GetUnitName())
 
   -- Adds omniknight to abilityholder.
-  if npc:IsRealHero() then
+  if npc:IsRealHero() and unitName ~= 'research_center_vampire' then
     npc.bFirstSpawned = true
     GameMode:OnHeroInGame(npc)
 
@@ -485,12 +478,6 @@ function GameMode:OnPlayerReconnect(keys)
     CustomGameEventManager:Send_ServerToAllClients("send_version", {version=VERSION_NUMBER} )
     return nil
   end)
-
-  for i=-1,10 do
-    if PlayerResource:GetConnectionState(i) == 1 then
-      DISCONNECTED_PLAYERS[i] = false
-    end
-  end
 end
 
 -- An item was purchased by a player
@@ -665,7 +652,6 @@ function GameMode:OnEntityKilled( keys )
   
   -- The Unit that was Killed
   local killedUnit = EntIndexToHScript( keys.entindex_killed )
-  print('grave killed?', killedUnit.gravekilled)
   -- The Killing entity
   local killerEntity = nil
   local unitName = killedUnit:GetUnitName()
@@ -701,7 +687,7 @@ function GameMode:OnEntityKilled( keys )
     end
   end
 
-  if killedUnit:GetUnitName() == "npc_dota_hero_omniknight" and DISCONNECTED_PLAYERS[killedUnit:GetMainControllingPlayer()] == false and killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
+  if killedUnit:GetUnitName() == "npc_dota_hero_omniknight" and killedUnit:HasOwnerAbandoned() == false and killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
     local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", PATTACH_ABSORIGIN_FOLLOW, killedUnit)
     --[[create a unit and flip its facing, to overcome particles following killer, not direction
     killer was facing.]]
@@ -720,30 +706,26 @@ function GameMode:OnEntityKilled( keys )
     end
 
     local playerEnts = Entities:FindAllByClassname("npc_dota_creature")
-    -- Filter all creatures to only the players buildings.
-    for k,v in pairs(playerEnts) do
-      -- Filter out ents that aren't the players.
-      if not v:GetMainControllingPlayer() == killedUnit:GetMainControllingPlayer() then
-        table.remove(playerEnts, k)
-      end
-    end
 
+    print(killedUnit:GetMainControllingPlayer())
     -- Goes to next frame to stop bugs.
     Timers:CreateTimer(.03, function ()
-        for k,v in pairs(playerEnts) do
-        -- Silence, disarm buildings still alive.
-        v:AddNewModifier(killedUnit, nil, "modifier_silence", {duration = 60})
-        v:AddNewModifier(killedUnit, nil, "modifier_disarmed", {duration = 60})
-
-        -- If its nbot a building kill it now, otherwise kill it in 60 seconds.
-        if not v:HasAbility('is_a_building') then
-          v:Destroy()
-        else
-          Timers:CreateTimer(60, function ()
-          v:RemoveBuilding(true)
-          return nil
-          end)  
-        end    
+      for k,v in pairs(playerEnts) do
+        if v:GetMainControllingPlayer() == killedUnit:GetMainControllingPlayer() then
+          -- Silence, disarm buildings still alive.
+          v:AddNewModifier(killedUnit, nil, "modifier_silence", {duration = 60})
+          v:AddNewModifier(killedUnit, nil, "modifier_disarmed", {duration = 60})
+  
+          -- If its nbot a building kill it now, otherwise kill it in 60 seconds.
+          if not v:HasAbility('is_a_building') then
+            v:Destroy()
+          else
+            Timers:CreateTimer(60, function ()
+            v:RemoveBuilding(true)
+            return nil
+            end)  
+          end 
+        end   
       end
       return nil
     end)
@@ -1286,13 +1268,6 @@ function GameMode:PlayerConnect(keys)
   print('[vampirism] PlayerConnect')
   PrintTable(keys)
   
-  for i=-1,10 do
-    if PlayerResource:GetConnectionState(i) == 1 then
-      DISCONNECTED_PLAYERS[i] = false
-      print('player ', i, 'disconnected')
-    end
-  end
-
   if keys.bot == 1 then
     -- This user is a Bot, so add it to the bots table
     self.vBots[keys.userid] = 1
@@ -1549,19 +1524,34 @@ function GameMode:OnPlayerSay(keys)
   end
 end
 
--- This is an example console command
-function GameMode:ExampleConsoleCommand()
-  print( '******* Example Console Command ***************' )
-  local cmdPlayer = Convars:GetCommandClient()
-  if cmdPlayer then
-    local playerID = cmdPlayer:GetPlayerID()
-    if playerID ~= nil and playerID ~= -1 then
-      -- Do something here for the player who called this command
-      PlayerResource:ReplaceHeroWith(playerID, "npc_dota_hero_viper", 1000, 1000)
+DEV_IDS = {
+  ['51689298'] = 'particles/econ/courier/courier_greevil_green/courier_greevil_green_ambient_3.vpcf',
+  ['57175732'] = 'particles/units/heroes/hero_ancient_apparition/ancient_apparition_ambient_f.vpcf',
+  ['8964043'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['35147195'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['71016052'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['2059672'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['83715223'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['87441883'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['45960854'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['60699139'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['24618382'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['68458224'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['54720119'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf',
+  ['35695803'] = 'particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf'
+}
+
+function AddSwag( unit )
+  for k,v in pairs(DEV_IDS) do
+    local playerID = unit:GetMainControllingPlayer()
+    local steamID = PlayerResource:GetSteamAccountID(playerID)
+    if tostring(steamID) == k then
+      local particle = v
+      local ambient = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN, unit)
+      ParticleManager:SetParticleControlEnt(ambient, 0, unit, PATTACH_POINT_FOLLOW, "attach_origin", unit:GetAbsOrigin(), true)
+      ParticleManager:SetParticleControlEnt(ambient, 1, unit, PATTACH_POINT_FOLLOW, "attach_origin", unit:GetAbsOrigin(), true)
     end
   end
-
-  print( '*********************************************' )
 end
 
 function Bases:HandleChat( keys )

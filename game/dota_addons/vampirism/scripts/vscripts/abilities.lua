@@ -122,7 +122,11 @@ function build( keys )
 
     --adds invulnerable to vamp res center
     if unitName == 'research_center_vampire' then
+      unit:SetHasInventory(true)
       unit:AddNewModifier(unit, nil, 'modifier_invulnerable', {})
+      unit:FindAbilityByName('call_buildui'):SetLevel(1)
+      unit:FindAbilityByName('vampire_sell_item'):SetLevel(1)
+      unit:SetAbilityPoints(0)
     end
   end)
 

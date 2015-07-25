@@ -5,9 +5,9 @@
   "vamp_human"
   {
     "override_hero"             "npc_dota_hero_omniknight"
-    "Ability1"                  "human_repair"
+    "Ability1"                  "human_blink"
     "Ability2"                  "call_buildui"
-    "Ability3"                  "human_blink"
+    "Ability3"                  "human_repair"
     "Ability4"                  "human_manaburn"
     "Ability5"                  "human_teleport"
     "Ability6"                  "build_blocked"

@@ -466,9 +466,7 @@ function GraveDamage( keys )
 	if not target:HasAbility('is_a_building') then
 		local dmg = ApplyDamage({victim = target, attacker = caster, damage = 35, damage_type = DAMAGE_TYPE_MAGICAL})
 		ability:ApplyDataDrivenModifier(owner, target, 'modifier_grave_apply_damage', {})
-		print(dmg, target:GetHealth())
 		if dmg >= target:GetHealth() then
-			print('legal damage')
 			target.gravekilled = true
 		end
 	end

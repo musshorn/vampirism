@@ -3843,16 +3843,15 @@
 
     // Abilities
     //----------------------------------------------------------------
-
-    "Ability1"          "harvest_channel"   //harvest test
-    "Ability2"          "carrying_lumber"     // Ability 2.
-    "Ability3"          "drop_lumber"     // Ability 3.
-    "Ability4"          "worker_det"      // Ability 4.
-    "Ability5"          "worker_debug"      // Ability 5.
-    "Ability6"          "find_lumber"      // Ability 6 - Extra.
-    "Ability7"          "worker_stack"      // Ability 7 - Extra.
-    "Ability8"          ""      // Ability 8 - Extra.
-    "AbilityLayout"     "5"
+    "Ability1"          "human_blink"   //harvest test
+    "Ability2"          "harvest_channel"   //harvest test
+    "Ability3"          "carrying_lumber"     // Ability 2.
+    "Ability4"          "drop_lumber"     // Ability 3.
+    "Ability5"          "worker_det"      // Ability 4.
+    "Ability6"          "worker_debug"      // Ability 5.
+    "Ability7"          "find_lumber"      // Ability 6 - Extra.
+    "Ability8"          "worker_stack"      // Ability 7 - Extra.
+    "Ability9"          ""      // Ability 8 - Extra.
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"       "100"     // Physical protection.
@@ -3930,16 +3929,16 @@
 
     // Abilities
     //----------------------------------------------------------------
+    "Ability1"          "human_blink"
+    "Ability2"          "harvest_channel"   //harvest test
+    "Ability3"          "carrying_lumber"     // Ability 2.
+    "Ability4"          "drop_lumber"     // Ability 3.
+    "Ability5"          "worker_det"      // Ability 4.
+    "Ability6"          "worker_debug"      // Ability 5.
+    "Ability7"          "find_lumber"      // Ability 6 - Extra.
+    "Ability8"          "worker_stack"      // Ability 7 - Extra.
+    "Ability9"          ""      // Ability 8 - Extra.
 
-    "Ability1"          "harvest_channel"   //harvest test
-    "Ability2"          "carrying_lumber"     // Ability 2.
-    "Ability3"          "drop_lumber"     // Ability 3.
-    "Ability4"          "worker_det"      // Ability 4.
-    "Ability5"          "worker_debug"      // Ability 5.
-    "Ability6"          "find_lumber"      // Ability 6 - Extra.
-    "Ability7"          "worker_stack"      // Ability 7 - Extra.
-    "Ability8"          ""      // Ability 8 - Extra.
-    "AbilityLayout"     "5"
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"       "100"     // Physical protection.
@@ -4428,14 +4427,15 @@
 
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"          "harvest_channel"
-    "Ability2"          "carrying_lumber"
-    "Ability3"          "drop_lumber"    
-    "Ability4"          "worker_det"     
-    "Ability5"          "worker_debug"   
-    "Ability6"          "find_lumber"    
-    "Ability7"          "worker_stack"      // Ability 7 - Extra.
-    "Ability8"          ""      // Ability 8 - Extra.
+    "Ability1"          "human_blink"
+    "Ability2"          "harvest_channel"
+    "Ability3"          "carrying_lumber"
+    "Ability4"          "drop_lumber"    
+    "Ability5"          "worker_det"     
+    "Ability6"          "worker_debug"   
+    "Ability7"          "find_lumber"    
+    "Ability8"          "worker_stack"      // Ability 7 - Extra.
+    "Ability9"          ""      // Ability 8 - Extra.
 
     // Armor
     //----------------------------------------------------------------
@@ -4472,7 +4472,7 @@
     "StatusHealth"        "100"   // Base health.
     "StatusHealthRegen"     "0"   // Health regeneration rate.
     "StatusMana"        "5"      // Base mana.
-    "StatusManaRegen"     "0"     // Mana regeneration rate.
+    "StatusManaRegen"     "0.1"     // Mana regeneration rate.
 
     // Team
     //----------------------------------------------------------------
@@ -4518,14 +4518,15 @@
 
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"          "harvest_channel"
-    "Ability2"          "carrying_lumber"
-    "Ability3"          "drop_lumber"    
-    "Ability4"          "worker_det"     
-    "Ability5"          "worker_debug"   
-    "Ability6"          "find_lumber"    
-    "Ability7"          "worker_stack"      // Ability 7 - Extra.
-    "Ability8"          ""      // Ability 8 - Extra.
+    "Ability1"          "human_blink"
+    "Ability2"          "harvest_channel"
+    "Ability3"          "carrying_lumber"
+    "Ability4"          "drop_lumber"    
+    "Ability5"          "worker_det"     
+    "Ability6"          "worker_debug"   
+    "Ability7"          "find_lumber"    
+    "Ability8"          "worker_stack"      // Ability 7 - Extra.
+    "Ability9"          ""      // Ability 8 - Extra.
 
     // Armor
     //----------------------------------------------------------------
@@ -4562,7 +4563,7 @@
     "StatusHealth"        "10000"   // Base health.
     "StatusHealthRegen"     "0"   // Health regeneration rate.
     "StatusMana"        "10"      // Base mana.
-    "StatusManaRegen"     "0"     // Mana regeneration rate.
+    "StatusManaRegen"     "0.5"     // Mana regeneration rate.
 
     // Team
     //----------------------------------------------------------------
@@ -7537,11 +7538,12 @@
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"                 "npc_dota_creature"
+    "BaseClass"                 "npc_dota_hero"
     "Model"                     "models/props_structures/bad_barracks001_ranged.vmdl"
     "ModelScale"                "0.5" 
     "ConsideredHero"            "0"
     "HasInventory"              "1" 
+    "Level"                     "200"
 
     // Abilities
     //----------------------------------------------------------------

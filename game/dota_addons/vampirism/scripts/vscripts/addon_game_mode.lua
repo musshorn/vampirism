@@ -87,6 +87,9 @@ function Precache( context )
 		PrecacheResource("particle", "particles/units/heroes/hero_jakiro/jakiro_base_attack_fire.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_razor/razor_static_link_projectile.vpcf", context)
 		PrecacheResource("particle", "particles/units/heroes/hero_life_stealer/life_stealer_ambient.vpcf", context)
+		PrecacheResource("particle", "particles/econ/courier/courier_greevil_green/courier_greevil_green_ambient_3.vpcf", context)
+		PrecacheResource("particle", "particles/econ/courier/courier_golden_doomling/courier_golden_doomling_ambient.vpcf", context)
+		PrecacheResource("particle", "particles/units/heroes/hero_ancient_apparition/ancient_apparition_ambient_f.vpcf", context)
 
 		-- Models can also be precached by folder or individually
 		-- PrecacheModel should generally used over PrecacheResource for individual models
