@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.03a"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.04"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -665,7 +665,7 @@ function GameMode:OnEntityKilled( keys )
   
   -- The Unit that was Killed
   local killedUnit = EntIndexToHScript( keys.entindex_killed )
-  print('ded xp', killedUnit:GetDeathXP())
+  print('grave killed?', killedUnit.gravekilled)
   -- The Killing entity
   local killerEntity = nil
   local unitName = killedUnit:GetUnitName()
@@ -765,13 +765,16 @@ function GameMode:OnEntityKilled( keys )
   local stackAbility = killedUnit:FindAbilityByName('worker_stack')
 
   if killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
-    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil then
+    print('killer was bad, check 4 coins', killerEntity:GetUnitName())
+    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil and killedUnit.gravekilled ~= true then
+      print('roll 4 coins')
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
 
       --outcome = 1 --dont forget to change this
       if outcome <= largeProb then
+        print('coin in first loop')
         local coin = CreateItem("item_large_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())    
@@ -780,6 +783,7 @@ function GameMode:OnEntityKilled( keys )
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(5)
       elseif outcome <= smallProb then
+        print('coin in first loop')
         local coin = CreateItem("item_small_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
@@ -787,43 +791,45 @@ function GameMode:OnEntityKilled( keys )
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(3)
       end
-    end
-    --roll for extra coins, grant extra exp, bounty. if the unit was stacked.
-    local expReward = 25
-    if killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) ~= nil then
-      local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
-      while stacks > 0 do
-        outcome = RandomInt(1, 200)
-        largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
-        smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
-        --outcome = 1 --dont forget to change this
-        if outcome <= largeProb then
-          local newcoin = CreateItem("item_large_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
-          local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
-          --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
-          VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
-          --print(VAMPIRE_COINS[coin:entindex()])
-          newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
-          newcoinP:SetModelScale(5) 
-        elseif outcome <= smallProb then
-          local newcoin = CreateItem("item_small_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
-          local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
-          VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
-          newcoin.player = killerEntity:GetMainControllingPlayer()
-          newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
-          newcoinP:SetModelScale(3)
+    
+      --roll for extra coins, grant extra exp, bounty. if the unit was stacked.
+      local expReward = 25
+      if killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) ~= nil then
+        local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
+        while stacks > 0 do
+          print('coin in second loop')
+          outcome = RandomInt(1, 200)
+          largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
+          smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
+          --outcome = 1 --dont forget to change this
+          if outcome <= largeProb then
+            local newcoin = CreateItem("item_large_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
+            local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
+            --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())        
+            VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
+            --print(VAMPIRE_COINS[coin:entindex()])
+            newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
+            newcoinP:SetModelScale(5) 
+          elseif outcome <= smallProb then
+            local newcoin = CreateItem("item_small_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
+            local newcoinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), newcoin)
+            VAMPIRE_COINS[newcoin:entindex()] = killerEntity:GetMainControllingPlayer()
+            newcoin.player = killerEntity:GetMainControllingPlayer()
+            newcoinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
+            newcoinP:SetModelScale(4)
+          end
+          ChangeGold(killerEntity:GetMainControllingPlayer(), killedUnit:GetGoldBounty())
+          expReward = expReward + 25
+          stacks = stacks - 1
         end
-        ChangeGold(killerEntity:GetMainControllingPlayer(), killedUnit:GetGoldBounty())
-        expReward = expReward + 25
-        stacks = stacks - 1
-      end
-      if killedUnit:FindAbilityByName('no_exp_gain') == nil then
-        local nearVamps = FindUnitsInRadius(killedUnit:GetTeam(), killedUnit:GetAbsOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
-        if nearVamps ~= nil then
-        	local xpSplit = expReward / (#nearVamps)
-        	for k,v in pairs(nearVamps) do
-            v:AddExperience(xpSplit, 2, false, true)
-        	end
+        if killedUnit:FindAbilityByName('no_exp_gain') == nil then
+          local nearVamps = FindUnitsInRadius(killedUnit:GetTeam(), killedUnit:GetAbsOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+          if nearVamps ~= nil then
+          	local xpSplit = expReward / (#nearVamps)
+          	for k,v in pairs(nearVamps) do
+              v:AddExperience(xpSplit, 2, false, true)
+          	end
+          end
         end
       end
     end

@@ -9583,7 +9583,7 @@
       {
         "ScriptFile"            "scripts/vscripts/abilities.lua"
         "Function"              "build"
-        "ItemBuilding"          "massive_grave"
+        "ItemBuilding"          "item_massive_grave"
       }
     }
   }

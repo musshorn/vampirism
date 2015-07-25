@@ -461,9 +461,16 @@ function GraveDamage( keys )
 	-- Retrieve correct vampire owner.
 	local owner = VAMPIRES[playerID]
 
+	--change atacker to caster
+
 	if not target:HasAbility('is_a_building') then
-		ApplyDamage({victim = target, attacker = owner, damage = 35, damage_type = DAMAGE_TYPE_MAGICAL})
+		local dmg = ApplyDamage({victim = target, attacker = caster, damage = 35, damage_type = DAMAGE_TYPE_MAGICAL})
 		ability:ApplyDataDrivenModifier(owner, target, 'modifier_grave_apply_damage', {})
+		print(dmg, target:GetHealth())
+		if dmg >= target:GetHealth() then
+			print('legal damage')
+			target.gravekilled = true
+		end
 	end
 end
 

@@ -21,7 +21,7 @@ function ShadowSight(keys)
       end
     end
   elseif ability:GetLevel() == 2 then
-    CreateUnitByName("vampire_vision_dummy_2", target, false, caster, PlayerResource:GetPlayer(playerID), PlayerResource:GetTeam(playerID))
+    local dummy = CreateUnitByName("vampire_vision_dummy_2", target, false, caster, PlayerResource:GetPlayer(playerID), PlayerResource:GetTeam(playerID))
     local buildings = FindUnitsInRadius(DOTA_TEAM_BADGUYS, dummy:GetAbsOrigin(), nil, 3000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
     for k,v in pairs(buildings) do
       if v:HasAbility('is_a_building') then
