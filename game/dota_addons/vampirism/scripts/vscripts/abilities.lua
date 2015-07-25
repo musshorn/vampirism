@@ -311,13 +311,14 @@ function SpawnGargoyle( keys )
   local pID = caster:GetMainControllingPlayer()
   local player = PlayerResource:GetPlayer(pID)
 
-  player:SetTeam(DOTA_TEAM_BADGUYS)
+  GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS, GameRules:GetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS) + 1)
+
+  PlayerResource:SetCustomTeamAssignment(pID, DOTA_TEAM_BADGUYS)
   PlayerResource:UpdateTeamSlot(pID, DOTA_TEAM_BADGUYS, true)
 
   local unit = CreateUnitByName("human_gargoyle", caster:GetAbsOrigin(), false, nil, nil, PlayerResource:GetTeam(pID))
   unit:SetControllableByPlayer(pID, true)
 
-  caster:RemoveSelf()
 end
 
 function BecomeVampire( keys )
