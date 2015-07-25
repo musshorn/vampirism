@@ -1311,40 +1311,7 @@ function GameMode:OnConnectFull(keys)
 
   --Lets player see bottom row of trees.
   SendToConsole("dota_camera_pitch_max 63")
- 
-  --heroRoller(playerID)
 end
-
---an EPIC function. aka how to skip hero selection. rip
---[[
-function heroRoller(playerID)
-  print('heroroller running')
-	if playerID < 8 then
-		if PlayerResource:GetSelectedHeroName(playerID) ~= "npc_dota_hero_omniknight" then
-			PlayerResource:GetPlayer(playerID):MakeRandomHeroSelection()
-			Timers:CreateTimer(.3, function ()
-				heroRoller(playerID)
-				return nil
-			end)
-			return
-		else
-			PlayerResource:SetHasRepicked(playerID) 
-			return
-		end
-	else
-		if PlayerResource:GetSelectedHeroName(playerID) ~= "npc_dota_hero_night_stalker" then
-			PlayerResource:GetPlayer(playerID):MakeRandomHeroSelection()
-			Timers:CreateTimer(.3, function ()
-				heroRoller(playerID)
-				return nil
-			end)
-			return
-		else
-			PlayerResource:SetHasRepicked(playerID)
-			return
-		end
-	end
-end]]
 
 function GoldMineTimer()
   --adds gold from gold mines
@@ -1484,6 +1451,18 @@ function GameMode:OnPlayerSay(keys)
   end
 
   if string.find(msg, "-buy") ~= nil then
+    Trade:HandleChat(keys)
+  end
+
+  if string.find(msg, "-wood") ~= nil then
+    Trade:HandleChat(keys)
+  end
+
+  if string.find(msg, "-gold") ~= nil then
+    Trade:HandleChat(keys)
+  end
+
+  if string.find(msg, "-mycolor") ~= nil then
     Trade:HandleChat(keys)
   end
 

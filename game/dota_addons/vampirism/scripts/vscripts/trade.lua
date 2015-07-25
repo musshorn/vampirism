@@ -141,32 +141,45 @@ function Trade:HandleChat( keys )
 		end
 	end
 
-	-- Process a trade request. Format:
-	-- -trade A X Y
-	-- A = player colour, X = amount, Y = resource
-	if chat[1] == "-trade" then
+	--'wood' sends wood to a player colour
+	if chat[1] == "-wood" then
 		if tonumber(chat[3]) then
 			local senderID = keys.ply:GetPlayerID()
 			local recieverID = ColourToID(chat[2])
 			local sendAmount = tonumber(chat[3])
-			local sendResource = chat[4]
 
-			-- Check the player has the required resources, deduct them if they do
-			if sendResource == "wood" and WOOD[senderID] < sendAmount then
+			-- Check the player has enough wood.
+			if WOOD[senderID] < sendAmount then
 				FireGameEvent( 'custom_error_show', { player_ID = senderID, _error = "You need more wood" } )
 				return
-			elseif sendResource == "wood" then
+			else
 				ChangeWood(senderID, -1 * sendAmount)
 				ChangeWood(recieverID, sendAmount)
-			end
+			end			
+		end
+	end
 
-			if sendResource == "gold" and GOLD[senderID] < sendAmount then
+	--'gold' sends gold to a player colour
+	if chat[1] == "-gold" then
+		if tonumber(chat[3]) then
+			local senderID = keys.ply:GetPlayerID()
+			local recieverID = ColourToID(chat[2])
+			local sendAmount = tonumber(chat[3])
+
+			if GOLD[senderID] < sendAmount then
 				FireGameEvent( 'custom_error_show', { player_ID = senderID, _error = "You need more gold" } )
 				return
-			elseif sendResource == "gold" then
+			else
 				ChangeGold(senderID, -1 * sendAmount)
 				ChangeGold(recieverID, sendAmount)
 			end
 		end
+	end
+
+	if chat[1] == "-mycolor" then
+		print('recieved, mycolor')
+		local playerID = keys.ply:GetPlayerID()
+		Notifications:Top(playerID, {text = "Your color is "..IDToColour(playerID), duration = 5, nil, style = {color="white", ["font-size"]="20px"}})
+		print('sent Your color is '..IDToColour(playerID))
 	end
 end
