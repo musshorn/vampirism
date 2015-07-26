@@ -197,6 +197,8 @@ function FinishUpgrade( keys )
   local pID = caster:GetMainControllingPlayer()
   local team = caster:GetTeam()
 
+  caster:AddNewModifier(caster, nil, "modifier_disarmed", {duration=10000})
+
   if UNIT_KV[pID][caster:GetUnitName()].RecievesLumber ~= nil then -- remove old unit from the lumber drops if applicable
     if UNIT_KV[pID][caster:GetUnitName()].RecievesLumber == "true" then
       for k,v in pairs(LUMBER_DROPS) do
@@ -213,9 +215,9 @@ function FinishUpgrade( keys )
 
   local blockers = caster.blockers
 
-
   caster:Destroy()
   local unit = CreateUnitByName(targetUnit, pos, false, nil, nil, team)
+  unit:AddNewModifier(unit, nil, "modifier_disarmed", {duration=0.1})
   unit.blockers = blockers
   unit:SetControllableByPlayer(pID, true)
   if keys.Scale ~= nil then

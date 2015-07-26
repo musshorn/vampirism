@@ -172,14 +172,15 @@ end
 -- Check if a building was the last to be destroyed, if so remove it from the tree.
 
 function TechTree:RemoveTech(unitName, playerID)
-	local tech = unitName
 
-	if playerTrees[playerID][tech] == nil then
+	if playerTrees[playerID][unitName] == nil then
 		return
 	end
 
-	if playerTrees[playerID][tech] > 0 then
-		playerTrees[playerID][tech] = playerTrees[playerID][tech] - 1
+	if playerTrees[playerID][unitName] > 0 then
+		playerTrees[playerID][unitName] = playerTrees[playerID][unitName] - 1
+	else
+		playerTrees[playerID][unitName] = 0
 	end
 end
 

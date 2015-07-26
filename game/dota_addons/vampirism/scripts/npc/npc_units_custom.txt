@@ -7226,8 +7226,8 @@
     // Abilities
     //----------------------------------------------------------------
     
-    "Ability1"          "grave_adder"      // Adds grave aura when build completes
-    "Ability2"          ""      // 
+    "Ability1"          ""      // Adds grave aura when build completes
+    "Ability2"          "is_a_building"      // 
     "Ability3"          ""      // Ability 3.
     "Ability4"          ""         // Ability 4.
     "Ability5"          ""      // Ability 5.

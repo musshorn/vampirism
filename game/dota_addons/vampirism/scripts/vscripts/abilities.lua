@@ -39,8 +39,8 @@ function build( keys )
       end
     end
     -- start the building with 0 mana.
-    unit:AddNewModifier(silencer, nil, "modifier_silence", {duration=10000})
-    unit:AddNewModifier(silencer, nil, "modifier_disarmed", {duration=10000})
+    unit:AddNewModifier(unit, nil, "modifier_silence", {duration=10000})
+    unit:AddNewModifier(unit, nil, "modifier_disarmed", {duration=10000})
     unit:SetMana(0)
 
     if sourceItem ~= nil then

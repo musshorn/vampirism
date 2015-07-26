@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.04"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.05"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -180,7 +180,7 @@ function GameMode:OnAllPlayersLoaded()
   CreateUnitByName("npc_vamp_fountain", Vector(779, 430, 128), false, nil, nil, DOTA_TEAM_BADGUYS)
   
   if not FACTOR_SET then
-    Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Read about worker factors here -http://bit.ly/WorkerStacks", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
+    Notifications:TopToAll({text = "By default, a worker factor of 4 is applied to reduce the network load on hosts. The host may change it by using -wf (number) to change it. Check info pane for details.", duration = 55, nil, style = {color="white", ["font-size"]="20px"}})
   end
 end
 
@@ -242,7 +242,7 @@ function GameMode:OnGameInProgress()
   SlayerPool:ActivatePool()
 
   if tonumber(WORKER_FACTOR) > 1 then
-    Notifications:TopToAll({text = "Remember that there is a worker factor of "..WORKER_FACTOR.." for this game. That means that tier 1 workers will roll "..WORKER_FACTOR.." times to drop a coin, take "..WORKER_FACTOR.." times as many detonates to destroy, and give "..WORKER_FACTOR.." as much gold and XP. Read more here - http://bit.ly/WorkerStacks", duration = 15, nil, style = {color="white", ["font-size"]="20px"}})
+    Notifications:TopToAll({text = "Remember that there is a worker factor of "..WORKER_FACTOR.." for this game. That means that tier 1 workers will roll "..WORKER_FACTOR.." times to drop a coin, take "..WORKER_FACTOR.." times as many detonates to destroy, and give "..WORKER_FACTOR.." as much gold and XP. Check info pane for details.", duration = 15, nil, style = {color="white", ["font-size"]="20px"}})
   end
 end
 
@@ -297,8 +297,8 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_blink"):SetLevel(1)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
-          WOOD[i] = 50 --cheats, real is 50.
-          GOLD[i] = 0 --this is how it should look on ship.
+          WOOD[i] = 10000 --cheats, real is 50.
+          GOLD[i] = 10000 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -316,8 +316,8 @@ function GameMode:OnGameRulesStateChange(keys)
           local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
           vampire:SetHullRadius(48)
           FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
-          GOLD[i] = 0 --cheats off
-          WOOD[i] = 0 --cheats off
+          GOLD[i] = 10000 --cheats off
+          WOOD[i] = 10000 --cheats off
           TOTAL_FOOD[i] = 10
           CURRENT_FOOD[i] = 0
           FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
@@ -334,7 +334,7 @@ function GameMode:OnGameRulesStateChange(keys)
           --Next frame timer
           Timers:CreateTimer(0.03, function ()
             vampire:FindAbilityByName("vampire_init_hider"):OnUpgrade()
-            vampire:SetAbsOrigin(OutOfWorldVector)
+            vampire:SetAbsOrigin(Vector(96, -416, -500))
             vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
             vampire:SetAbilityPoints(0)
             vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
@@ -748,7 +748,7 @@ function GameMode:OnEntityKilled( keys )
 
   if killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
     print('killer was bad, check 4 coins', killerEntity:GetUnitName())
-    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil and killedUnit.gravekilled ~= true then
+    if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil and killedUnit.gravekilled ~= true and killerEntity:FindAbilityByName('is_a_building') == nil then
       print('roll 4 coins')
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
