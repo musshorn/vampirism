@@ -7,6 +7,6 @@
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/building_helper.xml" /> 
     	<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hud_base.xml" /> 
     	<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/version_num.xml" /> 
+    	<CustomUIElement type="GameInfo" layoutfile="file://{resources}/layout/custom_game/vamp_game_info.xml" />
 	</Panel>
 </root>
-

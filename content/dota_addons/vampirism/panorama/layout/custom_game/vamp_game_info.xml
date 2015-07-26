@@ -1,0 +1,21 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/vamp_game_info.css" />
+	</styles>
+	<Panel class="VampGameInfo">
+		<Panel id="Title">
+			<Label id="TitleName" text="#addonname" />
+		</Panel>
+		<Label id="ObjectiveHeader" class="Header" html="true" text="#vamp_game_info_header_objective" />
+		<Label id="BriefDescription" text="#vamp_brief_description" />
+		<Label id="HowToPlayHeader" class="Header" html="true" text="#vamp_game_info_header_how_to_play" />
+		<Panel id="CommandRow" class="InfoRow">
+			<Label id="CommandText" html="true" text="#vamp_game_info_commands" />
+		</Panel>
+		<Label id="WorkerStackHeader" class="Header" html="true" text="#vamp_game_info_header_stacks" />
+		<Panel id="StacksRow" class="InfoRow">
+			<Label id="StacksText" html="true" text="#vamp_game_info_stacks" />
+		</Panel>
+	</Panel>
+</root>
