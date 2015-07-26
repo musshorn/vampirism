@@ -1394,10 +1394,10 @@ function UrnTimer()
   Timers:CreateTimer(function ()
     for k, v in pairs(VAMPIRES) do
       if v:HasItemInInventory('item_dracula_urn') then
-        local playerID = v:GetMainControllingPlayer()
-        ChangeGold(playerID, 35)
+        ChangeGold(k, 35)
       end
     end
+    return 60
   end)
 end
 
