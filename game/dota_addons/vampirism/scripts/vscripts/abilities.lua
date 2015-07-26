@@ -34,6 +34,7 @@ function build( keys )
     local nearVamps = FindUnitsInRadius(caster:GetTeam(), unit:GetAbsOrigin(), nil, 100, DOTA_TEAM_BADGUYS, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
     for k, v in pairs(nearVamps) do
       if v:GetUnitName() == "npc_dota_hero_night_stalker" then
+        v:AddNewModifier(caster, nil, "string modifier_stun", {duration = 1})
         v:AddNewModifier(caster, nil, "modifier_item_forcestaff_active", {push_length = 200})
       end
     end

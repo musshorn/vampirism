@@ -251,6 +251,7 @@ function SlayerRespawn( keys )
 
   slayer:RespawnUnit()
   GameMode:ModifyStatBonuses(SLAYERS[pID].handle)
+  FindClearSpaceForUnit(slayer, caster:GetAbsOrigin(), true)
 
   --This does not appear to be saved by the game.
   for k, v in pairs(SLAYERS[pID]['health']) do

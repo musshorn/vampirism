@@ -10,6 +10,12 @@ function SlayerPool:ActivatePool()
             if SLAYERS[i].handle ~= nil then
               if SLAYERS[i].handle.inPool ~= nil then
                 SLAYERS[i].handle:HeroLevelUp(true)
+                local level = SLAYERS[i].handle:GetLevel()
+                if level == 5 or level == 10 or level == 11 or level == 15 or level == 20 then
+                  SLAYERS[i].handle:SetAbilityPoints(1)
+                else
+                  SLAYERS[i].handle:SetAbilityPoints(0)
+                end
               end
             end
           end
