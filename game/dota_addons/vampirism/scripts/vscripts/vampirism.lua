@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.05"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.07"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -298,7 +298,7 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
           WOOD[i] = 50000 --cheats, real is 50.
-          GOLD[i] = 0 --this is how it should look on ship.
+          GOLD[i] = 50000 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -317,7 +317,7 @@ function GameMode:OnGameRulesStateChange(keys)
           vampire:SetHullRadius(48)
           FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
           GOLD[i] = 5000 --cheats off
-          WOOD[i] = 0 --cheats off
+          WOOD[i] = 5000 --cheats off
           TOTAL_FOOD[i] = 10
           CURRENT_FOOD[i] = 0
           FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
@@ -702,7 +702,7 @@ function GameMode:OnEntityKilled( keys )
 
     HUMAN_COUNT = HUMAN_COUNT - 1
     if HUMAN_COUNT == 0 then
-      GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
+      --GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
     end
 
     local playerEnts = Entities:FindAllByClassname("npc_dota_creature")
@@ -721,8 +721,10 @@ function GameMode:OnEntityKilled( keys )
             v:Destroy()
           else
             Timers:CreateTimer(60, function ()
-            v:RemoveBuilding(true)
-            return nil
+              local tempFood = TOTAL_FOOD[v:GetMainControllingPlayer()]
+              v:RemoveBuilding(true)
+              TOTAL_FOOD[v:GetMainControllingPlayer()] = tempFood
+              return nil
             end)  
           end 
         end   
@@ -740,7 +742,7 @@ function GameMode:OnEntityKilled( keys )
   if killedUnit:GetName() == "npc_dota_hero_night_stalker" then
     VAMP_COUNT = VAMP_COUNT - 1
     if VAMP_COUNT == 0 then
-      GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
+      --GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
     end
   end
 
@@ -846,10 +848,15 @@ function GameMode:OnEntityKilled( keys )
       
       if UNIT_KV[playerID][unitName].ProvidesFood ~= nil then
         lostfood = UNIT_KV[playerID][unitName].ProvidesFood
-        print(lostfood)
-        print(unitName)
         TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] - lostfood
-        FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+        if TOTAL_FOOD[playerID] < 10 and VAMPIRES[playerID] ~= nil then
+          TOTAL_FOOD[playerID] = 10
+        end
+        if TOTAL_FOOD[playerID] < 250 then
+          FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+        else
+          FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = 250})
+        end 
       end
 
       if UNIT_KV[playerID][unitName].ConsumesFood ~= nil then

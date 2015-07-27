@@ -73,10 +73,12 @@ function build( keys )
     -- If the building provides food, how much? Also alert the UI for an update
     if UNIT_KV[pID][unitName].ProvidesFood ~= nil then
       local food = tonumber(UNIT_KV[pID][unitName].ProvidesFood)
-      if (TOTAL_FOOD[pID] < 250) then
-        TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
+      TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
+      if TOTAL_FOOD[pID] < 250 then
         FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
-      end
+      else
+        FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = 250})
+      end 
     end
 
     if UNIT_KV[pID][unitName].IsTech ~= nil then
@@ -337,11 +339,12 @@ function BecomeVampire( keys )
       vamp:SetHullRadius(48)
       TOTAL_FOOD[pID] = 10
       CURRENT_FOOD[pID] = 0
-      GOLD[pID] = 0
-      WOOD[pID] = 0
+      ChangeGold(pID, -1 * GOLD[pID])
+      ChangeWood(pID, -1 * WOOD[pID])
       VAMPIRES[pID] = vamp
       VAMP_COUNT = VAMP_COUNT + 1
-
+      FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+      FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
       caster:RemoveSelf()
     else
       FireGameEvent( 'custom_error_show', { player_ID = pID , _error = "You must be on Blight to do that!" } )

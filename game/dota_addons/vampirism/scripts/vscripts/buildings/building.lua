@@ -233,12 +233,12 @@ function FinishUpgrade( keys )
       TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood
     end
     if TOTAL_FOOD[pID] > 250 then
-      TOTAL_FOOD[pID] = 250
+      FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = 250})
     end
     if TOTAL_FOOD[pID] < 20 then
       TOTAL_FOOD[pID] = 20
+      FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = 20})
     end
-    FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
   end
 
   if UNIT_KV[pID][targetUnit].AnnounceUnit == 1 and UNIQUE_TABLE[targetUnit] == nil then
