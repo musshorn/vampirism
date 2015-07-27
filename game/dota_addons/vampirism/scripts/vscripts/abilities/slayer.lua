@@ -183,6 +183,7 @@ function SpawnSlayer( keys )
   SLAYERS[pID]['intellect'] = {}
 
   slayer:SetAbilityPoints(0)
+  slayer:SetHullRadius(48)
     
   local name = PlayerResource:GetPlayerName(pID)
   local time = GameRules:GetDOTATime(false, false)
