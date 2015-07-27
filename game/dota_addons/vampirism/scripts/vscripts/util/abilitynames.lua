@@ -9,5 +9,6 @@ ABILITY_NAMES = {
   research_human_teleport = 'Human Teleport',
   research_tower_defenses = 'Tower Defenses',
   research_engineer_vitality = 'Engineer Vitality',
-  research_holy_essence = 'Holy Essence'
+  research_holy_essence = 'Holy Essence',
+  research_mana_regeneration = 'Mana Regeneration'
 }

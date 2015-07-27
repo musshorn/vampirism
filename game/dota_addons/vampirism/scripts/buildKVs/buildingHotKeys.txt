@@ -86,6 +86,7 @@
 		"research_rifles"									"r"
 		"research_improved_worker_motivation"				"m"
 		"research_improved_gem_quality"						"g"
+		"research_mana_regeneration"						"n"
 		"upgrade_to_research_center_t2"						"u"
 		"build_cancel"										"q"
 		"build_empty"										" "

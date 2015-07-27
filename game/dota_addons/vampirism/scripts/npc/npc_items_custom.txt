@@ -639,7 +639,7 @@
   {
   	"ID"	"2016"
   	"BaseClass"		         "item_datadriven"
-  	"AbilityTextureName"	"item_ring_aquila"
+  	"AbilityTextureName"	"item_ring_of_basilius"
     "AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
   	"ItemStackable"		"0"
   	"ItemKillable"		"1"

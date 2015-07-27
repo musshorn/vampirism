@@ -177,6 +177,7 @@ function Precache( context )
 		PrecacheResource("model_folder","models/items/omniknight", context)
 		PrecacheResource("model_folder","models/items/nightstalker", context)
 		PrecacheResource("model_folder", "models/heroes/life_stealer", context)
+		PrecacheResource("model_folder","models/items/invoker", context)
 
 		-- unit precache
 		PrecacheUnitByNameSync("tent_t2", context)

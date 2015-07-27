@@ -578,6 +578,12 @@ function AddEssence( keys )
   caster:AddAbility('upgrade_to_tower_lantern_t2')
 end
 
+-- Levels up the heal ability on heal towers
+function ManaRegeneration( keys )
+  local caster = keys.caster
+  caster:FindAbilityByName('heal_tower_heal_aura'):SetLevel(2)
+end
+
 function TechUpgrade( keys )
   local caster = keys.caster
   local playerID = caster:GetMainControllingPlayer()

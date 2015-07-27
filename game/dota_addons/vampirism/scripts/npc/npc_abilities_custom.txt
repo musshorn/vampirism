@@ -6859,13 +6859,13 @@
       "02"
       {
         "var_type"  "FIELD_FLOAT"
-        "health_regen_amount" "0.2 0.2"
+        "health_regen_amount" "2 2"
       }
 
       "03"
       {
         "var_type"  "FIELD_FLOAT"
-        "mana_regen_amount" "0 22.0"
+        "mana_regen_amount" "0 2"
       }
     }
 
@@ -6952,13 +6952,13 @@
       "02"
       {
         "var_type"  "FIELD_FLOAT"
-        "health_regen_amount" "0.5 0.5"
+        "health_regen_amount" "5 5"
       }
 
       "03"
       {
         "var_type"  "FIELD_FLOAT"
-        "mana_regen_amount" "0 22.0"
+        "mana_regen_amount" "0 2"
       }
     }
 
@@ -7022,6 +7022,98 @@
           "MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE" "%mana_regen_amount"
         }
 
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Research Mana Regeneration
+  //================================================================================= /
+  "research_mana_regeneration"
+  {
+    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityChannelTime"  "30"
+    "AbilityTextureName"  "buildings/research_mana_regeneration"
+    "LumberCost"   "2000"
+    "GoldCost"     "0"
+    "BaseClass"         "ability_datadriven"
+    //when this completes, this is the modifier(ability) we need to add.
+    "GiveModifier"      "tech_mana_regeneration"
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Research"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelInterrupted"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Cancelled"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelFinish"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+        "Function"    "Finished"
+        "TARGET"      "CASTER"
+      }
+    }
+    "OnChannelSucceeded"
+    {
+      "RunScript"
+      {
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+        "Level"             "10"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Healing Vitality passive (what gets applied to newly spawned buildings)
+  //================================================================================= /
+  "tech_mana_regeneration"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_mana_regeneration"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_mana_regeneration"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+            "Function"          "ManaRegeneration" //adds a flat health bonus.
+            "TARGET"            "CASTER"
+          }
+        }
       }
     }
   }

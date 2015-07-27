@@ -49,6 +49,7 @@ function build( keys )
         if item ~= nil then
           if item:GetName() == sourceItem then
             caster:RemoveItem(item)
+            break
           end
         end
       end
@@ -319,6 +320,7 @@ function SpawnGargoyle( keys )
 
   local unit = CreateUnitByName("human_gargoyle", caster:GetAbsOrigin(), false, nil, nil, PlayerResource:GetTeam(pID))
   unit:SetControllableByPlayer(pID, true)
+  caster:RemoveSelf()
 
 end
 
@@ -332,6 +334,7 @@ function BecomeVampire( keys )
       local vamp = PlayerResource:ReplaceHeroWith(pID, "npc_dota_hero_life_stealer", 0, 0)
       vamp:SetControllableByPlayer(pID, true)
       vamp:SetAbsOrigin(caster:GetAbsOrigin())
+      vamp:SetHullRadius(48)
       TOTAL_FOOD[pID] = 10
       CURRENT_FOOD[pID] = 0
       GOLD[pID] = 0

@@ -1873,7 +1873,7 @@
     "Ability7"          "build_blocked5"
     "Ability8"          "is_a_building"
 
-    "AbilityHolder"    "10"
+    "AbilityHolder"    "11"
 
     "ExtraAbility1"         "research_improved_lumber_harvesting"
     "ExtraAbility2"         "research_advanced_lumber_harvesting"         // Ability 2.
@@ -1884,7 +1884,8 @@
     "ExtraAbility7"         "research_improved_gem_quality"
     "ExtraAbility8"         "research_advanced_gem_quality"
     "ExtraAbility9"         "research_unbeatable_gem_quality"
-    "ExtraAbility10"        "upgrade_to_research_center_t2"
+    "ExtraAbility10"        "research_mana_regeneration"
+    "ExtraAbility11"        "upgrade_to_research_center_t2"
 
 
     // Armor
@@ -2046,6 +2047,7 @@
     "TechModifiers"
     {
         "1"             "research_healing_vitality"
+        "2"             "research_mana_regeneration"
     }
   }
 
@@ -2142,6 +2144,7 @@
     "TechModifiers"
     {
         "1"             "research_healing_vitality"
+        "2"             "research_mana_regeneration"
     }
   }
 
@@ -5928,6 +5931,9 @@
     "Ability7"                  "t4_worker_training"               // Ability 7 - Extra.
     "Ability8"                  "t5_worker_training"               // Ability 8 - Extra.
     "Ability9"                  "build_cancel"
+    "Ability10"                 "build_blocked"
+    "Ability11"                 "build_blocked2"
+
 
     "AbilityHolder"             "19"
 

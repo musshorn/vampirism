@@ -98,7 +98,7 @@
 			"research_unbeatable_gem_quality"		"2"
 			"OrderPosition"							"4"		
 		}
-		"build_empty"							"5"
+		"research_mana_regeneration"			"5"
 		"build_empty"							"6"
 		"build_empty"							"7"
 		"build_empty"							"8"
