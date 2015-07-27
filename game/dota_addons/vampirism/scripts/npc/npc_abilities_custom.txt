@@ -8768,7 +8768,6 @@
     }
   }
 
-
   //================================================================================= /
   // Build vampiric research center
   //================================================================================= /
@@ -8810,6 +8809,54 @@
         "ScriptFile"            "scripts/vscripts/abilities.lua"
         "Function"              "build"
         "ItemBuilding"          "item_vampiric_research_center"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Mini vamp Toughness aura
+  //================================================================================= /
+  "mini_toughness_aura"
+  {
+    "BaseClass"                 "ability_datadriven"
+    "AbilityTextureName"        "life_stealer_infest"
+    "MaxLevel"                  "10"
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "armor_bonus"   "1 2 3 4 5 6 7 8 9 10"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_mini_toughness"
+      {
+        "Passive"       "1"
+        "IsHidden"      "0"
+        "IsDebuff"      "0"
+
+        "Aura"            "modifier_mini_toughness_aura"
+        "Aura_Radius"     "900"
+        "Aura_Teams"      "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "Aura_Types"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "Aura_Flags"      "DOTA_UNIT_TARGET_FLAG_NONE"
+        "Aura_ApplyToCaster" "1"
+      }
+
+      "modifier_mini_toughness_aura"
+      {
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
+        }
       }
     }
   }

@@ -636,7 +636,7 @@ function GameMode:OnEntityKilled( keys )
 
     HUMAN_COUNT = HUMAN_COUNT - 1
     if HUMAN_COUNT == 0 then
-      GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
+      --GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
     end
 
     local playerEnts = Entities:FindAllByClassname("npc_dota_creature")
@@ -676,7 +676,7 @@ function GameMode:OnEntityKilled( keys )
   if killedUnit:GetName() == "npc_dota_hero_night_stalker" then
     VAMP_COUNT = VAMP_COUNT - 1
     if VAMP_COUNT == 0 then
-      GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
+      --GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
     end
   end
 

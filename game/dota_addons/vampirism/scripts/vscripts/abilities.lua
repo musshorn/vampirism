@@ -345,6 +345,7 @@ function BecomeVampire( keys )
       VAMP_COUNT = VAMP_COUNT + 1
       FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
       FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+      vamp:AddExperience(50000, 2, false, true)
       caster:RemoveSelf()
     else
       FireGameEvent( 'custom_error_show', { player_ID = pID , _error = "You must be on Blight to do that!" } )

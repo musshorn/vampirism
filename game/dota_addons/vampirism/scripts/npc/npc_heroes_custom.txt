@@ -214,7 +214,7 @@
     //"Ability3"          "vampire_cyka_speed"//"vampire_poison"
     "Ability3"          "vampire_critical_strike"
     "Ability4"          "vampire_health_beam"
-    "Ability5"          "vampire_chain_of_death"
+    "Ability5"          "mini_toughness_aura"
     "Ability6"          "vampire_veil_of_darkness"
     "Ability7"          "vampire_init_hider"
     "Ability8"          "attacktest"
