@@ -465,6 +465,8 @@ function GameMode:OnPlayerReconnect(keys)
     FireGameEvent("vamp_food_changed", { player_ID = pID, food_total = CURRENT_FOOD[pID]})
     FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
     CustomGameEventManager:Send_ServerToAllClients("send_version", {version=VERSION_NUMBER} )
+    local hero = PlayerResource:GetSelectedHeroEntity(pID)
+    AddSwag(hero)
     return nil
   end)
 end
