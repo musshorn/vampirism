@@ -824,6 +824,7 @@ function GameMode:OnEntityKilled( keys )
   
   -- Update all the slayer taverns the player owns to the new respawn time
   if killedUnit:GetUnitName() == "npc_dota_hero_invoker" then
+    ChangeGold(killerEntity:GetMainControllingPlayer(), 15)
     SLAYERS[playerID].state = "dead"
     SLAYERS[playerID].level = killedUnit:GetLevel()
     local house = nil
