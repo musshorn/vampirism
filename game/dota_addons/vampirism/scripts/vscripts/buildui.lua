@@ -84,24 +84,24 @@ function CallMenu(keys)
 end
 
 function BuildUI:BuildChosen(building, playerID)
-   --print(building)
+  print(building, playerID, 'chosen')
+  local caster = playerCasters[playerID]
 
-    local caster = playerCasters[playerID]
-
-    if caster:FindAbilityByName(building) ~= nil then
-      local ability = caster:FindAbilityByName(building)
-      caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
-    else
-      for k, v in ipairs(ABILITY_HOLDERS[caster:GetUnitName()]) do
-        if building == v then
-          caster:AddAbility(v)
-          local ability = caster:FindAbilityByName(v)
-          ability:SetLevel(1)
-          caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
-          if ABILITY_KV[ability:GetAbilityName()]['UnitName'] ~= nil then
-            caster:RemoveAbility(v)
-          end
+  if caster:FindAbilityByName(building) ~= nil then
+    local ability = caster:FindAbilityByName(building)
+    ability:SetLevel(1)
+    caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
+  else
+    for k, v in ipairs(ABILITY_HOLDERS[caster:GetUnitName()]) do
+      if building == v then
+        caster:AddAbility(v)
+        local ability = caster:FindAbilityByName(v)
+        ability:SetLevel(1)
+        caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
+        if ABILITY_KV[ability:GetAbilityName()]['UnitName'] ~= nil then
+          caster:RemoveAbility(v)
         end
       end
     end
+  end
 end

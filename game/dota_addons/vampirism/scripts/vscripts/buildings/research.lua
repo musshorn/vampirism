@@ -7,6 +7,7 @@ function Research( keys )
   local ability = keys.ability
   local abilityName = ability:GetAbilityName()
   local unitName = caster:GetUnitName()
+
   -- Not all research requires lumber or gold
   if lumberCost == nil then
     lumberCost = 0
@@ -48,7 +49,6 @@ function Research( keys )
         -- another unit had this ability, hide it.
         if v == abilityName then
           FireGameEvent('build_ui_hide', {player_ID = pID, ability_name = abilityName, builder = name, tier = keys.level})
-          print('ability holder hide on ', pID)
         end
       end
     end

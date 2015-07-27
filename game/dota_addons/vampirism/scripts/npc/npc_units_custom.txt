@@ -7556,17 +7556,18 @@
     
     "Ability1"          "call_buildui"      // 
     "Ability2"          "vampire_sell_item"      // 
-    "Ability3"          "build_blocked2"      // Ability 3.
-    "Ability4"          "build_blocked3"         // Ability 4.
-    "Ability5"          "build_blocked4"      // Ability 5.
-    "Ability6"          "build_cancel"      // Ability 6 - Extra.
-    "Ability7"          "research_vampiric_skills"      // Ability 7 - Extra.
-    "Ability8"          "research_vampiric_damage"      // Ability 8 - Extra.
-    "Ability9"          "research_vampiric_stats"
-    "Ability10"         "research_power_underworld"
-    "Ability11"         "research_vampiric_strength"
-    "Ability12"         "research_vampiric_agility"
-    "Ability13"         "research_vampiric_intellect"
+    "Ability3"          "build_blocked"      // Ability 3.
+    "Ability4"          "build_blocked2"      // Ability 3.
+    "Ability5"          "build_blocked3"         // Ability 4.
+    "Ability6"          "build_blocked4"      // Ability 5.
+    "Ability7"          "build_cancel"      // Ability 6 - Extra.
+    "Ability8"          "research_vampiric_skills"      // Ability 7 - Extra.
+    "Ability9"          "research_vampiric_damage"      // Ability 8 - Extra.
+    "Ability10"          "research_vampiric_stats"
+    "Ability11"         "research_power_underworld"
+    "Ability12"         "research_vampiric_strength"
+    "Ability13"         "research_vampiric_agility"
+    "Ability14"         "research_vampiric_intellect"
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"             "15"     // Physical protection.

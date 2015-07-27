@@ -226,7 +226,6 @@ function GameMode:OnGameInProgress()
   local vamps = Entities:FindAllByName("npc_dota_hero_night_stalker")
 
   for i = 1, #vamps do
-  	print(vamps[i]:GetUnitName())
   	vamps[i]:RemoveModifierByName("modifier_init_hider")
   	vamps[i]:SetAbilityPoints(3)
     FindClearSpaceForUnit(vamps[i], Vector(96, -416, 256), false)
@@ -249,7 +248,6 @@ end
 -- Cleanup a player when they leave
 function GameMode:OnDisconnect(keys)
   print('[vampirism] Player Disconnected ' .. tostring(keys.userid))
-  PrintTable(keys)
 
   local name = keys.name
   local networkid = keys.networkid
@@ -261,7 +259,6 @@ end
 function GameMode:OnGameRulesStateChange(keys)
   
   print("[vampirism] GameRules State Changed")
-  PrintTable(keys)
 
   local newState = GameRules:State_Get()
   if newState == DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD then
@@ -338,7 +335,6 @@ function GameMode:OnGameRulesStateChange(keys)
             vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
             vampire:SetAbilityPoints(0)
             vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
-            print('added to vamp count, vamp table,')
             VAMP_COUNT = VAMP_COUNT + 1
             VAMPIRES[i] = vampire
             VAMPIRES[-1] = vampire --nice game
@@ -373,9 +369,6 @@ end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
 function GameMode:OnNPCSpawned(keys)
-
-  print("[vampirism] NPC Spawned")
-
   local npc = EntIndexToHScript(keys.entindex)
   local playerID = npc:GetMainControllingPlayer()
 
@@ -430,7 +423,6 @@ end
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive
 -- operations here
 function GameMode:OnEntityHurt(keys)
-  print("[vampirism] Entity Hurt")
   if keys.entindex_attacker ~= nil then
     local entCause = EntIndexToHScript(keys.entindex_attacker)
     local entVictim = EntIndexToHScript(keys.entindex_killed)
@@ -447,9 +439,6 @@ end
 
 -- An item was picked up off the ground
 function GameMode:OnItemPickedUp(keys)
-  print ( '[vampirism] OnItemPickedUp' )
-  PrintTable(keys)
-
   local heroEntity = EntIndexToHScript(keys.HeroEntityIndex)
   local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
   local playerID = PlayerResource:GetPlayer(keys.PlayerID)
@@ -482,8 +471,6 @@ end
 
 -- An item was purchased by a player
 function GameMode:OnItemPurchased( keys )
-  print ( '[vampirism] OnItemPurchased' )
-
   -- The playerID of the hero who is buying something
   local plyID = keys.PlayerID
   if not plyID then return end
@@ -491,8 +478,6 @@ end
 
 -- An ability was used by a player
 function GameMode:OnAbilityUsed(keys)
-  print('[vampirism] AbilityUsed')
-  PrintTable(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID) 
   local abilitysname = keys.abilityname
@@ -506,8 +491,6 @@ function GameMode:OnAbilityUsed(keys)
       if not (string.len(abilityname) > 14 and string.sub(abilityname,1,14) == "move_to_point_") then
         if not DontCancelBuildingGhostAbils[abilityname] then
           player.cancelBuilding = true
-        else
-          print(abilityname .. " did not cancel building ghost.")
         end
       end
     end
@@ -526,7 +509,6 @@ end
 -- A player changed their name
 function GameMode:OnPlayerChangedName(keys)
   print('[vampirism] OnPlayerChangedName')
-  PrintTable(keys)
 
   local newName = keys.newname
   local oldName = keys.oldName
@@ -534,8 +516,6 @@ end
 
 -- A player leveled up an ability
 function GameMode:OnPlayerLearnedAbility( keys)
-  print ('[vampirism] OnPlayerLearnedAbility')
-  PrintTable(keys)
 
   local player = EntIndexToHScript(keys.player)
   local abilityname = keys.abilityname
@@ -552,9 +532,6 @@ end
 
 -- A player leveled up
 function GameMode:OnPlayerLevelUp(keys)
-  print ('[vampirism] OnPlayerLevelUp')
-  PrintTable(keys)
-
   local player = EntIndexToHScript(keys.player)
   local level = keys.level
   local playerID = player:GetPlayerID()
@@ -572,8 +549,6 @@ end
 
 -- A player last hit a creep, a tower, or a hero
 function GameMode:OnLastHit(keys)
-  print ('[vampirism] OnLastHit')
-  PrintTable(keys)
 
   local isFirstBlood = keys.FirstBlood == 1
   local isHeroKill = keys.HeroKill == 1
@@ -583,48 +558,13 @@ end
 
 -- A tree was cut down by tango, quelling blade, etc
 function GameMode:OnTreeCut(keys)
-  print ('[vampirism] OnTreeCut')
-  PrintTable(keys)
-
   local treeX = keys.tree_x
   local treeY = keys.tree_y
-end
-
--- A rune was activated by a player
-function GameMode:OnRuneActivated (keys)
-  print ('[vampirism] OnRuneActivated')
-  PrintTable(keys)
-
-  local player = PlayerResource:GetPlayer(keys.PlayerID)
-  local rune = keys.rune
-
-  --[[ Rune Can be one of the following types
-  DOTA_RUNE_DOUBLEDAMAGE
-  DOTA_RUNE_HASTE
-  DOTA_RUNE_HAUNTED
-  DOTA_RUNE_ILLUSION
-  DOTA_RUNE_INVISIBILITY
-  DOTA_RUNE_MYSTERY
-  DOTA_RUNE_RAPIER
-  DOTA_RUNE_REGENERATION
-  DOTA_RUNE_SPOOKY
-  DOTA_RUNE_TURBO
-  ]]
-end
-
--- A player took damage from a tower
-function GameMode:OnPlayerTakeTowerDamage(keys)
-  print ('[vampirism] OnPlayerTakeTowerDamage')
-  PrintTable(keys)
-
-  local player = PlayerResource:GetPlayer(keys.PlayerID)
-  local damage = keys.damage
 end
 
 -- A player picked a hero
 function GameMode:OnPlayerPickHero(keys)
   print ('[vampirism] OnPlayerPickHero')
-  PrintTable(keys)
 
   local heroClass = keys.hero
   local heroEntity = EntIndexToHScript(keys.heroindex)
@@ -636,8 +576,6 @@ end
 
 -- A player killed another player in a multi-team context
 function GameMode:OnTeamKillCredit(keys)
-  print ('[vampirism] OnTeamKillCredit')
-  PrintTable(keys)
 
   local killerPlayer = PlayerResource:GetPlayer(keys.killer_userid)
   local victimPlayer = PlayerResource:GetPlayer(keys.victim_userid)
@@ -647,9 +585,6 @@ end
 
 -- An entity died
 function GameMode:OnEntityKilled( keys )
-  print( '[vampirism] OnEntityKilled Called' )
-  PrintTable( keys )
-  
   -- The Unit that was Killed
   local killedUnit = EntIndexToHScript( keys.entindex_killed )
   -- The Killing entity
@@ -666,7 +601,6 @@ function GameMode:OnEntityKilled( keys )
   end
 
   if killedUnit:IsRealHero() then 
-    print ("KILLEDKILLER: " .. killedUnit:GetName() .. " -- " .. killerEntity:GetName())
     if killedUnit:GetTeam() == DOTA_TEAM_BADGUYS and killerEntity:GetTeam() == DOTA_TEAM_GOODGUYS then
       self.nRadiantKills = self.nRadiantKills + 1
       if END_GAME_ON_KILLS and self.nRadiantKills >= KILLS_TO_END_GAME_FOR_TEAM then
@@ -702,12 +636,12 @@ function GameMode:OnEntityKilled( keys )
 
     HUMAN_COUNT = HUMAN_COUNT - 1
     if HUMAN_COUNT == 0 then
-      --GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
+      GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
     end
 
     local playerEnts = Entities:FindAllByClassname("npc_dota_creature")
 
-    print(killedUnit:GetMainControllingPlayer())
+
     -- Goes to next frame to stop bugs.
     Timers:CreateTimer(.03, function ()
       for k,v in pairs(playerEnts) do
@@ -742,23 +676,23 @@ function GameMode:OnEntityKilled( keys )
   if killedUnit:GetName() == "npc_dota_hero_night_stalker" then
     VAMP_COUNT = VAMP_COUNT - 1
     if VAMP_COUNT == 0 then
-      --GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
+      GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
     end
   end
 
   local stackAbility = killedUnit:FindAbilityByName('worker_stack')
 
   if killerEntity:GetTeam() == DOTA_TEAM_BADGUYS then
-    print('killer was bad, check 4 coins', killerEntity:GetUnitName())
+    --print('killer was bad, check 4 coins', killerEntity:GetUnitName())
     if killedUnit:GetUnitName() ~= "npc_dota_hero_omniknight" and killedUnit:GetUnitName() ~= "npc_dota_hero_invoker" and killedUnit:FindAbilityByName('no_coin_drops') == nil and killedUnit.gravekilled ~= true and killerEntity:FindAbilityByName('is_a_building') == nil then
-      print('roll 4 coins')
+      --print('roll 4 coins')
       local outcome = RandomInt(1, 200)
       local largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
       local smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
 
       --outcome = 1 --dont forget to change this
       if outcome <= largeProb then
-        print('coin in first loop')
+        --print('coin in first loop')
         local coin = CreateItem("item_large_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         --print(coin:entindex(), ' = ', killerEntity:GetMainControllingPlayer())    
@@ -767,7 +701,7 @@ function GameMode:OnEntityKilled( keys )
         coinP:SetOrigin(Vector(killedUnit:GetAbsOrigin().x, killedUnit:GetAbsOrigin().y, killedUnit:GetAbsOrigin().z + 50))
         coinP:SetModelScale(5)
       elseif outcome <= smallProb then
-        print('coin in first loop')
+        --print('coin in first loop')
         local coin = CreateItem("item_small_coin", VAMPIRES[killerEntity:GetMainControllingPlayer()], VAMPIRES[killerEntity:GetMainControllingPlayer()])
         local coinP = CreateItemOnPositionSync(killedUnit:GetAbsOrigin(), coin)
         VAMPIRE_COINS[coin:entindex()] = killerEntity:GetMainControllingPlayer()
@@ -781,7 +715,7 @@ function GameMode:OnEntityKilled( keys )
       if killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) ~= nil then
         local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
         while stacks > 0 do
-          print('coin in second loop')
+          --print('coin in second loop')
           outcome = RandomInt(1, 200)
           largeProb = 3 + (2 * HUMAN_COUNT / VAMP_COUNT)
           smallProb = 18 + (2 * HUMAN_COUNT / VAMP_COUNT) + largeProb
@@ -826,6 +760,8 @@ function GameMode:OnEntityKilled( keys )
   
   -- Update all the slayer taverns the player owns to the new respawn time
   if killedUnit:GetUnitName() == "npc_dota_hero_invoker" then
+    local name = PlayerResource:GetPlayerName(killedUnit:GetMainControllingPlayer())
+    GameRules:SendCustomMessage(ColorIt(name, IDToColour(ownerpID)) .. "'s slayer has fallen!", 0, 0)
     ChangeGold(killerEntity:GetMainControllingPlayer(), 15)
     SLAYERS[playerID].state = "dead"
     SLAYERS[playerID].level = killedUnit:GetLevel()
@@ -1289,13 +1225,11 @@ function GameMode:OnConnectFull(keys)
   GameMode:CaptureGameMode()
  
   local entIndex = keys.index+1
-  print('entindex'..tostring(entIndex))
 
   -- The Player entity of the joining user
   local ply = EntIndexToHScript(entIndex)
   -- The Player ID of the joining player
   local playerID = ply:GetPlayerID()
-  print('playerID '..playerID)
   -- Update the user ID table with this user
   self.vUserIds[keys.userid] = ply
 
@@ -1486,7 +1420,6 @@ function GameMode:OnPlayerSay(keys)
     local chat = ParseChat(keys)
 
     WORKER_FACTOR = string.gsub(chat[2], '%D', '')
-    print(WORKER_FACTOR)
 
     for i = 1, 5 do
       local tier = i - 1

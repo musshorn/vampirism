@@ -10331,11 +10331,11 @@
   //================================================================================= /
   "research_vampiric_skills"
   {
-    "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
+    "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET"  
     "AbilityChannelTime"  "5"
     "AbilityTextureName"  "spectre_dispersion"
-    "GoldCost"          "5"
-    "BaseClass" "ability_datadriven"
+    "GoldCost"            "5"
+    "BaseClass"           "ability_datadriven"
     "OnSpellStart"
     {
       "RunScript"
