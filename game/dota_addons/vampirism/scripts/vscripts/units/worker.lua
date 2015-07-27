@@ -1,4 +1,4 @@
---[[ Worker AI v3, Worker Stacking.
+  --[[ Worker AI v3, Worker Stacking.
 ]]
 
 VECTOR_BUMP = Vector(50, 0, 0)
@@ -179,8 +179,8 @@ function DropLumber( keys )
 
   if targetHouse ~= nil then
     if currentLumber > 0 then
-      local pfxPath = string.format("particles/msg_heal.vpcf", "heal")
-      local pidx = ParticleManager:CreateParticle("particles/msg_heal.vpcf", PATTACH_ABSORIGIN_FOLLOW, worker)
+      local pfxPath = string.format("particles/msg_fx/msg_damage.vpcf", pfx)
+      local pidx = ParticleManager:CreateParticle(pfxPath, PATTACH_ABSORIGIN_FOLLOW, worker)
 
       local digits = 0
       local number = currentLumber
@@ -190,7 +190,7 @@ function DropLumber( keys )
 
       digits = digits + 1
 
-      ParticleManager:SetParticleControl(pidx, 1, Vector(0, tonumber(number), tonumber(nil)))
+      ParticleManager:SetParticleControl(pidx, 1, Vector(0, tonumber(number), 0))
       ParticleManager:SetParticleControl(pidx, 2, Vector(1, digits, 0))
       ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
 

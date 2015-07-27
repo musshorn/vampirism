@@ -28,7 +28,7 @@ BUYBACK_ENABLED = false                  -- Should we allow people to buyback wh
 
 DISABLE_FOG_OF_WAR_ENTIRELY = false      -- Should we disable fog of war entirely for both teams?
 --USE_STANDARD_DOTA_BOT_THINKING = false -- Should we have bots act like they would in Dota? (This requires 3 lanes, normal items, etc)
-USE_STANDARD_HERO_GOLD_BOUNTY = true     -- Should we give gold for hero kills the same as in Dota, or allow those values to be changed?
+USE_STANDARD_HERO_GOLD_BOUNTY = false     -- Should we give gold for hero kills the same as in Dota, or allow those values to be changed?
 
 USE_CUSTOM_TOP_BAR_VALUES = true         -- Should we do customized top bar values or use the default kill count per team?
 TOP_BAR_VISIBLE = false                  -- Should we display the top bar score/count at all?
@@ -297,8 +297,8 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_blink"):SetLevel(1)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
-          WOOD[i] = 10000 --cheats, real is 50.
-          GOLD[i] = 10000 --this is how it should look on ship.
+          WOOD[i] = 50 --cheats, real is 50.
+          GOLD[i] = 0 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -316,8 +316,8 @@ function GameMode:OnGameRulesStateChange(keys)
           local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
           vampire:SetHullRadius(48)
           FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
-          GOLD[i] = 10000 --cheats off
-          WOOD[i] = 10000 --cheats off
+          GOLD[i] = 0 --cheats off
+          WOOD[i] = 0 --cheats off
           TOTAL_FOOD[i] = 10
           CURRENT_FOOD[i] = 0
           FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
