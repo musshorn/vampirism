@@ -28,7 +28,7 @@ BUYBACK_ENABLED = false                  -- Should we allow people to buyback wh
 
 DISABLE_FOG_OF_WAR_ENTIRELY = false      -- Should we disable fog of war entirely for both teams?
 --USE_STANDARD_DOTA_BOT_THINKING = false -- Should we have bots act like they would in Dota? (This requires 3 lanes, normal items, etc)
-USE_STANDARD_HERO_GOLD_BOUNTY = false     -- Should we give gold for hero kills the same as in Dota, or allow those values to be changed?
+USE_STANDARD_HERO_GOLD_BOUNTY = true     -- Should we give gold for hero kills the same as in Dota, or allow those values to be changed?
 
 USE_CUSTOM_TOP_BAR_VALUES = true         -- Should we do customized top bar values or use the default kill count per team?
 TOP_BAR_VISIBLE = false                  -- Should we display the top bar score/count at all?
@@ -294,8 +294,8 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_blink"):SetLevel(1)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
-          WOOD[i] = 50000 --cheats, real is 50.
-          GOLD[i] = 50000 --this is how it should look on ship.
+          WOOD[i] = 50 --cheats, real is 50.
+          GOLD[i] = 0 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -313,8 +313,8 @@ function GameMode:OnGameRulesStateChange(keys)
           local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
           vampire:SetHullRadius(48)
           FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
-          GOLD[i] = 5000 --cheats off
-          WOOD[i] = 5000 --cheats off
+          GOLD[i] = 0 --cheats off
+          WOOD[i] = 0 --cheats off
           TOTAL_FOOD[i] = 10
           CURRENT_FOOD[i] = 0
           FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
@@ -638,7 +638,7 @@ function GameMode:OnEntityKilled( keys )
 
     HUMAN_COUNT = HUMAN_COUNT - 1
     if HUMAN_COUNT == 0 then
-      --GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
+      GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
     end
 
     local playerEnts = Entities:FindAllByClassname("npc_dota_creature")
@@ -678,7 +678,7 @@ function GameMode:OnEntityKilled( keys )
   if killedUnit:GetName() == "npc_dota_hero_night_stalker" then
     VAMP_COUNT = VAMP_COUNT - 1
     if VAMP_COUNT == 0 then
-      --GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
+      GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
     end
   end
 
@@ -1443,6 +1443,27 @@ function GameMode:OnPlayerSay(keys)
 
   if string.find(msg, "-ok") ~= nil and player == GetListenServerHost() and GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS and FACTOR_SET ~= true then
     FACTOR_SET = true
+  end
+
+  if string.find(msg, "-unstuck") ~= nil then
+    local newState = GameRules:State_Get()
+    local playerID = player:GetPlayerID()
+
+    if HUMANS[playerID] ~= nil and newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+      local human = HUMANS[playerID]
+      human:AddNewModifier(human, nil, 'modifier_stunned', {duration = 10})
+      Timers:CreateTimer(10, function (  )
+        FindClearSpaceForUnit(human, Vector(-128,0,192), true)
+        return nil
+      end)
+    elseif VAMPIRES[playerID] ~= nil and newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+      local vampire = VAMPIRES[playerID]
+      vampire:AddNewModifier(vampire, nil, 'modifier_stunned', {duration = 10})
+      Timers:CreateTimer(10, function (  )
+        FindClearSpaceForUnit(vampire, Vector(-128,0,192), true)
+        return nil
+      end)
+    end
   end
 end
 
