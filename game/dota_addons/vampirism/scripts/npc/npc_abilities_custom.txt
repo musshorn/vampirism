@@ -6558,7 +6558,7 @@
     "MaxScale"            "1"
     "CasterCanControl"        "1"
 
-    "AbilityCooldown"       "2.0"
+    "AbilityCooldown"       "0"
     "GoldCost"       "0"
     "LumberCost"       "50"
     
