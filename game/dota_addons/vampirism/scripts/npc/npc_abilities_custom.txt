@@ -77,7 +77,7 @@
       "01"
       {
         "var_type"  "FIELD_INTEGER"
-        "health_radius" "600"
+        "health_radius" "1200"
       }
 
       "02"
