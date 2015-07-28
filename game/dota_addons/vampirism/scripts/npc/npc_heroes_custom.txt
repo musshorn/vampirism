@@ -130,9 +130,9 @@
     "Ability14"         ""
     "Ability15"         ""
     "Ability16"         ""
-    "Level"           "1"
-    "ConsideredHero"      "1"
-    "AbilityLayout"       "5"
+    "Level"             "1"
+    "ConsideredHero"    "1"
+    "AbilityLayout"     "5"
     "NewHero"           "0"
 
     "Model" "models/heroes/invoker/invoker.vmdl"

@@ -1,20 +1,22 @@
 -- GREAT UTILITY FUNCTIONS
 
--- Returns a shallow copy of the passed table.
---[[function shallowcopy(orig)
-    local orig_type = type(orig)
-    local copy
-    if orig_type == 'table' then
-        copy = {}
-        for orig_key, orig_value in pairs(orig) do
-            copy[orig_key] = orig_value
-        end
-    else -- number, string, boolean, etc
-        copy = orig
-    end
-    return copy
-end]]
+-- The max range to find a space for a unit, if a space isn't found in this range, this returns false.
+FIND_SPACE_LIMIT = 500
 
+-- Finds a clear space for a unit, takes into account their HullSize, and any gridnav blocked space.
+-- Draw out and around in a circle, find the first good space, return that.
+function FindGoodSpaceForUnit( unit, vTargetPos )
+	local startPos = unit:GetAbsOrigin()
+	local unitSize = unit:GetHullRadius()
+	local x = startPos.x
+	local y = startPos.y
+
+	
+
+	local goodSpace = nil
+
+
+end
 
 -- Finds the unit nearest from another unit, within a given range.
 function FindNearestUnit(sFindUnit, hFromUnit, fRange)

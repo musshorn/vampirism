@@ -3851,10 +3851,9 @@
     "Ability3"          "carrying_lumber"     // Ability 2.
     "Ability4"          "drop_lumber"     // Ability 3.
     "Ability5"          "worker_det"      // Ability 4.
-    "Ability6"          "worker_debug"      // Ability 5.
-    "Ability7"          "find_lumber"      // Ability 6 - Extra.
-    "Ability8"          "worker_stack"      // Ability 7 - Extra.
-    "Ability9"          ""      // Ability 8 - Extra.
+    "Ability6"          "find_lumber"      // Ability 6 - Extra.
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"       "100"     // Physical protection.
@@ -3937,10 +3936,9 @@
     "Ability3"          "carrying_lumber"     // Ability 2.
     "Ability4"          "drop_lumber"     // Ability 3.
     "Ability5"          "worker_det"      // Ability 4.
-    "Ability6"          "worker_debug"      // Ability 5.
-    "Ability7"          "find_lumber"      // Ability 6 - Extra.
-    "Ability8"          "worker_stack"      // Ability 7 - Extra.
-    "Ability9"          ""      // Ability 8 - Extra.
+    "Ability6"          "find_lumber"      // Ability 6 - Extra.
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
 
     // Armor
     //----------------------------------------------------------------
@@ -4436,10 +4434,9 @@
     "Ability3"          "carrying_lumber"
     "Ability4"          "drop_lumber"    
     "Ability5"          "worker_det"     
-    "Ability6"          "worker_debug"   
-    "Ability7"          "find_lumber"    
-    "Ability8"          "worker_stack"      // Ability 7 - Extra.
-    "Ability9"          ""      // Ability 8 - Extra.
+    "Ability6"          "find_lumber"    
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
 
     // Armor
     //----------------------------------------------------------------
@@ -4527,10 +4524,9 @@
     "Ability3"          "carrying_lumber"
     "Ability4"          "drop_lumber"    
     "Ability5"          "worker_det"     
-    "Ability6"          "worker_debug"   
-    "Ability7"          "find_lumber"    
-    "Ability8"          "worker_stack"      // Ability 7 - Extra.
-    "Ability9"          ""      // Ability 8 - Extra.
+    "Ability6"          "find_lumber"    
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
 
     // Armor
     //----------------------------------------------------------------
@@ -4851,7 +4847,7 @@
     //----------------------------------------------------------------
     "StatusHealth"        "1000"   // Base health.
     "StatusHealthRegen"   "0"   // Health regeneration rate.
-    "StatusMana"          "1000"      // Base mana.
+    "StatusMana"          "10"      // Base mana.
     "StatusManaRegen"     "0"     // Mana regeneration rate.
 
     // Team
@@ -5362,7 +5358,7 @@
 
     //Attack
     //----------------------------------------------------------------
-    "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
     "AttackDamageMin"           "15000"
     "AttackDamageMax"           "15000"
     "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
