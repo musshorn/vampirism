@@ -90,14 +90,18 @@ function BuildUI:BuildChosen(building, playerID)
   if caster:FindAbilityByName(building) ~= nil then
     local ability = caster:FindAbilityByName(building)
     ability:SetLevel(1)
-    caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
+    ability:SetHidden(false)
+
+    ExecuteOrderFromTable({ UnitIndex = caster:GetEntityIndex(), OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET, AbilityIndex = ability:GetEntityIndex(), Queue = false})
   else
     for k, v in ipairs(ABILITY_HOLDERS[caster:GetUnitName()]) do
       if building == v then
         caster:AddAbility(v)
         local ability = caster:FindAbilityByName(v)
         ability:SetLevel(1)
-        caster:CastAbilityNoTarget(ability, caster:GetMainControllingPlayer())
+        ability:SetHidden(false)
+
+        ExecuteOrderFromTable({ UnitIndex = caster:GetEntityIndex(), OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET, AbilityIndex = ability:GetEntityIndex(), Queue = false})
         if ABILITY_KV[ability:GetAbilityName()]['UnitName'] ~= nil then
           caster:RemoveAbility(v)
         end
