@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.07"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.08"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -754,7 +754,7 @@ function GameMode:OnEntityKilled( keys )
       end
     end
 
-    if killedUnit:GetGoldBounty() > 0 then
+    if killedUnit:GetGoldBounty() > 0 and killedUnit:IsHero() ~= true  then
     	HUMAN_FEED[playerID] = HUMAN_FEED[playerID] + killedUnit:GetGoldBounty()
     	FireGameEvent("vamp_gold_feed", {player_ID = playerID, feed_total = HUMAN_FEED[playerID]})
     end
@@ -765,6 +765,7 @@ function GameMode:OnEntityKilled( keys )
     local name = PlayerResource:GetPlayerName(killedUnit:GetMainControllingPlayer())
     GameRules:SendCustomMessage(ColorIt(name, IDToColour(ownerpID)) .. "'s slayer has fallen!", 0, 0)
     ChangeGold(killerEntity:GetMainControllingPlayer(), 15)
+    CURRENT_FOOD[killedUnit:GetMainControllingPlayer()] = CURRENT_FOOD[killedUnit:GetMainControllingPlayer()] - 10
     SLAYERS[playerID].state = "dead"
     SLAYERS[playerID].level = killedUnit:GetLevel()
     local house = nil
@@ -777,6 +778,7 @@ function GameMode:OnEntityKilled( keys )
       end
     until house == nil
     FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Dead"})
+    FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[killedUnit:GetMainControllingPlayer()]})
   end
 
   -- If the killed unit increased the players food cap then it needs to decrease when it dies

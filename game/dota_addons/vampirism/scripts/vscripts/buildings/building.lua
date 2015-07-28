@@ -56,7 +56,7 @@ function TrainUnit( keys )
     woodCost = 0
   end
 
-  if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood and affordWood and affordGold and requestingFood < 250 then
+  if TOTAL_FOOD[building:GetMainControllingPlayer()] >= CURRENT_FOOD[building:GetMainControllingPlayer() ] + requestingFood and affordWood and affordGold and requestingFood <= 250 then
     if #building.queue < 6 then
       table.insert(building.queue, keys)
       ChangeGold(pID, -1 * goldCost)

@@ -4120,6 +4120,7 @@
       "Ability5"                    "build_blocked3"
       "Ability6"                    "build_blocked4"  
       "Ability7"                    "build_blocked5"                         // Ability 4.
+      "Ability8"                    "is_a_building"
 
       "AbilityHolder"               "16"
 
@@ -5106,6 +5107,7 @@
     "ConsideredHero"            "0"
 
     "Ability1"                  "upgrade_to_gold_mine_t3"
+    "Ability2"                  "is_a_building"
 
     // Armor
     //----------------------------------------------------------------

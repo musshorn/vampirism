@@ -101,6 +101,7 @@ function SummonSlayer( keys )
   local pID = caster:GetMainControllingPlayer()
   local lumberCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
   local goldCost = ABILITY_KV[ability:GetAbilityName()].GoldCost
+  local foodCost = 10
 
   if SLAYERS[pID] ~= nil then
     FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Only one slayer per player." } )
@@ -134,9 +135,27 @@ function SummonSlayer( keys )
   end
   caster.refundGold = goldCost
 
+  if CURRENT_FOOD[pID] > TOTAL_FOOD[pID] + foodCost then
+    caster:Stop()
+    caster.refundGold = 0
+    caster.refundWood = 0
+    FireGameEvent('custom_error_show', {player_ID = pID, _error = "You need more food!"})
+    return
+  end
+
+  if CURRENT_FOOD[pID] + foodCost > 250 then
+    caster:Stop()
+    caster.refundWood = 0
+    caster.refundGold = 0
+    FireGameEvent('custom_error_show', {player_ID = pID, _error = "Max food reached!"})
+    return
+  end
+
   -- Checks passed, deduct the resources and start channeling
   ChangeWood(pID, -1 * lumberCost)
   ChangeGold(pID, -1 * goldCost)
+  CURRENT_FOOD[pID] = CURRENT_FOOD[pID] + foodCost
+  FireGameEvent('vamp_food_changed', { player_ID = pID , food_total = CURRENT_FOOD[pID]})
 end
 
 function Refund( keys )
@@ -157,9 +176,10 @@ function Refund( keys )
   if HAS_SLAYER[pID] == nil then
     ChangeWood(pID, refundWood)
     ChangeGold(pID, refundGold)
+    CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - 10
+    FireGameEvent('vamp_food_changed', { player_ID = pID , food_total = CURRENT_FOOD[pID]})
   end
 end
-
 
 -- Function that spawns the slayer on channel success
 function SpawnSlayer( keys )
@@ -227,7 +247,22 @@ function SlayerRespawnStart( keys )
     caster:Stop()
     return nil
   end
+
+  if CURRENT_FOOD[pID] > TOTAL_FOOD[pID] + 10 then
+    caster:Stop()
+    FireGameEvent('custom_error_show', {player_ID = pID, _error = "You need more food!"})
+    return
+  end
+
+  if CURRENT_FOOD[pID] + 10 > 250 then
+    caster:Stop()
+    FireGameEvent('custom_error_show', {player_ID = pID, _error = "Max food reached!"})
+    return
+  end
+
   SLAYERS[pID].state = "reviving"
+  CURRENT_FOOD[pID] = CURRENT_FOOD[pID] + 10
+  FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[pID]})
   FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Reviving"})
 end
 
@@ -240,7 +275,9 @@ function SlayerRespawnInterrupted( keys )
   end
 
   if SLAYERS[pID].state == "reviving" then
-   SLAYERS[pID].state = "dead" 
+   SLAYERS[pID].state = "dead"
+   CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - 10
+   FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[pID]})
    FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Dead"})
   end
 end

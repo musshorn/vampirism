@@ -54,7 +54,7 @@ function House1:Init(unit)
 				Timers:CreateTimer(house1.uniqueName, {
 							endTime = spawnTime,
 							callback = function()
-								if TOTAL_FOOD[playerID] >= CURRENT_FOOD[playerID] + requestingFood then
+								if TOTAL_FOOD[playerID] >= CURRENT_FOOD[playerID] + requestingFood and CURRENT_FOOD[playerID] + requestingFood <= 250 then
 									--if CURRENT_FOOD[playerID] + requestingFood <= 250 then
 										local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
 										
@@ -82,14 +82,19 @@ function House1:Init(unit)
 													end)
 	  										end
 										end
-								else
+								elseif TOTAL_FOOD[playerID] <= CURRENT_FOOD[playerID] + requestingFood then
 									FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Build more farms" } )
 									table.remove(house1.queue)
 									caster:RemoveModifierByName(house1.workHandler:GetName())
 									house1.workHandler:SetChanneling(false)
 									house1.doingWork = false
-								end
-							
+								else
+									FireGameEvent( 'custom_error_show', { player_ID = playerID , _error = "Max food reached!" } )
+									table.remove(house1.queue)
+									caster:RemoveModifierByName(house1.workHandler:GetName())
+									house1.workHandler:SetChanneling(false)
+									house1.doingWork = false
+								end							
 							return nil
 						end})
 				-- Unit was created, pop the queue
