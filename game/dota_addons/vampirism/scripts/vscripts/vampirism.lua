@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.08c"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.08e"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -228,7 +228,7 @@ function GameMode:OnGameInProgress()
   for i = 1, #vamps do
   	vamps[i]:RemoveModifierByName("modifier_init_hider")
   	vamps[i]:SetAbilityPoints(3)
-    FindClearSpaceForUnit(vamps[i], Vector(96, -416, 256), false)
+    FindGoodSpaceForUnit(vamps[i], Vector(96, -416, 256), 300, nil)
     vamps[i]:SetForwardVector(RandomVector(1))
     vamps[i]:AddNewModifier(vampire, nil, "modifier_item_forcestaff_active", {push_length = 200})
   end
@@ -312,7 +312,10 @@ function GameMode:OnGameRulesStateChange(keys)
         elseif playerTeam == 3 then
           local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(i))
           vampire:SetHullRadius(48)
-          FindClearSpaceForUnit(vampire, vampire:GetAbsOrigin(), true)
+          local newSpace = FindGoodSpaceForUnit(vampire, vampire:GetAbsOrigin(), 200, nil)
+          if newSpace ~= false then
+            vampire:SetAbsOrigin(newSpace)
+          end
           GOLD[i] = 0 --cheats off
           WOOD[i] = 0 --cheats off
           TOTAL_FOOD[i] = 10

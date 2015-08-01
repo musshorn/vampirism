@@ -28,9 +28,11 @@ function build( keys )
     -- Unit is the building be built.
     -- Play construction sound
     -- FindClearSpace for the builder
-    FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
-
-    -- FindClearSpaceForUnit does not play nice with large hull units. Using this till a better solution is found.
+    local newSpace = FindGoodSpaceForUnit(caster, caster:GetAbsOrigin(), 200, nil)
+    if newSpace ~= false then
+      caster:SetAbsOrigin(newSpace)
+    end
+    
     local nearVamps = FindUnitsInRadius(caster:GetTeam(), unit:GetAbsOrigin(), nil, 100, DOTA_TEAM_BADGUYS, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
     for k, v in pairs(nearVamps) do
       if v:GetUnitName() == "npc_dota_hero_night_stalker" then
@@ -433,7 +435,10 @@ function TeleportFinish( keys )
   local caster = keys.caster
   local target = keys.target
 
-  FindClearSpaceForUnit(caster, target:GetAbsOrigin(), false)
+  local newSpace = FindGoodSpaceForUnit(caster, caster:GetAbsOrigin(), 200, nil)
+  if newSpace ~= false then
+    caster:SetAbsOrigin(newSpace)
+  end
 end
 
 function HolyAttack( keys )

@@ -35,8 +35,10 @@ function SphereDoom( keys )
 		point = caster:GetAbsOrigin() + (point - caster:GetAbsOrigin()):Normalized() * keys.MaxBlink
 	end
 
-	caster:SetAbsOrigin(point)
-	FindClearSpaceForUnit(caster, point, false)
+	local newSpace = FindGoodSpaceForUnit(caster, point, 200, nil)
+  	if newSpace ~= false then
+  	  caster:SetAbsOrigin(newSpace)
+  	end
 end
 
 -- Spawns four engineers by the caster.
@@ -364,7 +366,10 @@ function RodFinish( keys )
 	local caster = keys.caster
 	local target = keys.target
 
-	FindClearSpaceForUnit(caster, target:GetAbsOrigin(), false)
+	local newSpace = FindGoodSpaceForUnit(caster, target:GetAbsOrigin(), 200, 100)
+    if newSpace ~= false then
+      caster:SetAbsOrigin(newSpace)
+    end
 end
 
 -- Fel founds may only attack Engineers.

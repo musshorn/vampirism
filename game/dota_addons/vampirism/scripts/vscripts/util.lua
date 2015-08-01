@@ -1,21 +1,132 @@
 -- GREAT UTILITY FUNCTIONS
 
--- The max range to find a space for a unit, if a space isn't found in this range, this returns false.
-FIND_SPACE_LIMIT = 500
-
--- Finds a clear space for a unit, takes into account their HullSize, and any gridnav blocked space.
--- Draw out and around in a circle, find the first good space, return that.
-function FindGoodSpaceForUnit( unit, vTargetPos )
+--[[ Find a clear space for a unit, depending on its HullSize. (Used to replace FindClearSpaceForUnit)
+	 Author: space jam
+	 Date: 31.07.2015 
+	 unit 		 : The handle of the unit you are moving.
+	 vTargetPos  : The target Vector you want to move this unit too.
+	 searchLimit : The furthest we should look for a clear space.
+	 initRadius  : Must be less than searchLimit, allows us to start further out from the initial vector. Can also be nil to not specify.]]
+function FindGoodSpaceForUnit( unit, vTargetPos, searchLimit, initRadius )
 	local startPos = unit:GetAbsOrigin()
 	local unitSize = unit:GetHullRadius()
-	local x = startPos.x
-	local y = startPos.y
+	local gridSize = math.ceil(unitSize / 32)
+	local x = vTargetPos.x
+	local y = vTargetPos.y
 
+	local goodSpace = {}
+
+	local initBlocked = false
+	if initRadius == nil then
+		for i=1,360 do
+			local rad = math.rad(i)
+			local cx = x + unitSize * math.cos(rad)
+			local cy = y + unitSize * math.sin(rad)
+			local cz = GetGroundPosition(Vector(cx, cy, 1000), unit).z
+			local pos = Vector(cx, cy, cz)
 	
+			-- Check first if the initial space is a good one.	
+			local units = FindUnitsInRadius(unit:GetTeam(), pos, nil, unitSize, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL, 0, FIND_ANY_ORDER, false)
+			if #units > 0 then
+				-- There was a unit other than the unit in that space. Its blocked.
+				--DebugDrawCircle(pos, Vector(0,0,255), 1, unitSize, true, 5)
+				initBlocked = true
+			end
+			if GridNav:IsBlocked(pos) or GridNav:IsTraversable(pos) == false then
+				initBlocked = true
+				--DebugDrawCircle(pos, Vector(255,0,0), 1, unitSize, true, 5)
+			end
+		end
+		-- The inital space was good, return it.
+		if initBlocked == false then
+			--DebugDrawCircle(vTargetPos, Vector(255,0,0), 1, unitSize, true, 5)
+			return vTargetPos
+		end
+		initRadius = unitSize
+	end
 
-	local goodSpace = nil
+	local radius = initRadius
+	while radius < searchLimit do
+		local isBlocked = false
+		local pos = Vector(0, 0, 0)
+		local spaceIndex = 1
 
+		-- Draw a circle, find the LEAST blocked space in that circle.
+		for i = 1, 360 do
+			isBlocked = false
+			local rad = math.rad(i)
 
+			-- Start at target point, works its way out.
+			local cx = x + radius * math.cos(rad)
+			local cy = y + radius * math.sin(rad)
+
+			local cz = GetGroundPosition(Vector(cx, cy, 1000), unit).z
+			pos = Vector(cx, cy, cz)
+			
+			--DebugDrawCircle(Vector(cx, cy, cz), RandomVector(50), 1, unitSize, true, 5)
+			local units = FindUnitsInRadius(unit:GetTeam(), pos, nil, unitSize, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL, 0, FIND_ANY_ORDER, false)
+			if #units > 0 then
+				-- There was a unit other than the unit in that space. Its blocked.
+				--DebugDrawCircle(pos, Vector(0,0,255), 1, unitSize, true, 5)
+				isBlocked = true
+			end
+			if GridNav:IsBlocked(pos) or GridNav:IsTraversable(pos) == false then
+				isBlocked = true
+				--DebugDrawCircle(pos, Vector(255,0,0), 1, unitSize, true, 5)
+			end
+			-- We found an empty space, add to current candidate.
+			if isBlocked == false then
+				if goodSpace[spaceIndex] == nil then goodSpace[spaceIndex] = {} end
+				table.insert(goodSpace[spaceIndex], pos) 
+			else
+				if goodSpace[spaceIndex] ~= nil then
+					spaceIndex = spaceIndex + 1
+				end
+			end
+		end
+
+		-- Grab the best candidate.
+		local candidate = {}
+		for k,v in pairs(goodSpace) do
+			-- The table with the most verticies represents the longest unbroken section of clear space in the search radius.
+			if #v > #candidate then
+				candidate = v
+			end
+		end
+
+		-- Get the middle point on the candidate space, assume this to be the most likely point to find a clear unit space.
+		local bestVec = candidate[math.floor(#candidate / 2)]
+		if bestVec ~= nil then
+			local validSpace = true
+			-- Trace around that point a circle the size of the unit, if we find something the point is blocked.
+			for i = 1, 360 do
+				local rad = math.rad(i)
+	
+				local cx = bestVec.x + unitSize * math.cos(rad)
+				local cy = bestVec.y + unitSize * math.sin(rad)
+				local newVec = Vector(cx, cy, pos.z)
+				-- If any point on this circle is blocked, we haven't found a good spot.
+				if GridNav:IsBlocked(newVec) or GridNav:IsTraversable(newVec) == false then
+					validSpace = false
+					--DebugDrawCircle(newVec, Vector(0,255,255), 1, unitSize, true, 5)
+				end
+				local units = FindUnitsInRadius(unit:GetTeam(), newVec, nil, unitSize, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL, 0, FIND_ANY_ORDER, false)
+				if #units > 0 then
+					-- There was a unit other than the unit in that space. Its blocked.
+					--DebugDrawCircle(newVec, Vector(0,255,255), 1, unitSize, true, 5)
+					validSpace = false
+				end
+			end
+	
+			if validSpace == true then
+				--DebugDrawCircle(bestVec, Vector(0,255,0), 1, unitSize, true, 5)
+				return bestVec
+			end
+		end
+		radius = radius + unitSize / 4
+		--DebugDrawCircle(Vector(x, y, pos.z), Vector(255,255,255), 1, radius, true, 5)
+	end
+	return false			
 end
 
 -- Finds the unit nearest from another unit, within a given range.

@@ -269,7 +269,7 @@
 				"ScriptFile"	"items.lua"
 				"Function"		"SphereDoom"
         "Target" "POINT"
-        "MaxBlink"    "200"
+        "MaxBlink"    "220"
 			}
 		}
 	}

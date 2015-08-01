@@ -2,8 +2,11 @@
 function SlayerBlink( keys )
   local caster = keys.caster
   local point = keys.target_points[1]
-
-  FindClearSpaceForUnit(caster, point, false)
+  
+  local newSpace = FindGoodSpaceForUnit(caster, point, 200, nil)
+  if newSpace ~= false then
+    caster:SetAbsOrigin(newSpace)
+  end
 end
 
 
@@ -103,11 +106,11 @@ function SummonSlayer( keys )
   local goldCost = ABILITY_KV[ability:GetAbilityName()].GoldCost
   local foodCost = 10
 
-  if SLAYERS[pID] ~= nil then
-    FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Only one slayer per player." } )
-    caster:Stop()
-    return
-  end
+  --if SLAYERS[pID] ~= nil then
+  --  FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Only one slayer per player." } )
+  --  caster:Stop()
+  --  return
+  --end
 
   if lumberCost == nil then
     lumberCost = 0
@@ -192,6 +195,13 @@ function SpawnSlayer( keys )
   slayer:SetControllableByPlayer(pID, true)
   slayer:SetOwner(EntIndexToHScript(pID))
   slayer:FindAbilityByName("slayer_blink"):SetLevel(1)
+  slayer:SetHullRadius(48)
+
+  local newSpace = FindGoodSpaceForUnit(slayer, caster:GetAbsOrigin(), 350, 200)
+  if newSpace ~= false then
+    slayer:SetAbsOrigin(newSpace)
+  end
+
 
   SLAYERS[pID].handle = slayer
   FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Alive"})
@@ -203,7 +213,6 @@ function SpawnSlayer( keys )
   SLAYERS[pID]['intellect'] = {}
 
   slayer:SetAbilityPoints(0)
-  slayer:SetHullRadius(48)
     
   local name = PlayerResource:GetPlayerName(pID)
   local time = GameRules:GetDOTATime(false, false)
@@ -289,7 +298,10 @@ function SlayerRespawn( keys )
 
   slayer:RespawnUnit()
   GameMode:ModifyStatBonuses(SLAYERS[pID].handle)
-  FindClearSpaceForUnit(slayer, caster:GetAbsOrigin(), true)
+  local newSpace = FindGoodSpaceForUnit(slayer, caster:GetAbsOrigin(), 350, 200)
+  if newSpace ~= false then
+    slayer:SetAbsOrigin(newSpace)
+  end
 
   --This does not appear to be saved by the game.
   for k, v in pairs(SLAYERS[pID]['health']) do

@@ -70,6 +70,7 @@
     "NewHero"         "0"
     "TeamName"          "DOTA_TEAM_BADGUYS"
     "BoundsHullName"            "DOTA_HULL_SIZE_HERO"
+    "RingRadius"                "48"
 
     // Armor
     //-------------------------------------------------------------------------------------------------------------
@@ -134,6 +135,7 @@
     "ConsideredHero"    "1"
     "AbilityLayout"     "5"
     "NewHero"           "0"
+    "RingRadius"        "48"
 
     "Model" "models/heroes/invoker/invoker.vmdl"
     "precache"
