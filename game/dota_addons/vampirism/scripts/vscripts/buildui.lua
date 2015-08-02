@@ -43,14 +43,16 @@ function CallMenu(keys)
     if ABILITY_HOLDERS[unitName] ~= nil then
       for k, v in pairs(ABILITY_HOLDERS[unitName]) do
         -- If you get errors here, you need to check abilities_custom. Can't find the ability.
-        --print(unitName, v)
+        print(unitName, v)
         if ABILITY_KV[v]['UnitName'] ~= nil then
           local tech = ABILITY_KV[v]['UnitName']
-          TechTree:GetRequired(tech, playerID, caster:GetUnitName(), "building")
+          print(TechTree:GetRequired(tech, playerID, caster:GetUnitName(), "building"))
+          print('building')
         else
           --assuming its research
           local tech = v
-          TechTree:GetRequired(tech, playerID, caster:GetUnitName(), "ability")
+          print(TechTree:GetRequired(tech, playerID, caster:GetUnitName(), "ability"))
+          print('ability')
         end
       end
     -- Not using ability holder.

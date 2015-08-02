@@ -1337,7 +1337,7 @@
 
     
     "AbilityManaCost"            "1000"
-    "AbilityCooldown"            "5"
+    "AbilityCooldown"            "300"
     "AbilityChannelTime"         "4.0 20.0"
     
     

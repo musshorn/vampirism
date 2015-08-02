@@ -64,12 +64,6 @@ function FindGoodSpaceForUnit( unit, vTargetPos, searchLimit, initRadius )
 			pos = Vector(cx, cy, cz)
 			
 			--DebugDrawCircle(Vector(cx, cy, cz), RandomVector(50), 1, unitSize, true, 5)
-			local units = FindUnitsInRadius(unit:GetTeam(), pos, nil, unitSize, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL, 0, FIND_ANY_ORDER, false)
-			if #units > 0 then
-				-- There was a unit other than the unit in that space. Its blocked.
-				--DebugDrawCircle(pos, Vector(0,0,255), 1, unitSize, true, 5)
-				isBlocked = true
-			end
 			if GridNav:IsBlocked(pos) or GridNav:IsTraversable(pos) == false then
 				isBlocked = true
 				--DebugDrawCircle(pos, Vector(255,0,0), 1, unitSize, true, 5)
@@ -110,17 +104,17 @@ function FindGoodSpaceForUnit( unit, vTargetPos, searchLimit, initRadius )
 					validSpace = false
 					--DebugDrawCircle(newVec, Vector(0,255,255), 1, unitSize, true, 5)
 				end
-				local units = FindUnitsInRadius(unit:GetTeam(), newVec, nil, unitSize, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL, 0, FIND_ANY_ORDER, false)
-				if #units > 0 then
-					-- There was a unit other than the unit in that space. Its blocked.
-					--DebugDrawCircle(newVec, Vector(0,255,255), 1, unitSize, true, 5)
-					validSpace = false
-				end
 			end
 	
 			if validSpace == true then
+				local units = FindUnitsInRadius(unit:GetTeam(), bestVec, nil, unitSize, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL, 0, FIND_ANY_ORDER, false)
 				--DebugDrawCircle(bestVec, Vector(0,255,0), 1, unitSize, true, 5)
-				return bestVec
+				if #units > 0 then
+					validSpace = false
+				end
+				if validSpace == true then
+					return bestVec
+				end
 			end
 		end
 		radius = radius + unitSize / 4

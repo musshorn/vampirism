@@ -3,7 +3,7 @@ function SlayerBlink( keys )
   local caster = keys.caster
   local point = keys.target_points[1]
   
-  local newSpace = FindGoodSpaceForUnit(caster, point, 200, nil)
+  local newSpace = FindGoodSpaceForUnit(caster, point, 500, nil)
   if newSpace ~= false then
     caster:SetAbsOrigin(newSpace)
   end
@@ -124,6 +124,7 @@ function SummonSlayer( keys )
     caster:Stop()
     caster.refundGold = 0
     caster.refundWood = 0
+    caster.refundFood = 0
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more wood" } )
     return
   end
@@ -133,15 +134,17 @@ function SummonSlayer( keys )
     caster:Stop()
     caster.refundGold = 0
     caster.refundWood = 0
+    caster.refundFood = 0
     FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You need more gold" } )
     return
   end
   caster.refundGold = goldCost
 
-  if CURRENT_FOOD[pID] > TOTAL_FOOD[pID] + foodCost then
+  if CURRENT_FOOD[pID] + foodCost > TOTAL_FOOD[pID] then
     caster:Stop()
     caster.refundGold = 0
     caster.refundWood = 0
+    caster.refundFood = 0
     FireGameEvent('custom_error_show', {player_ID = pID, _error = "You need more food!"})
     return
   end
@@ -150,6 +153,7 @@ function SummonSlayer( keys )
     caster:Stop()
     caster.refundWood = 0
     caster.refundGold = 0
+    caster.refundFood = 0
     FireGameEvent('custom_error_show', {player_ID = pID, _error = "Max food reached!"})
     return
   end
@@ -157,6 +161,9 @@ function SummonSlayer( keys )
   -- Checks passed, deduct the resources and start channeling
   ChangeWood(pID, -1 * lumberCost)
   ChangeGold(pID, -1 * goldCost)
+  caster.refundWood = lumberCost
+  caster.refundGold = goldCost
+  caster.refundFood = 10
   CURRENT_FOOD[pID] = CURRENT_FOOD[pID] + foodCost
   FireGameEvent('vamp_food_changed', { player_ID = pID , food_total = CURRENT_FOOD[pID]})
 end
@@ -168,6 +175,7 @@ function Refund( keys )
   
   local refundWood = caster.refundWood
   local refundGold = caster.refundGold
+  local refundFood = caster.refundFood
 
   if refundWood == nil then
     refundWood = 0
@@ -175,11 +183,14 @@ function Refund( keys )
   if refundGold == nil then
     refundGold = 0
   end
+  if refundFood == nil then
+    refundFood = 0
+  end
 
   if HAS_SLAYER[pID] == nil then
     ChangeWood(pID, refundWood)
     ChangeGold(pID, refundGold)
-    CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - 10
+    CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - refundFood
     FireGameEvent('vamp_food_changed', { player_ID = pID , food_total = CURRENT_FOOD[pID]})
   end
 end
