@@ -124,11 +124,11 @@
 			"upgrade_human_damage_8"		"7"
 			"upgrade_human_damage_9"		"8"
 			"upgrade_human_damage_10"		"9"
-			"OrderPosition"							"0"		
+			"OrderPosition"						"0"		
 		}
 		"research_slayer_godlike"				"1"
 		"research_blink_extension"				"2"
-		"research_healing_vitality"				"3"
+		"build_empty"							"3"
 		"spawn_super_tower_builder"				"4"
 		"spawn_worker_t4"						"5"
 		"spawn_worker_t5"						"6"
@@ -160,7 +160,7 @@
 		}
 		"research_slayer_godlike"				"1"
 		"research_blink_extension"				"2"
-		"research_healing_vitality"				"3"
+		"build_empty"							"3"
 		"spawn_super_tower_builder"				"4"
 		"spawn_worker_t4"						"5"
 		"spawn_worker_t5"						"6"
@@ -192,7 +192,7 @@
 		}
 		"research_slayer_godlike"				"1"
 		"research_blink_extension"				"2"
-		"research_healing_vitality"				"3"
+		"build_empty"				"3"
 		"spawn_super_tower_builder"				"4"
 		"spawn_worker_t4"						"5"
 		"spawn_worker_t5"						"6"
@@ -224,7 +224,7 @@
 		}
 		"research_slayer_godlike"				"1"
 		"research_blink_extension"				"2"
-		"research_healing_vitality"				"3"
+		"build_empty"				"3"
 		"spawn_super_tower_builder"				"4"
 		"spawn_worker_t4"						"5"
 		"spawn_worker_t5"						"6"

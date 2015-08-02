@@ -4406,11 +4406,21 @@
       {
         "Passive"     "1"
         "IsHidden"      "1"
+        "ThinkInterval" "1.3"
     
         "Aura"        "modifier_autocast_attacked"
         "Aura_Radius"     "900"
         "Aura_Teams"    "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
         "Aura_Types"    "DOTA_UNIT_TARGET_BASIC"
+
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/building.lua"
+            "Function"    "RepairAutocastScan"
+          }
+        }
       }
       "modifier_autocast_attacked"
       {

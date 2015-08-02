@@ -2263,7 +2263,7 @@
     "Ability10"                  "build_blocked"
     "Ability11"                  "build_blocked2"
 
-    "AbilityHolder"          "17"
+    "AbilityHolder"          "16"
 
     "ExtraAbility1"          "upgrade_human_damage_1"          
     "ExtraAbility2"          "upgrade_human_damage_2"          
@@ -2277,11 +2277,10 @@
     "ExtraAbility10"         "upgrade_human_damage_10"         
     "ExtraAbility11"         "research_slayer_godlike"         
     "ExtraAbility12"         "research_blink_extension"         
-    "ExtraAbility13"         "research_healing_vitality"         
-    "ExtraAbility14"         "spawn_super_tower_builder"         
-    "ExtraAbility15"         "spawn_worker_t4"
-    "ExtraAbility16"         "spawn_worker_t5"
-    "ExtraAbility17"         "upgrade_to_citadel_of_faith" 
+    "ExtraAbility13"         "spawn_super_tower_builder"         
+    "ExtraAbility14"         "spawn_worker_t4"
+    "ExtraAbility15"         "spawn_worker_t5"
+    "ExtraAbility16"         "upgrade_to_citadel_of_faith" 
 
     // Armor
     //----------------------------------------------------------------
@@ -4430,13 +4429,13 @@
     // Abilities
     //----------------------------------------------------------------
     "Ability1"          "human_blink"
-    "Ability2"          "harvest_channel"
-    "Ability3"          "carrying_lumber"
-    "Ability4"          "drop_lumber"    
-    "Ability5"          "worker_det"     
-    "Ability6"          "find_lumber"    
-    "Ability7"          "worker_stack"      // Ability 7 - Extra.
-    "Ability8"          ""      // Ability 8 - Extra.
+    "Ability2"          "human_repair"
+    "Ability3"          "harvest_channel"
+    "Ability4"          "carrying_lumber"
+    "Ability5"          "drop_lumber"    
+    "Ability6"          "worker_det"     
+    "Ability7"          "find_lumber"    
+    "Ability8"          "worker_stack"      // Ability 7 - Extra.
 
     // Armor
     //----------------------------------------------------------------
@@ -5933,7 +5932,7 @@
     "Ability11"                 "build_blocked2"
 
 
-    "AbilityHolder"             "19"
+    "AbilityHolder"             "18"
 
     "ExtraAbility1"             "upgrade_human_damage_1"               
     "ExtraAbility2"             "upgrade_human_damage_2"                    
@@ -5947,13 +5946,12 @@
     "ExtraAbility10"            "upgrade_human_damage_10"                  
     "ExtraAbility11"            "research_slayer_godlike"
     "ExtraAbility12"            "research_blink_extension"                              
-    "ExtraAbility13"            "research_healing_vitality"                 
-    "ExtraAbility14"            "spawn_super_tower_builder"                 
-    "ExtraAbility15"            "spawn_worker_t4"
-    "ExtraAbility16"            "spawn_worker_t5"
-    "ExtraAbility17"            "research_master_human_survival"
-    "ExtraAbility18"            "upgrade_to_base_operations"
-    "ExtraAbility19"            "build_cancel"                              
+    "ExtraAbility13"            "spawn_super_tower_builder"                 
+    "ExtraAbility14"            "spawn_worker_t4"
+    "ExtraAbility15"            "spawn_worker_t5"
+    "ExtraAbility16"            "research_master_human_survival"
+    "ExtraAbility17"            "upgrade_to_base_operations"
+    "ExtraAbility18"            "build_cancel"                              
 
 
     // Armor
@@ -6042,7 +6040,7 @@
     "Ability11"                 "build_blocked2"
     "Ability11"                 "build_blocked"  
 
-    "AbilityHolder"             "20"
+    "AbilityHolder"             "19"
 
     "ExtraAbility1"             "upgrade_human_damage_1"               
     "ExtraAbility2"             "upgrade_human_damage_2"                    
@@ -6056,14 +6054,13 @@
     "ExtraAbility10"            "upgrade_human_damage_10"                  
     "ExtraAbility11"            "research_slayer_godlike"
     "ExtraAbility12"            "research_blink_extension"                              
-    "ExtraAbility13"            "research_healing_vitality"                 
-    "ExtraAbility14"            "spawn_super_tower_builder"                 
-    "ExtraAbility15"            "spawn_worker_t4"
-    "ExtraAbility16"            "spawn_worker_t5"
-    "ExtraAbility17"            "research_master_human_survival"
-    "ExtraAbility18"            "spawn_goblin_tower_builder"
-    "ExtraAbility19"            "upgrade_to_base_operations"
-    "ExtraAbility20"            "build_cancel"        
+    "ExtraAbility13"            "spawn_super_tower_builder"                 
+    "ExtraAbility14"            "spawn_worker_t4"
+    "ExtraAbility15"            "spawn_worker_t5"
+    "ExtraAbility16"            "research_master_human_survival"
+    "ExtraAbility17"            "spawn_goblin_tower_builder"
+    "ExtraAbility18"            "upgrade_to_base_operations"
+    "ExtraAbility19"            "build_cancel"        
 
     // Armor
     //----------------------------------------------------------------
@@ -6155,7 +6152,7 @@
     "Ability10"                 "build_blocked" 
 
 
-    "AbilityHolder"             "18"
+    "AbilityHolder"             "17"
 
     "ExtraAbility1"             "upgrade_human_damage_1"               
     "ExtraAbility2"             "upgrade_human_damage_2"                    
@@ -6169,12 +6166,11 @@
     "ExtraAbility10"            "upgrade_human_damage_10"                  
     "ExtraAbility11"            "research_slayer_godlike"
     "ExtraAbility12"            "research_blink_extension"                              
-    "ExtraAbility13"            "research_healing_vitality"                 
-    "ExtraAbility14"            "spawn_super_tower_builder"                 
-    "ExtraAbility15"            "spawn_worker_t4"
-    "ExtraAbility16"            "spawn_worker_t5"
-    "ExtraAbility17"            "upgrade_to_command_center"
-    "ExtraAbility18"            "build_cancel"                              
+    "ExtraAbility13"            "spawn_super_tower_builder"                 
+    "ExtraAbility14"            "spawn_worker_t4"
+    "ExtraAbility15"            "spawn_worker_t5"
+    "ExtraAbility16"            "upgrade_to_command_center"
+    "ExtraAbility17"            "build_cancel"                              
 
 
 

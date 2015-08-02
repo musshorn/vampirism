@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.09c"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.10"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items

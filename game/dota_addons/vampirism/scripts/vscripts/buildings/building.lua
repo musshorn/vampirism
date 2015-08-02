@@ -299,6 +299,27 @@ function RepairAutocast( keys )
   end
 end
 
+-- Scans for damaged buildings
+function RepairAutocastScan( keys )
+  local ability = keys.ability
+  local caster = keys.caster
+  local casterTeam = caster:GetTeam()
+  local playerID = caster:GetMainControllingPlayer()
+
+  if ability:GetAutoCastState() then
+    local nearBuildings = FindUnitsInRadius(casterTeam, caster:GetAbsOrigin(), nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC, 0, FIND_CLOSEST, false)
+    if caster:IsChanneling() == false then
+      local repairAbility = caster:FindAbilityByName('human_repair')
+      for k,v in pairs(nearBuildings) do
+        if v:HasAbility('is_a_building') and v:GetHealthDeficit() > 0 then
+          caster:CastAbilityOnTarget(v, repairAbility, playerID)
+          return
+        end
+      end
+    end
+  end
+end
+
 function Repair( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
