@@ -106,11 +106,11 @@ function SummonSlayer( keys )
   local goldCost = ABILITY_KV[ability:GetAbilityName()].GoldCost
   local foodCost = 10
 
-  --if SLAYERS[pID] ~= nil then
-  --  FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Only one slayer per player." } )
-  --  caster:Stop()
-  --  return
-  --end
+  if SLAYERS[pID] ~= nil then
+    FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Only one slayer per player." } )
+    caster:Stop()
+    return
+  end
 
   if lumberCost == nil then
     lumberCost = 0
