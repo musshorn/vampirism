@@ -334,6 +334,14 @@ function RodTeleportation( keys )
 		return
 	end
 
+	if target:GetUnitName() == 'observer_ward' then
+		ability:EndCooldown()
+		ability:RefundManaCost()
+		caster:Stop()
+		FireGameEvent('custom_error_show', {player_ID = playerID, _error = "Can't teleport to Wards!"})
+		return
+	end
+
 	if isBlocked then
 		ability:EndCooldown()
 		ability:RefundManaCost()

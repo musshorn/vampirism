@@ -9340,6 +9340,15 @@
             "Duration"      "2"
           }
         }
+        "OnAbilityExecuted"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_avernal_invis_fade"
+            "Target"        "CASTER"
+            "Duration"      "2"
+          }
+        }
       }
 
       "modifier_avernal_invis_fade"
@@ -9905,6 +9914,24 @@
         "EffectName"        "particles/vampire/nevermore_trail_ground_cracks.vpcf"
         "EffectAttachType"  "follow_origin"
         "Target"            "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_attack_notifier"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+    
+        "OnAttackLanded"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "abilities/vampire.lua"
+            "Function"    "VampireAttackLanded"
+          }
+        }
       }
     }
   }

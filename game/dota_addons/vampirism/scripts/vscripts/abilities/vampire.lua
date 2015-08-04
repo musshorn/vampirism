@@ -387,3 +387,25 @@ function RemoveSpeed( keys )
     caster:RemoveModifierByName('modifier_veil_of_darkness')
   end
 end
+
+GOOD_TEAM_NOTIFY_TIME = 5
+
+-- Notify Human players if they haven't in the last 5 seconds of an attack on an ally.
+function VampireAttackLanded( keys )
+  local caster = keys.caster
+  local target = keys.target
+  print(target:GetUnitName())
+  local targetPos = target:GetAbsOrigin()
+
+  -- Good team can be notified of an attack
+  if GOOD_TEAM_NOTIFY_TIME == 5 then
+    MinimapEvent(target:GetTeam(), target, target.x, target.y,  DOTA_MINIMAP_EVENT_TEAMMATE_UNDER_ATTACK , 2)
+  end
+
+  Timers:CreateTimer(function ()
+    if GOOD_TEAM_NOTIFY_TIME < 5 then
+      GOOD_TEAM_NOTIFY_TIME = GOOD_TEAM_NOTIFY_TIME + 1
+    end
+    return 1
+  end)
+end
