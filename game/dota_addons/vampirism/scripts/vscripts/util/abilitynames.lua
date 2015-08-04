@@ -1,6 +1,9 @@
 -- Table of ability names, to convert to some ui text.
 
 ABILITY_NAMES = {
+  research_improved_gem_quality = 'Improved Gem Quality',
+  research_advanced_gem_quality = 'Advanced Gem Quality',
+  research_unbeatable_gem_quality = 'Unbeatable Gem Quality',
   research_healing_vitality = 'Healing Vitality',
   research_wall_plating_1 = 'Iron Plating',
   research_wall_plating_2 = 'Steel Plating',

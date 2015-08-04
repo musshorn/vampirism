@@ -210,21 +210,20 @@ function GemQuality(keys)
         local wall = models[i]
         if wall:GetMainControllingPlayer() == pID then
           local increasedHP = 0
+          local baseMaxHP = UNIT_KV[pID][key].StatusHealth
           if level == 1 then
-            wall.baseMaxHP = wall:GetMaxHealth()
             increasedHP = wall:GetMaxHealth() * 1.2  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.2
           end
           if level == 2 then
-            increasedHP = wall.baseMaxHP * 1.4  - wall:GetHealth()
+            increasedHP = baseMaxHP * 1.4  - wall:GetHealth()
             UNIT_KV[pID][key].HealthModifier = 1.4
           end
           if level == 3 then
-            increasedHP = wall.baseMaxHP * 1.6  - wall:GetHealth()
-            UNIT_KV[pID][key].HealthModifier = 1.6
-            Notifications:Bottom(pID, {text = "Researched: Insane Gem Quality", duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
+            increasedHP = baseMaxHP * 1.6  - wall:GetHealth()
+            UNIT_KV[pID][key].HealthModifier = 1.6  
           end
-          wall:SetMaxHealth(wall.baseMaxHP + increasedHP)
+          wall:SetMaxHealth(baseMaxHP + increasedHP)
           wall:SetHealth(wall:GetHealth() + increasedHP)
         end
       end
@@ -635,7 +634,6 @@ end
 function AddHealthUpgrade( keys )
   local caster = keys.caster
   local amount = keys.Amount
-
   -- yeah this is how it should be
   Timers:CreateTimer(.09, function ()
     caster:SetMaxHealth(caster:GetMaxHealth() + amount)
@@ -648,4 +646,23 @@ function AddHealthUpgrade( keys )
     end
     return nil
   end)
+end
+
+function AddPercentHealth( keys )
+  local caster = keys.caster
+  local amount = keys.Amount
+  local unitName = caster:GetUnitName()
+  local playerID = caster:GetMainControllingPlayer()
+
+  local origMaxHP = UNIT_KV[playerID][unitName].StatusHealth
+  local newAmount = (amount / 100) * origMaxHP
+
+  if caster.addedHealth == nil then
+    caster.addedHealth = amount
+  else
+    caster.addedHealth = caster.addedHealth + amount
+  end
+
+  keys.Amount = newAmount
+  AddHealthUpgrade( keys )
 end
