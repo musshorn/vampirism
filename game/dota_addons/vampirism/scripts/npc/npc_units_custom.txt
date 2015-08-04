@@ -30,7 +30,6 @@
   //    
   //    These are custom keys that are used by various components of the game.
   //    
-  //     "AffectedByGemUpgrades" "true" -- Whether a unit will be affected by the basic gem upgrades.
   //     "RepairTime"            "15" -- The amount of time to repair this from 0-100% HP.
   //     "IsTech"                "true" -- Whether this unit should be tracked by TechTree.
   //     "NeedTech"              "house_t1 wall_t1" -- Any buildings that are needed to build this unit, seperated by spaces.
@@ -211,7 +210,6 @@
     "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "15"
 
     "IsTech"    "true"
@@ -223,6 +221,7 @@
         "2" "research_wall_plating_2"
         "3" "research_wall_plating_3"
         "4" "research_wall_plating_4"
+        "5" "research_improved_gem_quality"
     }
   }
 
@@ -301,7 +300,6 @@
     "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "15"
     "NeedTech"    "research_center_t1"
 
@@ -395,7 +393,6 @@
 
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
     "NeedTech"      "research_center_t1"
 
@@ -489,7 +486,6 @@
 
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
     "NeedTech"      "human_vault"
 
@@ -582,7 +578,6 @@
     "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
     "NeedTech"      "human_vault"
 
@@ -675,7 +670,6 @@
     "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
 
     // Bounty
@@ -769,7 +763,6 @@
     "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "25"
     "NeedTech"     "research_center_t2 house_t3 citadel_of_faith"
 
@@ -862,7 +855,6 @@
     "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "45"
     "NeedTech"      "research_center_t2 house_t3 citadel_of_faith"
 
@@ -955,7 +947,6 @@
     "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "65"
     "NeedTech"      "command_center"
 
@@ -1048,7 +1039,6 @@
     "VisionNighttimeRange"      "1600"    // Range of vision at night time.
 
     // Vamp
-    "AffectedByGemUpgrades" "true"
     "RepairTime"  "75"
     "NeedTech"      "gold_mine_t3 base_operations"
 
@@ -4805,7 +4795,7 @@
 
     "Ability1"          "human_repair"   //harvest test
     "Ability2"          "human_blink"     // Ability 2.
-    "Ability3"          ""     // Ability 3.
+    "Ability3"          "engineer_self_destruct"     // Ability 3.
     "Ability4"          ""      // Ability 4.
     "Ability5"          ""      // Ability 5.
     "Ability6"          ""      // Ability 6 - Extra.
@@ -4890,13 +4880,13 @@
     // Abilities
     //----------------------------------------------------------------
 
-    "Ability1"                  "call_buildui"   //harvest test
-    "Ability2"                  "human_blink"    // Ability 2.
-    "Ability3"                  "build_blocked"               // Ability 3.
+    "Ability1"                  "human_blink"   //harvest test
+    "Ability2"                  "call_buildui"    // Ability 2.
+    "Ability3"                  "human_repair"               // Ability 3.
     "Ability4"                  "build_blocked2"               // Ability 4.
     "Ability5"                  "build_blocked3"               // Ability 5.
     "Ability6"                  "build_blocked4"               // Ability 6 - Extra.
-    "Ability7"                  ""               // Ability 7 - Extra.
+    "Ability7"                  "build_blocked"               // Ability 7 - Extra.
     "Ability8"                  ""               // Ability 8 - Extra.
 
     "AbilityHolder"             "12"

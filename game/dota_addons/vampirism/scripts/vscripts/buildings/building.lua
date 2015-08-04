@@ -177,15 +177,15 @@ function Upgrade( keys )
     end
 
     -- If the unit has a HealthModifier (gem upgrades) then they gain the bonus of the targets HP straight away
-    -- "Muh Parity" - Space Germ, 2015
-    caster.originalMaxHP = caster:GetMaxHealth()
+    --[[ "Muh Parity" - Space Germ, 2015
+    caster.originalMaxHP = UNIT_KV[pID][caster:GetUnitName()].StatusHealth
     if UNIT_KV[pID][caster:GetUnitName()].HealthModifier ~= nil then
       local maxHPOffset = UNIT_KV[pID][targetUnit].StatusHealth * UNIT_KV[pID][caster:GetUnitName()].HealthModifier - UNIT_KV[pID][targetUnit].StatusHealth
       caster.originalMaxHP = caster:GetMaxHealth()
   
       caster:SetMaxHealth(caster:GetMaxHealth() + maxHPOffset)
       caster:SetHealth(caster:GetHealth() + maxHPOffset)
-    end
+    end]]
   end
 end
 

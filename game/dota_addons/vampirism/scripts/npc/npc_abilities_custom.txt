@@ -1939,6 +1939,7 @@
     "AbilityChannelTime"  "40"
     "LumberCost" "2000"
     "BaseClass" "ability_datadriven"
+    "GiveModifier"      "tech_gem_quality_1"
     "OnSpellStart"
     {
       "RunScript"
@@ -1970,10 +1971,48 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "GemQuality"
-        "TARGET"      "CASTER"
-        "Level"       "1"
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "TARGET"            "CASTER"
+      }
+    }
+  }
+
+  //================================================================================= /
+  // Improved Gem Quality - Tech modifier.
+  //================================================================================= /
+  "tech_gem_quality_1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "ability_datadriven"
+    "MaxLevel"                  "1"
+
+    "OnUpgrade"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_gem_quality_1"
+        "Target"        "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_gem_quality_1"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "scripts/vscripts/buildings/research.lua"
+            "Function"    "AddPercentHealth"
+            "Amount"      "20"
+          }
+        }
       }
     }
   }
@@ -10915,6 +10954,48 @@
           "RemoveUnit"
           {
             "Target"  "CASTER"   
+          }
+        }
+      }
+    }
+  }
+
+  //================================================================================= 
+  // Engineer self destruct
+  //=================================================================================
+  "engineer_self_destruct"
+  {
+    "AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "BaseClass"                 "ability_datadriven"
+
+    "Modifiers"
+    {
+      "modifier_add_destruct"
+      {
+        "Passive"       "1"
+        "IsHidden"      "1"
+        "IsDebuff"      "0"
+
+        "OnCreated"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_engineer_destruct"
+            "Target"     "CASTER"
+            "Duration"    "120"
+          }
+        }
+      }
+      "modifier_engineer_destruct"
+      {
+        "Passive"   "0"
+        "IsHidden"  "0"
+
+        "OnDestroy"
+        {
+          "RemoveUnit"
+          {
+            "Target"  "CASTER"
           }
         }
       }

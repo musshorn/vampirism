@@ -2041,7 +2041,7 @@
     "ItemPermanent"     "0"
     "ItemRequiresCharges"   "0"
     "SideShop"        "1"
-    "AbilityCooldown"   "0" //30
+    "AbilityCooldown"   "30" //30
     "GoldCost"        "200"
     "LumberCost"      "0"
 

@@ -381,8 +381,6 @@ function BuildingHelper:InitializeBuildingEntity( keys )
   building.blockers = gridNavBlockers
   building.buildingTable = buildingTable
 
-  local fMaxHealth = building:GetMaxHealth()
-
   if callbacks.onConstructionStarted ~= nil then
     callbacks.onConstructionStarted(building)
   end
@@ -405,12 +403,6 @@ function BuildingHelper:InitializeBuildingEntity( keys )
 
     -- whether we should update the building's health over the build time.
     local bUpdateHealth = buildingTable:GetVal("UpdateHealth", "bool")
-    
-    -- Research based modifiers
-    if UNIT_KV[pID][unitName].HealthModifier ~= nil then
-      fMaxHealth = fMaxHealth * UNIT_KV[pID][unitName].HealthModifier
-      unit:SetMaxHealth(fMaxHealth)
-    end
 
     -- Check it for tech modifiers.
     if UNIT_KV[pID][unitName]['TechModifiers'] ~= nil then
@@ -425,6 +417,14 @@ function BuildingHelper:InitializeBuildingEntity( keys )
         end
       end
     end
+
+    -- Get max health after techmodifiers system runs.
+    local fMaxHealth = UNIT_KV[pID][unitName].StatusHealth
+
+    if building.addedHealth ~= nil then
+      fMaxHealth = fMaxHealth + ((building.addedHealth / 100) * fMaxHealth)
+    end
+    building:SetMaxHealth(fMaxHealth)
     --[[
           Code to update unit health and scale over the build time, maths is a bit spooky but here's whats happening
           Logic follows:
@@ -504,6 +504,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
         else
           -- completion: timesUp is true
           building:SetHealth(building:GetHealth() + fMaxHealth - fAddedHealth) -- round up the last little bit
+          print(building:GetHealth() + fMaxHealth - fAddedHealth)
           if callbacks.onConstructionCompleted ~= nil and building:IsAlive() then
             callbacks.onConstructionCompleted(building)
           end

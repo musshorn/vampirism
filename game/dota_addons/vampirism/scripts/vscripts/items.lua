@@ -57,10 +57,6 @@ function SpawnEngineers( keys )
 				return nil
 			end)
 		end
-		Timers:CreateTimer(120, function ()
-			engi:RemoveSelf()
-			return nil
-		end)
 	end
 end
 

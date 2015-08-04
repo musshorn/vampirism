@@ -10,10 +10,14 @@ function EnterBase( keys )
     -- Check claim to this base
     for k, v in pairs(Bases.Owners) do
       if type(v) ~= "function" then
-        if v.BaseID == baseID then
+        if v.BaseID == baseID and k ~= pID then
           FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "This base has already been claimed!" } )
           return
         end
+      end
+      if k == pID then
+        FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "You've already claimed this base!" } )
+        return
       end
     end
 
