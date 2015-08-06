@@ -134,6 +134,8 @@ function build( keys )
       unit:FindAbilityByName('vampire_sell_item'):SetLevel(1)
       unit:SetAbilityPoints(0)
     end
+
+    print(unit:GetHealth(), unit:GetMaxHealth())
   end)
 
   -- These callbacks will only fire when the state between below half health/above half health changes.

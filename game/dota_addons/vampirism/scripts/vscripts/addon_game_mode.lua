@@ -201,6 +201,8 @@ function Precache( context )
 		PrecacheUnitByNameSync("goblin_tower_builder", context)
 		PrecacheUnitByNameSync("base_operations", context)
 
+		PrecacheResource("soundfile", "soundevents/soundevents_custom.vsndevts", context)
+
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 
 		-- Sounds can precached here like anything else

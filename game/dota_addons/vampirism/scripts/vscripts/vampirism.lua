@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.10f"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.11"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -99,6 +99,9 @@ WORKER_STACKS = {
 
 -- Table used to check if something has been bought or built before.
 UNIQUE_TABLE = {}
+
+-- Time between attack notifications
+ATTACK_NOTIFICATION_COOLDOWN = 5
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
@@ -435,6 +438,18 @@ function GameMode:OnEntityHurt(keys)
       local ability = entVictim:FindAbilityByName("is_a_building")
       if entCause:GetUnitName() == "npc_dota_hero_omniknight" and ability ~= nil then
         entVictim:ForceKill(true)
+      end
+    end
+
+    if entCause:GetTeam() == DOTA_TEAM_BADGUYS and ATTACK_NOTIFICATION_COOLDOWN == 0 then
+      NotifyAttack(entVictim, entCause)
+      -- Emit sound on all humans
+      for k,v in pairs(HUMANS) do
+        if v:GetMainControllingPlayer() == entVictim:GetMainControllingPlayer() then
+          EmitSoundOnClient("Vampirism.YourBaseAttacked", PlayerResource:GetPlayer(entVictim:GetMainControllingPlayer()))
+        else
+          EmitSoundOnClient("Vampirism.AllyBaseAttacked", PlayerResource:GetPlayer(v:GetMainControllingPlayer()))
+        end
       end
     end
   end
@@ -1163,9 +1178,12 @@ function GameMode:InitGameMode()
   BuildUI:Init()
   TechTree:Init()
   ShopUI:Init()
+  AttackTimer()
 
   UNIT_KV[-1] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
   UNIT_KV[-1].Version = nil
+
+  ATTACK_NOTIFICATION_COOLDOWN = 0
 
   print('[vampirism] Done loading vampirism gamemode!\n\n')
 end
@@ -1260,6 +1278,17 @@ function GameMode:OnConnectFull(keys)
 
   --Lets player see bottom row of trees.
   SendToConsole("dota_camera_pitch_max 63")
+end
+
+-- start here
+function NotifyAttack( victim, attacker )
+  local victimPID = victim:GetMainControllingPlayer()
+  local attackerPID = attacker:GetMainControllingPlayer()
+  local victimPos = victim:GetAbsOrigin()
+
+  print('making minimap event.')
+  MinimapEvent(victim:GetTeam(), victim, victimPos.x, victimPos.y, DOTA_MINIMAP_EVENT_ENEMY_TELEPORTING, 2)
+  ATTACK_NOTIFICATION_COOLDOWN = 5
 end
 
 function GoldMineTimer()
@@ -1383,6 +1412,15 @@ function AutoGoldTimer()
       end
     end
     time = time + 1
+    return 1
+  end)
+end
+
+function AttackTimer()
+  Timers:CreateTimer(function ()
+    if ATTACK_NOTIFICATION_COOLDOWN > 0 then
+      ATTACK_NOTIFICATION_COOLDOWN = ATTACK_NOTIFICATION_COOLDOWN - 1
+    end
     return 1
   end)
 end

@@ -9916,24 +9916,6 @@
         "Target"            "CASTER"
       }
     }
-
-    "Modifiers"
-    {
-      "modifier_attack_notifier"
-      {
-        "Passive"       "1"
-        "IsHidden"      "1"
-    
-        "OnAttackLanded"
-        {
-          "RunScript"
-          {
-            "ScriptFile"  "abilities/vampire.lua"
-            "Function"    "VampireAttackLanded"
-          }
-        }
-      }
-    }
   }
 
   //================================================================================= 
