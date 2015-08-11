@@ -177,15 +177,19 @@ function Upgrade( keys )
     end
 
     -- If the unit has a HealthModifier (gem upgrades) then they gain the bonus of the targets HP straight away
-    --[[ "Muh Parity" - Space Germ, 2015
+    -- "Muh Parity" - Space Germ, 2015
     caster.originalMaxHP = UNIT_KV[pID][caster:GetUnitName()].StatusHealth
     if UNIT_KV[pID][caster:GetUnitName()].HealthModifier ~= nil then
       local maxHPOffset = UNIT_KV[pID][targetUnit].StatusHealth * UNIT_KV[pID][caster:GetUnitName()].HealthModifier - UNIT_KV[pID][targetUnit].StatusHealth
       caster.originalMaxHP = caster:GetMaxHealth()
-  
-      caster:SetMaxHealth(caster:GetMaxHealth() + maxHPOffset)
-      caster:SetHealth(caster:GetHealth() + maxHPOffset)
-    end]]
+      
+      Timers:CreateTimer(0.03, function ()
+        print('sperce herm')
+          caster:SetMaxHealth(caster:GetMaxHealth() + maxHPOffset)
+          caster:SetHealth(caster:GetHealth() + maxHPOffset)
+        return nil
+      end)     
+    end
   end
 end
 
@@ -214,6 +218,8 @@ function FinishUpgrade( keys )
   end
 
   local blockers = caster.blockers
+
+  local oldHealthDef = caster:GetHealthDeficit()
 
   caster:Destroy()
   local unit = CreateUnitByName(targetUnit, pos, false, nil, nil, team)
@@ -283,6 +289,33 @@ function FinishUpgrade( keys )
     end
   end
 
+  -- new building hp gains the diffenece between its current hp, and the max hp of the building it is upgrading to.
+  local hpdiff = unit:GetMaxHealth() - oldHealthDef
+  print(hpdiff, oldHealthDef)
+  if oldHealthDef > 0 then
+    unit:SetHealth(hpdiff)
+  end
+
+  -- Wall health upgrade fixup. dont judge.
+  if UNIT_KV[pID][targetUnit].HealthModifier ~= nil then
+    local maxHealth = unit:GetMaxHealth() * UNIT_KV[pID][targetUnit].HealthModifier
+    print(maxHealth, unit:GetMaxHealth())
+    print(hpdiff)
+    Timers:CreateTimer(0.3, function (  )
+      --print(unit:GetMaxHealth())
+      if unit:GetMaxHealth() ~= maxHealth then
+        unit:SetMaxHealth(maxHealth)
+        print(unit:GetMaxHealth())
+	local hpGain = (UNIT_KV[pID][targetUnit].HealthModifier * maxHealth) - maxHealth
+	print(hpGain)
+	unit:Heal(hpGain, unit)
+        return nil
+      else
+        print(unit:GetMaxHealth())
+        return 0.1
+      end
+    end)
+  end
   TechTree:AddTech(targetUnit, pID)
 end
 

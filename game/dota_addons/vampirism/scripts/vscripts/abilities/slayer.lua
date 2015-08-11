@@ -1,11 +1,16 @@
 -- Slayer blink, global version of human blink
 function SlayerBlink( keys )
   local caster = keys.caster
+  local ability = keys.ability
   local point = keys.target_points[1]
   
   local newSpace = FindGoodSpaceForUnit(caster, point, 500, nil)
   if newSpace ~= false then
     caster:SetAbsOrigin(newSpace)
+  else
+    FireGameEvent('custom_error_show', {player_ID = caster:GetMainControllingPlayer(), _error = "Can't blink there!"})
+    ability:RefundManaCost()
+    ability:EndCooldown()
   end
 end
 

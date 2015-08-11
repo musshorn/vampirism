@@ -1,5 +1,3 @@
--- Generated from template
-
 require('util.print')
 require('util.print_table')
 require('util.myutil')

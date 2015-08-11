@@ -214,6 +214,8 @@
 
     "IsTech"    "true"
     "NeedTech"    "house_t1"
+    "HealthModifier"    "1"
+    "AffectedByGemUpgrades" "1"
 
     "TechModifiers"
     {
@@ -221,7 +223,6 @@
         "2" "research_wall_plating_2"
         "3" "research_wall_plating_3"
         "4" "research_wall_plating_4"
-        "5" "research_improved_gem_quality"
     }
   }
 
@@ -308,6 +309,9 @@
     //"BountyXP"            "25"
     "BountyGoldMin"       "2"
     "BountyGoldMax"       "2"
+
+    "AffectedByGemUpgrades" "1"
+    "HealthModifier"        "1"
 
     "TechModifiers"
     {
@@ -402,6 +406,9 @@
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
+    "HealthModifier"        "1"
+    "AffectedByGemUpgrades" "1"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -495,6 +502,9 @@
     "BountyGoldMin"       "20"
     "BountyGoldMax"       "20"
 
+    "HealthModifier"      "1"
+    "AffectedByGemUpgrades" "1"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -587,6 +597,9 @@
     "BountyGoldMin"       "50"
     "BountyGoldMax"       "50"
 
+    "HealthModifier"    "1"
+    "AffectedByGemUpgrades" "1"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -677,6 +690,9 @@
     //"BountyXP"            "25"
     "BountyGoldMin"       "75"
     "BountyGoldMax"       "75"
+
+    "HealthModifier"    "1"
+    "AffectedByGemUpgrades" "1"
 
     "NeedTech"     "research_center_t2 house_t3"
 
@@ -772,6 +788,9 @@
     "BountyGoldMin"       "75"
     "BountyGoldMax"       "75"
 
+    "HealthModifier"    "1"
+    "AffectedByGemUpgrades" "1"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -863,6 +882,9 @@
     //"BountyXP"            "25"
     "BountyGoldMin"       "250"
     "BountyGoldMax"       "250"
+
+    "HealthModifier"    "1"
+    "AffectedByGemUpgrades" "1"
 
     "TechModifiers"
     {
@@ -956,6 +978,9 @@
     "BountyGoldMin"       "500"
     "BountyGoldMax"       "500"
 
+    "HealthModifier"    "1"
+    "AffectedByGemUpgrades" "1"
+
     "TechModifiers"
     {
         "1" "research_wall_plating_1"
@@ -1047,6 +1072,9 @@
     //"BountyXP"            "25"
     "BountyGoldMin"       "1000"
     "BountyGoldMax"       "1000"
+
+    "HealthModifier"    "1"
+    "AffectedByGemUpgrades" "1"
 
     "TechModifiers"
     {

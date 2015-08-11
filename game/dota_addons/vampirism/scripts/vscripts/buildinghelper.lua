@@ -380,7 +380,8 @@ function BuildingHelper:InitializeBuildingEntity( keys )
   building:SetHullRadius( size * 32 - 32 )
   building.blockers = gridNavBlockers
   building.buildingTable = buildingTable
-  building.fMaxHealth = UNIT_KV[pID][unitName].StatusHealth
+
+  local fMaxHealth = building:GetMaxHealth()
 
   if callbacks.onConstructionStarted ~= nil then
     callbacks.onConstructionStarted(building)
@@ -404,6 +405,16 @@ function BuildingHelper:InitializeBuildingEntity( keys )
 
     -- whether we should update the building's health over the build time.
     local bUpdateHealth = buildingTable:GetVal("UpdateHealth", "bool")
+    
+    -- Research based modifiers
+    if UNIT_KV[pID][unitName].HealthModifier ~= nil then
+      fMaxHealth = fMaxHealth * UNIT_KV[pID][unitName].HealthModifier
+      print(fMaxHealth,'fMaxHealth')
+      Timers:CreateTimer(0.03, function (  )
+        building:SetMaxHealth(fMaxHealth)
+        return nil
+      end)
+    end
 
     -- Check it for tech modifiers.
     if UNIT_KV[pID][unitName]['TechModifiers'] ~= nil then
@@ -418,11 +429,6 @@ function BuildingHelper:InitializeBuildingEntity( keys )
         end
       end
     end
-
-    if building.addedHealth ~= nil then
-      building.fMaxHealth = building.fMaxHealth + ((building.addedHealth / 100) * building.fMaxHealth)
-    end
-    building:SetMaxHealth(building.fMaxHealth)
     --[[
           Code to update unit health and scale over the build time, maths is a bit spooky but here's whats happening
           Logic follows:
@@ -439,7 +445,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
 
     local fserverFrameRate = 1/30 
 
-    local nHealthInterval = building.fMaxHealth / (buildTime / fserverFrameRate)
+    local nHealthInterval = fMaxHealth / (buildTime / fserverFrameRate)
     local fSmallHealthInterval = nHealthInterval - math.floor(nHealthInterval) -- just the floating point component
     nHealthInterval = math.floor(nHealthInterval)
     local fHPAdjustment = 0
@@ -501,13 +507,12 @@ function BuildingHelper:InitializeBuildingEntity( keys )
           end
         else
           -- completion: timesUp is true
-          building:SetHealth(building:GetHealth() + building.fMaxHealth - fAddedHealth) -- round up the last little bit
-          print(building:GetHealth() + building.fMaxHealth - fAddedHealth)
+          building:SetHealth(building:GetHealth() + fMaxHealth - fAddedHealth) -- round up the last little bit
           if callbacks.onConstructionCompleted ~= nil and building:IsAlive() then
             callbacks.onConstructionCompleted(building)
           end
           building.constructionCompleted = true
-          print("[BuildingHelper] HP was off by:", building.fMaxHealth - fAddedHealth)
+          print("[BuildingHelper] HP was off by:", fMaxHealth - fAddedHealth)
           building.state = "complete"
           building.bUpdatingHealth = false
           -- clean up the timer if we don't need it.
@@ -566,13 +571,13 @@ function BuildingHelper:InitializeBuildingEntity( keys )
   building.onBelowHalfHealthProc = false
   building.healthChecker = Timers:CreateTimer(.2, function()
     if IsValidEntity(building) then
-      if building:GetHealth() < building.fMaxHealth/2.0 and not building.onBelowHalfHealthProc and not building.bUpdatingHealth then
+      if building:GetHealth() < fMaxHealth/2.0 and not building.onBelowHalfHealthProc and not building.bUpdatingHealth then
         if callbacks.fireEffect ~= nil then
           building:AddNewModifier(building, nil, callbacks.fireEffect, nil)
         end
         callbacks.onBelowHalfHealth(unit)
         building.onBelowHalfHealthProc = true
-      elseif building:GetHealth() >= building.fMaxHealth/2.0 and building.onBelowHalfHealthProc and not building.bUpdatingHealth then
+      elseif building:GetHealth() >= fMaxHealth/2.0 and building.onBelowHalfHealthProc and not building.bUpdatingHealth then
         if callbacks.fireEffect then
           building:RemoveModifierByName(callbacks.fireEffect)
         end

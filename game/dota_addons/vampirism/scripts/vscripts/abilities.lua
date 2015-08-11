@@ -135,7 +135,19 @@ function build( keys )
       unit:SetAbilityPoints(0)
     end
 
-    print(unit:GetHealth(), unit:GetMaxHealth())
+    -- Research based modifiers
+    if UNIT_KV[pID][unitName].HealthModifier ~= nil then
+      print('this runs on upgrade?')
+      local maxHealth = unit:GetMaxHealth() * UNIT_KV[pID][unitName].HealthModifier
+      local hpdiff = maxHealth - unit:GetMaxHealth()
+      Timers:CreateTimer(0.03, function (  )
+        unit:SetMaxHealth(maxHealth)
+        if hpdiff > 0 then
+          unit:Heal(hpdiff, unit)
+        end
+        return nil
+      end)
+    end
   end)
 
   -- These callbacks will only fire when the state between below half health/above half health changes.
