@@ -34,6 +34,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
   worker.unitName = worker:GetUnitName()
   worker.carryTotal = worker:FindAbilityByName("carrying_lumber")
   worker.dropAbiltiy = worker:FindAbilityByName("drop_lumber")
+  worker.currentLumber = 0
 
   --attach fire spawn particles.
   if unitName == 'worker_t4' then
@@ -57,28 +58,27 @@ function Worker:Worker1(vPos, hOwner, unitName)
       return nil
     end
 
-  	if worker.pos ~= worker:GetAbsOrigin() then
-  		worker.moving = true
-  		worker.pos = worker:GetAbsOrigin()
-  	else
-  		worker.moving = false
-  	end
+    if worker.pos ~= worker:GetAbsOrigin() then
+      worker.moving = true
+      worker.pos = worker:GetAbsOrigin()
+    else
+      worker.moving = false
+    end
 
-  	return 0.1
+    return 0.1
   end})
 
-	function worker:Think()
+  function worker:Think()
 
     worker.thinking = true
-		Timers:CreateTimer(function ()
-			if worker:IsNull() then
-				return nil
-			end
+    Timers:CreateTimer(function ()
+      if worker:IsNull() then
+        return nil
+      end
 
-      if worker.ability:GetAutoCastState() then
-        local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
-        if (worker.moving == false and currentLumber < UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
-          
+      worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
+      if worker.ability:GetAutoCastState() then 
+        if (worker.moving == false and worker.currentLumber < UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
           -- If they are not working, start them working
           if (worker.harvest:IsChanneling() == false) then
             local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
@@ -87,16 +87,15 @@ function Worker:Worker1(vPos, hOwner, unitName)
         end
       end
 
-			-- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
-      local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
-			if (currentLumber >= UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
+      -- If the worker has all the lumber they can carry, dump it at the nearest house and update the UI
+      if (worker.currentLumber >= UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
         -- This occurs sometimes from sharpened hatchets, resets to default if it goes over.
-		    if currentLumber > UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks then
+        if worker.currentLumber > UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks then
           worker:SetModifierStackCount("modifier_carrying_lumber", worker.carryTotal, UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks)
         end
-				-- Search for the nearest unit that can recieve lumber and is owned by the correct player
-				if (worker.housePos == nil) then
-					local bestDrop = nil
+        -- Search for the nearest unit that can recieve lumber and is owned by the correct player
+        if (worker.housePos == nil) then
+          local bestDrop = nil
           local bestDist = 99999
           for k, v in pairs(LUMBER_DROPS) do
             local dist = CalcDistanceBetweenEntityOBB(worker, v)
@@ -105,13 +104,13 @@ function Worker:Worker1(vPos, hOwner, unitName)
               bestDist = dist
             end
           end
-					worker.housePos = bestDrop:GetAbsOrigin()
+          worker.housePos = bestDrop:GetAbsOrigin()
           worker:CastAbilityOnTarget(bestDrop, worker.dropAbiltiy, worker:GetMainControllingPlayer())
         end
-			end
-			return .1
-		end)
-	end
+      end
+      return .1
+    end)
+  end
 
   worker:Think()
 
@@ -127,8 +126,8 @@ function FindLumber( keys )
 
   local carryTotal = worker:FindAbilityByName("carrying_lumber")
 
-  local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
-  if (worker.moving == false and currentLumber < UNIT_KV[pID][unitName].MaximumLumber * worker.currentStacks) then
+  worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+  if (worker.moving == false and worker.currentLumber < UNIT_KV[pID][unitName].MaximumLumber * worker.currentStacks) then
     local ability = worker:FindAbilityByName("harvest_channel")
 
     -- If they are not working, start them working
@@ -143,13 +142,13 @@ end
 function ChoppedLumber( keys )
   local worker = keys.caster
   local carryTotal= worker:FindAbilityByName("carrying_lumber")
-  local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+  worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
   local pID = worker:GetMainControllingPlayer()
   local unitName = worker:GetUnitName()
   local stackAbility = worker:FindAbilityByName('worker_stack')
 
-  if currentLumber + UNIT_KV[pID][unitName].LumberPerChop <= UNIT_KV[pID][unitName].MaximumLumber * worker.currentStacks then
-    worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (currentLumber + UNIT_KV[pID][unitName].LumberPerChop * worker.currentStacks))
+  if worker.currentLumber + UNIT_KV[pID][unitName].LumberPerChop <= UNIT_KV[pID][unitName].MaximumLumber * worker.currentStacks then
+    worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (worker.currentLumber + UNIT_KV[pID][unitName].LumberPerChop * worker.currentStacks))
     worker.housePos = nil
   end
 end
@@ -163,7 +162,7 @@ end
 function DropLumber( keys )
   local worker = keys.caster
   local carryTotal = worker:FindAbilityByName("carrying_lumber")
-  local currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+  worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
   local targetHouse = nil
   local searchRange = 180
 
@@ -178,12 +177,12 @@ function DropLumber( keys )
   end
 
   if targetHouse ~= nil then
-    if currentLumber > 0 then
+    if worker.currentLumber > 0 then
       local pfxPath = string.format("particles/msg_fx/msg_damage.vpcf", pfx)
       local pidx = ParticleManager:CreateParticle(pfxPath, PATTACH_ABSORIGIN_FOLLOW, worker)
 
       local digits = 0
-      local number = currentLumber
+      local number = worker.currentLumber
       if number ~= nil then
         digits = #tostring(number)
       end
@@ -195,9 +194,10 @@ function DropLumber( keys )
       ParticleManager:SetParticleControl(pidx, 3, Vector(0, 255, 0))
 
       local pid = worker:GetMainControllingPlayer() 
-      ChangeWood(pid, currentLumber)
+      ChangeWood(pid, worker.currentLumber)
 
       worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
+      worker.currentLumber = 0
       local ability = worker:FindAbilityByName("find_lumber")
       if ability:GetAutoCastState() then
         worker:CastAbilityNoTarget(ability, pid)

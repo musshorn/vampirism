@@ -33,13 +33,6 @@ function build( keys )
       caster:SetAbsOrigin(newSpace)
     end
     
-    local nearVamps = FindUnitsInRadius(caster:GetTeam(), unit:GetAbsOrigin(), nil, 100, DOTA_TEAM_BADGUYS, DOTA_UNIT_TARGET_HERO, 0, FIND_CLOSEST, false)
-    for k, v in pairs(nearVamps) do
-      if v:GetUnitName() == "npc_dota_hero_night_stalker" then
-        v:AddNewModifier(caster, nil, "string modifier_stun", {duration = 1})
-        v:AddNewModifier(caster, nil, "modifier_item_forcestaff_active", {push_length = 200})
-      end
-    end
     -- start the building with 0 mana.
     unit:AddNewModifier(unit, nil, "modifier_silence", {duration=10000})
     unit:AddNewModifier(unit, nil, "modifier_disarmed", {duration=10000})
@@ -136,18 +129,18 @@ function build( keys )
     end
 
     -- Research based modifiers
-    if UNIT_KV[pID][unitName].HealthModifier ~= nil then
-      print('this runs on upgrade?')
-      local maxHealth = unit:GetMaxHealth() * UNIT_KV[pID][unitName].HealthModifier
-      local hpdiff = maxHealth - unit:GetMaxHealth()
-      Timers:CreateTimer(0.03, function (  )
-        unit:SetMaxHealth(maxHealth)
-        if hpdiff > 0 then
-          unit:Heal(hpdiff, unit)
-        end
-        return nil
-      end)
-    end
+    --if UNIT_KV[pID][unitName].HealthModifier ~= nil then
+    --  local maxHealth = unit:GetMaxHealth() * UNIT_KV[pID][unitName].HealthModifier
+    --  local hpdiff = maxHealth - unit:GetMaxHealth()
+    --  Timers:CreateTimer(0.03, function (  )
+    --    print('this runs on upgrade?')
+    --    unit:SetMaxHealth(maxHealth)
+    --    if hpdiff > 0 then
+    --      unit:Heal(hpdiff, unit)
+    --    end
+    --    return nil
+    --  end)
+    --end
   end)
 
   -- These callbacks will only fire when the state between below half health/above half health changes.

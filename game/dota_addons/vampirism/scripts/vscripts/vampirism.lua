@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.12"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.13a"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -78,12 +78,12 @@ AVERNALS = {} --table of all avernals, by playerID
 Bases = {}     -- Access by owner pID, has int value baseID and a table of shared builders pIDs
 Bases.Owners = {}
 HUMAN_FEED = {}
-for i = 0, 7 do
+for i = 0, 9 do
 	HUMAN_FEED[i] = 0
 end
 
 VAMPIRE_FEED = {}
-for i = -1, 9 do
+for i = -1, 11 do
 	VAMPIRE_FEED[i] = 0
   AVERNALS[i] = {}
 end
@@ -287,7 +287,7 @@ function GameMode:OnGameRulesStateChange(keys)
       })
 
     -- Need to delay the human spawns, spawning 8 omnis at once is too much for the server.
-    for i = 0, 9 do
+    for i = 0, 11 do
       Timers:CreateTimer(.03, function ()
         local playerTeam = PlayerResource:GetTeam(i)
         if playerTeam == 2 then
@@ -343,7 +343,7 @@ function GameMode:OnGameRulesStateChange(keys)
             vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
             VAMP_COUNT = VAMP_COUNT + 1
             VAMPIRES[i] = vampire
-            VAMPIRES[-1] = vampire --nice game
+            --VAMPIRES[-1] = vampire --nice game
             return nil
           end)
         end
@@ -370,7 +370,6 @@ function GameMode:OnGameRulesStateChange(keys)
       return nil
     end)
   end
-
 end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
@@ -1053,7 +1052,7 @@ function GameMode:InitGameMode()
   GameRules:SetRuneMinimapIconScale( MINIMAP_RUNE_ICON_SIZE )
 
   if GetMapName() == 'vamp' then
-    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 8 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 10 )
     GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 2 )
     LOW_PLAYER_MAP = false
   elseif GetMapName() == 'vamp_5h_1v' then
@@ -1346,21 +1345,19 @@ end
 
 --Runs every 15 seconds, checks whether vamps have sphere of doom
 function SphereTimer()
-  local haveSphere = false
   Timers:CreateTimer(function()
+    local haveSphere = false
     for k, v in pairs(VAMPIRES) do
-      if v:HasItemInInventory('item_sphere_of_doom') then
+      if v:HasItemInInventory('item_sphere_doom') then
         haveSphere = true
-      else
-        haveSphere = false
       end
     end
 
     for k, v in pairs(VAMPIRES) do
       if haveSphere then
-        v:SetBaseAgility(v:GetBaseAgility() +15)
-        v:SetBaseStrength(v:GetBaseStrength() +15)
-        v:SetBaseIntellect(v:GetBaseIntellect() +15)
+        v:SetBaseAgility(v:GetBaseAgility() +5)
+        v:SetBaseStrength(v:GetBaseStrength() +5)
+        v:SetBaseIntellect(v:GetBaseIntellect() +5)
       end
     end
     return 15
@@ -1625,5 +1622,24 @@ function ChangeWood( playerID, amount )
       WOOD[playerID] = WOOD[playerID] + amount
     end
     FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
+  end
+end
+
+function GameMode:CheckGemQuality( unit )
+  local playerID = unit:GetMainControllingPlayer()
+  --some neg pid junk
+  if playerID == -1 then playerID = 0 end
+  local unitName = unit:GetUnitName()
+  local modifierLevel = UNIT_KV[playerID][unitName].HealthModifier
+  if modifierLevel > 0 then
+    local gemQuality = UNIT_KV[playerID][unitName].GemQuality
+    local prevQuality = gemQuality..modifierLevel -1
+    gemQuality = gemQuality..modifierLevel
+    if unit:HasAbility(prevQuality) then
+      unit:RemoveAbility(prevQuality)
+    end
+    unit:AddAbility(gemQuality)
+    local gemAbility = unit:FindAbilityByName(gemQuality)
+    gemAbility:SetLevel(modifierLevel)  
   end
 end

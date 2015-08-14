@@ -2072,10 +2072,85 @@
         "ScriptFile"        "scripts/vscripts/buildings/research.lua"
         "Function"          "GemQuality" 
         "TARGET"            "CASTER"
-	"Level"		    "3"
+	      "Level"		          "3"
       }
     }
   }
+
+  //================================================================================= /
+  // t1 wall gem quality
+  //================================================================================= /
+  "tech_gem_quality_1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "granite_golem_hp_aura"
+    "MaxLevel"                  "1"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "bonus_hp"      "20.00001"
+      }
+      "02"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "radius"        "1"
+      }
+    }
+  }
+  //================================================================================= /
+  // t2 wall gem quality
+  //================================================================================= /
+  "tech_gem_quality_2"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "granite_golem_hp_aura"
+    "MaxLevel"                  "1"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "bonus_hp"      "40.00001"
+      }
+      "02"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "radius"        "1"
+      }
+    }
+  }
+  //================================================================================= /
+  // t3 wall gem quality
+  //================================================================================= /
+  "tech_gem_quality_3"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "granite_golem_hp_aura"
+    "MaxLevel"                  "1"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "bonus_hp"      "60.00001"
+      }
+      "02"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "radius"        "1"
+      }
+    }
+  }
+
+
 
   //================================================================================= /
   // Research: Upgrade Healing Tower

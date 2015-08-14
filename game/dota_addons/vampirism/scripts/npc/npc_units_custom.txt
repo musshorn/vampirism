@@ -214,8 +214,9 @@
 
     "IsTech"    "true"
     "NeedTech"    "house_t1"
-    "HealthModifier"    "1"
+    "HealthModifier"    "0"
     "AffectedByGemUpgrades" "1"
+    "GemQuality"          "tech_gem_quality_"
 
     "TechModifiers"
     {
@@ -311,7 +312,9 @@
     "BountyGoldMax"       "2"
 
     "AffectedByGemUpgrades" "1"
-    "HealthModifier"        "1"
+    "HealthModifier"        "0"
+    "GemQuality"          "tech_gem_quality_"
+
 
     "TechModifiers"
     {
@@ -406,7 +409,9 @@
     "BountyGoldMin"       "5"
     "BountyGoldMax"       "5"
 
-    "HealthModifier"        "1"
+    "HealthModifier"        "0"
+    "GemQuality"          "tech_gem_quality_"
+
     "AffectedByGemUpgrades" "1"
 
     "TechModifiers"
@@ -502,7 +507,9 @@
     "BountyGoldMin"       "20"
     "BountyGoldMax"       "20"
 
-    "HealthModifier"      "1"
+    "HealthModifier"      "0"
+    "GemQuality"          "tech_gem_quality_"
+
     "AffectedByGemUpgrades" "1"
 
     "TechModifiers"
@@ -597,8 +604,10 @@
     "BountyGoldMin"       "50"
     "BountyGoldMax"       "50"
 
-    "HealthModifier"    "1"
+    "HealthModifier"    "0"
     "AffectedByGemUpgrades" "1"
+    "GemQuality"          "tech_gem_quality_"
+
 
     "TechModifiers"
     {
@@ -691,8 +700,10 @@
     "BountyGoldMin"       "75"
     "BountyGoldMax"       "75"
 
-    "HealthModifier"    "1"
+    "HealthModifier"    "0"
     "AffectedByGemUpgrades" "1"
+    "GemQuality"          "tech_gem_quality_"
+
 
     "NeedTech"     "research_center_t2 house_t3"
 
@@ -788,8 +799,10 @@
     "BountyGoldMin"       "75"
     "BountyGoldMax"       "75"
 
-    "HealthModifier"    "1"
+    "HealthModifier"    "0"
     "AffectedByGemUpgrades" "1"
+    "GemQuality"          "tech_gem_quality_"
+
 
     "TechModifiers"
     {
@@ -883,7 +896,9 @@
     "BountyGoldMin"       "250"
     "BountyGoldMax"       "250"
 
-    "HealthModifier"    "1"
+    "HealthModifier"    "0"
+    "GemQuality"          "tech_gem_quality_"
+
     "AffectedByGemUpgrades" "1"
 
     "TechModifiers"
@@ -978,8 +993,10 @@
     "BountyGoldMin"       "500"
     "BountyGoldMax"       "500"
 
-    "HealthModifier"    "1"
+    "HealthModifier"    "0"
     "AffectedByGemUpgrades" "1"
+    "GemQuality"          "tech_gem_quality_"
+
 
     "TechModifiers"
     {
@@ -1073,8 +1090,10 @@
     "BountyGoldMin"       "1000"
     "BountyGoldMax"       "1000"
 
-    "HealthModifier"    "1"
+    "HealthModifier"    "0"
     "AffectedByGemUpgrades" "1"
+    "GemQuality"          "tech_gem_quality_"
+
 
     "TechModifiers"
     {

@@ -89,7 +89,7 @@ function ShopUI:InitVampShop( vampshop )
       SHOPS[shopIndex][index]['stock'] = 0
       table.insert(SHOPS[shopIndex][index]['queue'], SHOPS[shopIndex][index]['unlocktime'])
     end
-    for i = -1, 10 do
+    for i = -1, 11 do
       FireGameEvent('shop_preload', {player_ID = i, shop_index = shopIndex, shop_type = shopName, item_name = k, item_stock = SHOPS[shopIndex][index]['stock'], item_time = SHOPS[shopIndex][index]['queue'][0], item_index = v['index'], has_tech = true})
     end
   end

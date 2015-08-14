@@ -408,12 +408,10 @@ function BuildingHelper:InitializeBuildingEntity( keys )
     
     -- Research based modifiers
     if UNIT_KV[pID][unitName].HealthModifier ~= nil then
-      fMaxHealth = fMaxHealth * UNIT_KV[pID][unitName].HealthModifier
-      print(fMaxHealth,'fMaxHealth')
-      Timers:CreateTimer(0.03, function (  )
-        building:SetMaxHealth(fMaxHealth)
-        return nil
-      end)
+      if UNIT_KV[pID][unitName].HealthModifier > 0 then
+        GameMode:CheckGemQuality(building)
+        fMaxHealth = ((UNIT_KV[pID][unitName].HealthModifier * 0.2) + 1) * fMaxHealth
+      end
     end
 
     -- Check it for tech modifiers.

@@ -206,42 +206,11 @@ function GemQuality(keys)
       models = Entities:FindAllByModel(UNIT_KV[pID][key].Model)
 
       -- Set healthmodifier of all walls.
-      if level == 1 then
-        UNIT_KV[pID][key].HealthModifier = 1.2
-      end
-      if level == 2 then
-        UNIT_KV[pID][key].HealthModifier = 1.4
-      end
-      if level == 3 then
-        UNIT_KV[pID][key].HealthModifier = 1.6  
-      end
- 
+      UNIT_KV[pID][key].HealthModifier = level
+
       -- Increase the health of all alive walls
-      for i = 1,table.getn(models) do
-        local wall = models[i]
-        if wall:GetMainControllingPlayer() == pID then
-          local newMaxHP = 0
-          local baseMaxHP = UNIT_KV[pID][key].StatusHealth
-          if level == 1 then
-            newMaxHP = baseMaxHP * 1.2 
-          end
-          if level == 2 then
-            newMaxHP = baseMaxHP * 1.4 
-          end
-          if level == 3 then
-            newMaxHP = baseMaxHP * 1.6
-          end
-	  Timers:CreateTimer(0.03, function()
-	      local hpDef = wall:GetHealthDeficit()
-              wall:SetMaxHealth(newMaxHP)
-              if hpDef > 0 then
-                wall:SetHealth(wall:GetMaxHealth() - hpDef)
-	      else
-	        wall:SetHealth(wall:GetMaxHealth())
-	      end
-	    return nil
-	  end)
-        end
+      for k,v in pairs(models) do
+        GameMode:CheckGemQuality(v)
       end
    end
   end
@@ -548,8 +517,6 @@ function TechPlating( keys )
   local abilityName = keys.ability:GetAbilityName() 
   TechTree:AddTechAbility(playerID, abilityName)
 
-  Notifications:Bottom(playerID, {text = "Researched: "..ABILITY_NAMES[abilityName], duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
-  
   Timers:CreateTimer(.03, function ()
     local armorLevel = WALL_PLATING_SCALE[wallName]
     caster:FindAbilityByName(abilityName):SetLevel(armorLevel)

@@ -272,7 +272,7 @@
 			{
 				"ScriptFile"	"items.lua"
 				"Function"		"SphereDoom"
-        "Target" "POINT"
+        "Target"      "POINT"
         "MaxBlink"    "220"
 			}
 		}
@@ -351,7 +351,7 @@
   			"Properties"
   			{
   				"MODIFIER_PROPERTY_HEALTH_BONUS" "%health_bonus"
-  			    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage_bonus" 
+  			  "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage_bonus" 
   			}
   		}
   	}
