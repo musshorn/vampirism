@@ -1937,7 +1937,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "40"
-    "LumberCost" "2000"
+    "LumberCost" "500"
     "BaseClass" "ability_datadriven"
     "GiveModifier"      "tech_gem_quality_1"
     "OnSpellStart"
@@ -1972,50 +1972,13 @@
       "RunScript"
       {
         "ScriptFile"        "scripts/vscripts/buildings/research.lua"
-        "Function"          "TechUpgrade" //potentially a generic function that will handle all future techs.
+        "Function"          "GemQuality" //potentially a generic function that will handle all future techs.
         "TARGET"            "CASTER"
+        "Level"             "1" 
       }
     }
   }
 
-  //================================================================================= /
-  // Improved Gem Quality - Tech modifier.
-  //================================================================================= /
-  "tech_gem_quality_1"
-  {
-    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    "BaseClass"                 "ability_datadriven"
-    "MaxLevel"                  "1"
-
-    "OnUpgrade"
-    {
-      "ApplyModifier"
-      {
-        "ModifierName"  "modifier_gem_quality_1"
-        "Target"        "CASTER"
-      }
-    }
-
-    "Modifiers"
-    {
-      "modifier_gem_quality_1"
-      {
-        "Passive"       "1"
-        "IsHidden"      "1"
-
-        "OnCreated"
-        {
-          "RunScript"
-          {
-            "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-            "Function"    "AddPercentHealth"
-            "Amount"      "20"
-          }
-        }
-      }
-    }
-  }
 
   //================================================================================= /
   // Research: Advanced Gem Quality
@@ -2024,7 +1987,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "40"
-    "LumberCost" "2000"
+    "LumberCost" "1000"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -2057,10 +2020,11 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "GemQuality"
-        "TARGET"  "CASTER"
-        "Level" "2"
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "GemQuality" 
+        "TARGET"            "CASTER"
+        "Level"         "2" 
+        "BaseAbility"       "research_improved_gem_quality"
       }
     }
   }
@@ -2072,7 +2036,7 @@
   {
     "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"  
     "AbilityChannelTime"  "40"
-    "LumberCost" "2000"
+    "LumberCost" "1500"
     "BaseClass" "ability_datadriven"
     "OnSpellStart"
     {
@@ -2105,13 +2069,88 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/buildings/research.lua"
-        "Function"    "GemQuality"
-        "TARGET"  "CASTER"
-        "Level" "3"
+        "ScriptFile"        "scripts/vscripts/buildings/research.lua"
+        "Function"          "GemQuality" 
+        "TARGET"            "CASTER"
+	      "Level"		          "3"
       }
     }
   }
+
+  //================================================================================= /
+  // t1 wall gem quality
+  //================================================================================= /
+  "tech_gem_quality_1"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "granite_golem_hp_aura"
+    "MaxLevel"                  "1"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "bonus_hp"      "20.00001"
+      }
+      "02"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "radius"        "1"
+      }
+    }
+  }
+  //================================================================================= /
+  // t2 wall gem quality
+  //================================================================================= /
+  "tech_gem_quality_2"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "granite_golem_hp_aura"
+    "MaxLevel"                  "1"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "bonus_hp"      "40.00001"
+      }
+      "02"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "radius"        "1"
+      }
+    }
+  }
+  //================================================================================= /
+  // t3 wall gem quality
+  //================================================================================= /
+  "tech_gem_quality_3"
+  {
+    "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "BaseClass"                 "granite_golem_hp_aura"
+    "MaxLevel"                  "1"
+
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_FLOAT"
+        "bonus_hp"      "60.00001"
+      }
+      "02"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "radius"        "1"
+      }
+    }
+  }
+
+
 
   //================================================================================= /
   // Research: Upgrade Healing Tower
@@ -9332,6 +9371,15 @@
           }
         }
         "OnAttackLanded"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_avernal_invis_fade"
+            "Target"        "CASTER"
+            "Duration"      "2"
+          }
+        }
+        "OnAbilityExecuted"
         {
           "ApplyModifier"
           {

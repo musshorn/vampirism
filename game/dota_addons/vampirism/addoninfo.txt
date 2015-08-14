@@ -9,6 +9,6 @@
 	}
 	"vamp"
 	{
-		"MaxPlayers"	"10"
+		"MaxPlayers"	"12"
 	}
 }

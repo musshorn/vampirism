@@ -24,21 +24,40 @@ end
 
 -- Caster blinks a small distance if space is available.
 function SphereDoom( keys )
+	PrintTable(keys)
 	local caster = keys.caster
 	local ability = keys.ability
 	local point = keys.target_points[1]
 	local gooddist = keys.MaxBlink
-
-	local dist_vec =  point - caster:GetAbsOrigin()
-
-	if dist_vec:Length2D() > keys.MaxBlink then
-		point = caster:GetAbsOrigin() + (point - caster:GetAbsOrigin()):Normalized() * keys.MaxBlink
+	if ability.stacks == nil then
+		ability.stacks = 2
 	end
 
-	local newSpace = FindGoodSpaceForUnit(caster, point, 200, nil)
-  	if newSpace ~= false then
-  	  caster:SetAbsOrigin(newSpace)
-  	end
+	if ability.stacks > 0 then
+		local dist_vec =  point - caster:GetAbsOrigin()
+
+		if dist_vec:Length2D() > keys.MaxBlink then
+			point = caster:GetAbsOrigin() + (point - caster:GetAbsOrigin()):Normalized() * keys.MaxBlink
+		end
+
+		local newSpace = FindGoodSpaceForUnit(caster, point, 200, nil)
+  		if newSpace ~= false then
+  		  caster:SetAbsOrigin(newSpace)
+  		end
+		
+		ability.stacks = ability.stacks - 1
+		if ability.stacks > 0 then
+			ability:EndCooldown()
+		end
+
+		Timers:CreateTimer(30, function()
+			ability.stacks = ability.stacks + 1
+			ability:EndCooldown()
+			return nil
+		end)
+	else
+		FireGameEvent("custom_error_show", {player_ID = caster:GetMainControllingPlayer(), _error = "Sphere cooling down!"})
+	end
 end
 
 -- Spawns four engineers by the caster.
@@ -331,6 +350,14 @@ function RodTeleportation( keys )
 		ability:RefundManaCost()
 		caster:Stop()
 		FireGameEvent('custom_error_show', {player_ID = playerID, _error = "Can't teleport to Assassins!"})
+		return
+	end
+
+	if target:GetUnitName() == 'observer_ward' then
+		ability:EndCooldown()
+		ability:RefundManaCost()
+		caster:Stop()
+		FireGameEvent('custom_error_show', {player_ID = playerID, _error = "Can't teleport to Wards!"})
 		return
 	end
 

@@ -205,29 +205,14 @@ function GemQuality(keys)
     if UNIT_KV[pID][key].AffectedByGemUpgrades ~= nil then
       models = Entities:FindAllByModel(UNIT_KV[pID][key].Model)
 
-      -- Increase the health of all walls
-      for i = 1,table.getn(models) do
-        local wall = models[i]
-        if wall:GetMainControllingPlayer() == pID then
-          local increasedHP = 0
-          local baseMaxHP = UNIT_KV[pID][key].StatusHealth
-          if level == 1 then
-            increasedHP = wall:GetMaxHealth() * 1.2  - wall:GetHealth()
-            UNIT_KV[pID][key].HealthModifier = 1.2
-          end
-          if level == 2 then
-            increasedHP = baseMaxHP * 1.4  - wall:GetHealth()
-            UNIT_KV[pID][key].HealthModifier = 1.4
-          end
-          if level == 3 then
-            increasedHP = baseMaxHP * 1.6  - wall:GetHealth()
-            UNIT_KV[pID][key].HealthModifier = 1.6  
-          end
-          wall:SetMaxHealth(baseMaxHP + increasedHP)
-          wall:SetHealth(wall:GetHealth() + increasedHP)
-        end
+      -- Set healthmodifier of all walls.
+      UNIT_KV[pID][key].HealthModifier = level
+
+      -- Increase the health of all alive walls
+      for k,v in pairs(models) do
+        GameMode:CheckGemQuality(v)
       end
-    end
+   end
   end
 
   if level == 1 then
@@ -532,8 +517,6 @@ function TechPlating( keys )
   local abilityName = keys.ability:GetAbilityName() 
   TechTree:AddTechAbility(playerID, abilityName)
 
-  Notifications:Bottom(playerID, {text = "Researched: "..ABILITY_NAMES[abilityName], duration = 5, nil, style = {color="yellow", ["font-size"]="24px"}})
-  
   Timers:CreateTimer(.03, function ()
     local armorLevel = WALL_PLATING_SCALE[wallName]
     caster:FindAbilityByName(abilityName):SetLevel(armorLevel)
@@ -646,23 +629,4 @@ function AddHealthUpgrade( keys )
     end
     return nil
   end)
-end
-
-function AddPercentHealth( keys )
-  local caster = keys.caster
-  local amount = keys.Amount
-  local unitName = caster:GetUnitName()
-  local playerID = caster:GetMainControllingPlayer()
-
-  local origMaxHP = UNIT_KV[playerID][unitName].StatusHealth
-  local newAmount = (amount / 100) * origMaxHP
-
-  if caster.addedHealth == nil then
-    caster.addedHealth = amount
-  else
-    caster.addedHealth = caster.addedHealth + amount
-  end
-
-  keys.Amount = newAmount
-  AddHealthUpgrade( keys )
 end

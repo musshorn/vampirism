@@ -114,7 +114,6 @@ function Cancel( keys )
     ChangeWood(pID, caster.refundLumber)
     caster.refundLumber = 0
     caster.refundGold = 0
-    caster:SetMaxHealth(caster.originalMaxHP)
   end
 end
 
@@ -175,17 +174,6 @@ function Upgrade( keys )
     if UNIT_KV[pID][targetUnit].ModelScale ~= nil then
       caster:SetModelScale(UNIT_KV[pID][targetUnit].ModelScale)
     end
-
-    -- If the unit has a HealthModifier (gem upgrades) then they gain the bonus of the targets HP straight away
-    --[[ "Muh Parity" - Space Germ, 2015
-    caster.originalMaxHP = UNIT_KV[pID][caster:GetUnitName()].StatusHealth
-    if UNIT_KV[pID][caster:GetUnitName()].HealthModifier ~= nil then
-      local maxHPOffset = UNIT_KV[pID][targetUnit].StatusHealth * UNIT_KV[pID][caster:GetUnitName()].HealthModifier - UNIT_KV[pID][targetUnit].StatusHealth
-      caster.originalMaxHP = caster:GetMaxHealth()
-  
-      caster:SetMaxHealth(caster:GetMaxHealth() + maxHPOffset)
-      caster:SetHealth(caster:GetHealth() + maxHPOffset)
-    end]]
   end
 end
 
@@ -215,6 +203,8 @@ function FinishUpgrade( keys )
 
   local blockers = caster.blockers
 
+  local oldHealthDef = caster:GetHealthDeficit()
+
   caster:Destroy()
   local unit = CreateUnitByName(targetUnit, pos, false, nil, nil, team)
   unit:AddNewModifier(unit, nil, "modifier_disarmed", {duration=0.1})
@@ -232,6 +222,7 @@ function FinishUpgrade( keys )
     else
       TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood
     end
+    FireGameEvent("vamp_food_cap_changed", {player_ID = pID, food_cap = TOTAL_FOOD[pID]})
     if TOTAL_FOOD[pID] > 250 then
       FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = 250})
     end
@@ -283,6 +274,14 @@ function FinishUpgrade( keys )
     end
   end
 
+  -- new building hp gains the diffenece between its current hp, and the max hp of the building it is upgrading to.
+  local hpdiff = unit:GetMaxHealth() - oldHealthDef
+  if oldHealthDef > 0 then
+    unit:SetHealth(hpdiff)
+  end
+  if UNIT_KV[pID][targetUnit].HealthModifier ~= nil then
+    GameMode:CheckGemQuality(unit)
+  end
   TechTree:AddTech(targetUnit, pID)
 end
 

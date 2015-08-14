@@ -1,5 +1,3 @@
--- Generated from template
-
 require('util.print')
 require('util.print_table')
 require('util.myutil')
@@ -200,6 +198,8 @@ function Precache( context )
 		PrecacheUnitByNameSync("merc_meat_carrier", context)
 		PrecacheUnitByNameSync("goblin_tower_builder", context)
 		PrecacheUnitByNameSync("base_operations", context)
+
+		PrecacheResource("soundfile", "soundevents/soundevents_custom.vsndevts", context)
 
 		--PrecacheModel("models/heroes/viper/viper.vmdl", context)
 
