@@ -13,7 +13,9 @@
 										 		     -mycolor Displays your color at the top of your screen.<br>
 										 		     -unstuck After a delay of 10 seconds, moves your human/vampire to the center<br>
 										 		     -wf number (HOST ONLY)<br>
-										 		     Example: -wf 2 sets the worker factor to half the default. -wf 1 or lower will disable worker factor.<br>"
+										 		     Example: -wf 2 sets the worker factor to half the default. -wf 1 or lower will disable worker factor.<br>
+										 		     -announcer on/off<br>
+										 		     Example: -announcer off will disable the announcer sound for you."
 	"vamp_game_info_header_stacks"					"Worker Stacks:"
 	"vamp_game_info_stacks"							"Worker stacking is a feature added to Vampirism to reduce the load on hosts, by stacking multiple workers into one.<br> By default, Tier 1 workers are stacked 4 times, and Tier 2 workers are stacked 2 times. Every worker after that is not stacked. <br> What this means is that by default a Tier 1 worker costs 4 times as much, returns 4 times as much wood, gives 4 times as much gold and XP to a killer, and must be detonated 4 times to dissappear. (Each detonate removes one stack.)<br> Remember that if you do not like this feature, and think your upload is capable of hosting without it, you may set -wf 1 at the start of the game to disable this feature.<br><br>
 

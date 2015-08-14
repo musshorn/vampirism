@@ -7,9 +7,25 @@ if Worker == nil then
   Worker = {}
 end
 
-function Worker:Worker1(vPos, hOwner, unitName)
-  local worker = CreateUnitByName(unitName, vPos + VECTOR_BUMP, true, nil, nil, hOwner:GetTeam())
+function Worker:Worker1(vPos, hOwner, unitName, isHero)
+  local worker = nil
   local pID = hOwner:GetMainControllingPlayer()
+  if isHero then
+    worker = CreateHeroForPlayer(unitName, PlayerResource:GetPlayer(pID))
+    worker:SetAbilityPoints(0)
+    for i=0, worker:GetAbilityCount() do
+      local ability = worker:GetAbilityByIndex(i)
+      if ability ~= nil then
+        ability:SetLevel(1)
+      end
+    end
+    local newPos = FindGoodSpaceForUnit(worker, vPos, 200, 50)
+    if newPos ~= nil then
+      worker:SetAbsOrigin(newPos)
+    end
+  else
+    worker = CreateUnitByName(unitName, vPos + VECTOR_BUMP, true, nil, nil, hOwner:GetTeam())
+  end
   worker:SetControllableByPlayer(hOwner:GetMainControllingPlayer() , true)
 
   -- If health techs have been researched, apply them
@@ -50,8 +66,7 @@ function Worker:Worker1(vPos, hOwner, unitName)
     UNIQUE_TABLE[unitName] = pID
   end
 
-  local ability = worker:FindAbilityByName("find_lumber")
-  ability:ToggleAutoCast() 
+  worker.ability:ToggleAutoCast() 
 
   Timers:CreateTimer(worker.moveTimer, {callback = function()
     if worker:IsNull() then
@@ -104,8 +119,12 @@ function Worker:Worker1(vPos, hOwner, unitName)
               bestDist = dist
             end
           end
-          worker.housePos = bestDrop:GetAbsOrigin()
-          worker:CastAbilityOnTarget(bestDrop, worker.dropAbiltiy, worker:GetMainControllingPlayer())
+          if bestDrop ~= nil then
+            worker.housePos = bestDrop:GetAbsOrigin()
+            worker:CastAbilityOnTarget(bestDrop, worker.dropAbiltiy, worker:GetMainControllingPlayer())
+          else
+            worker:Stop()
+          end
         end
       end
       return .1
@@ -119,19 +138,14 @@ end
 
 function FindLumber( keys )
   local worker = keys.caster
-  local ability = worker:FindAbilityByName("harvest_channel")
   local pID = worker:GetMainControllingPlayer()
   local unitName = worker:GetUnitName()
-  local stackAbility = worker:FindAbilityByName('worker_stack')
 
-  local carryTotal = worker:FindAbilityByName("carrying_lumber")
-
-  worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+  worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
   if (worker.moving == false and worker.currentLumber < UNIT_KV[pID][unitName].MaximumLumber * worker.currentStacks) then
-    local ability = worker:FindAbilityByName("harvest_channel")
 
     -- If they are not working, start them working
-    if (ability:IsChanneling() == false) then
+    if (worker.harvest:IsChanneling() == false) then
       local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
       worker:CastAbilityOnTarget(tree, ability, worker:GetMainControllingPlayer())
     end
@@ -141,14 +155,12 @@ end
 -- Fired when the harvest_channel ability has finished channelling
 function ChoppedLumber( keys )
   local worker = keys.caster
-  local carryTotal= worker:FindAbilityByName("carrying_lumber")
-  worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+  worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
   local pID = worker:GetMainControllingPlayer()
   local unitName = worker:GetUnitName()
-  local stackAbility = worker:FindAbilityByName('worker_stack')
 
   if worker.currentLumber + UNIT_KV[pID][unitName].LumberPerChop <= UNIT_KV[pID][unitName].MaximumLumber * worker.currentStacks then
-    worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, (worker.currentLumber + UNIT_KV[pID][unitName].LumberPerChop * worker.currentStacks))
+    worker:SetModifierStackCount("modifier_carrying_lumber", worker.carryTotal, (worker.currentLumber + UNIT_KV[pID][unitName].LumberPerChop * worker.currentStacks))
     worker.housePos = nil
   end
 end
@@ -161,8 +173,7 @@ end
 
 function DropLumber( keys )
   local worker = keys.caster
-  local carryTotal = worker:FindAbilityByName("carrying_lumber")
-  worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", carryTotal)
+  worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
   local targetHouse = nil
   local searchRange = 180
 
@@ -196,10 +207,9 @@ function DropLumber( keys )
       local pid = worker:GetMainControllingPlayer() 
       ChangeWood(pid, worker.currentLumber)
 
-      worker:SetModifierStackCount("modifier_carrying_lumber", carryTotal, 0)
+      worker:SetModifierStackCount("modifier_carrying_lumber", worker.carryTotal, 0)
       worker.currentLumber = 0
-      local ability = worker:FindAbilityByName("find_lumber")
-      if ability:GetAutoCastState() then
+      if worker.ability:GetAutoCastState() then
         worker:CastAbilityNoTarget(ability, pid)
       end
     end

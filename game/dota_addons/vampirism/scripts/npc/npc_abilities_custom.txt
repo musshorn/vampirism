@@ -404,7 +404,7 @@
             "ScriptFile"  "scripts/vscripts/buildings/building.lua"
             "Function"    "TrainUnit"
             "AddToQueue"  "t2_worker_training"
-            "SpawnUnit"   "worker_t2"
+            "SpawnUnit"   "npc_dota_hero_ursa"
             "GoldCost"    "1"
             "WoodCost"    "1000"
           }
@@ -459,7 +459,7 @@
             "ScriptFile"  "scripts/vscripts/buildings/building.lua"
             "Function"    "TrainUnit"
             "AddToQueue"  "t3_worker_training"
-            "SpawnUnit"   "worker_t3"
+            "SpawnUnit"   "npc_dota_hero_sven"
             "GoldCost"    "20"
             "WoodCost"    "1000"
           }
@@ -5589,7 +5589,7 @@
     {
       "modifier_holy_blood_debuff"
       {
-        "Passive"     "0"
+        "Passive"       "1"
         "IsHidden"      "0"
         "IsDebuff"      "1"
       
@@ -5612,7 +5612,7 @@
 
       "modifier_blood_armor_1"
       {
-        "Passive" "1"
+        "Passive"    "0"
         "IsHidden"  "0"
         "IsDebuff"  "1"
 

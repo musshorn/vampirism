@@ -56,8 +56,19 @@ function House1:Init(unit)
 							callback = function()
 								if TOTAL_FOOD[playerID] >= CURRENT_FOOD[playerID] + requestingFood and CURRENT_FOOD[playerID] + requestingFood <= 250 then
 									--if CURRENT_FOOD[playerID] + requestingFood <= 250 then
-										local unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn)
-										
+										local unit = nil
+										local isHero = false
+										for k,v in pairs(HERO_KV) do
+											--print(k,v)
+											if v.override_hero == unitToSpawn then
+												isHero = true
+											end
+										end
+										if isHero then
+											unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn, true)
+										else
+											unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn, false)
+										end										
 										CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + requestingFood
 										FireGameEvent('vamp_food_changed', { player_ID = playerID , food_total = CURRENT_FOOD[playerID]})
 										

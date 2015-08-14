@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.13a"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.14"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -49,6 +49,7 @@ WORKER_FACTOR = 4                        -- How many workers does a single worke
 FACTOR_SET = false
 
 LOW_PLAYER_MAP = true
+ANNOUNCER_SOUND = {} -- Each player can toggle the announcer sound.
 
 GOLD = {}
 WOOD = {}
@@ -86,13 +87,14 @@ VAMPIRE_FEED = {}
 for i = -1, 11 do
 	VAMPIRE_FEED[i] = 0
   AVERNALS[i] = {}
+  ANNOUNCER_SOUND[i] = true
 end
 
 -- Default worker stacking factors.
 WORKER_STACKS = {
   worker_t1 = 4,
-  worker_t2 = 2,
-  worker_t3 = 1,
+  npc_dota_hero_ursa = 2,
+  npc_dota_hero_sven = 1,
   worker_t4 = 1,
   worker_t5 = 1
 }
@@ -297,8 +299,8 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_blink"):SetLevel(1)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
-          WOOD[i] = 50 --cheats, real is 50.
-          GOLD[i] = 0 --this is how it should look on ship.
+          WOOD[i] = 10000000 --cheats, real is 50.
+          GOLD[i] = 10000000 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -444,10 +446,12 @@ function GameMode:OnEntityHurt(keys)
       NotifyAttack(entVictim, entCause)
       -- Emit sound on all humans
       for k,v in pairs(HUMANS) do
-        if v:GetMainControllingPlayer() == entVictim:GetMainControllingPlayer() then
+        if v:GetMainControllingPlayer() == entVictim:GetMainControllingPlayer() and ANNOUNCER_SOUND[v:GetMainControllingPlayer()] == true then
           EmitSoundOnClient("Vampirism.YourBaseAttacked", PlayerResource:GetPlayer(entVictim:GetMainControllingPlayer()))
         else
-          EmitSoundOnClient("Vampirism.AllyBaseAttacked", PlayerResource:GetPlayer(v:GetMainControllingPlayer()))
+          if ANNOUNCER_SOUND[v:GetMainControllingPlayer()] == true then
+            EmitSoundOnClient("Vampirism.AllyBaseAttacked", PlayerResource:GetPlayer(v:GetMainControllingPlayer()))
+          end
         end
       end
     end
@@ -501,20 +505,6 @@ function GameMode:OnAbilityUsed(keys)
   local player = PlayerResource:GetPlayer(keys.PlayerID) 
   local abilitysname = keys.abilityname
   local hero = player:GetAssignedHero()
-
-  -- Cancel the ghost if the player casts another active ability.
-  -- Start of BH Snippet:
-  if hero ~= nil then
-    local abil = hero:FindAbilityByName(abilityname)
-    if player.cursorStream ~= nil then
-      if not (string.len(abilityname) > 14 and string.sub(abilityname,1,14) == "move_to_point_") then
-        if not DontCancelBuildingGhostAbils[abilityname] then
-          player.cancelBuilding = true
-        end
-      end
-    end
-  end
-  -- End of BH Snippet
 end
 
 -- A non-player entity (necro-book, chen creep, etc) used an ability
@@ -771,7 +761,7 @@ function GameMode:OnEntityKilled( keys )
       end
     end
 
-    if killedUnit:GetGoldBounty() > 0 and killedUnit:IsHero() ~= true  then
+    if killedUnit:GetGoldBounty() > 0 and killedUnit:IsHero() ~= true and killedUnit:IsConsideredHero() ~= true then
     	HUMAN_FEED[playerID] = HUMAN_FEED[playerID] + killedUnit:GetGoldBounty()
     	FireGameEvent("vamp_gold_feed", {player_ID = playerID, feed_total = HUMAN_FEED[playerID]})
     end
@@ -1504,6 +1494,25 @@ function GameMode:OnPlayerSay(keys)
         return nil
       end)
     end
+  end
+
+  if string.find(msg, "-announcer") ~= nil then
+    local playerID = player:GetPlayerID()
+    local chat = ParseChat(keys)
+    local option = chat[2]
+    print(option)
+
+    if option == 'on' then
+      ANNOUNCER_SOUND[playerID] = true
+      Notifications:Bottom(playerID, {text = "Announcer sound is enabled.", duration = 5, nil, style = {color="white", ["font-size"]="18px"}})
+    end
+    if option == 'off' then
+      ANNOUNCER_SOUND[playerID] = false
+      Notifications:Bottom(playerID, {text = "Announcer sound is disabled.", duration = 5, nil, style = {color="white", ["font-size"]="18px"}})
+    end
+  end
+
+  if string.find(msg, "-ah") ~= nil then
   end
 end
 

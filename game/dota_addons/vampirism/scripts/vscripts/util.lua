@@ -453,7 +453,6 @@ COLOR_GOLD = '\x1D'
 function round(num, idp)
   return tonumber(string.format("%." .. (idp or 0) .. "f", num))
 end
-
 --============ Copyright (c) Valve Corporation, All rights reserved. ==========
 --
 --

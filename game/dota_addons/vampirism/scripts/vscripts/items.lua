@@ -560,9 +560,8 @@ function ShadowSight( keys )
 	local target = keys.target
 
 	if not target:HasAbility('is_a_building') then
-		if target:IsHero() then
+		if target:IsHero() and target:IsConsideredHero() then
 			target:AddNewModifier(caster, nil, 'modifier_bloodseeker_thirst_vision', {duration = 30})
-			DeepPrintTable(target)
 		else
 			target:AddNewModifier(caster, nil, 'modifier_bloodseeker_thirst_vision', {duration = 120})
 		end

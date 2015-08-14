@@ -54,7 +54,6 @@ function VisionDummy(keys)
         return nil
     end)
   elseif level == 3 then
-    print('lvevel 3')
     local lock = dummy:FindAbilityByName("vampire_vision_dummy_lock2")
     lock:OnUpgrade()
     Timers:CreateTimer(55, function ()
@@ -285,6 +284,14 @@ function ChainOfDeath(keys)
   local target_location = target:GetAbsOrigin()
   local ability = keys.ability
   local ability_level = ability:GetLevel() - 1
+
+  if target:HasAbility('is_a_building') then
+    ability:RefundManaCost()
+    ability:EndCooldown()
+    caster:Stop()
+    FireGameEvent('custom_error_show', {player_ID = caster:GetMainControllingPlayer(), _error = "Cannot target buildings!"})
+    return
+  end
 
   -- Ability variables
   local bounce_radius = ability:GetSpecialValueFor("bounce_radius")

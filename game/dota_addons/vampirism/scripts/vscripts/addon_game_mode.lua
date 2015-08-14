@@ -171,11 +171,20 @@ function Precache( context )
 
 		PrecacheResource("particle_folder", "particles/buildinghelper", context)
 		PrecacheResource("particle_folder", "particles/vampire", context)
+		PrecacheResource("particle_folder", "particles/econ/items/invoker", context)
+		PrecacheResource("particle_folder", "particles/econ/items/sven", context)
+		PrecacheResource("particle_folder", "particles/econ/items/ursa", context)
+		PrecacheResource("particle_folder", "particles/units/heroes/hero_ursa/", context)
+		PrecacheResource("particle_folder", "particles/units/heroes/hero_sven", context)
 
 		PrecacheResource("model_folder","models/items/omniknight", context)
 		PrecacheResource("model_folder","models/items/nightstalker", context)
 		PrecacheResource("model_folder", "models/heroes/life_stealer", context)
+		PrecacheResource("model_folder", "models/heroes/ursa", context)
+		PrecacheResource("model_folder", "models/heroes/sven", context)
 		PrecacheResource("model_folder","models/items/invoker", context)
+		PrecacheResource("model_folder", "models/items/sven", context)
+		PrecacheResource("model_folder", "models/items/ursa", context)
 
 		-- unit precache
 		PrecacheUnitByNameSync("tent_t2", context)

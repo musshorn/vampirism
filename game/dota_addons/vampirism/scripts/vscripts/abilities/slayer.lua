@@ -207,7 +207,8 @@ function SpawnSlayer( keys )
 
   SLAYERS[pID] = {["state"] = "alive", ["upgrades"] = {}}
 
-  local slayer = CreateUnitByName("npc_dota_hero_invoker", caster:GetAbsOrigin(), true, nil, nil, caster:GetTeam())
+  local slayer = CreateHeroForPlayer("npc_dota_hero_invoker", PlayerResource:GetPlayer(pID))
+  --local slayer = CreateUnitByName("npc_dota_hero_invoker", caster:GetAbsOrigin(), true, nil, nil, caster:GetTeam())
   slayer:SetControllableByPlayer(pID, true)
   slayer:SetOwner(EntIndexToHScript(pID))
   slayer:FindAbilityByName("slayer_blink"):SetLevel(1)

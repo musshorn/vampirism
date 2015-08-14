@@ -288,4 +288,205 @@
       }
     }
   }
+
+  //================================================================================= 
+  // Worker T2 - Furbolg
+  //=================================================================================
+  "worker_t2"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    //"BaseClass"           "npc_dota_creature"
+    "override_hero"       "npc_dota_hero_ursa"
+    "Model" "models/heroes/ursa/ursa.vmdl"
+    "ModelScale"  "0.8" 
+    "ConsideredHero"  "0"
+    "AbilityLayout"         "6"
+
+
+    // Abilities
+    //----------------------------------------------------------------
+    "Ability1"          "human_blink"
+    "Ability2"          "human_repair"
+    "Ability3"          "harvest_channel"
+    "Ability4"          "carrying_lumber"
+    "Ability5"          "drop_lumber"    
+    "Ability6"          "worker_det"     
+    "Ability7"          "find_lumber"    
+    "Ability8"          "worker_stack"      // Ability 7 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "0"     // Physical protection.
+    "MagicalResistance"     "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"     "1"
+    "AttackDamageMax"     "1"
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "0"
+    "AttackAnimationPoint"    "0"
+    "AttackAcquisitionRange"  "0"
+    "AttackRange"       "0"
+    "ProjectileModel"     ""
+    "ProjectileSpeed"     "0"
+
+    "AttributeBaseStrength"     "0"
+    "AttributeStrengthGain"     "0"
+    "AttributeBaseAgility"      "0"
+    "AttributeAgilityGain"      "0"
+    "AttributeBaseIntelligence" "0"
+    "AttributeIntelligenceGain" "0"
+    
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"     "170"
+    "RingRadius"        "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"       "300"   // Speed
+    "MovementTurnRate"      "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "100"   // Base health.
+    "StatusHealthRegen"     "0"   // Health regeneration rate.
+    "StatusMana"        "5"      // Base mana.
+    "StatusManaRegen"     "0.1"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Bounty
+    //----------------------------------------------------------------
+    //"BountyXP"          "25"
+    "BountyGoldMin"       "15"
+    "BountyGoldMax"       "15"
+
+    // Vamp
+    "MaximumLumber" "100" // Base max lumber
+    "LumberPerChop" "20"
+    "ConsumesFood"  "20"
+    "CanDropCoins"  "1"
+  }
+
+  //================================================================================= 
+  // Worker T3 - Fang Harvester
+  //=================================================================================
+  "worker_t3"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    //BaseClass"           "npc_dota_creature"
+    "override_hero"             "npc_dota_hero_sven"
+    "Model" "models/heroes/sven/sven.vmdl"
+    "ModelScale"  "0.8" 
+    "ConsideredHero"    "0"
+    "AbilityLayout"     "6"
+
+    "precache"
+    {
+        "model"  "models/heroes/sven/sven_mask.vmdl"
+        "model"  "models/heroes/sven/sven_gauntlet.vmdl"
+        "model"  "models/heroes/sven/sven_shoulder.vmdl"
+        "model"  "models/items/sven/breath_of_tielong/breath_of_tielong.mdl"
+        "particle"  "particles/units/heroes/hero_sven.vpcf"
+    }
+
+    "AttributeBaseStrength"     "0"
+    "AttributeStrengthGain"     "0"
+    "AttributeBaseAgility"      "0"
+    "AttributeAgilityGain"      "0"
+    "AttributeBaseIntelligence" "0"
+    "AttributeIntelligenceGain" "0"
+
+    // Abilities
+    //----------------------------------------------------------------
+    "Ability1"          "human_blink"
+    "Ability2"          "harvest_channel"
+    "Ability3"          "carrying_lumber"
+    "Ability4"          "drop_lumber"    
+    "Ability5"          "worker_det"     
+    "Ability6"          "find_lumber"    
+    "Ability7"          "worker_stack"      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "20"     // Physical protection.
+    "MagicalResistance"     "0"     // Magical protection.
+
+    //Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"     "1"
+    "AttackDamageMax"     "1"
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "0"
+    "AttackAnimationPoint"    "0"
+    "AttackAcquisitionRange"  "0"
+    "AttackRange"       "0"
+    "ProjectileModel"     ""
+    "ProjectileSpeed"     "0"
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_HERO"     // Hull type used for navigation/locomotion.
+    "HealthBarOffset"     "170"
+    "RingRadius"        "40"
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"     // Type of locomotion - ground, air
+    "MovementSpeed"       "300"   // Speed
+    "MovementTurnRate"      "0.5"   // Turning rate.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "10000"   // Base health.
+    "StatusHealthRegen"     "0"   // Health regeneration rate.
+    "StatusMana"        "10"      // Base mana.
+    "StatusManaRegen"     "0.5"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_STRONG"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+    // Bounty
+    //----------------------------------------------------------------
+    //"BountyXP"          "25"
+    "BountyGoldMin"       "25"
+    "BountyGoldMax"       "25"
+
+    // Vamp
+    "MaximumLumber" "1000" // Base max lumber
+    "LumberPerChop" "100"
+    "ConsumesFood"  "30"
+    "AnnounceUnit"  "1"
+
+    //"Creature"
+    //{
+    //    "AttachWearables"
+    //    {
+    //        "Wearble1"  { "ItemDef"     "16" }
+    //        "Wearble2"  { "ItemDef"     "19" }
+    //        "Wearble3"  { "ItemDef"     "20" }
+    //        "Wearble4"  { "ItemDef"     "6080" }
+    //    }
+    //}
+  }
+
+
 }
