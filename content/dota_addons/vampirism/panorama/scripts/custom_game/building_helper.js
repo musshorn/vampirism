@@ -54,7 +54,7 @@ function StartBuildingHelper( params )
   }
   if (state === 'active')
   {
-    $.Schedule(0.001, StartBuildingHelper);
+    $.Schedule(1/60, StartBuildingHelper);
     var mPos = GameUI.GetCursorPosition();
     var GamePos = Game.ScreenXYToWorld(mPos[0], mPos[1]);
 
