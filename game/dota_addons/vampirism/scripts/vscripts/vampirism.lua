@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.14"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.14a"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -299,8 +299,8 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_blink"):SetLevel(1)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
-          WOOD[i] = 10000000 --cheats, real is 50.
-          GOLD[i] = 10000000 --this is how it should look on ship.
+          WOOD[i] = 50 --cheats, real is 50.
+          GOLD[i] = 0 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -1500,7 +1500,6 @@ function GameMode:OnPlayerSay(keys)
     local playerID = player:GetPlayerID()
     local chat = ParseChat(keys)
     local option = chat[2]
-    print(option)
 
     if option == 'on' then
       ANNOUNCER_SOUND[playerID] = true
@@ -1513,6 +1512,36 @@ function GameMode:OnPlayerSay(keys)
   end
 
   if string.find(msg, "-ah") ~= nil then
+    local playerID = player:GetPlayerID()
+    local chat = ParseChat(keys)
+    local option = chat[2]
+
+    if option == 'on' then
+      Notifications:Bottom(playerID, {text = "Auto harvest has been enabled on all your workers!", duration = 5, nil, style = {color="white", ["font-size"]="18px"}})
+      local playerWorkers = FindUnitsInRadius(player:GetTeam(), Vector(0,0,0), nil, 10000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+      for k,v in pairs(playerWorkers) do
+        if v:GetMainControllingPlayer() == playerID then
+          if v:HasAbility('harvest_channel') then
+            if v.ability:GetAutoCastState() == false then
+              v.ability:ToggleAutoCast()
+            end
+          end
+        end
+      end
+    end
+    if option == 'off' then
+      Notifications:Bottom(playerID, {text = "Auto harvest has been disabled on all your workers!", duration = 5, nil, style = {color="white", ["font-size"]="18px"}})
+      local playerWorkers = FindUnitsInRadius(player:GetTeam(), Vector(0,0,0), nil, 10000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)
+      for k,v in pairs(playerWorkers) do
+        if v:GetMainControllingPlayer() == playerID then
+          if v:HasAbility('harvest_channel') then
+            if v.ability:GetAutoCastState() == true then
+              v.ability:ToggleAutoCast()
+            end
+          end
+        end
+      end
+    end
   end
 end
 

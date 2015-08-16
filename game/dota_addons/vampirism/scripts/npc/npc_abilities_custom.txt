@@ -5687,7 +5687,7 @@
     {
       "modifier_holy_blood_debuff"
       {
-        "Passive"     "0"
+        "Passive"     "1"
         "IsHidden"      "0"
         "IsDebuff"      "1"
 
@@ -5719,7 +5719,7 @@
 
       "modifier_blood_armor_2"
       {
-        "Passive" "1"
+        "Passive" "0"
         "IsHidden"  "0"
         "IsDebuff"  "1"
 

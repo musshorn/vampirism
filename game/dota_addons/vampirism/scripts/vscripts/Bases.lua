@@ -118,3 +118,23 @@ function BaseTeleport( keys )
     FindClearSpaceForUnit(unit, TELEPORT_EXITS[teleID], true)
   end
 end
+
+function BuildBlocked( keys )
+  local unit = keys.activator
+  local playerID = unit:GetMainControllingPlayer()
+  if unit:HasAbility('is_a_building') then
+    if not unit.removed then
+      local lumberCost = unit.buildingTable.LumberCost
+      local goldCost = unit.buildingTable.GoldCost
+    
+      ChangeGold(playerID, goldCost)
+      ChangeWood(playerID, lumberCost)
+    
+      FireGameEvent("custom_error_show", {player_ID = playerID, _error = "Cannot build here!"})
+      unit:SetAbsOrigin(Vector(0,0,-1000))
+    
+      unit:RemoveBuilding(true)
+      unit.removed = true
+    end
+  end
+end
