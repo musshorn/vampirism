@@ -351,6 +351,7 @@ function BecomeVampire( keys )
       ChangeGold(pID, -1 * GOLD[pID])
       ChangeWood(pID, -1 * WOOD[pID])
       VAMPIRES[pID] = vamp
+      HUMANS[pID] = nil
       VAMP_COUNT = VAMP_COUNT + 1
       FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
       FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
