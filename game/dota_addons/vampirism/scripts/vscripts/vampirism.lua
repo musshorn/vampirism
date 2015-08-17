@@ -1,6 +1,6 @@
 print ('[VAMPIRISM] vampirism.lua' )
 
-VERSION_NUMBER = "0.14a"                   -- Version number sent to panorama.
+VERSION_NUMBER = "0.14b"                   -- Version number sent to panorama.
 
 ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false              -- Should the main shop contain Secret Shop items as well as regular items
@@ -487,7 +487,69 @@ function GameMode:OnPlayerReconnect(keys)
     FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
     CustomGameEventManager:Send_ServerToAllClients("send_version", {version=VERSION_NUMBER} )
     local hero = PlayerResource:GetSelectedHeroEntity(pID)
-    AddSwag(hero)
+    if hero ~= nil then
+      AddSwag(hero)
+    else
+      local playerTeam = PlayerResource:GetTeam(pID)
+      if playerTeam == 2 then
+        local human = CreateHeroForPlayer("npc_dota_hero_omniknight", PlayerResource:GetPlayer(pID))
+        HUMANS[pID] = human
+        human:FindAbilityByName("call_buildui"):SetLevel(1)
+        human:FindAbilityByName("human_blink"):SetLevel(1)
+        human:FindAbilityByName("human_manaburn"):SetLevel(1)
+        human:FindAbilityByName("human_repair"):SetLevel(1)
+        WOOD[pID] = 50 --cheats, real is 50.
+        GOLD[pID] = 0 --this is how it should look on ship.
+        TOTAL_FOOD[pID] = 20
+        CURRENT_FOOD[pID] = 0
+        UNIT_KV[pID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+        UNIT_KV[pID].Version = nil -- Value is made by LoadKeyValues, pretty annoying for iterating so we'll remove it
+        HUMAN_COUNT = HUMAN_COUNT + 1
+        human:SetAbilityPoints(0)
+        human:SetHasInventory(false) --testing
+        FireGameEvent("vamp_gold_changed", {player_ID = pID, gold_total = GOLD[pID]})
+        FireGameEvent("vamp_wood_changed", {player_ID = pID, wood_total = WOOD[pID]})
+        FireGameEvent("vamp_food_changed", {player_ID = pID, food_total = CURRENT_FOOD[pID]})
+        FireGameEvent("vamp_food_cap_changed", {player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+        PlayerResource:SetCustomTeamAssignment(pID, DOTA_TEAM_GOODGUYS)
+        AddSwag(human)
+      elseif playerTeam == 3 then
+        local vampire = CreateHeroForPlayer("npc_dota_hero_night_stalker", PlayerResource:GetPlayer(pID))
+        vampire:SetHullRadius(48)
+        local newSpace = FindGoodSpaceForUnit(vampire, vampire:GetAbsOrigin(), 200, nil)
+        if newSpace ~= false then
+          vampire:SetAbsOrigin(newSpace)
+        end
+        GOLD[pID] = 0 --cheats off
+        WOOD[pID] = 0 --cheats off
+        TOTAL_FOOD[pID] = 10
+        CURRENT_FOOD[pID] = 0
+        FireGameEvent("vamp_gold_changed", {player_ID = pID, gold_total = GOLD[pID]})
+        FireGameEvent("vamp_wood_changed", {player_ID = pID, wood_total = WOOD[pID]})
+        FireGameEvent("vamp_food_changed", {player_ID = pID, food_total = CURRENT_FOOD[pID]})
+        FireGameEvent("vamp_food_cap_changed", {player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+        UNIT_KV[pID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+        vampire:AddExperience(400, 0, false, true)
+        AddSwag(vampire)
+        if GetMapName() == 'vamp_5h_1v' then
+          vampire:SetBaseMoveSpeed(500)
+        end
+        --Next frame timer
+        Timers:CreateTimer(0.03, function ()
+          if GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+            vampire:FindAbilityByName("vampire_init_hider"):OnUpgrade()
+            vampire:SetAbsOrigin(Vector(96, -416, -500))
+            vampire:FindAbilityByName("vampire_particles"):OnUpgrade()
+            vampire:SetAbilityPoints(0)
+            vampire:FindAbilityByName("vampire_poison"):SetLevel(1)
+            VAMP_COUNT = VAMP_COUNT + 1
+            VAMPIRES[pID] = vampire
+            --VAMPIRES[-1] = vampire --nice game
+          end
+          return nil
+        end)
+      end
+    end
     return nil
   end)
 end
