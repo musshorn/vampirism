@@ -137,7 +137,7 @@ function Purchase( itemname, buyer )
     FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Not enough food!'})
     return
   end
-  if food + foodCost >= 250 then
+  if food + foodCost > 250 then
     FireGameEvent('custom_error_show', {player_ID = playerID, _error = 'Food cap reached!'})
     return
   end
