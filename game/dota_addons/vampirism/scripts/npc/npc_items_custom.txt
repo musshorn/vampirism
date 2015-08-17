@@ -354,6 +354,44 @@
   			  "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" "%damage_bonus" 
   			}
   		}
+
+      "modifier_vest_truesight"
+      {
+        "Passive"     "1"
+        "IsHidden"      "0"
+        "IsDebuff"      "0"
+
+        "EffectName"    "particles/items_fx/necronomicon_true_sight.vpcf"
+        "EffectAttachType"  "attach_head" 
+
+        "Aura"            "modifier_vest_aura"
+        "Aura_Radius"     "1000"
+        "Aura_Teams"      "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "Aura_Types"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "Aura_Flags"      "DOTA_UNIT_TARGET_FLAG_NONE"
+        "Aura_ApplyToCaster" "0"
+      }
+
+      "modifier_vest_aura"
+      {
+        "OnCreated"
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_truesight"
+            "Target"    "TARGET"
+          }
+        }
+
+        "OnDestroy"
+        {
+          "RemoveModifier"
+          {
+            "ModifierName"  "modifier_truesight"
+            "Target"    "TARGET"
+          }
+        }
+      }
   	}
   }
 
