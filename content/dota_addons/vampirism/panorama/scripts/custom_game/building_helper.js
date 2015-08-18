@@ -29,6 +29,10 @@ function StartBuildingHelper( params )
     
     if (particle !== undefined) {
       Particles.DestroyParticleEffect(particle, true);
+      for (var i = 0; i < buildingBase.length; i++)
+      {
+        Particles.DestroyParticleEffect(buildingBase[i][0], true);
+      }
       buildingBase = [];
     }
 
@@ -78,7 +82,7 @@ function StartBuildingHelper( params )
     var top =  GamePos[1] - (size / 2) * 64 + 32;
     for (var i = 0; i < buildingBase.length; i++)
     {
-      Particles.SetParticleControl(buildingBase[i][0], 0, [left + buildingBase[i][1] * 64, top + buildingBase[i][2] * 64, GamePos[2] + 1]); // #JustValveThings
+      Particles.SetParticleControl(buildingBase[i][0], 0, [left + buildingBase[i][1] * 64, top + buildingBase[i][2] * 64, GamePos[2] + 1]);
       Particles.SetParticleControl(buildingBase[i][0], 2, [0,255,0]);
     }
 
