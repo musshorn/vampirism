@@ -633,3 +633,19 @@ function LogDeepPrint(debugInstance, prefix)
 	prefix = prefix or ""
 	LogEndLine(LogDeepToString(debugInstance, prefix))
 end
+
+function SendDebugTable( table )
+	local request = CreateHTTPRequest("POST","http://musshorn.me:50000")
+
+	for k, v in pairs(table) do
+		if type(v) ~= "table" and type(v) ~= "function" then
+			request:SetHTTPRequestGetOrPostParameter(k, v)
+		end
+	end
+
+  request:Send(function ( result )
+  	if result.StatusCode == 200 then
+  		print("Debug table sent")
+  	end
+  end)
+end
