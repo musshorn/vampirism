@@ -101,23 +101,23 @@
 		}
 		"hire_shade"					
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"10"
+			"stock"			"10"
+			"stocktime"		"30"
 			"index"			"5"
 		}
 		"hire_avernal"				
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"1"
+			"initstock"		"5"
+			"stock"			"5"
+			"stocktime"		"30"
 			"index"			"6"
 		}
 		"hire_avernal_meteor"		
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"30"
 			"index"			"7"
 			"unlocktime"	"900"
 		}
@@ -160,16 +160,16 @@
 		}
 		"hire_assassin"				
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"2"
+			"stock"			"2"
+			"stocktime"		"160"
 			"index"			"13"
 		}
 		"hire_fallen_hound"				
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"2"
+			"stock"			"2"
+			"stocktime"		"160"
 			"index"			"14"
 		}
 		"item_trade_wood"					
