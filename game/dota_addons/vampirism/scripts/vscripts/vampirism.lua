@@ -112,6 +112,8 @@ for i=2,MAX_LEVEL do
   XP_PER_LEVEL_TABLE[i] = XP_PER_LEVEL_TABLE[i - 1] + i * 80
 end
 
+GAME_ID = DoUniqueString(tostring(Time())) -- Unique ID used for debug logs
+
 -- Generated from template
 if GameMode == nil then
     print ( '[vampirism] creating vampirism game mode' )

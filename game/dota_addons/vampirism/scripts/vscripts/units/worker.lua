@@ -92,21 +92,23 @@ function Worker:Worker1(vPos, hOwner, unitName, isHero)
       end
 
       -- Check all possible values for nils.
-      if tostring(worker.workTimer) == 'nil' then SendNil( "worker.workTimer" ) end
-      if tostring(worker.moveTimer) == 'nil' then SendNil( "worker.moveTimer" ) end
-      if tostring(worker.pos) == 'nil' then SendNil( "worker.pos" ) end
-      if tostring(worker.moving) == 'nil' then SendNil( "worker.moving" ) end
-      if tostring(worker.skipTicks) == 'nil' then SendNil( "worker.skipTicks" ) end
-      if tostring(worker.stackAbility) == 'nil' then SendNil( "worker.stackAbility" ) end
-      if tostring(worker.currentStacks) == 'nil' then SendNil( "worker.currentStacks" ) end
-      if tostring(worker.ability) == 'nil' then SendNil( "worker.ability" ) end
-      if tostring(worker.harvest) == 'nil' then SendNil( "worker.harvest" ) end
-      if tostring(worker.playerID) == 'nil' then SendNil( "worker.playerID" ) end
-      if tostring(worker.unitName) == 'nil' then SendNil( "worker.unitName" ) end
-      if tostring(worker.carryTotal) == 'nil' then SendNil( "worker.carryTotal" ) end
-      if tostring(worker.dropAbiltiy) == 'nil' then SendNil( "worker.dropAbiltiy" ) end
-      if tostring(worker.currentLumber) == 'nil' then SendNil( "worker.currentLumber" ) end
-      if tostring(LUMBER_DROPS) == 'nil' then SendNil( "LUMBER_DROPS" ) end
+      if tostring(worker.workTimer) == 'nil' then SendNil( worker,  "worker.workTimer" ) end
+      if tostring(worker.moveTimer) == 'nil' then SendNil( worker, "worker.moveTimer" ) end
+      if tostring(worker.pos) == 'nil' then SendNil( worker, "worker.pos" ) end
+      if tostring(worker.moving) == 'nil' then SendNil( worker, "worker.moving" ) end
+      if tostring(worker.skipTicks) == 'nil' then SendNil( worker, "worker.skipTicks" ) end
+      if tostring(worker.stackAbility) == 'nil' then SendNil( worker, "worker.stackAbility" ) end
+      if tostring(worker.currentStacks) == 'nil' then SendNil( worker, "worker.currentStacks" ) end
+      if tostring(worker.ability) == 'nil' then SendNil( worker, "worker.ability" ) end
+      if tostring(worker.harvest) == 'nil' then SendNil( worker, "worker.harvest" ) end
+      if tostring(worker.playerID) == 'nil' then SendNil( worker, "worker.playerID" ) end
+      if tostring(worker.unitName) == 'nil' then SendNil( worker, "worker.unitName" ) end
+      if tostring(worker.carryTotal) == 'nil' then SendNil( worker, "worker.carryTotal" ) end
+      if tostring(worker.dropAbiltiy) == 'nil' then SendNil( worker, "worker.dropAbiltiy" ) end
+      if tostring(worker.currentLumber) == 'nil' then SendNil( worker, "worker.currentLumber" ) end
+      if tostring(LUMBER_DROPS) == 'nil' then SendNil( worker, "LUMBER_DROPS" ) end
+
+
 
       worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
       if worker.ability:GetAutoCastState() then 
@@ -114,7 +116,7 @@ function Worker:Worker1(vPos, hOwner, unitName, isHero)
           -- If they are not working, start them working
           if (worker.harvest:IsChanneling() == false) then
             local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
-            if tostring(tree) == 'nil' then SendNil( "tree" ) end
+            if tostring(tree) == 'nil' then SendNil(worker,  "tree" ) end
             worker:CastAbilityOnTarget(tree, worker.harvest, worker:GetMainControllingPlayer())
           end
         end
@@ -131,7 +133,7 @@ function Worker:Worker1(vPos, hOwner, unitName, isHero)
           local bestDrop = nil
           local bestDist = 99999
           for k, v in pairs(LUMBER_DROPS) do
-            if tostring(v) == 'nil' then SendNil( "LUMBER_DROPS.v" ) end
+            if tostring(v) == 'nil' then SendNil(LUMBER_DROPS, "LUMBER_DROPS." .. tostring(k) .. ".v" ) end
             local dist = CalcDistanceBetweenEntityOBB(worker, v)
             if dist < bestDist and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
               bestDrop = v
@@ -146,7 +148,7 @@ function Worker:Worker1(vPos, hOwner, unitName, isHero)
           end
         end
       end
-      return .1
+      return 0.1
     end)
   end
 
@@ -166,7 +168,7 @@ function FindLumber( keys )
     -- If they are not working, start them working
     if (worker.harvest:IsChanneling() == false) then
       local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
-      if tostring(tree) == 'nil' then SendNil( "tree" ) end
+      if tostring(tree) == 'nil' then SendNil( worker, "tree" ) end
       worker:CastAbilityOnTarget(tree, ability, worker:GetMainControllingPlayer())
     end
   end
@@ -241,6 +243,11 @@ function StackAttacked( keys )
   caster:SetHealth(caster:GetMaxHealth())
 end
 
-function SendNil( sName )
-  print('We received a nil value, '..sName)
+function SendNil(state, sName )
+  if state.loggedIssue == nil then
+    state.loggedIssue = true
+    local requestTable = state
+    requestTable.ErrorTag = sName
+    SendDebugTable(requestTable)
+  end
 end

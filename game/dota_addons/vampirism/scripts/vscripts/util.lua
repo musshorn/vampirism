@@ -635,17 +635,19 @@ function LogDeepPrint(debugInstance, prefix)
 end
 
 function SendDebugTable( table )
-	local request = CreateHTTPRequest("POST","http://musshorn.me:50000")
+	local request = CreateHTTPRequest("POST","http://musshorn.me:5000/store")
 
 	for k, v in pairs(table) do
-		if type(v) ~= "table" and type(v) ~= "function" then
-			request:SetHTTPRequestGetOrPostParameter(k, v)
-		end
+		request:SetHTTPRequestGetOrPostParameter(k, tostring(v))
 	end
+
+	-- RequestUniqueID
+	request:SetHTTPRequestGetOrPostParameter("game_id", GAME_ID)
+	request:SetHTTPRequestGetOrPostParameter("event_id", DoUniqueString(tostring(Time())))	
 
   request:Send(function ( result )
   	if result.StatusCode == 200 then
-  		print("Debug table sent")
+  		print("[VAMP] Something went wrong! Debug log was sent.")
   	end
   end)
 end
