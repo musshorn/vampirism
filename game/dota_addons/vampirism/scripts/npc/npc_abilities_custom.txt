@@ -1233,6 +1233,14 @@
         "Function"  "SlayerSummonTracker"
       }
     }
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
+        "Function"    "RemoveAbilityPoint"
+      }
+    }
   }
 
   //================================================================================= /
@@ -1380,6 +1388,15 @@
       }
     }
 
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
+        "Function"    "RemoveAbilityPoint"
+      }
+    }
+
     "Modifiers"
     {
       "modifier_building_invulnerable"
@@ -1461,6 +1478,14 @@
           "Modelscale"  "%modelscale"
         }
     }
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
+        "Function"    "RemoveAbilityPoint"
+      }
+    }
 
     "Modifiers"
     {
@@ -1540,6 +1565,14 @@
       {
         "EffectName"      "Hero_NagaSiren.Ensnare.Cast"
         "Target"        "CASTER"
+      }
+    }
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/abilities/slayer.lua"
+        "Function"    "RemoveAbilityPoint"
       }
     }
   

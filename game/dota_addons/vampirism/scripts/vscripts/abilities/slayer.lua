@@ -348,3 +348,13 @@ function SlayerRespawn( keys )
 
   GameMode:ModifyStatBonuses(SLAYERS[pID].handle)
 end
+
+-- A skill was upgraded, remove the ability point from tracking.
+function RemoveAbilityPoint( keys )
+  local caster = keys.caster
+  local playerID = caster:GetMainControllingPlayer()
+
+  if SLAYERS[playerID].handle.AbilityPoints ~= nil then
+    SLAYERS[playerID].handle.AbilityPoints = SLAYERS[playerID].handle.AbilityPoints - 1
+  end
+end
