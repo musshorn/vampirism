@@ -39,7 +39,7 @@ function build( keys )
     unit:SetMana(0)
 
     if sourceItem ~= nil then
-      for i = 0, caster:GetNumItemsInInventory() do
+      for i = 0, 5 do
         local item = caster:GetItemInSlot(i)
         if item ~= nil then
           if item:GetName() == sourceItem then
@@ -52,6 +52,7 @@ function build( keys )
   end)
 
   keys:OnConstructionCompleted(function(unit)
+    print(unit.maxHealth, 'fmaxhp on complete', unit:GetMaxHealth())
     --print("Completed construction of " .. unit:GetUnitName())
     -- Play construction complete sound.  
     -- Give building its abilities
@@ -105,6 +106,8 @@ function build( keys )
       UNIQUE_TABLE[unitName] = pID
     end
 
+    local healthDef = unit:GetHealthDeficit()
+    local oldHealth = unit:GetHealth()
     --Remove Building Silence, Disarm
     if unit:HasModifier("modifier_silence") then
       unit:RemoveModifierByName("modifier_silence")
@@ -112,6 +115,8 @@ function build( keys )
     if unit:HasModifier("modifier_disarmed") then
       unit:RemoveModifierByName("modifier_disarmed")
     end
+    unit:SetMaxHealth(unit.maxHealth)
+    unit:SetHealth(oldHealth - healthDef)
 
     --lazy fix for making graves work properly.
     if unitName == 'massive_grave' then
@@ -244,6 +249,13 @@ function HumanBlink(keys)
   end
 
   FindClearSpaceForUnit(caster, point, false)
+
+  if not GridNav:IsTraversable(caster:GetAbsOrigin()) then
+    local newPos = FindGoodSpaceForUnit(caster, point, 300, nil)
+    if newPos then
+      caster:SetAbsOrigin(newPos)
+    end
+  end
 end
 
 function WorkerDet( keys )

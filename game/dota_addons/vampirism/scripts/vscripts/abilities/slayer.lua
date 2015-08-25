@@ -112,6 +112,9 @@ function SummonSlayer( keys )
   local foodCost = 10
 
   if SLAYERS[pID] ~= nil then
+    caster.refundGold = 0
+    caster.refundWood = 0
+    caster.refundFood = 0
     FireGameEvent( 'custom_error_show', { player_ID = caster:GetMainControllingPlayer() , _error = "Only one slayer per player." } )
     caster:Stop()
     return

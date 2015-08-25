@@ -162,7 +162,7 @@ function Purchase( itemname, buyer )
 
       if hasComponents then
         for k, v in pairs(ITEM_KV[itemname]['ItemRequirements']) do
-          for i = 0, buyer:GetNumItemsInInventory() do
+          for i = 0, 5 do
             if buyer:GetItemInSlot(i) ~= nil then
               if buyer:GetItemInSlot(i):GetName() == tostring(v) then
                 table.insert(itemsToRemove, buyer:GetItemInSlot(i))

@@ -33,7 +33,6 @@
 				"var_type"	"FIELD_INTEGER"
 				"damageout"	"20"
 			}
-
 		}
 
 		"OnSpellStart"
@@ -994,7 +993,7 @@
   	{
   		"RunScript"
   		{
-  			"ScriptFile"	"vscripts/scripts/items.lua"
+  			"ScriptFile"	"items.lua"
   			"Function"		"UrnReveal"
         "Target"    "POINT"
   		}
@@ -1135,7 +1134,7 @@
       "SpendCharge" {}
   		"RunScript"
   		{
-  			"ScriptFile"	"vscripts/scripts/items.lua"
+  			"ScriptFile"	"items.lua"
   			"Function"		"TradeWood"
   		}
   	}
@@ -1178,7 +1177,7 @@
   	{
   		"RunScript"
   		{
-  			"ScriptFile"	"vscripts/scripts/items.lua"
+  			"ScriptFile"	"items.lua"
   			"Function"		"BurstGem"
         "Target"      "TARGET"
   		}
@@ -1188,7 +1187,7 @@
       "DeleteOnHit"  "1"
       "RunScript"
       {
-        "ScriptFile"  "vscripts/scripts/items.lua"
+        "ScriptFile"  "items.lua"
         "Function"    "BurstHit"
         "Target"      "TARGET"
       }
@@ -1375,7 +1374,7 @@
       "SpendCharge" {}
   		"RunScript"
   		{
-  			"ScriptFile"	"vscripts/scripts/items.lua"
+  			"ScriptFile"	"items.lua"
   			"Function"		"HireUnit"
   			"Mercenary"		"french_man"
   		}
@@ -1467,7 +1466,7 @@
       "SpendCharge" {}
 	  	"RunScript"
 	  	{
-	  		"ScriptFile"	"vscripts/scripts/items.lua"
+	  		"ScriptFile"	"items.lua"
 	  		"Function"		"HireUnit"
 	  		"Mercenary"		"merc_meat_carrier"
 	  	}
@@ -1505,7 +1504,7 @@
 	  {
 	  	"RunScript"
 	  	{
-	  		"ScriptFile"	"vscripts/scripts/items.lua"
+	  		"ScriptFile"	"items.lua"
 	  		"Function"		"SilentWhisper"
 	  	}
 
@@ -1622,6 +1621,7 @@
 
   	"OnSpellStart"
     {
+      "SpendCharge" {}
       "RunScript"
       {
         "ScriptFile"  "items.lua"

@@ -429,6 +429,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
         end
       end
     end
+
     --[[
           Code to update unit health and scale over the build time, maths is a bit spooky but here's whats happening
           Logic follows:
@@ -441,6 +442,8 @@ function BuildingHelper:InitializeBuildingEntity( keys )
 
           Can be optimized later if updating every frame proves to be a problem
     ]]--
+    building.maxHealth = fMaxHealth
+
     local fAddedHealth = 0
 
     local fserverFrameRate = 1/30 
@@ -491,6 +494,13 @@ function BuildingHelper:InitializeBuildingEntity( keys )
     building.updateHealthTimer = DoUniqueString('health') 
     Timers:CreateTimer(building.updateHealthTimer, {
       callback = function()
+      -- If fMaxHealth and the units health aren't the same need to re calculate hp scaling etc.
+      if fMaxHealth ~= building:GetMaxHealth() then
+        fMaxHealth = building:GetMaxHealth()
+        nHealthInterval = fMaxHealth / (buildTime / fserverFrameRate)
+        fSmallHealthInterval = nHealthInterval - math.floor(nHealthInterval)
+        building.maxHealth = fMaxHealth
+      end
       if IsValidEntity(building) then
         local timesUp = GameRules:GetGameTime() >= fTimeBuildingCompleted
         if not timesUp then
@@ -507,7 +517,7 @@ function BuildingHelper:InitializeBuildingEntity( keys )
           end
         else
           -- completion: timesUp is true
-          building:SetHealth(building:GetHealth() + fMaxHealth - fAddedHealth) -- round up the last little bit
+          building:SetHealth(fMaxHealth) -- round up the last little bit
           if callbacks.onConstructionCompleted ~= nil and building:IsAlive() then
             callbacks.onConstructionCompleted(building)
           end

@@ -283,6 +283,7 @@ function FinishUpgrade( keys )
     GameMode:CheckGemQuality(unit)
   end
   TechTree:AddTech(targetUnit, pID)
+  unit.state = "complete"
 end
 
 -- Repairing is hard.

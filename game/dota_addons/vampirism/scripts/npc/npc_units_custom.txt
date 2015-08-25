@@ -1719,6 +1719,10 @@
     "IsTech"    "true"
     "NeedTech"    "house_t1"
     "RepairTime"  "10"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -1808,6 +1812,10 @@
     "NeedTech"      "house_t1"
 
     "RepairTime"  "10"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
     }
 
   //================================================================================= 
@@ -2085,6 +2093,7 @@
     {
         "1"             "research_healing_vitality"
         "2"             "research_mana_regeneration"
+        "3"             "research_tower_defenses"
     }
   }
 
@@ -2182,6 +2191,7 @@
     {
         "1"             "research_healing_vitality"
         "2"             "research_mana_regeneration"
+        "3"             "research_tower_defenses"
     }
   }
 
@@ -2480,6 +2490,7 @@
        "2"      "research_spire_quality_2"
        "3"      "research_spire_quality_3"
        "4"      "research_spire_quality_4"
+       "5"      "research_tower_defenses"
     }
   }
 
@@ -2569,6 +2580,10 @@
     "IsTech"        "true"
     "NeedTech"      "house_t1"
     "RepairTime"  "20"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -2657,6 +2672,11 @@
     "IsTech"        "true"
     "NeedTech"      "research_center_t2"
     "RepairTime"  "20"
+
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
 
@@ -2746,6 +2766,11 @@
     "IsTech"        "true"
     "NeedTech"      "human_vault"
     "RepairTime"  "20"
+
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -2829,6 +2854,11 @@
     "IsTech"        "true"
     "NeedTech"      "research_center_t2"
     "RepairTime"  "20"
+
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -2912,6 +2942,11 @@
     "IsTech"        "true"
     "NeedTech"      "citadel_of_faith"
     "RepairTime"  "20"
+
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
 
@@ -3001,6 +3036,10 @@
     "IsTech"        "true"
     "NeedTech"      "human_vault"
     "RepairTime"  "20"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -3084,6 +3123,10 @@
     "IsTech"        "true"
     "NeedTech"      "base_operations"
     "RepairTime"  "25"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
 
@@ -3172,6 +3215,10 @@
     "IsTech"        "true"
     "NeedTech"      "human_vault"
     "RepairTime"  "10"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -3261,6 +3308,10 @@
     "NeedTech"      "house_t1"
     "RepairTime"  "35"
     "NeedTec"       "human_vault"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   
@@ -3345,6 +3396,10 @@
     "IsTech"        "true"
     "NeedTech"      "command_center"
     "RepairTime"    "30"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -3428,6 +3483,10 @@
     "IsTech"        "true"
     "NeedTech"      "house_t2"
     "RepairTime"  "30"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
 
@@ -3512,6 +3571,10 @@
     "IsTech"        "true"
     "NeedTech"      "house_t1"
     "RepairTime"  "20"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -3599,6 +3662,7 @@
     "TechModifiers"
     {
         "1" "research_holy_essence"
+        "2" "research_tower_defenses"
     }
   }
 
@@ -3688,6 +3752,7 @@
     "TechModifiers"
     {
         "1" "research_holy_essence"
+        "2" "research_tower_defenses"
     }
   }
 
@@ -5443,6 +5508,11 @@
     "BountyGoldMax"             "50"
     "RepairTime"  "25"
     "NeedTech"                  "citadel_of_faith"
+
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -5517,6 +5587,11 @@
     "BountyGoldMax"             "600"
     "RepairTime"  "25"
     "NeedTech"                  "command_center"
+
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -5590,6 +5665,11 @@
     "RepairTime"  "25"
 
     "NeedTech"                  "base_operations"
+
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -5660,6 +5740,11 @@
     "BountyGoldMax"             "1000"
     "RepairTime"  "25"
     "NeedTech"                  "command_center"
+
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -5730,6 +5815,10 @@
     "BountyGoldMax"             "1000"
     "RepairTime"  "25"
     "NeedTech"                  "base_operations"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
   
   //================================================================================= 
@@ -5802,6 +5891,10 @@
     "BountyGoldMin"             "1000"
     "BountyGoldMax"             "1000"
     "RepairTime"  "35"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -5872,6 +5965,10 @@
     "BountyGoldMax"             "200"
     "NeedTech"                  "command_center"
     "RepairTime"  "25"
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -5942,6 +6039,11 @@
     "BountyGoldMax"             "500"
     "NeedTech"                  "base_operations"
     "RepairTime"                "25"
+
+    "TechModifiers"
+    {
+        "1"     "research_tower_defenses"
+    }
   }
 
   //================================================================================= 
@@ -7591,14 +7693,15 @@
     "Ability4"          "build_blocked2"      // Ability 3.
     "Ability5"          "build_blocked3"         // Ability 4.
     "Ability6"          "build_blocked4"      // Ability 5.
-    "Ability7"          "build_cancel"      // Ability 6 - Extra.
-    "Ability8"          "research_vampiric_skills"      // Ability 7 - Extra.
-    "Ability9"          "research_vampiric_damage"      // Ability 8 - Extra.
-    "Ability10"          "research_vampiric_stats"
-    "Ability11"         "research_power_underworld"
-    "Ability12"         "research_vampiric_strength"
-    "Ability13"         "research_vampiric_agility"
-    "Ability14"         "research_vampiric_intellect"
+    "Ability7"          "build_cancel" 
+    "Ability8"          "is_a_building"     // Ability 6 - Extra.
+    "Ability9"          "research_vampiric_skills"      // Ability 7 - Extra.
+    "Ability10"          "research_vampiric_damage"      // Ability 8 - Extra.
+    "Ability11"          "research_vampiric_stats"
+    "Ability12"         "research_power_underworld"
+    "Ability13"         "research_vampiric_strength"
+    "Ability14"         "research_vampiric_agility"
+    "Ability15"         "research_vampiric_intellect"
     // Armor
     //----------------------------------------------------------------
     "ArmorPhysical"             "15"     // Physical protection.
