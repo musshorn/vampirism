@@ -647,7 +647,7 @@ function SendDebugTable( table )
 
   request:Send(function ( result )
   	if result.StatusCode == 200 then
-  		print("Debug table sent")
+  		print("[VAMP] Something went wrong! Debug log was sent.")
   	end
   end)
 end

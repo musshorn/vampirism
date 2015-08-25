@@ -92,7 +92,6 @@ function Worker:Worker1(vPos, hOwner, unitName, isHero)
       end
 
       -- Check all possible values for nils.
-      worker.currentLumber = nil
       if tostring(worker.workTimer) == 'nil' then SendNil( worker,  "worker.workTimer" ) end
       if tostring(worker.moveTimer) == 'nil' then SendNil( worker, "worker.moveTimer" ) end
       if tostring(worker.pos) == 'nil' then SendNil( worker, "worker.pos" ) end
@@ -117,7 +116,7 @@ function Worker:Worker1(vPos, hOwner, unitName, isHero)
           -- If they are not working, start them working
           if (worker.harvest:IsChanneling() == false) then
             local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
-            if tostring(tree) == 'nil' then SendNil( "tree" ) end
+            if tostring(tree) == 'nil' then SendNil(worker,  "tree" ) end
             worker:CastAbilityOnTarget(tree, worker.harvest, worker:GetMainControllingPlayer())
           end
         end
@@ -149,7 +148,7 @@ function Worker:Worker1(vPos, hOwner, unitName, isHero)
           end
         end
       end
-      return 10.0
+      return 0.1
     end)
   end
 
@@ -245,7 +244,10 @@ function StackAttacked( keys )
 end
 
 function SendNil(state, sName )
-  local requestTable = state
-  requestTable.ErrorTag = sName
-  SendDebugTable(requestTable)
+  if state.loggedIssue == nil then
+    state.loggedIssue = true
+    local requestTable = state
+    requestTable.ErrorTag = sName
+    SendDebugTable(requestTable)
+  end
 end
