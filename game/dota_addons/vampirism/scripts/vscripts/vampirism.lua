@@ -299,8 +299,8 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_blink"):SetLevel(1)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
-          WOOD[i] = 50 --cheats, real is 50.
-          GOLD[i] = 0 --this is how it should look on ship.
+          WOOD[i] = 4000000 --cheats, real is 50.
+          GOLD[i] = 1000000 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")

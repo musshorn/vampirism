@@ -93,6 +93,7 @@
 			{
 				"IsHidden"	"1"
 				"Passive"	  "1"
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"3000"
@@ -348,6 +349,7 @@
   			"Passive"			"1"
   			"IsHidden"			"1"
   			"IsDebuff"			"0"
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
   	  			
   			"Properties"
   			{
@@ -470,6 +472,7 @@
   			"IsHidden"			"1"
   			"IsDebuff"			"0"
   	  			
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
   			"Properties"
   			{
   				"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%stat_bonus"
@@ -518,6 +521,7 @@
   			"IsHidden"			"1"
   			"IsDebuff"			"0"
   	  			
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
   			"Properties"
   			{
   				"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "%stat_bonus"
@@ -566,6 +570,7 @@
   			"IsHidden"			"1"
   			"IsDebuff"			"0"
   	  			
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
   			"Properties"
   			{
   				"MODIFIER_PROPERTY_MANA_BONUS"			"%mana_bonus"
@@ -612,6 +617,7 @@
   			"IsHidden"			"1"
   			"IsDebuff"			"0"
   	  			
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
   			"Properties"
   			{
   				"MODIFIER_PROPERTY_HEALTH_BONUS"			"%health_bonus"
@@ -1429,7 +1435,8 @@
     
         "EffectName"        "particles/units/heroes/hero_warlock/warlock_shadow_word_debuff.vpcf"
         "EffectAttachType"  "follow_origin"
-    
+
+
         "Properties"
         {
           "MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "20"
@@ -1742,6 +1749,7 @@
         "Passive"      "1"
         "IsHidden"      "1"
     
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
           "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"    "20"
@@ -1777,6 +1785,7 @@
         "Passive"      "1"
         "IsHidden"      "1"
           
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
           "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"    "20"
@@ -1877,6 +1886,7 @@
         "Passive"      "0"
         "IsHidden"      "0"
           
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
           "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"    "1"
@@ -1936,6 +1946,7 @@
   {
   	"ID"					"2047"
   	"BaseClass"				"item_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
   	"AbilityTextureName"	"item_armlet_active"
   	"ItemStackable"			"0"
   	"ItemKillable"			"1"
@@ -1952,20 +1963,16 @@
     {
       "modifier_gauntlets_underworld"
       {
-        "Passive"      "0"
-        "IsHidden"      "0"
+        "Passive"      "1"
+        "IsHidden"      "1"
           
         "Attributes"  "MODIFIER_ATTRIBUTE_MULTIPLE"
         "Properties"
         {
-          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "2500"
-          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "2500"
-          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "2500"
-          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"  "6000"
-        }
-        "States"
-        {
-          "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "750"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "750"
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "750"
+          "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"  "4000"
         }
       }
     }

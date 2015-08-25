@@ -91,12 +91,30 @@ function Worker:Worker1(vPos, hOwner, unitName, isHero)
         return nil
       end
 
+      -- Check all possible values for nils.
+      if tostring(worker.workTimer) == 'nil' then SendNil( "worker.workTimer" ) end
+      if tostring(worker.moveTimer) == 'nil' then SendNil( "worker.moveTimer" ) end
+      if tostring(worker.pos) == 'nil' then SendNil( "worker.pos" ) end
+      if tostring(worker.moving) == 'nil' then SendNil( "worker.moving" ) end
+      if tostring(worker.skipTicks) == 'nil' then SendNil( "worker.skipTicks" ) end
+      if tostring(worker.stackAbility) == 'nil' then SendNil( "worker.stackAbility" ) end
+      if tostring(worker.currentStacks) == 'nil' then SendNil( "worker.currentStacks" ) end
+      if tostring(worker.ability) == 'nil' then SendNil( "worker.ability" ) end
+      if tostring(worker.harvest) == 'nil' then SendNil( "worker.harvest" ) end
+      if tostring(worker.playerID) == 'nil' then SendNil( "worker.playerID" ) end
+      if tostring(worker.unitName) == 'nil' then SendNil( "worker.unitName" ) end
+      if tostring(worker.carryTotal) == 'nil' then SendNil( "worker.carryTotal" ) end
+      if tostring(worker.dropAbiltiy) == 'nil' then SendNil( "worker.dropAbiltiy" ) end
+      if tostring(worker.currentLumber) == 'nil' then SendNil( "worker.currentLumber" ) end
+      if tostring(LUMBER_DROPS) == 'nil' then SendNil( "LUMBER_DROPS" ) end
+
       worker.currentLumber = worker:GetModifierStackCount("modifier_carrying_lumber", worker.carryTotal)
       if worker.ability:GetAutoCastState() then 
         if (worker.moving == false and worker.currentLumber < UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks) then
           -- If they are not working, start them working
           if (worker.harvest:IsChanneling() == false) then
             local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
+            if tostring(tree) == 'nil' then SendNil( "tree" ) end
             worker:CastAbilityOnTarget(tree, worker.harvest, worker:GetMainControllingPlayer())
           end
         end
@@ -109,10 +127,11 @@ function Worker:Worker1(vPos, hOwner, unitName, isHero)
           worker:SetModifierStackCount("modifier_carrying_lumber", worker.carryTotal, UNIT_KV[worker.playerID][worker.unitName].MaximumLumber * worker.currentStacks)
         end
         -- Search for the nearest unit that can recieve lumber and is owned by the correct player
-        if (worker.housePos == nil) then
+        if worker.housePos == nil then
           local bestDrop = nil
           local bestDist = 99999
           for k, v in pairs(LUMBER_DROPS) do
+            if tostring(v) == 'nil' then SendNil( "LUMBER_DROPS.v" ) end
             local dist = CalcDistanceBetweenEntityOBB(worker, v)
             if dist < bestDist and v:GetMainControllingPlayer() == worker:GetMainControllingPlayer() then
               bestDrop = v
@@ -147,6 +166,7 @@ function FindLumber( keys )
     -- If they are not working, start them working
     if (worker.harvest:IsChanneling() == false) then
       local tree = Entities:FindByClassnameNearest("ent_dota_tree", worker:GetAbsOrigin(), 1000)
+      if tostring(tree) == 'nil' then SendNil( "tree" ) end
       worker:CastAbilityOnTarget(tree, ability, worker:GetMainControllingPlayer())
     end
   end
@@ -219,4 +239,8 @@ end
 function StackAttacked( keys )
   local caster = keys.caster
   caster:SetHealth(caster:GetMaxHealth())
+end
+
+function SendNil( sName )
+  print('We received a nil value, '..sName)
 end
