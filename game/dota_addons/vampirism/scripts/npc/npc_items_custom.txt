@@ -502,7 +502,7 @@
   	"GoldCost"			"150"
   	"LumberCost"		"10000"
 
-  	"NeedTech"			"citadel_of_faith"
+  	//"NeedTech"			"citadel_of_faith"
 
   	"AbilitySpecial"
   	{
@@ -551,7 +551,7 @@
   	"GoldCost"			"5"
   	"LumberCost"		"2500"
 
-  	"NeedTech"			"citadel_of_faith"
+  	//"NeedTech"			"citadel_of_faith"
 
   	"AbilitySpecial"
   	{
@@ -598,7 +598,7 @@
   	"GoldCost"			"5"
   	"LumberCost"		"5000"
 
-  	"NeedTech"			"citadel_of_faith"
+  	//"NeedTech"			"citadel_of_faith"
 
   	"AbilitySpecial"
   	{
