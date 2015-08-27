@@ -34,7 +34,6 @@ function UpgradeAvernal(keys)
 	local caster = keys.caster
 	local playerID = caster:GetMainControllingPlayer()
 	local newAvernal = keys.UpgradeTo
-	print(newAvernal)
 	local goldCost = keys.GoldCost
 	local woodCost = keys.WoodCost
 	local foodCost = keys.FoodCost

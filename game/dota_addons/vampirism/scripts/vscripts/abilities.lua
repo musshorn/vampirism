@@ -131,6 +131,8 @@ function build( keys )
       unit:FindAbilityByName('call_buildui'):SetLevel(1)
       unit:FindAbilityByName('vampire_sell_item'):SetLevel(1)
       unit:SetAbilityPoints(0)
+      local vampire = VAMPIRES[pID]
+      vampire.center = unit
     end
 
     -- Research based modifiers

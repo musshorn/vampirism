@@ -301,8 +301,8 @@ function GameMode:OnGameRulesStateChange(keys)
           human:FindAbilityByName("human_blink"):SetLevel(1)
           human:FindAbilityByName("human_manaburn"):SetLevel(1)
           human:FindAbilityByName("human_repair"):SetLevel(1)
-          WOOD[i] = 50 --cheats, real is 50.
-          GOLD[i] = 0 --this is how it should look on ship.
+          WOOD[i] = 10000000 --cheats, real is 50.
+          GOLD[i] = 100000 --this is how it should look on ship.
           TOTAL_FOOD[i] = 20
           CURRENT_FOOD[i] = 0
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -323,7 +323,7 @@ function GameMode:OnGameRulesStateChange(keys)
           if newSpace ~= false then
             vampire:SetAbsOrigin(newSpace)
           end
-          GOLD[i] = 0 --cheats off
+          GOLD[i] = 10000000 --cheats off
           WOOD[i] = 0 --cheats off
           TOTAL_FOOD[i] = 10
           CURRENT_FOOD[i] = 0
@@ -1422,8 +1422,15 @@ end
 function UrnTimer()
   Timers:CreateTimer(function ()
     for k, v in pairs(VAMPIRES) do
+      local foundUrn = false
       if v:HasItemInInventory('item_dracula_urn') then
         ChangeGold(k, 35)
+        foundUrn = true
+      end
+      if v.center ~= nil then
+        if v.center:HasItemInInventory('item_dracula_urn') and foundUrn == false then
+          ChangeGold(k, 35)
+        end
       end
     end
     return 60

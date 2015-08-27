@@ -246,6 +246,10 @@ function HireUnit( keys )
 	if mercName == 'merc_avernal' then
 		merc:FindAbilityByName('avernal_hp_growth'):OnUpgrade()
 	end
+	if UNIT_KV[playerID][mercName]['ProvidesFood'] ~= nil then
+		TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] + UNIT_KV[playerID][mercName]['ProvidesFood']
+		FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+	end
 end
 
 -- Stops from casting on non-slayers.
@@ -361,6 +365,14 @@ function RodTeleportation( keys )
 		return
 	end
 
+	if target:GetUnitName() == 'merc_fallen_hound' then
+		ability:EndCooldown()
+		ability:RefundManaCost()
+		caster:Stop()
+		FireGameEvent('custom_error_show', {player_ID = playerID, _error = "Can't teleport to fallen hounds!"})
+		return
+	end
+
 	if isBlocked then
 		ability:EndCooldown()
 		ability:RefundManaCost()
@@ -432,17 +444,7 @@ function BurstGem( keys )
 	local abilityDamage = ability:GetSpecialValueFor('damage')
 	local damageType = ability:GetAbilityDamageType()
 
-
 	if target:HasAbility('is_a_building') then
-		-- Deal damage
-		local damage_table = {
-			victim = target,
-			attacker = caster,
-			damage = abilityDamage,
-			damage_type = damageType
-		}
-		ApplyDamage( damage_table )
-
 		local burst_projectile = {
 			Target = target,
 			Source = caster,
@@ -481,7 +483,14 @@ function BurstHit( keys )
 	local playerID = caster:GetMainControllingPlayer()
 	local owner = VAMPIRES[playerID]
 
-	ApplyDamage({victim = target, attacker = owner, damage = abilityDamage, damage_type = damageType})
+	local damage_table = {
+		victim = target,
+		attacker = caster,
+		damage = abilityDamage,
+		damage_type = damageType
+	}
+
+	ApplyDamage(damage_table)
 end
 
 -- Applies the damage to a unit entering a grave area.

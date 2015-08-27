@@ -179,7 +179,7 @@
 		{
 			"initstock"		"1"
 			"stock"			"1"
-			"stocktime"		"420"
+			"stocktime"		"1"
 			"index"			"15"
 			"unlocktime"	"720"
 		}
@@ -206,9 +206,9 @@
 		}
 		"item_avernus_rain"					
 		{
-			"initstock"		"1"
-			"stock"			"1"
-			"stocktime"		"420"
+			"initstock"		"5"
+			"stock"			"5"
+			"stocktime"		"120"
 			"index"			"19"
 		}
 		"item_wind_walk_potion"				
