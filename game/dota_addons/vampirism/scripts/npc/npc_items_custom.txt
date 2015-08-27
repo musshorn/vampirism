@@ -1016,7 +1016,8 @@
   	"AbilityTextureName"	     "item_staff_of_wizardry"
   	"AbilityBehavior"		         "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
   	"AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-  	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC"
+  	"AbilityUnitTargetType"     "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitTargetFlags"     "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
     "AbilityChannelTime" "3.0"
   	"ItemStackable"			"0"
   	"ItemKillable"			"1"
@@ -1025,7 +1026,7 @@
     "ItemPurchasable"       "0"
   	"ItemRequiresCharges"   "0"
   	"SideShop"				"1"
-  	"AbilityCooldown"		"0"
+  	"AbilityCooldown"		"30"
   	"GoldCost"				"100"
   	"LumberCost"			"0"
 

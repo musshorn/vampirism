@@ -373,6 +373,16 @@ function RodTeleportation( keys )
 		return
 	end
 
+	if target:IsHero() then
+		if target:GetUnitName() ~= "research_center_vampire" then
+			ability:EndCooldown()
+			ability:RefundManaCost()
+			caster:Stop()
+			FireGameEvent('custom_error_show', {player_ID = playerID, _error = "Can't teleport to heroes!"})
+			return
+		end
+	end
+
 	if isBlocked then
 		ability:EndCooldown()
 		ability:RefundManaCost()
@@ -405,7 +415,7 @@ function RodFinish( keys )
 	local caster = keys.caster
 	local target = keys.target
 
-	local newSpace = FindGoodSpaceForUnit(caster, target:GetAbsOrigin(), 200, 100)
+	local newSpace = FindGoodSpaceForUnit(caster, target:GetAbsOrigin(), 200, 128)
     if newSpace ~= false then
       caster:SetAbsOrigin(newSpace)
     end
