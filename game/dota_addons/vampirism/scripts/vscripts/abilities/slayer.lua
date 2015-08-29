@@ -107,6 +107,7 @@ function SummonSlayer( keys )
   local caster = keys.caster
   local ability = keys.ability
   local pID = caster:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
   local lumberCost = ABILITY_KV[ability:GetAbilityName()].LumberCost
   local goldCost = ABILITY_KV[ability:GetAbilityName()].GoldCost
   local foodCost = 10
@@ -173,12 +174,14 @@ function SummonSlayer( keys )
   caster.refundGold = goldCost
   caster.refundFood = 10
   CURRENT_FOOD[pID] = CURRENT_FOOD[pID] + foodCost
+  CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
   FireGameEvent('vamp_food_changed', { player_ID = pID , food_total = CURRENT_FOOD[pID]})
 end
 
 function Refund( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
   local ability = keys.ability
   
   local refundWood = caster.refundWood
@@ -199,7 +202,7 @@ function Refund( keys )
     ChangeWood(pID, refundWood)
     ChangeGold(pID, refundGold)
     CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - refundFood
-    FireGameEvent('vamp_food_changed', { player_ID = pID , food_total = CURRENT_FOOD[pID]})
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
   end
 end
 
@@ -259,6 +262,7 @@ end
 function SlayerRespawnStart( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
 
   if SLAYERS[pID] == nil then
     caster:Stop()
@@ -291,13 +295,14 @@ function SlayerRespawnStart( keys )
 
   SLAYERS[pID].state = "reviving"
   CURRENT_FOOD[pID] = CURRENT_FOOD[pID] + 10
-  FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[pID]})
+  CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
   FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Reviving"})
 end
 
 function SlayerRespawnInterrupted( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
 
   if SLAYERS[pID] == nil then
     return nil
@@ -306,7 +311,7 @@ function SlayerRespawnInterrupted( keys )
   if SLAYERS[pID].state == "reviving" then
    SLAYERS[pID].state = "dead"
    CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - 10
-   FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[pID]})
+   CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
    FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Dead"})
   end
 end

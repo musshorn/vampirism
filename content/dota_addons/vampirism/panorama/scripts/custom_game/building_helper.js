@@ -76,15 +76,33 @@ function StartBuildingHelper( params )
     }
 
     Particles.SetParticleControl(particle, 0, [GamePos[0], GamePos[1], GamePos[2] + 1]); // #JustValveThings
-    Particles.SetParticleControl(particle, 2, [0,255,0]);
+    
 
     var left = GamePos[0] - (size / 2) * 64 + 32;
     var top =  GamePos[1] - (size / 2) * 64 + 32;
+    var validBuild = true;
+
     for (var i = 0; i < buildingBase.length; i++)
     {
       Particles.SetParticleControl(buildingBase[i][0], 0, [left + buildingBase[i][1] * 64, top + buildingBase[i][2] * 64, GamePos[2] + 1]);
-      Particles.SetParticleControl(buildingBase[i][0], 2, [0,255,0]);
+      
+      var searchX = Game.WorldToScreenX( left + buildingBase[i][1] * 64, top + buildingBase[i][2] * 64, GamePos[2] + 1 );
+      var searchY = Game.WorldToScreenY( left + buildingBase[i][1] * 64, top + buildingBase[i][2] * 64, GamePos[2] + 1 );
+
+      if (GameUI.FindScreenEntities(searchX, searchY).length == 0)
+      {
+        Particles.SetParticleControl(buildingBase[i][0], 2, [0,255,0]);
+      }
+      else
+      {
+        validBuild = false;
+        Particles.SetParticleControl(buildingBase[i][0], 2, [255,0,0]);
+      }
     }
+    if (validBuild)
+      Particles.SetParticleControl(particle, 2, [0,255,0]);
+    else
+      Particles.SetParticleControl(particle, 2, [255,0,0]);
 
     if ((!GameUI.IsShiftDown() && pressedShift))
     {

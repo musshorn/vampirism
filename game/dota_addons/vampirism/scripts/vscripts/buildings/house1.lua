@@ -31,6 +31,7 @@ function House1:Init(unit)
 			local unitToSpawn = keys.SpawnUnit
 			local requestingFood = nil
 			local playerID = caster:GetMainControllingPlayer()
+			local player = PlayerResource:GetPlayer(playerID)
 			house1.workHandler = caster:FindAbilityByName(abilityName)
 	
 			-- Check if the worker will fit in the food cap
@@ -70,7 +71,7 @@ function House1:Init(unit)
 											unit = Worker:Worker1(caster:GetAbsOrigin(), caster, unitToSpawn, false)
 										end										
 										CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + requestingFood
-										FireGameEvent('vamp_food_changed', { player_ID = playerID , food_total = CURRENT_FOOD[playerID]})
+										CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
 										
 										caster:RemoveModifierByName(house1.workHandler:GetName())
 										house1.workHandler:SetChanneling(false)

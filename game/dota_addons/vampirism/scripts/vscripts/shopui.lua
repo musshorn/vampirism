@@ -108,6 +108,7 @@ end
 
 function Purchase( itemname, buyer )
   local playerID = buyer:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
   local gold = GOLD[playerID]
   local lumber = WOOD[playerID]
   local food = CURRENT_FOOD[playerID]
@@ -223,7 +224,7 @@ function Purchase( itemname, buyer )
            CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] + foodCost
            ChangeWood(playerID, -1 * lumberCost)
            ChangeGold(playerID, -1 * goldCost)
-           FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
+           CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
       		 FireGameEvent("shop_item_bought", {player_ID = playerID, shop_index = shopIndex, item_index = index, item_name = itemname, stock = SHOPS[shopIndex][index]['stock'], stock_time = 0})
            SHOPS[shopIndex][index]['stock'] = SHOPS[shopIndex][index]['stock'] - 1
            table.insert(SHOPS[shopIndex][index]['queue'],  SHOPS[shopIndex][index]['stocktime'])

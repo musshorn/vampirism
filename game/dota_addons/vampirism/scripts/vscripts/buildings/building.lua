@@ -183,6 +183,7 @@ function FinishUpgrade( keys )
   local casterName = caster:GetUnitName()
   local pos = caster:GetAbsOrigin()
   local pID = caster:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
   local team = caster:GetTeam()
 
   caster:AddNewModifier(caster, nil, "modifier_disarmed", {duration=10000})
@@ -222,13 +223,13 @@ function FinishUpgrade( keys )
     else
       TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + UNIT_KV[pID][targetUnit].ProvidesFood
     end
-    FireGameEvent("vamp_food_cap_changed", {player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = TOTAL_FOOD[pID]})
     if TOTAL_FOOD[pID] > 250 then
-      FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = 250})
+      CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = 250})
     end
     if TOTAL_FOOD[pID] < 20 then
       TOTAL_FOOD[pID] = 20
-      FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = 20})
+      CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = 20})
     end
   end
 

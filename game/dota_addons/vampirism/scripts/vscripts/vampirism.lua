@@ -310,10 +310,10 @@ function GameMode:OnGameRulesStateChange(keys)
           HUMAN_COUNT = HUMAN_COUNT + 1
           human:SetAbilityPoints(0)
           human:SetHasInventory(false) --testing
-          FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
-          FireGameEvent("vamp_wood_changed", {player_ID = i, wood_total = WOOD[i]})
-          FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
-          FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
+          CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(i), "update_resource", {["resourceType"] = "gold", ["value"] = GOLD[i]})
+          CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(i), "update_resource", {["resourceType"] = "wood", ["value"] = WOOD[i]})
+          CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(i), "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[i]})
+          CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(i), "update_resource", {["resourceType"] = "maxFood", ["value"] = TOTAL_FOOD[i]})
           PlayerResource:SetCustomTeamAssignment(i, DOTA_TEAM_GOODGUYS)
           AddSwag(human)
         elseif playerTeam == 3 then
@@ -327,10 +327,10 @@ function GameMode:OnGameRulesStateChange(keys)
           WOOD[i] = 0 --cheats off
           TOTAL_FOOD[i] = 10
           CURRENT_FOOD[i] = 0
-          FireGameEvent("vamp_gold_changed", {player_ID = i, gold_total = GOLD[i]})
-          FireGameEvent("vamp_wood_changed", {player_ID = i, wood_total = WOOD[i]})
-          FireGameEvent("vamp_food_changed", {player_ID = i, food_total = CURRENT_FOOD[i]})
-          FireGameEvent("vamp_food_cap_changed", {player_ID = i, food_cap = TOTAL_FOOD[i]})
+CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(i), "update_resource", {["resourceType"] = "gold", ["value"] = GOLD[i]})
+          CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(i), "update_resource", {["resourceType"] = "wood", ["value"] = WOOD[i]})
+          CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(i), "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[i]})
+          CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(i), "update_resource", {["resourceType"] = "maxFood", ["value"] = TOTAL_FOOD[i]})
           UNIT_KV[i] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
           vampire:AddExperience(400, 0, false, true)
           AddSwag(vampire)
@@ -482,11 +482,12 @@ end
 function GameMode:OnPlayerReconnect(keys)
   print ( '[vampirism] OnPlayerReconnect' )
   local pID = keys.PlayerID
+  local player = PlayerResource:GetPlayer(pID)
   Timers:CreateTimer(2.0, function()
-    FireGameEvent("vamp_gold_changed", { player_ID = pID, gold_total = GOLD[pID]})
-    FireGameEvent("vamp_wood_changed", { player_ID = pID, wood_total = WOOD[pID]})
-    FireGameEvent("vamp_food_changed", { player_ID = pID, food_total = CURRENT_FOOD[pID]})
-    FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "gold", ["value"] = GOLD[pID]})
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "wood", ["value"] = WOOD[pID]})
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = TOTAL_FOOD[pID]})
     CustomGameEventManager:Send_ServerToAllClients("send_version", {version=VERSION_NUMBER} )
     local hero = PlayerResource:GetSelectedHeroEntity(pID)
     if hero ~= nil then
@@ -509,10 +510,10 @@ function GameMode:OnPlayerReconnect(keys)
         HUMAN_COUNT = HUMAN_COUNT + 1
         human:SetAbilityPoints(0)
         human:SetHasInventory(false) --testing
-        FireGameEvent("vamp_gold_changed", {player_ID = pID, gold_total = GOLD[pID]})
-        FireGameEvent("vamp_wood_changed", {player_ID = pID, wood_total = WOOD[pID]})
-        FireGameEvent("vamp_food_changed", {player_ID = pID, food_total = CURRENT_FOOD[pID]})
-        FireGameEvent("vamp_food_cap_changed", {player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "gold", ["value"] = GOLD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "wood", ["value"] = WOOD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = TOTAL_FOOD[pID]})
         PlayerResource:SetCustomTeamAssignment(pID, DOTA_TEAM_GOODGUYS)
         AddSwag(human)
       elseif playerTeam == 3 then
@@ -526,10 +527,10 @@ function GameMode:OnPlayerReconnect(keys)
         WOOD[pID] = 0 --cheats off
         TOTAL_FOOD[pID] = 10
         CURRENT_FOOD[pID] = 0
-        FireGameEvent("vamp_gold_changed", {player_ID = pID, gold_total = GOLD[pID]})
-        FireGameEvent("vamp_wood_changed", {player_ID = pID, wood_total = WOOD[pID]})
-        FireGameEvent("vamp_food_changed", {player_ID = pID, food_total = CURRENT_FOOD[pID]})
-        FireGameEvent("vamp_food_cap_changed", {player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "gold", ["value"] = GOLD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "wood", ["value"] = WOOD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = TOTAL_FOOD[pID]})
         UNIT_KV[pID] = LoadKeyValues("scripts/npc/npc_units_custom.txt")
         vampire:AddExperience(400, 0, false, true)
         AddSwag(vampire)
@@ -849,7 +850,8 @@ function GameMode:OnEntityKilled( keys )
       end
     until house == nil
     FireGameEvent("vamp_slayer_state_update", {player_ID = playerID, slayer_state = "Dead"})
-    FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total = CURRENT_FOOD[killedUnit:GetMainControllingPlayer()]})
+    local player = PlayerResource:GetPlayer(killedUnit:GetMainControllingPlayer())
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[killedUnit:GetMainControllingPlayer()]})
   end
 
   -- If the killed unit increased the players food cap then it needs to decrease when it dies
@@ -864,23 +866,27 @@ function GameMode:OnEntityKilled( keys )
           TOTAL_FOOD[playerID] = 10
         end
         if TOTAL_FOOD[playerID] < 250 then
-          FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+          local player = PlayerResource:GetPlayer(playerID)
+          CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = TOTAL_FOOD[playerID]})
         else
-          FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = 250})
+          local player = PlayerResource:GetPlayer(playerID)
+          CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = 250})
         end 
       end
 
       if UNIT_KV[playerID][unitName].ConsumesFood ~= nil then
         lostfood = UNIT_KV[playerID][unitName].ConsumesFood
         CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] - lostfood
-        FireGameEvent("vamp_food_changed", { player_ID = playerID, food_total = CURRENT_FOOD[playerID]})
+        local player = PlayerResource:GetPlayer(playerID)
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[playerID]})
         -- Decrease food based on stack count.
         local stackAbility = killedUnit:FindAbilityByName('worker_stack')
         if stackAbility ~= nil then
           local stacks = killedUnit:GetModifierStackCount("modifier_worker_stack", stackAbility) - 1
           if stacks ~= nil then
             CURRENT_FOOD[playerID] = CURRENT_FOOD[playerID] - (lostfood * stacks)
-          	FireGameEvent("vamp_food_changed", {player_ID = playerID, food_total =  CURRENT_FOOD[playerID]})
+            local player = PlayerResource:GetPlayer(playerID)
+            CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[playerID]})
           end
         end
       end
@@ -1713,7 +1719,8 @@ function ChangeGold( playerID, amount )
     else
       GOLD[playerID] = GOLD[playerID] + amount
     end
-    FireGameEvent('vamp_gold_changed', {player_ID = playerID, gold_total = GOLD[playerID]})
+    local player = PlayerResource:GetPlayer(playerID)
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "gold", ["value"] = GOLD[playerID]})
   end
 end
 
@@ -1730,7 +1737,8 @@ function ChangeWood( playerID, amount )
     else
       WOOD[playerID] = WOOD[playerID] + amount
     end
-    FireGameEvent('vamp_wood_changed', {player_ID = playerID, wood_total = WOOD[playerID]})
+    local player = PlayerResource:GetPlayer(playerID)
+    CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "wood", ["value"] = WOOD[playerID]})
   end
 end
 

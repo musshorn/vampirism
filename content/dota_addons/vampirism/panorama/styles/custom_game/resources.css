@@ -1,0 +1,52 @@
+.ResourcesBase
+{
+  width: 100%;
+  height: 45px;
+}
+.ResourceContainer
+{
+  margin-left: 1055px;
+  background-color: #000000;
+  border-radius: 2px;
+  height: 100%;
+}
+.SingleResourceContainer
+{
+  width: 160px;
+  height: 100%;
+}
+.WoodContainer
+{
+  margin-left: 160px;
+}
+.FoodContainer
+{
+  margin-left: 320px;
+  width: 120px;
+}
+.ResourceImage
+{
+  width: 40px;
+  height: 100%;
+}
+.ResourceFont
+{
+  margin-top: 10px;
+  margin-left: 40px;
+  font-size: 20px;
+  width: 115px;
+}
+.ResourceGoldFont
+{
+  color: #FFD700;
+  text-align: right;
+}
+.ResourceWoodFont
+{
+  color: #00FF00;
+  text-align: right;
+}
+.ResourceFoodFont
+{
+  color: #FFFFFF;
+}

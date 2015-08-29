@@ -69,11 +69,13 @@ function build( keys )
     -- If the building provides food, how much? Also alert the UI for an update
     if UNIT_KV[pID][unitName].ProvidesFood ~= nil then
       local food = tonumber(UNIT_KV[pID][unitName].ProvidesFood)
+      local player = PlayerResource:GetPlayer(pID)
+
       TOTAL_FOOD[pID] = TOTAL_FOOD[pID] + food
       if TOTAL_FOOD[pID] < 250 then
-        FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = TOTAL_FOOD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = TOTAL_FOOD[pID]})
       else
-        FireGameEvent("vamp_food_cap_changed", { player_ID = pID, food_cap = 250})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = 250} )
       end 
     end
 
@@ -263,6 +265,7 @@ end
 function WorkerDet( keys )
   local caster = keys.caster
   local pID = caster:GetMainControllingPlayer()
+  local player = PlayerResource:GetPlayer(pID)
 
   if caster:HasModifier('modifier_worker_stack') then
     local stackAbility = caster:FindAbilityByName('worker_stack') 
@@ -273,7 +276,7 @@ function WorkerDet( keys )
       if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
         local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
         CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
-        FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
         caster:SetModifierStackCount('modifier_worker_stack', stackAbility, stacks - 1)
         return
       end
@@ -287,7 +290,7 @@ function WorkerDet( keys )
       if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
         local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
           CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
-          FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+          CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
       end
     
       Timers:CreateTimer(0.03, function ()
@@ -305,7 +308,7 @@ function WorkerDet( keys )
     if UNIT_KV[pID][caster:GetUnitName()].ConsumesFood ~= nil then
       local returnfood = tonumber(UNIT_KV[pID][caster:GetUnitName()].ConsumesFood)
         CURRENT_FOOD[pID] = CURRENT_FOOD[pID] - returnfood
-        FireGameEvent('vamp_food_changed', { player_ID = pID, food_total = CURRENT_FOOD[pID]})
+        CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "currentFood", ["value"] = CURRENT_FOOD[pID]})
     end
   
     Timers:CreateTimer(0.03, function ()

@@ -235,6 +235,7 @@ function HireUnit( keys )
 	local foodCost = ITEM_KV[ability:GetAbilityName()]['FoodCost']
 	local mercName = keys.Mercenary
 	local playerID = caster:GetMainControllingPlayer()
+	local player = PlayerResource:GetPlayer(pID)
 
 	local merc = CreateUnitByName(mercName, caster:GetAbsOrigin(), true, caster, PlayerResource:GetPlayer(playerID), caster:GetTeam())
 	merc:SetControllableByPlayer(playerID, true)
@@ -248,7 +249,7 @@ function HireUnit( keys )
 	end
 	if UNIT_KV[playerID][mercName]['ProvidesFood'] ~= nil then
 		TOTAL_FOOD[playerID] = TOTAL_FOOD[playerID] + UNIT_KV[playerID][mercName]['ProvidesFood']
-		FireGameEvent("vamp_food_cap_changed", { player_ID = playerID, food_cap = TOTAL_FOOD[playerID]})
+		CustomGameEventManager:Send_ServerToPlayer(player, "update_resource", {["resourceType"] = "maxFood", ["value"] = TOTAL_FOOD[pID]})
 	end
 end
 

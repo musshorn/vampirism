@@ -1,0 +1,33 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/resources.css" />
+  </styles>
+  <scripts>
+    <include src="file://{resources}/scripts/custom_game/resources.js" />
+  </scripts>
+  <Panel hittest="false" class="ResourcesBase">
+    <Panel hittest="false" class="ResourceContainer">
+
+      <!-- Gold -->
+      <Panel hittest="false" class="SingleResourceContainer">
+        <Image class="ResourceImage" src="file://{images}/custom_game/gold.png"/>
+        <Label class="ResourceFont ResourceGoldFont" text="0" id="PlayerGold"/>
+      </Panel>
+
+      <!-- Wood -->
+      <Panel hittest="false" class="SingleResourceContainer WoodContainer">
+        <Image class="ResourceImage" src="file://{images}/custom_game/gold.png"/>
+        <Label class="ResourceFont ResourceWoodFont" text="50" id="PlayerWood"/>
+      </Panel>
+
+      <!-- Food -->
+      <Panel hittest="false" class="SingleResourceContainer FoodContainer">
+        <Image class="ResourceImage" src="file://{images}/custom_game/gold.png"/>
+        <Label class="ResourceFont ResourceFoodFont" text="100" id="PlayerFoodCurrent" style="text-align:right;width:40px;margin-left:30px;"/>
+        <Label class="ResourceFont ResourceFoodFont" text="/" style="margin-left:75px;"/>
+        <Label class="ResourceFont ResourceFoodFont" text="20" id="PlayerFoodMax" style="margin-left:82px;"/>
+      </Panel>
+
+    </Panel>
+  </Panel>
+</root>
