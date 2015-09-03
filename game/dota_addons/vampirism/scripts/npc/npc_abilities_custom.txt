@@ -8200,6 +8200,7 @@
     "Scale"                     "1"
     "MaxScale"                  "1.5"
     "CasterCanControl"          "1"
+    "DisableShiftQueue"         "true"
 
     "AbilityCooldown"           "0"
     "LumberCost"                "0"
@@ -8907,6 +8908,8 @@
     "Scale"                     "1"
     "MaxScale"                  ".5"
     "CasterCanControl"          "1"
+
+    "DisableShiftQueue"         "true"
 
     "AbilityCooldown"           "0.05"
     
@@ -9825,6 +9828,7 @@
     "BuildTime"                 "20"
     "AbilityCastRange"          "200"
     "UpdateHealth"              "1"
+    "DisableShiftQueue"         "true"
     "Scale"                     "0.5"
     "MaxScale"                  "0.6"
     "CasterCanControl"          "1"

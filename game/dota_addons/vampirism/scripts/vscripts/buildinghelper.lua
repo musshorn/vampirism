@@ -61,6 +61,12 @@ function BuildingHelper:RegisterLeftClick( args )
   if cmdPlayer then
     cmdPlayer.activeBuilder:AddToQueue(location)
   end
+
+  if cmdPlayer then
+    if cmdPlayer.disableShiftQueue then
+      CustomGameEventManager:Send_ServerToPlayer(cmdPlayer, "building_helper_end",{})
+    end
+  end
 end
 
 function BuildingHelper:RegisterRightClick( args )
@@ -264,6 +270,7 @@ function BuildingHelper:AddBuilding(keys)
   local size = buildingTable:GetVal("BuildingSize", "number")
   local unitName = buildingTable:GetVal("UnitName", "string")
   local fMaxScale = buildingTable:GetVal("MaxScale", "number")
+  local disableShiftQueue = buildingTable:GetVal("DisableShiftQueue", "string")
 
   -- Prepare the builder, if it hasn't already been done. Since this would need to be done for every builder in some games, might as well do it here.
   local builder = keys.caster
@@ -280,7 +287,13 @@ function BuildingHelper:AddBuilding(keys)
   player.activeBuilding = unitName
   player.activeBuildingTable = buildingTable
   player.activeCallbacks = callbacks
+  player.disableShiftQueue = false
 
+  if disableShiftQueue ~= nil then
+    if disableShiftQueue == "true" then
+      player.disableShiftQueue = true
+    end
+  end
 
   -- Create model ghost dummy out of the map, then make pretty particles
   player.mgd = CreateUnitByName(unitName, OutOfWorldVector, false, nil, nil, builder:GetTeam())
